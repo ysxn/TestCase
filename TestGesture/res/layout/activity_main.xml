@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/data"
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:text="gesture data:" />
+    <!-- Divider -->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/data"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="5dip"
+        android:background="@android:color/black" />
+
+    <com.lenovo.gesture.GestureView
+        android:id="@+id/gestureView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="200dip" />
+
+</RelativeLayout>

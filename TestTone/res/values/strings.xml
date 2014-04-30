@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="app_name">TestTone</string>
+    <string name="button_ring">ToneGenerator_Play_STREAM_RING</string>
+    <string name="button_dtmf">ToneGenerator_Play_STREAM_DTMF</string>
+    <string name="button_music">ToneGenerator_Play_STREAM_MUSIC</string>
+    
+    <string name="button_ring2">SoundPool_Play_STREAM_RING</string>
+    <string name="button_dtmf2">SoundPool_Play_STREAM_DTMF</string>
+    <string name="button_music2">SoundPool_Play_STREAM_MUSIC</string>
+    
+    <string name="button_setVolumeControlStream">setVolumeKey_Control_whitch_Stream</string>
+</resources>

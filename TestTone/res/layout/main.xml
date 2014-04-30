@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name" />
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_ring"/>
+    <Button 
+        android:layout_width="150dip"
+        android:layout_height="60dip"
+        android:id="@+id/action_button_ring"
+        android:text="@string/button_ring"/>
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_dtmf"/>
+    <Button 
+        android:layout_width="150dip"
+        android:layout_height="60dip"
+        android:id="@+id/action_button_dtmf"
+        android:text="@string/button_dtmf"/>
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_music"/>
+    <Button 
+        android:layout_width="150dip"
+        android:layout_height="60dip"
+        android:id="@+id/action_button_music"
+        android:text="@string/button_music"/>
+    
+    <!--  below is use sound pool -->
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_ring2"/>
+    <Button 
+        android:layout_width="150dip"
+        android:layout_height="60dip"
+        android:id="@+id/action_button_ring2"
+        android:text="@string/button_ring2"/>
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_dtmf2"/>
+    <Button 
+        android:layout_width="150dip"
+        android:layout_height="60dip"
+        android:id="@+id/action_button_dtmf2"
+        android:text="@string/button_dtmf2"/>
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_music2"/>
+    <Button 
+        android:layout_width="150dip"
+        android:layout_height="60dip"
+        android:id="@+id/action_button_music2"
+        android:text="@string/button_music2"/>
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_currentVolumeControlStream"
+        android:text="@string/button_setVolumeControlStream"/>
+    <Button 
+        android:layout_width="150dip"
+        android:layout_height="60dip"
+        android:id="@+id/action_button_setVolumeControlStream"
+        android:text="@string/button_setVolumeControlStream"/>
+
+</LinearLayout>
