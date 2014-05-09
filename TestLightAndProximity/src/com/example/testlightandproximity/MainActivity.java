@@ -93,8 +93,9 @@ public class MainActivity extends Activity implements SensorEventListener {
         setContentView(R.layout.activity_main);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mLightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         mProximitySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        mLightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        
         mTextViewLightSensorName = ((TextView) findViewById(R.id.light_sensor_name));
         mTextViewProximitySensorName = ((TextView) findViewById(R.id.proximity_sensor_name));
         mTextViewProximityData = ((TextView) findViewById(R.id.proximity_data));
@@ -104,12 +105,16 @@ public class MainActivity extends Activity implements SensorEventListener {
         if (mLightSensor == null)
         {
             mTextViewLightSensorName.setText("没有光传感器!");
+            
+            
         } else {
             mTextViewLightSensorName.setText("光传感器型号:"+mLightSensor.getName());
         }
 
         if (mProximitySensor == null) {
             mTextViewProximitySensorName.setText("没有接近传感器!");
+            mTextViewProximitySensorName.setVisibility(View.GONE);
+            mTextViewProximityData.setVisibility(View.GONE);
         } else {
             mTextViewProximitySensorName.setText("接近传感器型号:"+mProximitySensor.getName());
         }
@@ -139,16 +144,18 @@ public class MainActivity extends Activity implements SensorEventListener {
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
-        mSensorManager.registerListener(this, mLightSensor, SensorManager.SENSOR_DELAY_FASTEST);
         mSensorManager.registerListener(this, mProximitySensor, SensorManager.SENSOR_DELAY_FASTEST);
+        mSensorManager.registerListener(this, mLightSensor, SensorManager.SENSOR_DELAY_FASTEST);
+        
     }
 
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub
         super.onPause();
-        mSensorManager.unregisterListener(this, mLightSensor);
         mSensorManager.unregisterListener(this, mProximitySensor);
+        mSensorManager.unregisterListener(this, mLightSensor);
+        
     }
 
     @Override

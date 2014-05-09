@@ -25,13 +25,17 @@ import android.widget.Toast;
  */
 public class MainActivity extends Activity implements SensorEventListener {
 
+    /*
+     * k7上定义是LEFT = 3，RIGHT = 2，DOWN = 5，UP = 4，NEAR = 6，FAR = 15
+     * x2项目我们定义是LEFT = 3，RIGHT = 4，DOWN = 1，UP = 2，NEAR = 5，FAR = 6
+     */
     public static final int LEFT = 3;// 3;//2;
-    public static final int RIGHT = 2;// 4;//3;
-    public static final int DOWN = 5;// 1;//4;
-    public static final int UP = 4;// 2;//5;
+    public static final int RIGHT = 4;//3;2;// 
+    public static final int DOWN = 1;//4;5;// 
+    public static final int UP = 2;//5;4;// 
 
-    public static final int NEAR = 6;// 5;//6;
-    public static final int FAR = 15;// 6;//7;
+    public static final int NEAR = 5;//6;6;// 
+    public static final int FAR = 6;//7;15;// 
 
     static final String TAG = "zyw";
 
@@ -54,7 +58,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     SensorManager mSm;
     Sensor mSensor;
-    static final int GESTURE_SENSOR = 33171014;// Sensor.TYPE_ROTATION_VECTOR;//
+    /**
+     * k7上是33171014，我们x2项目上定义为33171011
+     */
+    static final int GESTURE_SENSOR = 33171011;//33171014;// Sensor.TYPE_ROTATION_VECTOR;//
                                                // 33171011;
     GestureView mGestureView;
     private TextView mData;
@@ -142,7 +149,12 @@ public class MainActivity extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent e) {
         // TODO Auto-generated method stub
-        int data = (int) e.values[0];
+        /**
+         * k7数据在e.values[0]里面传递
+         * 我们x2在e.values[2]里面传递
+         */
+        //int data = (int) e.values[0];
+        int data = (int) e.values[2];
         // Log.i(TAG, "data:" + data);
         if (mData != null) {
             mData.setText("当前时间：" + date.format(System.currentTimeMillis()) + ". \n" + mSensorBrief

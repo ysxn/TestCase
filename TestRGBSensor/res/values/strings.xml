@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">TestRGBSensor</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="notice">Please put device into Light Box!</string>
+    <string name="Red">Red(R)</string>
+    <string name="Green">Green(G)</string>
+    <string name="Blue">BLue(B)</string>
+    <string name="color_temperature">Color Temperature</string>
+
+</resources>

@@ -184,6 +184,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         mTextViewAccelerometerName.setText("加速度传感器型号:" + mAccelerometerSensor.getName());
 
         mGyroAnimation = (ImageView) findViewById(R.id.animation_image);
+        mGyroAnimation.setVisibility(View.GONE);
         mExit = (Button) findViewById(R.id.button_exit);
         if (mExit != null) {
             mExit.setOnClickListener(new View.OnClickListener() {
