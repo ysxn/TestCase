@@ -1,6 +1,10 @@
 
 package com.example.testhallic;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import android.app.Activity;
@@ -14,6 +18,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,6 +30,7 @@ import android.widget.Toast;
  */
 public class MainActivity extends Activity {
 
+    private final String TAG = "zyw";
     private TextView mTextViewHallName;
 
     private TextView mTextViewHallTips;
@@ -47,7 +53,7 @@ public class MainActivity extends Activity {
 
     private int mSensorData = 0;
 
-    private final static String sHallPath = "/dev/sys/class/switch/hall/";
+    private final static String HALL_STATE_PATH = "/sys/class/switch/hall/state";
 
     private Handler mHandler = new Handler() {
         @Override
@@ -55,6 +61,27 @@ public class MainActivity extends Activity {
             switch (msg.what) {
                 case REQUEST_UPDATE_DATA: {
                     mHandler.removeMessages(REQUEST_UPDATE_DATA);
+                    File f = new File(HALL_STATE_PATH);
+                    try {
+                        char[] buffer = new char[1024];
+                        FileReader file = new FileReader(HALL_STATE_PATH);
+                        try {
+                            int len = file.read(buffer, 0, 1024);
+                            /**
+                             * 这个显示buffer是乱码，最后有"\n"换行符。
+                             */
+                            //Log.i(TAG, ">>>>>read state len=="+len+"  buffer={"+buffer.toString()+"}");
+                            Log.i(TAG, ">>>>>read state len=="+len+"  buffer={"+new String(buffer, 0, len)+"}");
+                            mSensorData = Integer.valueOf((new String(buffer, 0, len)).trim());
+                        } finally {
+                            file.close();
+                        }
+                    } catch (FileNotFoundException e) {
+                        Log.e(TAG, "FileNotFoundException！ This kernel does not have hall sensor support");
+                    } catch (Exception e) {
+                        Log.e(TAG, e.toString());
+                    }
+
                     if (mTextViewHallData != null) {
                         mTextViewHallData.setText("当前时间：" + date.format(System.currentTimeMillis())
                                 + "\n" + "当前 Hall IC读数=" + mSensorData + "\n");
@@ -86,7 +113,7 @@ public class MainActivity extends Activity {
         mTextViewHallData = (TextView) findViewById(R.id.hall_sensor_data);
 
         mTextViewHallName.setVisibility(View.GONE);
-        mTextViewHallTips.setText("Hall设备节点路径="+sHallPath);
+        mTextViewHallTips.setText("Hall设备节点路径="+HALL_STATE_PATH);
         mHallAnimation = (ImageView) findViewById(R.id.animation_image);
 
         mHallAnimation.setBackgroundDrawable(new ColorDrawable(Color.GRAY));
