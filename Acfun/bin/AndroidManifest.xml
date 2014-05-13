@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.acfun"
+      android:versionCode="1"
+      android:versionName="1.0">  
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="8"/>
+    <application android:icon="@drawable/icon" android:label="@string/app_name">
+        <activity android:name=".Homepage"
+                  android:label="@string/app_name"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.acfun.action.activity.mainpage" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".About"
+                  android:label="@string/about"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:screenOrientation="portrait"
+                  >
+            <intent-filter>
+                <action android:name="com.acfun.action.activity.about" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PageArticle"
+                  android:label="@string/article"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:screenOrientation="portrait"
+                  >
+            <intent-filter>
+                <action android:name="com.acfun.action.activity.article" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PageEntertainment"
+                  android:label="@string/entertainment"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:screenOrientation="portrait"
+                  >
+            <intent-filter>
+                <action android:name="com.acfun.action.activity.entertainment" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PageAnimation"
+                  android:label="@string/animation"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:screenOrientation="portrait"
+                  >
+            <intent-filter>
+                <action android:name="com.acfun.action.activity.animation" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PageGame"
+                  android:label="@string/game"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:screenOrientation="portrait"
+                  >
+            <intent-filter>
+                <action android:name="com.acfun.action.activity.game" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PageMusic"
+                  android:label="@string/music"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:screenOrientation="portrait"
+                  >
+            <intent-filter>
+                <action android:name="com.acfun.action.activity.music" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PageCartoon"
+                  android:label="@string/cartoon"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:screenOrientation="portrait"
+                  >
+            <intent-filter>
+                <action android:name="com.acfun.action.activity.cartoon" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PageMovie"
+                  android:label="@string/movie"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:screenOrientation="portrait"
+                  >
+            <intent-filter>
+                <action android:name="com.acfun.action.activity.movie" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".ViewArticle"
+                  android:label="@string/article"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:screenOrientation="portrait"
+                  >
+            <intent-filter>
+                <action android:name="com.acfun.action.activity.viewarticle" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".WebViewActivity"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:screenOrientation="landscape"
+                  >
+            <intent-filter>
+                <action android:name="com.acfun.action.activity.viewvideo" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+
+
+<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+
+</manifest> 

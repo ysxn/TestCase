@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout 
+	android:id="@+id/RelativeLayout01" 
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent" 
+	android:background="@drawable/bg"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@+id/mainpage_title" layout="@layout/title" />
+    <Button 
+        android:layout_marginTop="@dimen/mainpage_button_margintop"
+        android:text="@string/animation" 
+        android:id="@+id/animation" 
+        android:layout_below="@id/mainpage_title"
+        android:layout_alignParentLeft="true"
+        android:layout_width="@dimen/mainpage_button_width" 
+        android:layout_height="@dimen/mainpage_button_height" />
+    <Button 
+        android:layout_marginTop="@dimen/mainpage_button_margintop"
+        android:layout_below="@id/mainpage_title" 
+        android:layout_alignParentRight="true"
+        android:text="@string/music" 
+        android:id="@+id/music" 
+        android:layout_width="@dimen/mainpage_button_width" 
+        android:layout_height="@dimen/mainpage_button_height"/>
+    <Button 
+        android:layout_marginTop="@dimen/mainpage_button_margintop"
+        android:layout_below="@id/mainpage_title" 
+        android:layout_centerHorizontal="true"
+        android:text="@string/game" 
+        android:id="@+id/game" 
+        android:layout_width="@dimen/mainpage_button_width" 
+        android:layout_height="@dimen/mainpage_button_height" />
+    <Button 
+        android:layout_marginTop="@dimen/mainpage_button_margintop"
+        android:layout_below="@id/music" 
+        android:layout_alignParentRight="true"
+        android:text="@string/entertainment" 
+        android:id="@+id/entertainment" 
+        android:layout_width="@dimen/mainpage_button_width" 
+        android:layout_height="@dimen/mainpage_button_height"/>
+    <Button 
+        android:layout_marginTop="@dimen/mainpage_button_margintop"
+        android:layout_below="@id/animation" 
+        android:layout_alignParentLeft="true"
+        android:text="@string/movie" 
+        android:id="@+id/movie" 
+        android:layout_width="@dimen/mainpage_button_width" 
+        android:layout_height="@dimen/mainpage_button_height"/>
+    <Button 
+        android:layout_marginTop="@dimen/mainpage_button_margintop"
+        android:layout_below="@id/game" 
+        android:layout_centerHorizontal="true"
+        android:layout_height="@dimen/mainpage_button_height" 
+        android:text="@string/cartoon" 
+        android:id="@+id/cartoon" 
+        android:layout_width="@dimen/mainpage_button_width" />
+    <Button 
+        android:layout_marginTop="@dimen/mainpage_button_margintop"
+        android:layout_below="@id/movie" 
+        android:layout_alignParentLeft="true"
+        android:text="@string/article" 
+        android:id="@+id/article" 
+        android:layout_width="@dimen/mainpage_button_width" 
+        android:layout_height="@dimen/mainpage_button_height" />
+    <Button 
+        android:layout_marginTop="@dimen/mainpage_button_margintop"
+        android:layout_below="@id/cartoon" 
+        android:layout_centerHorizontal="true"
+        android:text="@string/ranking" 
+        android:id="@+id/ranking" 
+        android:layout_width="@dimen/mainpage_button_width" 
+        android:layout_height="@dimen/mainpage_button_height" />
+    <RelativeLayout 
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        >
+        <include layout="@layout/menu" />
+    </RelativeLayout>
+</RelativeLayout>

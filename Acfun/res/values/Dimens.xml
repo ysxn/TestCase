@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <dimen name="mainpage_button_width">100dip</dimen>
+
+    <dimen name="mainpage_button_height">80dip</dimen>
+
+    <dimen name="mainpage_button_margintop">10dip</dimen>
+
+    <!-- roughly a status bar (for vertically centering the all apps
+         home icon in landscape) -->
+    <dimen name="status_bar_height">25dip</dimen>
+
+    <!-- roughly half a status bar (for vertically centering the right-hand
+         button cluster in landscape) -->
+    <dimen name="half_status_bar_height">12dip</dimen>
+
+    <!-- height & width of the drop rectangle for the trash icon -->
+    <dimen name="delete_zone_size">70dip</dimen>
+    
+    <!-- delete_zone_size_full - button_bar_height_portrait -->
+    <dimen name="delete_zone_padding">14dip</dimen>
+</resources>

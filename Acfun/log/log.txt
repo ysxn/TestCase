@@ -1,0 +1,287 @@
+04-21 05:28:07.592: DEBUG/dalvikvm(583): DexOpt: load 99ms, verify 1161ms, opt 54ms
+04-21 05:28:07.647: DEBUG/installd(35): DexInv: --- END '/data/app/com.acfun-2.apk' (success) ---
+04-21 05:28:07.656: WARN/PackageManager(66): Code path for pkg : com.acfun changing from /data/app/com.acfun-1.apk to /data/app/com.acfun-2.apk
+04-21 05:28:07.673: INFO/ActivityManager(66): Force stopping package com.acfun uid=10032
+04-21 05:28:07.673: WARN/PackageManager(66): Resource path for pkg : com.acfun changing from /data/app/com.acfun-1.apk to /data/app/com.acfun-2.apk
+04-21 05:28:07.682: DEBUG/PackageManager(66):   Activities: com.acfun.Homepage
+04-21 05:28:07.914: DEBUG/dalvikvm(66): GC_FOR_MALLOC freed 9441 objects / 561720 bytes in 218ms
+04-21 05:28:08.393: INFO/installd(35): move /data/dalvik-cache/data@app@com.acfun-2.apk@classes.dex -> /data/dalvik-cache/data@app@com.acfun-2.apk@classes.dex
+04-21 05:28:08.393: DEBUG/PackageManager(66): New package installed in /data/app/com.acfun-2.apk
+04-21 05:28:08.613: INFO/ActivityManager(66): Force stopping package com.acfun uid=10032
+04-21 05:28:08.792: DEBUG/dalvikvm(193): GC_EXPLICIT freed 1015 objects / 69424 bytes in 121ms
+04-21 05:28:09.334: DEBUG/dalvikvm(66): GC_EXPLICIT freed 3870 objects / 236040 bytes in 200ms
+04-21 05:28:09.552: DEBUG/dalvikvm(205): GC_EXPLICIT freed 6134 objects / 301056 bytes in 620ms
+04-21 05:28:09.712: INFO/installd(35): unlink /data/dalvik-cache/data@app@com.acfun-1.apk@classes.dex
+04-21 05:28:09.773: DEBUG/AndroidRuntime(567): Shutting down VM
+04-21 05:28:09.783: DEBUG/dalvikvm(567): Debugger has detached; object registry had 1 entries
+04-21 05:28:09.824: INFO/AndroidRuntime(567): NOTE: attach of thread 'Binder Thread #3' failed
+04-21 05:28:09.824: WARN/RecognitionManagerService(66): no available voice recognition services found
+04-21 05:28:10.722: DEBUG/AndroidRuntime(591): >>>>>>>>>>>>>> AndroidRuntime START <<<<<<<<<<<<<<
+04-21 05:28:10.722: DEBUG/AndroidRuntime(591): CheckJNI is ON
+04-21 05:28:11.033: DEBUG/AndroidRuntime(591): --- registering native functions ---
+04-21 05:28:13.054: INFO/ActivityManager(66): Starting activity: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=com.acfun/.Homepage }
+04-21 05:28:13.114: DEBUG/AndroidRuntime(591): Shutting down VM
+04-21 05:28:13.293: INFO/ActivityManager(66): Start proc com.acfun for activity com.acfun/.Homepage: pid=599 uid=10032 gids={3003}
+04-21 05:28:13.323: DEBUG/jdwp(591): Got wake-up signal, bailing out of select
+04-21 05:28:13.323: DEBUG/dalvikvm(591): Debugger has detached; object registry had 1 entries
+04-21 05:28:13.402: INFO/AndroidRuntime(591): NOTE: attach of thread 'Binder Thread #3' failed
+04-21 05:28:14.192: INFO/Htmlparser(599): >>>>>>>>construction
+04-21 05:28:14.284: INFO/TestAcfunActivity(599): >>>>>>>>http://www.acfun.tv
+04-21 05:28:14.284: INFO/Htmlparser(599): >>>>>>>>parserHome
+04-21 05:28:14.632: INFO/global(599): Default buffer size used in BufferedInputStream constructor. It would be better to be explicit if an 8k buffer is required.
+04-21 05:28:14.852: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 1614 objects / 89344 bytes in 145ms
+04-21 05:28:14.962: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 345 objects / 460640 bytes in 71ms
+04-21 05:28:14.962: INFO/dalvikvm-heap(599): Grow heap (frag case) to 3.181MB for 348640-byte allocation
+04-21 05:28:15.062: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 2 objects / 104 bytes in 89ms
+04-21 05:28:15.173: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 3 objects / 348720 bytes in 100ms
+04-21 05:28:15.392: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 4381 objects / 159904 bytes in 86ms
+04-21 05:28:15.574: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 77 objects / 12400 bytes in 87ms
+04-21 05:28:15.744: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 815 objects / 28168 bytes in 75ms
+04-21 05:28:16.534: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 4653 objects / 431136 bytes in 142ms
+04-21 05:28:17.973: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 9226 objects / 374824 bytes in 106ms
+04-21 05:28:18.592: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 8934 objects / 388064 bytes in 110ms
+04-21 05:28:19.403: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 10416 objects / 425608 bytes in 107ms
+04-21 05:28:19.944: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 9292 objects / 676616 bytes in 137ms
+04-21 05:28:20.082: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 5 objects / 174448 bytes in 125ms
+04-21 05:28:20.092: INFO/dalvikvm-heap(599): Grow heap (frag case) to 4.675MB for 348640-byte allocation
+04-21 05:28:20.312: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 0 objects / 0 bytes in 214ms
+04-21 05:28:20.494: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 0 objects / 0 bytes in 186ms
+04-21 05:28:20.503: INFO/dalvikvm-heap(599): Grow heap (frag case) to 4.841MB for 174328-byte allocation
+04-21 05:28:20.704: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 0 objects / 0 bytes in 196ms
+04-21 05:28:21.012: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 3 objects / 348720 bytes in 304ms
+04-21 05:28:21.413: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 871 objects / 602416 bytes in 176ms
+04-21 05:28:22.373: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 7212 objects / 512192 bytes in 300ms
+04-21 05:28:23.244: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 11247 objects / 483296 bytes in 139ms
+04-21 05:28:23.813: WARN/ActivityManager(66): Activity idle timeout for HistoryRecord{43e42c20 com.acfun/.Homepage}
+04-21 05:28:24.062: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 12419 objects / 510864 bytes in 133ms
+04-21 05:28:25.253: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 35923 objects / 1944992 bytes in 143ms
+04-21 05:28:26.473: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 7619 objects / 457048 bytes in 165ms
+04-21 05:28:27.664: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 9030 objects / 488152 bytes in 219ms
+04-21 05:28:28.244: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 6310 objects / 436232 bytes in 128ms
+04-21 05:28:28.263: INFO/Htmlparser(599): >>>>>>>>toString=<!DOCTYPE html>
+04-21 05:28:28.263: INFO/Htmlparser(599): <html>
+04-21 05:28:28.263: INFO/Htmlparser(599):  <head> 
+04-21 05:28:28.263: INFO/Htmlparser(599):   <meta charset="utf-8" /> 
+04-21 05:28:28.263: INFO/Htmlparser(599):   <!--Title --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):   <title>Acfun - ?¡è???????????????????</title> 
+04-21 05:28:28.263: INFO/Htmlparser(599):   <!--Style --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):   <link id="sanae" rel="stylesheet" href="//static.acfun.tv/dotnet/20120417/style/style.dev.css" /> 
+04-21 05:28:28.263: INFO/Htmlparser(599):   <link id="nagisa" rel="stylesheet" href="//static.acfun.tv/dotnet/20120417/style/index.css" /> 
+04-21 05:28:28.263: INFO/Htmlparser(599):  </head> 
+04-21 05:28:28.263: INFO/Htmlparser(599):  <body> 
+04-21 05:28:28.263: INFO/Htmlparser(599):   <div id="stage">
+04-21 05:28:28.263: INFO/Htmlparser(599):    <!--Stage --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):    <!--Header????¡ì?--> 
+04-21 05:28:28.263: INFO/Htmlparser(599):    <div id="area-info"></div>
+04-21 05:28:28.263: INFO/Htmlparser(599):    <!--Info Area --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):    <div id="area-window"></div>
+04-21 05:28:28.263: INFO/Htmlparser(599):    <!--Window Area --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):    <div id="header">
+04-21 05:28:28.263: INFO/Htmlparser(599):     <!--Header --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):     <div id="header-inner" class="inner">
+04-21 05:28:28.263: INFO/Htmlparser(599):      <!--Inner --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):      <a id="header-logo" class="" href="/" title="?¡è???????????????????"></a>
+04-21 05:28:28.263: INFO/Htmlparser(599):      <!--Logo --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):      <div id="area-header-guide">
+04-21 05:28:28.263: INFO/Htmlparser(599):       <!--Guide --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):       <a id="item-header-guide-1" class="item-header-guide btn btn-hover" href="/v/list1/index.htm" title="??????¨¨???????¡§?????????"> <span class="btn-hover-info">??¡§???</span> <span class="btn-hover-info-hidden">?????? Mad</span> </a> 
+04-21 05:28:28.263: INFO/Htmlparser(599):       <a id="item-header-guide-2" class="item-header-guide btn btn-hover" href="/v/list58/index.htm" title="??????¨¨?????¨¦???????????"> <span class="btn-hover-info">¨¦?????</span> <span class="btn-hover-info-hidden">?????¡À ¨¨??¨¨??</span> </a> 
+04-21 05:28:28.263: INFO/Htmlparser(599):       <a id="item-header-guide-3" class="item-header-guide btn btn-hover" href="/v/list59/index.htm" title="??????¨¨?????????????????"> <span class="btn-hover-info">??????</span> <span class="btn-hover-info-hidden">?????? ¨¨¡ì?¨¨??</span> </a> 
+04-21 05:28:28.263: INFO/Htmlparser(599):       <a id="item-header-guide-4" class="item-header-guide btn btn-hover" href="/v/list60/index.htm" title="??????¨¨??????¡§¡À?????????"> <span class="btn-hover-info">?¡§¡À???</span> <span class="btn-hover-info-hidden">?????? ???¨¦??</span> </a> 
+04-21 05:28:28.263: INFO/Htmlparser(599):       <a id="item-header-guide-5" class="item-header-guide btn btn-hover" href="/v/list62/index.htm" title="??????¨¨??????????¡À??????"> <span class="btn-hover-info">?????¡À</span> <span class="btn-hover-info-hidden">??¡ã??? ??¡À¨¨¡ì?</span> </a> 
+04-21 05:28:28.263: INFO/Htmlparser(599):       <a id="item-header-guide-6" class="item-header-guide btn btn-hover" href="/v/list63/index.htm" title="??????¨¨?????????????????"> <span class="btn-hover-info">??????</span> <span class="btn-hover-info-hidden">???¨¦?????¨¨¡ì?</span> </a> 
+04-21 05:28:28.263: INFO/Htmlparser(599):      </div>
+04-21 05:28:28.263: INFO/Htmlparser(599):      <!--Guide --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):      <a href="/list.html">
+04-21 05:28:28.263: INFO/Htmlparser(599):       <div id="item-header-image"></div></a> 
+04-21 05:28:28.263: INFO/Htmlparser(599):      <a id="area-header-login" target="_blank" href="/login.aspx" class="btn-hover">
+04-21 05:28:28.263: INFO/Htmlparser(599):       <!--Login --> <span class="btn-hover-info">??????</span> <span class="btn-hover-info-hidden">????¡è??????? ????¡è???????</span> </a>
+04-21 05:28:28.263: INFO/Htmlparser(599):      <!--Login --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):      <div id="area-header-search">
+04-21 05:28:28.263: INFO/Htmlparser(599):       <!--Search --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):       <form target="_blank" method="get" action="/search.aspx" name="frmHeaderSearch"> 
+04-21 05:28:28.263: INFO/Htmlparser(599):        <input class="input-header-search iptSearch" name="q" type="text" value="??????" /> 
+04-21 05:28:28.263: INFO/Htmlparser(599):        <button class="btn-header-search btnSearch" type="submit">??????</button> 
+04-21 05:28:28.263: INFO/Htmlparser(599):       </form> 
+04-21 05:28:28.263: INFO/Htmlparser(599):      </div>
+04-21 05:28:28.263: INFO/Htmlparser(599):      <!--Search --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):     </div>
+04-21 05:28:28.263: INFO/Htmlparser(599):     <!--Inner --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):    </div>
+04-21 05:28:28.263: INFO/Htmlparser(599):    <!--Header -->
+04-21 05:28:28.263: INFO/Htmlparser(599):    <!--Header??????--> 
+04-21 05:28:28.263: INFO/Htmlparser(599):    <div id="mainer" class="index">
+04-21 05:28:28.263: INFO/Htmlparser(599):     <!--Mainer --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):     <div id="mainer-inner" class="inner">
+04-21 05:28:28.263: INFO/Htmlparser(599):      <!--Inner --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):      <div id="area-mainer-left" class="area">
+04-21 05:28:28.263: INFO/Htmlparser(599):       <!--Mainer Left --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):       <div id="area-index-topic">
+04-21 05:28:28.263: INFO/Htmlparser(599):        <!--Topic --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):        <div class="area-index-topic-left"> 
+04-21 05:28:28.263: INFO/Htmlparser(599):         <div class="banner"> 
+04-21 05:28:28.263: INFO/Htmlparser(599):          <span class="tab tab-fixed">?????¡ã????¡ì?</span> 
+04-21 05:28:28.263: INFO/Htmlparser(599):          <a id="random-index-topic-left" href="#">&nbsp;</a> 
+04-21 05:28:28.263: INFO/Htmlparser(599):         </div> 
+04-21 05:28:28.263: INFO/Htmlparser(599):         <div id="item-index-topic-new-outer" data-focus="0"> 
+04-21 05:28:28.263: INFO/Htmlparser(599):          <div id="item-index-topic-new-inner"> 
+04-21 05:28:28.263: INFO/Htmlparser(599):           <!-- ?????¡ã????¡è?????¡ì? --> 
+04-21 05:28:28.263: INFO/Htmlparser(599):           <div class="item-index-topic-new item-index-topic-newActive" data-title="????????¡§??¡ì?¡ã???????????????????¨¦??????????¡§??¡¤?????¡§" data-desc="??????YY???&nbsp;¨¦?????" data-author="??????????¡è???????" data-date="2012???04???21???" data-view="20295" data-comment="104"> 
+04-21 05:28:28.263: INFO/Htmlparser(599):            <i class="icon icon-talk-left"></i> 
+04-21 05:28:28.263: INFO/Htmlparser(599):            <a class="thumb" target="_blank" href="/v/ac329837"><img class="avatar-video avatar"
+04-21 05:28:28.883: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 6979 objects / 735392 bytes in 136ms
+04-21 05:28:29.582: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 7156 objects / 390520 bytes in 127ms
+04-21 05:28:30.694: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 6290 objects / 346016 bytes in 258ms
+04-21 05:28:30.952: DEBUG/dalvikvm(193): GC_EXPLICIT freed 1273 objects / 64632 bytes in 2127ms
+04-21 05:28:31.913: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 9474 objects / 492832 bytes in 116ms
+04-21 05:28:32.164: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 1961 objects / 73536 bytes in 109ms
+04-21 05:28:32.164: INFO/dalvikvm-heap(599): Grow heap (frag case) to 4.536MB for 194634-byte allocation
+04-21 05:28:32.364: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 0 objects / 0 bytes in 197ms
+04-21 05:28:32.383: INFO/Htmlparser(599): >>>>>>>>outerHtml=<!DOCTYPE html>
+04-21 05:28:32.383: INFO/Htmlparser(599): <html>
+04-21 05:28:32.383: INFO/Htmlparser(599):  <head> 
+04-21 05:28:32.383: INFO/Htmlparser(599):   <meta charset="utf-8" /> 
+04-21 05:28:32.383: INFO/Htmlparser(599):   <!--Title --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):   <title>Acfun - ?¡è???????????????????</title> 
+04-21 05:28:32.383: INFO/Htmlparser(599):   <!--Style --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):   <link id="sanae" rel="stylesheet" href="//static.acfun.tv/dotnet/20120417/style/style.dev.css" /> 
+04-21 05:28:32.383: INFO/Htmlparser(599):   <link id="nagisa" rel="stylesheet" href="//static.acfun.tv/dotnet/20120417/style/index.css" /> 
+04-21 05:28:32.383: INFO/Htmlparser(599):  </head> 
+04-21 05:28:32.383: INFO/Htmlparser(599):  <body> 
+04-21 05:28:32.383: INFO/Htmlparser(599):   <div id="stage">
+04-21 05:28:32.383: INFO/Htmlparser(599):    <!--Stage --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):    <!--Header????¡ì?--> 
+04-21 05:28:32.383: INFO/Htmlparser(599):    <div id="area-info"></div>
+04-21 05:28:32.383: INFO/Htmlparser(599):    <!--Info Area --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):    <div id="area-window"></div>
+04-21 05:28:32.383: INFO/Htmlparser(599):    <!--Window Area --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):    <div id="header">
+04-21 05:28:32.383: INFO/Htmlparser(599):     <!--Header --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):     <div id="header-inner" class="inner">
+04-21 05:28:32.383: INFO/Htmlparser(599):      <!--Inner --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):      <a id="header-logo" class="" href="/" title="?¡è???????????????????"></a>
+04-21 05:28:32.383: INFO/Htmlparser(599):      <!--Logo --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):      <div id="area-header-guide">
+04-21 05:28:32.383: INFO/Htmlparser(599):       <!--Guide --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):       <a id="item-header-guide-1" class="item-header-guide btn btn-hover" href="/v/list1/index.htm" title="??????¨¨???????¡§?????????"> <span class="btn-hover-info">??¡§???</span> <span class="btn-hover-info-hidden">?????? Mad</span> </a> 
+04-21 05:28:32.383: INFO/Htmlparser(599):       <a id="item-header-guide-2" class="item-header-guide btn btn-hover" href="/v/list58/index.htm" title="??????¨¨?????¨¦???????????"> <span class="btn-hover-info">¨¦?????</span> <span class="btn-hover-info-hidden">?????¡À ¨¨??¨¨??</span> </a> 
+04-21 05:28:32.383: INFO/Htmlparser(599):       <a id="item-header-guide-3" class="item-header-guide btn btn-hover" href="/v/list59/index.htm" title="??????¨¨?????????????????"> <span class="btn-hover-info">??????</span> <span class="btn-hover-info-hidden">?????? ¨¨¡ì?¨¨??</span> </a> 
+04-21 05:28:32.383: INFO/Htmlparser(599):       <a id="item-header-guide-4" class="item-header-guide btn btn-hover" href="/v/list60/index.htm" title="??????¨¨??????¡§¡À?????????"> <span class="btn-hover-info">?¡§¡À???</span> <span class="btn-hover-info-hidden">?????? ???¨¦??</span> </a> 
+04-21 05:28:32.383: INFO/Htmlparser(599):       <a id="item-header-guide-5" class="item-header-guide btn btn-hover" href="/v/list62/index.htm" title="??????¨¨??????????¡À??????"> <span class="btn-hover-info">?????¡À</span> <span class="btn-hover-info-hidden">??¡ã??? ??¡À¨¨¡ì?</span> </a> 
+04-21 05:28:32.383: INFO/Htmlparser(599):       <a id="item-header-guide-6" class="item-header-guide btn btn-hover" href="/v/list63/index.htm" title="??????¨¨?????????????????"> <span class="btn-hover-info">??????</span> <span class="btn-hover-info-hidden">???¨¦?????¨¨¡ì?</span> </a> 
+04-21 05:28:32.383: INFO/Htmlparser(599):      </div>
+04-21 05:28:32.383: INFO/Htmlparser(599):      <!--Guide --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):      <a href="/list.html">
+04-21 05:28:32.383: INFO/Htmlparser(599):       <div id="item-header-image"></div></a> 
+04-21 05:28:32.383: INFO/Htmlparser(599):      <a id="area-header-login" target="_blank" href="/login.aspx" class="btn-hover">
+04-21 05:28:32.383: INFO/Htmlparser(599):       <!--Login --> <span class="btn-hover-info">??????</span> <span class="btn-hover-info-hidden">????¡è??????? ????¡è???????</span> </a>
+04-21 05:28:32.383: INFO/Htmlparser(599):      <!--Login --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):      <div id="area-header-search">
+04-21 05:28:32.383: INFO/Htmlparser(599):       <!--Search --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):       <form target="_blank" method="get" action="/search.aspx" name="frmHeaderSearch"> 
+04-21 05:28:32.383: INFO/Htmlparser(599):        <input class="input-header-search iptSearch" name="q" type="text" value="??????" /> 
+04-21 05:28:32.383: INFO/Htmlparser(599):        <button class="btn-header-search btnSearch" type="submit">??????</button> 
+04-21 05:28:32.383: INFO/Htmlparser(599):       </form> 
+04-21 05:28:32.383: INFO/Htmlparser(599):      </div>
+04-21 05:28:32.383: INFO/Htmlparser(599):      <!--Search --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):     </div>
+04-21 05:28:32.383: INFO/Htmlparser(599):     <!--Inner --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):    </div>
+04-21 05:28:32.383: INFO/Htmlparser(599):    <!--Header -->
+04-21 05:28:32.383: INFO/Htmlparser(599):    <!--Header??????--> 
+04-21 05:28:32.383: INFO/Htmlparser(599):    <div id="mainer" class="index">
+04-21 05:28:32.383: INFO/Htmlparser(599):     <!--Mainer --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):     <div id="mainer-inner" class="inner">
+04-21 05:28:32.383: INFO/Htmlparser(599):      <!--Inner --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):      <div id="area-mainer-left" class="area">
+04-21 05:28:32.383: INFO/Htmlparser(599):       <!--Mainer Left --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):       <div id="area-index-topic">
+04-21 05:28:32.383: INFO/Htmlparser(599):        <!--Topic --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):        <div class="area-index-topic-left"> 
+04-21 05:28:32.383: INFO/Htmlparser(599):         <div class="banner"> 
+04-21 05:28:32.383: INFO/Htmlparser(599):          <span class="tab tab-fixed">?????¡ã????¡ì?</span> 
+04-21 05:28:32.383: INFO/Htmlparser(599):          <a id="random-index-topic-left" href="#">&nbsp;</a> 
+04-21 05:28:32.383: INFO/Htmlparser(599):         </div> 
+04-21 05:28:32.383: INFO/Htmlparser(599):         <div id="item-index-topic-new-outer" data-focus="0"> 
+04-21 05:28:32.383: INFO/Htmlparser(599):          <div id="item-index-topic-new-inner"> 
+04-21 05:28:32.383: INFO/Htmlparser(599):           <!-- ?????¡ã????¡è?????¡ì? --> 
+04-21 05:28:32.383: INFO/Htmlparser(599):           <div class="item-index-topic-new item-index-topic-newActive" data-title="????????¡§??¡ì?¡ã???????????????????¨¦??????????¡§??¡¤?????¡§" data-desc="??????YY???&nbsp;¨¦?????" data-author="??????????¡è???????" data-date="2012???04???21???" data-view="20295" data-comment="104"> 
+04-21 05:28:32.383: INFO/Htmlparser(599):            <i class="icon icon-talk-left"></i> 
+04-21 05:28:32.383: INFO/Htmlparser(599):            <a class="thumb" target="_blank" href="/v/ac329837"><img class="avatar-video avatar
+04-21 05:28:33.363: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 10059 objects / 1093320 bytes in 121ms
+04-21 05:28:34.083: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 7707 objects / 461920 bytes in 118ms
+04-21 05:28:35.452: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 9367 objects / 492752 bytes in 203ms
+04-21 05:28:36.183: INFO/Htmlparser(599): >>>>>>>>html=<!DOCTYPE html>
+04-21 05:28:36.183: INFO/Htmlparser(599): <html>
+04-21 05:28:36.183: INFO/Htmlparser(599):  <head> 
+04-21 05:28:36.183: INFO/Htmlparser(599):   <meta charset="utf-8" /> 
+04-21 05:28:36.183: INFO/Htmlparser(599):   <!--Title --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):   <title>Acfun - ?¡è???????????????????</title> 
+04-21 05:28:36.183: INFO/Htmlparser(599):   <!--Style --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):   <link id="sanae" rel="stylesheet" href="//static.acfun.tv/dotnet/20120417/style/style.dev.css" /> 
+04-21 05:28:36.183: INFO/Htmlparser(599):   <link id="nagisa" rel="stylesheet" href="//static.acfun.tv/dotnet/20120417/style/index.css" /> 
+04-21 05:28:36.183: INFO/Htmlparser(599):  </head> 
+04-21 05:28:36.183: INFO/Htmlparser(599):  <body> 
+04-21 05:28:36.183: INFO/Htmlparser(599):   <div id="stage">
+04-21 05:28:36.183: INFO/Htmlparser(599):    <!--Stage --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):    <!--Header????¡ì?--> 
+04-21 05:28:36.183: INFO/Htmlparser(599):    <div id="area-info"></div>
+04-21 05:28:36.183: INFO/Htmlparser(599):    <!--Info Area --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):    <div id="area-window"></div>
+04-21 05:28:36.183: INFO/Htmlparser(599):    <!--Window Area --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):    <div id="header">
+04-21 05:28:36.183: INFO/Htmlparser(599):     <!--Header --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):     <div id="header-inner" class="inner">
+04-21 05:28:36.183: INFO/Htmlparser(599):      <!--Inner --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):      <a id="header-logo" class="" href="/" title="?¡è???????????????????"></a>
+04-21 05:28:36.183: INFO/Htmlparser(599):      <!--Logo --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):      <div id="area-header-guide">
+04-21 05:28:36.183: INFO/Htmlparser(599):       <!--Guide --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):       <a id="item-header-guide-1" class="item-header-guide btn btn-hover" href="/v/list1/index.htm" title="??????¨¨???????¡§?????????"> <span class="btn-hover-info">??¡§???</span> <span class="btn-hover-info-hidden">?????? Mad</span> </a> 
+04-21 05:28:36.183: INFO/Htmlparser(599):       <a id="item-header-guide-2" class="item-header-guide btn btn-hover" href="/v/list58/index.htm" title="??????¨¨?????¨¦???????????"> <span class="btn-hover-info">¨¦?????</span> <span class="btn-hover-info-hidden">?????¡À ¨¨??¨¨??</span> </a> 
+04-21 05:28:36.183: INFO/Htmlparser(599):       <a id="item-header-guide-3" class="item-header-guide btn btn-hover" href="/v/list59/index.htm" title="??????¨¨?????????????????"> <span class="btn-hover-info">??????</span> <span class="btn-hover-info-hidden">?????? ¨¨¡ì?¨¨??</span> </a> 
+04-21 05:28:36.183: INFO/Htmlparser(599):       <a id="item-header-guide-4" class="item-header-guide btn btn-hover" href="/v/list60/index.htm" title="??????¨¨??????¡§¡À?????????"> <span class="btn-hover-info">?¡§¡À???</span> <span class="btn-hover-info-hidden">?????? ???¨¦??</span> </a> 
+04-21 05:28:36.183: INFO/Htmlparser(599):       <a id="item-header-guide-5" class="item-header-guide btn btn-hover" href="/v/list62/index.htm" title="??????¨¨??????????¡À??????"> <span class="btn-hover-info">?????¡À</span> <span class="btn-hover-info-hidden">??¡ã??? ??¡À¨¨¡ì?</span> </a> 
+04-21 05:28:36.183: INFO/Htmlparser(599):       <a id="item-header-guide-6" class="item-header-guide btn btn-hover" href="/v/list63/index.htm" title="??????¨¨?????????????????"> <span class="btn-hover-info">??????</span> <span class="btn-hover-info-hidden">???¨¦?????¨¨¡ì?</span> </a> 
+04-21 05:28:36.183: INFO/Htmlparser(599):      </div>
+04-21 05:28:36.183: INFO/Htmlparser(599):      <!--Guide --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):      <a href="/list.html">
+04-21 05:28:36.183: INFO/Htmlparser(599):       <div id="item-header-image"></div></a> 
+04-21 05:28:36.183: INFO/Htmlparser(599):      <a id="area-header-login" target="_blank" href="/login.aspx" class="btn-hover">
+04-21 05:28:36.183: INFO/Htmlparser(599):       <!--Login --> <span class="btn-hover-info">??????</span> <span class="btn-hover-info-hidden">????¡è??????? ????¡è???????</span> </a>
+04-21 05:28:36.183: INFO/Htmlparser(599):      <!--Login --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):      <div id="area-header-search">
+04-21 05:28:36.183: INFO/Htmlparser(599):       <!--Search --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):       <form target="_blank" method="get" action="/search.aspx" name="frmHeaderSearch"> 
+04-21 05:28:36.183: INFO/Htmlparser(599):        <input class="input-header-search iptSearch" name="q" type="text" value="??????" /> 
+04-21 05:28:36.183: INFO/Htmlparser(599):        <button class="btn-header-search btnSearch" type="submit">??????</button> 
+04-21 05:28:36.183: INFO/Htmlparser(599):       </form> 
+04-21 05:28:36.183: INFO/Htmlparser(599):      </div>
+04-21 05:28:36.183: INFO/Htmlparser(599):      <!--Search --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):     </div>
+04-21 05:28:36.183: INFO/Htmlparser(599):     <!--Inner --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):    </div>
+04-21 05:28:36.183: INFO/Htmlparser(599):    <!--Header -->
+04-21 05:28:36.183: INFO/Htmlparser(599):    <!--Header??????--> 
+04-21 05:28:36.183: INFO/Htmlparser(599):    <div id="mainer" class="index">
+04-21 05:28:36.183: INFO/Htmlparser(599):     <!--Mainer --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):     <div id="mainer-inner" class="inner">
+04-21 05:28:36.183: INFO/Htmlparser(599):      <!--Inner --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):      <div id="area-mainer-left" class="area">
+04-21 05:28:36.183: INFO/Htmlparser(599):       <!--Mainer Left --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):       <div id="area-index-topic">
+04-21 05:28:36.183: INFO/Htmlparser(599):        <!--Topic --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):        <div class="area-index-topic-left"> 
+04-21 05:28:36.183: INFO/Htmlparser(599):         <div class="banner"> 
+04-21 05:28:36.183: INFO/Htmlparser(599):          <span class="tab tab-fixed">?????¡ã????¡ì?</span> 
+04-21 05:28:36.183: INFO/Htmlparser(599):          <a id="random-index-topic-left" href="#">&nbsp;</a> 
+04-21 05:28:36.183: INFO/Htmlparser(599):         </div> 
+04-21 05:28:36.183: INFO/Htmlparser(599):         <div id="item-index-topic-new-outer" data-focus="0"> 
+04-21 05:28:36.183: INFO/Htmlparser(599):          <div id="item-index-topic-new-inner"> 
+04-21 05:28:36.183: INFO/Htmlparser(599):           <!-- ?????¡ã????¡è?????¡ì? --> 
+04-21 05:28:36.183: INFO/Htmlparser(599):           <div class="item-index-topic-new item-index-topic-newActive" data-title="????????¡§??¡ì?¡ã???????????????????¨¦??????????¡§??¡¤?????¡§" data-desc="??????YY???&nbsp;¨¦?????" data-author="??????????¡è???????" data-date="2012???04???21???" data-view="20295" data-comment="104"> 
+04-21 05:28:36.183: INFO/Htmlparser(599):            <i class="icon icon-talk-left"></i> 
+04-21 05:28:36.183: INFO/Htmlparser(599):            <a class="thumb" target="_blank" href="/v/ac329837"><img class="avatar-video avatar" src
+04-21 05:28:36.453: DEBUG/dalvikvm(599): GC_FOR_MALLOC freed 25907 objects / 1918688 bytes in 126ms
+04-21 05:28:36.643: INFO/ActivityManager(66): Displayed activity com.acfun/.Homepage: 23496 ms (total 23496 ms)
+04-21 05:28:36.993: DEBUG/dalvikvm(260): GC_EXPLICIT freed 638 objects / 50272 bytes in 3149ms

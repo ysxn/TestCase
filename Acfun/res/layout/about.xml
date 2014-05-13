@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>                  
+
+<RelativeLayout 
+    android:id="@+id/RelativeLayout01" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent" 
+    android:background="@drawable/bg"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@+id/about_title" layout="@layout/title" />
+    <TextView 
+        android:layout_marginTop="@dimen/mainpage_button_margintop"
+        android:text="@string/text_about" 
+        android:id="@+id/text_about" 
+        android:layout_below="@id/about_title"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold" 
+        android:textSize="20sp"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" />
+    <RelativeLayout 
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        >
+        <include layout="@layout/menu" />
+    </RelativeLayout>
+</RelativeLayout>

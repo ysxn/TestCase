@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:orientation="horizontal" 
+    android:background="@drawable/menu_bg"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@+id/menu_mainpage" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:drawableTop="@drawable/menu_mainpage" 
+        android:background="@drawable/menu_mainpage_bg"
+        android:clickable="true"
+        android:text="@string/mainpage" 
+        android:gravity="center_horizontal"
+        android:layout_weight="1.0" />
+    <TextView android:id="@+id/menu_refresh" 
+        android:duplicateParentState="false" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:drawableTop="@drawable/menu_refresh" 
+        android:background="@drawable/menu_mainpage_bg"
+        android:clickable="true"
+        android:text="@string/refresh" 
+        android:gravity="center_horizontal" 
+        android:layout_weight="1.0" />
+    <TextView android:id="@+id/menu_forward" 
+        android:duplicateParentState="false" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:drawableTop="@drawable/menu_forward" 
+        android:background="@drawable/menu_mainpage_bg"
+        android:clickable="true"
+        android:text="@string/forward" 
+        android:gravity="center_horizontal" 
+        android:layout_weight="1.0" />
+    <TextView android:id="@+id/menu_back" 
+        android:duplicateParentState="false" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:drawableTop="@drawable/menu_back" 
+        android:background="@drawable/menu_mainpage_bg"
+        android:clickable="true"
+        android:text="@string/back" 
+        android:gravity="center_horizontal" 
+        android:layout_weight="1.0" />
+    
+</LinearLayout>

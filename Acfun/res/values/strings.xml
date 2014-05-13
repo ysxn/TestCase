@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, Homepage!</string>
+    <string name="app_name">AcFun</string>
+    <string name="mainpage">主页</string>
+    <string name="refresh">刷新</string>
+    <string name="favorite">收藏</string>
+    <string name="about">关于</string>
+    <string name="exit">退出</string>
+    <string name="forward">下一页</string>
+    <string name="back">上一页</string>
+    
+    <string name="animation">动画</string>
+    <string name="music">音乐</string>
+    <string name="game">游戏</string>
+    <string name="entertainment">娱乐</string>
+    <string name="movie">短影</string>
+    <string name="cartoon">番剧</string>
+    <string name="article">文章</string>
+    <string name="ranking">趋势</string>
+    
+    <string name="no_wifi">当前网络连接不是wifi，建议使用wifi。</string>
+    <string name="is_wifi">当前网络连接是wifi。</string>
+    <string name="no_connect">当前网络连接不正常，建议使用wifi。</string>
+    
+    <string name="text_about">如果你有任何建议或发现bug，可以QQ : 243781392或者email : zhuyawen1983@126.com 联系我。</string>
+</resources>
