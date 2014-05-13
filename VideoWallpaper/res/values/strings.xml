@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="select_file">选择视频文件</string>
+    <string name="app_name">视频壁纸</string>
+    <string name="settings_title">视频壁纸设置</string>
+    <string name="description">视频壁纸设置</string>
+    <string name="preference_about_title">关于</string>
+    <string name="preference_bgcolor_title">配置视频颜色</string>
+    <string name="preference_bgcolor_summary">视频之外部分的颜色</string>
+    <string name="preference_fixscreen_title">配置视频缩放</string>
+    <string name="preference_fixscreen_summary">如何缩放视频来适应屏幕</string>
+    <string name="preference_selectfile_title">点击选择视频文件</string>
+    <string name="preference_selectfile_summary">当前文件 : </string>
+    <string name="text_about">如果你有任何建议或发现bug，可以QQ : 243781392或者email : zhuyawen1983@126.com 联系我。</string>
+
+</resources>

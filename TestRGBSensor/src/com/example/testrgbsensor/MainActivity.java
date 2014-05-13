@@ -66,6 +66,8 @@ public class MainActivity extends Activity implements SensorEventListener {
     private TextView mTextViewFrontRGBSensorData;
     private TextView mTextViewBackRGBSensorData;
 
+    private TextView mTextViewNativeOperate;
+
     private Sensor mFrontRGBSensor;
     private Sensor mBackRGBSensor;
 
@@ -79,8 +81,8 @@ public class MainActivity extends Activity implements SensorEventListener {
                 case REQUEST_UPDATE_DATA: {
                     mHandler.removeMessages(REQUEST_UPDATE_DATA);
 
-                    if (mTextViewFrontRGBSensorData != null) {
-
+                    if (mTextViewNativeOperate != null) {
+                        mTextViewNativeOperate.setText("native int=" + NativeOperate.getData());
                     }
                     mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 300L);
                     break;
@@ -106,30 +108,32 @@ public class MainActivity extends Activity implements SensorEventListener {
 
         mTextViewFrontRGBSensorName = ((TextView) findViewById(R.id.front_rgb_sensor_name));
         mTextViewFrontRGBSensorData = ((TextView) findViewById(R.id.front_rgb_data));
+        mTextViewNativeOperate = ((TextView) findViewById(R.id.native_operate));
 
         List<Sensor> ss = mSensorManager.getSensorList(RGB_SENSOR);
         if (ss == null || ss.size() == 0) {
             Toast.makeText(this, "获取RGB传感器为空，请检查传感器id是否为：" + RGB_SENSOR,
                     Toast.LENGTH_LONG)
                     .show();
-            finish();
-            return;
-        }
-        Toast.makeText(this,
-                "获取RGB传感器ok，getSensorList size=" + ss.size() + ",传感器id为：" + RGB_SENSOR,
-                Toast.LENGTH_LONG)
-                .show();
-        StringBuilder sb = new StringBuilder();
-        sb.append("getSensorList,size=" + ss.size() + ",传感器Type_id为=" + RGB_SENSOR + "; ");
-        Sensor s;
-        for (int i = 0; i < ss.size(); i++) {
-            s = ss.get(i);
-            sb.append("(i=" + i + ",name=" + s.getName() + ") ");
-        }
-        sb.append("\n");
-        mSensorBrief = sb.toString();
+            // finish();
+            // return;
+        } else {
+            Toast.makeText(this,
+                    "获取RGB传感器ok，getSensorList size=" + ss.size() + ",传感器id为：" + RGB_SENSOR,
+                    Toast.LENGTH_LONG)
+                    .show();
+            StringBuilder sb = new StringBuilder();
+            sb.append("getSensorList,size=" + ss.size() + ",传感器Type_id为=" + RGB_SENSOR + "; ");
+            Sensor s;
+            for (int i = 0; i < ss.size(); i++) {
+                s = ss.get(i);
+                sb.append("(i=" + i + ",name=" + s.getName() + ") ");
+            }
+            sb.append("\n");
+            mSensorBrief = sb.toString();
 
-        mFrontRGBSensor = ss.get(0);
+            mFrontRGBSensor = ss.get(0);
+        }
 
         if (mFrontRGBSensor == null)
         {

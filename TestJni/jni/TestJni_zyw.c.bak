@@ -1,0 +1,45 @@
+#define LOG_TAG "TestJni_jni"
+
+#include "Jnilogger.h"
+#include <stdio.h>
+#include <jni.h>
+#include <string.h>
+
+static int i = 0;
+/*
+ * Class:     com_testjni_TestJni
+ * Method:    init
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_testjni_TestJni_init
+  (JNIEnv * env, jclass thiz) 
+{
+    i = 189;
+    return;
+}
+
+/*
+ * Class:     com_testjni_TestJni
+ * Method:    getInt
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_testjni_TestJni_getInt
+  (JNIEnv * env, jclass thiz) 
+{
+    return i++;
+}
+
+/*
+ * Class:     com_testjni_TestJni
+ * Method:    getVersion
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_testjni_TestJni_getVersion
+  (JNIEnv * env, jclass thiz) 
+  {
+  	char str[25];
+  	sprintf(str, "%d", avcodec_version());
+  	LOGE(">>>>>>>>>>Java_com_testjni_TestJni_getVersion");
+  	return (*env)->NewStringUTF(env, str);
+  	
+  }

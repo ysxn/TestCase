@@ -1,10 +1,15 @@
 
 package com.lenovo.gesture;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -26,16 +31,16 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements SensorEventListener {
 
     /*
-     * k7上定义是LEFT = 3，RIGHT = 2，DOWN = 5，UP = 4，NEAR = 6，FAR = 15
-     * x2项目我们定义是LEFT = 3，RIGHT = 4，DOWN = 1，UP = 2，NEAR = 5，FAR = 6
+     * k7上定义是LEFT = 3，RIGHT = 2，DOWN = 5，UP = 4，NEAR = 6，FAR = 15 x2项目我们定义是LEFT
+     * = 3，RIGHT = 4，DOWN = 1，UP = 2，NEAR = 5，FAR = 6
      */
     public static final int LEFT = 3;// 3;//2;
-    public static final int RIGHT = 4;//3;2;// 
-    public static final int DOWN = 1;//4;5;// 
-    public static final int UP = 2;//5;4;// 
+    public static final int RIGHT = 4;// 3;2;//
+    public static final int DOWN = 1;// 4;5;//
+    public static final int UP = 2;// 5;4;//
 
-    public static final int NEAR = 5;//6;6;// 
-    public static final int FAR = 6;//7;15;// 
+    public static final int NEAR = 5;// 6;6;//
+    public static final int FAR = 6;// 7;15;//
 
     static final String TAG = "zyw";
 
@@ -43,35 +48,48 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     private SimpleDateFormat date = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒  ");
     private String mSensorBrief = "";
-
-    // Handler mHandler = new Handler() {
-    // @Override
-    // public void handleMessage(Message msg) {
-    // switch (msg.what) {
-    // case MSG_RESET:
-    // mHandler.removeMessages(MSG_RESET);
-    // mGestureView.reset();
-    // break;
-    // }
-    // }
-    // };
-
+    private int mSensorData[] = {
+            0, 0, 0
+    };
     SensorManager mSm;
     Sensor mSensor;
     /**
      * k7上是33171014，我们x2项目上定义为33171011
      */
-    static final int GESTURE_SENSOR = 33171011;//33171014;// Sensor.TYPE_ROTATION_VECTOR;//
+    static final int GESTURE_SENSOR = 33171011;// 33171014;//
+                                               // Sensor.TYPE_ROTATION_VECTOR;//
                                                // 33171011;
     GestureView mGestureView;
-    private TextView mData;
+    private TextView mTextViewSensorData;
+    private static final int REQUEST_UPDATE_DATA = 299;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case REQUEST_UPDATE_DATA: {
+                    mHandler.removeMessages(REQUEST_UPDATE_DATA);
+                    if (mTextViewSensorData != null) {
+                        mTextViewSensorData.setText("当前时间：" + date.format(System.currentTimeMillis()) + ". \n"
+                                + mSensorBrief
+                                + ": update gesture data:" + "\n"
+                                + ";原始数据：e.values[0]=" + mSensorData[0] + ", e.values[1]=" + mSensorData[1]
+                                + ", e.values[2]=" + mSensorData[2] + "\n"
+                                + "现在e.values[0]里面传递");
+                    }
+                    mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
+                }
+            }
+        }
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mGestureView = (GestureView) this.findViewById(R.id.gestureView1);
-        mData = (TextView) this.findViewById(R.id.data);
+        mTextViewSensorData = (TextView) this.findViewById(R.id.data);
         mSm = (SensorManager) this.getSystemService(SENSOR_SERVICE);
 
         List<Sensor> ss = mSm.getSensorList(GESTURE_SENSOR);
@@ -95,8 +113,10 @@ public class MainActivity extends Activity implements SensorEventListener {
         }
         sb.append("\n");
         mSensorBrief = sb.toString();
+        mTextViewSensorData.setText(mSensorBrief);
 
         mSensor = ss.get(0);
+        mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
     }
 
     @Override
@@ -104,7 +124,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         // TODO Auto-generated method stub
         super.onResume();
         // Log.i(TAG, "onResume");
-        mSm.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        mSm.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     @Override
@@ -150,19 +170,14 @@ public class MainActivity extends Activity implements SensorEventListener {
     public void onSensorChanged(SensorEvent e) {
         // TODO Auto-generated method stub
         /**
-         * k7数据在e.values[0]里面传递
-         * 我们x2在e.values[2]里面传递
+         * k7数据在e.values[0]里面传递， 我们x2在e.values[0]里面传递
          */
-        //int data = (int) e.values[0];
-        int data = (int) e.values[2];
-        // Log.i(TAG, "data:" + data);
-        if (mData != null) {
-            mData.setText("当前时间：" + date.format(System.currentTimeMillis()) + ". \n" + mSensorBrief
-                    + ": onSensorChanged gesture data:" + data + "\n"
-                    + ";原始数据：e.values[0]=" + e.values[0] + ", e.values[1]=" + e.values[1]
-                    + ", e.values[2]=" + e.values[2]);
-        }
-        handle(data);
+        mSensorData[0] = (int) e.values[0];
+        mSensorData[1] = (int) e.values[1];
+        mSensorData[2] = (int) e.values[2];
+        //Log.i(TAG, "data:" + data);
+        
+        handle(mSensorData[0]);
     }
 
     final String dirString(int dir) {

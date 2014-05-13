@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings_title">
+
+    <Preference
+            android:key="preference_selectfile"
+            android:title="@string/preference_selectfile_title"
+            android:summary="@string/preference_selectfile_summary" />
+    <ListPreference
+            android:key="preference_bgcolor"
+            android:title="@string/preference_bgcolor_title"
+            android:summary="@string/preference_bgcolor_summary"
+            android:entries="@array/bgcolor_names"
+            android:entryValues="@array/bgcolor_values"
+            android:defaultValue="6" />
+    <ListPreference
+            android:key="preference_fixscreen"
+            android:title="@string/preference_fixscreen_title"
+            android:summary="@string/preference_fixscreen_summary"
+            android:entries="@array/fixscreen_names"
+            android:entryValues="@array/fixscreen_values"
+            android:defaultValue="2" />
+    <Preference
+            android:key="preference_about"
+            android:title="@string/preference_about_title"/>
+
+</PreferenceScreen>
+

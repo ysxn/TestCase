@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/htc_widget_config"
+	android:orientation="vertical"
+	android:gravity="center">
+	<ImageButton 
+		android:id="@+id/button1"
+		android:src="@drawable/screenshot_music44_htc"
+		android:background="@android:color/transparent"
+		android:layout_width="wrap_content" 
+		android:layout_height="150dip"
+		android:scaleType="centerInside"/>
+	<ImageButton 
+		android:id="@+id/button2"
+		android:src="@drawable/screenshot_music_htc"
+		android:background="@android:color/transparent"
+		android:layout_width="wrap_content" 
+		android:layout_height="150dip"
+		android:scaleType="centerInside"
+		android:layout_marginTop="50dip"/>
+</LinearLayout>

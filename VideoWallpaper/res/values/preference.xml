@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<string-array name="fixscreen_names">
+		<item>原始尺寸</item>
+		<item>按比例缩放到屏幕高度</item>
+		<item>按比例缩放到屏幕宽度</item>
+		<item>不按比例缩放到屏幕宽高</item>
+	</string-array>
+
+	<string-array name="fixscreen_values">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+	</string-array>
+	
+	<string-array name="bgcolor_names">
+        <item>黑色</item>
+        <item>蓝色</item>
+        <item>蓝绿色, 青色</item>
+        <item>深灰色</item>
+        <item>灰色</item>
+        <item>绿色</item>
+        <item>浅灰色</item>
+        <item>红紫色, 洋红</item>
+        <item>红色</item>
+        <item>透明</item>
+        <item>白色</item>
+        <item>黄色</item>
+    </string-array>
+    
+	<string-array name="bgcolor_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+    
+
+</resources>

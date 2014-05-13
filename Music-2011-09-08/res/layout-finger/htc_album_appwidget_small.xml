@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2009 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<RelativeLayout 
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+	android:layout_marginLeft="5dip"
+	android:layout_marginRight="5dip"
+	android:background="@drawable/common_panel_large_htc"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<RelativeLayout 
+		android:id="@+id/album_image_layout_small"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:gravity="left"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:layout_marginLeft="15dip"
+		android:layout_marginTop="15dip">
+		<RelativeLayout 
+			android:layout_width="fill_parent"
+			android:layout_height="101.0dip"
+			android:layout_alignParentTop="true"
+			android:gravity="bottom">
+			<ImageView 
+				android:id="@+id/img_player_cover_shadow_small"
+				android:layout_width="133dip" 
+				android:layout_height="16dip"
+				android:background="@android:color/transparent"
+				android:src="@drawable/music_album_shadow_htc" 
+				android:scaleType="centerCrop"
+				android:layout_marginTop="89dip"
+				android:layout_marginLeft="1.0dip"/>
+		</RelativeLayout>
+		<ImageView 
+			android:id="@+id/img_player_cover_small"
+			android:layout_width="107.0dip" 
+			android:layout_height="101.0dip"
+			android:background="@drawable/music_album_htc"
+			android:src="@drawable/albumart_mp_unknown_htc" 
+			android:scaleType="centerCrop"
+			android:paddingLeft="9.0dip"
+			android:paddingRight="3dip"
+			android:paddingTop="3dip"
+			android:paddingBottom="3dip"
+			android:layout_alignParentTop="true"/>
+		<ImageView 
+			android:id="@+id/img_player_cover_reflect_small"
+			android:layout_width="107.0dip" 
+			android:layout_height="50.5dip"
+			android:background="@android:color/transparent"
+			android:scaleType="centerCrop"
+			android:visibility ="gone"
+			android:layout_below="@id/img_player_cover_small"/>
+	</RelativeLayout>
+	<RelativeLayout 
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent">
+		<RelativeLayout 
+			android:id="@+id/display_player_mode_small"
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="15.0dip"
+			android:layout_alignParentBottom="true">
+			<ImageButton 
+				android:id="@+id/btn_player_shuffle_small"
+				android:layout_width="35dip" 
+				android:layout_height="45dip"
+				android:src="@drawable/ic_mp_shuffle_off_btn"
+				android:background="#00000000"
+				android:layout_marginLeft="5.0dip"
+				android:layout_alignParentLeft="true"/>
+			<ImageButton 
+				android:id="@+id/btn_player_repeat_small"
+				android:layout_width="35dip" 
+				android:layout_height="45dip"
+				android:src="@drawable/ic_mp_repeat_off_btn"
+				android:background="@android:color/transparent"
+				android:layout_marginRight="5.0dip"
+				android:layout_alignParentRight="true" />
+		</RelativeLayout>
+		<LinearLayout 
+			android:id="@+id/desktop4_control_small"
+			android:orientation="horizontal" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:layout_marginBottom="15dip"
+			android:layout_alignParentBottom="true">
+			<RelativeLayout 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content">
+				<ImageButton 
+					android:id="@+id/btn_player_prev_small" 
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" 
+					android:background="@drawable/desktop_prev_btn"
+					android:src="@drawable/music_icon_prev_htc"
+					android:layout_alignParentLeft="true" />
+				<ImageButton 
+					android:id="@+id/btn_player_playpause_small" 
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" 
+					android:background="@drawable/desktop_play_btn"
+					android:src="@drawable/music_icon_play_htc"
+					android:layout_alignParentLeft="true"
+					android:layout_marginLeft="60.0dip"/>
+				<ImageButton 
+					android:id="@+id/btn_player_next_small" 
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" 
+					android:background="@drawable/desktop_next_btn"
+					android:src="@drawable/music_icon_next_htc"
+					android:layout_alignParentLeft="true"
+					android:layout_marginLeft="134.0dip"/>
+			</RelativeLayout>
+		</LinearLayout>
+		<RelativeLayout 
+			android:id="@+id/desktop4_dsplayinfo_small"
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content"
+			android:layout_marginTop="25.0dip"
+			android:layout_marginLeft="119dip">
+			<TextView 
+					android:gravity="left"
+					android:textSize="15.0dip" 
+					android:textStyle="bold"
+					android:textColor="#ffffffff" 
+					android:ellipsize="end"
+					android:id="@+id/txt_player_title_small" 
+					android:paddingLeft="12.0dip"
+					android:paddingRight="12.0dip"
+					android:fadingEdge="horizontal" 
+					android:fadingEdgeLength="10.0dip"
+					android:layout_width="fill_parent" 
+					android:layout_height="wrap_content"
+					android:text="@string/txtt_player_title" 
+					android:singleLine="true"
+					android:layout_alignParentTop="true" />
+			<TextView 
+					android:gravity="left"
+					android:textSize="13.0dip" 
+					android:textColor="#ffffffff"
+					android:ellipsize="end" 
+					android:id="@+id/txt_player_artist_small"
+					android:paddingLeft="12.0dip" 
+					android:paddingRight="12.0dip" 
+					android:fadingEdge="horizontal"
+					android:fadingEdgeLength="10.0dip" 
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" 
+					android:text="@string/txtt_player_artist"
+					android:singleLine="true"
+					android:layout_below="@id/txt_player_title_small" 
+					android:layout_marginTop="15.0dip"/>
+			<ProgressBar
+					android:id="@+id/prb_player_progress_small"
+					android:layout_width="fill_parent"
+					android:layout_height="2.0dip"
+					android:progressDrawable="@drawable/progress_horizontal44"
+					android:max="1000"
+					android:progress="0"
+					style="?android:progressBarStyleHorizontal"
+					android:layout_marginLeft="12.0dip"
+					android:layout_marginRight="12.0dip"
+					android:layout_below="@id/txt_player_artist_small"
+					android:layout_marginTop="12dip"/>
+			<RelativeLayout 
+				android:id="@+id/display_player_time_small"
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:layout_below="@id/prb_player_progress_small">
+				<TextView 
+					android:textSize="11.0dip" 
+					android:id="@+id/txt_player_lapse_small"
+					android:layout_width="wrap_content" 
+					android:layout_height="wrap_content"
+					android:text="@string/txtt_player_lapse"
+					android:layout_marginLeft="12.0dip"
+					android:layout_alignParentLeft="true"/>
+				
+				<TextView 
+					android:textSize="11.0dip" 
+					android:id="@+id/txt_player_duration_small"
+					android:layout_width="wrap_content" 
+					android:layout_height="wrap_content"
+					android:text="@string/txtt_player_duration"
+					android:layout_marginRight="12.0dip"
+					android:layout_alignParentRight="true" />
+			</RelativeLayout>
+		</RelativeLayout>
+	</RelativeLayout>
+	
+</RelativeLayout>

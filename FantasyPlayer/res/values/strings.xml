@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World!</string>
+    <string name="app_name">FantasyPlayer</string>
+    <string name="video_wallpaper_app">Video Live WallPaper</string>
+    <string name="wallpaperdescription">Use video for live wallPaper!</string>
+    <string name="video_wallpaper_config">Configuration for Video Live WallPaper</string>
+
+</resources>

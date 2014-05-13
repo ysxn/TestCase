@@ -12,6 +12,22 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical" >
+            
+            <TextView
+                android:id="@+id/native_operate"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="native_operate" />
+
+            <!-- Divider -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="5dip"
+                android:layout_marginTop="5dip"
+                android:background="@android:color/black" />
 
             <TextView
                 android:id="@+id/front_rgb_sensor_name"

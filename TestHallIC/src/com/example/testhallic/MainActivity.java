@@ -61,25 +61,41 @@ public class MainActivity extends Activity {
             switch (msg.what) {
                 case REQUEST_UPDATE_DATA: {
                     mHandler.removeMessages(REQUEST_UPDATE_DATA);
-                    File f = new File(HALL_STATE_PATH);
+                    FileReader file = null;
                     try {
                         char[] buffer = new char[1024];
-                        FileReader file = new FileReader(HALL_STATE_PATH);
-                        try {
-                            int len = file.read(buffer, 0, 1024);
-                            /**
-                             * 这个显示buffer是乱码，最后有"\n"换行符。
-                             */
-                            //Log.i(TAG, ">>>>>read state len=="+len+"  buffer={"+buffer.toString()+"}");
-                            Log.i(TAG, ">>>>>read state len=="+len+"  buffer={"+new String(buffer, 0, len)+"}");
-                            mSensorData = Integer.valueOf((new String(buffer, 0, len)).trim());
-                        } finally {
-                            file.close();
-                        }
+                        file = new FileReader(HALL_STATE_PATH);
+                        int len = file.read(buffer, 0, 1024);
+                        
+                        /**
+                         * FileInputStream.jva
+                         * <p>
+                         * BufferedInputStream.java
+                         * <p>
+                         * BufferedReader.java
+                         * <p>
+                         * InputStreamReader.java
+                         * 这个显示buffer是乱码，最后有"\n"换行符。
+                         */
+                        // Log.i(TAG,
+                        // ">>>>>read state len=="+len+"  buffer={"+buffer.toString()+"}");
+                        Log.i(TAG, ">>>>>read state len==" + len + "  buffer={"
+                                + new String(buffer, 0, len) + "}");
+                        mSensorData = Integer.valueOf((new String(buffer, 0, len)).trim());
                     } catch (FileNotFoundException e) {
-                        Log.e(TAG, "FileNotFoundException！ This kernel does not have hall sensor support");
+                        Log.e(TAG,
+                                "FileNotFoundException！ This kernel does not have hall sensor support");
                     } catch (Exception e) {
                         Log.e(TAG, e.toString());
+                    } finally {
+                        if (file != null) {
+                            try {
+                                file.close();
+                            } catch (IOException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                        }
                     }
 
                     if (mTextViewHallData != null) {
@@ -113,7 +129,7 @@ public class MainActivity extends Activity {
         mTextViewHallData = (TextView) findViewById(R.id.hall_sensor_data);
 
         mTextViewHallName.setVisibility(View.GONE);
-        mTextViewHallTips.setText("Hall设备节点路径="+HALL_STATE_PATH);
+        mTextViewHallTips.setText("Hall设备节点路径=" + HALL_STATE_PATH);
         mHallAnimation = (ImageView) findViewById(R.id.animation_image);
 
         mHallAnimation.setBackgroundDrawable(new ColorDrawable(Color.GRAY));
