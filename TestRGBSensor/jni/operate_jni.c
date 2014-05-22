@@ -22,6 +22,7 @@ static int target_width = 320;
 static int target_height = 240;
 static struct SwsContext *img_convert_ctx = NULL;
 static int videoStream = -1;
+
 static uint8_t debug = 1;
 
 
