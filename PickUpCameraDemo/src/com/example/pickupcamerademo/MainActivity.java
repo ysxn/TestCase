@@ -1,17 +1,23 @@
 
 package com.example.pickupcamerademo;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,6 +41,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     public static final int TYPE_SENSOR_HUB_SCREEN_ON = 33171010;
 
     private static final int REQUEST_UPDATE_DATA = 299;
+
     private SimpleDateFormat date = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒  ");
     private String mSensorBrief = "";
     private int mSensorAirMouseData[] = {
@@ -76,6 +83,9 @@ public class MainActivity extends Activity implements SensorEventListener {
     private int mSensorScreenOnData[] = {
             0, 0, 0, 0
     };
+    private int mSensorAcceData[] = {
+            0, 0, 0, 0
+    };
 
     SensorManager mSm;
     Sensor mSensorAirMouse;
@@ -92,8 +102,16 @@ public class MainActivity extends Activity implements SensorEventListener {
     Sensor mSensorContextAwareness;
     Sensor mSensorScreenOn;
 
+    Sensor mSensorAcce;
+    Sensor mSensorGyro;
+    Sensor mSensorOrien;
+
     private TextView mTips;
     private TextView mData;
+
+    private final int REQUEST_CAPTURE = 0x2341;
+    
+    private boolean mFlagIdle = false;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -158,9 +176,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 
         mTips = (TextView) findViewById(R.id.sensor_tips);
         mData = (TextView) findViewById(R.id.sensor_data);
+        mData.setVisibility(View.GONE);
         Button b = (Button) findViewById(R.id.button_exit);
         b.setOnClickListener(new View.OnClickListener() {
-            
+
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
@@ -171,6 +190,10 @@ public class MainActivity extends Activity implements SensorEventListener {
         StringBuilder sb = new StringBuilder();
 
         mSm = (SensorManager) this.getSystemService(SENSOR_SERVICE);
+        mSensorAcce = mSm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensorGyro = mSm.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        mSensorOrien = mSm.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+
         List<Sensor> ss;
 
         ss = mSm.getSensorList(TYPE_SENSOR_HUB_AIR_MOUSE);
@@ -302,7 +325,8 @@ public class MainActivity extends Activity implements SensorEventListener {
         sb.append("\n");
 
         mSensorBrief = sb.toString();
-        mTips.setText(mSensorBrief);
+        //mTips.setText(mSensorBrief);
+        mTips.setText("这个DEMO使用ACCELEROMETER传感器。 \n用户初始状态为手机静止在水平桌面上， \n当用户拿起手机横屏对准前方， 立即启动Camera。 \n现在还不能");
         mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
     }
 
@@ -360,6 +384,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 
         if (mSensorScreenOn != null) {
             mSm.registerListener(this, mSensorScreenOn, SensorManager.SENSOR_DELAY_FASTEST);
+        }
+        
+        if (mSensorAcce != null) {
+            mSm.registerListener(this, mSensorAcce, SensorManager.SENSOR_DELAY_FASTEST);
         }
     }
 
@@ -522,6 +550,18 @@ public class MainActivity extends Activity implements SensorEventListener {
                 mSensorScreenOnData[1] = (int) event.values[1];
                 mSensorScreenOnData[2] = (int) event.values[2];
             }
+        } else if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            mSensorAcceData[0] = (int) event.values[0];
+            mSensorAcceData[1] = (int) event.values[1];
+            mSensorAcceData[2] = (int) event.values[2];
+            
+            Log.i(TAG, ">>>>>acce : "+mSensorAcceData[0]+", "+mSensorAcceData[1]+", "+mSensorAcceData[2]);
+            if (!mFlagIdle && Math.abs(mSensorAcceData[0]) < 1 && Math.abs(mSensorAcceData[1]) < 1 && Math.abs(mSensorAcceData[2]) > 9) {
+                mFlagIdle = true;
+            } else if (mFlagIdle && Math.abs(mSensorAcceData[0]) > 9 && Math.abs(mSensorAcceData[1]) < 1 && Math.abs(mSensorAcceData[2]) < 1) {
+                mFlagIdle = false;
+                launchCamera();
+            }
         }
         mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 10L);
     }
@@ -530,6 +570,43 @@ public class MainActivity extends Activity implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         // TODO Auto-generated method stub
 
+    }
+
+    private void launchCamera() {
+        Intent intent = new Intent();
+        intent.setAction("android.media.action.STILL_IMAGE_CAMERA");
+        startActivity(intent);
+    }
+
+    private void launchCameraForResult() {
+        String imgPath = "/sdcard/test/img.jpg";
+        File vFile = new File(imgPath);
+
+        if (!vFile.exists()) {
+            File vDirPath = vFile.getParentFile(); // new
+                                                   // File(vFile.getParent());
+            vDirPath.mkdirs();
+        }
+
+        Uri uri = Uri.fromFile(vFile);
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        i.putExtra(MediaStore.EXTRA_OUTPUT, uri);//
+        startActivityForResult(i, REQUEST_CAPTURE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        switch (requestCode) {
+            case REQUEST_CAPTURE:
+                if (resultCode == RESULT_OK) {
+                    // iViewPic.setImageURI(Uri.fromFile(new File(imgPath)));
+                    // 假设不传参数MediaStore.EXTRA_OUTPUT的情况下，onActivityResult函数在resultCode为RESULT_OK的情况下，data返回的参数是经过实际拍摄照片经过缩放的图像数据，可以通过类似如下方法来打印缩放图像的尺寸
+                    Bitmap bmp = (Bitmap) data.getExtras().get("data");
+                    Log.d(TAG, "bmp width:" + bmp.getWidth() + ", height:" + bmp.getHeight());
+                }
+                break;
+        }
     }
 
 }
