@@ -3,7 +3,11 @@ package com.example.pickupcamerademo;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +21,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -41,10 +46,9 @@ public class MainActivity extends Activity implements SensorEventListener {
     public static final int TYPE_SENSOR_HUB_CONTEXT_AWARENESS = 33171012;
     public static final int TYPE_SENSOR_HUB_SCREEN_ON = 33171010;
 
-    private static final int REQUEST_UPDATE_DATA = 299;
-
     private SimpleDateFormat date = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒  ");
     private String mSensorBrief = "";
+    private long mStartDelayTime = 1L;// System.currentTimeMillis();
 
     private float mSensorAcceData[] = {
             0, 0, 0, 0
@@ -53,6 +57,9 @@ public class MainActivity extends Activity implements SensorEventListener {
             0, 0, 0, 0
     };
     private float mSensorGyroData[] = {
+            0, 0, 0, 0
+    };
+    private float mSensorOrienData[] = {
             0, 0, 0, 0
     };
 
@@ -79,11 +86,20 @@ public class MainActivity extends Activity implements SensorEventListener {
     private TextView mTips;
     private TextView mData;
 
+    private ArrayList<AcceData> mArrayListSensorAcceDataFront = new ArrayList<AcceData>(100);
+    private ArrayList<AcceData> mArrayListSensorAcceDataBack = new ArrayList<AcceData>(100);
+    private boolean mFlagReckoning = false;
+    private boolean mFlagPreReckoning = false;
+    private long mPreReckoningTime = 0L;
+    private AcceData mPreReckoningAcceData = null;
     private final int REQUEST_CAPTURE = 0x2341;
 
     private boolean mFlagStartMonitor = false;
     private boolean mFlagProximityNear = false;
     private boolean mFlagActivityResume = false;
+
+    private static final int REQUEST_UPDATE_DATA = 299;
+    private static final int REQUEST_RECKON_DATA = 399;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -97,7 +113,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                                 + mFlagProximityNear + "\n"
                                 + ">>>>>acce the x-axis:" + mSensorAcceData[0] + "\n"
                                 + ">>>>>acce the y-axis:" + mSensorAcceData[1] + "\n"
-                                + ">>>>>acce the y-axis:" + mSensorAcceData[2] + "\n"
+                                + ">>>>>acce the z-axis:" + mSensorAcceData[2] + "\n"
                                 + "mFlagStartMonitor=" + mFlagStartMonitor + "\n"
                                 + ">>>>>Angular speed around the x-axis:" + mSensorGyroData[0]
                                 + "\n"
@@ -105,10 +121,27 @@ public class MainActivity extends Activity implements SensorEventListener {
                                 + "\n"
                                 + ">>>>>Angular speed around the z-axis:" + mSensorGyroData[2]
                                 + "\n"
+                                // 就是绕z轴转动的角度，0度=正北:
+                                + ">>>>>azimuth 方位角：" + mSensorOrienData[0]
+                                + "\n"
+                                // 绕X轴转动的角度 (-180<=pitch<=180),
+                                // 如果设备水平放置，前方向下俯就是正:
+                                + ">>>>>pitch 仰俯：" + mSensorOrienData[1]
+                                + "\n"
+                                // 绕Y轴转动(-90<=roll<=90)，向左翻滚是正值:
+                                + ">>>>>roll 滚转：" + mSensorOrienData[2]
+                                + "\n"
                                 + "mFlagActivityResume=" + mFlagActivityResume);
                     }
                     mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
                 }
+                break;
+                case REQUEST_RECKON_DATA: {
+                    mHandler.removeMessages(REQUEST_RECKON_DATA);
+                    Log.i("zzzz", ">>>>>handler REQUEST_RECKON_DATA");
+                    reckonLaunchFrontCameraHistory();
+                }
+                break;
             }
         }
 
@@ -163,6 +196,10 @@ public class MainActivity extends Activity implements SensorEventListener {
         if (mSensorGyro != null) {
             mSm.registerListener(this, mSensorGyro, SensorManager.SENSOR_DELAY_NORMAL);
         }
+
+        if (mSensorOrien != null) {
+            mSm.registerListener(this, mSensorOrien, SensorManager.SENSOR_DELAY_NORMAL);
+        }
     }
 
     @Override
@@ -184,46 +221,436 @@ public class MainActivity extends Activity implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         // TODO Auto-generated method stub
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            if (mFlagReckoning)
+                return;
             mSensorAcceData[0] = event.values[0];
             mSensorAcceData[1] = event.values[1];
             mSensorAcceData[2] = event.values[2];
-            if (mFlagActivityResume && !mFlagStartMonitor
+            long time = System.currentTimeMillis();
+
+            AcceData data = new AcceData(time, mSensorAcceData[0],
+                    mSensorAcceData[1],
+                    mSensorAcceData[2]);
+            if (mArrayListSensorAcceDataFront.size() < 20) {
+                mArrayListSensorAcceDataFront.add(data);
+            } else if (mArrayListSensorAcceDataBack.size() < 20) {
+                mArrayListSensorAcceDataBack.add(data);
+            } else {
+                Log.i("zzzz", ">>>>>swap"
+                        +", front size="+mArrayListSensorAcceDataFront.size()
+                        +", back  size="+mArrayListSensorAcceDataBack.size());
+                if (mArrayListSensorAcceDataFront.get(mArrayListSensorAcceDataFront.size()-1).time > mArrayListSensorAcceDataBack
+                        .get(mArrayListSensorAcceDataBack.size()-1).time) {
+                    mArrayListSensorAcceDataBack.clear();
+                    mArrayListSensorAcceDataBack.add(data);
+                } else {
+                    mArrayListSensorAcceDataFront.clear();
+                    mArrayListSensorAcceDataFront.add(data);
+                }
+            }
+            if (false && mFlagActivityResume && !mFlagStartMonitor
                     && (mFlagProximityNear || (Math.abs(mSensorAcceData[0]) <= 1
                             && Math.abs(mSensorAcceData[1]) <= 1
                             && mSensorAcceData[2] >= 9))) {
                 // 距离传感器被挡住代表手机在裤子口袋或包里面,这时候也是初始情况之一。
                 // 手机水平放在桌面上静止不动，这也是初始情况之一。
                 mFlagStartMonitor = true;
-            } else if (mFlagActivityResume && !mFlagProximityNear && mFlagStartMonitor
+            } else if (mFlagActivityResume && !mFlagPreReckoning
                     && Math.abs(mSensorAcceData[0]) >= 8
                     && Math.abs(mSensorAcceData[1]) <= 3 && Math.abs(mSensorAcceData[2]) <= 3) {
-                mFlagStartMonitor = false;
-                launchBackCamera();
-            } else if (mFlagActivityResume && !mFlagProximityNear && mFlagStartMonitor
+//                mFlagStartMonitor = false;
+//                launchBackCamera();
+//                mArrayListSensorAcceDataBack.clear();
+//                mArrayListSensorAcceDataFront.clear();
+                mPreReckoningAcceData = data;
+                mPreReckoningTime = time;
+                mFlagPreReckoning = true;
+                reckonLaunchBackCameraHistory();
+            } else if (mFlagActivityResume && !mFlagProximityNear && !mFlagPreReckoning
                     && Math.abs(mSensorAcceData[0]) <= 3
                     && mSensorAcceData[1] >= 8
                     && Math.abs(mSensorAcceData[2]) <= 4) {
-                mFlagStartMonitor = false;
-                launchFrontCamera();
+                // mFlagStartMonitor = false;
+
+                mPreReckoningAcceData = data;
+                mPreReckoningTime = time;
+                mFlagPreReckoning = true;
+                reckonLaunchFrontCameraHistory();
+                //Log.i("zzzz", ">>>>>sendEmptyMessageDelayed REQUEST_RECKON_DATA");
+                //mHandler.sendEmptyMessageDelayed(REQUEST_RECKON_DATA, 2000);
+
             }
+            Log.i("zzzz", ">>>>>acce == (" + mSensorAcceData[0]
+                    + ", "
+                    + mSensorAcceData[1]
+                    + ", "
+                    + mSensorAcceData[2]
+                    + ")"
+                    + ", time=" + System.currentTimeMillis());
         } else if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
             mSensorGyroData[0] = Math.abs(event.values[0]) > 0.01f ? event.values[0] : 0f;
             mSensorGyroData[1] = Math.abs(event.values[1]) > 0.01f ? event.values[1] : 0f;
             mSensorGyroData[2] = Math.abs(event.values[2]) > 0.01f ? event.values[2] : 0f;
+            long time = System.currentTimeMillis();
+            Log.i("zzzz", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> the x-axis:"
+                    + mSensorGyroData[0]
+                    + ", y-axis:" + mSensorGyroData[1]
+                    + ", z-axis:" + mSensorGyroData[2]
+                    + ", time=" + System.currentTimeMillis());
+        } else if (event.sensor.getType() == Sensor.TYPE_ORIENTATION) {
+            mSensorOrienData[0] = event.values[0];
+            mSensorOrienData[1] = event.values[1];
+            mSensorOrienData[2] = event.values[2];
+            long time = System.currentTimeMillis();
+            Log.i("zzzz",
+                    ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> pitch :"
+                            + mSensorOrienData[1]
+                            + ", roll :" + mSensorOrienData[2]
+                            + ", time=" + System.currentTimeMillis());
         } else if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
             mSensorProximityData[0] = event.values[0];
             mFlagProximityNear = mSensorProximityData[0] == 0f;
         }
 
-        Log.i("zzzz", ">>>>>acce == (" + mSensorAcceData[0]
-                + ", "
-                + mSensorAcceData[1]
-                + ", "
-                + mSensorAcceData[2]
-                + ")   >>>>>Angular speed around the x-axis:" + mSensorGyroData[0]
-                + ", y-axis:" + mSensorGyroData[1]
-                + ", z-axis:" + mSensorGyroData[2]);
+        // Log.i("zzzz", ">>>>>acce == (" + mSensorAcceData[0]
+        // + ", "
+        // + mSensorAcceData[1]
+        // + ", "
+        // + mSensorAcceData[2]
+        // + ")   >>>>>Angular speed around the x-axis:" + mSensorGyroData[0]
+        // + ", y-axis:" + mSensorGyroData[1]
+        // + ", z-axis:" + mSensorGyroData[2]);
         mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
+    }
+
+    private void reckonLaunchBackCameraHistory() {
+        // TODO Auto-generated method stub
+        Log.i("zzzz", ">>>>>reckonLaunch <<Back>> CameraHistory start");
+        mFlagReckoning = true;
+        ArrayList<AcceData> mArrayListSensorAcceData = new ArrayList<AcceData>(100);
+        Iterator<AcceData> iteratorFront =
+                mArrayListSensorAcceDataFront.iterator();
+        Iterator<AcceData> iteratorBack =
+                mArrayListSensorAcceDataBack.iterator();
+        if (mArrayListSensorAcceDataFront.size() > 0
+                && mArrayListSensorAcceDataBack.size() <= 0) {
+            while (iteratorFront.hasNext()) {
+                AcceData acceData = (AcceData) iteratorFront.next();
+                mArrayListSensorAcceData.add(acceData);
+                Log.i("zzzz",
+                        ">>>>>>>AcceDataFront time = " + acceData.time
+                                + ", x=" + acceData.x
+                                + ", y=" + acceData.y
+                                + ", z=" + acceData.z);
+            }
+        } else if (mArrayListSensorAcceDataFront.size() <= 0
+                && mArrayListSensorAcceDataBack.size() > 0) {
+            while (iteratorBack.hasNext()) {
+                AcceData acceData = (AcceData) iteratorBack.next();
+                mArrayListSensorAcceData.add(acceData);
+                Log.i("zzzz",
+                        ">>>>>>>AcceDataBack  time = " + acceData.time
+                                + ", x=" + acceData.x
+                                + ", y=" + acceData.y
+                                + ", z=" + acceData.z);
+            }
+        } else if (mArrayListSensorAcceDataFront.size() > 0
+                && mArrayListSensorAcceDataBack.size() > 0) {
+            if (mArrayListSensorAcceDataFront.get(mArrayListSensorAcceDataFront.size() - 1).time < mArrayListSensorAcceDataBack
+                    .get(mArrayListSensorAcceDataBack.size() - 1).time) {
+                while (iteratorFront.hasNext()) {
+                    AcceData acceData = (AcceData) iteratorFront.next();
+                    mArrayListSensorAcceData.add(acceData);
+                    Log.i("zzzz",
+                            ">>>>>>>AcceDataFront time = " + acceData.time
+                                    + ", x=" + acceData.x
+                                    + ", y=" + acceData.y
+                                    + ", z=" + acceData.z);
+                }
+
+                while (iteratorBack.hasNext()) {
+                    AcceData acceData = (AcceData) iteratorBack.next();
+                    mArrayListSensorAcceData.add(acceData);
+                    Log.i("zzzz",
+                            ">>>>>>>AcceDataBack  time = " + acceData.time
+                                    + ", x=" + acceData.x
+                                    + ", y=" + acceData.y
+                                    + ", z=" + acceData.z);
+                }
+            } else {
+                while (iteratorBack.hasNext()) {
+                    AcceData acceData = (AcceData) iteratorBack.next();
+                    mArrayListSensorAcceData.add(acceData);
+                    Log.i("zzzz",
+                            ">>>>>>>AcceDataBack  time = " + acceData.time
+                                    + ", x=" + acceData.x
+                                    + ", y=" + acceData.y
+                                    + ", z=" + acceData.z);
+                }
+
+                while (iteratorFront.hasNext()) {
+                    AcceData acceData = (AcceData) iteratorFront.next();
+                    mArrayListSensorAcceData.add(acceData);
+                    Log.i("zzzz",
+                            ">>>>>>>AcceDataFront time = " + acceData.time
+                                    + ", x=" + acceData.x
+                                    + ", y=" + acceData.y
+                                    + ", z=" + acceData.z);
+                }
+            }
+        }
+
+        boolean checkOk = true;
+        int totalLength = mArrayListSensorAcceData.size();
+        if (totalLength > 10 && mPreReckoningAcceData != null
+                && mPreReckoningTime > 0) {
+            int indexOfPreReckoningAcceData = mArrayListSensorAcceData
+                    .indexOf(mPreReckoningAcceData);
+            if (indexOfPreReckoningAcceData > 0
+                    && indexOfPreReckoningAcceData < totalLength) {
+
+                for (int i = indexOfPreReckoningAcceData; i < totalLength; i++) {
+                    AcceData checkD = mArrayListSensorAcceData.get(i);
+                    if (Math.abs(checkD.x) >= 8
+                            && Math.abs(checkD.y) <= 3 && Math.abs(checkD.z) <= 3) {
+                        Log.i("zzzz",
+                                ">>>>>>>AcceData checkOk = true  stable time = " + checkD.time
+                                        + ", x=" + checkD.x
+                                        + ", y=" + checkD.y
+                                        + ", z=" + checkD.z
+                                        + ", indexOfPreReckoningAcceData="+indexOfPreReckoningAcceData
+                                        + ", totalLength="+totalLength);
+                    } else {
+                        checkOk = false;
+                        Log.i("zzzz",
+                                ">>>>>>>AcceData checkOk = false stable time = " + checkD.time
+                                        + ", x=" + checkD.x
+                                        + ", y=" + checkD.y
+                                        + ", z=" + checkD.z
+                                        + ", indexOfPreReckoningAcceData="+indexOfPreReckoningAcceData
+                                        + ", totalLength="+totalLength);
+                    }
+                }
+                int startIndex = 0;
+                AcceData startData = null;
+                for (int i = indexOfPreReckoningAcceData; i > 1; i--) {
+                    AcceData check = mArrayListSensorAcceData.get(i);
+                    if (Math.abs(check.x) <= 1
+                            /*&& check.y < 2*/
+                            && check.z > 7) {
+                        startIndex = i;
+                        startData = check;
+                        Log.i("zzzz",
+                                ">>>>>>>AcceData  find startIndex time = " + check.time
+                                        + ", x=" + check.x
+                                        + ", y=" + check.y
+                                        + ", z=" + check.z
+                                        + ", startIndex="+startIndex);
+                        break;
+                    }
+                }
+                if (startIndex == 0 || startData == null) {
+                    checkOk = false;
+                    Log.i("zzzz",
+                            ">>>>>>>AcceData  find startIndex time fail");
+                } else {
+                    for (int i = indexOfPreReckoningAcceData; i > startIndex; i--) {
+                        AcceData checkUp = mArrayListSensorAcceData.get(i);
+                        AcceData checkDown = mArrayListSensorAcceData.get(i-1);
+                        if (/*Math.abs(checkUp.x) <= 3
+                                && Math.abs(checkDown.x) <= 3
+                                && */checkUp.x >= checkDown.x
+                                && (checkUp.z <= checkDown.z || (checkDown.z > 8 && checkUp.z > 8))) {
+                            Log.i("zzzz",
+                                    ">>>>>>>AcceData checkOk = true  checkDown time = " + checkDown.time
+                                            + ", x=" + checkDown.x
+                                            + ", y=" + checkDown.y
+                                            + ", z=" + checkDown.z);
+                        } else {
+                            checkOk = false;
+                            Log.i("zzzz",
+                                    ">>>>>>>AcceData checkOk = false checkDown time = " + checkDown.time
+                                            + ", x=" + checkDown.x
+                                            + ", y=" + checkDown.y
+                                            + ", z=" + checkDown.z);
+                        }
+                    }
+                }
+            }
+            if (checkOk) launchBackCamera();
+        }
+        mPreReckoningAcceData = null;
+        mArrayListSensorAcceDataBack.clear();
+        mArrayListSensorAcceDataFront.clear();
+        mFlagReckoning = false;
+        mFlagPreReckoning = false;
+        mPreReckoningTime = 0L;
+        Log.i("zzzz", ">>>>>reckonLaunch <<Back>> CameraHistory end");
+    }
+
+    private void reckonLaunchFrontCameraHistory() {
+        Log.i("zzzz", ">>>>>reckonLaunchFrontCameraHistory start");
+        mFlagReckoning = true;
+        ArrayList<AcceData> mArrayListSensorAcceData = new ArrayList<AcceData>(100);
+        Iterator<AcceData> iteratorFront =
+                mArrayListSensorAcceDataFront.iterator();
+        Iterator<AcceData> iteratorBack =
+                mArrayListSensorAcceDataBack.iterator();
+        if (mArrayListSensorAcceDataFront.size() > 0
+                && mArrayListSensorAcceDataBack.size() <= 0) {
+            while (iteratorFront.hasNext()) {
+                AcceData acceData = (AcceData) iteratorFront.next();
+                mArrayListSensorAcceData.add(acceData);
+                Log.i("zzzz",
+                        ">>>>>>>AcceDataFront time = " + acceData.time
+                                + ", x=" + acceData.x
+                                + ", y=" + acceData.y
+                                + ", z=" + acceData.z);
+            }
+        } else if (mArrayListSensorAcceDataFront.size() <= 0
+                && mArrayListSensorAcceDataBack.size() > 0) {
+            while (iteratorBack.hasNext()) {
+                AcceData acceData = (AcceData) iteratorBack.next();
+                mArrayListSensorAcceData.add(acceData);
+                Log.i("zzzz",
+                        ">>>>>>>AcceDataBack  time = " + acceData.time
+                                + ", x=" + acceData.x
+                                + ", y=" + acceData.y
+                                + ", z=" + acceData.z);
+            }
+        } else if (mArrayListSensorAcceDataFront.size() > 0
+                && mArrayListSensorAcceDataBack.size() > 0) {
+            if (mArrayListSensorAcceDataFront.get(mArrayListSensorAcceDataFront.size() - 1).time < mArrayListSensorAcceDataBack
+                    .get(mArrayListSensorAcceDataBack.size() - 1).time) {
+                while (iteratorFront.hasNext()) {
+                    AcceData acceData = (AcceData) iteratorFront.next();
+                    mArrayListSensorAcceData.add(acceData);
+                    Log.i("zzzz",
+                            ">>>>>>>AcceDataFront time = " + acceData.time
+                                    + ", x=" + acceData.x
+                                    + ", y=" + acceData.y
+                                    + ", z=" + acceData.z);
+                }
+
+                while (iteratorBack.hasNext()) {
+                    AcceData acceData = (AcceData) iteratorBack.next();
+                    mArrayListSensorAcceData.add(acceData);
+                    Log.i("zzzz",
+                            ">>>>>>>AcceDataBack  time = " + acceData.time
+                                    + ", x=" + acceData.x
+                                    + ", y=" + acceData.y
+                                    + ", z=" + acceData.z);
+                }
+            } else {
+                while (iteratorBack.hasNext()) {
+                    AcceData acceData = (AcceData) iteratorBack.next();
+                    mArrayListSensorAcceData.add(acceData);
+                    Log.i("zzzz",
+                            ">>>>>>>AcceDataBack  time = " + acceData.time
+                                    + ", x=" + acceData.x
+                                    + ", y=" + acceData.y
+                                    + ", z=" + acceData.z);
+                }
+
+                while (iteratorFront.hasNext()) {
+                    AcceData acceData = (AcceData) iteratorFront.next();
+                    mArrayListSensorAcceData.add(acceData);
+                    Log.i("zzzz",
+                            ">>>>>>>AcceDataFront time = " + acceData.time
+                                    + ", x=" + acceData.x
+                                    + ", y=" + acceData.y
+                                    + ", z=" + acceData.z);
+                }
+            }
+        }
+
+        boolean checkOk = true;
+        int totalLength = mArrayListSensorAcceData.size();
+        if (totalLength > 10 && mPreReckoningAcceData != null
+                && mPreReckoningTime > 0) {
+            int indexOfPreReckoningAcceData = mArrayListSensorAcceData
+                    .indexOf(mPreReckoningAcceData);
+            if (indexOfPreReckoningAcceData > 0
+                    && indexOfPreReckoningAcceData < totalLength) {
+
+                for (int i = indexOfPreReckoningAcceData; i < totalLength; i++) {
+                    AcceData checkD = mArrayListSensorAcceData.get(i);
+                    if (Math.abs(checkD.x) <= 3
+                            && checkD.y >= 8
+                            && Math.abs(checkD.z) <= 4) {
+                        Log.i("zzzz",
+                                ">>>>>>>AcceData checkOk = true  stable time = " + checkD.time
+                                        + ", x=" + checkD.x
+                                        + ", y=" + checkD.y
+                                        + ", z=" + checkD.z
+                                        + ", indexOfPreReckoningAcceData="+indexOfPreReckoningAcceData
+                                        + ", totalLength="+totalLength);
+                    } else {
+                        checkOk = false;
+                        Log.i("zzzz",
+                                ">>>>>>>AcceData checkOk = false stable time = " + checkD.time
+                                        + ", x=" + checkD.x
+                                        + ", y=" + checkD.y
+                                        + ", z=" + checkD.z
+                                        + ", indexOfPreReckoningAcceData="+indexOfPreReckoningAcceData
+                                        + ", totalLength="+totalLength);
+                    }
+                }
+                int startIndex = 0;
+                AcceData startData = null;
+                for (int i = indexOfPreReckoningAcceData; i > 1; i--) {
+                    AcceData check = mArrayListSensorAcceData.get(i);
+                    if (/*Math.abs(check.x) <= 3
+                            && */check.y < 2
+                            && check.z > 7) {
+                        startIndex = i;
+                        startData = check;
+                        Log.i("zzzz",
+                                ">>>>>>>AcceData  find startIndex time = " + check.time
+                                        + ", x=" + check.x
+                                        + ", y=" + check.y
+                                        + ", z=" + check.z
+                                        + ", startIndex="+startIndex);
+                        break;
+                    }
+                }
+                if (startIndex == 0 || startData == null) {
+                    checkOk = false;
+                    Log.i("zzzz",
+                            ">>>>>>>AcceData  find startIndex time fail");
+                } else {
+                    for (int i = indexOfPreReckoningAcceData; i > startIndex; i--) {
+                        AcceData checkUp = mArrayListSensorAcceData.get(i);
+                        AcceData checkDown = mArrayListSensorAcceData.get(i-1);
+                        if (/*Math.abs(checkUp.x) <= 3
+                                && Math.abs(checkDown.x) <= 3
+                                && */checkUp.y >= checkDown.y
+                                && (checkUp.z <= checkDown.z || (checkDown.z > 8 && checkUp.z > 8))) {
+                            Log.i("zzzz",
+                                    ">>>>>>>AcceData checkOk = true  checkDown time = " + checkDown.time
+                                            + ", x=" + checkDown.x
+                                            + ", y=" + checkDown.y
+                                            + ", z=" + checkDown.z);
+                        } else {
+                            checkOk = false;
+                            Log.i("zzzz",
+                                    ">>>>>>>AcceData checkOk = false checkDown time = " + checkDown.time
+                                            + ", x=" + checkDown.x
+                                            + ", y=" + checkDown.y
+                                            + ", z=" + checkDown.z);
+                        }
+                    }
+                }
+            }
+            if (checkOk) launchFrontCamera();
+        }
+        mPreReckoningAcceData = null;
+        mArrayListSensorAcceDataBack.clear();
+        mArrayListSensorAcceDataFront.clear();
+        mFlagReckoning = false;
+        mFlagPreReckoning = false;
+        mPreReckoningTime = 0L;
+        Log.i("zzzz", ">>>>>reckonLaunchFrontCameraHistory end");
     }
 
     @Override
@@ -286,6 +713,52 @@ public class MainActivity extends Activity implements SensorEventListener {
     public void onConfigurationChanged(Configuration newConfig) {
         // TODO Auto-generated method stub
         // super.onConfigurationChanged(newConfig);
+    }
+
+    private class AcceData {
+
+        public AcceData(long l, float f, float g, float h) {
+            // TODO Auto-generated constructor stub
+            time = l;
+            x = f;
+            y = g;
+            z = h;
+        }
+
+        public long time = 0L;
+        public float x = 999;
+        public float y = 999;
+        public float z = 999;
+    }
+
+    private class GyroData {
+
+        public GyroData(long l, float f, float g, float h) {
+            // TODO Auto-generated constructor stub
+            time = l;
+            x = f;
+            y = g;
+            z = h;
+        }
+
+        public long time = 0L;
+        public float x = 999;
+        public float y = 999;
+        public float z = 999;
+    }
+
+    private class OrienData {
+
+        public OrienData(long l, float f, float g) {
+            // TODO Auto-generated constructor stub
+            time = l;
+            pitch = f;
+            roll = g;
+        }
+
+        public long time = 0L;
+        public float pitch = 999;
+        public float roll = 999;
     }
 
 }

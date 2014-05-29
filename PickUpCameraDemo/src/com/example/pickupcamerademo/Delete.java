@@ -3,6 +3,7 @@ package com.example.pickupcamerademo;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
@@ -42,6 +43,90 @@ public class Delete extends Activity implements SensorEventListener {
     public static final int TYPE_SENSOR_HUB_SCREEN_ON = 33171010;
 
     private static final int REQUEST_UPDATE_DATA = 299;
+    private HashMap<Float, AcceData> mHashMapSensorAcceDataFront = new HashMap<Float, AcceData>(100);
+    private HashMap<Float, AcceData> mHashMapSensorAcceDataBack = new HashMap<Float, AcceData>(100);
+    
+
+    // if (mHashMapSensorAcceDataFront.size() < 20) {
+    // mHashMapSensorAcceDataFront.put(time, new
+    // AcceData(mSensorAcceData[0], mSensorAcceData[1],
+    // mSensorAcceData[2]));
+    // } else if (mHashMapSensorAcceDataBack.size() < 20) {
+    // mHashMapSensorAcceDataBack.put(time, new
+    // AcceData(mSensorAcceData[0], mSensorAcceData[1],
+    // mSensorAcceData[2]));
+    // }
+    
+    
+    // if (mHashMapSensorAcceDataFront.size() > 0) {
+    // Iterator iterator =
+    // mHashMapSensorAcceDataFront.keySet().iterator();
+    // while (iterator.hasNext()) {
+    // Float key = (Float) iterator.next();
+    // Log.i("zzzz",
+    // ">>>>>>>AcceDataFront x="+mHashMapSensorAcceDataFront.get(key).x
+    // +", y="+mHashMapSensorAcceDataFront.get(key).y
+    // +", z="+mHashMapSensorAcceDataFront.get(key).z);
+    // }
+    // }
+    //
+    // if (mHashMapSensorAcceDataBack.size() > 0) {
+    // Iterator iterator =
+    // mHashMapSensorAcceDataBack.keySet().iterator();
+    // while (iterator.hasNext()) {
+    // Float key = (Float) iterator.next();
+    // Log.i("zzzz",
+    // ">>>>>>>AcceDataBack x="+mHashMapSensorAcceDataBack.get(key).x
+    // +", y="+mHashMapSensorAcceDataBack.get(key).y
+    // +", z="+mHashMapSensorAcceDataBack.get(key).z);
+    // }
+    // }
+
+    private class AcceData {
+
+        public AcceData(long l, float f, float g, float h) {
+            // TODO Auto-generated constructor stub
+            time = l;
+            x = f;
+            y = g;
+            z = h;
+        }
+
+        public long time = 0L;
+        public float x = 999;
+        public float y = 999;
+        public float z = 999;
+    }
+
+    private class GyroData {
+
+        public GyroData(long l, float f, float g, float h) {
+            // TODO Auto-generated constructor stub
+            time = l;
+            x = f;
+            y = g;
+            z = h;
+        }
+
+        public long time = 0L;
+        public float x = 999;
+        public float y = 999;
+        public float z = 999;
+    }
+
+    private class OrienData {
+
+        public OrienData(long l, float f, float g) {
+            // TODO Auto-generated constructor stub
+            time = l;
+            pitch = f;
+            roll = g;
+        }
+
+        public long time = 0L;
+        public float pitch = 999;
+        public float roll = 999;
+    }
 
     private SimpleDateFormat date = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒  ");
     private String mSensorBrief = "";
