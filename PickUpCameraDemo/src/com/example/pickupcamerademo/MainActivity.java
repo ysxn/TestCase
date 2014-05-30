@@ -86,8 +86,9 @@ public class MainActivity extends Activity implements SensorEventListener {
     private TextView mTips;
     private TextView mData;
 
-    private ArrayList<AcceData> mArrayListSensorAcceDataFront = new ArrayList<AcceData>(100);
-    private ArrayList<AcceData> mArrayListSensorAcceDataBack = new ArrayList<AcceData>(100);
+    //private ArrayList<AcceData> mArrayListSensorAcceDataFront = new ArrayList<AcceData>(100);
+    //private ArrayList<AcceData> mArrayListSensorAcceDataBack = new ArrayList<AcceData>(100);
+    private BufferStack<AcceData> mBufferStack = new BufferStack<AcceData>(20);
     private boolean mFlagReckoning = false;
     private boolean mFlagPreReckoning = false;
     private long mPreReckoningTime = 0L;
@@ -231,23 +232,8 @@ public class MainActivity extends Activity implements SensorEventListener {
             AcceData data = new AcceData(time, mSensorAcceData[0],
                     mSensorAcceData[1],
                     mSensorAcceData[2]);
-            if (mArrayListSensorAcceDataFront.size() < 20) {
-                mArrayListSensorAcceDataFront.add(data);
-            } else if (mArrayListSensorAcceDataBack.size() < 20) {
-                mArrayListSensorAcceDataBack.add(data);
-            } else {
-                Log.i("zzzz", ">>>>>swap"
-                        +", front size="+mArrayListSensorAcceDataFront.size()
-                        +", back  size="+mArrayListSensorAcceDataBack.size());
-                if (mArrayListSensorAcceDataFront.get(mArrayListSensorAcceDataFront.size()-1).time > mArrayListSensorAcceDataBack
-                        .get(mArrayListSensorAcceDataBack.size()-1).time) {
-                    mArrayListSensorAcceDataBack.clear();
-                    mArrayListSensorAcceDataBack.add(data);
-                } else {
-                    mArrayListSensorAcceDataFront.clear();
-                    mArrayListSensorAcceDataFront.add(data);
-                }
-            }
+            mBufferStack.push(data);
+            
             if (false && mFlagActivityResume && !mFlagStartMonitor
                     && (mFlagProximityNear || (Math.abs(mSensorAcceData[0]) <= 1
                             && Math.abs(mSensorAcceData[1]) <= 1
@@ -260,8 +246,6 @@ public class MainActivity extends Activity implements SensorEventListener {
                     && Math.abs(mSensorAcceData[1]) <= 3 && Math.abs(mSensorAcceData[2]) <= 3) {
 //                mFlagStartMonitor = false;
 //                launchBackCamera();
-//                mArrayListSensorAcceDataBack.clear();
-//                mArrayListSensorAcceDataFront.clear();
                 mPreReckoningAcceData = data;
                 mPreReckoningTime = time;
                 mFlagPreReckoning = true;
@@ -278,7 +262,6 @@ public class MainActivity extends Activity implements SensorEventListener {
                 reckonLaunchFrontCameraHistory();
                 //Log.i("zzzz", ">>>>>sendEmptyMessageDelayed REQUEST_RECKON_DATA");
                 //mHandler.sendEmptyMessageDelayed(REQUEST_RECKON_DATA, 2000);
-
             }
             Log.i("zzzz", ">>>>>acce == (" + mSensorAcceData[0]
                     + ", "
@@ -312,14 +295,6 @@ public class MainActivity extends Activity implements SensorEventListener {
             mFlagProximityNear = mSensorProximityData[0] == 0f;
         }
 
-        // Log.i("zzzz", ">>>>>acce == (" + mSensorAcceData[0]
-        // + ", "
-        // + mSensorAcceData[1]
-        // + ", "
-        // + mSensorAcceData[2]
-        // + ")   >>>>>Angular speed around the x-axis:" + mSensorGyroData[0]
-        // + ", y-axis:" + mSensorGyroData[1]
-        // + ", z-axis:" + mSensorGyroData[2]);
         mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
     }
 
@@ -327,90 +302,29 @@ public class MainActivity extends Activity implements SensorEventListener {
         // TODO Auto-generated method stub
         Log.i("zzzz", ">>>>>reckonLaunch <<Back>> CameraHistory start");
         mFlagReckoning = true;
-        ArrayList<AcceData> mArrayListSensorAcceData = new ArrayList<AcceData>(100);
-        Iterator<AcceData> iteratorFront =
-                mArrayListSensorAcceDataFront.iterator();
-        Iterator<AcceData> iteratorBack =
-                mArrayListSensorAcceDataBack.iterator();
-        if (mArrayListSensorAcceDataFront.size() > 0
-                && mArrayListSensorAcceDataBack.size() <= 0) {
-            while (iteratorFront.hasNext()) {
-                AcceData acceData = (AcceData) iteratorFront.next();
-                mArrayListSensorAcceData.add(acceData);
-                Log.i("zzzz",
-                        ">>>>>>>AcceDataFront time = " + acceData.time
-                                + ", x=" + acceData.x
-                                + ", y=" + acceData.y
-                                + ", z=" + acceData.z);
-            }
-        } else if (mArrayListSensorAcceDataFront.size() <= 0
-                && mArrayListSensorAcceDataBack.size() > 0) {
-            while (iteratorBack.hasNext()) {
-                AcceData acceData = (AcceData) iteratorBack.next();
-                mArrayListSensorAcceData.add(acceData);
-                Log.i("zzzz",
-                        ">>>>>>>AcceDataBack  time = " + acceData.time
-                                + ", x=" + acceData.x
-                                + ", y=" + acceData.y
-                                + ", z=" + acceData.z);
-            }
-        } else if (mArrayListSensorAcceDataFront.size() > 0
-                && mArrayListSensorAcceDataBack.size() > 0) {
-            if (mArrayListSensorAcceDataFront.get(mArrayListSensorAcceDataFront.size() - 1).time < mArrayListSensorAcceDataBack
-                    .get(mArrayListSensorAcceDataBack.size() - 1).time) {
-                while (iteratorFront.hasNext()) {
-                    AcceData acceData = (AcceData) iteratorFront.next();
-                    mArrayListSensorAcceData.add(acceData);
-                    Log.i("zzzz",
-                            ">>>>>>>AcceDataFront time = " + acceData.time
-                                    + ", x=" + acceData.x
-                                    + ", y=" + acceData.y
-                                    + ", z=" + acceData.z);
-                }
-
-                while (iteratorBack.hasNext()) {
-                    AcceData acceData = (AcceData) iteratorBack.next();
-                    mArrayListSensorAcceData.add(acceData);
-                    Log.i("zzzz",
-                            ">>>>>>>AcceDataBack  time = " + acceData.time
-                                    + ", x=" + acceData.x
-                                    + ", y=" + acceData.y
-                                    + ", z=" + acceData.z);
-                }
-            } else {
-                while (iteratorBack.hasNext()) {
-                    AcceData acceData = (AcceData) iteratorBack.next();
-                    mArrayListSensorAcceData.add(acceData);
-                    Log.i("zzzz",
-                            ">>>>>>>AcceDataBack  time = " + acceData.time
-                                    + ", x=" + acceData.x
-                                    + ", y=" + acceData.y
-                                    + ", z=" + acceData.z);
-                }
-
-                while (iteratorFront.hasNext()) {
-                    AcceData acceData = (AcceData) iteratorFront.next();
-                    mArrayListSensorAcceData.add(acceData);
-                    Log.i("zzzz",
-                            ">>>>>>>AcceDataFront time = " + acceData.time
-                                    + ", x=" + acceData.x
-                                    + ", y=" + acceData.y
-                                    + ", z=" + acceData.z);
-                }
-            }
+        
+        ArrayList<AcceData> mAll = mBufferStack.dump();
+        Iterator<AcceData> iterator = mAll.iterator();
+        while (iterator.hasNext()) {
+            AcceData data = (AcceData) iterator.next();
+            Log.i("zzzz",
+                  ">>>>>>>AcceData dump time = " + data.time
+                          + ", x=" + data.x
+                          + ", y=" + data.y
+                          + ", z=" + data.z);
         }
-
+        
         boolean checkOk = true;
-        int totalLength = mArrayListSensorAcceData.size();
+        int totalLength = mBufferStack.size();
         if (totalLength > 10 && mPreReckoningAcceData != null
-                && mPreReckoningTime > 0) {
-            int indexOfPreReckoningAcceData = mArrayListSensorAcceData
-                    .indexOf(mPreReckoningAcceData);
+              && mPreReckoningTime > 0) {
+            int indexOfPreReckoningAcceData = mBufferStack
+                  .indexOf(mPreReckoningAcceData);
             if (indexOfPreReckoningAcceData > 0
                     && indexOfPreReckoningAcceData < totalLength) {
 
                 for (int i = indexOfPreReckoningAcceData; i < totalLength; i++) {
-                    AcceData checkD = mArrayListSensorAcceData.get(i);
+                    AcceData checkD = mBufferStack.get(i);
                     if (Math.abs(checkD.x) >= 8
                             && Math.abs(checkD.y) <= 3 && Math.abs(checkD.z) <= 3) {
                         Log.i("zzzz",
@@ -434,7 +348,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                 int startIndex = 0;
                 AcceData startData = null;
                 for (int i = indexOfPreReckoningAcceData; i > 1; i--) {
-                    AcceData check = mArrayListSensorAcceData.get(i);
+                    AcceData check = mBufferStack.get(i);
                     if (Math.abs(check.x) <= 1
                             /*&& check.y < 2*/
                             && check.z > 7) {
@@ -455,8 +369,8 @@ public class MainActivity extends Activity implements SensorEventListener {
                             ">>>>>>>AcceData  find startIndex time fail");
                 } else {
                     for (int i = indexOfPreReckoningAcceData; i > startIndex; i--) {
-                        AcceData checkUp = mArrayListSensorAcceData.get(i);
-                        AcceData checkDown = mArrayListSensorAcceData.get(i-1);
+                        AcceData checkUp = mBufferStack.get(i);
+                        AcceData checkDown = mBufferStack.get(i-1);
                         if (/*Math.abs(checkUp.x) <= 3
                                 && Math.abs(checkDown.x) <= 3
                                 && */checkUp.x >= checkDown.x
@@ -476,12 +390,12 @@ public class MainActivity extends Activity implements SensorEventListener {
                         }
                     }
                 }
+                if (checkOk) launchBackCamera();
             }
-            if (checkOk) launchBackCamera();
         }
+        
         mPreReckoningAcceData = null;
-        mArrayListSensorAcceDataBack.clear();
-        mArrayListSensorAcceDataFront.clear();
+        mBufferStack.clear();
         mFlagReckoning = false;
         mFlagPreReckoning = false;
         mPreReckoningTime = 0L;
@@ -491,90 +405,29 @@ public class MainActivity extends Activity implements SensorEventListener {
     private void reckonLaunchFrontCameraHistory() {
         Log.i("zzzz", ">>>>>reckonLaunchFrontCameraHistory start");
         mFlagReckoning = true;
-        ArrayList<AcceData> mArrayListSensorAcceData = new ArrayList<AcceData>(100);
-        Iterator<AcceData> iteratorFront =
-                mArrayListSensorAcceDataFront.iterator();
-        Iterator<AcceData> iteratorBack =
-                mArrayListSensorAcceDataBack.iterator();
-        if (mArrayListSensorAcceDataFront.size() > 0
-                && mArrayListSensorAcceDataBack.size() <= 0) {
-            while (iteratorFront.hasNext()) {
-                AcceData acceData = (AcceData) iteratorFront.next();
-                mArrayListSensorAcceData.add(acceData);
-                Log.i("zzzz",
-                        ">>>>>>>AcceDataFront time = " + acceData.time
-                                + ", x=" + acceData.x
-                                + ", y=" + acceData.y
-                                + ", z=" + acceData.z);
-            }
-        } else if (mArrayListSensorAcceDataFront.size() <= 0
-                && mArrayListSensorAcceDataBack.size() > 0) {
-            while (iteratorBack.hasNext()) {
-                AcceData acceData = (AcceData) iteratorBack.next();
-                mArrayListSensorAcceData.add(acceData);
-                Log.i("zzzz",
-                        ">>>>>>>AcceDataBack  time = " + acceData.time
-                                + ", x=" + acceData.x
-                                + ", y=" + acceData.y
-                                + ", z=" + acceData.z);
-            }
-        } else if (mArrayListSensorAcceDataFront.size() > 0
-                && mArrayListSensorAcceDataBack.size() > 0) {
-            if (mArrayListSensorAcceDataFront.get(mArrayListSensorAcceDataFront.size() - 1).time < mArrayListSensorAcceDataBack
-                    .get(mArrayListSensorAcceDataBack.size() - 1).time) {
-                while (iteratorFront.hasNext()) {
-                    AcceData acceData = (AcceData) iteratorFront.next();
-                    mArrayListSensorAcceData.add(acceData);
-                    Log.i("zzzz",
-                            ">>>>>>>AcceDataFront time = " + acceData.time
-                                    + ", x=" + acceData.x
-                                    + ", y=" + acceData.y
-                                    + ", z=" + acceData.z);
-                }
 
-                while (iteratorBack.hasNext()) {
-                    AcceData acceData = (AcceData) iteratorBack.next();
-                    mArrayListSensorAcceData.add(acceData);
-                    Log.i("zzzz",
-                            ">>>>>>>AcceDataBack  time = " + acceData.time
-                                    + ", x=" + acceData.x
-                                    + ", y=" + acceData.y
-                                    + ", z=" + acceData.z);
-                }
-            } else {
-                while (iteratorBack.hasNext()) {
-                    AcceData acceData = (AcceData) iteratorBack.next();
-                    mArrayListSensorAcceData.add(acceData);
-                    Log.i("zzzz",
-                            ">>>>>>>AcceDataBack  time = " + acceData.time
-                                    + ", x=" + acceData.x
-                                    + ", y=" + acceData.y
-                                    + ", z=" + acceData.z);
-                }
-
-                while (iteratorFront.hasNext()) {
-                    AcceData acceData = (AcceData) iteratorFront.next();
-                    mArrayListSensorAcceData.add(acceData);
-                    Log.i("zzzz",
-                            ">>>>>>>AcceDataFront time = " + acceData.time
-                                    + ", x=" + acceData.x
-                                    + ", y=" + acceData.y
-                                    + ", z=" + acceData.z);
-                }
-            }
+        ArrayList<AcceData> mAll = mBufferStack.dump();
+        Iterator<AcceData> iterator = mAll.iterator();
+        while (iterator.hasNext()) {
+            AcceData data = (AcceData) iterator.next();
+            Log.i("zzzz",
+                  ">>>>>>>AcceData dump time = " + data.time
+                          + ", x=" + data.x
+                          + ", y=" + data.y
+                          + ", z=" + data.z);
         }
-
+        
         boolean checkOk = true;
-        int totalLength = mArrayListSensorAcceData.size();
+        int totalLength = mBufferStack.size();
         if (totalLength > 10 && mPreReckoningAcceData != null
                 && mPreReckoningTime > 0) {
-            int indexOfPreReckoningAcceData = mArrayListSensorAcceData
+            int indexOfPreReckoningAcceData = mBufferStack
                     .indexOf(mPreReckoningAcceData);
             if (indexOfPreReckoningAcceData > 0
                     && indexOfPreReckoningAcceData < totalLength) {
 
                 for (int i = indexOfPreReckoningAcceData; i < totalLength; i++) {
-                    AcceData checkD = mArrayListSensorAcceData.get(i);
+                    AcceData checkD = mBufferStack.get(i);
                     if (Math.abs(checkD.x) <= 3
                             && checkD.y >= 8
                             && Math.abs(checkD.z) <= 4) {
@@ -599,7 +452,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                 int startIndex = 0;
                 AcceData startData = null;
                 for (int i = indexOfPreReckoningAcceData; i > 1; i--) {
-                    AcceData check = mArrayListSensorAcceData.get(i);
+                    AcceData check = mBufferStack.get(i);
                     if (/*Math.abs(check.x) <= 3
                             && */check.y < 2
                             && check.z > 7) {
@@ -620,8 +473,8 @@ public class MainActivity extends Activity implements SensorEventListener {
                             ">>>>>>>AcceData  find startIndex time fail");
                 } else {
                     for (int i = indexOfPreReckoningAcceData; i > startIndex; i--) {
-                        AcceData checkUp = mArrayListSensorAcceData.get(i);
-                        AcceData checkDown = mArrayListSensorAcceData.get(i-1);
+                        AcceData checkUp = mBufferStack.get(i);
+                        AcceData checkDown = mBufferStack.get(i-1);
                         if (/*Math.abs(checkUp.x) <= 3
                                 && Math.abs(checkDown.x) <= 3
                                 && */checkUp.y >= checkDown.y
@@ -641,12 +494,13 @@ public class MainActivity extends Activity implements SensorEventListener {
                         }
                     }
                 }
+                if (checkOk) launchFrontCamera();
             }
-            if (checkOk) launchFrontCamera();
         }
+        
+        
         mPreReckoningAcceData = null;
-        mArrayListSensorAcceDataBack.clear();
-        mArrayListSensorAcceDataFront.clear();
+        mBufferStack.clear();
         mFlagReckoning = false;
         mFlagPreReckoning = false;
         mPreReckoningTime = 0L;
