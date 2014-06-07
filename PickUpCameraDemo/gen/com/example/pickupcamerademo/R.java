@@ -15,24 +15,23 @@ public final class R {
         public static final int stat_sample=0x7f020001;
     }
     public static final class id {
-        public static final int animation_image=0x7f060003;
-        public static final int bind=0x7f06000e;
-        public static final int bind_above_client=0x7f060008;
-        public static final int bind_allow_oom=0x7f060009;
-        public static final int bind_important=0x7f06000b;
-        public static final int bind_normal=0x7f060006;
-        public static final int bind_not_foreground=0x7f060007;
-        public static final int bind_waive_priority=0x7f06000a;
-        public static final int bind_with_activity=0x7f06000c;
-        public static final int button_exit=0x7f060004;
-        public static final int callback=0x7f060005;
-        public static final int hall_sensor_data=0x7f060002;
-        public static final int hall_sensor_name=0x7f060000;
-        public static final int hall_sensor_tips=0x7f060001;
-        public static final int kill=0x7f06000f;
-        public static final int start=0x7f060010;
-        public static final int stop=0x7f060011;
-        public static final int unbind=0x7f06000d;
+        public static final int ScrollView=0x7f060000;
+        public static final int bind=0x7f06000d;
+        public static final int bind_above_client=0x7f060007;
+        public static final int bind_allow_oom=0x7f060008;
+        public static final int bind_important=0x7f06000a;
+        public static final int bind_normal=0x7f060005;
+        public static final int bind_not_foreground=0x7f060006;
+        public static final int bind_waive_priority=0x7f060009;
+        public static final int bind_with_activity=0x7f06000b;
+        public static final int button_exit=0x7f060003;
+        public static final int callback=0x7f060004;
+        public static final int kill=0x7f06000e;
+        public static final int sensor_data=0x7f060002;
+        public static final int sensor_tips=0x7f060001;
+        public static final int start=0x7f06000f;
+        public static final int stop=0x7f060010;
+        public static final int unbind=0x7f06000c;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

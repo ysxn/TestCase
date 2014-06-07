@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">TestSettingSensorHub</string>
+    <string name="open_pick_up_tips">设置是否打开pickUp手势唤醒手机：</string>
+    <string name="open_wave_tips">设置是否打开上下挥手唤醒手机：</string>
+
+</resources>

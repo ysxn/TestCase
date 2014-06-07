@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="100dip"
+            android:orientation="horizontal"
+            android:gravity="center_vertical" >
+            <TextView
+                android:id="@+id/open_pick_up_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="@string/open_pick_up_tips" />
+            <CheckBox 
+                android:id="@+id/open_pick_up"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+        </LinearLayout>
+        
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="@android:color/black" />
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="100dip"
+            android:orientation="horizontal"
+            android:gravity="center_vertical" >
+            <TextView
+                android:id="@+id/open_wave_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="@string/open_wave_tips" />
+            <CheckBox 
+                android:id="@+id/open_wave"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+        </LinearLayout>
+
+        <!-- Divider -->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="@android:color/black" />
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical" >
+            <Button
+                android:id="@+id/acce_open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ACCE_OPEN" />
+            <Button
+                android:id="@+id/acce_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ACCE_CLOSE" />
+
+        </LinearLayout>
+        
+        <!-- Divider -->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="@android:color/black" />
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical" >
+            <Button
+                android:id="@+id/gesture_open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GESTURE_OPEN" />
+            <Button
+                android:id="@+id/gesture_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GESTURE_CLOSE" />
+        </LinearLayout>
+        
+        <!-- Divider -->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="@android:color/black" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+            
+
+            <Button
+                android:id="@+id/button_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="EXIT" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

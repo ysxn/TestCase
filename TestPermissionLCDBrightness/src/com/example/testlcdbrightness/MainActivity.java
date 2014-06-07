@@ -65,7 +65,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     private TextView mTextViewLightSensorData;
     private TextView mTextViewLightMode;
     private EditText mEditText;
-    private final static String LCD_PATH = "/sdcard/123.txt";//"/sys/devices/platform/leds-mt65xx/leds/lcd-backlight/brightness";
+    private final static String LCD_PATH = "/sys/devices/platform/leds-mt65xx/leds/lcd-backlight/brightness";
 
     //private final IPowerManager mPower;
     
@@ -104,7 +104,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                             b =Integer.valueOf((new String(buffer, 0, len)).trim());
                         } catch (FileNotFoundException e) {
                             Log.e(TAG,
-                                    "FileNotFoundException！ This kernel does not have hall sensor support");
+                                    "FileNotFoundException！LCD_PATH= "+LCD_PATH);
                         } catch (Exception e) {
                             Log.e(TAG, e.toString());
                         } finally {
@@ -181,13 +181,12 @@ public class MainActivity extends Activity implements SensorEventListener {
                 } catch (NumberFormatException e) {
                     Toast.makeText(MainActivity.this, "数字为空或者非法输入！！！", Toast.LENGTH_LONG).show();
                 }
-                if (i >= 30 && i <= 255) {
+                if (i >= 0 && i <= 255) {
                     Toast.makeText(MainActivity.this, "输入有效数字为  i=" + i, Toast.LENGTH_LONG).show();
                     String cmd1 = "echo " + i
                             + " > /sys/devices/platform/leds-mt65xx/leds/lcd-backlight/brightness";
                     String cmd = "ls -la";
                     String suffix = "\n";
-                    System.out.println(">>>>>>>>>>dfssssss");
                     //Settings.System.putInt(MainActivity.this.getContentResolver(),
                     //        Settings.System.SCREEN_BRIGHTNESS, i);
                     FileWriter file = null;
@@ -198,7 +197,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                     } catch (IOException e1) {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
-                        System.out.println(">>>>>>>>>>write fail!");
+                        Log.i(TAG, ">>>>>>>>>>write fail!");
                     } finally {
                         if (file != null) {
                             try {
@@ -222,6 +221,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 //                        dataOutputStream.flush();
                         dataOutputStream.writeBytes("cat brightness"+suffix);
                         dataOutputStream.flush();
+                        dataOutputStream.writeBytes("ls -la"+suffix);
+                        dataOutputStream.flush();
                         dataOutputStream.writeBytes("exit"+suffix);
                         dataOutputStream.flush();
                         dataOutputStream.close();
@@ -240,7 +241,9 @@ public class MainActivity extends Activity implements SensorEventListener {
                             while ((line = in.readLine()) != null) {
                                 stringBuffer.append(line + "\n");
                             }
-                            System.out.println(stringBuffer.toString());
+                            Log.i(TAG, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>exec result start :"+"\n");
+                            Log.i(TAG, stringBuffer.toString());
+                            Log.i(TAG, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>exec result end :"+"\n");
                             in.close();
                         } catch (InterruptedException e) {
                             // TODO Auto-generated catch block
