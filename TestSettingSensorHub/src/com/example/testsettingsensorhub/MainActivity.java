@@ -19,7 +19,10 @@ import java.util.Set;
 
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.hardware.Sensor;
@@ -82,6 +85,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     
     private final static String SDCARD_PATH = Environment.getExternalStorageDirectory().getPath()+"/8712.txt"; //"/sdcard/879123.txt";
     private final static String BRIGHTNESS_PATH = "/sys/devices/platform/leds-mt65xx/leds/lcd-backlight/brightness";
+    private final static String I2C_SENSOR_HUB_PATH = "/sys/devices/platform/mt-i2c.3/i2c-3/3-003a/input/input1/enable";
 
 
     private static final int REQUEST_UPDATE_DATA = 299;
@@ -108,12 +112,12 @@ public class MainActivity extends Activity implements SensorEventListener {
                          * InputStreamReader.java
                          * 这个显示buffer是乱码，最后有"\n"换行符。
                          */
-                        file = new FileReader(SDCARD_PATH);
+                        file = new FileReader(I2C_SENSOR_HUB_PATH);
                         int len = file.read(buffer, 0, 1024);
                         b =Integer.valueOf((new String(buffer, 0, len)).trim());
                     } catch (FileNotFoundException e) {
                         Log.e(TAG,
-                                "FileNotFoundException！ path="+SDCARD_PATH);
+                                "FileNotFoundException！ path="+I2C_SENSOR_HUB_PATH);
                     } catch (Exception e) {
                         Log.e(TAG, e.toString());
                     } finally {
@@ -158,12 +162,27 @@ public class MainActivity extends Activity implements SensorEventListener {
         }
 
     };
+    
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver(){
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // TODO Auto-generated method stub
+            if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
+                Log.i(TAG, ">>>>>>>>>>>>ACTION_SCREEN_OFF");
+            } else if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
+                Log.i(TAG, ">>>>>>>>>>>>ACTION_SCREEN_ON");
+            }
+        }
+        
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
         
         mCheckBoxPickup = (CheckBox) findViewById(R.id.open_pick_up);
         mCheckBoxWave = (CheckBox) findViewById(R.id.open_wave);
@@ -445,6 +464,10 @@ public class MainActivity extends Activity implements SensorEventListener {
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_SCREEN_ON);
+        this.registerReceiver(mBroadcastReceiver, filter);
         //AlarmAlertWakeLock.acquireScreenCpuWakeLock(this);
 //        if (mSensorAcce != null) {
 //            mSm.registerListener(this, mSensorAcce, SensorManager.SENSOR_DELAY_NORMAL);
@@ -468,6 +491,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         // TODO Auto-generated method stub
         super.onPause();
         mExitFlag = true;
+        this.unregisterReceiver(mBroadcastReceiver);
         //AlarmAlertWakeLock.releaseCpuLock();
 //        mSm.unregisterListener(this);
     }
