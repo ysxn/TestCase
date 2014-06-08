@@ -168,6 +168,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         @Override
         public void onReceive(Context context, Intent intent) {
             // TODO Auto-generated method stub
+            Log.i(TAG, ">>>>>>>>>>>>ACTION_SCREEN_intent="+intent);
             if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
                 Log.i(TAG, ">>>>>>>>>>>>ACTION_SCREEN_OFF");
             } else if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
@@ -183,7 +184,9 @@ public class MainActivity extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        
+        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_SCREEN_ON);
+        MainActivity.this.registerReceiver(mBroadcastReceiver, filter);
         mCheckBoxPickup = (CheckBox) findViewById(R.id.open_pick_up);
         mCheckBoxWave = (CheckBox) findViewById(R.id.open_wave);
         
@@ -315,6 +318,47 @@ public class MainActivity extends Activity implements SensorEventListener {
         }
     }
 
+
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+        
+        //AlarmAlertWakeLock.acquireScreenCpuWakeLock(this);
+//        if (mSensorAcce != null) {
+//            mSm.registerListener(this, mSensorAcce, SensorManager.SENSOR_DELAY_NORMAL);
+//        }
+//
+//        if (mSensorProximity != null) {
+//            mSm.registerListener(this, mSensorProximity, SensorManager.SENSOR_DELAY_NORMAL);
+//        }
+//
+//        if (mSensorGyro != null) {
+//            mSm.registerListener(this, mSensorGyro, SensorManager.SENSOR_DELAY_NORMAL);
+//        }
+//
+//        if (mSensorOrien != null) {
+//            mSm.registerListener(this, mSensorOrien, SensorManager.SENSOR_DELAY_NORMAL);
+//        }
+    }
+
+    @Override
+    protected void onPause() {
+        // TODO Auto-generated method stub
+        super.onPause();
+        mExitFlag = true;
+
+        //AlarmAlertWakeLock.releaseCpuLock();
+//        mSm.unregisterListener(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        // TODO Auto-generated method stub
+        super.onDestroy();
+        MainActivity.this.unregisterReceiver(mBroadcastReceiver);
+    }
+    
     protected void stopWave() {
         // TODO Auto-generated method stub
         stopPickUp();
@@ -458,48 +502,6 @@ public class MainActivity extends Activity implements SensorEventListener {
                     .show();
             Log.i(TAG, ">>>>>>>>>>exec echo fails, IOException");
         }
-    }
-
-    @Override
-    protected void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_SCREEN_OFF);
-        filter.addAction(Intent.ACTION_SCREEN_ON);
-        this.registerReceiver(mBroadcastReceiver, filter);
-        //AlarmAlertWakeLock.acquireScreenCpuWakeLock(this);
-//        if (mSensorAcce != null) {
-//            mSm.registerListener(this, mSensorAcce, SensorManager.SENSOR_DELAY_NORMAL);
-//        }
-//
-//        if (mSensorProximity != null) {
-//            mSm.registerListener(this, mSensorProximity, SensorManager.SENSOR_DELAY_NORMAL);
-//        }
-//
-//        if (mSensorGyro != null) {
-//            mSm.registerListener(this, mSensorGyro, SensorManager.SENSOR_DELAY_NORMAL);
-//        }
-//
-//        if (mSensorOrien != null) {
-//            mSm.registerListener(this, mSensorOrien, SensorManager.SENSOR_DELAY_NORMAL);
-//        }
-    }
-
-    @Override
-    protected void onPause() {
-        // TODO Auto-generated method stub
-        super.onPause();
-        mExitFlag = true;
-        this.unregisterReceiver(mBroadcastReceiver);
-        //AlarmAlertWakeLock.releaseCpuLock();
-//        mSm.unregisterListener(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        // TODO Auto-generated method stub
-        super.onDestroy();
     }
 
     @Override
