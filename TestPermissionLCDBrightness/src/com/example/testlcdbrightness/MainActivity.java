@@ -187,8 +187,8 @@ public class MainActivity extends Activity implements SensorEventListener {
                             + " > /sys/devices/platform/leds-mt65xx/leds/lcd-backlight/brightness";
                     String cmd = "ls -la";
                     String suffix = "\n";
-                    //Settings.System.putInt(MainActivity.this.getContentResolver(),
-                    //        Settings.System.SCREEN_BRIGHTNESS, i);
+                    Settings.System.putInt(MainActivity.this.getContentResolver(),
+                            Settings.System.SCREEN_BRIGHTNESS, i);
                     FileWriter file = null;
                     try {
                         file = new FileWriter(LCD_PATH);

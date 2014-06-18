@@ -10,7 +10,13 @@ import java.util.List;
 import java.util.Set;
 
 import android.app.Activity;
+import android.app.KeyguardManager;
+import android.app.KeyguardManager.KeyguardLock;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.hardware.Sensor;
@@ -62,6 +68,11 @@ public class MainActivity extends Activity implements SensorEventListener {
     private float mSensorOrienData[] = {
             0, 0, 0, 0
     };
+    private float mSensorScreenOnData[] = {
+            0, 0, 0, 0
+    };
+    private float mSensorScreenOnLogData = 0f;
+    private boolean mIsScreenOn = true;
 
     SensorManager mSm;
     Sensor mSensorAirMouse;
@@ -85,6 +96,13 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     private TextView mTips;
     private TextView mData;
+    private Button mPause;
+    private Button mResume;
+    public static final String EXTRAS_CAMERA_FACING = "android.intent.extras.CAMERA_FACING";
+    public static final int EXTRAS_CAMERA_FACING_BACK = 0;
+    public static final int EXTRAS_CAMERA_FACING_FRONT = 1;
+    public static final int SENSOR_DATA_FACING_FRONT = 3;
+    public static final int SENSOR_DATA_FACING_BACK = 2;
 
     //private ArrayList<AcceData> mArrayListSensorAcceDataFront = new ArrayList<AcceData>(100);
     //private ArrayList<AcceData> mArrayListSensorAcceDataBack = new ArrayList<AcceData>(100);
@@ -94,6 +112,11 @@ public class MainActivity extends Activity implements SensorEventListener {
     private long mPreReckoningTime = 0L;
     private AcceData mPreReckoningAcceData = null;
     private final int REQUEST_CAPTURE = 0x2341;
+    
+  //声明键盘管理器
+    KeyguardManager mKeyguardManager = null;    
+    //声明键盘锁
+    private KeyguardLock mKeyguardLock = null;
 
     private boolean mFlagStartMonitor = false;
     private boolean mFlagProximityNear = false;
@@ -107,34 +130,67 @@ public class MainActivity extends Activity implements SensorEventListener {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case REQUEST_UPDATE_DATA: {
-                    mHandler.removeMessages(REQUEST_UPDATE_DATA);
+                    //mHandler.removeMessages(REQUEST_UPDATE_DATA);
                     if (mData != null) {
-                        mData.setText(">>>>>Proximity : " + mSensorProximityData[0]
-                                + ",   mFlagProximityNear="
-                                + mFlagProximityNear + "\n"
-                                + ">>>>>acce the x-axis:" + mSensorAcceData[0] + "\n"
-                                + ">>>>>acce the y-axis:" + mSensorAcceData[1] + "\n"
-                                + ">>>>>acce the z-axis:" + mSensorAcceData[2] + "\n"
-                                + "mFlagStartMonitor=" + mFlagStartMonitor + "\n"
-                                + ">>>>>Angular speed around the x-axis:" + mSensorGyroData[0]
-                                + "\n"
-                                + ">>>>>Angular speed around the y-axis:" + mSensorGyroData[1]
-                                + "\n"
-                                + ">>>>>Angular speed around the z-axis:" + mSensorGyroData[2]
-                                + "\n"
-                                // 就是绕z轴转动的角度，0度=正北:
-                                + ">>>>>azimuth 方位角：" + mSensorOrienData[0]
-                                + "\n"
-                                // 绕X轴转动的角度 (-180<=pitch<=180),
-                                // 如果设备水平放置，前方向下俯就是正:
-                                + ">>>>>pitch 仰俯：" + mSensorOrienData[1]
-                                + "\n"
-                                // 绕Y轴转动(-90<=roll<=90)，向左翻滚是正值:
-                                + ">>>>>roll 滚转：" + mSensorOrienData[2]
-                                + "\n"
-                                + "mFlagActivityResume=" + mFlagActivityResume);
+                        if (false) {
+                            mData.setText(">>>>>Proximity : " + mSensorProximityData[0]
+                                    + ",   mFlagProximityNear="
+                                    + mFlagProximityNear + "\n"
+                                    + ">>>>>acce the x-axis:" + mSensorAcceData[0] + "\n"
+                                    + ">>>>>acce the y-axis:" + mSensorAcceData[1] + "\n"
+                                    + ">>>>>acce the z-axis:" + mSensorAcceData[2] + "\n"
+                                    + "mFlagStartMonitor=" + mFlagStartMonitor + "\n"
+                                    + ">>>>>Angular speed around the x-axis:" + mSensorGyroData[0]
+                                    + "\n"
+                                    + ">>>>>Angular speed around the y-axis:" + mSensorGyroData[1]
+                                    + "\n"
+                                    + ">>>>>Angular speed around the z-axis:" + mSensorGyroData[2]
+                                    + "\n"
+                                    // 就是绕z轴转动的角度，0度=正北:
+                                    + ">>>>>azimuth 方位角：" + mSensorOrienData[0]
+                                    + "\n"
+                                    // 绕X轴转动的角度 (-180<=pitch<=180),
+                                    // 如果设备水平放置，前方向下俯就是正:
+                                    + ">>>>>pitch 仰俯：" + mSensorOrienData[1]
+                                    + "\n"
+                                    // 绕Y轴转动(-90<=roll<=90)，向左翻滚是正值:
+                                    + ">>>>>roll 滚转：" + mSensorOrienData[2]
+                                    + "\n"
+                                    + "mFlagActivityResume=" + mFlagActivityResume);
+                        }
                     }
-                    mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
+                    String sC = "当前时间：" + date.format(System.currentTimeMillis())
+                            + " DATA=" + mSensorScreenOnLogData;
+                    mData.setText(sC+"\n"+mData.getText());
+                    //添加WM新的view来控制亮屏和解锁
+                    //挪到service里面
+                    if (mSensorScreenOnLogData == SENSOR_DATA_FACING_FRONT) {
+                        //亮屏
+                        if (!mIsScreenOn) {
+                            AlarmAlertWakeLock.acquireScreenCpuWakeLock(MainActivity.this);
+                        }
+                        //解锁
+                        //禁用显示键盘锁定
+                        mKeyguardLock.disableKeyguard(); 
+                        //判断camera是否已经启动，避免重复开启camera
+                        
+                        //自己修改camera，区分前后
+                        launchFrontCamera();
+                    } else if (mSensorScreenOnLogData == SENSOR_DATA_FACING_BACK) {
+                        //亮屏
+                        if (!mIsScreenOn) {
+                            AlarmAlertWakeLock.acquireScreenCpuWakeLock(MainActivity.this);
+                        }
+                        //解锁
+                        //禁用显示键盘锁定
+                        mKeyguardLock.disableKeyguard();
+                        
+                        //判断camera是否已经启动，避免重复开启camera
+                        
+                        //自己修改camera，区分前后
+                        launchBackCamera();
+                    }
+                    //mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
                 }
                 break;
                 case REQUEST_RECKON_DATA: {
@@ -147,12 +203,37 @@ public class MainActivity extends Activity implements SensorEventListener {
         }
 
     };
+    
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver(){
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // TODO Auto-generated method stub
+            Log.i(TAG, ">>>>>>>>>>>>ACTION_SCREEN_intent="+intent);
+            if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
+                Log.i(TAG, ">>>>>>>>>>>>ACTION_SCREEN_OFF");
+                mIsScreenOn = false;
+            } else if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
+                Log.i(TAG, ">>>>>>>>>>>>ACTION_SCREEN_ON");
+                mIsScreenOn = true;
+                AlarmAlertWakeLock.releaseCpuLock();
+            }
+        }
+        
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_SCREEN_ON);
+        MainActivity.this.registerReceiver(mBroadcastReceiver, filter);
+        
+        mKeyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+        //初始化键盘锁，可以锁定或解开键盘锁
+        mKeyguardLock = mKeyguardManager.newKeyguardLock("zhuyawen"); 
 
         mTips = (TextView) findViewById(R.id.sensor_tips);
         mData = (TextView) findViewById(R.id.sensor_data);
@@ -162,7 +243,40 @@ public class MainActivity extends Activity implements SensorEventListener {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
+                mSm.unregisterListener(MainActivity.this);
+                AlarmAlertWakeLock.releaseCpuLock();
+                //屏幕锁定
+                mKeyguardLock.reenableKeyguard();
                 finish();
+            }
+        });
+        
+        mPause = (Button) findViewById(R.id.button_pause);
+        mResume = (Button) findViewById(R.id.button_resume);
+        mPause.setEnabled(false);
+        mResume.setEnabled(false);
+        mPause.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+//                mSm.unregisterListener(MainActivity.this);
+//                mPause.setEnabled(false);
+//                mResume.setEnabled(true);
+                launchBackCamera();
+            }
+        });
+        mResume.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                if (mSensorScreenOn != null) {
+//                    mSm.registerListener(MainActivity.this, mSensorScreenOn, SensorManager.SENSOR_DELAY_NORMAL);
+//                    mPause.setEnabled(true);
+//                    mResume.setEnabled(false);
+                }
+                launchFrontCamera();
             }
         });
 
@@ -173,19 +287,49 @@ public class MainActivity extends Activity implements SensorEventListener {
         mSensorGyro = mSm.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         mSensorOrien = mSm.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         mSensorProximity = mSm.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        
+        List<Sensor> ss;
 
-        mSensorBrief = sb.toString();
-        // mTips.setText(mSensorBrief);
-        mTips.setText("距离传感器被挡住代表手机在裤子口袋或包里面,这时候也是初始情况之一。 或者手机水平放在桌面上静止不动，这也是初始情况之一。， \n当用户拿起手机横屏对准前方， 立即启动后Camera。 \n如果是拿起后竖屏，本应该打开前camera，目前DEMO只能打开后camera，因为标准api不能指定前后camera，除非camera应用修改定制过。");
-        mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
+        ss = mSm.getSensorList(TYPE_SENSOR_HUB_SCREEN_ON);
+        if (ss == null || ss.size() == 0) {
+            sb.append("获取pick up动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_SCREEN_ON);
+        } else {
+            mSensorScreenOn = ss.get(0);
+            sb.append("获取pick up动作传感器OK,size=" + ss.size() + ",传感器Type_id为="
+                    + TYPE_SENSOR_HUB_SCREEN_ON + "; ");
+        }
+        sb.append("\n");
+        
+        mSensorBrief = sb.toString()+"\n"
+                +"拿起后竖屏对准前方DATA为3就开启_前摄像头，" 
+                +"\n"
+                +"横屏为2就开启_后摄像头," 
+                +"\n"
+                +"值0为初始值。";
+        mTips.setText(mSensorBrief);
+        //mTips.setText("距离传感器被挡住代表手机在裤子口袋或包里面,这时候也是初始情况之一。 或者手机水平放在桌面上静止不动，这也是初始情况之一。， \n当用户拿起手机横屏对准前方， 立即启动后Camera。 \n如果是拿起后竖屏，本应该打开前camera，目前DEMO只能打开后camera，因为标准api不能指定前后camera，除非camera应用修改定制过。");
+        //mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
+        if (mSensorScreenOn != null) {
+            mSm.registerListener(this, mSensorScreenOn, SensorManager.SENSOR_DELAY_NORMAL);
+            mPause.setEnabled(true);
+            mResume.setEnabled(false);
+        }
+        mPause.setEnabled(true);
+        mResume.setEnabled(true);
+        
+        boolean hasAccelerometer = this.getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_SENSOR_ACCELEROMETER);
+        Log.i(TAG, ">>>>>hasAccelerometer="+hasAccelerometer);
     }
 
     @Override
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
-        AlarmAlertWakeLock.acquireScreenCpuWakeLock(this);
+        //AlarmAlertWakeLock.acquireScreenCpuWakeLock(this);
         mFlagActivityResume = true;
+        
+        /*
         if (mSensorAcce != null) {
             mSm.registerListener(this, mSensorAcce, SensorManager.SENSOR_DELAY_NORMAL);
         }
@@ -201,6 +345,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         if (mSensorOrien != null) {
             mSm.registerListener(this, mSensorOrien, SensorManager.SENSOR_DELAY_NORMAL);
         }
+        */
     }
 
     @Override
@@ -208,13 +353,20 @@ public class MainActivity extends Activity implements SensorEventListener {
         // TODO Auto-generated method stub
         mFlagActivityResume = false;
         super.onPause();
-        mSm.unregisterListener(this);
-        AlarmAlertWakeLock.releaseCpuLock();
+        //AlarmAlertWakeLock.releaseCpuLock();
     }
 
     @Override
     protected void onDestroy() {
         // TODO Auto-generated method stub
+        //广播不能重复解除注册
+        MainActivity.this.unregisterReceiver(mBroadcastReceiver);
+        
+        
+        mSm.unregisterListener(this);
+        AlarmAlertWakeLock.releaseCpuLock();
+        //屏幕锁定
+        mKeyguardLock.reenableKeyguard();
         super.onDestroy();
     }
 
@@ -293,9 +445,16 @@ public class MainActivity extends Activity implements SensorEventListener {
         } else if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
             mSensorProximityData[0] = event.values[0];
             mFlagProximityNear = mSensorProximityData[0] == 0f;
+        } else if (event.sensor.getType() == TYPE_SENSOR_HUB_SCREEN_ON) {
+            mSensorScreenOnData[0] = event.values[0];
+            if (mSensorScreenOnData[0] != 0) {
+                mSensorScreenOnLogData = mSensorScreenOnData[0];
+                mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 0L);
+            }
+            Log.i("zzzz", ">>>>>SCREEN_ON == (" + mSensorScreenOnData[0]
+                    + ")"
+                    + " 当前时间：" + date.format(System.currentTimeMillis()));
         }
-
-        mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
     }
 
     private void reckonLaunchBackCameraHistory() {
@@ -515,10 +674,12 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     private void launchBackCamera() {
         Intent intent = new Intent();
-        intent.setAction("android.media.action.STILL_IMAGE_CAMERA");
-        // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-        // | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-        // | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        //intent.setAction("android.media.action.STILL_IMAGE_CAMERA");
+        intent.setAction(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
+        intent.putExtra(EXTRAS_CAMERA_FACING, EXTRAS_CAMERA_FACING_BACK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 
@@ -526,9 +687,10 @@ public class MainActivity extends Activity implements SensorEventListener {
         Intent intent = new Intent();
         // intent.setAction("android.media.action.STILL_IMAGE_CAMERA");
         intent.setAction(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
-        // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-        // | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-        // | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra(EXTRAS_CAMERA_FACING, EXTRAS_CAMERA_FACING_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 

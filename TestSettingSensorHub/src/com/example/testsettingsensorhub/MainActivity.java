@@ -36,6 +36,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -316,6 +317,15 @@ public class MainActivity extends Activity implements SensorEventListener {
             
             mHandler.sendEmptyMessageDelayed(REQUEST_DUMP_DATA, 1000L);
         }
+        
+        DisplayMetrics localDisplayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(localDisplayMetrics);
+        Log.e("zyw", ">>>" + localDisplayMetrics.toString() + ", densityDpi="
+                + localDisplayMetrics.densityDpi);
+        Toast.makeText(
+                this,
+                ">>>" + localDisplayMetrics.toString() + ", densityDpi="
+                        + localDisplayMetrics.densityDpi, Toast.LENGTH_LONG).show();
     }
 
 

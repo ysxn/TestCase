@@ -19,7 +19,7 @@
         android:layout_marginTop="5dip"
         android:background="@android:color/black" />
 
-    <com.lenovo.gesture.GestureView
+    <com.test.gesture.GestureView
         android:id="@+id/gestureView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
