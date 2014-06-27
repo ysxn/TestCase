@@ -1,5 +1,5 @@
 
-package com.example.pickupcamerademo;
+package com.example.pickupcamerastepcounter;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -32,7 +32,9 @@ import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -113,13 +115,6 @@ public class MainActivity extends Activity implements SensorEventListener {
     public static final int SENSOR_DATA_FACING_FRONT = 3;
     public static final int SENSOR_DATA_FACING_BACK = 2;
 
-    //private ArrayList<AcceData> mArrayListSensorAcceDataFront = new ArrayList<AcceData>(100);
-    //private ArrayList<AcceData> mArrayListSensorAcceDataBack = new ArrayList<AcceData>(100);
-    private BufferStack<AcceData> mBufferStack = new BufferStack<AcceData>(20);
-    private boolean mFlagReckoning = false;
-    private boolean mFlagPreReckoning = false;
-    private long mPreReckoningTime = 0L;
-    private AcceData mPreReckoningAcceData = null;
     private final int REQUEST_CAPTURE_BACK = 0x2341;
     private final int REQUEST_CAPTURE_FRONT = 0x2342;
     private static final String REQUEST_CAPTURE_SAVE_FRONT_IMG = Environment.getExternalStorageDirectory().getPath() + "/pickuptest/front.jpg";
@@ -129,10 +124,9 @@ public class MainActivity extends Activity implements SensorEventListener {
     KeyguardManager mKeyguardManager = null;    
     //声明键盘锁
     private KeyguardLock mKeyguardLock = null;
-
-    private boolean mFlagStartMonitor = false;
-    private boolean mFlagProximityNear = false;
-    private boolean mFlagActivityResume = false;
+    private WindowManager mWindowManager = null;
+    private LinearLayout mGlobalView = null;
+    private WindowManager.LayoutParams mGlobalParams = null;
 
     private static final int REQUEST_UPDATE_DATA = 299;
 
@@ -142,30 +136,8 @@ public class MainActivity extends Activity implements SensorEventListener {
             switch (msg.what) {
                 case REQUEST_UPDATE_DATA: {
                     //mHandler.removeMessages(REQUEST_UPDATE_DATA);
-                    String data = ">>>>>Proximity : " + mSensorProximityData[0]
-                            + ",   mFlagProximityNear="
-                            + mFlagProximityNear + "\n"
-                            + ">>>>>acce the x-axis:" + mSensorAcceData[0] + "\n"
-                            + ">>>>>acce the y-axis:" + mSensorAcceData[1] + "\n"
-                            + ">>>>>acce the z-axis:" + mSensorAcceData[2] + "\n"
-                            + "mFlagStartMonitor=" + mFlagStartMonitor + "\n"
-                            + ">>>>>Angular speed around the x-axis:" + mSensorGyroData[0]
-                            + "\n"
-                            + ">>>>>Angular speed around the y-axis:" + mSensorGyroData[1]
-                            + "\n"
-                            + ">>>>>Angular speed around the z-axis:" + mSensorGyroData[2]
-                            + "\n"
-                            // 就是绕z轴转动的角度，0度=正北:
-                            + ">>>>>azimuth 方位角：" + mSensorOrienData[0]
-                            + "\n"
-                            // 绕X轴转动的角度 (-180<=pitch<=180),
-                            // 如果设备水平放置，前方向下俯就是正:
-                            + ">>>>>pitch 仰俯：" + mSensorOrienData[1]
-                            + "\n"
-                            // 绕Y轴转动(-90<=roll<=90)，向左翻滚是正值:
-                            + ">>>>>roll 滚转：" + mSensorOrienData[2]
-                            + "\n"
-                            + "mFlagActivityResume=" + mFlagActivityResume;
+                    String step = ">>>>>Step Counter : " + mSensorStepCounterData[0] + "\n"
+                            + ">>>>>>Step Detector : " + mSensorStepDetectorData[0] + "\n";
                     String sC = "当前时间：" + date.format(System.currentTimeMillis())
                             + " DATA=" + mSensorScreenOnLogData;
                     mData.setText(sC+"\n"+mData.getText());
@@ -216,6 +188,15 @@ public class MainActivity extends Activity implements SensorEventListener {
         MainActivity.this.registerReceiver(mBroadcastReceiver, filter);
         
         mKeyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+        mWindowManager = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
+        mGlobalView = new LinearLayout(this);
+        mGlobalParams = new WindowManager.LayoutParams();
+        mGlobalParams.flags |= WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
+        mGlobalView.setVisibility(View.GONE);
+        mWindowManager.addView(mGlobalView, mGlobalParams);
         //初始化键盘锁，可以锁定或解开键盘锁
         mKeyguardLock = mKeyguardManager.newKeyguardLock("zhuyawen"); 
 
@@ -227,7 +208,7 @@ public class MainActivity extends Activity implements SensorEventListener {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                mSensorManager.unregisterListener(MainActivity.this);
+                disableScreenOnSensor();
                 AlarmAlertWakeLock.releaseCpuLock();
                 //屏幕锁定
                 mKeyguardLock.reenableKeyguard();
@@ -301,38 +282,18 @@ public class MainActivity extends Activity implements SensorEventListener {
         // TODO Auto-generated method stub
         super.onResume();
         //AlarmAlertWakeLock.acquireScreenCpuWakeLock(this);
-        mFlagActivityResume = true;
-        
-        /*
-        if (mSensorAcce != null) {
-            mSm.registerListener(this, mSensorAcce, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-
-        if (mSensorProximity != null) {
-            mSm.registerListener(this, mSensorProximity, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-
-        if (mSensorGyro != null) {
-            mSm.registerListener(this, mSensorGyro, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-
-        if (mSensorOrien != null) {
-            mSm.registerListener(this, mSensorOrien, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        */
     }
 
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub
-        mFlagActivityResume = false;
         super.onPause();
         AlarmAlertWakeLock.releaseCpuLock();
     }
 
     @Override
     protected void onDestroy() {
-        // TODO Auto-generated method stub
+        mWindowManager.removeView(mGlobalView);
         //广播不能重复解除注册
         MainActivity.this.unregisterReceiver(mBroadcastReceiver);
 
@@ -346,76 +307,16 @@ public class MainActivity extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         // TODO Auto-generated method stub
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            if (mFlagReckoning)
-                return;
-            mSensorAcceData[0] = event.values[0];
-            mSensorAcceData[1] = event.values[1];
-            mSensorAcceData[2] = event.values[2];
-            long time = System.currentTimeMillis();
-
-            AcceData data = new AcceData(time, mSensorAcceData[0],
-                    mSensorAcceData[1],
-                    mSensorAcceData[2]);
-            mBufferStack.push(data);
-            
-            if (false && mFlagActivityResume && !mFlagStartMonitor
-                    && (mFlagProximityNear || (Math.abs(mSensorAcceData[0]) <= 1
-                            && Math.abs(mSensorAcceData[1]) <= 1
-                            && mSensorAcceData[2] >= 9))) {
-                // 距离传感器被挡住代表手机在裤子口袋或包里面,这时候也是初始情况之一。
-                // 手机水平放在桌面上静止不动，这也是初始情况之一。
-                mFlagStartMonitor = true;
-            } else if (mFlagActivityResume && !mFlagPreReckoning
-                    && Math.abs(mSensorAcceData[0]) >= 8
-                    && Math.abs(mSensorAcceData[1]) <= 3 && Math.abs(mSensorAcceData[2]) <= 3) {
-//                mFlagStartMonitor = false;
-//                launchBackCamera();
-                mPreReckoningAcceData = data;
-                mPreReckoningTime = time;
-                mFlagPreReckoning = true;
-                reckonLaunchBackCameraHistory();
-            } else if (mFlagActivityResume && !mFlagProximityNear && !mFlagPreReckoning
-                    && Math.abs(mSensorAcceData[0]) <= 3
-                    && mSensorAcceData[1] >= 8
-                    && Math.abs(mSensorAcceData[2]) <= 4) {
-                // mFlagStartMonitor = false;
-
-                mPreReckoningAcceData = data;
-                mPreReckoningTime = time;
-                mFlagPreReckoning = true;
-                reckonLaunchFrontCameraHistory();
-            }
-            Log.i("zzzz", ">>>>>acce == (" + mSensorAcceData[0]
-                    + ", "
-                    + mSensorAcceData[1]
-                    + ", "
-                    + mSensorAcceData[2]
+        if (event.sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
+            mSensorStepDetectorData[0] = event.values[0];
+            Log.i("zzzz", ">>>>>STEP_DETECTOR == (" + mSensorStepDetectorData[0]
                     + ")"
-                    + ", time=" + System.currentTimeMillis());
-        } else if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
-            mSensorGyroData[0] = Math.abs(event.values[0]) > 0.01f ? event.values[0] : 0f;
-            mSensorGyroData[1] = Math.abs(event.values[1]) > 0.01f ? event.values[1] : 0f;
-            mSensorGyroData[2] = Math.abs(event.values[2]) > 0.01f ? event.values[2] : 0f;
-            long time = System.currentTimeMillis();
-            Log.i("zzzz", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> the x-axis:"
-                    + mSensorGyroData[0]
-                    + ", y-axis:" + mSensorGyroData[1]
-                    + ", z-axis:" + mSensorGyroData[2]
-                    + ", time=" + System.currentTimeMillis());
-        } else if (event.sensor.getType() == Sensor.TYPE_ORIENTATION) {
-            mSensorOrienData[0] = event.values[0];
-            mSensorOrienData[1] = event.values[1];
-            mSensorOrienData[2] = event.values[2];
-            long time = System.currentTimeMillis();
-            Log.i("zzzz",
-                    ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> pitch :"
-                            + mSensorOrienData[1]
-                            + ", roll :" + mSensorOrienData[2]
-                            + ", time=" + System.currentTimeMillis());
-        } else if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
-            mSensorProximityData[0] = event.values[0];
-            mFlagProximityNear = mSensorProximityData[0] == 0f;
+                    + " 当前时间：" + date.format(System.currentTimeMillis()));
+        } else if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+            mSensorStepCounterData[0] = event.values[0];
+            Log.i("zzzz", ">>>>>STEP_COUNTER == (" + mSensorStepCounterData[0]
+                    + ")"
+                    + " 当前时间：" + date.format(System.currentTimeMillis()));
         } else if (event.sensor.getType() == TYPE_SENSOR_HUB_SCREEN_ON) {
             mSensorScreenOnData[0] = event.values[0];
             if (mSensorScreenOnData[0] != 0) {
@@ -426,215 +327,6 @@ public class MainActivity extends Activity implements SensorEventListener {
                     + ")"
                     + " 当前时间：" + date.format(System.currentTimeMillis()));
         }
-    }
-
-    private void reckonLaunchBackCameraHistory() {
-        // TODO Auto-generated method stub
-        Log.i("zzzz", ">>>>>reckonLaunch <<Back>> CameraHistory start");
-        mFlagReckoning = true;
-        
-        ArrayList<AcceData> mAll = mBufferStack.dump();
-        Iterator<AcceData> iterator = mAll.iterator();
-        while (iterator.hasNext()) {
-            AcceData data = (AcceData) iterator.next();
-            Log.i("zzzz",
-                  ">>>>>>>AcceData dump time = " + data.time
-                          + ", x=" + data.x
-                          + ", y=" + data.y
-                          + ", z=" + data.z);
-        }
-        
-        boolean checkOk = true;
-        int totalLength = mBufferStack.size();
-        if (totalLength > 10 && mPreReckoningAcceData != null
-              && mPreReckoningTime > 0) {
-            int indexOfPreReckoningAcceData = mBufferStack
-                  .indexOf(mPreReckoningAcceData);
-            if (indexOfPreReckoningAcceData > 0
-                    && indexOfPreReckoningAcceData < totalLength) {
-
-                for (int i = indexOfPreReckoningAcceData; i < totalLength; i++) {
-                    AcceData checkD = mBufferStack.get(i);
-                    if (Math.abs(checkD.x) >= 8
-                            && Math.abs(checkD.y) <= 3 && Math.abs(checkD.z) <= 3) {
-                        Log.i("zzzz",
-                                ">>>>>>>AcceData checkOk = true  stable time = " + checkD.time
-                                        + ", x=" + checkD.x
-                                        + ", y=" + checkD.y
-                                        + ", z=" + checkD.z
-                                        + ", indexOfPreReckoningAcceData="+indexOfPreReckoningAcceData
-                                        + ", totalLength="+totalLength);
-                    } else {
-                        checkOk = false;
-                        Log.i("zzzz",
-                                ">>>>>>>AcceData checkOk = false stable time = " + checkD.time
-                                        + ", x=" + checkD.x
-                                        + ", y=" + checkD.y
-                                        + ", z=" + checkD.z
-                                        + ", indexOfPreReckoningAcceData="+indexOfPreReckoningAcceData
-                                        + ", totalLength="+totalLength);
-                    }
-                }
-                int startIndex = 0;
-                AcceData startData = null;
-                for (int i = indexOfPreReckoningAcceData; i > 1; i--) {
-                    AcceData check = mBufferStack.get(i);
-                    if (Math.abs(check.x) <= 1
-                            /*&& check.y < 2*/
-                            && check.z > 7) {
-                        startIndex = i;
-                        startData = check;
-                        Log.i("zzzz",
-                                ">>>>>>>AcceData  find startIndex time = " + check.time
-                                        + ", x=" + check.x
-                                        + ", y=" + check.y
-                                        + ", z=" + check.z
-                                        + ", startIndex="+startIndex);
-                        break;
-                    }
-                }
-                if (startIndex == 0 || startData == null) {
-                    checkOk = false;
-                    Log.i("zzzz",
-                            ">>>>>>>AcceData  find startIndex time fail");
-                } else {
-                    for (int i = indexOfPreReckoningAcceData; i > startIndex; i--) {
-                        AcceData checkUp = mBufferStack.get(i);
-                        AcceData checkDown = mBufferStack.get(i-1);
-                        if (/*Math.abs(checkUp.x) <= 3
-                                && Math.abs(checkDown.x) <= 3
-                                && */checkUp.x >= checkDown.x
-                                && (checkUp.z <= checkDown.z || (checkDown.z > 8 && checkUp.z > 8))) {
-                            Log.i("zzzz",
-                                    ">>>>>>>AcceData checkOk = true  checkDown time = " + checkDown.time
-                                            + ", x=" + checkDown.x
-                                            + ", y=" + checkDown.y
-                                            + ", z=" + checkDown.z);
-                        } else {
-                            checkOk = false;
-                            Log.i("zzzz",
-                                    ">>>>>>>AcceData checkOk = false checkDown time = " + checkDown.time
-                                            + ", x=" + checkDown.x
-                                            + ", y=" + checkDown.y
-                                            + ", z=" + checkDown.z);
-                        }
-                    }
-                }
-                if (checkOk) launchBackCamera();
-            }
-        }
-        
-        mPreReckoningAcceData = null;
-        mBufferStack.clear();
-        mFlagReckoning = false;
-        mFlagPreReckoning = false;
-        mPreReckoningTime = 0L;
-        Log.i("zzzz", ">>>>>reckonLaunch <<Back>> CameraHistory end");
-    }
-
-    private void reckonLaunchFrontCameraHistory() {
-        Log.i("zzzz", ">>>>>reckonLaunchFrontCameraHistory start");
-        mFlagReckoning = true;
-
-        ArrayList<AcceData> mAll = mBufferStack.dump();
-        Iterator<AcceData> iterator = mAll.iterator();
-        while (iterator.hasNext()) {
-            AcceData data = (AcceData) iterator.next();
-            Log.i("zzzz",
-                  ">>>>>>>AcceData dump time = " + data.time
-                          + ", x=" + data.x
-                          + ", y=" + data.y
-                          + ", z=" + data.z);
-        }
-        
-        boolean checkOk = true;
-        int totalLength = mBufferStack.size();
-        if (totalLength > 10 && mPreReckoningAcceData != null
-                && mPreReckoningTime > 0) {
-            int indexOfPreReckoningAcceData = mBufferStack
-                    .indexOf(mPreReckoningAcceData);
-            if (indexOfPreReckoningAcceData > 0
-                    && indexOfPreReckoningAcceData < totalLength) {
-
-                for (int i = indexOfPreReckoningAcceData; i < totalLength; i++) {
-                    AcceData checkD = mBufferStack.get(i);
-                    if (Math.abs(checkD.x) <= 3
-                            && checkD.y >= 8
-                            && Math.abs(checkD.z) <= 4) {
-                        Log.i("zzzz",
-                                ">>>>>>>AcceData checkOk = true  stable time = " + checkD.time
-                                        + ", x=" + checkD.x
-                                        + ", y=" + checkD.y
-                                        + ", z=" + checkD.z
-                                        + ", indexOfPreReckoningAcceData="+indexOfPreReckoningAcceData
-                                        + ", totalLength="+totalLength);
-                    } else {
-                        checkOk = false;
-                        Log.i("zzzz",
-                                ">>>>>>>AcceData checkOk = false stable time = " + checkD.time
-                                        + ", x=" + checkD.x
-                                        + ", y=" + checkD.y
-                                        + ", z=" + checkD.z
-                                        + ", indexOfPreReckoningAcceData="+indexOfPreReckoningAcceData
-                                        + ", totalLength="+totalLength);
-                    }
-                }
-                int startIndex = 0;
-                AcceData startData = null;
-                for (int i = indexOfPreReckoningAcceData; i > 1; i--) {
-                    AcceData check = mBufferStack.get(i);
-                    if (/*Math.abs(check.x) <= 3
-                            && */check.y < 2
-                            && check.z > 7) {
-                        startIndex = i;
-                        startData = check;
-                        Log.i("zzzz",
-                                ">>>>>>>AcceData  find startIndex time = " + check.time
-                                        + ", x=" + check.x
-                                        + ", y=" + check.y
-                                        + ", z=" + check.z
-                                        + ", startIndex="+startIndex);
-                        break;
-                    }
-                }
-                if (startIndex == 0 || startData == null) {
-                    checkOk = false;
-                    Log.i("zzzz",
-                            ">>>>>>>AcceData  find startIndex time fail");
-                } else {
-                    for (int i = indexOfPreReckoningAcceData; i > startIndex; i--) {
-                        AcceData checkUp = mBufferStack.get(i);
-                        AcceData checkDown = mBufferStack.get(i-1);
-                        if (/*Math.abs(checkUp.x) <= 3
-                                && Math.abs(checkDown.x) <= 3
-                                && */checkUp.y >= checkDown.y
-                                && (checkUp.z <= checkDown.z || (checkDown.z > 8 && checkUp.z > 8))) {
-                            Log.i("zzzz",
-                                    ">>>>>>>AcceData checkOk = true  checkDown time = " + checkDown.time
-                                            + ", x=" + checkDown.x
-                                            + ", y=" + checkDown.y
-                                            + ", z=" + checkDown.z);
-                        } else {
-                            checkOk = false;
-                            Log.i("zzzz",
-                                    ">>>>>>>AcceData checkOk = false checkDown time = " + checkDown.time
-                                            + ", x=" + checkDown.x
-                                            + ", y=" + checkDown.y
-                                            + ", z=" + checkDown.z);
-                        }
-                    }
-                }
-                if (checkOk) launchFrontCamera();
-            }
-        }
-        
-        
-        mPreReckoningAcceData = null;
-        mBufferStack.clear();
-        mFlagReckoning = false;
-        mFlagPreReckoning = false;
-        mPreReckoningTime = 0L;
-        Log.i("zzzz", ">>>>>reckonLaunchFrontCameraHistory end");
     }
 
     @Override
@@ -772,6 +464,9 @@ public class MainActivity extends Activity implements SensorEventListener {
     }
     
     private void enableScreenOnSensor() {
+        //mSensorManager.registerListener(MainActivity.this, mSensorStepCounter, SensorManager.SENSOR_DELAY_NORMAL);
+        //mSensorManager.registerListener(MainActivity.this, mSensorStepDetector, SensorManager.SENSOR_DELAY_NORMAL);
+        
         mSensorManager.registerListener(MainActivity.this, mSensorScreenOn, SensorManager.SENSOR_DELAY_NORMAL);
         mPause.setEnabled(true);
         mResume.setEnabled(false);
@@ -787,13 +482,16 @@ public class MainActivity extends Activity implements SensorEventListener {
         //亮屏
         if (!mIsScreenOn) {
             AlarmAlertWakeLock.acquireScreenCpuWakeLock(MainActivity.this);
+            mGlobalView.setVisibility(View.VISIBLE);
+            mWindowManager.updateViewLayout(mGlobalView, mGlobalParams);
+            
         }
         //判断键盘锁定返回值和disableKeyguard的调用没有关系
         Log.i(TAG, ">>>>>isKeyguardLocked="+mKeyguardManager.isKeyguardLocked());
-        
+        if (mGlobalView != null) return;
         //解锁
         //禁用显示键盘锁定
-        mKeyguardLock.disableKeyguard(); 
+        //mKeyguardLock.disableKeyguard(); 
         //判断camera是否已经启动，避免重复开启camera
         //自己修改camera，区分前后
     }
