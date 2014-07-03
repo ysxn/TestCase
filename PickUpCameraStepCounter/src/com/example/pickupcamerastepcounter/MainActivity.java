@@ -23,6 +23,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -54,8 +55,10 @@ public class MainActivity extends Activity implements SensorEventListener {
     public static final int TYPE_SENSOR_HUB_PROXIMITY_GESTURE = 33171011;
     public static final int TYPE_SENSOR_HUB_CONTEXT_AWARENESS = 33171012;
     public static final int TYPE_SENSOR_HUB_SCREEN_ON = 33171010;
+    public static final int TYPE_SENSOR_HUB_SCREEN_ON_PROXIMITY = 33171014;
 
     private SimpleDateFormat date = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒  ");
+    
     private String mSensorBrief = "";
     private long mStartDelayTime = 1L;// System.currentTimeMillis();
 
@@ -80,9 +83,17 @@ public class MainActivity extends Activity implements SensorEventListener {
     private float mSensorStepDetectorData[] = {
             0, 0, 0, 0
     };
+    private float mSensorScreenOnProximityData[] = {
+            0, 0, 0, 0
+    };
+    private float mSensorScreenOnProximityLogData = 0f;
     private float mSensorScreenOnLogData = 0f;
     private boolean mIsScreenOn = true;
+    private boolean mTestStep = false;
+    private boolean mTestScreenOnProximity = true;
+    private boolean mTestPickUp = true;
 
+    AudioManager mAudioManager;
     SensorManager mSensorManager;
     Sensor mSensorAirMouse;
     Sensor mSensorSnap;
@@ -97,6 +108,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     Sensor mSensorGesture;
     Sensor mSensorContextAwareness;
     Sensor mSensorScreenOn;
+    Sensor mSensorScreenOnProximity;
 
     Sensor mSensorAcce;
     Sensor mSensorGyro;
@@ -128,20 +140,34 @@ public class MainActivity extends Activity implements SensorEventListener {
     private LinearLayout mGlobalView = null;
     private WindowManager.LayoutParams mGlobalParams = null;
 
+    private static final int REQUEST_UPDATE_DATA_STEP_COUNTER = 199;
+    private static final int REQUEST_UPDATE_DATA_STEP_DETECTOR = 192;
     private static final int REQUEST_UPDATE_DATA = 299;
-
+    private static final int REQUEST_UPDATE_DATA_SCREEN_ON_PROXIMITY = 399;
+    
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
+                case REQUEST_UPDATE_DATA_STEP_DETECTOR: {
+                    //mHandler.removeMessages(REQUEST_UPDATE_DATA);
+                    String sC = "Step Detector：" + date.format(System.currentTimeMillis())
+                            + " DATA=" + mSensorStepDetectorData[0];
+                    mData.setText(sC+"\n"+mData.getText());
+                }
+                    break;
+                case REQUEST_UPDATE_DATA_STEP_COUNTER: {
+                    //mHandler.removeMessages(REQUEST_UPDATE_DATA);
+                    String sC = "Step Counter：" + date.format(System.currentTimeMillis())
+                            + " DATA=" + mSensorStepCounterData[0];
+                    mData.setText(sC+"\n"+mData.getText());
+                }
+                    break;
                 case REQUEST_UPDATE_DATA: {
                     //mHandler.removeMessages(REQUEST_UPDATE_DATA);
-                    String step = ">>>>>Step Counter : " + mSensorStepCounterData[0] + "\n"
-                            + ">>>>>>Step Detector : " + mSensorStepDetectorData[0] + "\n";
-                    String sC = "当前时间：" + date.format(System.currentTimeMillis())
+                    String sC = "体感相机：" + date.format(System.currentTimeMillis())
                             + " DATA=" + mSensorScreenOnLogData;
                     mData.setText(sC+"\n"+mData.getText());
-                    
                     //添加WM新的view来控制亮屏和解锁
                     //挪到service里面
                     if (mSensorScreenOnLogData == SENSOR_DATA_FACING_FRONT) {
@@ -153,7 +179,16 @@ public class MainActivity extends Activity implements SensorEventListener {
                     }
                     //mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
                 }
-                break;
+                    break;
+                case REQUEST_UPDATE_DATA_SCREEN_ON_PROXIMITY: {
+                    // mHandler.removeMessages(REQUEST_UPDATE_DATA);
+                    String step = ">>>>>Step Counter : " + mSensorStepCounterData[0] + "\n"
+                            + ">>>>>>Step Detector : " + mSensorStepDetectorData[0] + "\n";
+                    String sC = "挥手亮屏：" + date.format(System.currentTimeMillis())
+                            + " DATA=" + mSensorScreenOnProximityLogData;
+                    mData.setText(sC + "\n" + mData.getText());
+                }
+                    break;
             }
         }
 
@@ -249,32 +284,63 @@ public class MainActivity extends Activity implements SensorEventListener {
         
         List<Sensor> ss;
 
-        ss = mSensorManager.getSensorList(TYPE_SENSOR_HUB_SCREEN_ON);
-        if (ss == null || ss.size() == 0) {
-            sb.append("获取pick up动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_SCREEN_ON);
-        } else {
-            mSensorScreenOn = ss.get(0);
-            sb.append("获取pick up动作传感器OK,size=" + ss.size() + ",传感器Type_id为="
-                    + TYPE_SENSOR_HUB_SCREEN_ON + "; MD="+mSensorScreenOn.getMinDelay());
+        if (mTestPickUp) {
+            ss = mSensorManager.getSensorList(TYPE_SENSOR_HUB_SCREEN_ON);
+            if (ss == null || ss.size() == 0) {
+                sb.append("获取pick up动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_SCREEN_ON);
+            } else {
+                mSensorScreenOn = ss.get(0);
+                sb.append("获取pick up动作传感器OK,size=" + ss.size() + ",传感器Type_id为="
+                        + TYPE_SENSOR_HUB_SCREEN_ON + "; MD="+mSensorScreenOn.getMinDelay());
+            }
+            sb.append("\n");
         }
-        sb.append("\n");
         
-        mSensorBrief = sb.toString()+"\n"
-                +"拿起后竖屏对准前方DATA为3就开启_前摄像头，" 
-                +"\n"
-                +"横屏为2就开启_后摄像头," 
-                +"\n"
-                +"值0为初始值。";
+        if (mTestScreenOnProximity) {
+            ss = mSensorManager.getSensorList(TYPE_SENSOR_HUB_SCREEN_ON_PROXIMITY);
+            if (ss == null || ss.size() == 0) {
+                sb.append("获取挥手亮屏动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_SCREEN_ON_PROXIMITY);
+            } else {
+                mSensorScreenOnProximity = ss.get(0);
+                sb.append("获取挥手亮屏动作传感器OK,size=" + ss.size() + ",传感器Type_id为="
+                        + TYPE_SENSOR_HUB_SCREEN_ON_PROXIMITY + "; MD="+mSensorScreenOnProximity.getMinDelay());
+            }
+            sb.append("\n");
+        }
+        mSensorBrief = sb.toString()+"\n";
+        if (mTestStep) {
+            mSensorBrief = mSensorBrief+"\n"
+                    +"1.计步器检测数据始终为1.0，" 
+                    +"\n"
+                    +"2.计步器计数返回开机后的累计值," 
+                    +"\n";
+        }
+        if (mTestScreenOnProximity) {
+            mSensorBrief = mSensorBrief+"\n"
+                    +"1.挥手亮屏静止于桌面且与水平夹角1~45度" 
+                    +"\n"
+                    +"2.挥手来回各一次，未覆盖屏幕->覆盖屏幕->0.5秒内离开屏幕->0.5秒内再次覆盖屏幕->0.5秒内再离开屏幕->触发" 
+                    +"\n";
+        }
+        if (mTestPickUp) {
+            mSensorBrief = mSensorBrief+"\n"
+                    +"拿起后竖屏对准前方DATA为3就开启_前摄像头，" 
+                    +"\n"
+                    +"横屏为2就开启_后摄像头," 
+                    +"\n"
+                    +"值0为初始值。";
+        }
         mTips.setText(mSensorBrief);
         //mTips.setText("距离传感器被挡住代表手机在裤子口袋或包里面,这时候也是初始情况之一。 或者手机水平放在桌面上静止不动，这也是初始情况之一。， \n当用户拿起手机横屏对准前方， 立即启动后Camera。 \n如果是拿起后竖屏，本应该打开前camera，目前DEMO只能打开后camera，因为标准api不能指定前后camera，除非camera应用修改定制过。");
         //mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
-        if (mSensorScreenOn != null) {
-            enableScreenOnSensor();
-        }
+        enableScreenOnSensor();
         
         boolean hasAccelerometer = this.getPackageManager().hasSystemFeature(
                 PackageManager.FEATURE_SENSOR_ACCELEROMETER);
         Log.i(TAG, ">>>>>hasAccelerometer="+hasAccelerometer);
+        mAudioManager = (AudioManager) this.getSystemService(AUDIO_SERVICE);
+        int i = mAudioManager.getStreamVolume(AudioManager.STREAM_RING);
+        Log.i(TAG, ">>>>>STREAM_RINGStreamVolume="+i);
     }
 
     @Override
@@ -309,11 +375,13 @@ public class MainActivity extends Activity implements SensorEventListener {
         // TODO Auto-generated method stub
         if (event.sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
             mSensorStepDetectorData[0] = event.values[0];
+            mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA_STEP_DETECTOR, 0L);
             Log.i("zzzz", ">>>>>STEP_DETECTOR == (" + mSensorStepDetectorData[0]
                     + ")"
                     + " 当前时间：" + date.format(System.currentTimeMillis()));
         } else if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
             mSensorStepCounterData[0] = event.values[0];
+            mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA_STEP_COUNTER, 0L);
             Log.i("zzzz", ">>>>>STEP_COUNTER == (" + mSensorStepCounterData[0]
                     + ")"
                     + " 当前时间：" + date.format(System.currentTimeMillis()));
@@ -324,6 +392,15 @@ public class MainActivity extends Activity implements SensorEventListener {
                 mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 0L);
             }
             Log.i("zzzz", ">>>>>SCREEN_ON == (" + mSensorScreenOnData[0]
+                    + ")"
+                    + " 当前时间：" + date.format(System.currentTimeMillis()));
+        } else if (event.sensor.getType() == TYPE_SENSOR_HUB_SCREEN_ON_PROXIMITY) {
+            mSensorScreenOnProximityData[0] = event.values[0];
+            if (mSensorScreenOnProximityData[0] != 0) {
+                mSensorScreenOnProximityLogData = mSensorScreenOnProximityData[0];
+                mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA_SCREEN_ON_PROXIMITY, 0L);
+            }
+            Log.i("zzzz", ">>>>>SCREEN_ON_PROXIMITY == (" + event.values[0]
                     + ")"
                     + " 当前时间：" + date.format(System.currentTimeMillis()));
         }
@@ -464,10 +541,16 @@ public class MainActivity extends Activity implements SensorEventListener {
     }
     
     private void enableScreenOnSensor() {
-        //mSensorManager.registerListener(MainActivity.this, mSensorStepCounter, SensorManager.SENSOR_DELAY_NORMAL);
-        //mSensorManager.registerListener(MainActivity.this, mSensorStepDetector, SensorManager.SENSOR_DELAY_NORMAL);
-        
-        mSensorManager.registerListener(MainActivity.this, mSensorScreenOn, SensorManager.SENSOR_DELAY_NORMAL);
+        if (mTestStep) {
+            mSensorManager.registerListener(MainActivity.this, mSensorStepCounter, SensorManager.SENSOR_DELAY_NORMAL);
+            mSensorManager.registerListener(MainActivity.this, mSensorStepDetector, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+        if (mTestScreenOnProximity) {
+            mSensorManager.registerListener(MainActivity.this, mSensorScreenOnProximity, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+        if (mTestPickUp) {
+            mSensorManager.registerListener(MainActivity.this, mSensorScreenOn, SensorManager.SENSOR_DELAY_NORMAL);
+        }
         mPause.setEnabled(true);
         mResume.setEnabled(false);
     }
