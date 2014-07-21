@@ -72,4 +72,6 @@
     <string name="isolated_service_1_started">Isolated service 1 has started</string>
     <string name="isolated_service_1_stopped">Isolated service 1 has stopped</string>
     <string name="isolated_service_1_label">Sample Isolated Service 1</string>
+    
+    <string name="about_title">Pick up Statistic</string>
 </resources>

@@ -2,6 +2,7 @@
 package com.example.pickupcamerastepcounter;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,11 +10,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.KeyguardManager;
 import android.app.KeyguardManager.KeyguardLock;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -60,6 +64,8 @@ public class MainActivity extends Activity implements SensorEventListener {
     private SimpleDateFormat date = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒  ");
     
     private String mSensorBrief = "";
+    private static int mPickUpTriggerCorrect = 0;
+    private static int mPickUpTriggerWrong = 0;
     private long mStartDelayTime = 1L;// System.currentTimeMillis();
 
     private float mSensorAcceData[] = {
@@ -90,7 +96,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     private float mSensorScreenOnLogData = 0f;
     private boolean mIsScreenOn = true;
     private boolean mTestStep = false;
-    private boolean mTestScreenOnProximity = true;
+    private boolean mTestScreenOnProximity = false;
     private boolean mTestPickUp = true;
 
     AudioManager mAudioManager;
@@ -170,12 +176,9 @@ public class MainActivity extends Activity implements SensorEventListener {
                     mData.setText(sC+"\n"+mData.getText());
                     //添加WM新的view来控制亮屏和解锁
                     //挪到service里面
-                    if (mSensorScreenOnLogData == SENSOR_DATA_FACING_FRONT) {
+                    if (mSensorScreenOnLogData == 1) {
                         unLockScreen();
-                        //launchFrontCamera();
-                    } else if (mSensorScreenOnLogData == SENSOR_DATA_FACING_BACK) {
-                        unLockScreen();
-                        //launchBackCamera();
+                        launchBackCamera();
                     }
                     //mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
                 }
@@ -324,11 +327,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         }
         if (mTestPickUp) {
             mSensorBrief = mSensorBrief+"\n"
-                    +"拿起后竖屏对准前方DATA为3就开启_前摄像头，" 
-                    +"\n"
-                    +"横屏为2就开启_后摄像头," 
-                    +"\n"
-                    +"值0为初始值。";
+                    +"横屏举起对准前方DATA为1就开启后摄像头，";
         }
         mTips.setText(mSensorBrief);
         //mTips.setText("距离传感器被挡住代表手机在裤子口袋或包里面,这时候也是初始情况之一。 或者手机水平放在桌面上静止不动，这也是初始情况之一。， \n当用户拿起手机横屏对准前方， 立即启动后Camera。 \n如果是拿起后竖屏，本应该打开前camera，目前DEMO只能打开后camera，因为标准api不能指定前后camera，除非camera应用修改定制过。");
@@ -391,7 +390,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                 mSensorScreenOnLogData = mSensorScreenOnData[0];
                 mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 0L);
             }
-            Log.i("zzzz", ">>>>>SCREEN_ON == (" + mSensorScreenOnData[0]
+            Log.i("yyyy", ">>>>>TYPE="+TYPE_SENSOR_HUB_SCREEN_ON+",SCREEN_ON == (" + mSensorScreenOnData[0]
                     + ")"
                     + " 当前时间：" + date.format(System.currentTimeMillis()));
         } else if (event.sensor.getType() == TYPE_SENSOR_HUB_SCREEN_ON_PROXIMITY) {
@@ -420,6 +419,32 @@ public class MainActivity extends Activity implements SensorEventListener {
                 | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
+        String text = "历史统计数据："
+                +"\n"
+                +"正确触发体感相机次数="+mPickUpTriggerCorrect
+                +"\n"
+                +"误触发体感相机次数="+mPickUpTriggerWrong
+                +"\n"
+                +"误触概率="+getPercent(mPickUpTriggerWrong, mPickUpTriggerWrong+mPickUpTriggerCorrect)
+                +"\n"
+                +"本次触发是您想要的结果吗？";
+        showDialog(text);
+    }
+    
+    public String getPercent(int x, int y) {
+        String result = "";// 接受百分比的值
+        if (y <= 0)
+            return result;
+        double x_double = x * 1.0;
+        double y_double = y * 1.0;
+        double tempresult = x_double / y_double;
+        // NumberFormat nf = NumberFormat.getPercentInstance(); 注释掉的也是一种方法
+        // nf.setMinimumFractionDigits( 2 ); 保留到小数点后几位
+        DecimalFormat df1 = new DecimalFormat("##%"); // ##.00%
+                                                      // 百分比格式，后面不足2位的用0补齐
+        // result=nf.format(tempresult);
+        result = df1.format(tempresult);
+        return result;
     }
 
     private void launchFrontCamera() {
@@ -577,6 +602,33 @@ public class MainActivity extends Activity implements SensorEventListener {
         //mKeyguardLock.disableKeyguard(); 
         //判断camera是否已经启动，避免重复开启camera
         //自己修改camera，区分前后
+    }
+    
+    private void showDialog(String msg) {
+        // TODO Auto-generated method stub
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle(R.string.about_title)
+                .setMessage(msg)
+                .setCancelable(true)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                        mPickUpTriggerCorrect++;
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                        mPickUpTriggerWrong++;
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
 }

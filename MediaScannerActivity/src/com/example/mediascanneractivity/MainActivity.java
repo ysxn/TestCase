@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -49,8 +50,12 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                MainActivity.this.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,
-                        Uri.parse("file://" + Environment.getExternalStorageDirectory())));
+                //MainActivity.this.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,
+                //        Uri.parse("file://" + Environment.getExternalStorageDirectory())));
+                MediaScannerConnection.scanFile(MainActivity.this, new String[] {
+                        Environment.getExternalStorageDirectory()
+                            .getPath()
+                }, null, null);
             }
         });
     }

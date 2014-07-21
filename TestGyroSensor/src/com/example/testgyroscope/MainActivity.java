@@ -8,6 +8,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,6 +39,7 @@ import android.widget.Toast;
  * @author zhuyw1
  */
 public class MainActivity extends Activity implements SensorEventListener {
+    private String TAG = "zyw";
     private SensorManager mSensorManager;
     private Sensor mGyroSensor;
     private Sensor mAccelerometerSensor;
@@ -150,6 +152,9 @@ public class MainActivity extends Activity implements SensorEventListener {
             float y = Math.abs(event.values[1]) > 0.09f ? event.values[1] : 0f;
             float z = Math.abs(event.values[2]) > 0.09f ? event.values[2] : 0f;
             mTextViewAccelerometerData.setText("Acceleration minus Gx on the x-axis:" + x + "\n"
+                    + "Acceleration minus Gy on the y-axis:" + y + "\n"
+                    + "Acceleration minus Gz on the z-axis:" + z + "\n");
+            Log.i(TAG, "Acceleration minus Gx on the x-axis:" + x + "\n"
                     + "Acceleration minus Gy on the y-axis:" + y + "\n"
                     + "Acceleration minus Gz on the z-axis:" + z + "\n");
         }
