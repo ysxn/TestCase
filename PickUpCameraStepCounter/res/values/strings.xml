@@ -73,5 +73,8 @@
     <string name="isolated_service_1_stopped">Isolated service 1 has stopped</string>
     <string name="isolated_service_1_label">Sample Isolated Service 1</string>
     
-    <string name="about_title">Pick up Statistic</string>
+    <string name="pick_up_statistic_title">Pick up Statistic</string>
+    <string name="wave_hand_statistic_title">Wave Hand Statistic</string>
+    <string name="trigger_correct">trigger correct</string>
+    <string name="trigger_wrong">trigger wrong</string>
 </resources>

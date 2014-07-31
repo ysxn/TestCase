@@ -28,6 +28,20 @@
             </intent-filter>
         </activity>
         
+        <activity
+            android:name="com.example.pickupcamerastepcounter.StatisticPickUpActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:label="@string/pick_up_statistic_title" >
+        </activity>
+        
+        <activity
+            android:name="com.example.pickupcamerastepcounter.StatisticWaveHandActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:label="@string/wave_hand_statistic_title" >
+        </activity>
+        
         <service android:name="com.example.pickupcamerastepcounter.RemoteService" android:process=":remote">
             <intent-filter>
                 <!-- These are the interfaces supported by the service, which

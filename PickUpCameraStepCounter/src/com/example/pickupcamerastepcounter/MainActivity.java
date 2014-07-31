@@ -64,8 +64,6 @@ public class MainActivity extends Activity implements SensorEventListener {
     private SimpleDateFormat date = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒  ");
     
     private String mSensorBrief = "";
-    private static int mPickUpTriggerCorrect = 0;
-    private static int mPickUpTriggerWrong = 0;
     private long mStartDelayTime = 1L;// System.currentTimeMillis();
 
     private float mSensorAcceData[] = {
@@ -419,32 +417,9 @@ public class MainActivity extends Activity implements SensorEventListener {
                 | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
-        String text = "历史统计数据："
-                +"\n"
-                +"正确触发体感相机次数="+mPickUpTriggerCorrect
-                +"\n"
-                +"误触发体感相机次数="+mPickUpTriggerWrong
-                +"\n"
-                +"误触概率="+getPercent(mPickUpTriggerWrong, mPickUpTriggerWrong+mPickUpTriggerCorrect)
-                +"\n"
-                +"本次触发是您想要的结果吗？";
-        showDialog(text);
-    }
-    
-    public String getPercent(int x, int y) {
-        String result = "";// 接受百分比的值
-        if (y <= 0)
-            return result;
-        double x_double = x * 1.0;
-        double y_double = y * 1.0;
-        double tempresult = x_double / y_double;
-        // NumberFormat nf = NumberFormat.getPercentInstance(); 注释掉的也是一种方法
-        // nf.setMinimumFractionDigits( 2 ); 保留到小数点后几位
-        DecimalFormat df1 = new DecimalFormat("##%"); // ##.00%
-                                                      // 百分比格式，后面不足2位的用0补齐
-        // result=nf.format(tempresult);
-        result = df1.format(tempresult);
-        return result;
+        Intent i = new Intent();
+        i.setClassName("com.example.pickupcamerastepcounter", "com.example.pickupcamerastepcounter.StatisticPickUpActivity");
+        startActivity(i);
     }
 
     private void launchFrontCamera() {
@@ -456,6 +431,9 @@ public class MainActivity extends Activity implements SensorEventListener {
                 | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
+        Intent i = new Intent();
+        i.setClassName("com.example.pickupcamerastepcounter", "com.example.pickupcamerastepcounter.StatisticPickUpActivity");
+        startActivity(i);
     }
 
     private void launchBackCameraForResult() {
@@ -604,31 +582,4 @@ public class MainActivity extends Activity implements SensorEventListener {
         //自己修改camera，区分前后
     }
     
-    private void showDialog(String msg) {
-        // TODO Auto-generated method stub
-        new AlertDialog.Builder(MainActivity.this)
-                .setTitle(R.string.about_title)
-                .setMessage(msg)
-                .setCancelable(true)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
-                        mPickUpTriggerCorrect++;
-                        dialog.dismiss();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
-                        mPickUpTriggerWrong++;
-                        dialog.dismiss();
-                    }
-                })
-                .show();
-    }
-
 }
