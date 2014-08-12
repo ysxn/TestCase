@@ -9,6 +9,8 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +27,20 @@ public class StatisticPickUpActivity extends Activity {
     private Button mWrong;
     private TextView mTips;
     private SharedPreferences mSharedPreferences;
+    private static final int REQUEST_QUIT = 299;
+    
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case REQUEST_QUIT: {
+                    finish();
+                }
+                default:
+                    break;
+            }
+        }
+    };
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

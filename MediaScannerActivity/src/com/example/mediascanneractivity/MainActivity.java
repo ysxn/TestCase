@@ -6,10 +6,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.CamcorderProfile;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -58,6 +60,35 @@ public class MainActivity extends Activity {
                 }, null, null);
             }
         });
+        
+        boolean has = CamcorderProfile.hasProfile(0, 7);
+        CamcorderProfile c = CamcorderProfile.get(0, 7);
+        Log.i("zyw", ">>>>>>hasProfile(0, 7)=="+has);
+        Log.i("zyw", ">>>>>>get(0, 7)=="
+                +"\n"
+                +"duration="+c.duration
+                +"\n"
+                +"quality="+c.quality
+                +"\n"
+                +"fileFormat="+c.fileFormat
+                +"\n"
+                +"videoCodec="+c.videoCodec
+                +"\n"
+                +"videoBitRate="+c.videoBitRate
+                +"\n"
+                +"videoFrameRate="+c.videoFrameRate
+                +"\n"
+                +"videoFrameWidth="+c.videoFrameWidth
+                +"\n"
+                +"videoFrameHeight="+c.videoFrameHeight
+                +"\n"
+                +"audioCodec="+c.audioCodec
+                +"\n"
+                +"audioBitRate="+c.audioBitRate
+                +"\n"
+                +"audioSampleRate="+c.audioSampleRate
+                +"\n"
+                +"audioChannels="+c.audioChannels);
     }
 
     @Override
