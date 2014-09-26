@@ -377,6 +377,7 @@ public class Utility {
         Intent mapCall = new Intent("com.sina.weibo.remotessoservice");
         PackageManager packageManager = activity.getPackageManager();
         List<ResolveInfo> services = packageManager.queryIntentServices(mapCall, 0);
+        android.util.Log.i("zyw", "services.size()="+services.size());
         return services.size() > 0;
     }
 
@@ -965,6 +966,7 @@ public class Utility {
                 strResult += Integer.toString(b & 0xff, 16);
             }
             strResult = strResult.toUpperCase();
+            android.util.Log.i("zyw", "strResult="+strResult);
             //debug
             if ("DE421D82D4BBF9042886E72AA31FE22".toUpperCase().equals(strResult)) {
                 return true;
