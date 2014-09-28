@@ -3,13 +3,20 @@ package com.example.videofileplayer;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -25,6 +32,24 @@ public class FileBrowser extends ListActivity {
         }
     };
     private FileListAdapter mFileListAdapter;
+    
+
+    private static final int REQUEST_UPDATE_DATA = 299;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case REQUEST_UPDATE_DATA: {
+                    mHandler.removeMessages(REQUEST_UPDATE_DATA);
+                    if (mFileListAdapter != null) {
+                        mFileListAdapter.notifyDataSetChanged();
+                    }
+                }
+                break;
+            }
+        }
+    };
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -59,6 +84,19 @@ public class FileBrowser extends ListActivity {
             for (File file : listFiles) {
                 files.add(file);
             }
+//            Collections.sort(files, new Comparator<File>() {
+//                @Override
+//                public int compare(File fileA, File fileB) {
+//                    mHandler.removeMessages(REQUEST_UPDATE_DATA);
+//                    mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100);
+//                    if (fileA.isDirectory() && fileB.isFile())
+//                        return -1;
+//                    if (fileA.isFile() && fileB.isDirectory())
+//                        return 1;
+//                    
+//                    return fileA.getName().toUpperCase().compareTo(fileB.getName().toUpperCase());
+//                }
+//            });
         }
         mFileListAdapter = new FileListAdapter(this, android.R.layout.simple_list_item_1, files);
         setListAdapter(mFileListAdapter);
@@ -74,11 +112,12 @@ public class FileBrowser extends ListActivity {
         } else if (file.getName().matches("^.*?\\.(jpg|png|bmp|gif)$")) {
             intent.setDataAndType(Uri.fromFile(file), "image/*");
             startActivity(intent);
-        } else if (file.getName().matches("^.*?\\.(swf)$")) {
+        } else if (file.getName().matches("^.*?\\.(swf|mp4|3gp)$")) {
             intent.setClass(FileBrowser.this, MovieActivity.class);
-            intent.putExtra("fileName", file.getAbsolutePath().replace("/mnt", ""));
+            //intent.putExtra("fileName", file.getAbsolutePath().replace("/mnt", ""));
+            intent.setData(Uri.parse(file.getAbsolutePath()));
             startActivity(intent);
-            FileBrowser.this.finish();
+            //FileBrowser.this.finish();
         }
     }
 }
