@@ -91,6 +91,8 @@ public class MoviePlayer implements
     private boolean mShowing;
 
     private Virtualizer mVirtualizer;
+    
+    private VideoZoomController mVideoZoomController;
 
     private final Runnable mPlayingChecker = new Runnable() {
         @Override
@@ -127,6 +129,8 @@ public class MoviePlayer implements
         mVideoView.setOnErrorListener(this);
         mVideoView.setOnCompletionListener(this);
         mVideoView.setVideoURI(mUri);
+        
+        mVideoZoomController = new VideoZoomController(movieActivity, mRootView, mVideoView, mController);
 
         Intent ai = movieActivity.getIntent();
         boolean virtualize = ai.getBooleanExtra(VIRTUALIZE_EXTRA, false);
@@ -139,6 +143,7 @@ public class MoviePlayer implements
                 Log.w(TAG, "no audio session to virtualize");
             }
         }
+        /*
         mVideoView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -146,6 +151,7 @@ public class MoviePlayer implements
                 return true;
             }
         });
+        */
         mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer player) {
@@ -157,6 +163,7 @@ public class MoviePlayer implements
                 setProgress();
             }
         });
+        
 
         // The SurfaceView is transparent before drawing the first frame.
         // This makes the UI flashing when open a video. (black -> old screen
