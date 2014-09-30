@@ -71,34 +71,33 @@ public class FileBrowser extends ListActivity {
     }
 
     private void setListAdapterByPath(File folder) {
-        List<File> files = new ArrayList<File>();
-        files.add(folder);
-        if (folder.getParentFile() != null) {
-            files.add(folder.getParentFile());
-        }
+        List<File> filesList = new ArrayList<File>();
+
         Log.i(TAG, "setListAdapterByPath folder="+folder);
         File[] listFiles = folder.listFiles(FILTER);
         if (listFiles == null) {
             Log.e(TAG, "setListAdapterByPath listFiles == null");
         } else {
             for (File file : listFiles) {
-                files.add(file);
+                filesList.add(file);
             }
-//            Collections.sort(files, new Comparator<File>() {
-//                @Override
-//                public int compare(File fileA, File fileB) {
-//                    mHandler.removeMessages(REQUEST_UPDATE_DATA);
-//                    mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100);
-//                    if (fileA.isDirectory() && fileB.isFile())
-//                        return -1;
-//                    if (fileA.isFile() && fileB.isDirectory())
-//                        return 1;
-//                    
-//                    return fileA.getName().toUpperCase().compareTo(fileB.getName().toUpperCase());
-//                }
-//            });
+            Collections.sort(filesList, new Comparator<File>() {
+                @Override
+                public int compare(File fileA, File fileB) {
+                    if (fileA.isDirectory() && fileB.isFile())
+                        return -1;
+                    if (fileA.isFile() && fileB.isDirectory())
+                        return 1;
+                    
+                    return fileA.getName().toUpperCase().compareTo(fileB.getName().toUpperCase());
+                }
+            });
         }
-        mFileListAdapter = new FileListAdapter(this, android.R.layout.simple_list_item_1, files);
+        filesList.add(0, folder);
+        if (folder.getParentFile() != null) {
+            filesList.add(1, folder.getParentFile());
+        }
+        mFileListAdapter = new FileListAdapter(this, android.R.layout.simple_list_item_1, filesList);
         setListAdapter(mFileListAdapter);
     }
 
