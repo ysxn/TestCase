@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.videofileplayer;
+package com.zyw.videofileplayer;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
@@ -71,7 +71,7 @@ public class MoviePlayer implements
     private static final long RESUMEABLE_TIMEOUT = 3 * 60 * 1000; // 3 mins
 
     private Context mContext;
-    private final VideoView mVideoView;
+    private final ZoomVideoView mVideoView;
     private final View mRootView;
     private final Bookmarker mBookmarker;
     private final Uri mUri;
@@ -117,7 +117,7 @@ public class MoviePlayer implements
             Uri videoUri, Bundle savedInstance, boolean canReplay) {
         mContext = movieActivity.getApplicationContext();
         mRootView = rootView;
-        mVideoView = (VideoView) rootView.findViewById(R.id.surface_view);
+        mVideoView = (ZoomVideoView) rootView.findViewById(R.id.surface_view);
         mBookmarker = new Bookmarker(movieActivity);
         mUri = videoUri;
 
@@ -147,6 +147,7 @@ public class MoviePlayer implements
         mVideoView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                Log.i(TAG, "onTouch event="+event);
                 mController.show();
                 return true;
             }
@@ -161,9 +162,12 @@ public class MoviePlayer implements
                     mController.setSeekable(true);
                 }
                 setProgress();
+                if (mVideoZoomController != null) {
+                    Log.i(TAG, ">>>>>width="+player.getVideoWidth()+", height="+player.getVideoHeight());
+                    mVideoZoomController.setVideoSize(player.getVideoWidth(), player.getVideoHeight());
+                }
             }
         });
-        
 
         // The SurfaceView is transparent before drawing the first frame.
         // This makes the UI flashing when open a video. (black -> old screen
@@ -219,7 +223,7 @@ public class MoviePlayer implements
                 mLastSystemUiVis = visibility;
                 if ((diff & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) != 0
                         && (visibility & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0) {
-                    mController.show();
+                    //mController.show();
                 }
             }
         });

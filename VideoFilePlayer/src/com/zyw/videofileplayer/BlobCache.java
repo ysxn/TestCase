@@ -63,7 +63,7 @@
 // public void syncAll();
 // public static void deleteFiles(String path);
 //
-package com.example.videofileplayer;
+package com.zyw.videofileplayer;
 
 import android.util.Log;
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.videofileplayer;
+package com.zyw.videofileplayer;
 
 import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;

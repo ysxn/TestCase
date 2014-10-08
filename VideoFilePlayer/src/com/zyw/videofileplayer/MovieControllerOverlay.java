@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.example.videofileplayer;
+package com.zyw.videofileplayer;
 
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -73,6 +74,8 @@ public class MovieControllerOverlay extends CommonControllerOverlay implements
 
     @Override
     public void show() {
+        Log.i("MovieControllerOverlay", "show");
+        Thread.dumpStack();
         boolean wasHidden = hidden;
         hidden = false;
         super.show();
@@ -130,7 +133,7 @@ public class MovieControllerOverlay extends CommonControllerOverlay implements
         }
         return super.onKeyDown(keyCode, event);
     }
-
+/* remove for Video Zoom
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (super.onTouchEvent(event)) {
@@ -138,6 +141,7 @@ public class MovieControllerOverlay extends CommonControllerOverlay implements
         }
 
         if (hidden) {
+            Log.i("MovieControllerOverlay", "onTouchEvent event="+event);
             show();
             return true;
         }
@@ -154,7 +158,7 @@ public class MovieControllerOverlay extends CommonControllerOverlay implements
         }
         return true;
     }
-
+*/
     @Override
     protected void updateViews() {
         if (hidden) {

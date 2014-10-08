@@ -1,5 +1,5 @@
 
-package com.example.videofileplayer;
+package com.zyw.videofileplayer;
 
 import android.content.Context;
 import android.graphics.Matrix;
@@ -13,9 +13,9 @@ import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.VideoView;
 
-import com.example.videofileplayer.MovieControllerOverlay;
-import com.example.videofileplayer.GestureRecognizer;
-import com.example.videofileplayer.GestureRecognizer.Listener;
+import com.zyw.videofileplayer.GestureRecognizer;
+import com.zyw.videofileplayer.MovieControllerOverlay;
+import com.zyw.videofileplayer.GestureRecognizer.Listener;
 
 public class VideoZoomController
         implements GestureRecognizer.Listener
@@ -45,7 +45,7 @@ public class VideoZoomController
     private int mVideoHeight;
     private View mVideoRoot;
     private float mVideoScaleRatio = 1.0F;
-    private VideoView mVideoView;
+    private ZoomVideoView mVideoView;
     private int mVideoWidth;
 
     private class LayoutListener implements ViewTreeObserver.OnGlobalLayoutListener {
@@ -145,15 +145,16 @@ public class VideoZoomController
     public VideoZoomController(Context context, View videoroot,
             VideoView videoView, View overlay) {
         mContext = context;
-        mVideoView = ((VideoView) videoView);
+        mVideoView = ((ZoomVideoView) videoView);
         mOverlay = overlay;
         mVideoRoot = videoroot;
         mRootViewWdith = mVideoRoot.getRootView().getWidth();
-        //mVideoView.setVideoZoomController(this);
+        mVideoView.setVideoZoomController(this);
         mGestureRecognizer = new GestureRecognizer(mContext, this);
         mVideoRoot.getRootView().setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event)
             {
+                Log.i(TAG, ">>>>>>>>onTouch event="+event);
                 mGestureRecognizer.onTouchEvent(event);
                 return true;
             }
