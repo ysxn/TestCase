@@ -20,9 +20,9 @@ import com.zyw.videofileplayer.GestureRecognizer.Listener;
 public class VideoZoomController
         implements GestureRecognizer.Listener
 {
-    private static final float MAX_DOUBLETAP_RATIO = 4.0F;
-    private static final float MAX_SCALE_RATIO = 4.0F;
-    private static final float MAX_SCALE_RATIO_2K_4K = 4.0F;
+    private static final float MAX_DOUBLETAP_RATIO = 10.0F;
+    private static final float MAX_SCALE_RATIO = 10.0F;
+    private static final float MAX_SCALE_RATIO_2K_4K = 10.0F;
     private static final float MINI_DOUBLETAP_RATIO = 2.0F;
     private static final float MINI_SCALE_RATIO = 1.0F;
     private static final String TAG = "VideoZoomController";
@@ -483,6 +483,7 @@ public class VideoZoomController
             mVideoHeight = height;
             isVideoZoomEnabled = ((mVideoWidth >= 320) && (mVideoHeight >= 240))
                     || ((mVideoWidth >= 240) || (mVideoHeight >= 320));
+            isVideoZoomEnabled = true;
             // for streaming , the video size maybe change when playing
             if (!isVideoZoomEnabled && isInZoomState()) {
                 setScaleRatio(MINI_SCALE_RATIO);
