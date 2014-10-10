@@ -120,4 +120,12 @@ public class AccountBean implements Parcelable {
                 && ((AccountBean) o).getUid().equalsIgnoreCase(getUid());
 
     }
+    
+    public String dump() {
+        return "access_token="+access_token+"\n"
+                +"expires_time="+expires_time+"\n"
+                +"black_magic="+black_magic+"\n"
+                +"navigationPosition="+navigationPosition+"\n"
+                +"UserBean="+info.dump();
+    }
 }

@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -324,6 +325,9 @@ public class AccountActivity extends AbstractAppActivity
                 token.setVisibility(View.GONE);
             }
 
+            Log.i("zyw", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+"\n"
+                    +accountList.get(i).dump()+"\n"
+                    +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
             return mView;
         }
     }

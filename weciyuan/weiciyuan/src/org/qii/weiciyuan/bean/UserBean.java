@@ -414,4 +414,35 @@ public class UserBean implements Parcelable {
         return getId().hashCode();
     }
 
+    public String dump() {
+        return "id="+id+"\n"
+                +"screen_name="+screen_name+"\n"
+                +"name="+name+"\n"
+                +"province="+province+"\n"
+                +"city="+city+"\n"
+                +"location="+location+"\n"
+                +"description="+description+"\n"
+                +"url="+url+"\n"
+                +"profile_image_url="+profile_image_url+"\n"
+                +"cover_image="+cover_image+"\n"
+                +"domain="+domain+"\n"
+                +"gender="+gender+"\n"
+                +"statuses_count="+statuses_count+"\n"
+                +"favourites_count="+favourites_count+"\n"
+                +"created_at="+created_at+"\n"
+                +"following="+following+"\n"
+                +"allow_all_act_msg="+allow_all_act_msg+"\n"
+                +"remark="+remark+"\n"
+                +"geo_enabled="+geo_enabled+"\n"
+                +"verified="+verified+"\n"
+                +"allow_all_comment="+allow_all_comment+"\n"
+                +"avatar_large="+avatar_large+"\n"
+                +"verified_reason="+verified_reason+"\n"
+                +"verified_type="+verified_type+"\n"
+                +"follow_me="+follow_me+"\n"
+                +"online_status="+online_status+"\n"
+                +"bi_followers_count="+bi_followers_count+"\n"
+                +"followers_count="+followers_count+"\n"
+                +"friends_count="+friends_count+"\n";
+    }
 }

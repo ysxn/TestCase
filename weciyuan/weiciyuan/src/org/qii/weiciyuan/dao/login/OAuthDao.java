@@ -1,5 +1,7 @@
 package org.qii.weiciyuan.dao.login;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import org.json.JSONException;
@@ -47,12 +49,15 @@ public class OAuthDao {
         String url = URLHelper.USER_SHOW;
 
         String result = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
+        Log.i("zyw", ">>>>>>HttpMethod.Get: url="+url+",uid="+uid);
 
 
         Gson gson = new Gson();
         UserBean user = new UserBean();
         try {
+            Log.i("zyw", ">>>>>>before user="+result);
             user = gson.fromJson(result, UserBean.class);
+            Log.i("zyw", ">>>>>>after user="+user.dump());
         } catch (JsonSyntaxException e) {
             AppLogger.e(result);
         }
