@@ -54,9 +54,13 @@ public class MainActivity extends Activity {
                 }
                     break;
                 case REQUEST_UPDATE_DATA_ERROR: {
+                    mHandler.removeMessages(REQUEST_UPDATE_DATA_ERROR);
                     String error = (String) msg.obj;
                     mData.setText(date.format(System.currentTimeMillis())+">>>"+error+"\n"+mData.getText());
-                    Log.e("cts", ">>>>>>>>5分钟没有数据上报了，Sensor HUB可能出问题，注意提供mtklog分析！！！！！");
+                    Log.e("cts", ">>>>>>>>5分钟没有数据上报了，Sensor HUB可能出问题，测试自动结束，注意提供mtklog分析！！！！！");
+                    mFlagTest = false;
+                    updateText("\n \n");
+                    updateText("请点击EXIT退出应用！请把mtklog提供给开发分析！！！");
                 }
                     break;
                 case REQUEST_UPDATE_DATA_MAIN: {
@@ -195,13 +199,14 @@ public class MainActivity extends Activity {
         Log.e("cts", ">>>>>>>>CTS : Finish search continuous sensor");
         //updateText(">>>>>>>>CTS : Finish search continuous sensor");
         
-        Log.e("cts", ">>>>>>>>CTS : Please press start");
+        Log.e("cts", ">>>>>>>>稳定性测试 : 请点击 START");
         updateText("参考CTS测试项目里面SensorTest的代码，cts测试是检查所有连续上报数据类型REPORTING_MODE_CONTINUOUS的Sensor，每个Sensor会检查收到25个上报数据后就判断该Sensor工作正常。我修改了逻辑，让上述逻辑的最外层加上无限循环。定时5分钟作为看门狗，一旦超过5分钟没有数据上报，就界面显示报警LOG。");
         
         updateText("\n \n");
+        updateText(">>>>>>>>请记得开始前打开mtklog！！！ 开始后本测试是无限时间运行，要手动结束测试请点击EXIT");
         
-        updateText(">>>>>>>>稳定性测试 : Please press start");
-        
+        updateText("\n \n");
+        updateText(">>>>>>>> 稳定性测试 : 请点击 START");
         updateText("\n \n");
     }
     
@@ -236,21 +241,6 @@ public class MainActivity extends Activity {
                         mHandler.removeMessages(REQUEST_UPDATE_DATA_ERROR);
                         postWatchDog();
                         flushReceived.countDown();
-                    }
-                };
-                
-                SensorEventListener listenernoooo = new SensorEventListener() {
-                    @Override
-                    public void onSensorChanged(SensorEvent event) {
-                        Log.e("cts", ">>>>>>>>onSensorChanged");
-                        //updateText(">>>>>>>>onSensorChanged");
-                        mHandler.removeMessages(REQUEST_UPDATE_DATA_ERROR);
-                        postWatchDog();
-                        eventReceived.countDown();
-                    }
-    
-                    @Override
-                    public void onAccuracyChanged(Sensor sensor, int accuracy) {
                     }
                 };
                 
@@ -309,7 +299,7 @@ public class MainActivity extends Activity {
     
     private void postWatchDog() {
         Message msg = mHandler.obtainMessage(REQUEST_UPDATE_DATA_ERROR);
-        msg.obj = ">>>>>>>>5分钟没有数据上报了，Sensor HUB可能出问题，注意提供mtklog分析！！！！！";
+        msg.obj = ">>>>>>>>5分钟没有数据上报了，Sensor HUB可能出问题，测试自动结束，注意提供mtklog分析！！！！！";
         mHandler.sendMessageDelayed(msg, 300000);
     }
 

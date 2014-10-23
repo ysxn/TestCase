@@ -2,10 +2,12 @@
 package com.example.testmediaprofile;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.media.CamcorderProfile;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -88,6 +90,14 @@ public class MainActivity extends Activity {
             }
         });
 
+    }
+    
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        // TODO Auto-generated method stub
+        Log.i(TAG, ">>>>>>>>>>>>>>newConfig="+newConfig);
+        Thread.dumpStack();
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override
