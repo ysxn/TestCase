@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="app_name">ProgressBarDemo</string>
+    
+    <string name="buffer_linear">buffer_linear</string>
+    <string name="indeterminate_progressBar">indeterminate_linear</string>
+    <string name="determinate_progressBar">determinate_linear</string>
+
+</resources>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lenovo.view.LenovoSlideMenuGroupView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/slide_menu_view"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+    
+    <LinearLayout
+        android:id="@+id/slidemenu_item1_container_left"
+        android:layout_width="@dimen/slide_menu_item_width"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_slidemenu_item"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/slide_menu_item1"
+            android:textColor="@color/slide_menu_item_text_color"
+            android:layout_marginRight="@dimen/slide_menu_item_margin"
+            android:layout_marginLeft="@dimen/slide_menu_item_margin"
+            android:textSize="@dimen/slide_menu_item_text_size" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/slide_menu_item_margin"
+            android:src="@drawable/ic_list_slidemenu_top" />
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/slidemenu_item2_container_left"
+        android:layout_width="@dimen/slide_menu_item_width"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_slidemenu_item"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/slide_menu_item2"
+            android:textColor="@color/slide_menu_item_text_color"
+            android:layout_marginRight="@dimen/slide_menu_item_margin"
+            android:layout_marginLeft="@dimen/slide_menu_item_margin"
+            android:textSize="@dimen/slide_menu_item_text_size" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/slide_menu_item_margin"
+            android:src="@drawable/ic_list_slidemenu_delete" />
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/slidemenu_item1_container_right"
+        android:layout_width="@dimen/slide_menu_item_width"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_slidemenu_item"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/slide_menu_item1"
+            android:textColor="@color/slide_menu_item_text_color"
+            android:layout_marginRight="@dimen/slide_menu_item_margin"
+            android:layout_marginLeft="@dimen/slide_menu_item_margin"
+            android:textSize="@dimen/slide_menu_item_text_size" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/slide_menu_item_margin"
+            android:src="@drawable/ic_list_slidemenu_top" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/slidemenu_item2_container_right"
+        android:layout_width="@dimen/slide_menu_item_width"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_slidemenu_item"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/slide_menu_item2"
+            android:textColor="@color/slide_menu_item_text_color"
+            android:layout_marginRight="@dimen/slide_menu_item_margin"
+            android:layout_marginLeft="@dimen/slide_menu_item_margin"
+            android:textSize="@dimen/slide_menu_item_text_size" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/slide_menu_item_margin"
+            android:src="@drawable/ic_list_slidemenu_delete" />
+
+    </LinearLayout>
+
+</lenovo.view.LenovoSlideMenuGroupView>
