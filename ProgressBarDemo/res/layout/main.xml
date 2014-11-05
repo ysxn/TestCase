@@ -29,6 +29,7 @@
     <ProgressBar
         android:id="@+id/determinate_progressBar"
         style="?android:attr/progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/progress_horizontal_material"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="1000"
@@ -56,23 +57,48 @@
         android:layout_width="match_parent"
         android:layout_height="50dip" />
     
-    <ProgressBar android:id="@+android:id/progress_large"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="large_circle" />
+    
+    <ProgressBar android:id="@+id/progress_large"
         style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="normal_circle" />
+
+    <ProgressBar android:id="@android:id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="small_circle" />
+    
+    <ProgressBar android:id="@+id/progress_small"
+        style="?android:attr/progressBarStyleSmall"
         android:indeterminateDrawable="@drawable/progress_large_material"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <ProgressBar android:id="@+android:id/progress"
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <ProgressBar android:id="@+android:id/progress_small"
-        style="?android:attr/progressBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <ProgressBar android:id="@+android:id/progress_small_title"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="small_title_circle" />
+    
+    <ProgressBar android:id="@+id/progress_small_title"
         style="?android:attr/progressBarStyleSmallTitle"
+        android:indeterminateDrawable="@drawable/progress_large_material"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

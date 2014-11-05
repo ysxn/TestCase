@@ -12,6 +12,7 @@ public class MainActivity extends Activity {
     private ProgressBar mIndeterminateProgressBar;
     private ProgressBar mDeterminateProgressBar;
     private int progress = 0;
+    private int seProgress = 200;
     private final int REQUEST_UPDATE_DATA = 0x887;
     
     private Handler mHandler = new Handler() {
@@ -23,10 +24,15 @@ public class MainActivity extends Activity {
 
                     if (mDeterminateProgressBar != null) {
                         progress++;
+                        seProgress++;
                         if (progress > 1000 || progress < 0) {
                             progress = 0;
                         }
+                        if (seProgress > 1000 || seProgress < 0) {
+                            seProgress = 200;
+                        }
                         mDeterminateProgressBar.setProgress(progress);
+                        mDeterminateProgressBar.setSecondaryProgress(seProgress);
                     }
                     mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 10L);
                     break;

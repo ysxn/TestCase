@@ -21,8 +21,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
 public class MainActivity extends Activity implements OnPageChangeListener, OnTabChangeListener {
-    static final String INTERNAL_VOLUME = "internal";
-    static final String EXTERNAL_VOLUME = "external";
     private static final String TAG_TAB1 = "tab 1";
     private static final String TAG_TAB2 = "tab 2";
     private static final int TAB_HOST_ID = android.R.id.tabhost;
@@ -53,10 +51,6 @@ public class MainActivity extends Activity implements OnPageChangeListener, OnTa
         mTabHost.addTab(tabSpec2);
 
         mTabHost.setCurrentTab(0);
-        //mTabHost.getTabWidget().setStripEnabled(true);
-        //mTabHost.getTabWidget().setDividerDrawable(getResources().getDrawable(R.drawable.state_normal_color));
-        //mTabHost.getTabWidget().setLeftStripDrawable(getResources().getDrawable(R.drawable.tab_bottom_holo));
-        //mTabHost.getTabWidget().setRightStripDrawable(getResources().getDrawable(R.drawable.tab_bottom_holo));
 
         mViewPager.setAdapter(new PagerAdapter() {
 
@@ -125,6 +119,10 @@ public class MainActivity extends Activity implements OnPageChangeListener, OnTa
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetpixels) {
         // TODO Auto-generated method stub
+        Log.i("zyw", ">>>>>>>onPageScrolled position="+position
+                +", positionOffset="+positionOffset
+                +", positionOffsetpixels="+positionOffsetpixels
+                +", count="+mTabHost.getTabWidget().getChildCount());
         setTabSliderCoord(position, positionOffset, positionOffsetpixels);
     }
 
