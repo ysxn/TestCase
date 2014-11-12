@@ -14,7 +14,7 @@
         android:label="@string/listviewslidemenu_app_name"
         android:theme="@android:style/Theme.DeviceDefault.Light" >
         <activity
-            android:name=".SlideMenuListViewDemo"
+            android:name="com.lenovo.demo.SlideMenuListViewDemoActivity"
             android:label="@string/listviewslidemenu_app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

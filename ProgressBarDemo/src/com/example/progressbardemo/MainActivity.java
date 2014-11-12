@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -50,6 +51,11 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
         mIndeterminateProgressBar = (ProgressBar) findViewById(R.id.indeterminate_progressBar);
         mDeterminateProgressBar = (ProgressBar) findViewById(R.id.determinate_progressBar);
+        
+        ProgressBar progress_small_title = (ProgressBar) findViewById(R.id.progress_small_title);
+        progress_small_title.setIndeterminateDrawable(this.getDrawable(R.drawable.progress_m_material));
+        progress_small_title.setIndeterminate(true);
+        progress_small_title.setVisibility(View.VISIBLE);
         mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 10L);
     }
     

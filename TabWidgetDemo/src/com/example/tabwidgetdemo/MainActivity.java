@@ -23,6 +23,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 public class MainActivity extends Activity implements OnPageChangeListener, OnTabChangeListener {
     private static final String TAG_TAB1 = "tab 1";
     private static final String TAG_TAB2 = "tab 2";
+    private static final String TAG_TAB3 = "tab 3";
     private static final int TAB_HOST_ID = android.R.id.tabhost;
     private ViewPager mViewPager;
     private TabHost mTabHost;
@@ -49,8 +50,13 @@ public class MainActivity extends Activity implements OnPageChangeListener, OnTa
         tabSpec2.setIndicator(TAG_TAB2);
         tabSpec2.setContent(new MyTabContentFactoryView());
         mTabHost.addTab(tabSpec2);
+        
+        TabSpec tabSpec3 = mTabHost.newTabSpec(TAG_TAB3);
+        tabSpec3.setIndicator(TAG_TAB3);
+        tabSpec3.setContent(new MyTabContentFactoryView());
+        mTabHost.addTab(tabSpec3);
 
-        mTabHost.setCurrentTab(0);
+        
 
         mViewPager.setAdapter(new PagerAdapter() {
 
@@ -74,9 +80,15 @@ public class MainActivity extends Activity implements OnPageChangeListener, OnTa
             @Override
             public int getCount() {
                 // TODO Auto-generated method stub
-                return 2;
+                return 3;
             }
         });
+        
+        mTabHost.setCurrentTab(2);
+        
+        
+        
+        
     }
 
     private void DisplayToast(String text) {
@@ -155,10 +167,12 @@ public class MainActivity extends Activity implements OnPageChangeListener, OnTa
     public void onTabChanged(String tabId) {
         // TODO Auto-generated method stub
         int position = mTabHost.getCurrentTab();
+        Log.i("zyw", ">>>>>>>onTabChanged, position=" + position+", tabId="+tabId
+                +", c="+mViewPager.getCurrentItem());
         if (position != mViewPager.getCurrentItem()) {
             mViewPager.setCurrentItem(position, true);
         }
-        Log.i("zyw", ">>>>>>>onTabChanged, position=" + position);
+        
     }
 
 }

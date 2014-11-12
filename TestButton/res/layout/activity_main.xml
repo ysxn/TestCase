@@ -10,9 +10,9 @@
 
     <LinearLayout
         android:id="@+id/slidemenu_item2_container_right"
-        android:layout_width="@dimen/slide_menu_item_width"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_slidemenu_item"
+        android:layout_width="300dip"
+        android:layout_height="50dip"
+        android:background="@drawable/state_focused_ripple"
         android:gravity="center"
         android:orientation="horizontal"
         android:clickable="true" >
