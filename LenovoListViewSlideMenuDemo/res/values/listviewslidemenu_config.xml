@@ -1,0 +1,16 @@
+<resources>
+    <!-- VIBE2.5 GuidelineV0.3 041022.pdf page-49: Pressed color: #1E4D1D (#259B24 40% + #191919) -->
+    <drawable name="listviewslidemenu_state_focused_color_drawable">#ff1e4d1d</drawable>
+    <color name="listviewslidemenu_state_focused_color">#ff1e4d1d</color>
+    
+    <!-- VIBE2.5 GuidelineV0.3 041022.pdf page-49: Background color: Custom -->
+    <drawable name="listviewslidemenu_state_normal_color_drawable">#ff000000</drawable>
+    <color name="listviewslidemenu_state_normal_color">#ff000000</color>
+    
+    <!-- VIBE2.5 GuidelineV0.3 041022.pdf page-49: Text: 16sp #FAFAFA -->
+    <color name="listviewslidemenu_slide_menu_item_text_color">#fffafafa</color>
+    <dimen name="listviewslidemenu_slide_menu_item_text_size">16sp</dimen>
+    <dimen name="listviewslidemenu_slide_menu_item_margin">16px</dimen>
+    <dimen name="listviewslidemenu_slide_menu_item_width">112.0dip</dimen>
+    
+</resources>
