@@ -10,12 +10,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="@drawable/slidingtab_ic_launcher"
+        android:label="@string/slidingtab_app_name"
         android:theme="@android:style/Theme.DeviceDefault.Light" >
         <activity
             android:name="com.lenovo.demo.SlidingTabDemoActivity"
-            android:label="@string/app_name" >
+            android:label="@string/slidingtab_app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

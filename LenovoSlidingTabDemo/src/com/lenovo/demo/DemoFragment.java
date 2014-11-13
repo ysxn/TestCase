@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.lenovo.component.slidingtab.*;
+import com.lenovo.internal.R;
 
 public class DemoFragment extends Fragment {
 
@@ -26,10 +26,10 @@ public class DemoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         position = getArguments().getInt(ARG_POSITION);
-        View rootView = inflater.inflate(R.layout.page, container, false);
+        View rootView = inflater.inflate(R.layout.slidingtab_page_sample, container, false);
 
-        TextView sample = (TextView) rootView.findViewById(R.id.demo_text);
-        sample.setText("DEMO---text---"+position);
+        TextView sample = (TextView) rootView.findViewById(R.id.slidingtab_sample_text);
+        sample.setText("DEMO---PAGE---"+position);
 
         return rootView;
     }

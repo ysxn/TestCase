@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- NOTE : DO NOT MODIFY THE FOLLOWING PACKAGE NAME -->
+    <private-symbols package="com.lenovo.internal" />
+    <!-- put the resource reference here -->
+    <!-- id -->
+    <java-symbol name="slidingtab_content_frame" type="id" />
+    <java-symbol name="slidingtab_sample_text" type="id" />
+    <java-symbol name="slidingtab_sliding_tabs" type="id" />
+    <java-symbol name="slidingtab_viewpager" type="id" />
+    <!--                   drawable                     -->
+    <java-symbol type="drawable" name="slidingtab_ic_launcher" />
+
+    <!--                   layout                     -->
+    <java-symbol type="layout" name="slidingtab_activity_sample" />
+    <java-symbol type="layout" name="slidingtab_page_sample" />
+
+    <!--                   string                     -->
+    <java-symbol type="string" name="slidingtab_app_name" />
+
+    <!--                   dimen                     -->
+
+    <!--                   color                     -->
+
+    <!--                   integer                     -->
+
+    <!--                   anim                     -->
+
+    <!--                   style                     -->
+
+    <!--                   menu                     -->
+
+    <!--                   raw                     -->
+
+    <!--                   xml                     -->
+
+</resources>

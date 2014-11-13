@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import com.lenovo.component.slidingtab.*;
+import com.lenovo.internal.R;
 
 public class SlidingTabDemoActivity extends FragmentActivity {
     private ViewPager mViewPager;
@@ -20,10 +21,10 @@ public class SlidingTabDemoActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sample);
+        setContentView(R.layout.slidingtab_activity_sample);
 
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        mViewPager = (ViewPager) findViewById(R.id.slidingtab_viewpager);
+        mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.slidingtab_sliding_tabs);
         mViewPager.setAdapter(new DemoViewPagerAdapter(getSupportFragmentManager(), mDemoTitles));
         
         mSlidingTabLayout.setViewPager(mViewPager);
