@@ -22,6 +22,7 @@
     <!--                   dimen                     -->
 
     <!--                   color                     -->
+    <java-symbol type="color" name="slidingtab_tab_textview_color" />
 
     <!--                   integer                     -->
 

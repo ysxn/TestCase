@@ -22,6 +22,7 @@ import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -62,14 +63,12 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     }
 
-    private static final int TITLE_OFFSET_DIPS = 24;
     private static final int TAB_VIEW_PADDING_DIPS = 16;
     private static final int TAB_VIEW_TEXT_SIZE_SP = 12;
 
-    private int mTitleOffset;
-
     private int mTabViewLayoutId;
     private int mTabViewTextViewId;
+    private int mTabViewTextViewColorResId = -1;
     private boolean mDistributeEvenly;
 
     private ViewPager mViewPager;
@@ -93,8 +92,6 @@ public class SlidingTabLayout extends HorizontalScrollView {
         setHorizontalScrollBarEnabled(false);
         // Make sure that the Tab Strips fills this View
         setFillViewport(true);
-
-        mTitleOffset = (int) (TITLE_OFFSET_DIPS * getResources().getDisplayMetrics().density);
 
         mTabStrip = new SlidingTabStrip(context);
         addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -179,7 +176,11 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
         int padding = (int) (TAB_VIEW_PADDING_DIPS * getResources().getDisplayMetrics().density);
         textView.setPadding(padding, padding, padding, padding);
-
+        if (mTabViewTextViewColorResId > 0) {
+            textView.setTextColor(context.getResources().getColorStateList(mTabViewTextViewColorResId));
+        } else {
+            textView.setTextColor(Color.WHITE);
+        }
         return textView;
     }
 
@@ -213,7 +214,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
             }
 
             tabTitleView.setText(adapter.getPageTitle(i));
-            tabTitleView.setTextColor(Color.WHITE);
+            
             tabView.setOnClickListener(tabClickListener);
             String desc = mContentDescriptions.get(i, null);
             if (desc != null) {
@@ -252,8 +253,18 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
             if (tabIndex > 0 || positionOffset > 0) {
                 // If we're not at the first child and are mid-scroll, make sure we obey the offset
-                targetScrollX -= mTitleOffset;
+                //targetScrollX -= mTitleOffset;
+                targetScrollX -= + (getWidth() / 2) - (selectedChild.getWidth() / 2);
             }
+            
+            //scrollTo(targetScrollX, 0);
+            //smoothScrollTo(targetScrollX, 0);
+            Log.i("zyw", ">>>>>>targetScrollX="+targetScrollX
+                    +", getScrollX="+SlidingTabLayout.this.getScrollX()
+                    +", viewLeft="+selectedChild.getLeft()
+                    +", viewWidth="+selectedChild.getWidth()
+                    +", tabIndex="+tabIndex
+                    +", positionOffset="+positionOffset);
 
             scrollTo(targetScrollX, 0);
         }
@@ -272,6 +283,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
             mTabStrip.onViewPagerPageChanged(position, positionOffset);
 
             View selectedTitle = mTabStrip.getChildAt(position);
+            //Log.i("zyw", ">>>>>>position="+position+", positionOffset="+positionOffset+", positionOffsetPixels="+positionOffsetPixels);
             int extraOffset = (selectedTitle != null)
                     ? (int) (positionOffset * selectedTitle.getWidth())
                     : 0;
@@ -294,6 +306,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
         @Override
         public void onPageSelected(int position) {
+            Log.i("zyw", ">>>>>>mScrollState="+mScrollState+", position="+position);
             if (mScrollState == ViewPager.SCROLL_STATE_IDLE) {
                 mTabStrip.onViewPagerPageChanged(position, 0f);
                 scrollToTab(position, 0);
@@ -318,6 +331,30 @@ public class SlidingTabLayout extends HorizontalScrollView {
                 }
             }
         }
+    }
+    
+    /**
+     * If no custom TabViewLayout, set TabViewTextViewColor Res Id, defined xml in color. for example:
+     * <p>
+     * <selector xmlns:android="http://schemas.android.com/apk/res/android">
+     * <p>
+     * <item android:state_selected="true" android:color="#fffafafa"/> <!--
+     * selected -->
+     * <p>
+     * <item android:state_pressed="true" android:color="#fffafafa"/> <!--
+     * pressed -->
+     * <p>
+     * <item android:state_focused="true" android:color="#fffafafa"/> <!--
+     * focused -->
+     * <p>
+     * <item android:color="#ffbdbdbd"/> <!-- default --> </selector>
+     * <p>
+     * NOTICE : should call before setViewPager!!!
+     * 
+     * @param id
+     */
+    public void setTabViewTextViewColorResId(int id) {
+        mTabViewTextViewColorResId = id;
     }
 
 }

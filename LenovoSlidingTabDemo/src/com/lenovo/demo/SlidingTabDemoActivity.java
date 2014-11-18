@@ -15,8 +15,9 @@ public class SlidingTabDemoActivity extends FragmentActivity {
     private ViewPager mViewPager;
     private SlidingTabLayout mSlidingTabLayout;
     private String mDemoTitles[] = new String[]{
-            "Sample Tab 111", "Sample Tab 2", "Sample Tab 333333", "Sample Tab 4"
-            , "Sample Tab 5555", "Sample Tab 6", "Sample Tab 77777", "Sample Tab 8"};
+            "类别", "首页", "热门付费", "热门免费"
+            , "创收最高", "畅销付费新品", "热门免费新品", "上升最快"
+            , "热门游戏", "热门音乐", "热门网络", "热门招聘"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class SlidingTabDemoActivity extends FragmentActivity {
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.slidingtab_sliding_tabs);
         mViewPager.setAdapter(new DemoViewPagerAdapter(getSupportFragmentManager(), mDemoTitles));
         
+        mSlidingTabLayout.setTabViewTextViewColorResId(R.color.slidingtab_tab_textview_color);
         mSlidingTabLayout.setViewPager(mViewPager);
         mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
