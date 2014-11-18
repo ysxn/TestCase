@@ -70,6 +70,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
     private int mTabViewTextViewId;
     private int mTabViewTextViewColorResId = -1;
     private boolean mDistributeEvenly;
+    private int mLastScrollto = -1;
+    private int mCurrentPageIndex = -1;
 
     private ViewPager mViewPager;
     private SparseArray<String> mContentDescriptions = new SparseArray<String>();
@@ -253,19 +255,10 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
             if (tabIndex > 0 || positionOffset > 0) {
                 // If we're not at the first child and are mid-scroll, make sure we obey the offset
-                //targetScrollX -= mTitleOffset;
-                targetScrollX -= + (getWidth() / 2) - (selectedChild.getWidth() / 2);
+                targetScrollX -= + (getWidth() / 2) - (mTabStrip.getRight() / tabStripChildCount / 2);
             }
-            
-            //scrollTo(targetScrollX, 0);
-            //smoothScrollTo(targetScrollX, 0);
-            Log.i("zyw", ">>>>>>targetScrollX="+targetScrollX
-                    +", getScrollX="+SlidingTabLayout.this.getScrollX()
-                    +", viewLeft="+selectedChild.getLeft()
-                    +", viewWidth="+selectedChild.getWidth()
-                    +", tabIndex="+tabIndex
-                    +", positionOffset="+positionOffset);
 
+            mLastScrollto = targetScrollX;
             scrollTo(targetScrollX, 0);
         }
     }
@@ -279,7 +272,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
             if ((tabStripChildCount == 0) || (position < 0) || (position >= tabStripChildCount)) {
                 return;
             }
-
+            mCurrentPageIndex = position;
             mTabStrip.onViewPagerPageChanged(position, positionOffset);
 
             View selectedTitle = mTabStrip.getChildAt(position);
@@ -306,8 +299,9 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
         @Override
         public void onPageSelected(int position) {
-            Log.i("zyw", ">>>>>>mScrollState="+mScrollState+", position="+position);
+            //Log.i("zyw", ">>>>>>mScrollState="+mScrollState+", position="+position);
             if (mScrollState == ViewPager.SCROLL_STATE_IDLE) {
+                mCurrentPageIndex = position;
                 mTabStrip.onViewPagerPageChanged(position, 0f);
                 scrollToTab(position, 0);
             }
