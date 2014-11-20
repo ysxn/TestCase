@@ -29,10 +29,12 @@ import android.widget.LinearLayout;
 
 class SlidingTabStrip extends LinearLayout {
 
-    private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 0;
-    private static final byte DEFAULT_BOTTOM_BORDER_COLOR_ALPHA = 0x26;
-    private static final int SELECTED_INDICATOR_THICKNESS_DIPS = 3;
-    private static final int DEFAULT_SELECTED_INDICATOR_COLOR = 0xFF33B5E5;
+    private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 1;
+    //private static final byte DEFAULT_BOTTOM_BORDER_COLOR_ALPHA = 0x26;
+    private static final int DEFAULT_BOTTOM_BORDER_COLOR = 0xFFA3A3A3;
+    private static final int SELECTED_INDICATOR_THICKNESS_DIPS = 2;
+    private static final int DEFAULT_SELECTED_INDICATOR_COLOR = 0xFF2CADF1;
+    
 
     private final int mBottomBorderThickness;
     private final Paint mBottomBorderPaint;
@@ -58,12 +60,11 @@ class SlidingTabStrip extends LinearLayout {
 
         final float density = getResources().getDisplayMetrics().density;
 
-        TypedValue outValue = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.colorForeground, outValue, true);
-        final int themeForegroundColor =  outValue.data;
+        //TypedValue outValue = new TypedValue();
+        //context.getTheme().resolveAttribute(R.attr.colorForeground, outValue, true);
+        //final int themeForegroundColor =  outValue.data;
 
-        mDefaultBottomBorderColor = setColorAlpha(themeForegroundColor,
-                DEFAULT_BOTTOM_BORDER_COLOR_ALPHA);
+        mDefaultBottomBorderColor = DEFAULT_BOTTOM_BORDER_COLOR;//setColorAlpha(themeForegroundColor, DEFAULT_BOTTOM_BORDER_COLOR_ALPHA);
 
         mDefaultTabColorizer = new SimpleTabColorizer();
         mDefaultTabColorizer.setIndicatorColors(DEFAULT_SELECTED_INDICATOR_COLOR);
@@ -102,6 +103,9 @@ class SlidingTabStrip extends LinearLayout {
                 ? mCustomTabColorizer
                 : mDefaultTabColorizer;
 
+        // Thin underline along the entire bottom edge
+        canvas.drawRect(0, height - mBottomBorderThickness, getWidth(), height, mBottomBorderPaint);
+
         // Thick colored underline below the current selection
         if (childCount > 0) {
             View selectedTitle = getChildAt(mSelectedPosition);
@@ -128,9 +132,6 @@ class SlidingTabStrip extends LinearLayout {
             canvas.drawRect(left, height - mSelectedIndicatorThickness, right,
                     height, mSelectedIndicatorPaint);
         }
-
-        // Thin underline along the entire bottom edge
-        canvas.drawRect(0, height - mBottomBorderThickness, getWidth(), height, mBottomBorderPaint);
     }
 
     /**

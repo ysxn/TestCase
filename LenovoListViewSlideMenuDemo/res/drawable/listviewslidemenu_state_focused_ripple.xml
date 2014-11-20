@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ?android:attr/colorControlHighlight -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/listviewslidemenu_state_focused_color">
+    <item android:drawable="@drawable/listviewslidemenu_state_focused_color_drawable" />
+</ripple>

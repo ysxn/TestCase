@@ -64,11 +64,16 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
 
     private static final int TAB_VIEW_PADDING_DIPS = 16;
-    private static final int TAB_VIEW_TEXT_SIZE_SP = 12;
+    private static final int TAB_VIEW_TEXT_SIZE_SP = 16;
+    private static final int DEFAULT_LAYOUT_BACKGROUD_COLOR = 0xfff3f3f3;
 
     private int mTabViewLayoutId;
     private int mTabViewTextViewId;
     private int mTabViewTextViewColorResId = -1;
+    private int mTabViewTextViewBackgroundResId = -1;
+    private int mTabViewTextViewTextSize = -1;
+    private int mTabViewTextViewMinWidth = -1;
+    private int mTabViewTextViewMinHeight = -1;
     private boolean mDistributeEvenly;
     private int mLastScrollto = -1;
     private int mCurrentPageIndex = -1;
@@ -94,6 +99,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         setHorizontalScrollBarEnabled(false);
         // Make sure that the Tab Strips fills this View
         setFillViewport(true);
+        setBackgroundColor(DEFAULT_LAYOUT_BACKGROUD_COLOR);
 
         mTabStrip = new SlidingTabStrip(context);
         addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -165,15 +171,29 @@ public class SlidingTabLayout extends HorizontalScrollView {
     protected TextView createDefaultTabView(Context context) {
         TextView textView = new TextView(context);
         textView.setGravity(Gravity.CENTER);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TAB_VIEW_TEXT_SIZE_SP);
+        if (mTabViewTextViewTextSize > 0) {
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTabViewTextViewTextSize);
+        } else {
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TAB_VIEW_TEXT_SIZE_SP);
+        }
         textView.setTypeface(Typeface.DEFAULT_BOLD);
         textView.setLayoutParams(new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
+        if (mTabViewTextViewMinHeight > 0) {
+            textView.setMinHeight(mTabViewTextViewMinHeight);
+        }
+        
+        if (mTabViewTextViewMinWidth > 0) {
+            textView.setMinWidth(mTabViewTextViewMinWidth);
+        }
         TypedValue outValue = new TypedValue();
         getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
                 outValue, true);
-        textView.setBackgroundResource(outValue.resourceId);
+        if (mTabViewTextViewBackgroundResId > 0) {
+            textView.setBackgroundResource(mTabViewTextViewBackgroundResId);
+        } else {
+            textView.setBackgroundResource(outValue.resourceId);
+        }
         textView.setAllCaps(true);
 
         int padding = (int) (TAB_VIEW_PADDING_DIPS * getResources().getDisplayMetrics().density);
@@ -181,7 +201,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         if (mTabViewTextViewColorResId > 0) {
             textView.setTextColor(context.getResources().getColorStateList(mTabViewTextViewColorResId));
         } else {
-            textView.setTextColor(Color.WHITE);
+            textView.setTextColor(context.getResources().getColorStateList(com.lenovo.internal.R.color.slidingtab_tab_textview_color));
         }
         return textView;
     }
@@ -349,6 +369,41 @@ public class SlidingTabLayout extends HorizontalScrollView {
      */
     public void setTabViewTextViewColorResId(int id) {
         mTabViewTextViewColorResId = id;
+    }
+    
+    public void setTabViewTextViewBackgroundResId(int id) {
+        mTabViewTextViewBackgroundResId = id;
+    }
+    
+    /**
+     * Text size unit is SP
+     * @param size
+     */
+    public void setTabViewTextViewTextSize(int size) {
+        mTabViewTextViewTextSize = size;
+    }
+    
+    /**
+     * Text View min height unit is px
+     * @param size
+     */
+    public void setTabViewTextViewMinHeight(int height) {
+        mTabViewTextViewMinHeight = height;
+    }
+    
+    /**
+     * Text View min width unit is px
+     * @param size
+     */
+    public void setTabViewTextViewMinWidth(int width) {
+        mTabViewTextViewMinWidth = width;
+    }
+    
+    /**
+     * return the SlidingTabStrip
+     */
+    public SlidingTabStrip getTabStrip() {
+        return mTabStrip;
     }
 
 }

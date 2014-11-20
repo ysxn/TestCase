@@ -10,7 +10,6 @@
 
             <com.lenovo.component.slidingtab.SlidingTabLayout
                 android:id="@+id/slidingtab_sliding_tabs"
-                android:background="?android:attr/colorPrimaryDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

@@ -30,12 +30,12 @@ public class SlidingTabDemoActivity extends FragmentActivity {
         
         mSlidingTabLayout.setTabViewTextViewColorResId(R.color.slidingtab_tab_textview_color);
         mSlidingTabLayout.setViewPager(mViewPager);
-        mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                return Color.BLUE;
-            }
-        });
+        //mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+        //    @Override
+        //    public int getIndicatorColor(int position) {
+        //        return Color.BLUE;
+        //    }
+        //});
     }
     
     private class DemoViewPagerAdapter extends FragmentPagerAdapter {

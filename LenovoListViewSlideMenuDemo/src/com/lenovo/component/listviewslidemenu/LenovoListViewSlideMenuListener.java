@@ -117,8 +117,11 @@ public class LenovoListViewSlideMenuListener implements View.OnTouchListener {
                     return true;
                 }
 
-                mDownView = (LenovoListViewSlideMenuGroupView) getFocusChild((int) mTouchX,
+                View downView = getFocusChild((int) mTouchX,
                         (int) mTouchY);
+                if (downView != null && downView instanceof LenovoListViewSlideMenuGroupView) {
+                    mDownView = (LenovoListViewSlideMenuGroupView) downView;
+                }
                 if (mDownView != null) {
                     // mDownPosition = mListView.getPositionForView(mDownView);
                     // Log.e(TAG, "#####mDownView:" + mDownView);
@@ -253,7 +256,9 @@ public class LenovoListViewSlideMenuListener implements View.OnTouchListener {
             child.getHitRect(rect);
             if (rect.contains(view_x, view_y)) {
                 // Log.e(TAG, "####Focus: "+i);
-                return child;
+                if (child instanceof LenovoListViewSlideMenuGroupView) {
+                    return child;
+                }
             }
         }
 
