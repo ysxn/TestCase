@@ -33,3 +33,15 @@ getSlideMenuLeftSideText（）
 getSlideMenuRightSideText（）
 getSlideMenuLeftSideIcon（）
 getSlideMenuRightSideIcon（）
+
+change log 2014-11-21:
+增加接口获取左右菜单，提供给应用设置自定义属性，比如背景等等：
+    public ViewGroup getSlideMenuLeftSideViewGroup() {
+        // TODO Auto-generated method stub
+        return mSlidemenuItemContainerLeft;
+    }
+    
+    public ViewGroup getSlideMenuRightSideViewGroup() {
+        // TODO Auto-generated method stub
+        return mSlidemenuItemContainerRight;
+    }

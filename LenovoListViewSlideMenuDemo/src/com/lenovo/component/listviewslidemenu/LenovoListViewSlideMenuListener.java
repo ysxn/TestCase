@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 public class LenovoListViewSlideMenuListener implements View.OnTouchListener {
     private static final String TAG = "LenovoSlidemenuListViewListener";
-    private boolean DEBUG = false;
+    private static boolean DEBUG = false;
     private ListView mListView;
     private OnSlideMenuClickListener mOnSlideMenuClickListener;
     private LenovoListViewSlideMenuGroupView mDownView;
@@ -57,7 +57,9 @@ public class LenovoListViewSlideMenuListener implements View.OnTouchListener {
 
                     @Override
                     public void onSlideStateChanged(LenovoListViewSlideMenuGroupView view, int state) {
-                        // Log.e(TAG, "####state:"+state);
+                        if (DEBUG) {
+                            Log.i(TAG, "####onSlideStateChanged state:"+state);
+                        }
                         // TODO Auto-generated method stub
                         mScrollState = state;
                         if (mScrollState == LenovoListViewSlideMenuGroupView.SLIDE_STATE_SETTING) {
@@ -89,7 +91,7 @@ public class LenovoListViewSlideMenuListener implements View.OnTouchListener {
         mTouchY = event.getRawY();
 
         if (DEBUG) {
-            Log.e(TAG,"####onTouch:"+event.getAction()+", mScrollState:"+mScrollState);
+            Log.i(TAG,"####onTouch:"+event.getAction()+", mScrollState:"+mScrollState);
         }
 
         switch (event.getAction())
@@ -124,7 +126,9 @@ public class LenovoListViewSlideMenuListener implements View.OnTouchListener {
                 }
                 if (mDownView != null) {
                     // mDownPosition = mListView.getPositionForView(mDownView);
-                    // Log.e(TAG, "#####mDownView:" + mDownView);
+                    if (DEBUG) {
+                        Log.i(TAG, "#####mDownView:" + mDownView);
+                    }
                     mDownX = mTouchX;
                     mDownY = mTouchY;
                     if (mVelocityTracker == null) {
@@ -169,7 +173,9 @@ public class LenovoListViewSlideMenuListener implements View.OnTouchListener {
                 }
 
                 if (bSliding) {
-                    // Log.e(TAG, "####touchScroll");
+                    if (DEBUG) {
+                        Log.i(TAG, "####touchScroll");
+                    }
                     mListView.requestDisallowInterceptTouchEvent(true);
 
                     // Cancel ListView's touch (un-highlighting the item)
@@ -196,7 +202,7 @@ public class LenovoListViewSlideMenuListener implements View.OnTouchListener {
                                 && (mMenuItemView.isSelected())) {
                             mMenuItemView.setSelected(false);
                             if (DEBUG) {
-                                Log.e(TAG, "#####mMenuItemView click:");
+                                Log.i(TAG, "#####mMenuItemView click:");
                             }
                             mSelectView.resetState();
                             if (mOnSlideMenuClickListener != null) {
@@ -249,13 +255,17 @@ public class LenovoListViewSlideMenuListener implements View.OnTouchListener {
         int view_x = (int) x - listViewCoords[0];
         int view_y = (int) y - listViewCoords[1];
         int childCount = mListView.getChildCount();
-        // Log.e(TAG, "####childCount:"+childCount);
+        if (DEBUG) {
+            Log.i(TAG, "####childCount:"+childCount);
+        }
 
         for (int i = 0; i < childCount; i++) {
             child = mListView.getChildAt(i);
             child.getHitRect(rect);
             if (rect.contains(view_x, view_y)) {
-                // Log.e(TAG, "####Focus: "+i);
+                if (DEBUG) {
+                    Log.i(TAG, "####Focus: "+i);
+                }
                 if (child instanceof LenovoListViewSlideMenuGroupView) {
                     return child;
                 }
@@ -263,5 +273,9 @@ public class LenovoListViewSlideMenuListener implements View.OnTouchListener {
         }
 
         return null;
+    }
+    
+    public void setDebugLog(boolean isTrue) {
+        DEBUG = isTrue;
     }
 }

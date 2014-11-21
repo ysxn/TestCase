@@ -13,7 +13,9 @@ import android.view.View;
 import android.view.View.OnCreateContextMenuListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +27,7 @@ import com.lenovo.component.listviewslidemenu.LenovoListViewSlideMenuListener;
 import com.lenovo.internal.R;
 
 public class SlideMenuListViewDemoActivity extends Activity {
-    private static String TAG = "SlideSectionListViewDemo";
+    private static String TAG = "zyw";
     private ListView mListView;
     private LenovoListViewSlideMenuListener mLenovoSlidemenuListViewListener;
     private LenovoListViewSlideMenuAdapter mLenovoListViewSlideMenuAdapter;
@@ -53,34 +55,17 @@ public class SlideMenuListViewDemoActivity extends Activity {
                     }
                 });
         mListView.setOnTouchListener(mLenovoSlidemenuListViewListener);
-
-        mListView.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-                Log.e(TAG, "#####onItemClick:"+position);
-                Toast.makeText(SlideMenuListViewDemoActivity.this,
-                        "onListItemClick[" + position + "]", 200)
-                        .show();
-            }
-        });
-        mListView.setOnItemLongClickListener(new OnItemLongClickListener() {
-
+        mListView.setOnScrollListener(new OnScrollListener() {
+            
             @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                    int arg2, long arg3) {
-                // TODO Auto-generated method stub
-                Log.e(TAG, "#####setOnItemLongClickListener:"+arg2);
-                mLenovoSlidemenuListViewListener.abortSlide();
-                return false;
+            public void onScrollStateChanged(AbsListView list, int state) {
+                
+                Log.i(TAG, ">>>>>OnScrollListener onScrollStateChanged state="+state);
             }
-
-        });
-
-        mListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
-
+            
             @Override
-            public void onCreateContextMenu(ContextMenu conMenu, View view, ContextMenuInfo info) {
-                conMenu.setHeaderTitle("ContextMenu");
-                conMenu.add(0, 0, 0, "Test only!");
+            public void onScroll(AbsListView arg0, int arg1, int arg2, int arg3) {
+                Log.i(TAG, ">>>>>OnScrollListener onScroll arg1="+arg1+",arg2="+arg2+",arg3="+arg3);
             }
         });
     }
@@ -129,6 +114,14 @@ public class SlideMenuListViewDemoActivity extends Activity {
                 ((LenovoListViewSlideMenuGroupView) sectionView).setContentView(customView);
 
                 convertView = sectionView;
+
+                customView.setOnClickListener(new View.OnClickListener(){
+                    
+                    @Override
+                    public void onClick(View arg0) {
+                        Log.i(TAG, ">>>>>convertView OnClickListener");
+                    }
+                });
             } else {
                 holder = (ViewHolder) convertView.getTag();
                 // We should update the position so that the position is
@@ -151,6 +144,7 @@ public class SlideMenuListViewDemoActivity extends Activity {
                 ((LenovoListViewSlideMenuGroupView) convertView).getSlideMenuLeftSideIcon().setImageDrawable(mContext.getResources().getDrawable(R.drawable.listviewslidemenu_ic_list_slidemenu_canceltop));
                 ((LenovoListViewSlideMenuGroupView) convertView).getSlideMenuRightSideIcon().setImageDrawable(mContext.getResources().getDrawable(R.drawable.listviewslidemenu_ic_list_slidemenu_canceltop));
             }
+            
 
             return convertView;
         }

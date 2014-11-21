@@ -48,3 +48,7 @@ setTabViewTextViewColorResId（int id）
     public void setTabViewTextViewMinWidth(int width) {
         mTabViewTextViewMinWidth = width;
     }
+6.设置TextView的最大高度
+    public void setTabViewTextViewMaxHeight(int height) {
+        mTabViewTextViewMaxHeight = height;
+    }

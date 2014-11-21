@@ -19,7 +19,7 @@ public class LenovoListViewSlideMenuGroupView extends ViewGroup {
     public static final int SLIDE_STATE_SCROLLING = 1;
     public static final int SLIDE_STATE_SETTING = 2;
     private static final String TAG = "LenovoSlideSectionGroupView";
-    private boolean DEBUG = false;
+    private static boolean DEBUG = false;
     private int mMaxSectionCount;
 
     private Context mContext;
@@ -137,7 +137,9 @@ public class LenovoListViewSlideMenuGroupView extends ViewGroup {
     }
 
     public void resetState() {
-        // Log.e(TAG, "####resetState, bAutoScrollState: "+bAutoScrollState);
+        if (DEBUG) {
+            Log.i(TAG, "####resetState, bAutoScrollState: "+bAutoScrollState);
+        }
 
         bScrollEnter = false;
         bScrollBack = false;
@@ -162,7 +164,9 @@ public class LenovoListViewSlideMenuGroupView extends ViewGroup {
 
         mScroller.startScroll(startX, 0, -startX, 0, mScrollTime);
 
-        // Log.e(TAG, "####scrollBack(), bAutoScrollState:"+bAutoScrollState);
+        if (DEBUG) {
+            Log.i(TAG, "####scrollBack(), bAutoScrollState:"+bAutoScrollState);
+        }
         invalidate();
     }
 
@@ -186,7 +190,9 @@ public class LenovoListViewSlideMenuGroupView extends ViewGroup {
                     (Math.abs(mMaxScrollThresholdRight - startX)), 0, mScrollTime);
         }
 
-        // Log.e(TAG, "####scorllEnter(), bAutoScrollState:"+bAutoScrollState);
+        if (DEBUG) {
+            Log.i(TAG, "####scorllEnter(), bAutoScrollState:"+bAutoScrollState);
+        }
         invalidate();
     }
 
@@ -279,7 +285,9 @@ public class LenovoListViewSlideMenuGroupView extends ViewGroup {
                         && y >= view_coords[1]
                         && y <= (view_coords[1] + childView.getHeight()))
                 {
-                    // Log.e(TAG, "####left_section");
+                    if (DEBUG) {
+                        Log.i(TAG, "####left_section");
+                    }
                     return childView;
                 }
             }
@@ -307,7 +315,9 @@ public class LenovoListViewSlideMenuGroupView extends ViewGroup {
             childView = getChildAt(index);
             if (childView.getVisibility() != View.GONE) {
                 viewWidth = childView.getMeasuredWidth();
-                // Log.e(TAG, "####index:"+index+", viewWidth:"+viewWidth);
+                if (DEBUG) {
+                    Log.i(TAG, "####index:"+index+", viewWidth:"+viewWidth);
+                }
                 if (index == mContentSectionIdex) {
                     mOriginalPositionX = 0;
                     mVelocityScrollThreshold = 0;// viewWidth / 4;
@@ -335,13 +345,14 @@ public class LenovoListViewSlideMenuGroupView extends ViewGroup {
         if (DEBUG) {
             Log.i("zyw", ">>>>>menuWidthLeft="+menuWidthLeft+", menuWidthRight="+menuWidthRight);
         }
-        // Log.e(TAG, "####mAutoScrollThreshold:"+mAutoScrollThreshold);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // TODO Auto-generated method stub
-        // Log.e(TAG, "####:" + getChildCount());
+        if (DEBUG) {
+            Log.i(TAG, "####:getChildCount=" + getChildCount());
+        }
         ViewGroup.LayoutParams layoutParams;
         // View left_section = null;
         View content_section = null;
@@ -366,7 +377,9 @@ public class LenovoListViewSlideMenuGroupView extends ViewGroup {
         }
 
         width = MeasureSpec.getSize(widthMeasureSpec);
-        // Log.e(TAG, "####width:"+width);
+        if (DEBUG) {
+            Log.i(TAG, "####width:"+width);
+        }
         if (content_section != null) {
             height = content_section.getMeasuredHeight();
         }
@@ -442,5 +455,19 @@ public class LenovoListViewSlideMenuGroupView extends ViewGroup {
     public ImageView getSlideMenuRightSideIcon() {
         // TODO Auto-generated method stub
         return mSlidemenuItemContainerRightIcon;
+    }
+    
+    public ViewGroup getSlideMenuLeftSideViewGroup() {
+        // TODO Auto-generated method stub
+        return mSlidemenuItemContainerLeft;
+    }
+    
+    public ViewGroup getSlideMenuRightSideViewGroup() {
+        // TODO Auto-generated method stub
+        return mSlidemenuItemContainerRight;
+    }
+    
+    public void setDebugLog(boolean isTrue) {
+        DEBUG = isTrue;
     }
 }

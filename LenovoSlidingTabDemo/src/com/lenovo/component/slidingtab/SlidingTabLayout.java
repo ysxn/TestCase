@@ -64,6 +64,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
 
     private static final int TAB_VIEW_PADDING_DIPS = 16;
+    private static final int TAB_VIEW_HEIGHT_DIPS = 52;
     private static final int TAB_VIEW_TEXT_SIZE_SP = 16;
     private static final int DEFAULT_LAYOUT_BACKGROUD_COLOR = 0xfff3f3f3;
 
@@ -74,9 +75,11 @@ public class SlidingTabLayout extends HorizontalScrollView {
     private int mTabViewTextViewTextSize = -1;
     private int mTabViewTextViewMinWidth = -1;
     private int mTabViewTextViewMinHeight = -1;
+    private int mTabViewTextViewMaxHeight = -1;
     private boolean mDistributeEvenly;
     private int mLastScrollto = -1;
     private int mCurrentPageIndex = -1;
+    private static boolean DEBUG = false;
 
     private ViewPager mViewPager;
     private SparseArray<String> mContentDescriptions = new SparseArray<String>();
@@ -185,6 +188,12 @@ public class SlidingTabLayout extends HorizontalScrollView {
         
         if (mTabViewTextViewMinWidth > 0) {
             textView.setMinWidth(mTabViewTextViewMinWidth);
+        }
+        if (mTabViewTextViewMaxHeight > 0) {
+            textView.setMaxHeight(mTabViewTextViewMaxHeight);
+        } else {
+            int maxHeight = (int) (TAB_VIEW_HEIGHT_DIPS * getResources().getDisplayMetrics().density);
+            textView.setMaxHeight(maxHeight);
         }
         TypedValue outValue = new TypedValue();
         getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
@@ -296,7 +305,9 @@ public class SlidingTabLayout extends HorizontalScrollView {
             mTabStrip.onViewPagerPageChanged(position, positionOffset);
 
             View selectedTitle = mTabStrip.getChildAt(position);
-            //Log.i("zyw", ">>>>>>position="+position+", positionOffset="+positionOffset+", positionOffsetPixels="+positionOffsetPixels);
+            if (DEBUG) {
+                Log.i("zyw", ">>>>>>position="+position+", positionOffset="+positionOffset+", positionOffsetPixels="+positionOffsetPixels);
+            }
             int extraOffset = (selectedTitle != null)
                     ? (int) (positionOffset * selectedTitle.getWidth())
                     : 0;
@@ -319,7 +330,9 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
         @Override
         public void onPageSelected(int position) {
-            //Log.i("zyw", ">>>>>>mScrollState="+mScrollState+", position="+position);
+            if (DEBUG) {
+                Log.i("zyw", ">>>>>>mScrollState="+mScrollState+", position="+position);
+            }
             if (mScrollState == ViewPager.SCROLL_STATE_IDLE) {
                 mCurrentPageIndex = position;
                 mTabStrip.onViewPagerPageChanged(position, 0f);
@@ -392,6 +405,14 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
     
     /**
+     * Text View max height unit is px
+     * @param size
+     */
+    public void setTabViewTextViewMaxHeight(int height) {
+        mTabViewTextViewMaxHeight = height;
+    }
+    
+    /**
      * Text View min width unit is px
      * @param size
      */
@@ -404,6 +425,10 @@ public class SlidingTabLayout extends HorizontalScrollView {
      */
     public SlidingTabStrip getTabStrip() {
         return mTabStrip;
+    }
+    
+    public void setDebugLog(boolean isTrue) {
+        DEBUG = isTrue;
     }
 
 }
