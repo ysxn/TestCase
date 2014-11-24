@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.android_160examples_4_28_widget_time_0105"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <application android:icon="@drawable/icon" android:label="@string/app_name">
+        <receiver android:name="android_160examples_4_28_widget_time_0105"
+                  android:label="@string/app_name">
+            <meta-data android:name="android.appwidget.provider"
+                    android:resource="@xml/appwidget_provider" />
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+        </receiver>
+        <service android:name="android_160examples_4_28_widget_time_0105$UpdateService" />
+    </application>
+    <uses-sdk android:minSdkVersion="3" />
+</manifest> 

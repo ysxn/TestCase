@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+	<LinearLayout
+	    android:orientation="horizontal"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+		<TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:padding="3dip"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="UP"
+	    style="@style/Label"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="DOWN"
+	    style="@style/Label"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="ALL"
+	    style="@style/Label"
+	    android:layout_weight="1"/>
+	</LinearLayout>
+	<LinearLayout
+	    android:orientation="horizontal"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+		<TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="DAY"
+	    style="@style/Label"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="0 KB"
+	    style="@style/LabelByte"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="0 KB"
+	    style="@style/LabelByte"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="0 KB"
+	    style="@style/LabelByte"
+	    android:layout_weight="1"/>
+	</LinearLayout>
+	<LinearLayout
+	    android:orientation="horizontal"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+		<TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="WEEK"
+	    style="@style/Label"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="0 KB"
+	    style="@style/LabelByte"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="0 KB"
+	    style="@style/LabelByte"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="0 KB"
+	    style="@style/LabelByte"
+	    android:layout_weight="1"/>
+	</LinearLayout>
+	<LinearLayout
+	    android:orientation="horizontal"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+		<TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="MONTH"
+	    style="@style/Label"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="0 KB"
+	    style="@style/LabelByte"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="0 KB"
+	    style="@style/LabelByte"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="0 KB"
+	    style="@style/LabelByte"
+	    android:layout_weight="1"/>
+	</LinearLayout>
+	<LinearLayout
+	    android:orientation="horizontal"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+		<TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="TOTAL"
+	    style="@style/Label"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="0 KB"
+	    style="@style/LabelByte"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="0 KB"
+	    style="@style/LabelByte"
+	    android:layout_weight="1"/>
+	    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="0 KB"
+	    style="@style/LabelByte"
+	    android:layout_weight="1"/>
+	</LinearLayout>
+</LinearLayout>

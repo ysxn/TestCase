@@ -1,0 +1,7 @@
+MIDlet-1: helloworld,,snake.WormMain
+MIDlet-Jar-URL: J2ME_java2me_game.jar
+MIDlet-Name: J2ME_java2me_game Midlet Suite
+MIDlet-Vendor: Midlet Suite Vendor
+MIDlet-Version: 1.0.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0

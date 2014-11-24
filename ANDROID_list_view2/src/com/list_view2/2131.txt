@@ -1,0 +1,36 @@
+#if 0
+	/*
+	private ListView listview = new ListView(this); //findViewById(R.id.list);
+	private TextView textview = (TextView) findViewById(R.id.myTextView);
+	private ArrayList<Map<String, Object>> arrayList;
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        
+        arrayList = new ArrayList<Map<String, Object>>();
+        Map<String, Object> map;
+        map= new HashMap<String, Object>();
+        map.put("System", "Linux");
+        map.put("Ability", "Cool");
+        arrayList.add(map);
+        
+        SimpleAdapter adapter;
+        adapter= new SimpleAdapter(this, arrayList,
+        		android.R.layout.simple_list_item_1,
+        		new String[] { "System" }, new int[] { android.R.id.text1 });
+        listview.setAdapter(adapter);//设置适配器
+        
+
+        listview.setOnItemClickListener(listener);
+        
+    }
+    private	OnItemClickListener listener = new OnItemClickListener() {
+        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+        	//textview.setTextColor(Color.YELLOW);
+        	//textview.setText(arrayList.get(arg2).get("prod_type").toString());
+        	setTitle(arrayList.get(arg2).get("prod_type").toString());
+        }
+    };//事件处理接口实现
+    */

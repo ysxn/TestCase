@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, xml_imagebutton!</string>
+    <string name="app_name">BASIC_UI_XML_IMAGEBUTTON</string>
+</resources>

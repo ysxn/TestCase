@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<AbsoluteLayout android:id="@+id/widget0" 
+android:layout_width="fill_parent" 
+android:layout_height="fill_parent" 
+xmlns:android="http://schemas.android.com/apk/res/android">
+
+<TextView android:id="@+id/showText" 
+	android:text="计算你的标准体重!" 
+	android:layout_height="26px" 
+	android:layout_width="wrap_content" 
+	android:layout_y="65px" 
+	android:layout_x="21px"></TextView>
+
+<TextView android:id="@+id/text_Sex" 
+	android:text="性别:" 
+	android:layout_height="wrap_content" 
+	android:layout_width="wrap_content"
+	android:layout_y="103px" 
+ 	android:layout_x="71px"></TextView>
+
+<TextView android:id="@+id/text_Height" 
+	android:text="身高:" 
+	android:layout_height="wrap_content" 
+	android:layout_width="wrap_content" 
+	android:layout_y="169px" 
+	android:layout_x="72px"></TextView>
+
+<RadioGroup android:id="@+id/radioGroup" 
+	android:orientation="horizontal"
+	android:layout_x="124px"
+	android:layout_y="101px" 
+	android:layout_height="37px" 
+	android:layout_width="wrap_content"> 
+
+	<RadioButton android:id="@+id/Sex_Man" 
+		android:text="男" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"></RadioButton>
+	<RadioButton android:id="@+id/Sex_Woman" 
+		android:text="女" 
+		android:layout_height="wrap_content" 
+		android:layout_width="wrap_content" ></RadioButton>
+</RadioGroup>
+
+
+<EditText android:text="0" 
+	android:id="@+id/height_Edit" 
+	android:textSize="18sp"
+	android:layout_x="124px"
+	android:layout_y="160px" 
+	android:layout_height="wrap_content" 
+	android:layout_width="123px" ></EditText>
+<Button android:id="@+id/button_OK" 
+	android:text="计算" 
+	android:layout_x="125px"
+	android:layout_y="213px" 
+	android:layout_height="wrap_content" 
+	android:layout_width="80px" ></Button>
+</AbsoluteLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, Bgcolor!</string>
+    <string name="app_name">BASIC_UI_BGCOLOR</string>
+	<string name="screenpixels">手机屏幕分辨率：</string>
+</resources>

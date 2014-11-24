@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, imagebutton!</string>
+    <string name="app_name">BAISC_UI_IMAGEBUTTON</string>
+    <string name="unknow">图片按钮状态：未知</string>
+    <string name="onfocus">图片按钮状态：Got Focus</string>
+    <string name="lostfocus">图片按钮状态：lost Focus</string>
+    <string name="onclick">图片按钮状态：Got Click</string>
+    <string name="normalbutton">一般按钮</string>
+</resources>

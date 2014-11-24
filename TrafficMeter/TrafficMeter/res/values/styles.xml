@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="Label">
+		 <item name="android:textSize">14sp</item>
+    	 <item name="android:textStyle">bold</item>
+    	 <item name="android:gravity">center</item>
+    	 <item name="android:padding">3dip</item>
+    </style>
+	<style name="LabelByte">
+		 <item name="android:textSize">14sp</item>
+    	 <item name="android:textColor">#f0f0</item>
+    	 <item name="android:gravity">center</item>
+    	 <item name="android:padding">3dip</item>
+    </style>
+    <style name="Theme.CustomDialog" parent="android:style/Theme.Dialog">
+        <item name="android:layout_height">300dp</item>
+        <!--<item name="listPreferredItemHeight">100dip</item>-->
+    </style>
+</resources>

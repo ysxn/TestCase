@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, BMIActivity!</string>
+    <string name="app_name">BASIC_UI_bundle</string>
+    <string name="errorString">哈哈，输入出错了！</string>
+</resources>

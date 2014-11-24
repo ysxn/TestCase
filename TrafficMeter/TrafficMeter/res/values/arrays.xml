@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="counterTypes">
+		<item>DAY</item>
+		<item>WEEK</item>
+		<item>MONTH</item>
+		<item>TOTAL</item>
+		<item>YESTERDAY</item>
+		<item>LAST WEEK</item>
+		<item>LAST MONTH</item>
+	</string-array>
+</resources>

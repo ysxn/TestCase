@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="103"
+   name=""
+   committed-date="2009-08-25T23:28:14.673767Z"
+   url="http://www.jaqpot.net/svn/android/netcounter/trunk/src/org/achartengine/chart"
+   last-author="cyril"
+   kind="dir"
+   uuid="c3f17da7-5910-48e3-affd-a6486d1fb455"
+   repos="http://www.jaqpot.net/svn/android"
+   revision="153"/>
+<entry
+   committed-rev="103"
+   name="XYChart.java"
+   text-time="2010-11-17T15:15:22.828125Z"
+   committed-date="2009-08-25T23:28:14.673767Z"
+   checksum="3a4e1b9ab9a6bc8c9952c64afda658ae"
+   last-author="cyril"
+   kind="file"
+   prop-time="2010-11-17T15:15:19.390625Z"/>
+<entry
+   committed-rev="103"
+   name="AbstractChart.java"
+   text-time="2010-11-17T15:15:22.843750Z"
+   committed-date="2009-08-25T23:28:14.673767Z"
+   checksum="85d99b3796c3976d83a89f7cc16faf46"
+   last-author="cyril"
+   kind="file"
+   prop-time="2010-11-17T15:15:21.031250Z"/>
+<entry
+   committed-rev="103"
+   name="TimeBarChart.java"
+   text-time="2010-11-17T15:15:22.859375Z"
+   committed-date="2009-08-25T23:28:14.673767Z"
+   checksum="bfbfd278abee8def7cf592070b135d49"
+   last-author="cyril"
+   kind="file"
+   prop-time="2010-11-17T15:15:22.156250Z"/>
+<entry
+   committed-rev="103"
+   name="BarChart.java"
+   text-time="2010-11-17T15:15:22.859375Z"
+   committed-date="2009-08-25T23:28:14.673767Z"
+   checksum="af272165c2bf041e460c740abc54f0e4"
+   last-author="cyril"
+   kind="file"
+   prop-time="2010-11-17T15:15:22.828125Z"/>
+</wc-entries>

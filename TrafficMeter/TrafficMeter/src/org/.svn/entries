@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="103"
+   name=""
+   committed-date="2009-08-25T23:28:14.673767Z"
+   url="http://www.jaqpot.net/svn/android/netcounter/trunk/src/org"
+   last-author="cyril"
+   kind="dir"
+   uuid="c3f17da7-5910-48e3-affd-a6486d1fb455"
+   repos="http://www.jaqpot.net/svn/android"
+   revision="153"/>
+<entry
+   name="achartengine"
+   kind="dir"/>
+</wc-entries>

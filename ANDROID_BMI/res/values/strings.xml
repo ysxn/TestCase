@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">你好-世界, Bmi!</string>
+    <string name="app_name">BMI</string>
+<string name="weight">体重(Kg)</string>
+<string name="height">身高(cm)</string>
+<string name="calc">计算BMI</string>
+<string name="advice_heavy">你改减肥了！</string>
+<string name="advice_light">你太瘦了，改多吃点！</string>
+<string name="advice_average">你体重和身高处于正常水平。</string>
+</resources>

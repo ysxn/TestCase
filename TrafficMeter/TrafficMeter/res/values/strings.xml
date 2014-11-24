@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, TrafficMeter!</string>
+    <string name="app_name">TrafficMeter</string>
+
+    <string name="wifi">wifi</string>
+    <string name="mobile">2G/3G</string>
+
+    <string name="menu_help_title">Help</string>
+    <string name="menu_about_title">About</string>
+    <string name="menu_refresh_title">Refresh</string>
+
+	 <string name="counter">Counter</string>
+    <string name="close">Close</string>
+    <string name="menucontext_startDay">Set start day</string>
+    <string name="menucontext_graph">Show graph</string>
+    <string name="menucontext_counter_add">Add a counter</string>
+    <string name="menucontext_counter_remove">Remove counter</string>
+
+    <string name="graphUp">up</string>
+    <string name="graphDown">down</string>
+    <string name="graphYTitle">Bytes</string>
+
+    <string name="labelDay">Day</string>
+    <string name="labelUp">UP</string>
+    <string name="labelDown">DOWN</string>
+    <string name="labelALL">ALL</string>
+    <string name="no_data">No Data</string>
+
+    <string name="alert_dialog_ok">OK</string>
+    <string name="alert_dialog_cancel">Cancel</string>
+</resources>

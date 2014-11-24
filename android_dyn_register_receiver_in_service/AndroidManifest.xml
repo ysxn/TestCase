@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.android_dyn_register_receiver_in_service"
+	android:versionCode="1" android:versionName="1.0">
+	<application android:icon="@drawable/icon"
+		android:label="@string/app_name">
+		<receiver
+			android:name="android_dyn_register_receiver_in_service"
+			android:label="@string/app_name">
+			<meta-data
+				android:name="android.appwidget.provider"
+				android:resource="@xml/appwidget_provider" />
+			<intent-filter>
+				<action
+					android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+		</receiver>
+		<service
+			android:name="android_dyn_register_receiver_in_service$UpdateService" />
+		<receiver android:name="android_dyn_register_receiver_in_service$mBR"
+			android:enabled="true">
+			<!--  
+			<intent-filter>
+				<action
+					android:name="android.provider.Telephony.SMS_RECEIVED" />
+			</intent-filter>
+			-->
+			<intent-filter>
+                <action
+                    android:name="special_service_my" />
+            </intent-filter>
+		</receiver>
+	</application>
+	<uses-sdk android:minSdkVersion="3" />
+	<uses-permission
+		android:name="android.permission.RECEIVE_SMS">
+	</uses-permission>
+</manifest>

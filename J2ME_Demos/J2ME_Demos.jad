@@ -1,0 +1,14 @@
+MIDlet-1: Colors, /icons/ColorChooser.png, example.chooser.Color
+MIDlet-2: Properties, /icons/App.png, example.PropExample
+MIDlet-3: Http, , example.http.HttpTest
+MIDlet-4: FontTestlet, , example.fonts.FontTestlet
+MIDlet-5: Stock, /icons/Stock.png, example.stock.StockMIDlet
+MIDlet-6: Tickets, /icons/Auction.png, example.auction.NewTicketAuction
+MIDlet-7: ManyBalls, /icons/ManyBalls.png, example.manyballs.ManyBalls
+
+MIDlet-Jar-URL: J2ME_Demos.jar
+MIDlet-Name: J2ME_Demos Midlet Suite
+MIDlet-Vendor: Midlet Suite Vendor
+MIDlet-Version: 1.0.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0

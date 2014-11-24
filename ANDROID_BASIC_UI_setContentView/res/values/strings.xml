@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, setcontentview!</string>
+    <string name="app_name">BASIC_UI_setContentView</string>
+    <string name="layout1">this is Layout 1</string>
+    <string name="layout2">this is Layout 2</string>
+</resources>

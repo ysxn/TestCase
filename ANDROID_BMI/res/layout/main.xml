@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+<TextView android:text="@string/weight" 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content"></TextView>
+<EditText android:id="@+id/weight" 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content" 
+	android:numeric="integer"></EditText>
+<TextView android:text="@string/height" 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content"></TextView>
+<EditText android:id="@+id/height" 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content"
+	android:numeric="integer"></EditText>
+<Button android:text="@string/calc" 
+	android:id="@+id/submit" 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content"></Button>
+<TextView android:id="@+id/result" 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content"></TextView>
+<TextView android:id="@+id/suggest" 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content"></TextView>
+</LinearLayout>
