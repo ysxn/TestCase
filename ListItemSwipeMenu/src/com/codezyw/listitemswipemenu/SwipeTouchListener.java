@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 public class SwipeTouchListener implements View.OnTouchListener {
     private String TAG = "zyw";
-    private boolean DEBUG = true;
+    private boolean DEBUG = false;
     public static final int SWIPE_STAT_IDLE = 0;
     public static final int SWIPE_STAT_PROCESS= 1;
     public static final int SWIPE_STAT_SHOW_MENU = 2;
@@ -67,9 +67,11 @@ public class SwipeTouchListener implements View.OnTouchListener {
                         mVelocityTracker.addMovement(event);
                     }
                 } else if (mSwipeStatus == SWIPE_STAT_SHOW_MENU) {
-                    scrollBack();
+                    scrollBack(true);
+                    return true;
                 } else if (mSwipeStatus == SWIPE_STAT_PROCESS) {
-                    
+                    scrollBack(true);
+                    return true;
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -77,7 +79,7 @@ public class SwipeTouchListener implements View.OnTouchListener {
                     Log.i(TAG, ">>>>>onTouch ACTION_MOVE, touch="+event.getRawX()+"+"+event.getRawY()+", mSwipeStatus="+mSwipeStatus);
                 }
                 if (mSwipeStatus == SWIPE_STAT_IDLE && mTouchDownListItemViewGroup != null) {
-                    if (Math.abs(event.getRawX() - mDownX) > mTouchSlop && Math.abs(event.getRawY() - mDownY) < mTouchSlop) {
+                    if (Math.abs(mDownX - event.getRawX()) > mTouchSlop && Math.abs(mDownY - event.getRawY()) < mTouchSlop) {
                         mSwipeStatus = SWIPE_STAT_PROCESS;
                     }
                 }
@@ -98,9 +100,17 @@ public class SwipeTouchListener implements View.OnTouchListener {
                         Log.i(TAG, ">>>>>onTouch ACTION_MOVE, touch="+event.getRawX()+", mDownX="+mDownX);
                     }
                     if (deltaX > 0) {
+                        //swipe to left direction
                         deltaX = Math.min(deltaX, mTouchDownListItemViewGroup.getRightMenuWidth());
+                        if (mTouchDownListItemViewGroup.isRightMenuHide()) {
+                            deltaX = 0;
+                        }
                     } else {
+                        //swipe to right direction
                         deltaX = Math.max(deltaX, -mTouchDownListItemViewGroup.getLeftMenuWidth());
+                        if (mTouchDownListItemViewGroup.isLeftMenuHide()) {
+                            deltaX = 0;
+                        }
                     }
                     mTouchDownListItemViewGroup.scrollTo(deltaX, 0);
                     if (mVelocityTracker != null) {
@@ -133,6 +143,11 @@ public class SwipeTouchListener implements View.OnTouchListener {
                     }
                     
                     if (deltaX > 0 && (deltaX > (mTouchDownListItemViewGroup.getRightMenuWidth() / 2) || (velocityEnoughToFling && v_x < 0))) {
+                        //swipe to left direction
+                        if (mTouchDownListItemViewGroup.isRightMenuHide()) {
+                            scrollBack();
+                            break;
+                        }
                         deltaX = mTouchDownListItemViewGroup.getRightMenuWidth();
                         mTouchDownListItemViewGroup.scrollSmoothTo(deltaX, 0);
                         mSwipeStatus = SWIPE_STAT_SHOW_MENU;
@@ -145,6 +160,11 @@ public class SwipeTouchListener implements View.OnTouchListener {
                             }
                         });
                     } else if (deltaX < 0 && (deltaX < (-mTouchDownListItemViewGroup.getLeftMenuWidth() / 2) || (velocityEnoughToFling && v_x > 0))) {
+                        //swipe to right direction
+                        if (mTouchDownListItemViewGroup.isLeftMenuHide()) {
+                            scrollBack();
+                            break;
+                        }
                         deltaX = -mTouchDownListItemViewGroup.getLeftMenuWidth();
                         mTouchDownListItemViewGroup.scrollSmoothTo(deltaX, 0);
                         mSwipeStatus = SWIPE_STAT_SHOW_MENU;
@@ -174,11 +194,23 @@ public class SwipeTouchListener implements View.OnTouchListener {
     }
     
     private void scrollBack() {
+        scrollBack(false);
+    }
+    
+    private void scrollBack(boolean quickly) {
         if (mTouchDownListItemViewGroup != null) {
-            mTouchDownListItemViewGroup.scrollSmoothTo(0, 0);
+            if (quickly) {
+                mTouchDownListItemViewGroup.scrollTo(0, 0);
+            } else {
+                mTouchDownListItemViewGroup.scrollSmoothTo(0, 0);
+            }
             mTouchDownListItemViewGroup.setMenuClickListener(null);
             mSwipeStatus = SWIPE_STAT_IDLE;
             mTouchDownListItemViewGroup = null;
+            if (mVelocityTracker != null) {
+                mVelocityTracker.recycle();
+                mVelocityTracker = null;
+            }
         } else {
             Log.e(TAG, ">>>>>scrollBack  NULL pointer");
         }

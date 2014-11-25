@@ -3,9 +3,14 @@ package com.codezyw.listitemswipemenu;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
     private final String TAG = "zyw";
@@ -126,21 +132,9 @@ public class MainActivity extends Activity {
                 holder.listItem = listItem;
                 ((ListItemViewGroup) convertView).setListItemView(listItem);
 
-                TextView leftMenu = new TextView(mContext);
-                leftMenu.setGravity(Gravity.CENTER);
-                leftMenu.setBackgroundColor(Color.GREEN);
-                leftMenu.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-                        LayoutParams.WRAP_CONTENT));
-                holder.leftMenu = leftMenu;
-                ((ListItemViewGroup) convertView).setLeftMenu(leftMenu);
+                holder.leftMenu = (TextView) ((ListItemViewGroup) convertView).getLeftMenu();
 
-                TextView rightMenu = new TextView(mContext);
-                rightMenu.setGravity(Gravity.CENTER);
-                rightMenu.setBackgroundResource(R.drawable.ripple);
-                rightMenu.setLayoutParams(new LayoutParams((int) (60 * mDensity),
-                        (int) (60 * mDensity)));
-                holder.rightMenu = rightMenu;
-                ((ListItemViewGroup) convertView).setRightMenu(rightMenu);
+                holder.rightMenu = (TextView) ((ListItemViewGroup) convertView).getRightMenu();
 
                 convertView.setTag(holder);
                 ((ListItemViewGroup) convertView)
@@ -152,6 +146,7 @@ public class MainActivity extends Activity {
                                 if (DEBUG) {
                                     Log.i(TAG, ">>>>>>>leftMenu onClick : "
                                             + ((ViewHolder) listItemViewGroup.getTag()).text);
+                                    Toast.makeText(mContext, "leftMenu onClick : "+((ViewHolder) listItemViewGroup.getTag()).text, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -164,6 +159,7 @@ public class MainActivity extends Activity {
                                 if (DEBUG) {
                                     Log.i(TAG, ">>>>>>>rightMenu onClick : "
                                             + ((ViewHolder) listItemViewGroup.getTag()).text);
+                                    Toast.makeText(mContext, "rightMenu onClick : "+((ViewHolder) listItemViewGroup.getTag()).text, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -171,11 +167,18 @@ public class MainActivity extends Activity {
                 holder = (ViewHolder) convertView.getTag();
             }
             holder.position = position;
-            holder.listItem.setText("List Item  " + position);
+            holder.listItem.setText("List Item " + position);
             holder.leftMenu.setText("MenuL  " + position);
             holder.rightMenu.setText("MenuR  " + position);
+            ((ListItemViewGroup) convertView).setLeftMenuHide(false);
+            ((ListItemViewGroup) convertView).setRightMenuHide(false);
+            if (position % 2 == 0) {
+                ((ListItemViewGroup) convertView).setLeftMenuHide(true);
+            } else {
+                ((ListItemViewGroup) convertView).setRightMenuHide(true);
+            }
 
-            holder.text = "TEST  " + position;
+            holder.text = "List Item " + position;
             return convertView;
         }
 

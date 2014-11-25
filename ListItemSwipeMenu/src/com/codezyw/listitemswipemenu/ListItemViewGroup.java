@@ -2,18 +2,23 @@
 package com.codezyw.listitemswipemenu;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
+import android.widget.TextView;
 
 public class ListItemViewGroup extends ViewGroup {
 
     private String TAG = "zyw";
-    private boolean DEBUG = true;
+    private boolean DEBUG = false;
     private Context mContext;
     private LayoutInflater mInflater;
     private Scroller mScroller;
@@ -30,6 +35,9 @@ public class ListItemViewGroup extends ViewGroup {
     private OnLeftMenuClickListener mOnLeftMenuClickListener = null;
     private OnRightMenuClickListener mOnRightMenuClickListener = null;
     private OnMenuClickListener mOnMenuClickListener = null;
+    private float mDensity = 1;
+    private boolean mLeftMenuHide = false;
+    private boolean mRightMenuHide = false;
     
     public interface OnLeftMenuClickListener {
         void onLeftMenuClicked(ListItemViewGroup listItemViewGroup);
@@ -60,6 +68,51 @@ public class ListItemViewGroup extends ViewGroup {
         mContext = context;
         mInflater = LayoutInflater.from(context);
         mScroller = new Scroller(context, new LinearInterpolator());
+        mDensity = getResources().getDisplayMetrics().density;
+        
+        TextView leftMenu = new TextView(mContext);
+        Drawable dLeft = mContext.getDrawable(R.drawable.listviewslidemenu_ic_list_slidemenu_top);
+        dLeft.setBounds(0, 0, dLeft.getIntrinsicWidth(), dLeft.getIntrinsicHeight());
+        leftMenu.setCompoundDrawables(dLeft, null, null, null);
+        leftMenu.setCompoundDrawablePadding((int) (16*mDensity));
+        leftMenu.setPadding((int) (16*mDensity), 0, (int) (16*mDensity), 0);
+        leftMenu.setGravity(Gravity.CENTER);
+        leftMenu.setTextColor(0xfffafafa);
+        leftMenu.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        /*
+        RippleDrawable rdLeft = new RippleDrawable(ColorStateList.valueOf(Color.GREEN), null, new ColorDrawable(Color.WHITE));
+        TypedValue outValue = new TypedValue();
+        mContext.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
+        final int selectableItemBackground =  outValue.resourceId;
+        */
+        
+        leftMenu.setBackgroundResource(R.drawable.ripple_left_menu);
+        leftMenu.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT));
+        if (mLeftMenu != null) {
+            removeView(mLeftMenu);
+        }
+        mLeftMenu = leftMenu;
+        addView(mLeftMenu);
+        
+        TextView rightMenu = new TextView(mContext);
+        Drawable dRight = mContext.getDrawable(R.drawable.listviewslidemenu_ic_list_slidemenu_delete);
+        dRight.setBounds(0, 0, dRight.getIntrinsicWidth(), dRight.getIntrinsicHeight());
+        rightMenu.setCompoundDrawables(null, null, dRight, null);
+        rightMenu.setCompoundDrawablePadding((int) (16*mDensity));
+        rightMenu.setPadding((int) (16*mDensity), 0, (int) (16*mDensity), 0);
+        rightMenu.setGravity(Gravity.CENTER);
+        rightMenu.setTextColor(0xfffafafa);
+        rightMenu.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        rightMenu.setBackgroundResource(R.drawable.ripple_right_menu);
+        rightMenu.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT));
+        //rightMenu.setLayoutParams(new LayoutParams((int) (60 * mDensity), (int) (60 * mDensity)));
+        if (mRightMenu != null) {
+            removeView(mRightMenu);
+        }
+        mRightMenu = rightMenu;
+        addView(mRightMenu);
     }
 
     @Override
@@ -131,29 +184,47 @@ public class ListItemViewGroup extends ViewGroup {
     }
 
     public void setListItemView(View v) {
+        if (mListItem != null) {
+            removeView(mListItem);
+        }
         mListItem = v;
         addView(mListItem);
     }
 
     public void setListItemView(int resid) {
+        if (mListItem != null) {
+            removeView(mListItem);
+        }
         mListItem = mInflater.inflate(resid, this);
     }
 
     public void setLeftMenu(View v) {
+        if (mLeftMenu != null) {
+            removeView(mLeftMenu);
+        }
         mLeftMenu = v;
         addView(mLeftMenu);
     }
 
     public void setLeftMenu(int resid) {
+        if (mLeftMenu != null) {
+            removeView(mLeftMenu);
+        }
         mLeftMenu = mInflater.inflate(resid, this);
     }
 
     public void setRightMenu(View v) {
+        if (mRightMenu != null) {
+            removeView(mRightMenu);
+        }
         mRightMenu = v;
         addView(mRightMenu);
     }
 
     public void setRightMenu(int resid) {
+        if (mRightMenu != null) {
+            removeView(mRightMenu);
+        }
         mRightMenu = mInflater.inflate(resid, this);
     }
     
@@ -163,6 +234,47 @@ public class ListItemViewGroup extends ViewGroup {
     
     public int getLeftMenuWidth() {
         return mLeftMenuWidth;
+    }
+    
+    public View getRightMenu() {
+        return mRightMenu;
+    }
+    
+    public View getLeftMenu() {
+        return mLeftMenu;
+    }
+    
+    public boolean isRightMenuHide() {
+        return mRightMenuHide;
+    }
+    
+    public boolean isLeftMenuHide() {
+        return mLeftMenuHide;
+    }
+    
+    public void setRightMenuHide(boolean isTrue) {
+//        if (mRightMenu != null) {
+////            mRightMenu.setVisibility(isTrue ? View.GONE : View.VISIBLE);
+////            requestLayout();
+////            postInvalidate();
+//            if (isTrue) {
+//                removeView(mRightMenu);
+//            } else {
+//                addView(mRightMenu);
+//            }
+//        }
+        mRightMenuHide = isTrue;
+    }
+    
+    public void setLeftMenuHide(boolean isTrue) {
+//        if (mLeftMenu != null) {
+//            if (isTrue) {
+//                removeView(mLeftMenu);
+//            } else {
+//                addView(mLeftMenu);
+//            }
+//        }
+        mLeftMenuHide = isTrue;
     }
     
     public void setLeftMenuClickListener(OnLeftMenuClickListener l) {
