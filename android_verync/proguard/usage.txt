@@ -1,0 +1,381 @@
+android.annotation.SuppressLint
+android.annotation.TargetApi
+net.shopnc.android.BuildConfig
+net.shopnc.android.R
+net.shopnc.android.R$anim
+net.shopnc.android.R$attr
+net.shopnc.android.R$color
+net.shopnc.android.R$dimen
+net.shopnc.android.R$drawable
+net.shopnc.android.R$id
+net.shopnc.android.R$layout
+net.shopnc.android.R$string
+net.shopnc.android.R$style
+net.shopnc.android.adapter.MenuListViewAdapter:
+    public static final java.lang.String TAG_ITEM_TEXT
+    public static final java.lang.String TAG_ITEM_CHECKED
+net.shopnc.android.adapter.ShopListViewAdapter
+net.shopnc.android.adapter.ShopListViewAdapter$1
+net.shopnc.android.adapter.ShopListViewAdapter$ViewHolder
+net.shopnc.android.adapter.SubmenuListViewAdapter:
+    public static final java.lang.String TAG_ITEM_TEXT
+    public static final java.lang.String TAG_ITEM_ICON
+net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter:
+    private static final java.lang.String TAG
+    283:283:public java.util.ArrayList getDatas()
+    291:291:public long getPageno()
+    299:299:public int getPagesize()
+net.shopnc.android.adapter.TopicDetailListViewAdapter:
+    private static final java.lang.String TAG
+    278:278:public java.util.ArrayList getDatas()
+    286:286:public long getPageno()
+    294:294:public int getPagesize()
+net.shopnc.android.common.BBCodeHelper:
+    8:8:public BBCodeHelper()
+    30:40:public static java.lang.String processImage(java.lang.String,java.util.LinkedHashSet)
+    211:222:public static java.lang.String processBBCode(java.lang.String,java.util.LinkedHashSet)
+    244:257:public static void main(java.lang.String[])
+net.shopnc.android.common.Constants:
+    public static final java.lang.String SYSTEM_INIT_FILE_NAME
+    public static final int DB_VERSION
+    public static final java.lang.String DB_NAME
+    public static final java.lang.String SQL_USER_CREATE
+    public static final java.lang.String SQL_USER_DROP
+    public static final java.lang.String SQL_USER_SELECT_ALL
+    public static final java.lang.String SQL_USER_SELECT_BY
+    public static final java.lang.String SQL_USER_INSERT
+    public static final java.lang.String SQL_USER_DELETE_BY
+    public static final java.lang.String SQL_FAVORITE_CREATE
+    public static final java.lang.String SQL_FAVORITE_DROP
+    public static final java.lang.String SQL_FAVORITE_SELECT_BY_FID
+    public static final java.lang.String SQL_FAVORITE_SELECT_OWNER
+    public static final java.lang.String SQL_FAVORITE_SELECT_LIMIT
+    public static final java.lang.String SQL_FAVORITE_INSERT
+    public static final java.lang.String SQL_FAVORITE_DELETE
+    public static final java.lang.String SQL_FAVORITE_RESET_SEQUENCE
+    public static final java.lang.String SQL_LASTEST_BROWSE_CREATE
+    public static final java.lang.String SQL_LASTEST_BROWSE_DROP
+    public static final java.lang.String SQL_LASTEST_BROWSE_SELECT_BY_TID
+    public static final java.lang.String SQL_LASTEST_BROWSE_SELECT_LIMIT
+    public static final java.lang.String SQL_LASTEST_BROWSE_INSERT
+    public static final java.lang.String SQL_LASTEST_BROWSE_DELETE_BY_TID
+    public static final java.lang.String SQL_LASTEST_BROWSE_UPDATE_BY_TID
+    public static final java.lang.String SQL_LASTEST_BROWSE_DELETE
+    public static final java.lang.String SQL_LASTEST_BROWSE_RESET_SEQUENCE
+    public static final int RESULT_CODE_CAMERA
+    public static final int RESULT_CODE_PHOTO_PICKED
+    public static final int RESULT_CODE_PHOTO_CUT
+    public static final java.lang.String IMAGE_UNSPECIFIED
+    public static final java.lang.String HUIFU
+    public static final int DIALOG_LOADDATA_ID
+    public static final int DIALOG_EXITAPP_ID
+    public static final int DIALOG_LOGIN_ID
+    public static final int DIALOG_USER_CHANGE_ID
+    public static final int DIALOG_SENT_TOPIC_ID
+    public static final int DIALOG_LOCATION_ID
+    public static final int DIALOG_CLEAR_CACHE_ID
+    public static final int ORDERBY_ID
+    public static final java.lang.String PROTOCOL
+    public static final java.lang.String HOST
+    public static final java.lang.String PORT
+    public static final java.lang.String APP
+    public static final java.lang.String URL_CONTEXTPATH
+    public static final java.lang.String URL_COMMON_TOPIC_LIST
+    public static final java.lang.String PARAM_TYPE
+    public static final java.lang.String PARAM_PAGENO
+    public static final java.lang.String PARAM_PAGESIZE
+    public static final java.lang.String URL_TOP_NAME
+    public static final java.lang.String URL_TOPIC_TYPE
+    public static final java.lang.String URL_INSTALL
+    public static final java.lang.String URL_HOME_TOP
+    public static final java.lang.String URL_HOME_TOPS
+    public static final java.lang.String URL_HOME_TEAHOUSE
+    public static final java.lang.String URL_HOME_FOCUS
+    public static final java.lang.String URL_HOME_ENTERTAINMENT
+    public static final java.lang.String URL_HOME_EMOTIONAL
+    public static final java.lang.String URL_LIVE_FIRST
+    public static final java.lang.String URL_LIVE_SECOND
+    public static final java.lang.String URL_LIVE_THIRD
+    public static final java.lang.String URL_LIVE_FORTH
+    public static final java.lang.String URL_LIVE_FIFTH
+    public static final java.lang.String URL_LIVE_SIXTH
+    public static final java.lang.String URL_INFO_01
+    public static final java.lang.String URL_INFO_02
+    public static final java.lang.String URL_INFO_03
+    public static final java.lang.String URL_INFO_04
+    public static final java.lang.String URL_INFO_05
+    public static final java.lang.String URL_INFO_06
+    public static final java.lang.String URL_DISTRICT_SHOP_LIST
+    public static final java.lang.String URL_GOOGLE_REVERSE_GEOCODING
+    public static final java.lang.String URL_DISTRICT_SHOP_DETAIL
+    public static final java.lang.String URL_BOARD
+    public static final java.lang.String URL_BOARD_TOPIC_LIST
+    public static final java.lang.String URL_BOARD_TOPIC_TOP
+    public static final java.lang.String URL_BOARD_TOPIC_DIGEST
+    public static final java.lang.String URL_BOARD_TOPIC_SEARCH
+    public static final java.lang.String URL_TOPIC_DETAIL_DEFAULT
+    public static final java.lang.String URL_TOPIC_DETAIL_LANDLOAD
+    public static final java.lang.String URL_TOPIC_DETAIL_REPLY
+    public static final java.lang.String URL_LOGIN
+    public static final java.lang.String URL_TOPIC_SEND
+    public static final java.lang.String URL_TOPIC_REPLY
+    public static final java.lang.String URL_SMILEY
+    public static final java.lang.String URL_FEEDBACK
+    33:33:private Constants()
+net.shopnc.android.common.DateAndTimeHepler:
+    public static final java.lang.String TIME_PATTERN
+    23:23:private DateAndTimeHepler()
+net.shopnc.android.common.DbHelper:
+    38:39:public DbHelper(android.content.Context,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int)
+net.shopnc.android.common.FileHelper
+net.shopnc.android.common.HttpHelper:
+    61:61:public HttpHelper()
+    100:100:public static org.apache.http.client.HttpClient getHttpClient()
+    221:243:public static android.graphics.drawable.Drawable loadDrawable(java.lang.String,java.lang.String)
+net.shopnc.android.common.IOHelper:
+    22:22:public IOHelper()
+    43:76:public static void copy(java.io.File,java.io.File)
+net.shopnc.android.common.ImageHelper:
+    32:32:public ImageHelper()
+    35:58:public static android.graphics.Bitmap getHttpBitmap(java.lang.String)
+    68:68:public static android.graphics.Bitmap getBitmap(android.content.Context,int)
+    150:176:public static void write(android.graphics.Bitmap,java.lang.String,java.lang.String)
+    199:215:public static android.graphics.Bitmap loadFromFile(java.lang.String)
+    248:266:public static android.graphics.Bitmap zoom(android.graphics.Bitmap,int,int)
+    275:294:public static android.graphics.Bitmap getImageFromAssetsFile(android.content.Context,java.lang.String)
+net.shopnc.android.common.ImageHelper$MyViewBinder
+net.shopnc.android.common.ImageZoom:
+    68:72:public static void main(java.lang.String[])
+net.shopnc.android.common.JSONHelper
+net.shopnc.android.common.LocationHelper
+net.shopnc.android.common.LocationHelper$LocationCallback
+net.shopnc.android.common.LocationHelper$MyLocationListner
+net.shopnc.android.common.MD5Encoder:
+    18:18:public MD5Encoder()
+net.shopnc.android.common.MyApp:
+    private static android.content.Context context
+    81:81:public static android.content.Context getContext()
+    131:131:public android.content.SharedPreferences getSysInitSharedPreferences()
+    159:160:public void setPageSize(int)
+    247:247:public java.lang.String getGroupid()
+net.shopnc.android.common.SystemHelper:
+    35:36:private SystemHelper()
+    44:61:public static void createShortcut(android.content.Context,java.lang.Class)
+    70:85:public static boolean hasShortCut(android.content.Context)
+    114:116:public static java.lang.String getMobileNumber(android.content.Context)
+    128:141:public static boolean isConnected(android.content.Context)
+    179:188:public static int getAppVersionCode(android.content.Context)
+    198:207:public static java.lang.String getAppVersionName(android.content.Context)
+    218:222:public static void installAPK(android.content.Context,java.lang.String)
+net.shopnc.android.common.TitleString
+net.shopnc.android.common.Tools:
+    14:15:public Tools()
+    29:29:public static java.lang.String splitString(java.lang.String,int)
+    46:69:public static java.lang.String splitString(java.lang.String,int,java.lang.String)
+    73:78:public static void test(java.lang.String)
+    90:106:public static java.lang.String substring(java.lang.String,int)
+    128:138:public static int length(java.lang.String)
+net.shopnc.android.dao.FavoriteDao:
+    144:175:public java.util.ArrayList findByPager(java.lang.String,int,int)
+net.shopnc.android.handler.ImageLoader:
+    public static final java.lang.String TAG
+    125:135:public void asyncLoadBitmap2(java.lang.String,int,android.content.Context,net.shopnc.android.handler.ImageLoader$ImageCallback)
+    140:142:public void asyncLoadBitmap3(java.lang.String,int,android.content.Context,net.shopnc.android.handler.ImageLoader$ImageCallback)
+net.shopnc.android.handler.RemoteDataHandler:
+    public static final java.lang.String TAG
+    private static final java.lang.String _CODE
+    private static final java.lang.String _DATAS
+    private static final java.lang.String _HASMORE
+    private static final java.lang.String _COUNT
+    private static final java.lang.String _RESULT
+    private static final java.lang.String _URL
+    52:52:private RemoteDataHandler()
+    73:77:public static net.shopnc.android.model.ResponseData getShopDetail(int)
+    88:130:public static void asyncGetAddressName(double,double,net.shopnc.android.handler.RemoteDataHandler$StringCallback)
+    142:148:public static void asyncGetShopList(double,double,int,int,int,net.shopnc.android.handler.RemoteDataHandler$Callback)
+    370:427:public static void asyncGet(java.lang.String,net.shopnc.android.handler.RemoteDataHandler$Callback)
+net.shopnc.android.handler.RemoteDataHandler$1
+net.shopnc.android.handler.RemoteDataHandler$2
+net.shopnc.android.handler.RemoteDataHandler$4
+net.shopnc.android.handler.RemoteDataHandler$5
+net.shopnc.android.handler.RemoteDataHandler$StringCallback
+net.shopnc.android.handler.SendTopicTypeName
+net.shopnc.android.model.Board:
+    159:160:public void setSubBoards(java.util.ArrayList)
+net.shopnc.android.model.Board$Attr
+net.shopnc.android.model.PushData:
+    private static final long serialVersionUID
+    78:95:public static synchronized net.shopnc.android.model.PushData newInstance(java.lang.String)
+    101:106:public PushData(long,java.lang.String,java.lang.String,java.lang.String)
+    122:123:public void setId(long)
+    128:129:public void setTitle(java.lang.String)
+    134:135:public void setPic(java.lang.String)
+    140:141:public void setSummary(java.lang.String)
+    143:143:public java.lang.String getIdtype()
+    146:147:public void setIdtype(java.lang.String)
+net.shopnc.android.model.PushData$Attr
+net.shopnc.android.model.ResponseData:
+    54:54:public java.lang.String getResult()
+net.shopnc.android.model.ResponseData$Attr
+net.shopnc.android.model.Shop
+net.shopnc.android.model.Shop$Attr
+net.shopnc.android.model.Smiley:
+    public static final java.lang.String BBCODE_TEMPLATE
+    24:28:public Smiley(java.lang.String,java.lang.String)
+    35:35:public java.lang.String getName()
+    56:57:public void setName(java.lang.String)
+    64:64:public java.lang.String getBbcode()
+    68:69:public void setBbcode(java.lang.String)
+net.shopnc.android.model.Topic:
+    public static final java.lang.String TOPIC_TAG
+    private static final long serialVersionUID
+    126:131:public Topic(long,java.lang.String,java.lang.String,java.lang.String)
+    133:141:public Topic(long,java.lang.String,java.lang.String,java.lang.String,java.lang.String,long)
+    148:149:public void setStatus(java.lang.String)
+    177:178:public void setPid(long)
+    193:194:public void setFid(long)
+    205:205:public java.lang.String getUname()
+    209:210:public void setUname(java.lang.String)
+    221:221:public java.lang.String getSummary()
+    225:226:public void setSummary(java.lang.String)
+    229:229:public java.lang.String getImage()
+    233:234:public void setImage(java.lang.String)
+    269:270:public void setMessage(java.lang.String)
+    277:278:public void setAvatar(java.lang.String)
+    283:284:public void setPic_info(java.lang.String[])
+net.shopnc.android.model.Topic$Attr
+net.shopnc.android.model.User$Attr
+net.shopnc.android.ui.BaseActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.MainActivity:
+    public static final java.lang.String TAB_TAG_HOME
+    public static final java.lang.String TAB_TAG_LIVE
+    public static final java.lang.String TAB_TAG_FORUM
+    public static final java.lang.String TAB_TAG_INFO
+    public static final java.lang.String TAB_TAG_MORE
+net.shopnc.android.ui.StartActivity:
+    private static final java.lang.String TAG
+net.shopnc.android.ui.forum.BoardFavoriteActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.forum.BoardListActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.forum.ForumActivity:
+    public static final java.lang.String TAB_TAG_LIST
+    public static final java.lang.String TAB_TAG_FAVORITE
+    public static final java.lang.String TAB_TAG_BROWSE
+    public static android.widget.TextView titleleft_btn
+net.shopnc.android.ui.forum.LastestBrowseActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.forum.board.ChildBoardActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.forum.board.TopicAllActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.forum.board.TopicChildAllActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.forum.board.TopicChildListActivity:
+    public static final java.lang.String TAB_TAG_ALL
+    public static final java.lang.String TAB_TAG_TOP
+    public static final java.lang.String TAB_TAG_DIGEST
+    public static final java.lang.String TAB_TAG_SEARCH
+net.shopnc.android.ui.forum.board.TopicListActivity:
+    public static final java.lang.String TAB_TAG_ALL
+    public static final java.lang.String TAB_TAG_TOP
+    public static final java.lang.String TAB_TAG_DIGEST
+    public static final java.lang.String TAB_TAG_SON
+net.shopnc.android.ui.forum.board.TopicSearchActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.forum.topic.SendTopicActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.forum.topic.TopicDetailActivity:
+    public static final java.lang.String TAG
+    public static final java.lang.String TAB_TAG_DEFAULT
+    public static final java.lang.String TAB_TAG_ONLYLANDORD
+    public static final java.lang.String TAB_TAG_LASTREPLIES
+net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity$2:
+    209:209:static synthetic net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity access$0(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity$2)
+net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity$2$1:
+    356:392:public void clickOnAndroid(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    353:353:static synthetic net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity$2 access$0(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity$2$1)
+net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity$2$1$1
+net.shopnc.android.ui.forum.topic.TopicHtmlActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.forum.topic.TopicHtmlActivity$2:
+    211:211:static synthetic net.shopnc.android.ui.forum.topic.TopicHtmlActivity access$0(net.shopnc.android.ui.forum.topic.TopicHtmlActivity$2)
+net.shopnc.android.ui.forum.topic.TopicHtmlActivity$2$1:
+    356:392:public void clickOnAndroid(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    353:353:static synthetic net.shopnc.android.ui.forum.topic.TopicHtmlActivity$2 access$0(net.shopnc.android.ui.forum.topic.TopicHtmlActivity$2$1)
+net.shopnc.android.ui.forum.topic.TopicHtmlActivity$2$1$1
+net.shopnc.android.ui.home.EntertainmentActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.home.FocusActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.home.HeadlinesActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.ui.home.HomeActivity:
+    public static final java.lang.String TAB_TAG_HEADLINES
+    public static final java.lang.String TAB_TAG_TEAHOUSE
+    public static final java.lang.String TAB_TAG_FOCUS
+    public static final java.lang.String TAB_TAG_ENTERTAINMENT
+    public static final java.lang.String TAB_TAG_EMOTIONAL
+net.shopnc.android.ui.info.InfoActivity:
+    public static final java.lang.String TAB_TAG_FIRST
+    public static final java.lang.String TAB_TAG_SECOND
+    public static final java.lang.String TAB_TAG_THIRD
+    public static final java.lang.String TAB_TAG_FORTH
+    public static final java.lang.String TAB_TAG_FIFTH
+    public static final java.lang.String TAB_TAG_SIXTH
+net.shopnc.android.ui.live.LiveActivity:
+    public static final java.lang.String TAB_TAG_HOUSEDECORATE
+    public static final java.lang.String TAB_TAG_FOOD
+    public static final java.lang.String TAB_TAG_CAR
+    public static final java.lang.String TAB_TAG_MARRIAGE
+    public static final java.lang.String TAB_TAG_BABY
+    public static final java.lang.String TAB_TAG_WOMAN
+net.shopnc.android.ui.more.AccountMngActivity:
+    public static final java.lang.String TAG
+net.shopnc.android.widget.PullView:
+    375:376:public void setIgnore(boolean)
+    383:391:public void setUpdateTime(java.lang.String)
+org.apache.http.entity.mime.Header:
+    68:68:public java.util.List getFields()
+    84:92:public java.util.List getFields(java.lang.String)
+    97:106:public int removeFields(java.lang.String)
+    110:133:public void setField(org.apache.http.entity.mime.MinimalField)
+org.apache.http.entity.mime.HttpMultipart:
+    138:139:public HttpMultipart(java.lang.String,java.nio.charset.Charset,java.lang.String)
+    142:143:public HttpMultipart(java.lang.String,java.lang.String)
+    146:146:public java.lang.String getSubType()
+    150:150:public java.nio.charset.Charset getCharset()
+    154:154:public org.apache.http.entity.mime.HttpMultipartMode getMode()
+org.apache.http.entity.mime.MIME:
+    public static final java.lang.String CONTENT_TYPE
+    public static final java.lang.String CONTENT_TRANSFER_ENC
+    public static final java.lang.String CONTENT_DISPOSITION
+    public static final java.lang.String ENC_8BIT
+    public static final java.lang.String ENC_BINARY
+    36:36:public MIME()
+org.apache.http.entity.mime.content.AbstractContentBody:
+    61:61:public java.lang.String getMediaType()
+    65:65:public java.lang.String getSubType()
+org.apache.http.entity.mime.content.ByteArrayBody
+org.apache.http.entity.mime.content.ContentDescriptor:
+    public abstract java.lang.String getMediaType()
+    public abstract java.lang.String getSubType()
+org.apache.http.entity.mime.content.FileBody:
+    85:85:public java.io.InputStream getInputStream()
+    93:94:public void writeTo(java.io.OutputStream,int)
+    130:130:public java.io.File getFile()
+org.apache.http.entity.mime.content.InputStreamBody
+org.apache.http.entity.mime.content.StringBody:
+    58:60:public static org.apache.http.entity.mime.content.StringBody create(java.lang.String,java.lang.String,java.nio.charset.Charset)
+    69:69:public static org.apache.http.entity.mime.content.StringBody create(java.lang.String,java.nio.charset.Charset)
+    76:76:public static org.apache.http.entity.mime.content.StringBody create(java.lang.String)
+    126:127:public StringBody(java.lang.String)
+    130:130:public java.io.Reader getReader()
+    140:141:public void writeTo(java.io.OutputStream,int)

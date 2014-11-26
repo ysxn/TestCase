@@ -1,0 +1,1964 @@
+net.shopnc.android.adapter.BoardFavoriteListViewAdapter -> net.shopnc.android.a.a:
+    java.util.ArrayList datas -> a
+    android.view.LayoutInflater inflater -> b
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    void setDatas(java.util.ArrayList) -> a
+net.shopnc.android.adapter.FocusListViewAdapter -> net.shopnc.android.a.b:
+    java.util.ArrayList datas -> a
+    android.view.LayoutInflater inflater -> b
+    net.shopnc.android.adapter.FocusListViewAdapter$ViewHolder vh -> c
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    void setDatas(java.util.ArrayList) -> a
+net.shopnc.android.adapter.FocusListViewAdapter$ViewHolder -> net.shopnc.android.a.c:
+    android.widget.TextView txt_id -> a
+    android.widget.TextView txt_title -> b
+    net.shopnc.android.adapter.FocusListViewAdapter this$0 -> c
+net.shopnc.android.adapter.HeadlinesListViewAdapter -> net.shopnc.android.a.d:
+    java.util.ArrayList datas -> a
+    android.view.LayoutInflater inflater -> b
+    android.content.Context ctx -> c
+    net.shopnc.android.common.MyApp myApp -> d
+    int screenWidth -> e
+    boolean img_invisible -> f
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    void setDatas(java.util.ArrayList) -> a
+net.shopnc.android.adapter.HeadlinesListViewAdapter$1 -> net.shopnc.android.a.e:
+    net.shopnc.android.adapter.HeadlinesListViewAdapter this$0 -> a
+    android.widget.ImageView val$mv -> b
+    void imageLoaded$6004fe1d(android.graphics.Bitmap) -> a
+net.shopnc.android.adapter.MenuListViewAdapter -> net.shopnc.android.a.f:
+    java.util.ArrayList datas -> a
+    int size -> b
+    android.view.LayoutInflater inflater -> c
+    net.shopnc.android.adapter.MenuListViewAdapter$ViewHolder vh -> d
+    android.content.Context ctx -> e
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+net.shopnc.android.adapter.MenuListViewAdapter$ViewHolder -> net.shopnc.android.a.g:
+    android.widget.CheckBox cbx -> a
+    android.widget.TextView tv -> b
+    net.shopnc.android.adapter.MenuListViewAdapter this$0 -> c
+net.shopnc.android.adapter.MyExpandableListAdapter -> net.shopnc.android.a.h:
+    java.util.ArrayList boards -> b
+    int size -> c
+    android.content.Context context -> a
+    android.view.LayoutInflater childInflater -> d
+    android.view.LayoutInflater groupInflater -> e
+    net.shopnc.android.adapter.MyExpandableListAdapter$GroupViewHolder gvh -> f
+    net.shopnc.android.adapter.MyExpandableListAdapter$ChildViewHolder cvh -> g
+    int getGroupCount() -> getGroupCount
+    int getChildrenCount(int) -> getChildrenCount
+    java.lang.Object getGroup(int) -> getGroup
+    java.lang.Object getChild(int,int) -> getChild
+    long getGroupId(int) -> getGroupId
+    long getChildId(int,int) -> getChildId
+    boolean hasStableIds() -> hasStableIds
+    android.view.View getGroupView(int,boolean,android.view.View,android.view.ViewGroup) -> getGroupView
+    android.view.View getChildView(int,int,boolean,android.view.View,android.view.ViewGroup) -> getChildView
+    boolean isChildSelectable(int,int) -> isChildSelectable
+    void onGroupCollapsed(int) -> onGroupCollapsed
+    void onGroupExpanded(int) -> onGroupExpanded
+net.shopnc.android.adapter.MyExpandableListAdapter$ChildViewHolder -> net.shopnc.android.a.i:
+    android.widget.TextView txt_title -> a
+    net.shopnc.android.adapter.MyExpandableListAdapter this$0 -> b
+net.shopnc.android.adapter.MyExpandableListAdapter$GroupViewHolder -> net.shopnc.android.a.j:
+    android.widget.TextView txt_title -> a
+    android.widget.TextView txt_selector -> b
+    net.shopnc.android.adapter.MyExpandableListAdapter this$0 -> c
+net.shopnc.android.adapter.SmileyGridViewAdapter -> net.shopnc.android.a.k:
+    android.view.LayoutInflater inflater -> a
+    java.util.ArrayList faces -> b
+    int getCount() -> getCount
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    java.lang.Object getItem(int) -> getItem
+net.shopnc.android.adapter.SonListViewAdapter -> net.shopnc.android.a.l:
+    java.util.ArrayList datas -> a
+    android.view.LayoutInflater inflater -> b
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    void setDatas(java.util.ArrayList) -> a
+net.shopnc.android.adapter.SubmenuListViewAdapter -> net.shopnc.android.a.m:
+    java.util.ArrayList datas -> a
+    int size -> b
+    android.view.LayoutInflater inflater -> c
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter -> net.shopnc.android.a.n:
+    java.util.ArrayList datas -> a
+    android.view.LayoutInflater inflater -> b
+    net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter$ViewHolder vh -> c
+    android.content.Context ctx -> d
+    net.shopnc.android.common.MyApp myApp -> e
+    boolean img_invisible -> f
+    long count -> g
+    long pageno -> h
+    int pagesize -> i
+    java.lang.String mage -> j
+    java.lang.String WAY -> k
+    long tid -> l
+    long getTid() -> a
+    void setTid(long) -> a
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    void setDatas(java.util.ArrayList) -> a
+    void setPageno(long) -> b
+    void setPagesize(int) -> a
+    void setCount(long) -> c
+    net.shopnc.android.common.MyApp access$0(net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter) -> a
+    android.content.Context access$1(net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter) -> b
+    void access$2(net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter,java.lang.String) -> a
+    java.lang.String access$3(net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter) -> c
+net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter$1 -> net.shopnc.android.a.o:
+    net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter this$0 -> a
+    net.shopnc.android.model.Topic val$topic -> b
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter$2 -> net.shopnc.android.a.p:
+    net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter this$0 -> a
+    android.widget.ImageView val$temp -> b
+    void imageLoaded$6004fe1d(android.graphics.Bitmap) -> a
+net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter$3 -> net.shopnc.android.a.q:
+    net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter this$0 -> a
+    java.lang.String[] val$img_urls -> b
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter$ViewHolder -> net.shopnc.android.a.r:
+    android.widget.ImageView avatar -> a
+    android.widget.TextView txt_id -> b
+    android.widget.TextView txt_floor -> c
+    android.widget.TextView txt_author -> d
+    android.widget.TextView txt_visit_replies -> e
+    android.widget.TextView txt_pubtime -> f
+    android.widget.TextView txt_content -> g
+    android.widget.TextView txt_from -> h
+    android.widget.TextView topic_quote -> i
+    android.widget.TextView view_huifu -> j
+    android.widget.Button btn_view_image -> k
+    net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter this$0 -> l
+net.shopnc.android.adapter.TopicDetailListViewAdapter -> net.shopnc.android.a.s:
+    java.util.ArrayList datas -> a
+    android.view.LayoutInflater inflater -> b
+    net.shopnc.android.adapter.TopicDetailListViewAdapter$ViewHolder vh -> c
+    android.content.Context ctx -> d
+    net.shopnc.android.common.MyApp myApp -> e
+    boolean img_invisible -> f
+    long pageno -> g
+    int pagesize -> h
+    java.lang.String mage -> i
+    java.lang.String WAY -> j
+    long tid -> k
+    long getTid() -> a
+    void setTid(long) -> a
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    void setDatas(java.util.ArrayList) -> a
+    void setPageno(long) -> b
+    void setPagesize(int) -> a
+    net.shopnc.android.common.MyApp access$0(net.shopnc.android.adapter.TopicDetailListViewAdapter) -> a
+    android.content.Context access$1(net.shopnc.android.adapter.TopicDetailListViewAdapter) -> b
+    void access$2(net.shopnc.android.adapter.TopicDetailListViewAdapter,java.lang.String) -> a
+    java.lang.String access$3(net.shopnc.android.adapter.TopicDetailListViewAdapter) -> c
+net.shopnc.android.adapter.TopicDetailListViewAdapter$1 -> net.shopnc.android.a.t:
+    net.shopnc.android.adapter.TopicDetailListViewAdapter this$0 -> a
+    net.shopnc.android.model.Topic val$topic -> b
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.adapter.TopicDetailListViewAdapter$2 -> net.shopnc.android.a.u:
+    net.shopnc.android.adapter.TopicDetailListViewAdapter this$0 -> a
+    android.widget.ImageView val$temp -> b
+    void imageLoaded$6004fe1d(android.graphics.Bitmap) -> a
+net.shopnc.android.adapter.TopicDetailListViewAdapter$3 -> net.shopnc.android.a.v:
+    net.shopnc.android.adapter.TopicDetailListViewAdapter this$0 -> a
+    java.lang.String[] val$img_urls -> b
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.adapter.TopicDetailListViewAdapter$ViewHolder -> net.shopnc.android.a.w:
+    android.widget.ImageView avatar -> a
+    android.widget.TextView txt_id -> b
+    android.widget.TextView txt_floor -> c
+    android.widget.TextView txt_author -> d
+    android.widget.TextView txt_visit_replies -> e
+    android.widget.TextView txt_pubtime -> f
+    android.widget.TextView txt_content -> g
+    android.widget.TextView txt_from -> h
+    android.widget.TextView topic_quote -> i
+    android.widget.TextView view_huifu -> j
+    android.widget.Button btn_view_image -> k
+    net.shopnc.android.adapter.TopicDetailListViewAdapter this$0 -> l
+net.shopnc.android.adapter.TopicListViewAdapter -> net.shopnc.android.a.x:
+    java.util.ArrayList datas -> a
+    android.view.LayoutInflater inflater -> b
+    net.shopnc.android.adapter.TopicListViewAdapter$ViewHolder vh -> c
+    android.content.Context ctx -> d
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    void setDatas(java.util.ArrayList) -> a
+net.shopnc.android.adapter.TopicListViewAdapter$ViewHolder -> net.shopnc.android.a.y:
+    android.widget.TextView txt_id -> a
+    android.widget.TextView txt_title -> b
+    android.widget.TextView txt_author -> c
+    android.widget.TextView txt_visit_replies -> d
+    android.widget.TextView txt_pubtime -> e
+    net.shopnc.android.adapter.TopicListViewAdapter this$0 -> f
+net.shopnc.android.adapter.UserListViewAdapter -> net.shopnc.android.a.z:
+    java.util.ArrayList datas -> a
+    int size -> b
+    android.view.LayoutInflater inflater -> c
+    net.shopnc.android.common.MyApp myApp -> d
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+net.shopnc.android.common.BBCodeHelper -> net.shopnc.android.common.a:
+    java.util.regex.Pattern pattern_ncsmiley -> a
+    java.util.regex.Pattern pattern_pic -> b
+    java.util.regex.Pattern pattern_link -> c
+    java.util.regex.Pattern bbcode -> d
+    java.util.regex.Pattern pattern_attach -> e
+    java.util.regex.Pattern pattern_href -> f
+    java.lang.String img_html -> g
+    java.lang.String link_html -> h
+    java.lang.String processURL(java.lang.String) -> c
+    java.lang.String processNcsmiley(java.lang.String) -> d
+    java.lang.String parseHtmlExcludeImgTag(java.lang.String) -> a
+    java.lang.String processBBCode(java.lang.String) -> b
+net.shopnc.android.common.Constants -> net.shopnc.android.common.b:
+    java.lang.String CACHE_DIR -> a
+    java.lang.String CACHE_DIR_SMILEY -> b
+    java.lang.String CACHE_DIR_IMAGE -> c
+    java.lang.String CACHE_DIR_UPLOADING_IMG -> d
+net.shopnc.android.common.DateAndTimeHepler -> net.shopnc.android.common.c:
+    java.lang.String friendly_time(android.content.Context,long) -> a
+net.shopnc.android.common.DbHelper -> net.shopnc.android.common.d:
+    java.lang.String db_name -> a
+    void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
+    void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
+    android.database.sqlite.SQLiteDatabase getSQLiteDatabase() -> a
+net.shopnc.android.common.HttpHelper -> net.shopnc.android.common.e:
+    org.apache.http.client.HttpClient httpClient -> a
+    java.lang.String get(java.lang.String) -> a
+    java.lang.String post(java.lang.String,java.util.HashMap) -> a
+    java.lang.String multipartPost(java.lang.String,java.util.HashMap,java.util.HashMap) -> a
+    void download(java.lang.String,java.io.File) -> a
+    android.graphics.Bitmap downloadBitmap(java.lang.String) -> b
+net.shopnc.android.common.HttpHelper$FlushedInputStream -> net.shopnc.android.common.f:
+    long skip(long) -> skip
+net.shopnc.android.common.IOHelper -> net.shopnc.android.common.g:
+    java.lang.String getName(java.lang.String) -> a
+    long totalFileSize(java.io.File) -> a
+    int clearCacheFolder(java.io.File) -> b
+net.shopnc.android.common.ImageHelper -> net.shopnc.android.common.h:
+    void write(android.graphics.Bitmap,java.lang.String) -> a
+    android.graphics.Bitmap loadFromFile(java.io.File) -> a
+net.shopnc.android.common.ImageZoom -> net.shopnc.android.common.i:
+    boolean isZoom -> a
+    int srcWidth -> b
+    int srcHeight -> c
+    int maxWidth -> d
+    int maxHeight -> e
+    int newWidth -> f
+    int newHeight -> g
+    void zoomImage(int,int,int,int) -> a
+    int getWidth() -> a
+    int getHeight() -> b
+net.shopnc.android.common.MD5Encoder -> net.shopnc.android.common.j:
+    java.lang.String encode(java.lang.String) -> a
+    java.lang.String byte2hexString(byte[]) -> a
+net.shopnc.android.common.MyApp -> net.shopnc.android.common.MyApp:
+    android.content.SharedPreferences sysInitSharedPreferences -> a
+    java.lang.String sid -> b
+    java.lang.String uid -> c
+    java.lang.String groupid -> d
+    java.lang.String useracc -> e
+    java.lang.String userpw -> f
+    boolean remember_pwd -> g
+    boolean auto_login -> h
+    int pageSize -> i
+    boolean display_postStarter_only -> j
+    boolean img_invisible -> k
+    int screenWidth -> l
+    int screenHeight -> m
+    int sw -> n
+    int sh -> o
+    net.shopnc.android.dao.LastestBrowseDao lastestBrowseDao -> p
+    java.util.ArrayList faceList -> q
+    java.util.HashMap subBoardMap -> r
+    java.util.ArrayList boards -> s
+    void onCreate() -> onCreate
+    int getScreenWidth() -> a
+    int getScreenHeight() -> b
+    net.shopnc.android.dao.LastestBrowseDao getLastestBrowseDao() -> c
+    java.lang.String getUid() -> d
+    void setUid(java.lang.String) -> a
+    boolean isAuto_login() -> e
+    void setAuto_login(boolean) -> a
+    int getPageSize() -> f
+    boolean isDisplay_postStarter_only() -> g
+    void setDisplay_postStarter_only(boolean) -> b
+    boolean isImg_invisible() -> h
+    void setImg_invisible(boolean) -> c
+    java.lang.String getSid() -> i
+    void setSid(java.lang.String) -> b
+    java.lang.String getUseracc() -> j
+    void setUseracc(java.lang.String) -> c
+    boolean isRemember_pwd() -> k
+    void setRemember_pwd(boolean) -> d
+    java.lang.String getUserpw() -> l
+    void setUserpw(java.lang.String) -> d
+    java.util.ArrayList getFaceList() -> m
+    void setFaceList(java.util.ArrayList) -> a
+    void setGroupid(java.lang.String) -> e
+    java.util.HashMap getSubBoardMap() -> n
+    void setSubBoardMap(java.util.HashMap) -> a
+    java.util.ArrayList getBoards() -> o
+    void setBoards(java.util.ArrayList) -> b
+net.shopnc.android.common.MyApp$1 -> net.shopnc.android.common.k:
+    net.shopnc.android.common.MyApp this$0 -> a
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.common.SystemHelper -> net.shopnc.android.common.l:
+    int getNetworkType(android.content.Context) -> a
+net.shopnc.android.common.Tools -> net.shopnc.android.common.m:
+    java.lang.StringBuffer length2(java.lang.String) -> a
+net.shopnc.android.dao.FavoriteDao -> net.shopnc.android.b.a:
+    net.shopnc.android.common.DbHelper dbHelper -> a
+    void deleteAll() -> a
+    net.shopnc.android.model.Board get(long) -> a
+    void save(net.shopnc.android.model.Board,java.lang.String) -> a
+    java.util.ArrayList findByOwner(java.lang.String) -> a
+net.shopnc.android.dao.LastestBrowseDao -> net.shopnc.android.b.b:
+    net.shopnc.android.common.DbHelper dbHelper -> a
+    void deleteAll() -> a
+    void record(net.shopnc.android.model.Topic) -> a
+    java.util.ArrayList findByPager(int,int) -> a
+net.shopnc.android.dao.UserDao -> net.shopnc.android.b.c:
+    net.shopnc.android.common.DbHelper dbHelper -> a
+    void delete(java.lang.String) -> a
+    net.shopnc.android.model.User get(java.lang.String) -> b
+    void save(net.shopnc.android.model.User) -> a
+    java.util.ArrayList findAll() -> a
+net.shopnc.android.handler.ImageLoader -> net.shopnc.android.c.a:
+    net.shopnc.android.handler.ImageLoader imageLoader -> a
+    java.util.concurrent.ConcurrentHashMap imageCache -> b
+    java.util.concurrent.ThreadPoolExecutor threadPool -> c
+    net.shopnc.android.handler.ImageLoader getInstance() -> a
+    void downloadBitmap(java.lang.String) -> a
+    void asyncLoadBitmap(java.lang.String,int,net.shopnc.android.handler.ImageLoader$ImageCallback) -> a
+    void asyncLoadBitmap(java.lang.String,net.shopnc.android.handler.ImageLoader$ImageCallback) -> a
+    android.graphics.Bitmap getBitmapFromCache(java.lang.String) -> b
+    android.graphics.Bitmap getBitmapFromDisk(java.lang.String) -> c
+    java.util.concurrent.ConcurrentHashMap access$0() -> b
+net.shopnc.android.handler.ImageLoader$1 -> net.shopnc.android.c.b:
+    net.shopnc.android.handler.ImageLoader this$0 -> a
+    net.shopnc.android.handler.ImageLoader$ImageCallback val$callback -> b
+    java.lang.String val$url -> c
+    void handleMessage(android.os.Message) -> handleMessage
+net.shopnc.android.handler.ImageLoader$2 -> net.shopnc.android.c.c:
+    net.shopnc.android.handler.ImageLoader this$0 -> a
+    net.shopnc.android.handler.ImageLoader$ImageCallback val$callback -> b
+    java.lang.String val$url -> c
+    void handleMessage(android.os.Message) -> handleMessage
+net.shopnc.android.handler.ImageLoader$ImageCallback -> net.shopnc.android.c.d:
+    void imageLoaded$6004fe1d(android.graphics.Bitmap) -> a
+net.shopnc.android.handler.ImageLoader$LoadBitmapRunnable -> net.shopnc.android.c.e:
+    java.lang.String url -> b
+    android.os.Handler handler -> c
+    int width -> d
+    net.shopnc.android.handler.ImageLoader this$0 -> a
+    void run() -> run
+net.shopnc.android.handler.RemoteDataHandler -> net.shopnc.android.c.f:
+    java.util.concurrent.ThreadPoolExecutor threadPool -> a
+    java.util.HashMap loadSubBoardMap(java.lang.String) -> a
+    java.lang.String loadtopictype(long) -> a
+    void replyTopic(long,long,java.util.HashMap,java.util.HashSet,net.shopnc.android.handler.RemoteDataHandler$Callback) -> a
+    void quoteTopic(long,long,java.util.HashMap,java.util.HashSet,net.shopnc.android.handler.RemoteDataHandler$Callback) -> b
+    void sendTopic(long,java.util.HashMap,java.util.HashSet,java.lang.Long,net.shopnc.android.handler.RemoteDataHandler$Callback) -> a
+    java.util.ArrayList loadSmiley() -> a
+    void feedback(java.lang.String,java.lang.String,java.lang.String,net.shopnc.android.handler.RemoteDataHandler$Callback) -> a
+    void asyncLogin(java.lang.String,java.lang.String,net.shopnc.android.handler.RemoteDataHandler$Callback) -> a
+    void asyncGet(java.lang.String,int,int,net.shopnc.android.handler.RemoteDataHandler$Callback) -> a
+    net.shopnc.android.model.ResponseData get(java.lang.String) -> b
+    net.shopnc.android.model.ResponseData get$22802d8d(java.lang.String,int) -> a
+    net.shopnc.android.model.ResponseData post(java.lang.String,java.util.HashMap) -> a
+    void asyncPost(java.lang.String,java.util.HashMap,net.shopnc.android.handler.RemoteDataHandler$Callback) -> a
+    void asyncMultipartPost(java.lang.String,java.util.HashMap,java.util.HashMap,net.shopnc.android.handler.RemoteDataHandler$Callback) -> a
+    java.lang.String loadTopName() -> b
+    void intall(java.lang.String,java.lang.String,net.shopnc.android.handler.RemoteDataHandler$Callback) -> b
+net.shopnc.android.handler.RemoteDataHandler$10 -> net.shopnc.android.c.g:
+    net.shopnc.android.handler.RemoteDataHandler$Callback val$callback -> a
+    void handleMessage(android.os.Message) -> handleMessage
+net.shopnc.android.handler.RemoteDataHandler$11 -> net.shopnc.android.c.h:
+    android.os.Handler val$handler -> a
+    java.lang.String val$url -> b
+    java.util.HashMap val$params -> c
+    java.util.HashMap val$fileMap -> d
+    void run() -> run
+net.shopnc.android.handler.RemoteDataHandler$3 -> net.shopnc.android.c.i:
+    java.lang.String val$url -> a
+    java.io.File val$dest -> b
+    void run() -> run
+net.shopnc.android.handler.RemoteDataHandler$6 -> net.shopnc.android.c.j:
+    net.shopnc.android.handler.RemoteDataHandler$Callback val$callback -> a
+    void handleMessage(android.os.Message) -> handleMessage
+net.shopnc.android.handler.RemoteDataHandler$7 -> net.shopnc.android.c.k:
+    android.os.Handler val$handler -> a
+    java.lang.String val$url -> b
+    int val$pagesize -> c
+    int val$pageno -> d
+    void run() -> run
+net.shopnc.android.handler.RemoteDataHandler$8 -> net.shopnc.android.c.l:
+    net.shopnc.android.handler.RemoteDataHandler$Callback val$callback -> a
+    void handleMessage(android.os.Message) -> handleMessage
+net.shopnc.android.handler.RemoteDataHandler$9 -> net.shopnc.android.c.m:
+    android.os.Handler val$handler -> a
+    java.lang.String val$url -> b
+    java.util.HashMap val$params -> c
+    void run() -> run
+net.shopnc.android.handler.RemoteDataHandler$Callback -> net.shopnc.android.c.n:
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.handler.SmileyImageGetter -> net.shopnc.android.c.o:
+    android.graphics.drawable.BitmapDrawable bd -> a
+    android.content.Context c -> b
+    android.graphics.drawable.Drawable getDrawable(java.lang.String) -> getDrawable
+    void access$0(net.shopnc.android.handler.SmileyImageGetter,android.graphics.drawable.BitmapDrawable) -> a
+    android.graphics.drawable.BitmapDrawable access$1(net.shopnc.android.handler.SmileyImageGetter) -> a
+net.shopnc.android.handler.SmileyImageGetter$1 -> net.shopnc.android.c.p:
+    net.shopnc.android.handler.SmileyImageGetter this$0 -> a
+    int val$w -> b
+    int val$h -> c
+    void imageLoaded$6004fe1d(android.graphics.Bitmap) -> a
+net.shopnc.android.handler.UploadImageGetter -> net.shopnc.android.c.q:
+    android.graphics.drawable.Drawable getDrawable(java.lang.String) -> getDrawable
+net.shopnc.android.model.Board -> net.shopnc.android.d.a:
+    long fid -> a
+    long fup -> b
+    java.lang.String name -> c
+    java.lang.String type -> d
+    int ispost -> e
+    int isreply -> f
+    int ispostimage -> g
+    java.util.ArrayList subBoards -> h
+    java.util.HashMap newSubBoardMap(java.lang.String) -> a
+    java.util.ArrayList new_SB_list(java.lang.String) -> b
+    java.util.ArrayList newBoardList(java.lang.String) -> c
+    java.util.ArrayList getSubBoards() -> a
+    long getFid() -> b
+    void setFid(long) -> a
+    long getFup() -> c
+    void setFup(long) -> b
+    java.lang.String getName() -> d
+    void setName(java.lang.String) -> d
+    java.lang.String getType() -> e
+    void setType(java.lang.String) -> e
+    int getIspost() -> f
+    int getIsreply() -> g
+    int getIspostimage() -> h
+    java.lang.String toString() -> toString
+net.shopnc.android.model.PushData -> net.shopnc.android.d.b:
+    long id -> a
+    java.lang.String title -> b
+    java.lang.String pic -> c
+    java.lang.String summary -> d
+    java.lang.String idtype -> e
+    java.util.ArrayList newInstanceList(java.lang.String) -> a
+    long getId() -> a
+    java.lang.String getTitle() -> b
+    java.lang.String getPic() -> c
+    java.lang.String getSummary() -> d
+    java.lang.String toString() -> toString
+net.shopnc.android.model.ResponseData -> net.shopnc.android.d.c:
+    int code -> a
+    boolean hasMore -> b
+    java.lang.String json -> c
+    java.lang.String result -> d
+    long count -> e
+    int getCode() -> a
+    void setCode(int) -> a
+    boolean isHasMore() -> b
+    void setHasMore(boolean) -> a
+    java.lang.String getJson() -> c
+    void setJson(java.lang.String) -> a
+    void setResult(java.lang.String) -> b
+    long getCount() -> d
+    void setCount(long) -> a
+    java.lang.String toString() -> toString
+net.shopnc.android.model.Smiley -> net.shopnc.android.d.d:
+    java.lang.String code -> a
+    java.lang.String name -> b
+    java.lang.String bbcode -> c
+    java.lang.String path -> d
+    java.lang.String localName -> e
+    java.lang.String getCode() -> a
+    java.lang.String getPath() -> b
+    java.lang.String getLocalName() -> c
+    void setLocalName(java.lang.String) -> a
+    void setCode(java.lang.String) -> b
+    void setPath(java.lang.String) -> c
+    java.lang.String toString() -> toString
+net.shopnc.android.model.Topic -> net.shopnc.android.d.e:
+    long tid -> a
+    long fid -> b
+    java.lang.String subject -> c
+    java.lang.String uname -> d
+    java.lang.String author -> e
+    java.lang.String avatar -> f
+    java.lang.String summary -> g
+    java.lang.String image -> h
+    java.lang.String views -> i
+    java.lang.String replies -> j
+    long dateline -> k
+    java.lang.String message -> l
+    java.lang.String status -> m
+    long pid -> n
+    java.lang.String[] pic_info -> o
+    java.util.ArrayList newInstanceList(java.lang.String) -> a
+    java.lang.String getStatus() -> a
+    long getPid() -> b
+    long getTid() -> c
+    void setTid(long) -> a
+    long getFid() -> d
+    java.lang.String getSubject() -> e
+    void setSubject(java.lang.String) -> b
+    java.lang.String getAuthor() -> f
+    void setAuthor(java.lang.String) -> c
+    java.lang.String getViews() -> g
+    void setViews(java.lang.String) -> d
+    java.lang.String getReplies() -> h
+    void setReplies(java.lang.String) -> e
+    long getDateline() -> i
+    void setDateline(long) -> b
+    java.lang.String getMessage() -> j
+    java.lang.String getAvatar() -> k
+    java.lang.String[] getPic_info() -> l
+    java.lang.String toString() -> toString
+net.shopnc.android.model.User -> net.shopnc.android.d.f:
+    java.lang.String authorid -> a
+    java.lang.String author -> b
+    java.lang.String pwd -> c
+    java.lang.String sessionid -> d
+    java.lang.String groupid -> e
+    net.shopnc.android.model.User newInstance(java.lang.String) -> a
+    java.lang.String getGroupid() -> a
+    java.lang.String getAuthorid() -> b
+    void setAuthorid(java.lang.String) -> b
+    java.lang.String getAuthor() -> c
+    void setAuthor(java.lang.String) -> c
+    java.lang.String getPwd() -> d
+    void setPwd(java.lang.String) -> d
+    java.lang.String getSessionid() -> e
+    void setSessionid(java.lang.String) -> e
+    java.lang.String toString() -> toString
+net.shopnc.android.ui.BaseActivity -> net.shopnc.android.ui.BaseActivity:
+    net.shopnc.android.common.MyApp myApp -> a
+    android.app.Activity myParent -> b
+    net.shopnc.android.widget.MyProcessDialog mydialog -> c
+    android.widget.ImageButton btn_left -> d
+    net.shopnc.android.widget.PullView pv -> e
+    android.widget.LinearLayout moreLayout -> f
+    android.widget.Button moreBtn -> g
+    java.lang.String txt_more_default -> h
+    java.lang.String txt_more_wait -> i
+    net.shopnc.android.adapter.TopicListViewAdapter adapter -> j
+    java.util.ArrayList datas -> k
+    int pageno -> l
+    int pagesize -> m
+    java.lang.String url -> n
+    android.widget.ImageButton ibtu -> o
+    android.app.AlertDialog$Builder builder -> p
+    void onCreate(android.os.Bundle) -> onCreate
+    void onUpdate() -> a
+    void onResume() -> onResume
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
+    void loadPage(int) -> a
+    android.app.Dialog onCreateDialog(int) -> onCreateDialog
+    android.app.AlertDialog$Builder access$0(net.shopnc.android.ui.BaseActivity) -> a
+    java.lang.String access$1(net.shopnc.android.ui.BaseActivity) -> b
+    void access$2(net.shopnc.android.ui.BaseActivity,java.lang.String) -> a
+    net.shopnc.android.widget.MyProcessDialog access$3(net.shopnc.android.ui.BaseActivity) -> c
+    int access$4(net.shopnc.android.ui.BaseActivity) -> d
+    int access$5(net.shopnc.android.ui.BaseActivity) -> e
+    android.widget.Button access$6(net.shopnc.android.ui.BaseActivity) -> f
+    java.lang.String access$7(net.shopnc.android.ui.BaseActivity) -> g
+    android.widget.LinearLayout access$8(net.shopnc.android.ui.BaseActivity) -> h
+    java.util.ArrayList access$9(net.shopnc.android.ui.BaseActivity) -> i
+    net.shopnc.android.adapter.TopicListViewAdapter access$10(net.shopnc.android.ui.BaseActivity) -> j
+    net.shopnc.android.widget.PullView access$11(net.shopnc.android.ui.BaseActivity) -> k
+    java.lang.String access$12(net.shopnc.android.ui.BaseActivity) -> l
+    void access$13(net.shopnc.android.ui.BaseActivity,int) -> a
+    void access$14(net.shopnc.android.ui.BaseActivity,int) -> b
+net.shopnc.android.ui.BaseActivity$1 -> net.shopnc.android.ui.a:
+    net.shopnc.android.ui.BaseActivity this$0 -> a
+    android.widget.ArrayAdapter val$adapter2 -> b
+    java.lang.String[] val$str -> c
+    void onClick(android.view.View) -> onClick
+    net.shopnc.android.ui.BaseActivity access$0(net.shopnc.android.ui.BaseActivity$1) -> a
+net.shopnc.android.ui.BaseActivity$1$1 -> net.shopnc.android.ui.b:
+    net.shopnc.android.ui.BaseActivity$1 this$1 -> a
+    java.lang.String[] val$str -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+    net.shopnc.android.ui.BaseActivity$1 access$0(net.shopnc.android.ui.BaseActivity$1$1) -> a
+net.shopnc.android.ui.BaseActivity$1$1$1 -> net.shopnc.android.ui.c:
+    net.shopnc.android.ui.BaseActivity$1$1 this$2 -> a
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.BaseActivity$2 -> net.shopnc.android.ui.d:
+    net.shopnc.android.ui.BaseActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.BaseActivity$3 -> net.shopnc.android.ui.e:
+    net.shopnc.android.ui.BaseActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.BaseActivity$4 -> net.shopnc.android.ui.f:
+    net.shopnc.android.ui.BaseActivity this$0 -> a
+    int val$pageno -> b
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.MainActivity -> net.shopnc.android.ui.MainActivity:
+    android.widget.TabHost tabHost -> a
+    android.content.Intent homeIntent -> b
+    android.content.Intent liveIntent -> c
+    android.content.Intent forumIntent -> d
+    android.content.Intent info -> e
+    android.content.Intent moreIntent -> f
+    android.widget.RadioButton btn_home -> g
+    android.widget.RadioButton btn_live -> h
+    android.widget.RadioButton btn_forum -> i
+    android.widget.RadioButton btn_info -> j
+    android.widget.RadioButton btn_more -> k
+    void onCreate(android.os.Bundle) -> onCreate
+    android.app.Dialog onCreateDialog(int) -> onCreateDialog
+    android.widget.TabHost access$0(net.shopnc.android.ui.MainActivity) -> a
+net.shopnc.android.ui.MainActivity$1 -> net.shopnc.android.ui.g:
+    net.shopnc.android.ui.MainActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+net.shopnc.android.ui.MainActivity$2 -> net.shopnc.android.ui.h:
+    net.shopnc.android.ui.MainActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+net.shopnc.android.ui.MainActivity$MyRadioButtonClickListener -> net.shopnc.android.ui.i:
+    net.shopnc.android.ui.MainActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.StartActivity -> net.shopnc.android.ui.StartActivity:
+    net.shopnc.android.common.MyApp myApp -> a
+    void onCreate(android.os.Bundle) -> onCreate
+    void initDataAndStartMain() -> a
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    void access$0(net.shopnc.android.ui.StartActivity) -> a
+net.shopnc.android.ui.StartActivity$1 -> net.shopnc.android.ui.j:
+    net.shopnc.android.ui.StartActivity this$0 -> a
+    void run() -> run
+net.shopnc.android.ui.StartActivity$2 -> net.shopnc.android.ui.k:
+    net.shopnc.android.ui.StartActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+net.shopnc.android.ui.StartActivity$3 -> net.shopnc.android.ui.l:
+    net.shopnc.android.ui.StartActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+net.shopnc.android.ui.forum.BoardFavoriteActivity -> net.shopnc.android.ui.forum.BoardFavoriteActivity:
+    net.shopnc.android.common.MyApp myApp -> a
+    android.app.Activity myParent -> b
+    android.widget.ImageButton btn_left -> c
+    net.shopnc.android.widget.PullView pv -> d
+    net.shopnc.android.adapter.BoardFavoriteListViewAdapter adapter -> e
+    java.util.ArrayList datas -> f
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onUpdate() -> a
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
+    net.shopnc.android.widget.PullView access$0(net.shopnc.android.ui.forum.BoardFavoriteActivity) -> a
+net.shopnc.android.ui.forum.BoardFavoriteActivity$1 -> net.shopnc.android.ui.forum.a:
+    net.shopnc.android.ui.forum.BoardFavoriteActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.BoardListActivity -> net.shopnc.android.ui.forum.BoardListActivity:
+    net.shopnc.android.common.MyApp myApp -> b
+    android.widget.ImageButton btn_left -> c
+    net.shopnc.android.ui.forum.ForumActivity myParent -> a
+    net.shopnc.android.widget.PullView pv -> d
+    android.widget.ExpandableListView lv_boards -> e
+    net.shopnc.android.adapter.MyExpandableListAdapter adapter -> f
+    int pageno -> g
+    int pagesize -> h
+    void onCreate(android.os.Bundle) -> onCreate
+    void onUpdate() -> a
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    void loadData() -> b
+    net.shopnc.android.adapter.MyExpandableListAdapter access$0(net.shopnc.android.ui.forum.BoardListActivity) -> a
+    android.widget.ExpandableListView access$1(net.shopnc.android.ui.forum.BoardListActivity) -> b
+    net.shopnc.android.widget.PullView access$2(net.shopnc.android.ui.forum.BoardListActivity) -> c
+    net.shopnc.android.common.MyApp access$3(net.shopnc.android.ui.forum.BoardListActivity) -> d
+    void access$4(net.shopnc.android.ui.forum.BoardListActivity,net.shopnc.android.adapter.MyExpandableListAdapter) -> a
+net.shopnc.android.ui.forum.BoardListActivity$1 -> net.shopnc.android.ui.forum.b:
+    net.shopnc.android.ui.forum.BoardListActivity this$0 -> a
+    void onGroupExpand(int) -> onGroupExpand
+net.shopnc.android.ui.forum.BoardListActivity$2 -> net.shopnc.android.ui.forum.c:
+    net.shopnc.android.ui.forum.BoardListActivity this$0 -> a
+    boolean onChildClick(android.widget.ExpandableListView,android.view.View,int,int,long) -> onChildClick
+net.shopnc.android.ui.forum.BoardListActivity$3 -> net.shopnc.android.ui.forum.d:
+    net.shopnc.android.ui.forum.BoardListActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.BoardListActivity$4 -> net.shopnc.android.ui.forum.e:
+    net.shopnc.android.ui.forum.BoardListActivity this$0 -> a
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.forum.ForumActivity -> net.shopnc.android.ui.forum.ForumActivity:
+    android.widget.TabHost tabHost -> a
+    android.widget.RadioButton btn_board_list -> c
+    android.widget.RadioButton btn_board_favorite -> d
+    android.widget.RadioButton btn_lastest_browse -> e
+    android.content.Intent board_list_intent -> f
+    android.content.Intent board_favorite_intent -> g
+    android.content.Intent lastest_browse_intent -> h
+    net.shopnc.android.ui.MainActivity myParent -> b
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+net.shopnc.android.ui.forum.ForumActivity$1 -> net.shopnc.android.ui.forum.f:
+    net.shopnc.android.ui.forum.ForumActivity this$0 -> a
+    net.shopnc.android.common.MyApp val$myApp -> b
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.ForumActivity$MyRadioButtonClickListener -> net.shopnc.android.ui.forum.g:
+    net.shopnc.android.ui.forum.ForumActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.LastestBrowseActivity -> net.shopnc.android.ui.forum.LastestBrowseActivity:
+    net.shopnc.android.common.MyApp myApp -> a
+    android.app.Activity myParent -> b
+    android.widget.ImageButton btn_left -> c
+    net.shopnc.android.widget.PullView pv -> d
+    android.widget.LinearLayout moreLayout -> e
+    android.widget.Button moreBtn -> f
+    java.lang.String txt_more_default -> g
+    java.lang.String txt_more_wait -> h
+    net.shopnc.android.adapter.TopicListViewAdapter adapter -> i
+    java.util.ArrayList datas -> j
+    int pageno -> k
+    int pagesize -> l
+    net.shopnc.android.dao.LastestBrowseDao lbDao -> m
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onUpdate() -> a
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
+    void loadPage(int) -> a
+    net.shopnc.android.widget.PullView access$0(net.shopnc.android.ui.forum.LastestBrowseActivity) -> a
+    android.widget.Button access$1(net.shopnc.android.ui.forum.LastestBrowseActivity) -> b
+    java.lang.String access$2(net.shopnc.android.ui.forum.LastestBrowseActivity) -> c
+    int access$3(net.shopnc.android.ui.forum.LastestBrowseActivity) -> d
+    void access$4(net.shopnc.android.ui.forum.LastestBrowseActivity,int) -> a
+    void access$5(net.shopnc.android.ui.forum.LastestBrowseActivity,int) -> b
+net.shopnc.android.ui.forum.LastestBrowseActivity$1 -> net.shopnc.android.ui.forum.h:
+    net.shopnc.android.ui.forum.LastestBrowseActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.LastestBrowseActivity$2 -> net.shopnc.android.ui.forum.i:
+    net.shopnc.android.ui.forum.LastestBrowseActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.board.ChildBoardActivity -> net.shopnc.android.ui.forum.board.ChildBoardActivity:
+    net.shopnc.android.common.MyApp myApp -> a
+    net.shopnc.android.widget.PullView pv -> b
+    net.shopnc.android.ui.forum.board.TopicListActivity parent -> c
+    net.shopnc.android.adapter.SonListViewAdapter adapter -> d
+    java.util.ArrayList datas -> e
+    android.widget.ImageButton btn_right -> f
+    android.widget.TextView txt_title -> g
+    android.widget.ImageButton btn_pager_prev -> h
+    android.widget.ImageButton btn_pager_next -> i
+    android.widget.TextView txt_pager_info -> j
+    android.widget.ImageButton btn_board_favorite -> k
+    int pagesize -> l
+    int pageno -> m
+    long count -> n
+    long totalpage -> o
+    java.lang.String boardName -> p
+    long fid -> q
+    long fup -> r
+    int ispost -> s
+    int isreply -> t
+    int ispostimage -> u
+    java.lang.String type -> v
+    java.lang.String url -> w
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onUpdate() -> a
+    void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
+    void loadPage$13462e() -> b
+    long access$0(net.shopnc.android.ui.forum.board.ChildBoardActivity) -> a
+    int access$1(net.shopnc.android.ui.forum.board.ChildBoardActivity) -> b
+    void access$2(net.shopnc.android.ui.forum.board.ChildBoardActivity,int) -> a
+    void access$3$202a0728(net.shopnc.android.ui.forum.board.ChildBoardActivity) -> c
+    net.shopnc.android.common.MyApp access$4(net.shopnc.android.ui.forum.board.ChildBoardActivity) -> d
+    long access$5(net.shopnc.android.ui.forum.board.ChildBoardActivity) -> e
+    java.lang.String access$6(net.shopnc.android.ui.forum.board.ChildBoardActivity) -> f
+net.shopnc.android.ui.forum.board.ChildBoardActivity$1 -> net.shopnc.android.ui.forum.board.a:
+    net.shopnc.android.ui.forum.board.ChildBoardActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.board.ChildBoardActivity$MyOnClickListener -> net.shopnc.android.ui.forum.board.b:
+    net.shopnc.android.ui.forum.board.ChildBoardActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.board.TopicAllActivity -> net.shopnc.android.ui.forum.board.TopicAllActivity:
+    net.shopnc.android.ui.forum.board.TopicListActivity parent -> a
+    net.shopnc.android.common.MyApp myApp -> b
+    android.widget.ImageButton btn_right -> c
+    android.widget.TextView txt_title -> d
+    net.shopnc.android.widget.PullView pv -> e
+    net.shopnc.android.adapter.TopicListViewAdapter adapter -> f
+    java.util.ArrayList datas -> g
+    android.widget.ImageButton btn_pager_prev -> h
+    android.widget.ImageButton btn_pager_next -> i
+    android.widget.TextView txt_pager_info -> j
+    android.widget.ImageButton btn_board_favorite -> k
+    java.lang.String boardName -> l
+    long fid -> m
+    long fup -> n
+    int ispost -> o
+    int isreply -> p
+    int ispostimage -> q
+    int pagesize -> r
+    int pageno -> s
+    long count -> t
+    long totalpage -> u
+    java.lang.String url -> v
+    net.shopnc.android.dao.FavoriteDao dao -> w
+    void onCreate(android.os.Bundle) -> onCreate
+    void onUpdate() -> a
+    void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    long access$0(net.shopnc.android.ui.forum.board.TopicAllActivity) -> a
+    int access$1(net.shopnc.android.ui.forum.board.TopicAllActivity) -> b
+    void access$2(net.shopnc.android.ui.forum.board.TopicAllActivity,int) -> a
+    net.shopnc.android.widget.PullView access$3(net.shopnc.android.ui.forum.board.TopicAllActivity) -> c
+    void access$4(net.shopnc.android.ui.forum.board.TopicAllActivity) -> d
+    void access$5(net.shopnc.android.ui.forum.board.TopicAllActivity,long) -> a
+    long access$6(net.shopnc.android.ui.forum.board.TopicAllActivity) -> e
+    int access$7(net.shopnc.android.ui.forum.board.TopicAllActivity) -> f
+    void access$8(net.shopnc.android.ui.forum.board.TopicAllActivity,long) -> b
+    android.widget.TextView access$9(net.shopnc.android.ui.forum.board.TopicAllActivity) -> g
+    java.util.ArrayList access$10(net.shopnc.android.ui.forum.board.TopicAllActivity) -> h
+    net.shopnc.android.adapter.TopicListViewAdapter access$11(net.shopnc.android.ui.forum.board.TopicAllActivity) -> i
+    net.shopnc.android.common.MyApp access$12(net.shopnc.android.ui.forum.board.TopicAllActivity) -> j
+    int access$13(net.shopnc.android.ui.forum.board.TopicAllActivity) -> k
+    long access$14(net.shopnc.android.ui.forum.board.TopicAllActivity) -> l
+    java.lang.String access$15(net.shopnc.android.ui.forum.board.TopicAllActivity) -> m
+net.shopnc.android.ui.forum.board.TopicAllActivity$1 -> net.shopnc.android.ui.forum.board.c:
+    net.shopnc.android.ui.forum.board.TopicAllActivity this$0 -> a
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.forum.board.TopicAllActivity$2 -> net.shopnc.android.ui.forum.board.d:
+    net.shopnc.android.ui.forum.board.TopicAllActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.board.TopicAllActivity$MyOnClickListener -> net.shopnc.android.ui.forum.board.e:
+    net.shopnc.android.ui.forum.board.TopicAllActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.board.TopicChildAllActivity -> net.shopnc.android.ui.forum.board.TopicChildAllActivity:
+    net.shopnc.android.ui.forum.board.TopicChildListActivity parent -> a
+    net.shopnc.android.common.MyApp myApp -> b
+    android.widget.ImageButton btn_right -> c
+    android.widget.TextView txt_title -> d
+    net.shopnc.android.widget.PullView pv -> e
+    net.shopnc.android.adapter.TopicListViewAdapter adapter -> f
+    java.util.ArrayList datas -> g
+    android.widget.ImageButton btn_pager_prev -> h
+    android.widget.ImageButton btn_pager_next -> i
+    android.widget.TextView txt_pager_info -> j
+    android.widget.ImageButton btn_board_favorite -> k
+    java.lang.String boardName -> l
+    long fid -> m
+    long fup -> n
+    int ispost -> o
+    int isreply -> p
+    int ispostimage -> q
+    int pagesize -> r
+    int pageno -> s
+    long count -> t
+    long totalpage -> u
+    java.lang.String url -> v
+    net.shopnc.android.dao.FavoriteDao dao -> w
+    void onCreate(android.os.Bundle) -> onCreate
+    void onUpdate() -> a
+    void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    long access$0(net.shopnc.android.ui.forum.board.TopicChildAllActivity) -> a
+    int access$1(net.shopnc.android.ui.forum.board.TopicChildAllActivity) -> b
+    void access$2(net.shopnc.android.ui.forum.board.TopicChildAllActivity,int) -> a
+    net.shopnc.android.widget.PullView access$3(net.shopnc.android.ui.forum.board.TopicChildAllActivity) -> c
+    void access$4(net.shopnc.android.ui.forum.board.TopicChildAllActivity) -> d
+    void access$5(net.shopnc.android.ui.forum.board.TopicChildAllActivity,long) -> a
+    long access$6(net.shopnc.android.ui.forum.board.TopicChildAllActivity) -> e
+    int access$7(net.shopnc.android.ui.forum.board.TopicChildAllActivity) -> f
+    void access$8(net.shopnc.android.ui.forum.board.TopicChildAllActivity,long) -> b
+    android.widget.TextView access$9(net.shopnc.android.ui.forum.board.TopicChildAllActivity) -> g
+    java.util.ArrayList access$10(net.shopnc.android.ui.forum.board.TopicChildAllActivity) -> h
+    net.shopnc.android.adapter.TopicListViewAdapter access$11(net.shopnc.android.ui.forum.board.TopicChildAllActivity) -> i
+    net.shopnc.android.common.MyApp access$12(net.shopnc.android.ui.forum.board.TopicChildAllActivity) -> j
+    int access$13(net.shopnc.android.ui.forum.board.TopicChildAllActivity) -> k
+    long access$14(net.shopnc.android.ui.forum.board.TopicChildAllActivity) -> l
+    java.lang.String access$15(net.shopnc.android.ui.forum.board.TopicChildAllActivity) -> m
+net.shopnc.android.ui.forum.board.TopicChildAllActivity$1 -> net.shopnc.android.ui.forum.board.f:
+    net.shopnc.android.ui.forum.board.TopicChildAllActivity this$0 -> a
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.forum.board.TopicChildAllActivity$2 -> net.shopnc.android.ui.forum.board.g:
+    net.shopnc.android.ui.forum.board.TopicChildAllActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.board.TopicChildAllActivity$MyOnClickListener -> net.shopnc.android.ui.forum.board.h:
+    net.shopnc.android.ui.forum.board.TopicChildAllActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.board.TopicChildDigestActivity -> net.shopnc.android.ui.forum.board.TopicChildDigestActivity:
+net.shopnc.android.ui.forum.board.TopicChildListActivity -> net.shopnc.android.ui.forum.board.TopicChildListActivity:
+    android.widget.ImageButton btn_left -> a
+    android.widget.TabHost tabHost -> b
+    android.widget.RadioButton btn_topic_all -> c
+    android.widget.RadioButton btn_topic_top -> d
+    android.widget.RadioButton btn_topic_digest -> e
+    android.content.Intent topic_all_intent -> f
+    android.content.Intent topic_top_intent -> g
+    android.content.Intent topic_digest_intent -> h
+    net.shopnc.android.common.MyApp myApp -> i
+    void onCreate(android.os.Bundle) -> onCreate
+    android.widget.TabHost access$0() -> a
+net.shopnc.android.ui.forum.board.TopicChildListActivity$1 -> net.shopnc.android.ui.forum.board.i:
+    net.shopnc.android.ui.forum.board.TopicChildListActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.board.TopicChildListActivity$MyRadioButtonClickListener -> net.shopnc.android.ui.forum.board.j:
+    net.shopnc.android.ui.forum.board.TopicChildListActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.board.TopicChildTopActivity -> net.shopnc.android.ui.forum.board.TopicChildTopActivity:
+net.shopnc.android.ui.forum.board.TopicDigestActivity -> net.shopnc.android.ui.forum.board.TopicDigestActivity:
+net.shopnc.android.ui.forum.board.TopicListActivity -> net.shopnc.android.ui.forum.board.TopicListActivity:
+    android.widget.ImageButton btn_left -> a
+    android.widget.TabHost tabHost -> b
+    android.widget.RadioButton btn_topic_all -> c
+    android.widget.RadioButton btn_topic_top -> d
+    android.widget.RadioButton btn_topic_digest -> e
+    android.widget.RadioButton btn_topic_son -> f
+    android.content.Intent topic_all_intent -> g
+    android.content.Intent topic_top_intent -> h
+    android.content.Intent topic_digest_intent -> i
+    android.content.Intent topic_son_intent -> j
+    net.shopnc.android.model.Board board -> k
+    net.shopnc.android.common.MyApp myApp -> l
+    java.util.ArrayList son_board -> m
+    void onCreate(android.os.Bundle) -> onCreate
+    android.widget.TabHost access$0() -> a
+net.shopnc.android.ui.forum.board.TopicListActivity$1 -> net.shopnc.android.ui.forum.board.k:
+    net.shopnc.android.ui.forum.board.TopicListActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.board.TopicListActivity$MyRadioButtonClickListener -> net.shopnc.android.ui.forum.board.l:
+    net.shopnc.android.ui.forum.board.TopicListActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.board.TopicSearchActivity -> net.shopnc.android.ui.forum.board.TopicSearchActivity:
+    net.shopnc.android.ui.forum.board.TopicListActivity parent -> a
+    net.shopnc.android.common.MyApp myApp -> b
+    android.widget.ImageButton btn_right -> c
+    android.widget.TextView txt_title -> d
+    net.shopnc.android.widget.PullView pv -> e
+    net.shopnc.android.adapter.TopicListViewAdapter adapter -> f
+    java.util.ArrayList datas -> g
+    android.widget.ImageButton btn_pager_prev -> h
+    android.widget.ImageButton btn_pager_next -> i
+    android.widget.TextView txt_pager_info -> j
+    android.widget.ImageButton btn_board_favorite -> k
+    java.lang.String boardName -> l
+    long fid -> m
+    java.lang.String url -> n
+    android.widget.ImageButton btn_search -> o
+    android.widget.EditText txt_keyword -> p
+    java.lang.String keyword -> q
+    int pagesize -> r
+    int pageno -> s
+    long count -> t
+    long totalpage -> u
+    void onCreate(android.os.Bundle) -> onCreate
+    void onUpdate() -> a
+    void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
+    void loadPage(int) -> a
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    long access$0(net.shopnc.android.ui.forum.board.TopicSearchActivity) -> a
+    int access$1(net.shopnc.android.ui.forum.board.TopicSearchActivity) -> b
+    void access$2(net.shopnc.android.ui.forum.board.TopicSearchActivity,int) -> a
+    void access$3(net.shopnc.android.ui.forum.board.TopicSearchActivity,int) -> b
+    android.widget.EditText access$4(net.shopnc.android.ui.forum.board.TopicSearchActivity) -> c
+    void access$5(net.shopnc.android.ui.forum.board.TopicSearchActivity,java.lang.String) -> a
+    net.shopnc.android.widget.PullView access$6(net.shopnc.android.ui.forum.board.TopicSearchActivity) -> d
+    void access$7(net.shopnc.android.ui.forum.board.TopicSearchActivity,long) -> a
+    long access$8(net.shopnc.android.ui.forum.board.TopicSearchActivity) -> e
+    int access$9(net.shopnc.android.ui.forum.board.TopicSearchActivity) -> f
+    void access$10(net.shopnc.android.ui.forum.board.TopicSearchActivity,long) -> b
+    android.widget.TextView access$11(net.shopnc.android.ui.forum.board.TopicSearchActivity) -> g
+    java.util.ArrayList access$12(net.shopnc.android.ui.forum.board.TopicSearchActivity) -> h
+    net.shopnc.android.adapter.TopicListViewAdapter access$13(net.shopnc.android.ui.forum.board.TopicSearchActivity) -> i
+    net.shopnc.android.common.MyApp access$14(net.shopnc.android.ui.forum.board.TopicSearchActivity) -> j
+    long access$15(net.shopnc.android.ui.forum.board.TopicSearchActivity) -> k
+    java.lang.String access$16(net.shopnc.android.ui.forum.board.TopicSearchActivity) -> l
+net.shopnc.android.ui.forum.board.TopicSearchActivity$1 -> net.shopnc.android.ui.forum.board.m:
+    net.shopnc.android.ui.forum.board.TopicSearchActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.board.TopicSearchActivity$2 -> net.shopnc.android.ui.forum.board.n:
+    net.shopnc.android.ui.forum.board.TopicSearchActivity this$0 -> a
+    int val$pageno -> b
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.forum.board.TopicSearchActivity$3 -> net.shopnc.android.ui.forum.board.o:
+    net.shopnc.android.ui.forum.board.TopicSearchActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.board.TopicSearchActivity$MyOnClickListener -> net.shopnc.android.ui.forum.board.p:
+    net.shopnc.android.ui.forum.board.TopicSearchActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.board.TopicTopActivity -> net.shopnc.android.ui.forum.board.TopicTopActivity:
+net.shopnc.android.ui.forum.topic.QuoteTopicActivity -> net.shopnc.android.ui.forum.topic.QuoteTopicActivity:
+    android.widget.TextView tv -> a
+    java.lang.String TAG -> b
+    net.shopnc.android.common.MyApp myApp -> c
+    android.widget.TextView txt_title -> d
+    android.widget.ImageButton btn_left -> e
+    android.widget.ImageButton btn_right -> f
+    android.widget.ImageButton btn_camera -> g
+    android.widget.ImageButton btn_face -> h
+    android.widget.ImageButton btn_photo -> i
+    android.widget.ImageButton btn_keyboard -> j
+    android.widget.EditText reply_content -> k
+    int ispostimage -> l
+    android.view.inputmethod.InputMethodManager imm -> m
+    android.widget.GridView faces_gv -> n
+    java.util.ArrayList smileyList -> o
+    java.util.HashSet uploading_img -> p
+    java.util.regex.Pattern pattern_html2code -> q
+    java.util.regex.Pattern pattern_html2code2 -> r
+    java.lang.String camera_fileName -> s
+    java.lang.String author -> t
+    long tid -> u
+    long fid -> v
+    long pid -> w
+    long date -> x
+    java.lang.String mage -> y
+    void onCreate(android.os.Bundle) -> onCreate
+    android.app.Dialog onCreateDialog(int) -> onCreateDialog
+    java.lang.String convertContent(android.text.Editable) -> a
+    net.shopnc.android.model.Smiley getSmiley(java.lang.String) -> a
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    void startPhotoZoom(android.net.Uri) -> a
+    int access$0(net.shopnc.android.ui.forum.topic.QuoteTopicActivity) -> a
+    java.util.HashSet access$1(net.shopnc.android.ui.forum.topic.QuoteTopicActivity) -> b
+    void access$2(net.shopnc.android.ui.forum.topic.QuoteTopicActivity) -> c
+    void access$3(net.shopnc.android.ui.forum.topic.QuoteTopicActivity,java.lang.String) -> a
+    android.widget.GridView access$4(net.shopnc.android.ui.forum.topic.QuoteTopicActivity) -> d
+    void access$5(net.shopnc.android.ui.forum.topic.QuoteTopicActivity) -> e
+    android.view.inputmethod.InputMethodManager access$6(net.shopnc.android.ui.forum.topic.QuoteTopicActivity) -> f
+    android.widget.EditText access$7(net.shopnc.android.ui.forum.topic.QuoteTopicActivity) -> g
+    java.util.ArrayList access$8(net.shopnc.android.ui.forum.topic.QuoteTopicActivity) -> h
+    void access$9(net.shopnc.android.ui.forum.topic.QuoteTopicActivity) -> i
+net.shopnc.android.ui.forum.topic.QuoteTopicActivity$1 -> net.shopnc.android.ui.forum.topic.a:
+    net.shopnc.android.ui.forum.topic.QuoteTopicActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.QuoteTopicActivity$2 -> net.shopnc.android.ui.forum.topic.b:
+    net.shopnc.android.ui.forum.topic.QuoteTopicActivity this$0 -> a
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+net.shopnc.android.ui.forum.topic.QuoteTopicActivity$3 -> net.shopnc.android.ui.forum.topic.c:
+    net.shopnc.android.ui.forum.topic.QuoteTopicActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.QuoteTopicActivity$4 -> net.shopnc.android.ui.forum.topic.d:
+    net.shopnc.android.ui.forum.topic.QuoteTopicActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.QuoteTopicActivity$5 -> net.shopnc.android.ui.forum.topic.e:
+    net.shopnc.android.ui.forum.topic.QuoteTopicActivity this$0 -> a
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.forum.topic.QuoteTopicActivity$MyOnTouchListener -> net.shopnc.android.ui.forum.topic.f:
+    net.shopnc.android.ui.forum.topic.QuoteTopicActivity this$0 -> a
+    boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
+net.shopnc.android.ui.forum.topic.ReplyTopicActivity -> net.shopnc.android.ui.forum.topic.ReplyTopicActivity:
+    java.lang.String TAG -> a
+    net.shopnc.android.common.MyApp myApp -> b
+    android.widget.TextView txt_title -> c
+    android.widget.ImageButton btn_left -> d
+    android.widget.ImageButton btn_right -> e
+    android.widget.ImageButton btn_camera -> f
+    android.widget.ImageButton btn_face -> g
+    android.widget.ImageButton btn_photo -> h
+    android.widget.ImageButton btn_keyboard -> i
+    long tid -> j
+    long fid -> k
+    int ispostimage -> l
+    android.widget.EditText reply_content -> m
+    android.view.inputmethod.InputMethodManager imm -> n
+    android.widget.GridView faces_gv -> o
+    java.util.ArrayList smileyList -> p
+    java.util.HashSet uploading_img -> q
+    java.util.regex.Pattern pattern_html2code -> r
+    java.util.regex.Pattern pattern_html2code2 -> s
+    java.lang.String camera_fileName -> t
+    void onCreate(android.os.Bundle) -> onCreate
+    android.app.Dialog onCreateDialog(int) -> onCreateDialog
+    java.lang.String convertContent(android.text.Editable) -> a
+    net.shopnc.android.model.Smiley getSmiley(java.lang.String) -> a
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    void startPhotoZoom(android.net.Uri) -> a
+    int access$0(net.shopnc.android.ui.forum.topic.ReplyTopicActivity) -> a
+    java.util.HashSet access$1(net.shopnc.android.ui.forum.topic.ReplyTopicActivity) -> b
+    void access$2(net.shopnc.android.ui.forum.topic.ReplyTopicActivity) -> c
+    void access$3(net.shopnc.android.ui.forum.topic.ReplyTopicActivity,java.lang.String) -> a
+    android.widget.GridView access$4(net.shopnc.android.ui.forum.topic.ReplyTopicActivity) -> d
+    void access$5(net.shopnc.android.ui.forum.topic.ReplyTopicActivity) -> e
+    android.view.inputmethod.InputMethodManager access$6(net.shopnc.android.ui.forum.topic.ReplyTopicActivity) -> f
+    android.widget.EditText access$7(net.shopnc.android.ui.forum.topic.ReplyTopicActivity) -> g
+    java.util.ArrayList access$8(net.shopnc.android.ui.forum.topic.ReplyTopicActivity) -> h
+    void access$9(net.shopnc.android.ui.forum.topic.ReplyTopicActivity) -> i
+net.shopnc.android.ui.forum.topic.ReplyTopicActivity$1 -> net.shopnc.android.ui.forum.topic.g:
+    net.shopnc.android.ui.forum.topic.ReplyTopicActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.ReplyTopicActivity$2 -> net.shopnc.android.ui.forum.topic.h:
+    net.shopnc.android.ui.forum.topic.ReplyTopicActivity this$0 -> a
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+net.shopnc.android.ui.forum.topic.ReplyTopicActivity$3 -> net.shopnc.android.ui.forum.topic.i:
+    net.shopnc.android.ui.forum.topic.ReplyTopicActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.ReplyTopicActivity$4 -> net.shopnc.android.ui.forum.topic.j:
+    net.shopnc.android.ui.forum.topic.ReplyTopicActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.ReplyTopicActivity$5 -> net.shopnc.android.ui.forum.topic.k:
+    net.shopnc.android.ui.forum.topic.ReplyTopicActivity this$0 -> a
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.forum.topic.ReplyTopicActivity$MyOnTouchListener -> net.shopnc.android.ui.forum.topic.l:
+    net.shopnc.android.ui.forum.topic.ReplyTopicActivity this$0 -> a
+    boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
+net.shopnc.android.ui.forum.topic.SendTopicActivity -> net.shopnc.android.ui.forum.topic.SendTopicActivity:
+    net.shopnc.android.common.MyApp myApp -> a
+    android.widget.TextView txt_title -> b
+    android.widget.ImageButton btn_left -> c
+    android.widget.ImageButton btn_right -> d
+    android.widget.ImageButton btn_camera -> e
+    android.widget.ImageButton btn_face -> f
+    android.widget.ImageButton btn_photo -> g
+    android.widget.ImageButton btn_keyboard -> h
+    long fid -> i
+    java.lang.Long typeid -> j
+    java.lang.String boardName -> k
+    int ispostimage -> l
+    android.widget.EditText topic_title -> m
+    android.widget.Spinner topic_type -> n
+    java.lang.String topic_type_yn -> o
+    android.widget.TextView board_name -> p
+    android.widget.EditText topic_content -> q
+    org.json.JSONObject object -> r
+    org.json.JSONArray array -> s
+    org.json.JSONArray name -> t
+    java.util.List list -> u
+    java.util.List list2 -> v
+    android.view.inputmethod.InputMethodManager imm -> w
+    android.widget.GridView faces_gv -> x
+    java.util.ArrayList smileyList -> y
+    java.util.HashSet uploading_img -> z
+    java.util.regex.Pattern pattern_html2code -> A
+    java.util.regex.Pattern pattern_html2code2 -> B
+    java.lang.String camera_fileName -> C
+    void onCreate(android.os.Bundle) -> onCreate
+    android.app.Dialog onCreateDialog(int) -> onCreateDialog
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    java.lang.String convertContent(android.text.Editable) -> a
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    void startPhotoZoom(android.net.Uri) -> a
+    int access$0(net.shopnc.android.ui.forum.topic.SendTopicActivity) -> a
+    java.util.HashSet access$1(net.shopnc.android.ui.forum.topic.SendTopicActivity) -> b
+    void access$2(net.shopnc.android.ui.forum.topic.SendTopicActivity) -> c
+    void access$3(net.shopnc.android.ui.forum.topic.SendTopicActivity,java.lang.String) -> a
+    android.widget.GridView access$4(net.shopnc.android.ui.forum.topic.SendTopicActivity) -> d
+    void access$5(net.shopnc.android.ui.forum.topic.SendTopicActivity) -> e
+    android.view.inputmethod.InputMethodManager access$6(net.shopnc.android.ui.forum.topic.SendTopicActivity) -> f
+    android.widget.Spinner access$7(net.shopnc.android.ui.forum.topic.SendTopicActivity) -> g
+    java.util.List access$8(net.shopnc.android.ui.forum.topic.SendTopicActivity) -> h
+    void access$9(net.shopnc.android.ui.forum.topic.SendTopicActivity,java.lang.Long) -> a
+    android.widget.EditText access$10(net.shopnc.android.ui.forum.topic.SendTopicActivity) -> i
+    java.util.ArrayList access$11(net.shopnc.android.ui.forum.topic.SendTopicActivity) -> j
+    void access$12(net.shopnc.android.ui.forum.topic.SendTopicActivity) -> k
+net.shopnc.android.ui.forum.topic.SendTopicActivity$1 -> net.shopnc.android.ui.forum.topic.m:
+    net.shopnc.android.ui.forum.topic.SendTopicActivity this$0 -> a
+    void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
+    void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
+net.shopnc.android.ui.forum.topic.SendTopicActivity$2 -> net.shopnc.android.ui.forum.topic.n:
+    net.shopnc.android.ui.forum.topic.SendTopicActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.SendTopicActivity$3 -> net.shopnc.android.ui.forum.topic.o:
+    net.shopnc.android.ui.forum.topic.SendTopicActivity this$0 -> a
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+net.shopnc.android.ui.forum.topic.SendTopicActivity$4 -> net.shopnc.android.ui.forum.topic.p:
+    net.shopnc.android.ui.forum.topic.SendTopicActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.SendTopicActivity$5 -> net.shopnc.android.ui.forum.topic.q:
+    net.shopnc.android.ui.forum.topic.SendTopicActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.SendTopicActivity$6 -> net.shopnc.android.ui.forum.topic.r:
+    net.shopnc.android.ui.forum.topic.SendTopicActivity this$0 -> a
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.forum.topic.SendTopicActivity$MyOnTouchListener -> net.shopnc.android.ui.forum.topic.s:
+    net.shopnc.android.ui.forum.topic.SendTopicActivity this$0 -> a
+    boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
+net.shopnc.android.ui.forum.topic.ShowImageActivity -> net.shopnc.android.ui.forum.topic.ShowImageActivity:
+    net.shopnc.android.widget.MyProcessDialog dialog -> a
+    android.widget.Gallery gallery_img_big -> b
+    java.lang.String[] img_urls -> c
+    android.widget.TextView txt_info -> d
+    int total -> e
+    net.shopnc.android.common.MyApp myApp -> f
+    int screenWidth -> g
+    void onCreate(android.os.Bundle) -> onCreate
+    android.app.Dialog onCreateDialog(int) -> onCreateDialog
+    int access$0(net.shopnc.android.ui.forum.topic.ShowImageActivity) -> a
+    java.lang.String[] access$1(net.shopnc.android.ui.forum.topic.ShowImageActivity) -> b
+    android.widget.TextView access$2(net.shopnc.android.ui.forum.topic.ShowImageActivity) -> c
+net.shopnc.android.ui.forum.topic.ShowImageActivity$1 -> net.shopnc.android.ui.forum.topic.t:
+    net.shopnc.android.ui.forum.topic.ShowImageActivity this$0 -> a
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    net.shopnc.android.ui.forum.topic.ShowImageActivity access$0(net.shopnc.android.ui.forum.topic.ShowImageActivity$1) -> a
+net.shopnc.android.ui.forum.topic.ShowImageActivity$1$1 -> net.shopnc.android.ui.forum.topic.u:
+    net.shopnc.android.ui.forum.topic.ShowImageActivity$1 this$1 -> a
+    android.widget.ImageView val$localImageView -> b
+    void imageLoaded$6004fe1d(android.graphics.Bitmap) -> a
+net.shopnc.android.ui.forum.topic.TopicDetailActivity -> net.shopnc.android.ui.forum.topic.TopicDetailActivity:
+    android.widget.ImageButton btn_left -> a
+    android.widget.TabHost tabHost -> b
+    android.widget.RadioButton btn_topic_display_default -> c
+    android.widget.RadioButton btn_topic_display_onlylandlord -> d
+    android.widget.RadioButton btn_topic_display_lastreplies -> e
+    android.content.Intent topic_default_intent -> f
+    android.content.Intent topic_onlylandlord_intent -> g
+    android.content.Intent topic_lastreplies_intent -> h
+    void onCreate(android.os.Bundle) -> onCreate
+    android.widget.TabHost access$0() -> a
+net.shopnc.android.ui.forum.topic.TopicDetailActivity$1 -> net.shopnc.android.ui.forum.topic.v:
+    net.shopnc.android.ui.forum.topic.TopicDetailActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.TopicDetailActivity$MyRadioButtonClickListener -> net.shopnc.android.ui.forum.topic.w:
+    net.shopnc.android.ui.forum.topic.TopicDetailActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity -> net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity:
+    net.shopnc.android.ui.forum.topic.TopicDetailActivity parent -> a
+    net.shopnc.android.common.MyApp myApp -> b
+    int pagesize -> c
+    int pageno -> d
+    long count -> e
+    long totalpage -> f
+    android.widget.TextView txt_title -> g
+    android.widget.ImageButton btn_right -> h
+    android.widget.ImageButton btn_pager_prev -> i
+    android.widget.ImageButton btn_pager_next -> j
+    android.widget.TextView txt_pager_info -> k
+    android.widget.ImageButton btn_board_favorite -> l
+    android.widget.TextView txt_topic_title -> m
+    net.shopnc.android.widget.PullView pv -> n
+    java.util.ArrayList datas -> o
+    net.shopnc.android.adapter.TopicDetailListViewAdapter adapter -> p
+    java.lang.String subject -> q
+    long tid -> r
+    long fid -> s
+    java.lang.String intent_url -> t
+    java.lang.String url -> u
+    boolean display_postStarter_only -> v
+    int isreply -> w
+    int ispostimage -> x
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onUpdate() -> a
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    long access$0(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity) -> a
+    int access$1(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity) -> b
+    void access$2(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity,int) -> a
+    net.shopnc.android.widget.PullView access$3(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity) -> c
+    net.shopnc.android.common.MyApp access$4(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity) -> d
+    long access$5(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity) -> e
+    long access$6(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity) -> f
+    java.util.ArrayList access$7(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity) -> g
+    net.shopnc.android.adapter.TopicDetailListViewAdapter access$8(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity) -> h
+    void access$9(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity,long) -> a
+    int access$10(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity) -> i
+    long access$11(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity) -> j
+    void access$12(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity,long) -> b
+    void access$13(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity) -> k
+    void access$14(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity,long) -> c
+    android.widget.TextView access$15(net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity) -> l
+net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity$1 -> net.shopnc.android.ui.forum.topic.x:
+    net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity$2 -> net.shopnc.android.ui.forum.topic.y:
+    net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity this$0 -> a
+    int val$pageno -> b
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity$MyOnClickListener -> net.shopnc.android.ui.forum.topic.z:
+    net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity -> net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity:
+    net.shopnc.android.ui.forum.topic.TopicDetailActivity parent -> a
+    net.shopnc.android.common.MyApp myApp -> b
+    int pagesize -> c
+    int pageno -> d
+    long count -> e
+    long totalpage -> f
+    android.widget.TextView txt_title -> g
+    android.widget.ImageButton btn_right -> h
+    android.widget.ImageButton btn_pager_prev -> i
+    android.widget.ImageButton btn_pager_next -> j
+    android.widget.TextView txt_pager_info -> k
+    android.widget.ImageButton btn_board_favorite -> l
+    android.widget.TextView txt_topic_title -> m
+    net.shopnc.android.widget.PullView pv -> n
+    java.util.ArrayList datas -> o
+    net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter adapter -> p
+    java.lang.String subject -> q
+    long tid -> r
+    long fid -> s
+    java.lang.String intent_url -> t
+    java.lang.String url -> u
+    boolean display_postStarter_only -> v
+    int isreply -> w
+    int ispostimage -> x
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onUpdate() -> a
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    long access$0(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity) -> a
+    int access$1(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity) -> b
+    void access$2(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity,int) -> a
+    net.shopnc.android.widget.PullView access$3(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity) -> c
+    net.shopnc.android.common.MyApp access$4(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity) -> d
+    long access$5(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity) -> e
+    long access$6(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity) -> f
+    java.util.ArrayList access$7(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity) -> g
+    net.shopnc.android.adapter.TopicDetailLastRepliesListViewAdapter access$8(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity) -> h
+    void access$9(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity,long) -> a
+    long access$10(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity) -> i
+    int access$11(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity) -> j
+    void access$12(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity,long) -> b
+    void access$13(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity,long) -> c
+    void access$14(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity) -> k
+    android.widget.TextView access$15(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity) -> l
+net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity$1 -> net.shopnc.android.ui.forum.topic.aa:
+    net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity$2 -> net.shopnc.android.ui.forum.topic.ab:
+    net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity this$0 -> a
+    int val$pageno -> b
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity$MyOnClickListener -> net.shopnc.android.ui.forum.topic.ac:
+    net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity -> net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity:
+    android.webkit.WebView html_web -> a
+    net.shopnc.android.ui.forum.topic.TopicDetailActivity parent -> b
+    net.shopnc.android.common.MyApp myApp -> c
+    int pagesize -> d
+    int pageno -> e
+    long count -> f
+    long totalpage -> g
+    net.shopnc.android.widget.MyProcessDialog mydialog -> h
+    android.widget.TextView txt_title -> i
+    android.widget.ImageButton btn_right -> j
+    android.widget.ImageButton btn_pager_prev -> k
+    android.widget.ImageButton btn_pager_next -> l
+    android.widget.TextView txt_pager_info -> m
+    android.widget.ImageButton btn_board_favorite -> n
+    android.widget.TextView txt_topic_title -> o
+    java.lang.String subject -> p
+    long tid -> q
+    long fid -> r
+    java.lang.String intent_url -> s
+    java.lang.String url -> t
+    boolean display_postStarter_only -> u
+    int isreply -> v
+    int ispostimage -> w
+    java.util.ArrayList datas -> x
+    java.lang.StringBuffer str -> y
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    void loadPage(int) -> a
+    boolean isNumeric1(java.lang.String) -> a
+    android.app.Dialog onCreateDialog(int) -> onCreateDialog
+    long access$0(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity) -> a
+    int access$1(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity) -> b
+    void access$2(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity,int) -> a
+    void access$3(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity,int) -> b
+    net.shopnc.android.common.MyApp access$4(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity) -> c
+    long access$5(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity) -> d
+    long access$6(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity) -> e
+    void access$7(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity,java.lang.StringBuffer) -> a
+    java.util.ArrayList access$8(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity) -> f
+    void access$9(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity,long) -> a
+    long access$10(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity) -> g
+    void access$11(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity,long) -> b
+    void access$12(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity) -> h
+    int access$13(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity) -> i
+    void access$14(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity,long) -> c
+    android.widget.TextView access$15(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity) -> j
+    java.lang.StringBuffer access$16(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity) -> k
+    android.webkit.WebView access$17(net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity) -> l
+net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity$1 -> net.shopnc.android.ui.forum.topic.ad:
+    net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity$2 -> net.shopnc.android.ui.forum.topic.ae:
+    net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity this$0 -> a
+    int val$pageno -> b
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity$2$1 -> net.shopnc.android.ui.forum.topic.af:
+    net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity$2 this$1 -> a
+    android.os.Handler val$mHandler -> b
+net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity$MyOnClickListener -> net.shopnc.android.ui.forum.topic.ag:
+    net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.TopicDetailOnlyLandlordActivity -> net.shopnc.android.ui.forum.topic.TopicDetailOnlyLandlordActivity:
+net.shopnc.android.ui.forum.topic.TopicHtmlActivity -> net.shopnc.android.ui.forum.topic.TopicHtmlActivity:
+    android.webkit.WebView html_web -> a
+    net.shopnc.android.ui.forum.topic.TopicDetailActivity parent -> b
+    net.shopnc.android.common.MyApp myApp -> c
+    int pagesize -> d
+    int pageno -> e
+    long count -> f
+    long totalpage -> g
+    net.shopnc.android.widget.MyProcessDialog mydialog -> h
+    android.widget.TextView txt_title -> i
+    android.widget.ImageButton btn_right -> j
+    android.widget.ImageButton btn_pager_prev -> k
+    android.widget.ImageButton btn_pager_next -> l
+    android.widget.TextView txt_pager_info -> m
+    android.widget.ImageButton btn_board_favorite -> n
+    android.widget.TextView txt_topic_title -> o
+    java.lang.String subject -> p
+    long tid -> q
+    long fid -> r
+    java.lang.String intent_url -> s
+    java.lang.String url -> t
+    boolean display_postStarter_only -> u
+    int isreply -> v
+    int ispostimage -> w
+    java.util.ArrayList datas -> x
+    java.lang.StringBuffer str -> y
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    void loadPage(int) -> a
+    boolean isNumeric1(java.lang.String) -> a
+    android.app.Dialog onCreateDialog(int) -> onCreateDialog
+    long access$0(net.shopnc.android.ui.forum.topic.TopicHtmlActivity) -> a
+    int access$1(net.shopnc.android.ui.forum.topic.TopicHtmlActivity) -> b
+    void access$2(net.shopnc.android.ui.forum.topic.TopicHtmlActivity,int) -> a
+    void access$3(net.shopnc.android.ui.forum.topic.TopicHtmlActivity,int) -> b
+    net.shopnc.android.common.MyApp access$4(net.shopnc.android.ui.forum.topic.TopicHtmlActivity) -> c
+    long access$5(net.shopnc.android.ui.forum.topic.TopicHtmlActivity) -> d
+    long access$6(net.shopnc.android.ui.forum.topic.TopicHtmlActivity) -> e
+    void access$7(net.shopnc.android.ui.forum.topic.TopicHtmlActivity,java.lang.StringBuffer) -> a
+    java.util.ArrayList access$8(net.shopnc.android.ui.forum.topic.TopicHtmlActivity) -> f
+    void access$9(net.shopnc.android.ui.forum.topic.TopicHtmlActivity,long) -> a
+    long access$10(net.shopnc.android.ui.forum.topic.TopicHtmlActivity) -> g
+    void access$11(net.shopnc.android.ui.forum.topic.TopicHtmlActivity,long) -> b
+    void access$12(net.shopnc.android.ui.forum.topic.TopicHtmlActivity) -> h
+    int access$13(net.shopnc.android.ui.forum.topic.TopicHtmlActivity) -> i
+    void access$14(net.shopnc.android.ui.forum.topic.TopicHtmlActivity,long) -> c
+    android.widget.TextView access$15(net.shopnc.android.ui.forum.topic.TopicHtmlActivity) -> j
+    java.lang.StringBuffer access$16(net.shopnc.android.ui.forum.topic.TopicHtmlActivity) -> k
+    java.lang.String access$17(net.shopnc.android.ui.forum.topic.TopicHtmlActivity) -> l
+    android.webkit.WebView access$18(net.shopnc.android.ui.forum.topic.TopicHtmlActivity) -> m
+net.shopnc.android.ui.forum.topic.TopicHtmlActivity$1 -> net.shopnc.android.ui.forum.topic.ah:
+    net.shopnc.android.ui.forum.topic.TopicHtmlActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.forum.topic.TopicHtmlActivity$2 -> net.shopnc.android.ui.forum.topic.ai:
+    net.shopnc.android.ui.forum.topic.TopicHtmlActivity this$0 -> a
+    int val$pageno -> b
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.forum.topic.TopicHtmlActivity$2$1 -> net.shopnc.android.ui.forum.topic.aj:
+    net.shopnc.android.ui.forum.topic.TopicHtmlActivity$2 this$1 -> a
+    android.os.Handler val$mHandler -> b
+net.shopnc.android.ui.forum.topic.TopicHtmlActivity$MyOnClickListener -> net.shopnc.android.ui.forum.topic.ak:
+    net.shopnc.android.ui.forum.topic.TopicHtmlActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.home.EmotionalActivity -> net.shopnc.android.ui.home.EmotionalActivity:
+net.shopnc.android.ui.home.EntertainmentActivity -> net.shopnc.android.ui.home.EntertainmentActivity:
+net.shopnc.android.ui.home.FocusActivity -> net.shopnc.android.ui.home.FocusActivity:
+    net.shopnc.android.common.MyApp myApp -> a
+    net.shopnc.android.ui.home.HomeActivity myParent -> b
+    android.widget.ImageButton btn_left -> c
+    android.widget.ImageButton btn_sort -> d
+    net.shopnc.android.widget.PullView pv -> e
+    android.widget.LinearLayout moreLayout -> f
+    android.widget.Button moreBtn -> g
+    java.lang.String txt_more_default -> h
+    java.lang.String txt_more_wait -> i
+    net.shopnc.android.adapter.FocusListViewAdapter adapter -> j
+    java.util.ArrayList datas -> k
+    int pageno -> l
+    int pagesize -> m
+    java.lang.String url -> n
+    void onCreate(android.os.Bundle) -> onCreate
+    void onUpdate() -> a
+    void onResume() -> onResume
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
+    void loadPage(int) -> a
+    net.shopnc.android.widget.PullView access$0(net.shopnc.android.ui.home.FocusActivity) -> a
+    android.widget.Button access$1(net.shopnc.android.ui.home.FocusActivity) -> b
+    java.lang.String access$2(net.shopnc.android.ui.home.FocusActivity) -> c
+    int access$3(net.shopnc.android.ui.home.FocusActivity) -> d
+    void access$4(net.shopnc.android.ui.home.FocusActivity,int) -> a
+    void access$5(net.shopnc.android.ui.home.FocusActivity,int) -> b
+    java.lang.String access$6(net.shopnc.android.ui.home.FocusActivity) -> e
+    android.widget.LinearLayout access$7(net.shopnc.android.ui.home.FocusActivity) -> f
+    java.util.ArrayList access$8(net.shopnc.android.ui.home.FocusActivity) -> g
+    net.shopnc.android.adapter.FocusListViewAdapter access$9(net.shopnc.android.ui.home.FocusActivity) -> h
+net.shopnc.android.ui.home.FocusActivity$1 -> net.shopnc.android.ui.home.a:
+    net.shopnc.android.ui.home.FocusActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.home.FocusActivity$2 -> net.shopnc.android.ui.home.b:
+    net.shopnc.android.ui.home.FocusActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.home.FocusActivity$3 -> net.shopnc.android.ui.home.c:
+    net.shopnc.android.ui.home.FocusActivity this$0 -> a
+    int val$pageno -> b
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.home.HeadlinesActivity -> net.shopnc.android.ui.home.HeadlinesActivity:
+    net.shopnc.android.common.MyApp myApp -> a
+    net.shopnc.android.ui.home.HomeActivity myParent -> b
+    android.widget.ImageButton btn_left -> c
+    android.widget.ImageButton btn_sort -> d
+    net.shopnc.android.widget.PullView pv -> e
+    android.widget.LinearLayout moreLayout -> f
+    android.widget.Button moreBtn -> g
+    java.lang.String txt_more_default -> h
+    java.lang.String txt_more_wait -> i
+    net.shopnc.android.adapter.HeadlinesListViewAdapter adapter -> j
+    java.util.ArrayList datas -> k
+    int pageno -> l
+    int pagesize -> m
+    boolean img_invisible -> n
+    android.widget.RelativeLayout headerview_headlines -> o
+    android.widget.TextView top_id -> p
+    android.widget.ImageView top_img -> q
+    android.widget.TextView top_text -> r
+    net.shopnc.android.model.PushData top -> s
+    void onCreate(android.os.Bundle) -> onCreate
+    void onUpdate() -> a
+    void onResume() -> onResume
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
+    void loadPage(int) -> a
+    net.shopnc.android.widget.PullView access$0(net.shopnc.android.ui.home.HeadlinesActivity) -> a
+    android.widget.Button access$1(net.shopnc.android.ui.home.HeadlinesActivity) -> b
+    java.lang.String access$2(net.shopnc.android.ui.home.HeadlinesActivity) -> c
+    int access$3(net.shopnc.android.ui.home.HeadlinesActivity) -> d
+    void access$4(net.shopnc.android.ui.home.HeadlinesActivity,int) -> a
+    void access$5(net.shopnc.android.ui.home.HeadlinesActivity,int) -> b
+    java.lang.String access$6(net.shopnc.android.ui.home.HeadlinesActivity) -> e
+    android.widget.LinearLayout access$7(net.shopnc.android.ui.home.HeadlinesActivity) -> f
+    java.util.ArrayList access$8(net.shopnc.android.ui.home.HeadlinesActivity) -> g
+    void access$9(net.shopnc.android.ui.home.HeadlinesActivity) -> h
+    net.shopnc.android.adapter.HeadlinesListViewAdapter access$10(net.shopnc.android.ui.home.HeadlinesActivity) -> i
+    android.widget.ImageView access$11(net.shopnc.android.ui.home.HeadlinesActivity) -> j
+net.shopnc.android.ui.home.HeadlinesActivity$1 -> net.shopnc.android.ui.home.d:
+    net.shopnc.android.ui.home.HeadlinesActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.home.HeadlinesActivity$2 -> net.shopnc.android.ui.home.e:
+    net.shopnc.android.ui.home.HeadlinesActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.home.HeadlinesActivity$3 -> net.shopnc.android.ui.home.f:
+    net.shopnc.android.ui.home.HeadlinesActivity this$0 -> a
+    int val$pageno -> b
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.home.HeadlinesActivity$4 -> net.shopnc.android.ui.home.g:
+    net.shopnc.android.ui.home.HeadlinesActivity this$0 -> a
+    void imageLoaded$6004fe1d(android.graphics.Bitmap) -> a
+net.shopnc.android.ui.home.HomeActivity -> net.shopnc.android.ui.home.HomeActivity:
+    android.widget.TabHost tabHost -> a
+    android.widget.RadioButton btn_headlines -> c
+    android.widget.RadioButton btn_teahouse -> d
+    android.widget.RadioButton btn_focus -> e
+    android.widget.RadioButton btn_entertainment -> f
+    android.widget.RadioButton btn_emotional -> g
+    android.content.Intent headlines_intent -> h
+    android.content.Intent teahouse_intent -> i
+    android.content.Intent focus_intent -> j
+    android.content.Intent entertainment_intent -> k
+    android.content.Intent emotional_intent -> l
+    net.shopnc.android.ui.MainActivity myParent -> b
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+net.shopnc.android.ui.home.HomeActivity$1 -> net.shopnc.android.ui.home.h:
+    net.shopnc.android.ui.home.HomeActivity this$0 -> a
+    net.shopnc.android.common.MyApp val$myApp -> b
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.home.HomeActivity$MyRadioButtonClickListener -> net.shopnc.android.ui.home.i:
+    net.shopnc.android.ui.home.HomeActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.home.TeahouseActivity -> net.shopnc.android.ui.home.TeahouseActivity:
+net.shopnc.android.ui.info.FiveActivity -> net.shopnc.android.ui.info.FiveActivity:
+net.shopnc.android.ui.info.FourActivity -> net.shopnc.android.ui.info.FourActivity:
+net.shopnc.android.ui.info.InfoActivity -> net.shopnc.android.ui.info.InfoActivity:
+    android.widget.TabHost tabHost -> a
+    android.widget.RadioButton btn_first -> c
+    android.widget.RadioButton btn_second -> d
+    android.widget.RadioButton btn_third -> e
+    android.widget.RadioButton btn_forth -> f
+    android.widget.RadioButton btn_fifth -> g
+    android.widget.RadioButton btn_sixth -> h
+    android.content.Intent first_intent -> i
+    android.content.Intent second_intent -> j
+    android.content.Intent third_intent -> k
+    android.content.Intent forth_intent -> l
+    android.content.Intent fifth_intent -> m
+    android.content.Intent sixth_intent -> n
+    net.shopnc.android.ui.MainActivity myParent -> b
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+net.shopnc.android.ui.info.InfoActivity$1 -> net.shopnc.android.ui.info.a:
+    net.shopnc.android.ui.info.InfoActivity this$0 -> a
+    net.shopnc.android.common.MyApp val$myApp -> b
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.info.InfoActivity$MyRadioButtonClickListener -> net.shopnc.android.ui.info.b:
+    net.shopnc.android.ui.info.InfoActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.info.OneActivity -> net.shopnc.android.ui.info.OneActivity:
+net.shopnc.android.ui.info.SixActivity -> net.shopnc.android.ui.info.SixActivity:
+net.shopnc.android.ui.info.ThreeActivity -> net.shopnc.android.ui.info.ThreeActivity:
+net.shopnc.android.ui.info.TwoActivity -> net.shopnc.android.ui.info.TwoActivity:
+net.shopnc.android.ui.live.BabyActivity -> net.shopnc.android.ui.live.BabyActivity:
+net.shopnc.android.ui.live.CarActivity -> net.shopnc.android.ui.live.CarActivity:
+net.shopnc.android.ui.live.FoodActivity -> net.shopnc.android.ui.live.FoodActivity:
+net.shopnc.android.ui.live.HouseDecorateActivity -> net.shopnc.android.ui.live.HouseDecorateActivity:
+net.shopnc.android.ui.live.LiveActivity -> net.shopnc.android.ui.live.LiveActivity:
+    android.widget.TabHost tabHost -> a
+    android.widget.RadioButton btn_housedecorate -> c
+    android.widget.RadioButton btn_food -> d
+    android.widget.RadioButton btn_car -> e
+    android.widget.RadioButton btn_marriage -> f
+    android.widget.RadioButton btn_baby -> g
+    android.widget.RadioButton btn_woman -> h
+    android.content.Intent housedecorate_intent -> i
+    android.content.Intent food_intent -> j
+    android.content.Intent car_intent -> k
+    android.content.Intent marriage_intent -> l
+    android.content.Intent baby_intent -> m
+    android.content.Intent woman_intent -> n
+    net.shopnc.android.ui.MainActivity myParent -> b
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+net.shopnc.android.ui.live.LiveActivity$1 -> net.shopnc.android.ui.live.a:
+    net.shopnc.android.ui.live.LiveActivity this$0 -> a
+    net.shopnc.android.common.MyApp val$myApp -> b
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.live.LiveActivity$MyRadioButtonClickListener -> net.shopnc.android.ui.live.b:
+    net.shopnc.android.ui.live.LiveActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.live.MarriageActivity -> net.shopnc.android.ui.live.MarriageActivity:
+net.shopnc.android.ui.live.WomanActivity -> net.shopnc.android.ui.live.WomanActivity:
+net.shopnc.android.ui.more.AboutUsActivity -> net.shopnc.android.ui.more.AboutUsActivity:
+    android.widget.TextView txt_title -> a
+    android.widget.ImageButton btn_left -> b
+    android.widget.ImageButton btn_right -> c
+    android.widget.TextView txt_version -> d
+    android.widget.Button btn_feedback -> e
+    void onCreate(android.os.Bundle) -> onCreate
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+net.shopnc.android.ui.more.AboutUsActivity$1 -> net.shopnc.android.ui.more.a:
+    net.shopnc.android.ui.more.AboutUsActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.more.AboutUsActivity$2 -> net.shopnc.android.ui.more.b:
+    net.shopnc.android.ui.more.AboutUsActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.more.AccountMngActivity -> net.shopnc.android.ui.more.AccountMngActivity:
+    net.shopnc.android.common.MyApp myApp -> a
+    android.widget.TextView txt_title -> b
+    android.widget.ImageButton btn_left -> c
+    android.widget.ImageButton btn_right -> d
+    android.widget.ListView lv_users -> e
+    net.shopnc.android.adapter.UserListViewAdapter adapter2 -> f
+    android.widget.ListView lv -> g
+    net.shopnc.android.adapter.SubmenuListViewAdapter adapter -> h
+    net.shopnc.android.dao.UserDao dao -> i
+    net.shopnc.android.model.User curr_select_user -> j
+    void onCreate(android.os.Bundle) -> onCreate
+    android.app.Dialog onCreateDialog(int) -> onCreateDialog
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    void loadUserListData() -> a
+    net.shopnc.android.adapter.UserListViewAdapter access$0(net.shopnc.android.ui.more.AccountMngActivity) -> a
+    void access$1(net.shopnc.android.ui.more.AccountMngActivity,net.shopnc.android.model.User) -> a
+    net.shopnc.android.model.User access$2(net.shopnc.android.ui.more.AccountMngActivity) -> b
+    net.shopnc.android.common.MyApp access$3(net.shopnc.android.ui.more.AccountMngActivity) -> c
+    void access$4(net.shopnc.android.ui.more.AccountMngActivity) -> d
+    void access$5(net.shopnc.android.ui.more.AccountMngActivity,java.lang.String,java.lang.String) -> a
+    net.shopnc.android.dao.UserDao access$6(net.shopnc.android.ui.more.AccountMngActivity) -> e
+net.shopnc.android.ui.more.AccountMngActivity$1 -> net.shopnc.android.ui.more.c:
+    net.shopnc.android.ui.more.AccountMngActivity this$0 -> a
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+net.shopnc.android.ui.more.AccountMngActivity$2 -> net.shopnc.android.ui.more.d:
+    net.shopnc.android.ui.more.AccountMngActivity this$0 -> a
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+net.shopnc.android.ui.more.AccountMngActivity$3 -> net.shopnc.android.ui.more.e:
+    net.shopnc.android.ui.more.AccountMngActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+net.shopnc.android.ui.more.AccountMngActivity$4 -> net.shopnc.android.ui.more.f:
+    net.shopnc.android.ui.more.AccountMngActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+net.shopnc.android.ui.more.AccountMngActivity$5 -> net.shopnc.android.ui.more.g:
+    net.shopnc.android.ui.more.AccountMngActivity this$0 -> a
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.more.AccountMngActivity$6 -> net.shopnc.android.ui.more.h:
+    net.shopnc.android.ui.more.AccountMngActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.more.FeedbackActivity -> net.shopnc.android.ui.more.FeedbackActivity:
+    net.shopnc.android.common.MyApp myApp -> a
+    android.widget.TextView txt_title -> b
+    android.widget.ImageButton btn_left -> c
+    android.widget.ImageButton btn_right -> d
+    android.widget.EditText txt_content -> e
+    void onCreate(android.os.Bundle) -> onCreate
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    android.widget.EditText access$0(net.shopnc.android.ui.more.FeedbackActivity) -> a
+    net.shopnc.android.common.MyApp access$1(net.shopnc.android.ui.more.FeedbackActivity) -> b
+net.shopnc.android.ui.more.FeedbackActivity$1 -> net.shopnc.android.ui.more.i:
+    net.shopnc.android.ui.more.FeedbackActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.more.FeedbackActivity$2 -> net.shopnc.android.ui.more.j:
+    net.shopnc.android.ui.more.FeedbackActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+    net.shopnc.android.ui.more.FeedbackActivity access$0(net.shopnc.android.ui.more.FeedbackActivity$2) -> a
+net.shopnc.android.ui.more.FeedbackActivity$2$1 -> net.shopnc.android.ui.more.k:
+    net.shopnc.android.ui.more.FeedbackActivity$2 this$1 -> a
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.more.LoginActivity -> net.shopnc.android.ui.more.LoginActivity:
+    net.shopnc.android.common.MyApp myApp -> a
+    android.widget.TextView txt_title -> b
+    android.widget.ImageButton btn_left -> c
+    android.widget.ImageButton btn_right -> d
+    android.widget.EditText txt_loginname -> e
+    android.widget.EditText txt_pwd -> f
+    android.widget.CheckBox cbx_rememberpwd -> g
+    android.widget.CheckBox cbx_autologin -> h
+    android.widget.Button btn_login -> i
+    void onCreate(android.os.Bundle) -> onCreate
+    android.app.Dialog onCreateDialog(int) -> onCreateDialog
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    net.shopnc.android.common.MyApp access$0(net.shopnc.android.ui.more.LoginActivity) -> a
+    android.widget.EditText access$1(net.shopnc.android.ui.more.LoginActivity) -> b
+    android.widget.EditText access$2(net.shopnc.android.ui.more.LoginActivity) -> c
+    android.widget.CheckBox access$3(net.shopnc.android.ui.more.LoginActivity) -> d
+    android.widget.CheckBox access$4(net.shopnc.android.ui.more.LoginActivity) -> e
+    void access$5(net.shopnc.android.ui.more.LoginActivity,java.lang.String,java.lang.String,boolean,boolean) -> a
+net.shopnc.android.ui.more.LoginActivity$1 -> net.shopnc.android.ui.more.l:
+    net.shopnc.android.ui.more.LoginActivity this$0 -> a
+    java.lang.String val$author -> b
+    java.lang.String val$md5_pwd -> c
+    boolean val$autologin -> d
+    boolean val$rememberpwd -> e
+    java.lang.String val$pwd -> f
+    void dataLoaded(net.shopnc.android.model.ResponseData) -> a
+net.shopnc.android.ui.more.LoginActivity$2 -> net.shopnc.android.ui.more.m:
+    net.shopnc.android.ui.more.LoginActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.more.LoginActivity$3 -> net.shopnc.android.ui.more.n:
+    net.shopnc.android.ui.more.LoginActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.more.MoreActivity -> net.shopnc.android.ui.more.MoreActivity:
+    android.widget.TextView txt_title -> a
+    android.widget.ListView lv -> b
+    net.shopnc.android.adapter.SubmenuListViewAdapter adapter -> c
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+net.shopnc.android.ui.more.MoreActivity$1 -> net.shopnc.android.ui.more.o:
+    net.shopnc.android.ui.more.MoreActivity this$0 -> a
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+net.shopnc.android.ui.more.SystemSetActivity -> net.shopnc.android.ui.more.SystemSetActivity:
+    android.widget.TextView txt_title -> a
+    android.widget.ImageButton btn_left -> b
+    android.widget.ImageButton btn_right -> c
+    android.widget.ListView lv_flow -> d
+    net.shopnc.android.adapter.MenuListViewAdapter adapter -> e
+    android.widget.RelativeLayout clear_cache -> f
+    android.widget.TextView txt_cache_size -> g
+    android.widget.Button btn_reset -> h
+    net.shopnc.android.common.MyApp myApp -> i
+    java.io.File cacheDir -> j
+    void onCreate(android.os.Bundle) -> onCreate
+    void totalCacheSize() -> a
+    void onResume() -> onResume
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    android.app.Dialog onCreateDialog(int) -> onCreateDialog
+    net.shopnc.android.adapter.MenuListViewAdapter access$0(net.shopnc.android.ui.more.SystemSetActivity) -> a
+    net.shopnc.android.common.MyApp access$1(net.shopnc.android.ui.more.SystemSetActivity) -> b
+    java.io.File access$2(net.shopnc.android.ui.more.SystemSetActivity) -> c
+    void access$3(net.shopnc.android.ui.more.SystemSetActivity) -> d
+net.shopnc.android.ui.more.SystemSetActivity$1 -> net.shopnc.android.ui.more.p:
+    net.shopnc.android.ui.more.SystemSetActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.more.SystemSetActivity$2 -> net.shopnc.android.ui.more.q:
+    net.shopnc.android.ui.more.SystemSetActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.more.SystemSetActivity$3 -> net.shopnc.android.ui.more.r:
+    net.shopnc.android.ui.more.SystemSetActivity this$0 -> a
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+net.shopnc.android.ui.more.SystemSetActivity$4 -> net.shopnc.android.ui.more.s:
+    net.shopnc.android.ui.more.SystemSetActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+net.shopnc.android.ui.more.SystemSetActivity$5 -> net.shopnc.android.ui.more.t:
+    net.shopnc.android.ui.more.SystemSetActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+net.shopnc.android.ui.more.SystemSetActivity$6 -> net.shopnc.android.ui.more.u:
+    net.shopnc.android.ui.more.SystemSetActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+net.shopnc.android.widget.MyProcessDialog -> net.shopnc.android.widget.a:
+    android.widget.TextView txt_info -> a
+    void setMsg(java.lang.String) -> a
+net.shopnc.android.widget.PullView -> net.shopnc.android.widget.PullView:
+    int MAX_LENGHT -> a
+    android.view.animation.Animation animationDown -> b
+    android.view.animation.Animation animationUp -> c
+    android.widget.ImageView arrow -> d
+    android.widget.FrameLayout content -> e
+    net.shopnc.android.widget.PullView$Flinger flinger -> f
+    android.view.GestureDetector gestureDetector -> g
+    boolean isAutoScroller -> h
+    boolean isIgnore -> i
+    int paddingTop -> j
+    android.widget.ProgressBar progressBar -> k
+    int state -> l
+    int state_close -> m
+    int state_open -> n
+    int state_open_max -> o
+    int state_open_max_release -> p
+    int state_open_release -> q
+    int state_update -> r
+    java.lang.String suffix -> s
+    android.widget.TextView title -> t
+    java.lang.String updateData -> u
+    net.shopnc.android.widget.PullView$UpdateHandle updateHandle -> v
+    void init() -> c
+    void initLayout() -> d
+    boolean move(float,boolean) -> a
+    boolean release() -> e
+    void dispatchDraw(android.graphics.Canvas) -> dispatchDraw
+    boolean dispatchTouchEvent(android.view.MotionEvent) -> dispatchTouchEvent
+    void endUpdate() -> a
+    java.lang.String getCurDate() -> f
+    void onAnimationEnd(android.view.animation.Animation) -> onAnimationEnd
+    void onAnimationRepeat(android.view.animation.Animation) -> onAnimationRepeat
+    void onAnimationStart(android.view.animation.Animation) -> onAnimationStart
+    boolean onDown(android.view.MotionEvent) -> onDown
+    boolean onFling(android.view.MotionEvent,android.view.MotionEvent,float,float) -> onFling
+    void onLayout(boolean,int,int,int,int) -> onLayout
+    void onLongPress(android.view.MotionEvent) -> onLongPress
+    boolean onScroll(android.view.MotionEvent,android.view.MotionEvent,float,float) -> onScroll
+    void onShowPress(android.view.MotionEvent) -> onShowPress
+    boolean onSingleTapUp(android.view.MotionEvent) -> onSingleTapUp
+    void setUpdateHandle(net.shopnc.android.widget.PullView$UpdateHandle) -> a
+    void startUpdate() -> b
+    boolean access$0$5818cdd9(net.shopnc.android.widget.PullView,float) -> a
+    void access$1(net.shopnc.android.widget.PullView,boolean) -> a
+net.shopnc.android.widget.PullView$Flinger -> net.shopnc.android.widget.b:
+    int lastFlingX -> b
+    android.widget.Scroller scroller -> c
+    net.shopnc.android.widget.PullView this$0 -> a
+    void run() -> run
+    void startUsingDistance$255f295(int) -> a
+net.shopnc.android.widget.PullView$UpdateHandle -> net.shopnc.android.widget.c:
+    void onUpdate() -> a
+org.apache.http.entity.mime.FormBodyPart -> a.a.a.a.a.a:
+    java.lang.String name -> a
+    org.apache.http.entity.mime.Header header -> b
+    org.apache.http.entity.mime.content.ContentBody body -> c
+    org.apache.http.entity.mime.content.ContentBody getBody() -> a
+    org.apache.http.entity.mime.Header getHeader() -> b
+    void addField(java.lang.String,java.lang.String) -> a
+org.apache.http.entity.mime.Header -> a.a.a.a.a.b:
+    java.util.List fields -> a
+    java.util.Map fieldMap -> b
+    void addField(org.apache.http.entity.mime.MinimalField) -> a
+    org.apache.http.entity.mime.MinimalField getField(java.lang.String) -> a
+    java.util.Iterator iterator() -> iterator
+    java.lang.String toString() -> toString
+org.apache.http.entity.mime.HttpMultipart -> a.a.a.a.a.c:
+    org.apache.http.util.ByteArrayBuffer FIELD_SEP -> a
+    org.apache.http.util.ByteArrayBuffer CR_LF -> b
+    org.apache.http.util.ByteArrayBuffer TWO_DASHES -> c
+    java.lang.String subType -> d
+    java.nio.charset.Charset charset -> e
+    java.lang.String boundary -> f
+    java.util.List parts -> g
+    org.apache.http.entity.mime.HttpMultipartMode mode -> h
+    org.apache.http.util.ByteArrayBuffer encode(java.nio.charset.Charset,java.lang.String) -> a
+    void writeBytes(org.apache.http.util.ByteArrayBuffer,java.io.OutputStream) -> a
+    void writeBytes(java.lang.String,java.nio.charset.Charset,java.io.OutputStream) -> a
+    void writeBytes(java.lang.String,java.io.OutputStream) -> a
+    void writeField(org.apache.http.entity.mime.MinimalField,java.nio.charset.Charset,java.io.OutputStream) -> a
+    java.util.List getBodyParts() -> a
+    void addBodyPart(org.apache.http.entity.mime.FormBodyPart) -> a
+    void doWriteTo(org.apache.http.entity.mime.HttpMultipartMode,java.io.OutputStream,boolean) -> a
+    void writeTo(java.io.OutputStream) -> a
+    long getTotalLength() -> b
+org.apache.http.entity.mime.HttpMultipart$1 -> a.a.a.a.a.d:
+    int[] $SwitchMap$org$apache$http$entity$mime$HttpMultipartMode -> a
+org.apache.http.entity.mime.HttpMultipartMode -> a.a.a.a.a.e:
+    org.apache.http.entity.mime.HttpMultipartMode STRICT -> a
+    org.apache.http.entity.mime.HttpMultipartMode BROWSER_COMPATIBLE -> b
+    org.apache.http.entity.mime.HttpMultipartMode[] $VALUES -> c
+    org.apache.http.entity.mime.HttpMultipartMode[] values() -> values
+    org.apache.http.entity.mime.HttpMultipartMode valueOf(java.lang.String) -> valueOf
+org.apache.http.entity.mime.MIME -> a.a.a.a.a.f:
+    java.nio.charset.Charset DEFAULT_CHARSET -> a
+org.apache.http.entity.mime.MinimalField -> a.a.a.a.a.g:
+    java.lang.String name -> a
+    java.lang.String value -> b
+    java.lang.String getName() -> a
+    java.lang.String getBody() -> b
+    java.lang.String toString() -> toString
+org.apache.http.entity.mime.MultipartEntity -> a.a.a.a.a.h:
+    char[] MULTIPART_CHARS -> a
+    org.apache.http.entity.mime.HttpMultipart multipart -> b
+    org.apache.http.Header contentType -> c
+    long length -> d
+    boolean dirty -> e
+    java.lang.String generateBoundary() -> a
+    void addPart(java.lang.String,org.apache.http.entity.mime.content.ContentBody) -> a
+    boolean isRepeatable() -> isRepeatable
+    boolean isChunked() -> isChunked
+    boolean isStreaming() -> isStreaming
+    long getContentLength() -> getContentLength
+    org.apache.http.Header getContentType() -> getContentType
+    org.apache.http.Header getContentEncoding() -> getContentEncoding
+    void consumeContent() -> consumeContent
+    java.io.InputStream getContent() -> getContent
+    void writeTo(java.io.OutputStream) -> writeTo
+org.apache.http.entity.mime.content.AbstractContentBody -> a.a.a.a.a.a.a:
+    java.lang.String mimeType -> a
+    java.lang.String mediaType -> b
+    java.lang.String subType -> c
+    java.lang.String getMimeType() -> a
+org.apache.http.entity.mime.content.ContentBody -> a.a.a.a.a.a.b:
+    java.lang.String getFilename() -> b
+    void writeTo(java.io.OutputStream) -> a
+org.apache.http.entity.mime.content.ContentDescriptor -> a.a.a.a.a.a.c:
+    java.lang.String getMimeType() -> a
+    java.lang.String getCharset() -> c
+    java.lang.String getTransferEncoding() -> d
+    long getContentLength() -> e
+org.apache.http.entity.mime.content.FileBody -> a.a.a.a.a.a.d:
+    java.io.File file -> a
+    java.lang.String filename -> b
+    java.lang.String charset -> c
+    void writeTo(java.io.OutputStream) -> a
+    java.lang.String getTransferEncoding() -> d
+    java.lang.String getCharset() -> c
+    long getContentLength() -> e
+    java.lang.String getFilename() -> b
+org.apache.http.entity.mime.content.StringBody -> a.a.a.a.a.a.e:
+    byte[] content -> a
+    java.nio.charset.Charset charset -> b
+    void writeTo(java.io.OutputStream) -> a
+    java.lang.String getTransferEncoding() -> d
+    java.lang.String getCharset() -> c
+    long getContentLength() -> e
+    java.lang.String getFilename() -> b

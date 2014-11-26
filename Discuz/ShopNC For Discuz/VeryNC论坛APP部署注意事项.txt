@@ -1,0 +1,15 @@
+这次给大家最新的后台、显示“来自**客户端”的插件、最新的IOS越狱包，android最新的包明天给大家。
+
+注意事项：
+1、更新后台，为防止每次升级，文件config.ini.php替换后需要重新配置一遍，已经将config.ini.php文件改名为config.ini.sample.php来避免替换掉原有配置文件，但是每次覆盖文件后一定要使用新的配置文件。
+
+注意这次配置文件和之前的配置文件新增几个字段：
+//iPhone客户端提示语
+$iphone_tip = '';
+//Android客户端提示语
+$android_tip = '';
+//Windows Phone客户端提示语
+$wp_tip = '';
+
+
+2、在后台安装插件，插件文件夹是“verync_mobile_id”，上传到plugin文件夹，到后台启用该插件即可。
