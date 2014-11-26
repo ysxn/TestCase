@@ -286,6 +286,10 @@ public class RemoteDataHandler{
 		ArrayList<Smiley> list = new ArrayList<Smiley>();
 		try {
 			String json = HttpHelper.get(Constants.URL_SMILEY);
+			if (json == null) {
+			    android.util.Log.e("zyw", ">>>>>>>NULL pointer error!!!");
+			    return list;
+			}
 			JSONObject obj = new JSONObject(json);
 			if(null != obj && obj.has(_DATAS)){
 				JSONArray array = obj.getJSONArray(_DATAS);
@@ -674,6 +678,10 @@ public class RemoteDataHandler{
 				msg.getData().putBoolean("hasMore", false);
 				try {
 					String json = HttpHelper.post(url, params);
+					if (json == null) {
+					    android.util.Log.e("zyw", ">>>>>>>NUll pointer error!!!");
+					    return;
+					}
 					//注意:目前服务器返回的JSON数据串中会有特殊字符（如换行）。需要处理一下
 					json = json.replaceAll("\\x0a|\\x0d","");
 					JSONObject obj = new JSONObject(json);
@@ -773,6 +781,10 @@ public class RemoteDataHandler{
 		try {
 			json = HttpHelper.get(Constants.URL_TOP_NAME);
 			Log.d(TAG, "top_name===>"+Constants.URL_TOP_NAME);
+			if (json == null) {
+			    Log.e("zyw", ">>>>>>>>NULL pointer error!!!");
+			    return "";
+			}
 			//注意:目前服务器返回的JSON数据串中会有特殊字符（如换行）。需要处理一下
 			json = json.replaceAll("\\x0a|\\x0d","");			
 		} catch (IOException e) {

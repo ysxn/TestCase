@@ -112,6 +112,9 @@ public class HttpHelper {
 	    if(HttpStatus.SC_OK == response.getStatusLine().getStatusCode()){ 
 	        result = EntityUtils.toString(response.getEntity());
 	    }
+	    if (result == null) {
+	        throw new IOException("result is null");
+	    }
 	    return result;
 	}
 	/**
