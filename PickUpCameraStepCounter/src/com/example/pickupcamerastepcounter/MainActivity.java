@@ -60,6 +60,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     public static final int TYPE_SENSOR_HUB_CONTEXT_AWARENESS = 33171012;
     public static final int TYPE_SENSOR_HUB_SCREEN_ON = 33171010;
     public static final int TYPE_SENSOR_HUB_SCREEN_ON_PROXIMITY = 33171014;
+    public static final int TYPE_SENSOR_HUB_SCREEN_ON_MOTION = 33171015;
 
     private SimpleDateFormat date = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒  ");
     
@@ -90,12 +91,17 @@ public class MainActivity extends Activity implements SensorEventListener {
     private float mSensorScreenOnProximityData[] = {
             0, 0, 0, 0
     };
+    private float mSensorScreenOnMotionData[] = {
+            0, 0, 0, 0
+    };
     private float mSensorScreenOnProximityLogData = 0f;
+    private float mSensorScreenOnMotionLogData = 0f;
     private float mSensorScreenOnLogData = 0f;
     private boolean mIsScreenOn = true;
     private boolean mTestStep = false;
     private boolean mTestScreenOnProximity = false;
     private boolean mTestPickUp = true;
+    private boolean mTestMotion = true;
 
     AudioManager mAudioManager;
     SensorManager mSensorManager;
@@ -113,6 +119,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     Sensor mSensorContextAwareness;
     Sensor mSensorScreenOn;
     Sensor mSensorScreenOnProximity;
+    Sensor mSensorScreenOnMotion;
 
     Sensor mSensorAcce;
     Sensor mSensorGyro;
@@ -148,6 +155,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     private static final int REQUEST_UPDATE_DATA_STEP_DETECTOR = 192;
     private static final int REQUEST_UPDATE_DATA = 299;
     private static final int REQUEST_UPDATE_DATA_SCREEN_ON_PROXIMITY = 399;
+    private static final int REQUEST_UPDATE_DATA_SCREEN_ON_MOTION = 391;
     
     private Handler mHandler = new Handler() {
         @Override
@@ -188,6 +196,19 @@ public class MainActivity extends Activity implements SensorEventListener {
                     String sC = "挥手亮屏：" + date.format(System.currentTimeMillis())
                             + " DATA=" + mSensorScreenOnProximityLogData;
                     mData.setText(sC + "\n" + mData.getText());
+                }
+                    break;
+                case REQUEST_UPDATE_DATA_SCREEN_ON_MOTION: {
+                    //mHandler.removeMessages(REQUEST_UPDATE_DATA);
+                    String sC = "智能亮屏：" + date.format(System.currentTimeMillis())
+                            + " DATA=" + mSensorScreenOnMotionLogData;
+                    mData.setText(sC+"\n"+mData.getText());
+                    //添加WM新的view来控制亮屏和解锁
+                    //挪到service里面
+                    if (mSensorScreenOnMotionLogData == 1) {
+                        unLockScreen();
+                    }
+                    //mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
                 }
                     break;
             }
@@ -308,6 +329,19 @@ public class MainActivity extends Activity implements SensorEventListener {
             }
             sb.append("\n");
         }
+        
+        if (mTestMotion) {
+            ss = mSensorManager.getSensorList(TYPE_SENSOR_HUB_SCREEN_ON_MOTION);
+            if (ss == null || ss.size() == 0) {
+                sb.append("获取智能亮屏动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_SCREEN_ON_MOTION);
+            } else {
+                mSensorScreenOnMotion = ss.get(0);
+                sb.append("获取智能亮屏动作传感器OK,size=" + ss.size() + ",传感器Type_id为="
+                        + TYPE_SENSOR_HUB_SCREEN_ON_MOTION + "; MD="+mSensorScreenOnMotion.getMinDelay());
+            }
+            sb.append("\n");
+        }
+        
         mSensorBrief = sb.toString()+"\n";
         if (mTestStep) {
             mSensorBrief = mSensorBrief+"\n"
@@ -318,6 +352,8 @@ public class MainActivity extends Activity implements SensorEventListener {
         }
         if (mTestScreenOnProximity) {
             mSensorBrief = mSensorBrief+"\n"
+                    +"挥手亮屏说明："
+                    +"\n"
                     +"1.挥手亮屏静止于桌面且与水平夹角1~45度" 
                     +"\n"
                     +"2.挥手来回各一次，未覆盖屏幕->覆盖屏幕->0.5秒内离开屏幕->0.5秒内再次覆盖屏幕->0.5秒内再离开屏幕->触发" 
@@ -325,7 +361,16 @@ public class MainActivity extends Activity implements SensorEventListener {
         }
         if (mTestPickUp) {
             mSensorBrief = mSensorBrief+"\n"
-                    +"横屏举起对准前方DATA为1就开启后摄像头，";
+                    +"体感相机说明：横屏举起对准前方DATA为1就开启后摄像头";
+        }
+        if (mTestMotion) {
+            mSensorBrief = mSensorBrief+"\n\n"
+                    +"智能亮屏说明："
+                    +"\n"
+                    +"1.  手機(由非60~90度)被抬起直立並呈現60~90度(角度變化達45度以上),並固定角度達800 ms. " 
+                    +"\n"
+                    +"2.  P-sensor沒有被遮蔽. ( P-sensor可由sensor hub 自動開啟. 啟動到讀取正確值,約需要300ms 左右 )" 
+                    +"\n";
         }
         mTips.setText(mSensorBrief);
         //mTips.setText("距离传感器被挡住代表手机在裤子口袋或包里面,这时候也是初始情况之一。 或者手机水平放在桌面上静止不动，这也是初始情况之一。， \n当用户拿起手机横屏对准前方， 立即启动后Camera。 \n如果是拿起后竖屏，本应该打开前camera，目前DEMO只能打开后camera，因为标准api不能指定前后camera，除非camera应用修改定制过。");
@@ -398,6 +443,15 @@ public class MainActivity extends Activity implements SensorEventListener {
                 mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA_SCREEN_ON_PROXIMITY, 0L);
             }
             Log.i("zzzz", ">>>>>SCREEN_ON_PROXIMITY == (" + event.values[0]
+                    + ")"
+                    + " 当前时间：" + date.format(System.currentTimeMillis()));
+        } else if (event.sensor.getType() == TYPE_SENSOR_HUB_SCREEN_ON_MOTION) {
+            mSensorScreenOnMotionData[0] = event.values[0];
+            if (mSensorScreenOnMotionData[0] != 0) {
+                mSensorScreenOnMotionLogData = mSensorScreenOnMotionData[0];
+                mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA_SCREEN_ON_MOTION, 0L);
+            }
+            Log.i("zzzz", ">>>>>SCREEN_ON_Motion == (" + event.values[0]
                     + ")"
                     + " 当前时间：" + date.format(System.currentTimeMillis()));
         }
@@ -553,6 +607,9 @@ public class MainActivity extends Activity implements SensorEventListener {
         }
         if (mTestPickUp) {
             mSensorManager.registerListener(MainActivity.this, mSensorScreenOn, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+        if (mTestMotion) {
+            mSensorManager.registerListener(MainActivity.this, mSensorScreenOnMotion, SensorManager.SENSOR_DELAY_FASTEST);
         }
         mPause.setEnabled(true);
         mResume.setEnabled(false);

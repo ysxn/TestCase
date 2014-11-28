@@ -429,6 +429,9 @@ public class SlidingTabLayout extends HorizontalScrollView {
     
     public void setDebugLog(boolean isTrue) {
         DEBUG = isTrue;
+        if (mTabStrip != null) {
+            mTabStrip.setDebugLog(isTrue);
+        }
     }
 
 }

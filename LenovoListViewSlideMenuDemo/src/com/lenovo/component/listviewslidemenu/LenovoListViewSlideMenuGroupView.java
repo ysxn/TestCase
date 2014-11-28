@@ -14,6 +14,11 @@ import android.widget.TextView;
 
 import com.lenovo.internal.R;
 
+/**
+ * @deprecated This API has not ripple effect.  Do not use. Should use LenovoListViewSlideMenuGroupViewMaterial
+ * @author zhuyw1
+ *
+ */
 public class LenovoListViewSlideMenuGroupView extends ViewGroup {
     public static final int SLIDE_STATE_IDLE = 0;
     public static final int SLIDE_STATE_SCROLLING = 1;

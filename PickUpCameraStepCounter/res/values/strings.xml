@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-    <string name="app_name">PickUpCameraStepCounter</string>
+    <string name="app_name">SensorHubTest</string>
     
     <string name="local_service_started">Local service has started</string>
     <string name="local_service_stopped">Local service has stopped</string>

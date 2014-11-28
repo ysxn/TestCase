@@ -9,6 +9,11 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.ListView;
 
+/**
+ * @deprecated This API has not ripple effect.  Do not use. Should use LenovoListViewSlideMenuListenerMaterial
+ * @author zhuyw1
+ *
+ */
 public class LenovoListViewSlideMenuListener implements View.OnTouchListener {
     private static final String TAG = "LenovoSlidemenuListViewListener";
     private static boolean DEBUG = false;
@@ -202,13 +207,16 @@ public class LenovoListViewSlideMenuListener implements View.OnTouchListener {
                                 && (mMenuItemView.isSelected())) {
                             mMenuItemView.setSelected(false);
                             if (DEBUG) {
-                                Log.i(TAG, "#####mMenuItemView click:");
+                                Log.i(TAG, "#####mMenuItemView click:mSelectView="+mSelectView);
                             }
-                            mSelectView.resetState();
                             if (mOnSlideMenuClickListener != null) {
                                 int position = ((Integer) mMenuItemView.getTag()).intValue();
+                                if (DEBUG) {
+                                    Log.i(TAG, "#####mMenuItemView click: mSelectView="+mSelectView);
+                                }
                                 mOnSlideMenuClickListener.onClick(mListView, mSelectView, position);
                             }
+                            mSelectView.resetState();
                         }
                     }
                     bIntercepInternel = true;

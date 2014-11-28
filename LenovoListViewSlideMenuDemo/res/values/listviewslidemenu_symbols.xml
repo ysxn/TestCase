@@ -25,6 +25,8 @@
     <java-symbol type="drawable" name="listviewslidemenu_ic_list_slidemenu_delete" />
     <java-symbol type="drawable" name="listviewslidemenu_state_focused_color_drawable" />
     <java-symbol type="drawable" name="listviewslidemenu_state_normal_color_drawable" />
+    <java-symbol type="drawable" name="listviewslidemenu_ripple_left_menu" />
+    <java-symbol type="drawable" name="listviewslidemenu_ripple_right_menu" />
 
     <!--                   layout                     -->
     <java-symbol type="layout" name="listviewslidemenu_list_item_slide_menu" />

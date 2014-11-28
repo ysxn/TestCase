@@ -1,0 +1,96 @@
+List-滑动式菜单特效
+l  描述：对于item的常见操作如果不多于2个，可采用此菜单特效，通过简单的滑动即可进行相关操作；
+l  基本思路：类似左右滑动抽屉特效；
+l  Porting说明：
+第一版说明：
+SlideMenuListViewDemoActivity.java：demo示例
+LenovoListViewSlideMenuGroupView.java（extends ViewGroup）：包含了滑动菜单的容器；
+LenovoListViewSlideMenuListener.java：应用的list注册此监听，实现滑动操作及接收菜单点击事件；
+LenovoListViewSlideMenuAdapter.java 抽象的adapter，应用可以继承这个来放入要显示的list view item内容
+
+在res/values/config.xml里面可以配置：
+    <!-- shdoc.lenovo.com-ui&gui-02.设计规格-02.GUI标杆设计-Vibe ROM V2.5-02.Controls -->
+    
+    <!-- VIBE2.5 GuidelineV0.3 041022.pdf page-49: Pressed color: #1E4D1D (#259B24 40% + #191919) -->
+    <drawable name="state_focused_color">#ff1e4d1d</drawable>
+    
+    <!-- VIBE2.5 GuidelineV0.3 041022.pdf page-49: Background color: Custom -->
+    <drawable name="state_normal_color">#ff000000</drawable>
+    
+    <!-- VIBE2.5 GuidelineV0.3 041022.pdf page-49: Text: 16sp #FAFAFA -->
+    <color name="slide_menu_item_text_color">#fffafafa</color>
+    <dimen name="slide_menu_item_text_size">16sp</dimen>
+    <dimen name="slide_menu_item_margin">16px</dimen>
+    <dimen name="slide_menu_item_width">112.0dip</dimen>
+    
+
+滑动菜单的容器LenovoListViewSlideMenuGroupView.java提供了下列接口：
+控制显示左右菜单是否显示：
+setHideLeftSlideMenu（bool）
+setHideRightSlideMenu（bool）
+
+获取菜单项来设置菜单显示的文字和图标和其他属性：
+getSlideMenuLeftSideText（）
+getSlideMenuRightSideText（）
+getSlideMenuLeftSideIcon（）
+getSlideMenuRightSideIcon（）
+
+change log 2014-11-21:
+增加接口获取左右菜单，提供给应用设置自定义属性，比如背景等等：
+    public ViewGroup getSlideMenuLeftSideViewGroup() {
+        // TODO Auto-generated method stub
+        return mSlidemenuItemContainerLeft;
+    }
+    
+    public ViewGroup getSlideMenuRightSideViewGroup() {
+        // TODO Auto-generated method stub
+        return mSlidemenuItemContainerRight;
+    }
+    
+change log 2014-11-25:
+LenovoListViewSlideMenu重写了左右滑动的逻辑，主要修改支持左右菜单点击的水波纹效果，还有增加了自定义layout等接口.
+原来老的三个java文件不建议使用。
+SlideMenuListViewDemoActivity.java：demo示例
+LenovoListViewSlideMenuGroupViewMaterial.java（extends ViewGroup）：包含了滑动菜单的容器；
+LenovoListViewSlideMenuListenerMaterial.java：应用的list注册此监听，实现滑动操作及接收菜单点击事件；
+
+默认左右菜单是TextView对象，通过TextView的setCompoundDrawables附加一个图标。
+如果修改默认TextView里面的属性，可以这样操作：
+            View v = ((LenovoListViewSlideMenuGroupView) convertView).getLeftMenu();
+            ((TextView)v).setText("Test Left "+position);
+            Drawable dLeft = mContext.getDrawable(R.drawable.listviewslidemenu_ic_list_slidemenu_canceltop);
+            dLeft.setBounds(0, 0, dLeft.getIntrinsicWidth(), dLeft.getIntrinsicHeight());
+            ((TextView)v).setCompoundDrawables(dLeft, null, null, null);
+    
+
+滑动菜单的容器LenovoListViewSlideMenuGroupViewMaterial.java提供了下列接口：
+1.设置List View 的item实际内容
+    public void setListItemView(View v)
+2.设置List View 的item实际内容的布局文件
+    public void setListItemView(int resid)
+3.设置List View 的左边菜单的内容
+    public void setLeftMenu(View v)
+4.设置List View 的左边菜单的内容的布局文件
+    public void setLeftMenu(int resid)
+5.设置List View 的右边菜单的内容
+    public void setRightMenu(View v)
+6.设置List View 的右边菜单的内容的布局文件
+    public void setRightMenu(int resid)
+7.获取List View 的右边菜单的View，没有自定义时候，默认返回是个TextView
+    public View getRightMenu()
+8.获取List View 的左边菜单的View，没有自定义时候，默认返回是个TextView
+    public View getLeftMenu()
+9.获取List View 的右边菜单是否为隐藏
+    public boolean isRightMenuHide()
+10.获取List View 的左边菜单是否为隐藏
+    public boolean isLeftMenuHide()
+11.设置List View 的右边菜单是否为隐藏
+    public void setRightMenuHide(boolean isTrue)
+12.设置List View 的左边菜单是否为隐藏
+    public void setLeftMenuHide(boolean isTrue)
+13.设置List View 的左边菜单点击回调函数，回调函数里面返回参数是这个List View Item的LenovoListViewSlideMenuGroupView对象
+    public void setLeftMenuClickListener(OnLeftMenuClickListener l)
+14.设置List View 的右边菜单点击回调函数，回调函数里面返回参数是这个List View Item的LenovoListViewSlideMenuGroupView对象
+    public void setRightMenuClickListener(OnRightMenuClickListener l)
+15.设置log开关
+    public void setDebugEnable(boolean isTrue)

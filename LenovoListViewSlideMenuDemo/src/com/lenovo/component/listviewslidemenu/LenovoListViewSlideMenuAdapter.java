@@ -9,6 +9,11 @@ import android.widget.BaseAdapter;
 
 import com.lenovo.internal.R;
 
+/**
+ * @deprecated This API has not ripple effect.  Do not use.
+ * @author zhuyw1
+ *
+ */
 public abstract class LenovoListViewSlideMenuAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
 

@@ -1,256 +1,204 @@
 
 package com.lenovo.demo;
 
-import android.os.Bundle;
+import com.lenovo.component.listviewslidemenu.LenovoListViewSlideMenuListenerMaterial;
+import com.lenovo.component.listviewslidemenu.LenovoListViewSlideMenuGroupViewMaterial;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.RippleDrawable;
+import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
+import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnCreateContextMenuListener;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
-import com.lenovo.component.listviewslidemenu.LenovoListViewSlideMenuAdapter;
-import com.lenovo.component.listviewslidemenu.LenovoListViewSlideMenuGroupView;
-import com.lenovo.component.listviewslidemenu.LenovoListViewSlideMenuListener;
 import com.lenovo.internal.R;
 
 public class SlideMenuListViewDemoActivity extends Activity {
-    private static String TAG = "SlideSectionListViewDemo";
+    private final String TAG = "zyw";
+    private boolean DEBUG = true;
+    private float mDensity = 1;
+
     private ListView mListView;
-    private LenovoListViewSlideMenuListener mLenovoSlidemenuListViewListener;
-    private LenovoListViewSlideMenuAdapter mLenovoListViewSlideMenuAdapter;
+    private DemoAdapter mDemoAdapter;
+    private LenovoListViewSlideMenuListenerMaterial mSwipeTouchListener;
+    private final static int NUM_ITEM = 30;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listviewslidemenu_demo_activity);
 
-        mListView = (ListView) this.findViewById(R.id.listviewslidemenu_listView);
-        mLenovoListViewSlideMenuAdapter = new CustomAdapter(this);
-        mListView.setAdapter(mLenovoListViewSlideMenuAdapter);
-
-        mLenovoSlidemenuListViewListener = new LenovoListViewSlideMenuListener(mListView,
-                new LenovoListViewSlideMenuListener.OnSlideMenuClickListener() {
-
-                    @Override
-                    public void onClick(ListView parent, View view, int position) {
-                        // TODO Auto-generated method stub
-                        Log.e(TAG, "####onSlideMenuClick:" + position);
-                        Toast.makeText(SlideMenuListViewDemoActivity.this,
-                                "onSlideMenuClick[" + position + "]", 200)
-                                .show();
-                    }
-                });
-        mListView.setOnTouchListener(mLenovoSlidemenuListViewListener);
-
-        mListView.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-                Log.e(TAG, "#####onItemClick:"+position);
-                Toast.makeText(SlideMenuListViewDemoActivity.this,
-                        "onListItemClick[" + position + "]", 200)
-                        .show();
-            }
-        });
-        mListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+        mDensity = getResources().getDisplayMetrics().density;
+        mListView = (ListView) findViewById(R.id.listviewslidemenu_listView);
+        mDemoAdapter = new DemoAdapter(SlideMenuListViewDemoActivity.this);
+        mListView.setAdapter(mDemoAdapter);
+        mSwipeTouchListener = new LenovoListViewSlideMenuListenerMaterial(this, mListView);
+        mListView.setOnTouchListener(mSwipeTouchListener);
+        mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
 
             @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                    int arg2, long arg3) {
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
                 // TODO Auto-generated method stub
-                Log.e(TAG, "#####setOnItemLongClickListener:"+arg2);
-                mLenovoSlidemenuListViewListener.abortSlide();
-                return false;
+                if (DEBUG) {
+                    Log.i(TAG, ">>>>>onScrollStateChanged , scrollState=" + scrollState);
+                }
             }
-
-        });
-
-        mListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
 
             @Override
-            public void onCreateContextMenu(ContextMenu conMenu, View view, ContextMenuInfo info) {
-                conMenu.setHeaderTitle("ContextMenu");
-                conMenu.add(0, 0, 0, "Test only!");
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+                    int totalItemCount) {
+                // TODO Auto-generated method stub
+                if (DEBUG) {
+                    Log.i(TAG, ">>>>>onScroll , firstVisibleItem=" + firstVisibleItem
+                            + ", visibleItemCount=" + visibleItemCount + ", totalItemCount="
+                            + totalItemCount);
+                }
             }
         });
+
+        mListView.setOnItemClickListener(new AbsListView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // TODO Auto-generated method stub
+                if (DEBUG) {
+                    Log.i(TAG, ">>>>>onItemClick  , position=" + position + ", id=" + id);
+                }
+            }
+        });
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                // TODO Auto-generated method stub
+                if (DEBUG) {
+                    Log.i(TAG, ">>>>>onItemLongClick , position=" + position + ", id=" + id);
+                }
+                return true;
+            }
+        });
+
     }
 
-    private class CustomAdapter extends LenovoListViewSlideMenuAdapter {
+    private class DemoAdapter extends BaseAdapter {
         private Context mContext;
 
-        public CustomAdapter(Context context) {
-            super(context);
+        public DemoAdapter(Context context) {
             // TODO Auto-generated constructor stub
             mContext = context;
         }
 
-        public Object getItem(int position) {
-            return position;
-        }
-
-        public long getItemId(int position) {
-            return position;
-        }
-
+        @Override
         public int getCount() {
-            return CALL_DATA.length;
+            // TODO Auto-generated method stub
+            return NUM_ITEM;
         }
 
+        @Override
+        public Object getItem(int position) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            // TODO Auto-generated method stub
             ViewHolder holder;
-
             if (convertView == null) {
-                LenovoListViewSlideMenuGroupView sectionView = (LenovoListViewSlideMenuGroupView) super
-                        .getView(position, convertView, parent);
-                //for example, list item is a text view:
-                TextView customView = new TextView(mContext);
-                customView.setGravity(Gravity.CENTER);
-                customView.setMinHeight(100);
-                customView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-                        LayoutParams.WRAP_CONTENT));
-                // Creates a ViewHolder and store references to the two children
-                // views
-                // we want to bind data to.
                 holder = new ViewHolder();
-                holder.position = position;
-                holder.text = customView;
-                customView.setTag(holder);
-                sectionView.setTag(holder);
-                ((LenovoListViewSlideMenuGroupView) sectionView).setContentView(customView);
+                convertView = new LenovoListViewSlideMenuGroupViewMaterial(mContext);
+                TextView listItem = new TextView(mContext);
+                listItem.setGravity(Gravity.CENTER);
+                listItem.setMinHeight((int) (60 * mDensity));
+                listItem.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
+                        LayoutParams.MATCH_PARENT));
+                holder.listItem = listItem;
+                ((LenovoListViewSlideMenuGroupViewMaterial) convertView).setListItemView(listItem);
 
-                convertView = sectionView;
+                holder.leftMenu = (TextView) ((LenovoListViewSlideMenuGroupViewMaterial) convertView).getLeftMenu();
+
+                holder.rightMenu = (TextView) ((LenovoListViewSlideMenuGroupViewMaterial) convertView).getRightMenu();
+
+                convertView.setTag(holder);
+                ((LenovoListViewSlideMenuGroupViewMaterial) convertView)
+                        .setLeftMenuClickListener(new LenovoListViewSlideMenuGroupViewMaterial.OnLeftMenuClickListener() {
+
+                            @Override
+                            public void onLeftMenuClicked(LenovoListViewSlideMenuGroupViewMaterial listItemViewGroup) {
+                                // TODO Auto-generated method stub
+                                if (DEBUG) {
+                                    Log.i(TAG, ">>>>>>>leftMenu onClick : "
+                                            + ((ViewHolder) listItemViewGroup.getTag()).text);
+                                    Toast.makeText(mContext, "leftMenu onClick : "+((ViewHolder) listItemViewGroup.getTag()).text, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                ((LenovoListViewSlideMenuGroupViewMaterial) convertView)
+                        .setRightMenuClickListener(new LenovoListViewSlideMenuGroupViewMaterial.OnRightMenuClickListener() {
+
+                            @Override
+                            public void onRightMenuClicked(LenovoListViewSlideMenuGroupViewMaterial listItemViewGroup) {
+                                // TODO Auto-generated method stub
+                                if (DEBUG) {
+                                    Log.i(TAG, ">>>>>>>rightMenu onClick : "
+                                            + ((ViewHolder) listItemViewGroup.getTag()).text);
+                                    Toast.makeText(mContext, "rightMenu onClick : "+((ViewHolder) listItemViewGroup.getTag()).text, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
             } else {
                 holder = (ViewHolder) convertView.getTag();
-                // We should update the position so that the position is
-                // continuous.
-                holder.position = position;
             }
-
-            // Bind the data efficiently with the holder.
-            holder.text.setText(CALL_DATA[position][0]);
-            ((LenovoListViewSlideMenuGroupView) convertView).setHideLeftSlideMenu(false);
-            ((LenovoListViewSlideMenuGroupView) convertView).setHideRightSlideMenu(false);
-            
-            //show example for call interface:
-            
-            boolean test = true;
-            
-            if (test) {
-                ((LenovoListViewSlideMenuGroupView) convertView).getSlideMenuLeftSideText().setText("Left "+position);
-                ((LenovoListViewSlideMenuGroupView) convertView).getSlideMenuRightSideText().setText("Right "+position);
-                ((LenovoListViewSlideMenuGroupView) convertView).getSlideMenuLeftSideIcon().setImageDrawable(mContext.getResources().getDrawable(R.drawable.listviewslidemenu_ic_list_slidemenu_canceltop));
-                ((LenovoListViewSlideMenuGroupView) convertView).getSlideMenuRightSideIcon().setImageDrawable(mContext.getResources().getDrawable(R.drawable.listviewslidemenu_ic_list_slidemenu_canceltop));
+            holder.position = position;
+            holder.listItem.setText("List Item " + position);
+            holder.leftMenu.setText("MenuL  " + position);
+            holder.rightMenu.setText("MenuR  " + position);
+            ((LenovoListViewSlideMenuGroupViewMaterial) convertView).setLeftMenuHide(false);
+            ((LenovoListViewSlideMenuGroupViewMaterial) convertView).setRightMenuHide(false);
+            if (position % 2 == 0) {
+                ((LenovoListViewSlideMenuGroupViewMaterial) convertView).setLeftMenuHide(true);
+            } else {
+                ((LenovoListViewSlideMenuGroupViewMaterial) convertView).setRightMenuHide(true);
             }
+            View v = ((LenovoListViewSlideMenuGroupViewMaterial) convertView).getLeftMenu();
+            ((TextView)v).setText("Test Left "+position);
+            Drawable dLeft = mContext.getDrawable(R.drawable.listviewslidemenu_ic_list_slidemenu_canceltop);
+            dLeft.setBounds(0, 0, dLeft.getIntrinsicWidth(), dLeft.getIntrinsicHeight());
+            ((TextView)v).setCompoundDrawables(dLeft, null, null, null);
 
+            holder.text = "List Item " + position;
             return convertView;
         }
 
-        class ViewHolder {
-            int position;
-            TextView text;
-        }
     }
 
-    private final String[][] CALL_DATA = {
-            {
-                    "联想热线01", "4008188818"
-            },
-            {
-                    "联想热线02", "4008188818"
-            },
-            {
-                    "联想热线03", "4008188818"
-            },
-            {
-                    "联想热线04", "4008188818"
-            },
-            {
-                    "联想热线05", "4008188818"
-            },
-            {
-                    "联想热线06", "4008188818"
-            },
-            {
-                    "联想热线07", "4008188818"
-            },
-            {
-                    "联想热线08", "4008188818"
-            },
-            {
-                    "联想热线09", "4008188818"
-            },
-            {
-                    "联想热线10", "4008188818"
-            },
-            {
-                    "联想热线11", "4008188818"
-            },
-            {
-                    "联想热线12", "4008188818"
-            },
-            {
-                    "联想热线13", "4008188818"
-            },
-            {
-                    "联想热线14", "4008188818"
-            },
-            {
-                    "联想热线15", "4008188818"
-            },
-            {
-                    "联想热线16", "4008188818"
-            },
-            {
-                    "联想热线17", "4008188818"
-            },
-            {
-                    "联想热线18", "4008188818"
-            },
-            {
-                    "联想热线19", "4008188818"
-            },
-            {
-                    "联想热线20", "4008188818"
-            },
-            {
-                    "联想热线21", "4008188818"
-            },
-            {
-                    "联想热线22", "4008188818"
-            },
-            {
-                    "联想热线23", "4008188818"
-            },
-            {
-                    "联想热线24", "4008188818"
-            },
-            {
-                    "联想热线25", "4008188818"
-            },
-            {
-                    "联想热线26", "4008188818"
-            },
-            {
-                    "联想热线27", "4008188818"
-            },
-            {
-                    "联想热线28", "4008188818"
-            },
-            {
-                    "联想热线29", "4008188818"
-            },
-            {
-                    "联想热线30", "4008188818"
-            },
-    };
-
+    private class ViewHolder {
+        public int position;
+        public String text;
+        public TextView listItem;
+        public TextView leftMenu;
+        public TextView rightMenu;
+    }
 }
