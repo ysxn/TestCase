@@ -7,6 +7,7 @@ import java.util.List;
 import com.widget.DepthPageTransformer;
 import com.widget.DotIndicator;
 import com.widget.DotIndicatorItem;
+import com.widget.FadeTransformer;
 import com.widget.ViewPagerWithIndicator;
 import com.widget.ZoomOutPageTransformer;
 
@@ -55,8 +56,8 @@ public class MainActivity extends Activity  implements OnPageChangeListener {
         mPager.setOnPageChangeListener(this);
         // 设置viewpager在第二个视图显示  
         mPager.setCurrentItem(1);
-        //mPager.setPageTransformer(true, new DepthPageTransformer());
-        mPager.setPageTransformer(true, new ZoomOutPageTransformer());
+        mPager.setPageTransformer(true, new FadeTransformer());
+        //mPager.setPageTransformer(true, new ZoomOutPageTransformer());
     }
 
 

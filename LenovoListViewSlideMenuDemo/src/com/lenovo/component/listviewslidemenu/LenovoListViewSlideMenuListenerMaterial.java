@@ -27,6 +27,7 @@ public class LenovoListViewSlideMenuListenerMaterial implements View.OnTouchList
     private int mMinFlingVelocity;
     private int mMaxFlingVelocity;
     private VelocityTracker mVelocityTracker;
+    private boolean mSlideEnabled = true;
 
     public LenovoListViewSlideMenuListenerMaterial(Context context, ListView listView) {
         // TODO Auto-generated constructor stub
@@ -44,6 +45,12 @@ public class LenovoListViewSlideMenuListenerMaterial implements View.OnTouchList
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         // TODO Auto-generated method stub
+        if (!mSlideEnabled) {
+            if (mTouchDownListItemViewGroup != null) {
+                scrollBack(true);
+            }
+            return false;
+        }
         final int action = event.getAction();
         
         switch (action) {
@@ -68,9 +75,23 @@ public class LenovoListViewSlideMenuListenerMaterial implements View.OnTouchList
                     }
                 } else if (mSwipeStatus == SWIPE_STAT_SHOW_MENU) {
                     scrollBack(true);
+                    // Cancel ListView's touch (un-highlighting the item)
+                    MotionEvent cancelEvent = MotionEvent.obtain(event);
+                    cancelEvent.setAction(MotionEvent.ACTION_CANCEL |
+                            (event.getActionIndex()
+                            << MotionEvent.ACTION_POINTER_INDEX_SHIFT));
+                    mListView.onTouchEvent(cancelEvent);
+                    cancelEvent.recycle();
                     return true;
                 } else if (mSwipeStatus == SWIPE_STAT_PROCESS) {
                     scrollBack(true);
+                    // Cancel ListView's touch (un-highlighting the item)
+                    MotionEvent cancelEvent = MotionEvent.obtain(event);
+                    cancelEvent.setAction(MotionEvent.ACTION_CANCEL |
+                            (event.getActionIndex()
+                            << MotionEvent.ACTION_POINTER_INDEX_SHIFT));
+                    mListView.onTouchEvent(cancelEvent);
+                    cancelEvent.recycle();
                     return true;
                 }
                 break;
@@ -193,10 +214,17 @@ public class LenovoListViewSlideMenuListenerMaterial implements View.OnTouchList
         return false;
     }
     
+    /**
+     * scrollBack menu view, default is scroll smoothly
+     */
     private void scrollBack() {
         scrollBack(false);
     }
     
+    /**
+     * scrollBack menu view
+     * @param quickly
+     */
     private void scrollBack(boolean quickly) {
         if (mTouchDownListItemViewGroup != null) {
             if (quickly) {
@@ -235,6 +263,28 @@ public class LenovoListViewSlideMenuListenerMaterial implements View.OnTouchList
             }
         }
         return null;
+    }
+    
+    /**
+     * set Slide Function Enabled or not
+     * @param isTrue
+     */
+    public void setSlideFunctionEnable(boolean isTrue) {
+        if (mTouchDownListItemViewGroup != null) {
+            scrollBack(true);
+        }
+        mSlideEnabled = isTrue;
+        if (DEBUG) {
+            Log.i(TAG, ">>>>>mSlideEnabled="+mSlideEnabled);
+        }
+    }
+    
+    /**
+     * get Slide Function Enabled or not
+     * @return
+     */
+    public boolean getSlideFunctionEnable() {
+        return mSlideEnabled;
     }
 
     /**

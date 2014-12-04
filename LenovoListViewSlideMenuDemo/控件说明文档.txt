@@ -94,3 +94,16 @@ LenovoListViewSlideMenuListenerMaterial.java：应用的list注册此监听，实现滑动操作
     public void setRightMenuClickListener(OnRightMenuClickListener l)
 15.设置log开关
     public void setDebugEnable(boolean isTrue)
+    
+/***************************************我是分割线***********************************************************/
+change log 2014-12-04:
+
+LenovoListViewSlideMenuListenerMaterial.java增加2个接口提供应用控制整体listview开关左右滑动菜单功能：
+1.设置开关整体listview开关左右滑动菜单功能
+public void setSlideFunctionEnable(boolean isTrue)
+
+2.获取当前开关整体listview开关左右滑动菜单功能的值
+public boolean getSlideFunctionEnable()
+
+3.修改逻辑为这样子：滑出来菜单，但是如果没有点击到菜单，而是点击到item部分，不能算点击item，仅仅自动滑回去。
+
