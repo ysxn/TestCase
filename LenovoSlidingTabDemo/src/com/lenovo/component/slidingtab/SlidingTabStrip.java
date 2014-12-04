@@ -21,7 +21,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -30,7 +33,10 @@ import android.widget.LinearLayout;
 class SlidingTabStrip extends LinearLayout {
 
     private static boolean DEBUG = false;
+    private static String TAG = "zyw";
     private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 1;
+    private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_LAYGE_PX = 2;
+    private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_SMALL_PX = 1;
     //private static final byte DEFAULT_BOTTOM_BORDER_COLOR_ALPHA = 0x26;
     private static final int DEFAULT_BOTTOM_BORDER_COLOR = 0xFFA3A3A3;
     private static final int SELECTED_INDICATOR_THICKNESS_DIPS = 2;
@@ -70,7 +76,16 @@ class SlidingTabStrip extends LinearLayout {
         mDefaultTabColorizer = new SimpleTabColorizer();
         mDefaultTabColorizer.setIndicatorColors(DEFAULT_SELECTED_INDICATOR_COLOR);
 
-        mBottomBorderThickness = (int) (DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS * density);
+        Drawable dw = getResources().getDrawable(com.lenovo.internal.R.drawable.slidingtab_ic_launcher);
+        Log.i(TAG, ">>>>check res height="+dw.getIntrinsicHeight()+", width="+dw.getIntrinsicWidth());
+        if (dw.getIntrinsicHeight() >= 144 && dw.getIntrinsicWidth() >= 144) {
+            //xxxhdpi/xxhdpi  2px 
+            mBottomBorderThickness = DEFAULT_BOTTOM_BORDER_THICKNESS_LAYGE_PX;
+        } else {
+            //xhdpi/hdpi  1px 
+            mBottomBorderThickness = DEFAULT_BOTTOM_BORDER_THICKNESS_SMALL_PX;
+        }
+        //mBottomBorderThickness = (int) (DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS * density);
         mBottomBorderPaint = new Paint();
         mBottomBorderPaint.setColor(mDefaultBottomBorderColor);
 

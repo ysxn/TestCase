@@ -33,6 +33,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -46,20 +47,20 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements SensorEventListener {
     private final String TAG = "zyw";
     private final boolean DEBUG = true;
-    public static final int TYPE_SENSOR_HUB_AIR_MOUSE = 33171001;
+    //public static final int TYPE_SENSOR_HUB_AIR_MOUSE = 33171001;
     public static final int TYPE_SENSOR_HUB_SNAP = 33171002;
     public static final int TYPE_SENSOR_HUB_SHAKE = 33171003;
     public static final int TYPE_SENSOR_HUB_TAP = 33171004;
     public static final int TYPE_SENSOR_HUB_FLIP = 33171005;
     public static final int TYPE_SENSOR_HUB_TWIST = 33171006;
-    public static final int TYPE_SENSOR_HUB_TILT = 33171007;
-    public static final int TYPE_SENSOR_HUB_PDR_HOLD = 33171008;
-    public static final int TYPE_SENSOR_HUB_FALLING = 33171009;
+    //public static final int TYPE_SENSOR_HUB_TILT = 33171007;
+    //public static final int TYPE_SENSOR_HUB_PDR_HOLD = 33171008;
+    //public static final int TYPE_SENSOR_HUB_FALLING = 33171009;
+    public static final int TYPE_SENSOR_HUB_SCREEN_ON_CAMERA = 33171010;
+    public static final int TYPE_SENSOR_HUB_GESTURE = 33171011;
+    //public static final int TYPE_SENSOR_HUB_CONTEXT_AWARENESS = 33171012;
     public static final int TYPE_SENSOR_HUB_RGB = 33171013;
-    public static final int TYPE_SENSOR_HUB_PROXIMITY_GESTURE = 33171011;
-    public static final int TYPE_SENSOR_HUB_CONTEXT_AWARENESS = 33171012;
-    public static final int TYPE_SENSOR_HUB_SCREEN_ON = 33171010;
-    public static final int TYPE_SENSOR_HUB_SCREEN_ON_PROXIMITY = 33171014;
+    public static final int TYPE_SENSOR_HUB_SCREEN_ON_BYHAND = 33171014;
     public static final int TYPE_SENSOR_HUB_SCREEN_ON_MOTION = 33171015;
 
     private SimpleDateFormat date = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒  ");
@@ -79,7 +80,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     private float mSensorOrienData[] = {
             0, 0, 0, 0
     };
-    private float mSensorScreenOnData[] = {
+    private float mSensorScreenOnCameraData[] = {
             0, 0, 0, 0
     };
     private float mSensorStepCounterData[] = {
@@ -88,19 +89,19 @@ public class MainActivity extends Activity implements SensorEventListener {
     private float mSensorStepDetectorData[] = {
             0, 0, 0, 0
     };
-    private float mSensorScreenOnProximityData[] = {
+    private float mSensorScreenOnByHandData[] = {
             0, 0, 0, 0
     };
     private float mSensorScreenOnMotionData[] = {
             0, 0, 0, 0
     };
-    private float mSensorScreenOnProximityLogData = 0f;
+    private float mSensorScreenOnByHandLogData = 0f;
     private float mSensorScreenOnMotionLogData = 0f;
-    private float mSensorScreenOnLogData = 0f;
+    private float mSensorScreenOnCameraLogData = 0f;
     private boolean mIsScreenOn = true;
     private boolean mTestStep = false;
-    private boolean mTestScreenOnProximity = false;
-    private boolean mTestPickUp = true;
+    private boolean mTestScreenOnByHand = false;
+    private boolean mTestPickUp = false;
     private boolean mTestMotion = true;
 
     AudioManager mAudioManager;
@@ -117,8 +118,8 @@ public class MainActivity extends Activity implements SensorEventListener {
     Sensor mSensorRGB;
     Sensor mSensorGesture;
     Sensor mSensorContextAwareness;
-    Sensor mSensorScreenOn;
-    Sensor mSensorScreenOnProximity;
+    Sensor mSensorScreenOnCamera;
+    Sensor mSensorScreenOnByHand;
     Sensor mSensorScreenOnMotion;
 
     Sensor mSensorAcce;
@@ -143,6 +144,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     private static final String REQUEST_CAPTURE_SAVE_FRONT_IMG = Environment.getExternalStorageDirectory().getPath() + "/pickuptest/front.jpg";
     private static final String REQUEST_CAPTURE_SAVE_BACK_IMG = Environment.getExternalStorageDirectory().getPath() + "/pickuptest/back.jpg";
     
+    PowerManager mPm;
     //声明键盘管理器
     KeyguardManager mKeyguardManager = null;    
     //声明键盘锁
@@ -153,9 +155,12 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     private static final int REQUEST_UPDATE_DATA_STEP_COUNTER = 199;
     private static final int REQUEST_UPDATE_DATA_STEP_DETECTOR = 192;
-    private static final int REQUEST_UPDATE_DATA = 299;
-    private static final int REQUEST_UPDATE_DATA_SCREEN_ON_PROXIMITY = 399;
+    private static final int REQUEST_UPDATE_DATA_SCREEN_ON_CAMERA = 299;
+    private static final int REQUEST_UPDATE_DATA_SCREEN_ON_BYHAND = 399;
     private static final int REQUEST_UPDATE_DATA_SCREEN_ON_MOTION = 391;
+    private static final int REQUEST_UPDATE_DATA_SCREEN_ON_SNAP = 392;
+    private static final int REQUEST_UPDATE_DATA_SCREEN_ON_TAP = 393;
+    private static final int REQUEST_UPDATE_DATA_SCREEN_ON_FLIP = 394;
     
     private Handler mHandler = new Handler() {
         @Override
@@ -175,26 +180,26 @@ public class MainActivity extends Activity implements SensorEventListener {
                     mData.setText(sC+"\n"+mData.getText());
                 }
                     break;
-                case REQUEST_UPDATE_DATA: {
+                case REQUEST_UPDATE_DATA_SCREEN_ON_CAMERA: {
                     //mHandler.removeMessages(REQUEST_UPDATE_DATA);
                     String sC = "体感相机：" + date.format(System.currentTimeMillis())
-                            + " DATA=" + mSensorScreenOnLogData;
+                            + " DATA=" + mSensorScreenOnCameraLogData;
                     mData.setText(sC+"\n"+mData.getText());
                     //添加WM新的view来控制亮屏和解锁
                     //挪到service里面
-                    if (mSensorScreenOnLogData == 1) {
+                    if (mSensorScreenOnCameraLogData == 1) {
                         unLockScreen();
                         launchBackCamera();
                     }
                     //mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
                 }
                     break;
-                case REQUEST_UPDATE_DATA_SCREEN_ON_PROXIMITY: {
+                case REQUEST_UPDATE_DATA_SCREEN_ON_BYHAND: {
                     // mHandler.removeMessages(REQUEST_UPDATE_DATA);
                     String step = ">>>>>Step Counter : " + mSensorStepCounterData[0] + "\n"
                             + ">>>>>>Step Detector : " + mSensorStepDetectorData[0] + "\n";
                     String sC = "挥手亮屏：" + date.format(System.currentTimeMillis())
-                            + " DATA=" + mSensorScreenOnProximityLogData;
+                            + " DATA=" + mSensorScreenOnByHandLogData;
                     mData.setText(sC + "\n" + mData.getText());
                 }
                     break;
@@ -206,7 +211,58 @@ public class MainActivity extends Activity implements SensorEventListener {
                     //添加WM新的view来控制亮屏和解锁
                     //挪到service里面
                     if (mSensorScreenOnMotionLogData == 1) {
+                        Log.i(TAG, ">>>>>>>>>>>>REQUEST_UPDATE_DATA_SCREEN_ON_MOTION");
                         unLockScreen();
+                        //mPm.wakeUp(SystemClock.uptimeMillis());
+                        Log.i(TAG, ">>>>>>>>>>>>wake up ok");
+                    }
+                    //mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
+                }
+                    break;
+                case REQUEST_UPDATE_DATA_SCREEN_ON_SNAP: {
+                    //mHandler.removeMessages(REQUEST_UPDATE_DATA);
+                    String sC = "SNAP亮屏：" + date.format(System.currentTimeMillis())
+                            + " DATA=" + mSensorScreenOnMotionLogData;
+                    mData.setText(sC+"\n"+mData.getText());
+                    //添加WM新的view来控制亮屏和解锁
+                    //挪到service里面
+                    if (mSensorScreenOnMotionLogData == 1) {
+                        Log.i(TAG, ">>>>>>>>>>>>REQUEST_UPDATE_DATA_SCREEN_ON_SNAP");
+                        unLockScreen();
+                        //mPm.wakeUp(SystemClock.uptimeMillis());
+                        Log.i(TAG, ">>>>>>>>>>>>wake up ok");
+                    }
+                    //mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
+                }
+                    break;
+                case REQUEST_UPDATE_DATA_SCREEN_ON_TAP: {
+                    //mHandler.removeMessages(REQUEST_UPDATE_DATA);
+                    String sC = "TAP亮屏：" + date.format(System.currentTimeMillis())
+                            + " DATA=" + mSensorScreenOnMotionLogData;
+                    mData.setText(sC+"\n"+mData.getText());
+                    //添加WM新的view来控制亮屏和解锁
+                    //挪到service里面
+                    if (mSensorScreenOnMotionLogData == 1) {
+                        Log.i(TAG, ">>>>>>>>>>>>REQUEST_UPDATE_DATA_SCREEN_ON_TAP");
+                        unLockScreen();
+                        //mPm.wakeUp(SystemClock.uptimeMillis());
+                        Log.i(TAG, ">>>>>>>>>>>>wake up ok");
+                    }
+                    //mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
+                }
+                    break;
+                case REQUEST_UPDATE_DATA_SCREEN_ON_FLIP: {
+                    //mHandler.removeMessages(REQUEST_UPDATE_DATA);
+                    String sC = "FLIP亮屏：" + date.format(System.currentTimeMillis())
+                            + " DATA=" + mSensorScreenOnMotionLogData;
+                    mData.setText(sC+"\n"+mData.getText());
+                    //添加WM新的view来控制亮屏和解锁
+                    //挪到service里面
+                    if (mSensorScreenOnMotionLogData == 1) {
+                        Log.i(TAG, ">>>>>>>>>>>>REQUEST_UPDATE_DATA_SCREEN_ON_FLIP");
+                        unLockScreen();
+                        //mPm.wakeUp(SystemClock.uptimeMillis());
+                        Log.i(TAG, ">>>>>>>>>>>>wake up ok");
                     }
                     //mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
                 }
@@ -244,6 +300,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         filter.addAction(Intent.ACTION_SCREEN_ON);
         MainActivity.this.registerReceiver(mBroadcastReceiver, filter);
         
+        mPm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         mKeyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
         mWindowManager = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
         mGlobalView = new LinearLayout(this);
@@ -307,25 +364,25 @@ public class MainActivity extends Activity implements SensorEventListener {
         List<Sensor> ss;
 
         if (mTestPickUp) {
-            ss = mSensorManager.getSensorList(TYPE_SENSOR_HUB_SCREEN_ON);
+            ss = mSensorManager.getSensorList(TYPE_SENSOR_HUB_SCREEN_ON_CAMERA);
             if (ss == null || ss.size() == 0) {
-                sb.append("获取pick up动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_SCREEN_ON);
+                sb.append("获取pick up动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_SCREEN_ON_CAMERA);
             } else {
-                mSensorScreenOn = ss.get(0);
+                mSensorScreenOnCamera = ss.get(0);
                 sb.append("获取pick up动作传感器OK,size=" + ss.size() + ",传感器Type_id为="
-                        + TYPE_SENSOR_HUB_SCREEN_ON + "; MD="+mSensorScreenOn.getMinDelay());
+                        + TYPE_SENSOR_HUB_SCREEN_ON_CAMERA + "; MD="+mSensorScreenOnCamera.getMinDelay());
             }
             sb.append("\n");
         }
         
-        if (mTestScreenOnProximity) {
-            ss = mSensorManager.getSensorList(TYPE_SENSOR_HUB_SCREEN_ON_PROXIMITY);
+        if (mTestScreenOnByHand) {
+            ss = mSensorManager.getSensorList(TYPE_SENSOR_HUB_SCREEN_ON_BYHAND);
             if (ss == null || ss.size() == 0) {
-                sb.append("获取挥手亮屏动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_SCREEN_ON_PROXIMITY);
+                sb.append("获取挥手亮屏动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_SCREEN_ON_BYHAND);
             } else {
-                mSensorScreenOnProximity = ss.get(0);
+                mSensorScreenOnByHand = ss.get(0);
                 sb.append("获取挥手亮屏动作传感器OK,size=" + ss.size() + ",传感器Type_id为="
-                        + TYPE_SENSOR_HUB_SCREEN_ON_PROXIMITY + "; MD="+mSensorScreenOnProximity.getMinDelay());
+                        + TYPE_SENSOR_HUB_SCREEN_ON_BYHAND + "; MD="+mSensorScreenOnByHand.getMinDelay());
             }
             sb.append("\n");
         }
@@ -340,6 +397,36 @@ public class MainActivity extends Activity implements SensorEventListener {
                         + TYPE_SENSOR_HUB_SCREEN_ON_MOTION + "; MD="+mSensorScreenOnMotion.getMinDelay());
             }
             sb.append("\n");
+            
+            ss = mSensorManager.getSensorList(TYPE_SENSOR_HUB_FLIP);
+            if (ss == null || ss.size() == 0) {
+                sb.append("获取FLIP动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_FLIP);
+            } else {
+                mSensorFlip = ss.get(0);
+                sb.append("获取FLIP动作传感器OK,size=" + ss.size() + ",传感器Type_id为="
+                        + TYPE_SENSOR_HUB_FLIP + "; MD="+mSensorFlip.getMinDelay());
+            }
+            sb.append("\n");
+            
+            ss = mSensorManager.getSensorList(TYPE_SENSOR_HUB_SNAP);
+            if (ss == null || ss.size() == 0) {
+                sb.append("获取SNAP动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_SNAP);
+            } else {
+                mSensorSnap = ss.get(0);
+                sb.append("获取SNAP动作传感器OK,size=" + ss.size() + ",传感器Type_id为="
+                        + TYPE_SENSOR_HUB_SNAP + "; MD="+mSensorSnap.getMinDelay());
+            }
+            sb.append("\n");
+            
+            ss = mSensorManager.getSensorList(TYPE_SENSOR_HUB_TAP);
+            if (ss == null || ss.size() == 0) {
+                sb.append("获取TAP动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_TAP);
+            } else {
+                mSensorTap = ss.get(0);
+                sb.append("获取TAP动作传感器OK,size=" + ss.size() + ",传感器Type_id为="
+                        + TYPE_SENSOR_HUB_TAP + "; MD="+mSensorTap.getMinDelay());
+            }
+            sb.append("\n");
         }
         
         mSensorBrief = sb.toString()+"\n";
@@ -350,7 +437,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                     +"2.计步器计数返回开机后的累计值," 
                     +"\n";
         }
-        if (mTestScreenOnProximity) {
+        if (mTestScreenOnByHand) {
             mSensorBrief = mSensorBrief+"\n"
                     +"挥手亮屏说明："
                     +"\n"
@@ -367,14 +454,14 @@ public class MainActivity extends Activity implements SensorEventListener {
             mSensorBrief = mSensorBrief+"\n\n"
                     +"智能亮屏说明："
                     +"\n"
-                    +"1.  手機(由非60~90度)被抬起直立並呈現60~90度(角度變化達45度以上),並固定角度達800 ms. " 
+                    +"1.  在本应用界面灭屏后，按下述动作来触发： " 
                     +"\n"
-                    +"2.  P-sensor沒有被遮蔽. ( P-sensor可由sensor hub 自動開啟. 啟動到讀取正確值,約需要300ms 左右 )" 
+                    +"2.  手機(由非60~90度)被抬起直立並呈現60~90度(角度變化達45度以上),並固定角度達800 ms. " 
+                    +"\n"
+                    +"3.  P-sensor沒有被遮蔽. ( P-sensor可由sensor hub 自動開啟. 啟動到讀取正確值,約需要300ms 左右 )" 
                     +"\n";
         }
         mTips.setText(mSensorBrief);
-        //mTips.setText("距离传感器被挡住代表手机在裤子口袋或包里面,这时候也是初始情况之一。 或者手机水平放在桌面上静止不动，这也是初始情况之一。， \n当用户拿起手机横屏对准前方， 立即启动后Camera。 \n如果是拿起后竖屏，本应该打开前camera，目前DEMO只能打开后camera，因为标准api不能指定前后camera，除非camera应用修改定制过。");
-        //mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
         enableScreenOnSensor();
         
         boolean hasAccelerometer = this.getPackageManager().hasSystemFeature(
@@ -418,31 +505,31 @@ public class MainActivity extends Activity implements SensorEventListener {
         if (event.sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
             mSensorStepDetectorData[0] = event.values[0];
             mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA_STEP_DETECTOR, 0L);
-            Log.i("zzzz", ">>>>>STEP_DETECTOR == (" + mSensorStepDetectorData[0]
+            Log.i(TAG, ">>>>>STEP_DETECTOR == (" + mSensorStepDetectorData[0]
                     + ")"
                     + " 当前时间：" + date.format(System.currentTimeMillis()));
         } else if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
             mSensorStepCounterData[0] = event.values[0];
             mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA_STEP_COUNTER, 0L);
-            Log.i("zzzz", ">>>>>STEP_COUNTER == (" + mSensorStepCounterData[0]
+            Log.i(TAG, ">>>>>STEP_COUNTER == (" + mSensorStepCounterData[0]
                     + ")"
                     + " 当前时间：" + date.format(System.currentTimeMillis()));
-        } else if (event.sensor.getType() == TYPE_SENSOR_HUB_SCREEN_ON) {
-            mSensorScreenOnData[0] = event.values[0];
-            if (mSensorScreenOnData[0] != 0) {
-                mSensorScreenOnLogData = mSensorScreenOnData[0];
-                mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 0L);
+        } else if (event.sensor.getType() == TYPE_SENSOR_HUB_SCREEN_ON_CAMERA) {
+            mSensorScreenOnCameraData[0] = event.values[0];
+            if (mSensorScreenOnCameraData[0] != 0) {
+                mSensorScreenOnCameraLogData = mSensorScreenOnCameraData[0];
+                mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA_SCREEN_ON_CAMERA, 0L);
             }
-            Log.i("yyyy", ">>>>>TYPE="+TYPE_SENSOR_HUB_SCREEN_ON+",SCREEN_ON == (" + mSensorScreenOnData[0]
+            Log.i(TAG, ">>>>>TYPE="+TYPE_SENSOR_HUB_SCREEN_ON_CAMERA+",SCREEN_ON == (" + mSensorScreenOnCameraData[0]
                     + ")"
                     + " 当前时间：" + date.format(System.currentTimeMillis()));
-        } else if (event.sensor.getType() == TYPE_SENSOR_HUB_SCREEN_ON_PROXIMITY) {
-            mSensorScreenOnProximityData[0] = event.values[0];
-            if (mSensorScreenOnProximityData[0] != 0) {
-                mSensorScreenOnProximityLogData = mSensorScreenOnProximityData[0];
-                mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA_SCREEN_ON_PROXIMITY, 0L);
+        } else if (event.sensor.getType() == TYPE_SENSOR_HUB_SCREEN_ON_BYHAND) {
+            mSensorScreenOnByHandData[0] = event.values[0];
+            if (mSensorScreenOnByHandData[0] != 0) {
+                mSensorScreenOnByHandLogData = mSensorScreenOnByHandData[0];
+                mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA_SCREEN_ON_BYHAND, 0L);
             }
-            Log.i("zzzz", ">>>>>SCREEN_ON_PROXIMITY == (" + event.values[0]
+            Log.i(TAG, ">>>>>SCREEN_ON_BYHAND == (" + event.values[0]
                     + ")"
                     + " 当前时间：" + date.format(System.currentTimeMillis()));
         } else if (event.sensor.getType() == TYPE_SENSOR_HUB_SCREEN_ON_MOTION) {
@@ -451,7 +538,34 @@ public class MainActivity extends Activity implements SensorEventListener {
                 mSensorScreenOnMotionLogData = mSensorScreenOnMotionData[0];
                 mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA_SCREEN_ON_MOTION, 0L);
             }
-            Log.i("zzzz", ">>>>>SCREEN_ON_Motion == (" + event.values[0]
+            Log.i(TAG, ">>>>>SCREEN_ON_Motion == (" + event.values[0]
+                    + ")"
+                    + " 当前时间：" + date.format(System.currentTimeMillis()));
+        } else if (event.sensor.getType() == TYPE_SENSOR_HUB_FLIP) {
+            mSensorScreenOnMotionData[0] = event.values[0];
+            if (mSensorScreenOnMotionData[0] != 0) {
+                mSensorScreenOnMotionLogData = mSensorScreenOnMotionData[0];
+                mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA_SCREEN_ON_FLIP, 0L);
+            }
+            Log.i(TAG, ">>>>>FLIP == (" + event.values[0]
+                    + ")"
+                    + " 当前时间：" + date.format(System.currentTimeMillis()));
+        } else if (event.sensor.getType() == TYPE_SENSOR_HUB_TAP) {
+            mSensorScreenOnMotionData[0] = event.values[0];
+            if (mSensorScreenOnMotionData[0] != 0) {
+                mSensorScreenOnMotionLogData = mSensorScreenOnMotionData[0];
+                mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA_SCREEN_ON_TAP, 0L);
+            }
+            Log.i(TAG, ">>>>>TAP == (" + event.values[0]
+                    + ")"
+                    + " 当前时间：" + date.format(System.currentTimeMillis()));
+        } else if (event.sensor.getType() == TYPE_SENSOR_HUB_SNAP) {
+            mSensorScreenOnMotionData[0] = event.values[0];
+            if (mSensorScreenOnMotionData[0] != 0) {
+                mSensorScreenOnMotionLogData = mSensorScreenOnMotionData[0];
+                mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA_SCREEN_ON_SNAP, 0L);
+            }
+            Log.i(TAG, ">>>>>SNAP == (" + event.values[0]
                     + ")"
                     + " 当前时间：" + date.format(System.currentTimeMillis()));
         }
@@ -602,14 +716,17 @@ public class MainActivity extends Activity implements SensorEventListener {
             mSensorManager.registerListener(MainActivity.this, mSensorStepCounter, SensorManager.SENSOR_DELAY_NORMAL);
             mSensorManager.registerListener(MainActivity.this, mSensorStepDetector, SensorManager.SENSOR_DELAY_NORMAL);
         }
-        if (mTestScreenOnProximity) {
-            mSensorManager.registerListener(MainActivity.this, mSensorScreenOnProximity, SensorManager.SENSOR_DELAY_NORMAL);
+        if (mTestScreenOnByHand) {
+            mSensorManager.registerListener(MainActivity.this, mSensorScreenOnByHand, SensorManager.SENSOR_DELAY_NORMAL);
         }
         if (mTestPickUp) {
-            mSensorManager.registerListener(MainActivity.this, mSensorScreenOn, SensorManager.SENSOR_DELAY_NORMAL);
+            mSensorManager.registerListener(MainActivity.this, mSensorScreenOnCamera, SensorManager.SENSOR_DELAY_NORMAL);
         }
         if (mTestMotion) {
             mSensorManager.registerListener(MainActivity.this, mSensorScreenOnMotion, SensorManager.SENSOR_DELAY_FASTEST);
+            mSensorManager.registerListener(MainActivity.this, mSensorFlip, SensorManager.SENSOR_DELAY_FASTEST);
+            mSensorManager.registerListener(MainActivity.this, mSensorTap, SensorManager.SENSOR_DELAY_FASTEST);
+            mSensorManager.registerListener(MainActivity.this, mSensorSnap, SensorManager.SENSOR_DELAY_FASTEST);
         }
         mPause.setEnabled(true);
         mResume.setEnabled(false);
