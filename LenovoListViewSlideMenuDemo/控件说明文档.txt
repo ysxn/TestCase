@@ -107,3 +107,8 @@ public boolean getSlideFunctionEnable()
 
 3.修改逻辑为这样子：滑出来菜单，但是如果没有点击到菜单，而是点击到item部分，不能算点击item，仅仅自动滑回去。
 
+/***************************************我是分割线***********************************************************/
+change log 2014-12-08:
+
+LenovoListViewSlideMenuGroupViewMaterial.java里面 Coverity问题：
+1.避免空指针

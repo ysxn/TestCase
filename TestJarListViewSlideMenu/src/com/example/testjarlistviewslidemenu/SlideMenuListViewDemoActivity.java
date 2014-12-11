@@ -48,7 +48,7 @@ public class SlideMenuListViewDemoActivity extends Activity {
                     @Override
                     public void onClick(ListView parent, View view, int position) {
                         // TODO Auto-generated method stub
-                        Log.e(TAG, "####onSlideMenuClick:" + position);
+                        Log.e(TAG, "####onSlideMenuClick:" + position+",view="+view);
                         Toast.makeText(SlideMenuListViewDemoActivity.this,
                                 "onSlideMenuClick[" + position + "]", 200)
                                 .show();
@@ -115,13 +115,6 @@ public class SlideMenuListViewDemoActivity extends Activity {
 
                 convertView = sectionView;
 
-                customView.setOnClickListener(new View.OnClickListener(){
-                    
-                    @Override
-                    public void onClick(View arg0) {
-                        Log.i(TAG, ">>>>>convertView OnClickListener");
-                    }
-                });
             } else {
                 holder = (ViewHolder) convertView.getTag();
                 // We should update the position so that the position is
@@ -131,6 +124,7 @@ public class SlideMenuListViewDemoActivity extends Activity {
 
             // Bind the data efficiently with the holder.
             holder.text.setText(CALL_DATA[position][0]);
+            holder.tag = CALL_DATA[position][0];
             ((LenovoListViewSlideMenuGroupView) convertView).setHideLeftSlideMenu(false);
             ((LenovoListViewSlideMenuGroupView) convertView).setHideRightSlideMenu(false);
             
@@ -152,6 +146,7 @@ public class SlideMenuListViewDemoActivity extends Activity {
         class ViewHolder {
             int position;
             TextView text;
+            String tag;
         }
     }
 

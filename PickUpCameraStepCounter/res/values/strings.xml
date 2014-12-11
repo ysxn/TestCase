@@ -77,4 +77,13 @@
     <string name="wave_hand_statistic_title">Wave Hand Statistic</string>
     <string name="trigger_correct">trigger correct</string>
     <string name="trigger_wrong">trigger wrong</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_exit">EXIT</string>
+    <string name="action_stop">STOP_SENSOR</string>
+    <string name="action_start">START_SENSOR</string>
+    <string name="action_tips">sensor_tips</string>
+    <string name="action_data">sensor_data</string>
+    <string name="date_format">"yyyy年MM月dd日 HH时mm分ss秒  "</string>
+    <string name="flip_tips">"Flip动作说明：data ==1表示LCD 朝下,背壳朝上。data ==2表示 LCD朝上，背壳朝下"</string>
+
 </resources>

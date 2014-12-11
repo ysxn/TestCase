@@ -63,7 +63,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     public static final int TYPE_SENSOR_HUB_SCREEN_ON_BYHAND = 33171014;
     public static final int TYPE_SENSOR_HUB_SCREEN_ON_MOTION = 33171015;
 
-    private SimpleDateFormat date = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒  ");
+    private SimpleDateFormat date = null;//new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒  ");
     
     private String mSensorBrief = "";
     private long mStartDelayTime = 1L;// System.currentTimeMillis();
@@ -103,6 +103,9 @@ public class MainActivity extends Activity implements SensorEventListener {
     private boolean mTestScreenOnByHand = false;
     private boolean mTestPickUp = false;
     private boolean mTestMotion = true;
+    private boolean mTestFlip = false;
+    private boolean mTestSnap = false;
+    private boolean mTestTap = false;
 
     AudioManager mAudioManager;
     SensorManager mSensorManager;
@@ -144,7 +147,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     private static final String REQUEST_CAPTURE_SAVE_FRONT_IMG = Environment.getExternalStorageDirectory().getPath() + "/pickuptest/front.jpg";
     private static final String REQUEST_CAPTURE_SAVE_BACK_IMG = Environment.getExternalStorageDirectory().getPath() + "/pickuptest/back.jpg";
     
-    PowerManager mPm;
+    PowerManager mPowerManager;
     //声明键盘管理器
     KeyguardManager mKeyguardManager = null;    
     //声明键盘锁
@@ -253,16 +256,21 @@ public class MainActivity extends Activity implements SensorEventListener {
                     break;
                 case REQUEST_UPDATE_DATA_SCREEN_ON_FLIP: {
                     //mHandler.removeMessages(REQUEST_UPDATE_DATA);
-                    String sC = "FLIP亮屏：" + date.format(System.currentTimeMillis())
+                    String sC = "FLIP event:" + date.format(System.currentTimeMillis())
                             + " DATA=" + mSensorScreenOnMotionLogData;
                     mData.setText(sC+"\n"+mData.getText());
+                    Log.i(TAG, ">>>>>>>>>>>>REQUEST_UPDATE_DATA_SCREEN_ON_FLIP data="+mSensorScreenOnMotionLogData+",mIsScreenOn="+mIsScreenOn);
                     //添加WM新的view来控制亮屏和解锁
                     //挪到service里面
-                    if (mSensorScreenOnMotionLogData == 1) {
-                        Log.i(TAG, ">>>>>>>>>>>>REQUEST_UPDATE_DATA_SCREEN_ON_FLIP");
-                        unLockScreen();
+                    //data ==1, is flip LCD ,背壳朝上，锁屏。data ==2, is flip LCD朝上，亮屏
+                    if (mSensorScreenOnMotionLogData == 1.0) {
+                        LockScreen();
                         //mPm.wakeUp(SystemClock.uptimeMillis());
-                        Log.i(TAG, ">>>>>>>>>>>>wake up ok");
+                        Log.i(TAG, ">>>>>>>>>>>>go sleep ok");
+                    } else if (mSensorScreenOnMotionLogData == 2.0) {
+                        //data ==2, is flip LCD朝上，亮屏
+                        //unLockScreen();
+                        //Log.i(TAG, ">>>>>>>>>>>>wake up ok");
                     }
                     //mHandler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 100L);
                 }
@@ -296,11 +304,12 @@ public class MainActivity extends Activity implements SensorEventListener {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        date = new SimpleDateFormat(getString(R.string.date_format));
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_SCREEN_ON);
         MainActivity.this.registerReceiver(mBroadcastReceiver, filter);
         
-        mPm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         mKeyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
         mWindowManager = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
         mGlobalView = new LinearLayout(this);
@@ -325,7 +334,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                 disableScreenOnSensor();
                 AlarmAlertWakeLock.releaseCpuLock();
                 //屏幕锁定
-                mKeyguardLock.reenableKeyguard();
+                //mKeyguardLock.reenableKeyguard();
                 finish();
             }
         });
@@ -397,17 +406,21 @@ public class MainActivity extends Activity implements SensorEventListener {
                         + TYPE_SENSOR_HUB_SCREEN_ON_MOTION + "; MD="+mSensorScreenOnMotion.getMinDelay());
             }
             sb.append("\n");
-            
+        }
+        
+        if (mTestFlip) {
             ss = mSensorManager.getSensorList(TYPE_SENSOR_HUB_FLIP);
             if (ss == null || ss.size() == 0) {
-                sb.append("获取FLIP动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_FLIP);
+                sb.append("Get FLIP sensor is NULL，check TYPE ID：" + TYPE_SENSOR_HUB_FLIP);
             } else {
                 mSensorFlip = ss.get(0);
-                sb.append("获取FLIP动作传感器OK,size=" + ss.size() + ",传感器Type_id为="
+                sb.append("Get FLIP sensor is OK,size=" + ss.size() + ",Type_id="
                         + TYPE_SENSOR_HUB_FLIP + "; MD="+mSensorFlip.getMinDelay());
             }
             sb.append("\n");
-            
+        }
+        
+        if (mTestSnap) {
             ss = mSensorManager.getSensorList(TYPE_SENSOR_HUB_SNAP);
             if (ss == null || ss.size() == 0) {
                 sb.append("获取SNAP动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_SNAP);
@@ -417,7 +430,9 @@ public class MainActivity extends Activity implements SensorEventListener {
                         + TYPE_SENSOR_HUB_SNAP + "; MD="+mSensorSnap.getMinDelay());
             }
             sb.append("\n");
-            
+        }
+        
+        if (mTestTap) {
             ss = mSensorManager.getSensorList(TYPE_SENSOR_HUB_TAP);
             if (ss == null || ss.size() == 0) {
                 sb.append("获取TAP动作传感器为空，请检查传感器id是否为：" + TYPE_SENSOR_HUB_TAP);
@@ -428,7 +443,6 @@ public class MainActivity extends Activity implements SensorEventListener {
             }
             sb.append("\n");
         }
-        
         mSensorBrief = sb.toString()+"\n";
         if (mTestStep) {
             mSensorBrief = mSensorBrief+"\n"
@@ -449,6 +463,10 @@ public class MainActivity extends Activity implements SensorEventListener {
         if (mTestPickUp) {
             mSensorBrief = mSensorBrief+"\n"
                     +"体感相机说明：横屏举起对准前方DATA为1就开启后摄像头";
+        }
+        if (mTestFlip) {
+            mSensorBrief = mSensorBrief+"\n"
+                    +getString(R.string.flip_tips);
         }
         if (mTestMotion) {
             mSensorBrief = mSensorBrief+"\n\n"
@@ -495,7 +513,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         disableScreenOnSensor();
         AlarmAlertWakeLock.releaseCpuLock();
         //屏幕锁定
-        mKeyguardLock.reenableKeyguard();
+        //mKeyguardLock.reenableKeyguard();
         super.onDestroy();
     }
 
@@ -549,7 +567,7 @@ public class MainActivity extends Activity implements SensorEventListener {
             }
             Log.i(TAG, ">>>>>FLIP == (" + event.values[0]
                     + ")"
-                    + " 当前时间：" + date.format(System.currentTimeMillis()));
+                    + " TIME:" + date.format(System.currentTimeMillis()));
         } else if (event.sensor.getType() == TYPE_SENSOR_HUB_TAP) {
             mSensorScreenOnMotionData[0] = event.values[0];
             if (mSensorScreenOnMotionData[0] != 0) {
@@ -708,7 +726,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         // TODO Auto-generated method stub
-        // super.onConfigurationChanged(newConfig);
+        super.onConfigurationChanged(newConfig);
     }
     
     private void enableScreenOnSensor() {
@@ -724,8 +742,14 @@ public class MainActivity extends Activity implements SensorEventListener {
         }
         if (mTestMotion) {
             mSensorManager.registerListener(MainActivity.this, mSensorScreenOnMotion, SensorManager.SENSOR_DELAY_FASTEST);
+        }
+        if (mTestFlip) {
             mSensorManager.registerListener(MainActivity.this, mSensorFlip, SensorManager.SENSOR_DELAY_FASTEST);
+        }
+        if (mTestTap) {
             mSensorManager.registerListener(MainActivity.this, mSensorTap, SensorManager.SENSOR_DELAY_FASTEST);
+        }
+        if (mTestSnap) {
             mSensorManager.registerListener(MainActivity.this, mSensorSnap, SensorManager.SENSOR_DELAY_FASTEST);
         }
         mPause.setEnabled(true);
@@ -744,7 +768,24 @@ public class MainActivity extends Activity implements SensorEventListener {
             AlarmAlertWakeLock.acquireScreenCpuWakeLock(MainActivity.this);
             mGlobalView.setVisibility(View.VISIBLE);
             mWindowManager.updateViewLayout(mGlobalView, mGlobalParams);
-            
+        }
+        //判断键盘锁定返回值和disableKeyguard的调用没有关系
+        Log.i(TAG, ">>>>>isKeyguardLocked="+mKeyguardManager.isKeyguardLocked());
+        if (mGlobalView != null) return;
+        //解锁
+        //禁用显示键盘锁定
+        //mKeyguardLock.disableKeyguard(); 
+        //判断camera是否已经启动，避免重复开启camera
+        //自己修改camera，区分前后
+    }
+    
+    private void LockScreen() {
+        //灭屏
+        if (mIsScreenOn) {
+            AlarmAlertWakeLock.releaseCpuLock();
+            mGlobalView.setVisibility(View.GONE);
+            mWindowManager.updateViewLayout(mGlobalView, mGlobalParams);
+            //mPowerManager.goToSleep(SystemClock.uptimeMillis());
         }
         //判断键盘锁定返回值和disableKeyguard的调用没有关系
         Log.i(TAG, ">>>>>isKeyguardLocked="+mKeyguardManager.isKeyguardLocked());

@@ -12,6 +12,8 @@ import android.view.View;
  * @author zhuyw1
  */
 public class FadeTransformer implements PageTransformer {
+    private boolean DEBUG = true;
+    private final String TAG = "zyw";
     private static float MIN_SCALE = 0.75f;
 
     @Override
@@ -45,6 +47,22 @@ public class FadeTransformer implements PageTransformer {
             // This page is way off-screen to the right.
             view.setAlpha(0);
         }
+    }
+    
+    /**
+     * test
+     * @return
+     */
+    public String dumpLog() {
+        return "para:";
+    }
+
+    /**
+     * set log enable
+     * @param isTrue
+     */
+    public void setDebugEnable(boolean isTrue) {
+        DEBUG = isTrue;
     }
 
 }

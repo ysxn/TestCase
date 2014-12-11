@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import android.widget.LinearLayout;
  */
 public class DotIndicator extends LinearLayout implements
         Animation.AnimationListener {
+    private boolean DEBUG = true;
     private static final String TAG = "SlideDotIndicator";
     // 是否显示数量
     private boolean mIsShowNum = false;
@@ -93,7 +95,7 @@ public class DotIndicator extends LinearLayout implements
 
     @Override
     public void onAnimationEnd(Animation paramAnimation) {
-        setVisibility(4);
+        setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -146,8 +148,8 @@ public class DotIndicator extends LinearLayout implements
         }
     }
 
-    public void setAutoHide(boolean paramBoolean) {
-        if (!paramBoolean) {
+    public void setAutoHide(boolean hide) {
+        if (!hide) {
             this.mVisibleTime = -1;
             setVisibility(View.VISIBLE);// 设置可见
         } else {
@@ -156,17 +158,24 @@ public class DotIndicator extends LinearLayout implements
         }
     }
 
-    public void setCurrentItem(int paramInt) {
-        this.mCurrentItem = paramInt;
+    /**
+     * set current index, range is [0,total -1]
+     * @param currentIndex
+     */
+    public void setCurrentItem(int currentIndex) {
+        if (DEBUG) {
+            Log.i(TAG, ">>>>setCurrentItem : "+currentIndex);
+        }
+        this.mCurrentItem = currentIndex;
         for (int j =0;j < mDotViews.size(); j++) {
             mDotViews.get(j).setImageDrawable(mIndicatorDotNormal);
         }
-        mDotViews.get(paramInt-1).setImageDrawable(mIndicatorDotSelected);
+        mDotViews.get(currentIndex-1).setImageDrawable(mIndicatorDotSelected);
         /*
-        if ((paramInt < 0) || (paramInt >= this.mTotalItems)
-                || (paramInt == this.mCurrentItem))
+        if ((currentIndex < 0) || (currentIndex >= this.mTotalItems)
+                || (currentIndex == this.mCurrentItem))
             return;
-        this.mCurrentItem = paramInt;
+        this.mCurrentItem = currentIndex;
         onSetCurrentItem();
         this.mHandler.removeCallbacks(this.mAutoHide);
         if (this.mVisibleTime <= 0)
@@ -177,6 +186,8 @@ public class DotIndicator extends LinearLayout implements
 
     public void setTotalItems(int total) {
         this.mTotalItems = total;
+        this.removeAllViews();
+        mDotViews.clear();
 
         for (int i = 0; i < mTotalItems; i++) {
             DotIndicatorItem dot = new DotIndicatorItem(mContext);
@@ -205,6 +216,22 @@ public class DotIndicator extends LinearLayout implements
         this.mCurrentItem = -1;
         */
 
+    }
+    
+    /**
+     * test
+     * @return
+     */
+    public String dumpLog() {
+        return "para:";
+    }
+
+    /**
+     * set log enable
+     * @param isTrue
+     */
+    public void setDebugEnable(boolean isTrue) {
+        DEBUG = isTrue;
     }
 
 }

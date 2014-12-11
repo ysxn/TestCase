@@ -22,5 +22,21 @@
             android:layout_marginRight="10dip"
             android:background="@android:color/transparent" />
     </FrameLayout>
+    <Button
+        android:id="@+id/add_pager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dip"
+        android:text="Add Pager" />
+
+    <Button
+        android:id="@+id/remove_pager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dip"
+        android:layout_toRightOf="@id/add_pager"
+        android:text="Remove Pager" />
 
 </RelativeLayout>

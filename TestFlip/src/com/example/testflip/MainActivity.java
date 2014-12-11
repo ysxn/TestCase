@@ -1,5 +1,5 @@
 
-package com.example.testtap;
+package com.example.testflip;
 
 import java.io.File;
 import java.text.DecimalFormat;
@@ -103,9 +103,9 @@ public class MainActivity extends Activity implements SensorEventListener {
     private boolean mTestScreenOnByHand = false;
     private boolean mTestPickUp = false;
     private boolean mTestMotion = false;
-    private boolean mTestFlip = false;
+    private boolean mTestFlip = true;
     private boolean mTestSnap = false;
-    private boolean mTestTap = true;
+    private boolean mTestTap = false;
 
     AudioManager mAudioManager;
     SensorManager mSensorManager;

@@ -20,21 +20,21 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:text="EXIT" />
+                android:text="@string/action_exit" />
             <Button
                 android:id="@+id/button_pause"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_toLeftOf="@id/button_exit"
-                android:text="STOP_SENSOR" />
+                android:text="@string/action_stop" />
             <Button
                 android:id="@+id/button_resume"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_toLeftOf="@id/button_pause"
-                android:text="START_SENSOR" />
+                android:text="@string/action_start" />
         </RelativeLayout>
         
         <!-- Divider -->
@@ -50,7 +50,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="sensor_tips" />
+            android:text="@string/action_tips" />
 
         <!-- Divider -->
 
@@ -66,7 +66,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="sensor_data" />
+            android:text="@string/action_data" />
         <!-- Divider -->
 
         <View

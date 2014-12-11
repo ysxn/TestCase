@@ -19,10 +19,12 @@ public class ViewPagerWithIndicator extends ViewPager {
     private final String TAG = "zyw";
     
     private List<ImageView> mImageViews = null;
+    private List<Drawable> mDrawables = null;
     private int[] mImageResIds = {};
     private Context mContext;
     private DotIndicator mDotIndicator = null;
-    private SamplePagerAdapter mSamplePagerAdapter;
+    private SamplePagerAdapter mSamplePagerAdapter = null;
+    private boolean mUseResIds = true;
     
     public ViewPagerWithIndicator(Context context) {
         super(context);
@@ -38,30 +40,17 @@ public class ViewPagerWithIndicator extends ViewPager {
     
     private void initViewPager(Context context) {
         mImageViews = new ArrayList<ImageView>();
-    }
-    
-    public void initPagerAdapter() {
-        mSamplePagerAdapter = new SamplePagerAdapter(mContext);
-        this.setAdapter(mSamplePagerAdapter);
-        mSamplePagerAdapter.notifyDataSetChanged();
+        mDrawables = new ArrayList<Drawable>();
     }
     
     public void setDotIndicator(DotIndicator d) {
         mDotIndicator = d;
+        // 添加viewpager多出的两个view 
+        newImageView(2);
     }
     
-    public void setImageResIds(int[] resIds) {
-        if (resIds == null) {
-            Log.e(TAG, ">>>>>setImageResIds NULL error!!!");
-            return;
-        }
-        mImageResIds = resIds;
-        if (mDotIndicator != null) {
-            mDotIndicator.setTotalItems(mImageResIds.length);
-        }
-        // 添加viewpager多出的两个view  
-        int length = mImageResIds.length + 2;  
-        for (int i = 0; i < length; i++) {  
+    public void newImageView(int count) {
+        for (int i = 0; i < count; i++) {
             ImageView imageView = new ImageView(mContext);  
             ViewGroup.LayoutParams viewPagerImageViewParams = new ViewGroup.LayoutParams(  
                     ViewGroup.LayoutParams.WRAP_CONTENT,  
@@ -71,8 +60,60 @@ public class ViewPagerWithIndicator extends ViewPager {
             mImageViews.add(imageView);
         }
     }
+    
+    public void setDotIndicatorAndResIds(DotIndicator d, int[] resIds) {
+        mDotIndicator = d;
+        if (resIds == null || mDotIndicator == null) {
+            Log.e(TAG, ">>>>>setDotIndicatorAndResIds NULL error!!!");
+            return;
+        }
+        mUseResIds = true;
+        mImageResIds = resIds;
+        mDotIndicator.setTotalItems(mImageResIds.length);
+        // 添加viewpager多出的两个view  
+        int length = mImageResIds.length + 2;  
+        newImageView(length);
+        mDrawables.clear();
+        updatePagerAdapter();
+    }
+    
+    public void addDrawable(Drawable d) {
+        if (mDotIndicator == null || d == null) {
+            Log.e(TAG, ">>>>>addDrawable NULL error!!!");
+            return;
+        }
+        mUseResIds = false;
+        mDrawables.add(d);
+        newImageView(1);
+        mDotIndicator.setTotalItems(mDrawables.size());
+        updatePagerAdapter();
+    }
+    
+    public void removeDrawable(Drawable d) {
+        if (mDotIndicator == null || d == null || mImageViews.size() <= 0) {
+            Log.e(TAG, ">>>>>removeDrawable NULL error!!!");
+            return;
+        }
+        mUseResIds = false;
+        mDrawables.remove(d);
+        mImageViews.remove(0);
+        mDotIndicator.setTotalItems(mDrawables.size());
+        updatePagerAdapter();
+    }
+    
+    public void updatePagerAdapter() {
+        if (mImageResIds == null || mDotIndicator == null) {
+            Log.e(TAG, ">>>>>initPagerAdapter NULL error!!!");
+            return;
+        }
+        if (mSamplePagerAdapter == null) {
+            mSamplePagerAdapter = new SamplePagerAdapter(mContext);
+            this.setAdapter(mSamplePagerAdapter);
+        }
+        mSamplePagerAdapter.notifyDataSetChanged();
+    }
 
-    public void onPageScrollStateChanged(int i) {
+    public void onPageScrollStateChangedEvent(int i) {
         // TODO Auto-generated method stub
         String stat = "STATE_IDLE";
         switch (i) {
@@ -88,23 +129,27 @@ public class ViewPagerWithIndicator extends ViewPager {
             default:
                 break;
         }
-        Log.i(TAG, ">>>>>>>>>onPageScrollStateChanged stat="+stat);
+        if (DEBUG) {
+            Log.i(TAG, ">>>>>>>>>onPageScrollStateChanged stat="+stat);
+        }
     }
 
-    public void onPageSelected(int i) {
+    public void onPageSelectedEvent(int i) {
         // TODO Auto-generated method stub
         int pageIndex = i;  
         
         if (i == 0) {  
             // 当视图在第一个时，将页面号设置为图片的最后一张。  
-            pageIndex = mImageResIds.length;  
-        } else if (i == mImageResIds.length + 1) {  
+            pageIndex = mUseResIds ? mImageResIds.length : mDrawables.size();
+        } else if (i == (mUseResIds ? mImageResIds.length + 1 : mDrawables.size() + 1)) {  
             // 当视图在最后一个是,将页面号设置为图片的第一张。  
             pageIndex = 1;  
         }
         mDotIndicator.setCurrentItem(pageIndex);
         if (i != pageIndex) {
-            Log.i(TAG, ">>>>>>>>>i="+i+", pageIndex="+pageIndex);
+            if (DEBUG) {
+                Log.i(TAG, ">>>>>>>>>i="+i+", pageIndex="+pageIndex);
+            }
             this.setCurrentItem(pageIndex, false);
             return;  
         } 
@@ -164,19 +209,31 @@ public class ViewPagerWithIndicator extends ViewPager {
         public Object instantiateItem(ViewGroup container, int position) {
             
             if (position == 0) {
-                Drawable d = mContext.getResources().getDrawable(mImageResIds[mImageResIds.length - 1]);
-                Log.i(TAG, ">>>>"+d.getBounds()+", w="+d.getIntrinsicWidth()+", h="+d.getIntrinsicHeight());
-                d.setBounds(0, 0, 100, 100);
-                mImageViews.get(position).setImageDrawable(d); 
-                //mImageViews.get(position).setImageResource(mImageResIds[mImageResIds.length - 1]);  
-            } else if (position == (mImageViews.size() - 1)) {  
-                mImageViews.get(position).setImageResource(mImageResIds[0]);  
-            } else {  
-                mImageViews.get(position).setImageResource(mImageResIds[position - 1]);  
+                //Drawable d = mContext.getResources().getDrawable(mImageResIds[mImageResIds.length - 1]);
+                //Log.i(TAG, ">>>>"+d.getBounds()+", w="+d.getIntrinsicWidth()+", h="+d.getIntrinsicHeight());
+                //d.setBounds(0, 0, 100, 100);
+                if (mUseResIds) {
+                    mImageViews.get(position).setImageResource(mImageResIds[mImageResIds.length - 1]);
+                } else {
+                    mImageViews.get(position).setImageDrawable(mDrawables.get(mDrawables.size() - 1));
+                }
+            } else if (position == (mImageViews.size() - 1)) {
+                if (mUseResIds) {
+                    mImageViews.get(position).setImageResource(mImageResIds[0]);
+                } else {
+                    mImageViews.get(position).setImageDrawable(mDrawables.get(0));
+                }
+            } else {
+                if (mUseResIds) {
+                    mImageViews.get(position).setImageResource(mImageResIds[position - 1]);
+                } else {
+                    mImageViews.get(position).setImageDrawable(mDrawables.get(position - 1));
+                }
             } 
             container.addView(mImageViews.get(position));  
-            
-            Log.i(TAG, "instantiateItem() [position: " + position + "]");
+            if (DEBUG) {
+                Log.i(TAG, "instantiateItem() [position: " + position + "]");
+            }
             return mImageViews.get(position);
         }
 
@@ -187,10 +244,29 @@ public class ViewPagerWithIndicator extends ViewPager {
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             ImageView view = mImageViews.get(position);  
-            container.removeView(view);  
+            container.removeView(view);
+            //avoid memory leak
             view.setImageBitmap(null);
-            Log.i(TAG, "destroyItem() [position: " + position + "]");
+            if (DEBUG) {
+                Log.i(TAG, "destroyItem() [position: " + position + "]");
+            }
         }
 
+    }
+    
+    /**
+     * test
+     * @return
+     */
+    public String dumpLog() {
+        return "para:";
+    }
+
+    /**
+     * set log enable
+     * @param isTrue
+     */
+    public void setDebugEnable(boolean isTrue) {
+        DEBUG = isTrue;
     }
 }

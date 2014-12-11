@@ -13,6 +13,8 @@ import android.widget.ImageView;
  * @author Administrator
  */
 public class DotIndicatorItem extends ImageView {
+    private boolean DEBUG = true;
+    private final String TAG = "zyw";
     private int mNum = -1;
 
     public DotIndicatorItem(Context paramContext) {
@@ -62,5 +64,21 @@ public class DotIndicatorItem extends ImageView {
 
     public void setNum(int paramInt) {
         this.mNum = paramInt;
+    }
+    
+    /**
+     * test
+     * @return
+     */
+    public String dumpLog() {
+        return "para:";
+    }
+
+    /**
+     * set log enable
+     * @param isTrue
+     */
+    public void setDebugEnable(boolean isTrue) {
+        DEBUG = isTrue;
     }
 }

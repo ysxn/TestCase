@@ -360,8 +360,10 @@ public class LenovoListViewSlideMenuGroupViewMaterial extends ViewGroup {
                     }
                 }
             });
-        } else {
+        } else if (mLeftMenu != null) {
             mLeftMenu.setOnClickListener(null);
+        } else {
+            Log.e(TAG, ">>>>>setLeftMenuClickListener null error");
         }
     }
     
@@ -385,8 +387,10 @@ public class LenovoListViewSlideMenuGroupViewMaterial extends ViewGroup {
                     }
                 }
             });
-        } else {
+        } else if (mRightMenu != null) {
             mRightMenu.setOnClickListener(null);
+        } else {
+            Log.e(TAG, ">>>>>setRightMenuClickListener null error");
         }
     }
     
