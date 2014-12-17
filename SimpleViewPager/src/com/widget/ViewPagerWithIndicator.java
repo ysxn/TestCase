@@ -2,7 +2,9 @@
 package com.widget;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -18,13 +20,15 @@ public class ViewPagerWithIndicator extends ViewPager {
     private boolean DEBUG = true;
     private final String TAG = "zyw";
     
-    private List<ImageView> mImageViews = null;
+    //private List<ImageView> mImageViews = null;
+    private HashMap<Integer, ImageView> mImageViews = new HashMap<Integer, ImageView>();
     private List<Drawable> mDrawables = null;
     private int[] mImageResIds = {};
     private Context mContext;
     private DotIndicator mDotIndicator = null;
     private SamplePagerAdapter mSamplePagerAdapter = null;
     private boolean mUseResIds = true;
+    private int mCurrentPager = 1;
     
     public ViewPagerWithIndicator(Context context) {
         super(context);
@@ -39,25 +43,35 @@ public class ViewPagerWithIndicator extends ViewPager {
     }
     
     private void initViewPager(Context context) {
-        mImageViews = new ArrayList<ImageView>();
         mDrawables = new ArrayList<Drawable>();
     }
     
     public void setDotIndicator(DotIndicator d) {
         mDotIndicator = d;
+        mUseResIds = false;
+        mDrawables.clear();
+        mImageViews.clear();
         // 添加viewpager多出的两个view 
         newImageView(2);
     }
     
     public void newImageView(int count) {
-        for (int i = 0; i < count; i++) {
+        for (int i : mImageResIds) {
             ImageView imageView = new ImageView(mContext);  
             ViewGroup.LayoutParams viewPagerImageViewParams = new ViewGroup.LayoutParams(  
                     ViewGroup.LayoutParams.WRAP_CONTENT,  
                     ViewGroup.LayoutParams.WRAP_CONTENT);  
             imageView.setLayoutParams(viewPagerImageViewParams);  
-            imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);  
-            mImageViews.add(imageView);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            mImageViews.put(mImageResIds[i], imageView);
+        }
+    }
+    
+    public void clearImageViews() {
+        ImageView imageView;
+        for (int i : mImageResIds) {
+            imageView = mImageViews.get(i);
+            imageView.setImageBitmap(null);
         }
     }
     
@@ -68,18 +82,34 @@ public class ViewPagerWithIndicator extends ViewPager {
             return;
         }
         mUseResIds = true;
+        this.removeAllViews();
+        clearImageViews();
+        mImageViews.clear();
+        updatePagerAdapter();
         mImageResIds = resIds;
         mDotIndicator.setTotalItems(mImageResIds.length);
         // 添加viewpager多出的两个view  
-        int length = mImageResIds.length + 2;  
+        int length = mImageResIds.length;  
         newImageView(length);
         mDrawables.clear();
         updatePagerAdapter();
     }
     
+    public boolean isUseResIds() {
+        return mUseResIds;
+    }
+    
     public void addDrawable(Drawable d) {
+        if (mUseResIds) {
+            Log.e(TAG, ">>>>>addDrawable mode is mUseResIds!!!");
+            return;
+        }
         if (mDotIndicator == null || d == null) {
             Log.e(TAG, ">>>>>addDrawable NULL error!!!");
+            return;
+        }
+        if (mDrawables.contains(d)) {
+            Log.e(TAG, ">>>>>addDrawable duplicate!!!");
             return;
         }
         mUseResIds = false;
@@ -90,8 +120,16 @@ public class ViewPagerWithIndicator extends ViewPager {
     }
     
     public void removeDrawable(Drawable d) {
+        if (mUseResIds) {
+            Log.e(TAG, ">>>>>removeDrawable mode is mUseResIds!!!");
+            return;
+        }
         if (mDotIndicator == null || d == null || mImageViews.size() <= 0) {
             Log.e(TAG, ">>>>>removeDrawable NULL error!!!");
+            return;
+        }
+        if (!mDrawables.contains(d)) {
+            Log.e(TAG, ">>>>>removeDrawable not exist!!!");
             return;
         }
         mUseResIds = false;
@@ -124,13 +162,15 @@ public class ViewPagerWithIndicator extends ViewPager {
                 stat = "STATE_SETTLING";
                 break;
             case ViewPager.SCROLL_STATE_IDLE:
+                //this.setCurrentItem(mCurrentPager, false);
+                //this.postInvalidate();
                 break;
 
             default:
                 break;
         }
         if (DEBUG) {
-            Log.i(TAG, ">>>>>>>>>onPageScrollStateChanged stat="+stat);
+            Log.i(TAG, ">>>>>>>>>onPageScrollStateChangedEvent stat="+stat+" , mCurrentPager="+mCurrentPager);
         }
     }
 
@@ -140,22 +180,32 @@ public class ViewPagerWithIndicator extends ViewPager {
         
         if (i == 0) {  
             // 当视图在第一个时，将页面号设置为图片的最后一张。  
-            pageIndex = mUseResIds ? mImageResIds.length : mDrawables.size();
+            //pageIndex = mUseResIds ? mImageResIds.length : mDrawables.size();
         } else if (i == (mUseResIds ? mImageResIds.length + 1 : mDrawables.size() + 1)) {  
             // 当视图在最后一个是,将页面号设置为图片的第一张。  
-            pageIndex = 1;  
+            //pageIndex = 1;  
         }
+        mCurrentPager = pageIndex;
         mDotIndicator.setCurrentItem(pageIndex);
+        if (DEBUG) {
+            Log.i(TAG, ">>>>>>>>>onPageSelectedEvent i="+i+", pageIndex="+pageIndex);
+        }
         if (i != pageIndex) {
-            if (DEBUG) {
-                Log.i(TAG, ">>>>>>>>>i="+i+", pageIndex="+pageIndex);
-            }
-            this.setCurrentItem(pageIndex, false);
+            //this.setCurrentItem(pageIndex, false);
             return;  
         } 
     }
     
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
 
+        // Invalidate the adapter's data set since children may have been added during inflation.
+        if (getAdapter() == mSamplePagerAdapter && mSamplePagerAdapter != null) {
+            mSamplePagerAdapter.notifyDataSetChanged();
+        }
+    }
+    
     /**
      * The {@link android.support.v4.view.PagerAdapter} used to display pages in this sample.
      * The individual pages are simple and just display two lines of text. The important section of
@@ -175,7 +225,7 @@ public class ViewPagerWithIndicator extends ViewPager {
          */
         @Override
         public int getCount() {
-            return mImageViews.size();
+            return mImageViews.size()+2;
         }
 
         /**
@@ -207,33 +257,42 @@ public class ViewPagerWithIndicator extends ViewPager {
          */
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
+            ViewHolder holder;
+//            if (position == 0) {
+//                //Drawable d = mContext.getResources().getDrawable(mImageResIds[mImageResIds.length - 1]);
+//                //Log.i(TAG, ">>>>"+d.getBounds()+", w="+d.getIntrinsicWidth()+", h="+d.getIntrinsicHeight());
+//                //d.setBounds(0, 0, 100, 100);
+//                if (mUseResIds) {
+//                    mImageViews.get(mImageResIds[mImageResIds.length - 1]).setImageResource(mImageResIds[mImageResIds.length - 1]);
+//                } else {
+//                    mImageViews.get(position).setImageDrawable(mDrawables.get(mDrawables.size() - 1));
+//                }
+//            } else if (position == (mImageViews.size() - 1)) {
+//                if (mUseResIds) {
+//                    mImageViews.get(mImageResIds[0]).setImageResource(mImageResIds[0]);
+//                } else {
+//                    mImageViews.get(position).setImageDrawable(mDrawables.get(0));
+//                }
+//            } else {
+//                if (mUseResIds) {
+//                    mImageViews.get(mImageResIds[position]).setImageResource(mImageResIds[position - 1]);
+//                } else {
+//                    mImageViews.get(position).setImageDrawable(mDrawables.get(position - 1));
+//                }
+//            }
             
-            if (position == 0) {
-                //Drawable d = mContext.getResources().getDrawable(mImageResIds[mImageResIds.length - 1]);
-                //Log.i(TAG, ">>>>"+d.getBounds()+", w="+d.getIntrinsicWidth()+", h="+d.getIntrinsicHeight());
-                //d.setBounds(0, 0, 100, 100);
-                if (mUseResIds) {
-                    mImageViews.get(position).setImageResource(mImageResIds[mImageResIds.length - 1]);
-                } else {
-                    mImageViews.get(position).setImageDrawable(mDrawables.get(mDrawables.size() - 1));
-                }
-            } else if (position == (mImageViews.size() - 1)) {
-                if (mUseResIds) {
-                    mImageViews.get(position).setImageResource(mImageResIds[0]);
-                } else {
-                    mImageViews.get(position).setImageDrawable(mDrawables.get(0));
-                }
-            } else {
-                if (mUseResIds) {
-                    mImageViews.get(position).setImageResource(mImageResIds[position - 1]);
-                } else {
-                    mImageViews.get(position).setImageDrawable(mDrawables.get(position - 1));
-                }
-            } 
-            container.addView(mImageViews.get(position));  
+            //container.addView(mImageViews.get(mImageResIds[position]));  
             if (DEBUG) {
                 Log.i(TAG, "instantiateItem() [position: " + position + "]");
             }
+            Object tmp = mImageViews.get(position).getTag();
+            if (tmp != null && tmp instanceof ViewHolder) {
+                holder = (ViewHolder) tmp;
+            } else {
+                holder = new ViewHolder();
+            }
+            holder.position = position;
+            mImageViews.get(position).setTag(holder);
             return mImageViews.get(position);
         }
 
@@ -243,13 +302,21 @@ public class ViewPagerWithIndicator extends ViewPager {
          */
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            ImageView view = mImageViews.get(position);  
+            ImageView view = (ImageView) object;//container.getChildAt(position);//mImageViews.get(position);
+            if (DEBUG) {
+                Log.i(TAG, "destroyItem() [position: " + position + "]"
+                        +", count="+container.getChildCount()
+                        +", isViewPager="+(container instanceof ViewPager));
+            }
+            ViewHolder holder;
+            Object tmp = view.getTag();
+            if (tmp != null && tmp instanceof ViewHolder) {
+                holder = (ViewHolder) tmp;
+                Log.i(TAG, ">>>>>>>destroyItem position="+holder.position);
+            }
             container.removeView(view);
             //avoid memory leak
             view.setImageBitmap(null);
-            if (DEBUG) {
-                Log.i(TAG, "destroyItem() [position: " + position + "]");
-            }
         }
 
     }

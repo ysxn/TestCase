@@ -2,7 +2,10 @@
 package com.widget;
 
 import android.support.v4.view.ViewPager.PageTransformer;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Interpolator;
 
 /**
  * view理所当然就是滑动中的那个view，position这里是float类型，不是平时理解的int位置，而是当前滑动状态的一个表示，比如当滑动到正全屏时
@@ -15,9 +18,18 @@ public class FadeTransformer implements PageTransformer {
     private boolean DEBUG = true;
     private final String TAG = "zyw";
     private static float MIN_SCALE = 0.75f;
+    private Interpolator mAccelerateDecelerateInterpolator = new AccelerateDecelerateInterpolator();;
 
     @Override
     public void transformPage(View view, float position) {
+        if (!DEBUG) {
+            ViewHolder holder;
+            Object tmp = view.getTag();
+            if (tmp != null && tmp instanceof ViewHolder) {
+                holder = (ViewHolder) tmp;
+                Log.i(TAG, ">>>>>>>transformPage="+holder.position+", offset="+position);
+            }
+        }
         int pageWidth = view.getWidth();
         if (position < -1) {
             // [-Infinity,-1)
@@ -27,7 +39,11 @@ public class FadeTransformer implements PageTransformer {
             // [-1,0]
             // Use the default slide transition when
             // moving to the left page
-            view.setAlpha(1+position);
+            if (!DEBUG) {
+                Log.i(TAG, ">>>>>>>before="+(1+position)+",after="+mAccelerateDecelerateInterpolator.getInterpolation(1+position));
+            }
+            view.setAlpha((1+position));
+            //view.setTranslationX(-pageWidth *(1 + position) * position);
             view.setTranslationX(0);
             view.setScaleX(1);
             view.setScaleY(1);
@@ -36,7 +52,8 @@ public class FadeTransformer implements PageTransformer {
             // Fade the page out.
             view.setAlpha(1 - position);
             // Counteract the default slide transition
-            view.setTranslationX(0/*pageWidth * -position*/);
+            //view.setTranslationX(-(pageWidth * position) / 5);
+            view.setTranslationX(-(pageWidth * position) / 5);
             // Scale the page down (between MIN_SCALE and 1)
             float scaleFactor = MIN_SCALE + (1 - MIN_SCALE)
                     * (1 - Math.abs(position));

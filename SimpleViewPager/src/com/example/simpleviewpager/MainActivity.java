@@ -3,6 +3,7 @@ package com.example.simpleviewpager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import com.widget.DepthPageTransformer;
 import com.widget.DotIndicator;
@@ -39,6 +40,16 @@ public class MainActivity extends Activity  implements OnPageChangeListener {
             R.drawable.res_8,
     };
     
+    private int[] mImageResIdsLess = {
+            R.drawable.res_1,
+            R.drawable.res_2,
+            R.drawable.res_3,
+            R.drawable.res_4,
+            R.drawable.res_5,
+            R.drawable.res_6,
+            R.drawable.res_7,
+    };
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,30 +60,37 @@ public class MainActivity extends Activity  implements OnPageChangeListener {
         mPager = (ViewPagerWithIndicator) findViewById(R.id.viewpager);
         mIndicator = (DotIndicator) findViewById(R.id.dotindicator);
 
-        //mPager.setDotIndicatorAndResIds(mIndicator, mImageResIds);
-        mPager.setDotIndicator(mIndicator);
+        mPager.setDotIndicatorAndResIds(mIndicator, mImageResIds);
+        
         mDrawables.add(new ColorDrawable(Color.BLUE));
         mDrawables.add(new ColorDrawable(Color.RED));
         mDrawables.add(new ColorDrawable(Color.GREEN));
         mDrawables.add(new ColorDrawable(Color.YELLOW));
         mDrawables.add(new ColorDrawable(Color.GRAY));
+        //mPager.setDotIndicator(mIndicator);
         for (int i = 0; i < mDrawables.size(); i++) {
-            mPager.addDrawable(mDrawables.get(i));
+            //mPager.addDrawable(mDrawables.get(i));
         }
         mPager.setOnPageChangeListener(this);
-        // 设置viewpager在第二个视图显示  
-        mPager.setCurrentItem(1);
+        //mPager.setPageTransformer(true, new DepthPageTransformer());
         mPager.setPageTransformer(true, new FadeTransformer());
         //mPager.setPageTransformer(true, new ZoomOutPageTransformer());
+
+        // 设置viewpager在第二个视图显示  
         mPager.setCurrentItem(1);
-        
         mAddPager = (Button) findViewById(R.id.add_pager);
         mAddPager.setOnClickListener(new View.OnClickListener() {
             
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                mPager.addDrawable(mDrawables.get(mDrawables.size()-1));
+                if (mPager.isUseResIds()) {
+                    mPager.setDotIndicatorAndResIds(mIndicator, mImageResIds);
+                    // 设置viewpager在第二个视图显示  
+                    mPager.setCurrentItem(1);
+                } else {
+                    mPager.addDrawable(mDrawables.get(mDrawables.size()-1));
+                }
             }
         });
         
@@ -82,7 +100,13 @@ public class MainActivity extends Activity  implements OnPageChangeListener {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                mPager.removeDrawable(mDrawables.get(mDrawables.size()-1));
+                if (mPager.isUseResIds()) {
+                    mPager.setDotIndicatorAndResIds(mIndicator, mImageResIdsLess);
+                    // 设置viewpager在第二个视图显示  
+                    mPager.setCurrentItem(1);
+                } else {
+                    mPager.removeDrawable(mDrawables.get(mDrawables.size()-1));
+                }
             }
         });
     }

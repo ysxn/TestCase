@@ -170,7 +170,7 @@ public class DotIndicator extends LinearLayout implements
         for (int j =0;j < mDotViews.size(); j++) {
             mDotViews.get(j).setImageDrawable(mIndicatorDotNormal);
         }
-        mDotViews.get(currentIndex-1).setImageDrawable(mIndicatorDotSelected);
+        mDotViews.get(currentIndex).setImageDrawable(mIndicatorDotSelected);
         /*
         if ((currentIndex < 0) || (currentIndex >= this.mTotalItems)
                 || (currentIndex == this.mCurrentItem))
@@ -188,6 +188,9 @@ public class DotIndicator extends LinearLayout implements
         this.mTotalItems = total;
         this.removeAllViews();
         mDotViews.clear();
+        if (DEBUG) {
+            Log.i(TAG, ">>>>>>setTotalItems ="+total);
+        }
 
         for (int i = 0; i < mTotalItems; i++) {
             DotIndicatorItem dot = new DotIndicatorItem(mContext);
