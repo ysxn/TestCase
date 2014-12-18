@@ -1,5 +1,7 @@
 
-package com.widget;
+package com.transformer;
+
+import com.widget.ViewHolder;
 
 import android.support.v4.view.ViewPager.PageTransformer;
 import android.util.Log;

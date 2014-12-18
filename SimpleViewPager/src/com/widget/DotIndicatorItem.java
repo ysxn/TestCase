@@ -15,7 +15,7 @@ import android.widget.ImageView;
 public class DotIndicatorItem extends ImageView {
     private boolean DEBUG = true;
     private final String TAG = "zyw";
-    private int mNum = -1;
+    private int mCurrentIndex = -1;
 
     public DotIndicatorItem(Context paramContext) {
         super(paramContext);
@@ -46,11 +46,11 @@ public class DotIndicatorItem extends ImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (this.mNum != -1) {
+        if (false) {
             TextPaint paint = new TextPaint(1);
             int width = getMeasuredWidth();
             int height = getMeasuredHeight();
-            String str = String.valueOf(1 + this.mNum);
+            String str = String.valueOf(1 + this.mCurrentIndex);
             int k = (width - 3) * str.length();
             paint.setTextSize(k);
             paint.setColor(-16777216);// …Ë÷√ª≠± —’…´
@@ -58,12 +58,12 @@ public class DotIndicatorItem extends ImageView {
         }
     }
 
-    public void resetNum() {
-        this.mNum = -1;
+    public void resetCurrentIndex() {
+        this.mCurrentIndex = -1;
     }
 
-    public void setNum(int paramInt) {
-        this.mNum = paramInt;
+    public void setNum(int currentIndex) {
+        this.mCurrentIndex = currentIndex;
     }
     
     /**
