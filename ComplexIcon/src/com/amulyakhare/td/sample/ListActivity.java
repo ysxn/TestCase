@@ -47,7 +47,7 @@ public class ListActivity extends ActionBarActivity {
 
     // declare the color generator and drawable builder
     private ColorGenerator mColorGenerator = ColorGenerator.DEFAULT;
-    private TextDrawable.IBuilder mDrawableBuilder;
+    private TextDrawable.IShapeBuilder mDrawableBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,36 +61,36 @@ public class ListActivity extends ActionBarActivity {
         switch (type) {
             case DrawableProvider.SAMPLE_RECT:
                 mDrawableBuilder = TextDrawable.builder()
-                        .rect();
+                        .setRectShape();
                 break;
             case DrawableProvider.SAMPLE_ROUND_RECT:
                 mDrawableBuilder = TextDrawable.builder()
-                        .roundRect(10);
+                        .setRoundRectShape(10);
                 break;
             case DrawableProvider.SAMPLE_ROUND:
                 mDrawableBuilder = TextDrawable.builder()
-                        .round();
+                        .setRoundShape();
                 break;
             case DrawableProvider.SAMPLE_RECT_BORDER:
                 mDrawableBuilder = TextDrawable.builder()
                         .beginConfig()
-                            .withBorder(4)
+                            .setWithBorder(4)
                         .endConfig()
-                        .rect();
+                        .setRectShape();
                 break;
             case DrawableProvider.SAMPLE_ROUND_RECT_BORDER:
                 mDrawableBuilder = TextDrawable.builder()
                         .beginConfig()
-                            .withBorder(4)
+                            .setWithBorder(4)
                         .endConfig()
-                        .roundRect(10);
+                        .setRoundRectShape(10);
                 break;
             case DrawableProvider.SAMPLE_ROUND_BORDER:
                 mDrawableBuilder = TextDrawable.builder()
                         .beginConfig()
-                            .withBorder(4)
+                            .setWithBorder(4)
                         .endConfig()
-                        .round();
+                        .setRoundShape();
                 break;
         }
 
@@ -147,12 +147,12 @@ public class ListActivity extends ActionBarActivity {
 
         private void updateCheckedState(ViewHolder holder, ListData item) {
             if (item.isChecked) {
-                holder.imageView.setImageDrawable(mDrawableBuilder.build(" ", 0xff616161));
+                holder.imageView.setImageDrawable(mDrawableBuilder.buildDrawable(" ", 0xff616161));
                 holder.view.setBackgroundColor(HIGHLIGHT_COLOR);
                 holder.checkIcon.setVisibility(View.VISIBLE);
             }
             else {
-                TextDrawable drawable = mDrawableBuilder.build(String.valueOf(item.data.charAt(0)), mColorGenerator.getColor(item.data));
+                TextDrawable drawable = mDrawableBuilder.buildDrawable(String.valueOf(item.data.charAt(0)), mColorGenerator.getColor(item.data));
                 holder.imageView.setImageDrawable(drawable);
                 holder.view.setBackgroundColor(Color.TRANSPARENT);
                 holder.checkIcon.setVisibility(View.GONE);
