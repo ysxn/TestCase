@@ -134,8 +134,9 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
 
-        int widthWithoutPadding = width - mPaddingLeft - mPaddingRight;
-        int heightWithoutPadding = height - mPaddingTop - mPaddingBottom;
+        
+        int widthWithoutPadding = width - this.getPaddingLeft() - this.getPaddingRight();
+        int heightWithoutPadding = height - this.getPaddingTop() - this.getPaddingBottom();
 
         // Measure the content
         mContent.measure(MeasureSpec.makeMeasureSpec(widthWithoutPadding, MeasureSpec.EXACTLY),

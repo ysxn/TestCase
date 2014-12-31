@@ -17,6 +17,7 @@
 package com.android.systemui.recents.views;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -96,8 +97,29 @@ class TaskStackViewTouchHandler implements SwipeHelper.Callback {
         for (int i = childCount - 1; i >= 0; i--) {
             TaskView tv = (TaskView) mSv.getChildAt(i);
             if (tv.getVisibility() == View.VISIBLE) {
-                if (mSv.isTransformedTouchPointInView(x, y, tv)) {
+                if (getFocusChild(x,y) != null/*mSv.isTransformedTouchPointInView(x, y, tv)*/) {
                     return tv;
+                }
+            }
+        }
+        return null;
+    }
+    
+    private View getFocusChild(int x, int y) {
+        View child = null;
+        Rect rect = new Rect();
+        int[] listViewCoords = new int[2];
+        mSv.getLocationOnScreen(listViewCoords);
+        int view_x = (int) x - listViewCoords[0];
+        int view_y = (int) y - listViewCoords[1];
+        int childCount = mSv.getChildCount();
+
+        for (int i = 0; i < childCount; i++) {
+            child = mSv.getChildAt(i);
+            child.getHitRect(rect);
+            if (rect.contains(view_x, view_y)) {
+                if (child instanceof TaskView) {
+                    return child;
                 }
             }
         }

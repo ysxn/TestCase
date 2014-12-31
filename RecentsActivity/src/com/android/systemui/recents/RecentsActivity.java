@@ -86,7 +86,6 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
         @Override
         public void run() {
             // Mark Recents as no longer visible
-            AlternateRecentsComponent.notifyVisibilityChanged(false);
             mVisible = false;
             // Finish Recents
             if (mLaunchIntent != null) {
@@ -112,7 +111,6 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
             String action = intent.getAction();
             if (action.equals(AlternateRecentsComponent.ACTION_HIDE_RECENTS_ACTIVITY)) {
                 // Mark Recents as no longer visible
-                AlternateRecentsComponent.notifyVisibilityChanged(false);
                 if (intent.getBooleanExtra(AlternateRecentsComponent.EXTRA_TRIGGERED_FROM_ALT_TAB, false)) {
                     // If we are hiding from releasing Alt-Tab, dismiss Recents to the focused app
                     dismissRecentsToFocusedTaskOrHome(false);
@@ -433,7 +431,6 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
     @Override
     public void onTaskViewClicked() {
         // Mark recents as no longer visible
-        AlternateRecentsComponent.notifyVisibilityChanged(false);
         mVisible = false;
     }
 

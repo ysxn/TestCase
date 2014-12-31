@@ -27,12 +27,11 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.FrameLayout;
-import com.android.systemui.R;
+import com.example.recentsactivity.R;
 import com.android.systemui.recents.Constants;
 import com.android.systemui.recents.RecentsConfiguration;
 import com.android.systemui.recents.misc.DozeTrigger;
 import com.android.systemui.recents.misc.Utilities;
-import com.android.systemui.recents.model.RecentsPackageMonitor;
 import com.android.systemui.recents.model.RecentsTaskLoader;
 import com.android.systemui.recents.model.Task;
 import com.android.systemui.recents.model.TaskStack;
@@ -315,11 +314,11 @@ public class TaskStackView extends FrameLayout implements TaskStack.TaskStackCal
                 // Request accessibility focus on the next view if we removed the task
                 // that previously held accessibility focus
                 childCount = getChildCount();
-                if (childCount > 0 && ssp.isTouchExplorationEnabled()) {
+                if (childCount > 0) {
                     TaskView atv = (TaskView) getChildAt(childCount - 1);
                     int indexOfTask = mStack.indexOfTask(atv.getTask());
                     if (mPrevAccessibilityFocusedIndex != indexOfTask) {
-                        tv.requestAccessibilityFocus();
+                        //tv.requestAccessibilityFocus();
                         mPrevAccessibilityFocusedIndex = indexOfTask;
                     }
                 }
@@ -696,7 +695,7 @@ public class TaskStackView extends FrameLayout implements TaskStack.TaskStackCal
                     int childCount = getChildCount();
                     if (childCount > 0) {
                         TaskView tv = ((TaskView) getChildAt(childCount - 1));
-                        tv.requestAccessibilityFocus();
+                        //tv.requestAccessibilityFocus();
                         mPrevAccessibilityFocusedIndex = mStack.indexOfTask(tv.getTask());
                     }
                 }
@@ -740,7 +739,8 @@ public class TaskStackView extends FrameLayout implements TaskStack.TaskStackCal
     }
 
     public boolean isTransformedTouchPointInView(float x, float y, View child) {
-        return isTransformedTouchPointInView(x, y, child, null);
+        //return isTransformedTouchPointInView(x, y, child, null);
+        return true;
     }
 
     /** Pokes the dozer on user interaction. */
@@ -891,7 +891,7 @@ public class TaskStackView extends FrameLayout implements TaskStack.TaskStackCal
 
         // Clear the accessibility focus for that view
         if (tv.isAccessibilityFocused()) {
-            tv.clearAccessibilityFocus();
+            //tv.clearAccessibilityFocus();
         }
 
         // Report that this tasks's data is no longer being used
@@ -1000,8 +1000,8 @@ public class TaskStackView extends FrameLayout implements TaskStack.TaskStackCal
         int taskIndex = mStack.indexOfTask(task);
         boolean taskWasFocused = tv.isFocusedTask();
         // Announce for accessibility
-        tv.announceForAccessibility(getContext().getString(R.string.accessibility_recents_item_dismissed,
-                tv.getTask().activityLabel));
+        tv.announceForAccessibility(""/*getContext().getString(R.string.accessibility_recents_item_dismissed,
+                tv.getTask().activityLabel)*/);
         // Remove the task from the view
         mStack.removeTask(task);
         // If the dismissed task was focused, then we should focus the next task in front

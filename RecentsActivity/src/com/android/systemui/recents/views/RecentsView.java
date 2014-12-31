@@ -301,7 +301,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         // Update the configuration with the latest system insets and trigger a relayout
-        mConfig.updateSystemInsets(insets.getSystemWindowInsets());
+        //mConfig.updateSystemInsets(insets.getSystemWindowInsets());
         requestLayout();
         return insets.consumeSystemWindowInsets();
     }
@@ -406,8 +406,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
                 Uri.fromParts("package", baseIntent.getComponent().getPackageName(), null));
         intent.setComponent(intent.resolveActivity(getContext().getPackageManager()));
         TaskStackBuilder.create(getContext())
-                .addNextIntentWithParentStack(intent).startActivities(null,
-                new UserHandle(t.key.userId));
+                .addNextIntentWithParentStack(intent).startActivities();
     }
 
     @Override
