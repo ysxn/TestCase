@@ -11,9 +11,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
-        android:layout_marginBottom="50dip"
-        android:layout_marginRight="50dip"
-        android:src="@drawable/behind" />
+        android:layout_marginBottom="20px"
+        android:layout_marginRight="33px"
+        android:src="@drawable/behind2" />
+    
+    <ImageView
+        android:id="@+id/imgMiddle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:layout_marginBottom="0dip"
+        android:layout_marginRight="0dip"
+        android:elevation="140px"
+        android:src="@drawable/middle2" />
     
     <ImageView
         android:id="@+id/imgUpper"
@@ -21,10 +32,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
-        android:src="@drawable/upper"
-        android:layout_marginBottom="40dip"
-        android:layout_marginRight="40dip"
-        android:elevation="40px" />
+        android:src="@drawable/upper2"
+        android:layout_marginBottom="0dip"
+        android:layout_marginRight="0dip"
+        android:elevation="260px" />
 
     <ImageView
         android:id="@+id/imgPlay"

@@ -6,11 +6,14 @@ import com.widget.ViewAnimation;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -23,6 +26,7 @@ public class MainActivity extends Activity {
     private ImageView mButton = null;
     private ImageView mViewBehind = null;
     private ImageView mViewUpper = null;
+    private ImageView mViewMiddle = null;
     private Animation mAnimation = null;
     private ViewPropertyAnimator mViewPropertyAnimator = null;
 
@@ -33,11 +37,20 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
         mViewBehind = (ImageView) findViewById(R.id.imgBehind);
         mViewUpper = (ImageView) findViewById(R.id.imgUpper);
+        mViewMiddle = (ImageView) findViewById(R.id.imgMiddle);
+        //mViewMiddle.setImageDrawable(new ColorDrawable(Color.RED));
+        //mViewMiddle.setElevation(20);
+        //mViewMiddle.setRotationX(90);
+        mViewMiddle.setRotationX(0);
+        mViewMiddle.setRotationY(-90);
         mViewBehind.getDrawable().setDither(true);
         mViewUpper.getDrawable().setDither(true);
+        mViewMiddle.getDrawable().setDither(true);
         //showToast("mViewBehind="+mViewBehind.getElevation()+" , mViewUpper="+mViewUpper.getElevation());
         mButton = (ImageView) findViewById(R.id.imgPlay);
 
@@ -51,8 +64,8 @@ public class MainActivity extends Activity {
             
             @Override
             public void onClick(View v) {
-                doAnimate1(mViewUpper);
-                doAnimate2(mViewBehind);
+                //doAnimate1(mViewUpper);
+                //doAnimate2(mViewBehind);
             }
         });
     }
@@ -156,6 +169,8 @@ public class MainActivity extends Activity {
                 mViewBehind.setRotationY(deltaX);
                 mViewUpper.setRotationX(-deltaY);
                 mViewUpper.setRotationY(deltaX);
+                mViewMiddle.setRotationX(-deltaY);
+                mViewMiddle.setRotationY(deltaX-90);
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
@@ -163,6 +178,11 @@ public class MainActivity extends Activity {
                 mViewBehind.setRotationY(0);
                 mViewUpper.setRotationX(0);
                 mViewUpper.setRotationY(0);
+                mViewMiddle.setRotationX(0);
+                mViewMiddle.setRotationY(-90);
+                showToast("mViewBehind="+mViewBehind.getElevation()
+                        +" , mViewUpper="+mViewUpper.getElevation()
+                        +" , mViewMiddle="+mViewMiddle.getElevation());
                 break;
 
             default:
