@@ -55,7 +55,7 @@ public class ListActivity extends ActionBarActivity {
         setContentView(R.layout.activity_list);
 
         Intent intent = getIntent();
-        int type = intent.getIntExtra(MainActivity.TYPE, DrawableProvider.SAMPLE_RECT);
+        int type = intent.getIntExtra(MainActivityNew.TYPE, DrawableProvider.SAMPLE_RECT);
 
         // initialize the builder based on the "TYPE"
         switch (type) {

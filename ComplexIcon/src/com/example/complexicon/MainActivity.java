@@ -1,13 +1,10 @@
 
 package com.example.complexicon;
 
-import com.widget.ViewAnimation;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,6 +16,10 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.widget.ViewAnimation;
+
+//import com.amulyakhare.td.sample.MainActivityNew;
 
 public class MainActivity extends Activity {
     private String TAG = "zyw";
@@ -66,6 +67,8 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 //doAnimate1(mViewUpper);
                 //doAnimate2(mViewBehind);
+                Intent i = new Intent(MainActivity.this, com.amulyakhare.td.sample.MainActivityNew.class);
+                startActivity(i);
             }
         });
     }

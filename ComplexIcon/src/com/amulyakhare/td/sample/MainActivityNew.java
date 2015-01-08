@@ -14,7 +14,7 @@ import com.example.complexicon.R;
 import com.amulyakhare.td.sample.sample.DataItem;
 import com.amulyakhare.td.sample.sample.DataSource;
 
-public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+public class MainActivityNew extends ActionBarActivity implements AdapterView.OnItemClickListener {
 
     public static final String TYPE = "TYPE";
     private DataSource mDataSource;
@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
-                convertView = View.inflate(MainActivity.this, R.layout.list_item_layout, null);
+                convertView = View.inflate(MainActivityNew.this, R.layout.list_item_layout, null);
                 holder = new ViewHolder(convertView);
                 convertView.setTag(holder);
             } else {
