@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: D:\\workspace\\PickUpCameraStepCounter\\src\\com\\example\\pickupcamerastepcounter\\ISecondary.aidl
+ * Original file: E:\\workspace\\PickUpCameraStepCounter\\src\\com\\example\\pickupcamerastepcounter\\ISecondary.aidl
  */
 package com.example.pickupcamerastepcounter;
 /**

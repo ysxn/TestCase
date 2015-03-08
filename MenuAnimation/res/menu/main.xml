@@ -1,0 +1,41 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.menuanimation.MainActivity" >
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_settings"/>
+    <item
+        android:id="@+id/action_one"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_one"/>
+    <item
+        android:id="@+id/action_two"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_two"/>
+    <item
+        android:id="@+id/action_three"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_three"/>
+    <item
+        android:id="@+id/action_four"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_four"/>
+    <item
+        android:id="@+id/action_five"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_five"/>
+    <item
+        android:id="@+id/action_six"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_six"/>
+
+</menu>

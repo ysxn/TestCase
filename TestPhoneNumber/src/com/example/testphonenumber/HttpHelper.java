@@ -24,6 +24,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import android.os.Handler;
@@ -460,24 +461,19 @@ public class HttpHelper {
      * 在这个接口中被统一封装成了HttpPost(HttpGet)和HttpResponse，这样，就减少了操作的繁琐性。
      * 另外，在使用POST方式进行传输时，需要进行字符编码。
      */
-    public void methodHttpPost(String par, List<NameValuePair> params) {
+    public void methodHttpPost(String httpUrl, List<NameValuePair> params) {
         // http地址
-        String httpUrl = "http://192.168.1.110:8080/httpget.jsp";
-        if (par != null) {
-            httpUrl = par;
+        if (httpUrl == null || httpUrl.isEmpty()) {
+            Message msg = mHandler.obtainMessage(MSG_SHOW_RESULT, "httpUrl is null");
+            msg.sendToTarget();
+            return;
         }
         String resultData = null;
         // HttpPost连接对象
         HttpPost httpRequest = new HttpPost(httpUrl);
-        // 使用NameValuePair来保存要传递的Post参数
-        // List<NameValuePair> params = new ArrayList<NameValuePair>();
-
-        // 添加要传递的参数
-        // params.add(new BasicNameValuePair("par", "HttpClient_android_Post"));
-        try
-        {
+        try {
             // 设置字符集
-            HttpEntity httpentity = new UrlEncodedFormEntity(params, "gb2312");
+            HttpEntity httpentity = new UrlEncodedFormEntity(params, HTTP.UTF_8);//"gb2312"
             // 请求httpRequest
             httpRequest.setEntity(httpentity);
             // 取得默认的HttpClient
@@ -485,13 +481,11 @@ public class HttpHelper {
             // 取得HttpResponse
             HttpResponse httpResponse = httpclient.execute(httpRequest);
             // HttpStatus.SC_OK表示连接成功
-            if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK)
-            {
+            if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 // 取得返回的字符串
-                resultData = EntityUtils.toString(httpResponse.getEntity());
-            }
-            else
-            {
+                HttpEntity resultEntity = httpResponse.getEntity();
+                resultData = EntityUtils.toString(resultEntity);
+            } else {
                 resultData = "请求错误!";
             }
             if (resultData == null || resultData.isEmpty()) {
@@ -499,16 +493,13 @@ public class HttpHelper {
             }
             Message msg = mHandler.obtainMessage(MSG_SHOW_RESULT, resultData);
             msg.sendToTarget();
-        } catch (ClientProtocolException e)
-        {
+        } catch (ClientProtocolException e) {
             Log.e(DEBUG_TAG, "ClientProtocolException");
             e.printStackTrace();
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             Log.e(DEBUG_TAG, "IOException");
             e.printStackTrace();
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             Log.e(DEBUG_TAG, "Exception");
             e.printStackTrace();
         }

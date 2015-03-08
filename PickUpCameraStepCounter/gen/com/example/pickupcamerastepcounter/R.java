@@ -16,32 +16,43 @@ public final class R {
     }
     public static final class id {
         public static final int ScrollView=0x7f060000;
-        public static final int bind=0x7f06000f;
-        public static final int bind_above_client=0x7f060009;
-        public static final int bind_allow_oom=0x7f06000a;
-        public static final int bind_important=0x7f06000c;
-        public static final int bind_normal=0x7f060007;
-        public static final int bind_not_foreground=0x7f060008;
-        public static final int bind_waive_priority=0x7f06000b;
-        public static final int bind_with_activity=0x7f06000d;
+        public static final int bind=0x7f060012;
+        public static final int bind_above_client=0x7f06000c;
+        public static final int bind_allow_oom=0x7f06000d;
+        public static final int bind_important=0x7f06000f;
+        public static final int bind_normal=0x7f06000a;
+        public static final int bind_not_foreground=0x7f06000b;
+        public static final int bind_waive_priority=0x7f06000e;
+        public static final int bind_with_activity=0x7f060010;
+        public static final int button_correct=0x7f060007;
         public static final int button_exit=0x7f060001;
         public static final int button_pause=0x7f060002;
         public static final int button_resume=0x7f060003;
-        public static final int callback=0x7f060006;
-        public static final int kill=0x7f060010;
+        public static final int button_wrong=0x7f060008;
+        public static final int callback=0x7f060009;
+        public static final int kill=0x7f060013;
+        public static final int pick_up_tips=0x7f060006;
         public static final int sensor_data=0x7f060005;
         public static final int sensor_tips=0x7f060004;
-        public static final int start=0x7f060011;
-        public static final int stop=0x7f060012;
-        public static final int unbind=0x7f06000e;
+        public static final int start=0x7f060014;
+        public static final int stop=0x7f060015;
+        public static final int unbind=0x7f060011;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int remote_binding_options=0x7f030001;
-        public static final int remote_service_binding=0x7f030002;
-        public static final int remote_service_controller=0x7f030003;
+        public static final int activity_statistic_pick_up=0x7f030001;
+        public static final int activity_statistic_wave_hand=0x7f030002;
+        public static final int remote_binding_options=0x7f030003;
+        public static final int remote_service_binding=0x7f030004;
+        public static final int remote_service_controller=0x7f030005;
     }
     public static final class string {
+        public static final int action_data=0x7f040040;
+        public static final int action_exit=0x7f04003c;
+        public static final int action_settings=0x7f04003b;
+        public static final int action_start=0x7f04003e;
+        public static final int action_stop=0x7f04003d;
+        public static final int action_tips=0x7f04003f;
         public static final int activity_foreground_service_controller=0x7f040028;
         public static final int activity_isolated_service_controller=0x7f04002c;
         public static final int activity_local_service_binding=0x7f040008;
@@ -55,6 +66,8 @@ public final class R {
         public static final int bind_service=0x7f04000a;
         public static final int bind_service_1=0x7f040030;
         public static final int bind_service_2=0x7f040033;
+        public static final int date_format=0x7f040041;
+        public static final int flip_tips=0x7f040042;
         public static final int foreground_service_controller=0x7f040029;
         public static final int foreground_service_label=0x7f040027;
         public static final int foreground_service_started=0x7f040026;
@@ -71,6 +84,7 @@ public final class R {
         public static final int local_service_started=0x7f040001;
         public static final int local_service_stopped=0x7f040002;
         public static final int messenger_service_binding=0x7f04000f;
+        public static final int pick_up_statistic_title=0x7f040037;
         public static final int remote_call_failed=0x7f04001b;
         public static final int remote_service_binding=0x7f040016;
         public static final int remote_service_connected=0x7f040018;
@@ -96,7 +110,10 @@ public final class R {
         public static final int stop_service=0x7f040007;
         public static final int stop_service_1=0x7f04002f;
         public static final int stop_service_2=0x7f040032;
+        public static final int trigger_correct=0x7f040039;
+        public static final int trigger_wrong=0x7f04003a;
         public static final int unbind_service=0x7f04000b;
+        public static final int wave_hand_statistic_title=0x7f040038;
     }
     public static final class style {
         /** 

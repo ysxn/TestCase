@@ -5,11 +5,12 @@
     <string name="hello_world">Please input your phone number, and click check button!!</string>
     <string name="action_settings">Settings</string>
     <string name="tips">Please input your phone number, and click check button!</string>
-    <string name="check_get_button">get_check</string>
-    <string name="check_post_button">post_check</string>
+    <string name="fetch_button">get</string>
+    <string name="update_button">update</string>
     <string name="check_httpget_button">httpget_check</string>
     <string name="check_httpgetalias_button">httpgetalias_check</string>
-    <string name="check_httppost_button">httppost_check</string>
+    <string name="insert_button">insert</string>
+    <string name="delete_button">delete</string>
     <string name="check_result">check result:</string>
 
 </resources>

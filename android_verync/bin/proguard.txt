@@ -1,0 +1,176 @@
+# view res/layout/pull_to_refresh.xml #generated:7
+-keep class com.qiujy.widget.PullToRefreshListView { <init>(...); }
+
+# view AndroidManifest.xml #generated:22
+-keep class net.shopnc.android.common.MyApp { <init>(...); }
+
+# view AndroidManifest.xml #generated:39
+-keep class net.shopnc.android.ui.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:28
+-keep class net.shopnc.android.ui.StartActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:82
+-keep class net.shopnc.android.ui.forum.BoardFavoriteActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:80
+-keep class net.shopnc.android.ui.forum.BoardListActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:45
+-keep class net.shopnc.android.ui.forum.ForumActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:84
+-keep class net.shopnc.android.ui.forum.LastestBrowseActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:88
+-keep class net.shopnc.android.ui.forum.board.ChildBoardActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:116
+-keep class net.shopnc.android.ui.forum.board.TopicAllActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:92
+-keep class net.shopnc.android.ui.forum.board.TopicChildAllActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:94
+-keep class net.shopnc.android.ui.forum.board.TopicChildDigestActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:90
+-keep class net.shopnc.android.ui.forum.board.TopicChildListActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:96
+-keep class net.shopnc.android.ui.forum.board.TopicChildTopActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:120
+-keep class net.shopnc.android.ui.forum.board.TopicDigestActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:114
+-keep class net.shopnc.android.ui.forum.board.TopicListActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:122
+-keep class net.shopnc.android.ui.forum.board.TopicSearchActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:118
+-keep class net.shopnc.android.ui.forum.board.TopicTopActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:149
+-keep class net.shopnc.android.ui.forum.topic.QuoteTopicActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:142
+-keep class net.shopnc.android.ui.forum.topic.ReplyTopicActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:140
+-keep class net.shopnc.android.ui.forum.topic.SendTopicActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:144
+-keep class net.shopnc.android.ui.forum.topic.ShowImageActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:126
+-keep class net.shopnc.android.ui.forum.topic.TopicDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:128
+-keep class net.shopnc.android.ui.forum.topic.TopicDetailDefaultActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:132
+-keep class net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:134
+-keep class net.shopnc.android.ui.forum.topic.TopicDetailLastRepliesHtmlActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:130
+-keep class net.shopnc.android.ui.forum.topic.TopicDetailOnlyLandlordActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:136
+-keep class net.shopnc.android.ui.forum.topic.TopicHtmlActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:62
+-keep class net.shopnc.android.ui.home.EmotionalActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:60
+-keep class net.shopnc.android.ui.home.EntertainmentActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:58
+-keep class net.shopnc.android.ui.home.FocusActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:54
+-keep class net.shopnc.android.ui.home.HeadlinesActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:41
+-keep class net.shopnc.android.ui.home.HomeActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:56
+-keep class net.shopnc.android.ui.home.TeahouseActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:108
+-keep class net.shopnc.android.ui.info.FiveActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:106
+-keep class net.shopnc.android.ui.info.FourActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:47
+-keep class net.shopnc.android.ui.info.InfoActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:100
+-keep class net.shopnc.android.ui.info.OneActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:110
+-keep class net.shopnc.android.ui.info.SixActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:104
+-keep class net.shopnc.android.ui.info.ThreeActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:102
+-keep class net.shopnc.android.ui.info.TwoActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:74
+-keep class net.shopnc.android.ui.live.BabyActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:70
+-keep class net.shopnc.android.ui.live.CarActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:68
+-keep class net.shopnc.android.ui.live.FoodActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:66
+-keep class net.shopnc.android.ui.live.HouseDecorateActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:43
+-keep class net.shopnc.android.ui.live.LiveActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:72
+-keep class net.shopnc.android.ui.live.MarriageActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:76
+-keep class net.shopnc.android.ui.live.WomanActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:158
+-keep class net.shopnc.android.ui.more.AboutUsActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:154
+-keep class net.shopnc.android.ui.more.AccountMngActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:156
+-keep class net.shopnc.android.ui.more.FeedbackActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:161
+-keep class net.shopnc.android.ui.more.LoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:50
+-keep class net.shopnc.android.ui.more.MoreActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:152
+-keep class net.shopnc.android.ui.more.SystemSetActivity { <init>(...); }
+
+# view res/layout/last_browse.xml #generated:8
+-keep class net.shopnc.android.widget.MyFooterListView { <init>(...); }
+
+# view res/layout/board_favorite.xml #generated:8
+-keep class net.shopnc.android.widget.PullToRefreshListView { <init>(...); }
+
+# view res/layout/board_list.xml #generated:9
+# view res/layout/board_topic_list.xml #generated:18
+# view res/layout/board_topic_search.xml #generated:51
+# view res/layout/home_sub_banner.xml #generated:11
+# view res/layout/main.xml #generated:20
+# view res/layout/topic_detail.xml #generated:32
+-keep class net.shopnc.android.widget.PullView { <init>(...); }
+

@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: D:\\workspace\\PickUpCameraStepCounter\\src\\com\\example\\pickupcamerastepcounter\\IRemoteServiceCallback.aidl
+ * Original file: E:\\workspace\\PickUpCameraStepCounter\\src\\com\\example\\pickupcamerastepcounter\\IRemoteServiceCallback.aidl
  */
 package com.example.pickupcamerastepcounter;
 /**

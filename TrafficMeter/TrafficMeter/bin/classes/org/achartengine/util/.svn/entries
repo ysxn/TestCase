@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="103"
+   name=""
+   committed-date="2009-08-25T23:28:14.673767Z"
+   url="http://www.jaqpot.net/svn/android/netcounter/trunk/src/org/achartengine/util"
+   last-author="cyril"
+   kind="dir"
+   uuid="c3f17da7-5910-48e3-affd-a6486d1fb455"
+   repos="http://www.jaqpot.net/svn/android"
+   revision="153"/>
+<entry
+   committed-rev="103"
+   name="MathHelper.java"
+   text-time="2010-11-17T15:15:24.421875Z"
+   committed-date="2009-08-25T23:28:14.673767Z"
+   checksum="26c1bc5972a2706864a8f9671759ff92"
+   last-author="cyril"
+   kind="file"
+   prop-time="2010-11-17T15:15:24.421875Z"/>
+</wc-entries>

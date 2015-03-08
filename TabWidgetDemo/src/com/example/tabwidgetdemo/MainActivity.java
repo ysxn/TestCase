@@ -27,6 +27,9 @@ public class MainActivity extends Activity implements OnPageChangeListener, OnTa
     private static final int TAB_HOST_ID = android.R.id.tabhost;
     private ViewPager mViewPager;
     private TabHost mTabHost;
+    private ListView v1;
+    private ListView v2;
+    private ListView v3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,8 @@ public class MainActivity extends Activity implements OnPageChangeListener, OnTa
         tabSpec3.setContent(new MyTabContentFactoryView());
         mTabHost.addTab(tabSpec3);
 
-        
+        v1 = new ListView(this);
+        v1.setAdapter
 
         mViewPager.setAdapter(new PagerAdapter() {
 
@@ -68,7 +72,7 @@ public class MainActivity extends Activity implements OnPageChangeListener, OnTa
             @Override
             public Object instantiateItem(ViewGroup container, int position) { // 这个方法用来实例化页卡
                 View v = new View(MainActivity.this);
-                container.addView(v, 0);// 添加页卡
+                container.addView(v);// 添加页卡
                 return v;
             }
 

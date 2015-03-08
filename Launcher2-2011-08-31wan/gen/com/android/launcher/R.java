@@ -221,41 +221,41 @@ containing a value of this type.
         public static final int y=0x7f01000f;
     }
     public static final class color {
-        public static final int appwidget_error_color=0x7f090004;
-        public static final int bright_text_dark_focused=0x7f090008;
-        public static final int bubble_dark_background=0x7f090002;
-        public static final int delete_color_filter=0x7f090003;
-        public static final int gesture_color=0x7f090006;
-        public static final int grid_dark_background=0x7f090001;
-        public static final int snag_callout_color=0x7f090005;
-        public static final int uncertain_gesture_color=0x7f090007;
-        public static final int window_background=0x7f090000;
+        public static final int appwidget_error_color=0x7f080004;
+        public static final int bright_text_dark_focused=0x7f080008;
+        public static final int bubble_dark_background=0x7f080002;
+        public static final int delete_color_filter=0x7f080003;
+        public static final int gesture_color=0x7f080006;
+        public static final int grid_dark_background=0x7f080001;
+        public static final int snag_callout_color=0x7f080005;
+        public static final int uncertain_gesture_color=0x7f080007;
+        public static final int window_background=0x7f080000;
     }
     public static final class dimen {
         /**  height of the bottom row of controls 
          */
-        public static final int button_bar_height=0x7f0b0001;
+        public static final int button_bar_height=0x7f0a0001;
         /**  so we have access to this dimension in landscape mode even though
          button_bar_height changes 
          */
-        public static final int button_bar_height_portrait=0x7f0b0002;
+        public static final int button_bar_height_portrait=0x7f0a0002;
         /**  delete_zone_size_full - button_bar_height_portrait 
          */
-        public static final int delete_zone_padding=0x7f0b0006;
+        public static final int delete_zone_padding=0x7f0a0006;
         /**  height & width of the drop rectangle for the trash icon 
          */
-        public static final int delete_zone_size=0x7f0b0005;
+        public static final int delete_zone_size=0x7f0a0005;
         /**  roughly half a status bar (for vertically centering the right-hand
          button cluster in landscape) 
          */
-        public static final int half_status_bar_height=0x7f0b0004;
+        public static final int half_status_bar_height=0x7f0a0004;
         /**  roughly a status bar (for vertically centering the all apps
          home icon in landscape) 
          */
-        public static final int status_bar_height=0x7f0b0003;
-        public static final int title_texture_width=0x7f0b0000;
-        public static final int workspace_cell_height=0x7f0b0008;
-        public static final int workspace_cell_width=0x7f0b0007;
+        public static final int status_bar_height=0x7f0a0003;
+        public static final int title_texture_width=0x7f0a0000;
+        public static final int workspace_cell_height=0x7f0a0008;
+        public static final int workspace_cell_width=0x7f0a0007;
     }
     public static final class drawable {
         public static final int all_apps_button=0x7f020000;
@@ -438,58 +438,58 @@ containing a value of this type.
         public static final int zoom_bar_indicator=0x7f0200b1;
     }
     public static final class id {
-        public static final int all_apps_2d_grid=0x7f080003;
-        public static final int all_apps_2d_grid_cluster=0x7f080005;
-        public static final int all_apps_2d_home=0x7f080004;
-        public static final int all_apps_2d_list=0x7f080009;
-        public static final int all_apps_2d_list_cluster=0x7f080007;
-        public static final int all_apps_button=0x7f08001e;
-        public static final int all_apps_button_cluster=0x7f08001d;
-        public static final int all_apps_button_cluster_2d=0x7f08000b;
-        public static final int all_apps_foot_header=0x7f080006;
-        public static final int all_apps_foot_header_list=0x7f080008;
-        public static final int all_apps_foot_header_text=0x7f08000a;
-        public static final int all_apps_view=0x7f080002;
-        public static final int cell1=0x7f080015;
-        public static final int cell2=0x7f080016;
-        public static final int cell3=0x7f080017;
-        public static final int cell4=0x7f080018;
-        public static final int cell5=0x7f080019;
-        public static final int checkbox=0x7f080026;
-        public static final int delete_zone=0x7f08001c;
-        public static final int delete_zone_cluster=0x7f080021;
-        public static final int description=0x7f080011;
-        public static final int drag_layer=0x7f080013;
-        public static final int folder_close=0x7f080027;
-        public static final int folder_content=0x7f080028;
-        public static final int folder_name=0x7f08002a;
-        public static final int gallery=0x7f08002c;
-        public static final int horizontal=0x7f080001;
-        public static final int hotseat_center_text=0x7f080023;
-        public static final int hotseat_center_text_2d=0x7f08000c;
-        public static final int hotseat_left=0x7f08001f;
-        public static final int hotseat_right=0x7f080020;
-        public static final int hotseat_right_2d=0x7f08000d;
-        public static final int icon=0x7f080010;
-        public static final int label=0x7f080029;
-        public static final int name=0x7f08000e;
-        public static final int name_list=0x7f08000f;
-        public static final int next_screen=0x7f08001b;
-        public static final int previous_screen=0x7f08001a;
-        public static final int scrollerbar_for_htc=0x7f080022;
-        public static final int self=0x7f080012;
-        public static final int set=0x7f08002d;
-        public static final int summary=0x7f080025;
-        public static final int title=0x7f080024;
-        public static final int vertical=0x7f080000;
-        public static final int wallpaper=0x7f08002b;
-        public static final int workspace=0x7f080014;
+        public static final int all_apps_2d_grid=0x7f0d0005;
+        public static final int all_apps_2d_grid_cluster=0x7f0d0003;
+        public static final int all_apps_2d_home=0x7f0d0006;
+        public static final int all_apps_2d_list=0x7f0d0009;
+        public static final int all_apps_2d_list_cluster=0x7f0d0007;
+        public static final int all_apps_button=0x7f0d0020;
+        public static final int all_apps_button_cluster=0x7f0d001e;
+        public static final int all_apps_button_cluster_2d=0x7f0d000b;
+        public static final int all_apps_foot_header=0x7f0d0004;
+        public static final int all_apps_foot_header_list=0x7f0d0008;
+        public static final int all_apps_foot_header_text=0x7f0d000a;
+        public static final int all_apps_view=0x7f0d0002;
+        public static final int cell1=0x7f0d0015;
+        public static final int cell2=0x7f0d0016;
+        public static final int cell3=0x7f0d0017;
+        public static final int cell4=0x7f0d0018;
+        public static final int cell5=0x7f0d0019;
+        public static final int checkbox=0x7f0d0026;
+        public static final int delete_zone=0x7f0d001d;
+        public static final int delete_zone_cluster=0x7f0d001c;
+        public static final int description=0x7f0d0011;
+        public static final int drag_layer=0x7f0d0013;
+        public static final int folder_close=0x7f0d0027;
+        public static final int folder_content=0x7f0d0028;
+        public static final int folder_name=0x7f0d002a;
+        public static final int gallery=0x7f0d002c;
+        public static final int horizontal=0x7f0d0000;
+        public static final int hotseat_center_text=0x7f0d0021;
+        public static final int hotseat_center_text_2d=0x7f0d000c;
+        public static final int hotseat_left=0x7f0d0023;
+        public static final int hotseat_right=0x7f0d0022;
+        public static final int hotseat_right_2d=0x7f0d000d;
+        public static final int icon=0x7f0d0010;
+        public static final int label=0x7f0d0029;
+        public static final int name=0x7f0d000e;
+        public static final int name_list=0x7f0d000f;
+        public static final int next_screen=0x7f0d001b;
+        public static final int previous_screen=0x7f0d001a;
+        public static final int scrollerbar_for_htc=0x7f0d001f;
+        public static final int self=0x7f0d0012;
+        public static final int set=0x7f0d002d;
+        public static final int summary=0x7f0d0025;
+        public static final int title=0x7f0d0024;
+        public static final int vertical=0x7f0d0001;
+        public static final int wallpaper=0x7f0d002b;
+        public static final int workspace=0x7f0d0014;
     }
     public static final class integer {
-        public static final int config_allAppsBatchLoadDelay=0x7f0a0002;
-        public static final int config_allAppsBatchSize=0x7f0a0003;
-        public static final int config_allAppsFadeInTime=0x7f0a0000;
-        public static final int config_allAppsFadeOutTime=0x7f0a0001;
+        public static final int config_allAppsBatchLoadDelay=0x7f090002;
+        public static final int config_allAppsBatchSize=0x7f090003;
+        public static final int config_allAppsFadeInTime=0x7f090000;
+        public static final int config_allAppsFadeOutTime=0x7f090001;
     }
     public static final class layout {
         public static final int add_list_item=0x7f030000;
@@ -522,169 +522,169 @@ containing a value of this type.
     public static final class string {
         /**  Displayed when user selects a shortcut for an app that was uninstalled 
          */
-        public static final int activity_not_found=0x7f0c0008;
+        public static final int activity_not_found=0x7f0b0008;
         /**  Options in "Add to Home" dialog box; Name of the Clock widget
          */
-        public static final int add_clock=0x7f0c0016;
+        public static final int add_clock=0x7f0b0016;
         /**  Options in "Add to Home" dialog box; Name of the Folder widget
          */
-        public static final int add_folder=0x7f0c0015;
+        public static final int add_folder=0x7f0b0015;
         /**  Options in "Add to Home" dialog box; Name of the Picture frame widget
          */
-        public static final int add_photo_frame=0x7f0c0017;
-        public static final int all_app_diaplay=0x7f0c0031;
+        public static final int add_photo_frame=0x7f0b0017;
+        public static final int all_app_diaplay=0x7f0b0031;
         /**  All applications label for accessibilty (spoken when the button gets focus). 
          */
-        public static final int all_apps_button_label=0x7f0c001e;
+        public static final int all_apps_button_label=0x7f0b001e;
         /**  Label for button in all applications label to go back home (to the workspace / desktop)
          for accessibilty (spoken when the button gets focus). 
          */
-        public static final int all_apps_home_button_label=0x7f0c001f;
+        public static final int all_apps_home_button_label=0x7f0b001f;
         /**  Application name 
          */
-        public static final int application_name=0x7f0c0002;
+        public static final int application_name=0x7f0b0002;
         /**  Buttons in Rename folder dialog box 
          */
-        public static final int cancel_action=0x7f0c000d;
+        public static final int cancel_action=0x7f0b000d;
         /**  Title of dialog that appears after user selects Wallpaper from menu 
          */
-        public static final int chooser_wallpaper=0x7f0c0005;
+        public static final int chooser_wallpaper=0x7f0b0005;
         /**  List item for configuring the current wallpaper 
          */
-        public static final int configure_wallpaper=0x7f0c0009;
+        public static final int configure_wallpaper=0x7f0b0009;
         /**  URL to use when detecting the current default browser. 
          Attempts to mimic homepage_base in Browser; {CID} should be replaced
          by the client-id, e.g. "android-google". 
          */
-        public static final int default_browser_url=0x7f0c002f;
+        public static final int default_browser_url=0x7f0b002f;
         /**  Default folder name 
          */
-        public static final int folder_name=0x7f0c0004;
+        public static final int folder_name=0x7f0b0004;
         /**  Text to show user in place of a gadget when we can't display it properly 
          */
-        public static final int gadget_error_text=0x7f0c002e;
+        public static final int gadget_error_text=0x7f0b002e;
         /**  Options in "Add to Home" dialog box; Title of the group containing the list of all apps 
          */
-        public static final int group_applications=0x7f0c000f;
+        public static final int group_applications=0x7f0b000f;
         /**  Options in "Add to Home" dialog box; Title of the folder gadget 
          */
-        public static final int group_folder=0x7f0c0011;
+        public static final int group_folder=0x7f0b0011;
         /**  Options in "Add to Home" dialog box; Title of the group containing the list of all live folders 
          */
-        public static final int group_live_folders=0x7f0c0012;
+        public static final int group_live_folders=0x7f0b0012;
         /**  Options in "Add to Home" dialog box; Title of the group containing the list of all shortcuts 
          */
-        public static final int group_shortcuts=0x7f0c0010;
+        public static final int group_shortcuts=0x7f0b0010;
         /**  Options in "Add to Home" dialog box; Title of the group containing the list of apps that can set the wallpaper
          */
-        public static final int group_wallpapers=0x7f0c0014;
+        public static final int group_wallpapers=0x7f0b0014;
         /**  Options in "Add to Home" dialog box; Title of the group containing the list of all widgets/gadgets 
          */
-        public static final int group_widgets=0x7f0c0013;
-        public static final int hotseat_phone=0x7f0c0030;
+        public static final int group_widgets=0x7f0b0013;
+        public static final int hotseat_phone=0x7f0b0030;
         /**  Verb, menu item used to add an item on the desktop 
          */
-        public static final int menu_add=0x7f0c0020;
+        public static final int menu_add=0x7f0b0020;
         /**  Noun, menu item used to show the gestures settings 
          */
-        public static final int menu_gestures=0x7f0c0024;
+        public static final int menu_gestures=0x7f0b0024;
         /**  Title of dialog box 
          */
-        public static final int menu_item_add_item=0x7f0c000e;
+        public static final int menu_item_add_item=0x7f0b000e;
         /**  Noun, menu item used to bring down the notifications shade 
          */
-        public static final int menu_notifications=0x7f0c0023;
+        public static final int menu_notifications=0x7f0b0023;
         /**  Verb, menu item used to initiate global search 
          */
-        public static final int menu_search=0x7f0c0022;
+        public static final int menu_search=0x7f0b0022;
         /**  Noun, menu item used to show the system settings 
          */
-        public static final int menu_settings=0x7f0c0025;
+        public static final int menu_settings=0x7f0b0025;
         /**  Noun, menu item used to set the desktop's wallpaper 
          */
-        public static final int menu_wallpaper=0x7f0c0021;
+        public static final int menu_wallpaper=0x7f0b0021;
         /**  Error message when user has filled a home screen, possibly not used 
          */
-        public static final int out_of_space=0x7f0c0018;
+        public static final int out_of_space=0x7f0b0018;
         /**  Permission description 
          */
-        public static final int permdesc_install_shortcut=0x7f0c0027;
+        public static final int permdesc_install_shortcut=0x7f0b0027;
         /**  Permission description 
          */
-        public static final int permdesc_read_settings=0x7f0c002b;
+        public static final int permdesc_read_settings=0x7f0b002b;
         /**  Permission description 
          */
-        public static final int permdesc_uninstall_shortcut=0x7f0c0029;
+        public static final int permdesc_uninstall_shortcut=0x7f0b0029;
         /**  Permission description 
          */
-        public static final int permdesc_write_settings=0x7f0c002d;
+        public static final int permdesc_write_settings=0x7f0b002d;
         /**  Permission short label 
          */
-        public static final int permlab_install_shortcut=0x7f0c0026;
+        public static final int permlab_install_shortcut=0x7f0b0026;
         /**  Permission short label 
          */
-        public static final int permlab_read_settings=0x7f0c002a;
+        public static final int permlab_read_settings=0x7f0b002a;
         /**  Permission short label 
          */
-        public static final int permlab_uninstall_shortcut=0x7f0c0028;
+        public static final int permlab_uninstall_shortcut=0x7f0b0028;
         /**  Permission short label 
          */
-        public static final int permlab_write_settings=0x7f0c002c;
+        public static final int permlab_write_settings=0x7f0b002c;
         /**  Option in "Select wallpaper from" dialog box 
          */
-        public static final int pick_wallpaper=0x7f0c0007;
+        public static final int pick_wallpaper=0x7f0b0007;
         /**  Do not translate. android:process of this application. 
          */
-        public static final int process=0x7f0c0001;
+        public static final int process=0x7f0b0001;
         /**  Buttons in Rename folder dialog box 
          */
-        public static final int rename_action=0x7f0c000c;
+        public static final int rename_action=0x7f0b000c;
         /**  Label of Folder name field in Rename folder dialog box 
          */
-        public static final int rename_folder_label=0x7f0c000a;
+        public static final int rename_folder_label=0x7f0b000a;
         /**  Title of dialog box 
          */
-        public static final int rename_folder_title=0x7f0c000b;
-        public static final int select_all_apps_grid=0x7f0c0032;
-        public static final int select_all_apps_list=0x7f0c0033;
+        public static final int rename_folder_title=0x7f0b000b;
+        public static final int select_all_apps_grid=0x7f0b0032;
+        public static final int select_all_apps_list=0x7f0b0033;
         /**  Do not translate. android:sharedUserId of this application. 
          */
-        public static final int sharedUserId=0x7f0c0000;
+        public static final int sharedUserId=0x7f0b0000;
         /**  Message displayed when an external application attemps to create a shortcut that already exists 
          */
-        public static final int shortcut_duplicate=0x7f0c001b;
+        public static final int shortcut_duplicate=0x7f0b001b;
         /**  Message displayed when a shortcut is created by an external application 
          */
-        public static final int shortcut_installed=0x7f0c0019;
+        public static final int shortcut_installed=0x7f0b0019;
         /**  Message displayed when a shortcut is uninstalled by an external application 
          */
-        public static final int shortcut_uninstalled=0x7f0c001a;
+        public static final int shortcut_uninstalled=0x7f0b001a;
         /**  Title of dialog when user is selecting live folder to add to homescreen 
          */
-        public static final int title_select_live_folder=0x7f0c001d;
+        public static final int title_select_live_folder=0x7f0b001d;
         /**  Title of dialog when user is selecting shortcut to add to homescreen 
          */
-        public static final int title_select_shortcut=0x7f0c001c;
+        public static final int title_select_shortcut=0x7f0b001c;
         /**  Name for all applications running as this uid. 
          */
-        public static final int uid_name=0x7f0c0003;
+        public static final int uid_name=0x7f0b0003;
         /**  Button label on Wallpaper Gallery screen; user selects this button to set a specific wallpaper 
          */
-        public static final int wallpaper_instructions=0x7f0c0006;
+        public static final int wallpaper_instructions=0x7f0b0006;
     }
     public static final class style {
-        public static final int AnimationPreview=0x7f0d0001;
-        public static final int HotseatButton=0x7f0d0009;
-        public static final int HotseatButton_Left=0x7f0d000a;
-        public static final int HotseatButton_Right=0x7f0d000b;
-        public static final int SearchButton=0x7f0d0008;
-        public static final int Theme=0x7f0d0000;
-        public static final int WorkspaceIcon=0x7f0d0002;
-        public static final int WorkspaceIcon_Landscape=0x7f0d0005;
-        public static final int WorkspaceIcon_Portrait=0x7f0d0004;
-        public static final int WorkspaceIconSelf=0x7f0d0003;
-        public static final int WorkspaceIconSelf_Landscape=0x7f0d0007;
-        public static final int WorkspaceIconSelf_Portrait=0x7f0d0006;
+        public static final int AnimationPreview=0x7f0c0001;
+        public static final int HotseatButton=0x7f0c0009;
+        public static final int HotseatButton_Left=0x7f0c000a;
+        public static final int HotseatButton_Right=0x7f0c000b;
+        public static final int SearchButton=0x7f0c0008;
+        public static final int Theme=0x7f0c0000;
+        public static final int WorkspaceIcon=0x7f0c0002;
+        public static final int WorkspaceIcon_Landscape=0x7f0c0005;
+        public static final int WorkspaceIcon_Portrait=0x7f0c0004;
+        public static final int WorkspaceIconSelf=0x7f0c0003;
+        public static final int WorkspaceIconSelf_Landscape=0x7f0c0007;
+        public static final int WorkspaceIconSelf_Portrait=0x7f0c0006;
     }
     public static final class xml {
         public static final int default_workspace=0x7f050000;

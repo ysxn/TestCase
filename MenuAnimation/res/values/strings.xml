@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MaterialMenuAnimation</string>
+    <string name="holo_name">HoloMenuAnimation</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_one">action_one</string>
+    <string name="action_two">action_two</string>
+    <string name="action_three">action_three</string>
+    <string name="action_four">action_four</string>
+    <string name="action_five">action_five</string>
+    <string name="action_six">action_six</string>
+    <string name="go_to_holo">go to holo</string>
+    <string name="go_to_material">go to material</string>
+
+</resources>

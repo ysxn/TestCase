@@ -1,11 +1,18 @@
 
 package com.example.testphonenumber;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.NameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 import android.app.Activity;
 import android.app.ActionBar;
@@ -67,9 +74,10 @@ public class MainActivity extends Activity {
         public static final String MSG_DATA_KEY = HttpHelper.MSG_DATA_KEY;
         private final static String TAG = "zhuyawen";
         private final static Object mHttpLock = new Object();
-        private Button mCheckGetButton;
-        private Button mCheckPostButton;
-        private Button mCheckHttpPostButton;
+        private Button mFetchNote;
+        private Button mUpdateNote;
+        private Button mInsertNote;
+        private Button mDeleteNote;
         private EditText mEditText;
         private TextView mResult;
         private HttpHelper mHttpHelper;
@@ -85,6 +93,32 @@ public class MainActivity extends Activity {
                         Log.i(TAG, ">>>>>>>>>>>>>handler MSG_SHOW_RESULT :{" + data + "}");
                         if (mResult != null && data != null) {
                             mResult.setText(data);
+                            FetchBean fetchBean = ParseJSONHelper.parseFetchBeanByJSONSingle(data);
+                            if (fetchBean != null) {
+                                mResult.setText(mResult.getText() + "\n=" +fetchBean.dump());
+                            }
+                            JSONObject json;
+                            String result_data = "";
+                            boolean login_result = false;
+                            boolean fetch_result = false;
+                            try {
+                                json = new JSONObject(data);
+                                result_data = json.getString("result_data");
+                                login_result = json.getBoolean("login_result");
+                                fetch_result = json.getBoolean("fetch_result");
+                                //mResult.setText(mResult.getText() + "\n\nlogin_result=" +login_result);
+                                //mResult.setText(mResult.getText() + "\n\nfetch_result=" +fetch_result);
+                            } catch (JSONException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                            }
+                            List<NoteBean> notesBean = ParseJSONHelper.parseNoteBeanByJSON(result_data);
+                            if (notesBean != null) {
+                                for (NoteBean n : notesBean) {
+                                    //mResult.setText(mResult.getText() + "" +n.dump());
+                                    Log.i(TAG, ">>>>>>after note="+n.dump());
+                                }
+                            }
                         }
                         break;
                     }
@@ -103,29 +137,32 @@ public class MainActivity extends Activity {
             mHttpHelper = new HttpHelper();
             mHttpHelper.setMsgHandler(mHandler);
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            mCheckGetButton = (Button) rootView.findViewById(R.id.check_get_button);
-            mCheckPostButton = (Button) rootView.findViewById(R.id.check_post_button);
-            mCheckHttpPostButton = (Button) rootView.findViewById(R.id.check_httppost_button);
-            mEditText = (EditText) rootView.findViewById(R.id.input_phone_number);
+            mFetchNote = (Button) rootView.findViewById(R.id.fetch_button);
+            mUpdateNote = (Button) rootView.findViewById(R.id.update_button);
+            mInsertNote = (Button) rootView.findViewById(R.id.insert_button);
+            mDeleteNote = (Button) rootView.findViewById(R.id.delete_button);
+            mEditText = (EditText) rootView.findViewById(R.id.input);
             mResult = (TextView) rootView.findViewById(R.id.check_result);
 
-            if (mCheckGetButton != null) {
-                mCheckGetButton.setOnClickListener(new View.OnClickListener() {
+            if (mFetchNote != null) {
+                mFetchNote.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
                         if (mResult != null && mEditText != null) {
                             mResult.setText("");
-                            final String par = "http://www.dianhua.cn/search/yp?key=02150504500"
+                            final String par = "http://www.dianhua.cn/search/yp?key="
                                     + mEditText.getText().toString().trim();
-                            final String par2 = "http://www.dianhua.cn/search/yp?key=02150504500";
-
+                            final String phpString = "http://php.codezyw.com/view_users_android.php";
+                            final String httpUrl = "http://php.codezyw.com/fetch_note_android.php";
+                            final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
                             new Thread() {
                                 @Override
                                 public void run() {
                                     synchronized (mHttpLock) {
-                                        mHttpHelper.methodGet(par2);
+                                        //mHttpHelper.methodGet(phpString);
+                                        mHttpHelper.methodHttpPost(httpUrl, postParams);
                                     }
                                 }
                             }.start();
@@ -135,25 +172,24 @@ public class MainActivity extends Activity {
                 });
             }
 
-            if (mCheckPostButton != null) {
-                mCheckPostButton.setOnClickListener(new View.OnClickListener() {
+            if (mUpdateNote != null) {
+                mUpdateNote.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
                         if (mResult != null && mEditText != null) {
                             mResult.setText("");
-                            final String par = "http://www.dianhua.cn/search/yp?key=02150504500"
-                                    + mEditText.getText().toString().trim();
-                            final String par2 = "http://www.dianhua.cn/search/yp";
-                            final String key = "key";
-                            final String value = "02150504500";
-
+                            final String httpUrl = "http://php.codezyw.com/update_note_android.php";
+                            final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+                            postParams.add(new BasicNameValuePair("note_title", mEditText.getText().toString().trim()));
+                            postParams.add(new BasicNameValuePair("note_content", mEditText.getText().toString().trim()));
+                            postParams.add(new BasicNameValuePair("note_id", "1"));
                             new Thread() {
                                 @Override
                                 public void run() {
                                     synchronized (mHttpLock) {
-                                        mHttpHelper.methodPost(par2, key, value);
+                                        mHttpHelper.methodHttpPost(httpUrl, postParams);
                                     }
                                 }
                             }.start();
@@ -163,29 +199,47 @@ public class MainActivity extends Activity {
                 });
             }
 
-            if (mCheckHttpPostButton != null) {
-                mCheckHttpPostButton.setOnClickListener(new View.OnClickListener() {
+            if (mInsertNote != null) {
+                mInsertNote.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
                         if (mResult != null && mEditText != null) {
                             mResult.setText("");
-                            final String par = "http://www.dianhua.cn/search/yp?key=02150504500"
-                                    + mEditText.getText().toString().trim();
-                            final String par2 = "http://www.dianhua.cn/search/yp?key=02150504500";
-
-                            // 使用NameValuePair来保存要传递的Post参数
-                            final List<NameValuePair> params = new ArrayList<NameValuePair>();
-
-                            // 添加要传递的参数
-                            params.add(new BasicNameValuePair("key", "02150504500"));
-
+                            final String phpString = "http://php.codezyw.com/insert_note_android.php";
+                            final List<NameValuePair> phpParams = new ArrayList<NameValuePair>();
+                            phpParams.add(new BasicNameValuePair("note_title", mEditText.getText().toString().trim()));
+                            phpParams.add(new BasicNameValuePair("note_content", mEditText.getText().toString().trim()));
                             new Thread() {
                                 @Override
                                 public void run() {
                                     synchronized (mHttpLock) {
-                                        mHttpHelper.methodHttpPost(par2, params);
+                                        mHttpHelper.methodHttpPost(phpString, phpParams);
+                                    }
+                                }
+                            }.start();
+
+                        }
+                    }
+                });
+            }
+            if (mDeleteNote != null) {
+                mDeleteNote.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        if (mResult != null && mEditText != null) {
+                            mResult.setText("");
+                            final String phpString = "http://php.codezyw.com/delete_note_android.php";
+                            final List<NameValuePair> phpParams = new ArrayList<NameValuePair>();
+                            phpParams.add(new BasicNameValuePair("note_id", mEditText.getText().toString().trim()));
+                            new Thread() {
+                                @Override
+                                public void run() {
+                                    synchronized (mHttpLock) {
+                                        mHttpHelper.methodHttpPost(phpString, phpParams);
                                     }
                                 }
                             }.start();

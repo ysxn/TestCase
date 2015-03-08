@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: D:\\workspace\\PickUpCameraDemo\\src\\com\\example\\pickupcamerademo\\IRemoteService.aidl
+ * Original file: E:\\workspace\\PickUpCameraDemo\\src\\com\\example\\pickupcamerademo\\IRemoteService.aidl
  */
 package com.example.pickupcamerademo;
 /**

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="103"
+   name=""
+   committed-date="2009-08-25T23:28:14.673767Z"
+   url="http://www.jaqpot.net/svn/android/netcounter/trunk/src/org/achartengine"
+   last-author="cyril"
+   kind="dir"
+   uuid="c3f17da7-5910-48e3-affd-a6486d1fb455"
+   repos="http://www.jaqpot.net/svn/android"
+   revision="153"/>
+<entry
+   name="model"
+   kind="dir"/>
+<entry
+   name="chart"
+   kind="dir"/>
+<entry
+   committed-rev="100"
+   name="GraphicalView.java"
+   text-time="2010-11-17T15:15:24.437500Z"
+   committed-date="2009-08-25T22:38:13.588306Z"
+   checksum="91e9b795c748c9ae261ebe69fd0b2c87"
+   last-author="cyril"
+   kind="file"
+   prop-time="2010-11-17T15:15:23.046875Z"/>
+<entry
+   name="renderer"
+   kind="dir"/>
+<entry
+   committed-rev="103"
+   name="ChartFactory.java"
+   text-time="2010-11-17T15:15:24.437500Z"
+   committed-date="2009-08-25T23:28:14.673767Z"
+   checksum="d33b4f11dd69ed0ca55879a9c2c1f15e"
+   last-author="cyril"
+   kind="file"
+   prop-time="2010-11-17T15:15:24.390625Z"/>
+<entry
+   name="util"
+   kind="dir"/>
+</wc-entries>
