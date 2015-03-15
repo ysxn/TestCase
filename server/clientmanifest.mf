@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+X-COMMENT: Main-Class will be added automatically by build
+Main-Class: MyClient
+Class-Path: lib/OXmlEd1.11-nolib-bin.jar lib/dom4j-1.6.1.jar lib/commons-logging-1.0.4.jar lib/log4j-1.2.8.jar

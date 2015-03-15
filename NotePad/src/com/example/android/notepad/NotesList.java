@@ -179,11 +179,6 @@ public class NotesList extends ListActivity {
         } else {
             Toast.makeText(this, "再按一下返回键退出应用.", Toast.LENGTH_SHORT).show();
         }
-        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo n = connectivityManager.getActiveNetworkInfo();
-        if (n != null) {
-            
-        }
     }
 
     /**

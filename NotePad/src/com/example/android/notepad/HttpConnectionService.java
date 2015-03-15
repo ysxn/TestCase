@@ -11,15 +11,22 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.R.integer;
+import android.app.AlertDialog;
 import android.app.Notification;
+import android.app.ProgressDialog;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.database.Cursor;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,6 +34,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 public class HttpConnectionService extends Service implements Handler.Callback {
@@ -72,6 +80,7 @@ public class HttpConnectionService extends Service implements Handler.Callback {
     private HandlerThread mHandlerThread;
     private Handler mWorkHandler;
     private Context mContext = HttpConnectionService.this;
+    private ProgressDialog mProgressDialog = null;
     
     public static FetchBean sFetchBean = null;
     public static String sEmail = null;
@@ -87,6 +96,17 @@ public class HttpConnectionService extends Service implements Handler.Callback {
         NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, // Projection position 4,
     };
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置格式 
+    
+    private boolean mIsNetConnected = false;
+    private boolean mIsWifi = false;
+    private BroadcastReceiver mNetStatusReceiver = new BroadcastReceiver() {
+        
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // TODO Auto-generated method stub
+            checkNetStatus();
+        }
+    };
     
     @Override
     public void onCreate() {
@@ -106,6 +126,7 @@ public class HttpConnectionService extends Service implements Handler.Callback {
                 switch (msg.what) {
                     case MSG_LOGIN: 
                     case MSG_FETCH: {
+                        showProgressDialog("正在下载服务器数据......","");
                         Intent intent = (Intent) msg.obj;
                         if (intent == null) {
                             Toast.makeText(mContext, "MSG_FETCH intent is null error!", Toast.LENGTH_LONG).show();
@@ -126,6 +147,7 @@ public class HttpConnectionService extends Service implements Handler.Callback {
                     case MSG_UPDATE: {
                         Bundle bundle = (Bundle) msg.obj;
                         if (bundle != null) {
+                            showProgressDialog("正在更新服务器数据......","");
                             int id = bundle.getInt(NOTE_ID);
                             String title = bundle.getString(TITLE);
                             String content = bundle.getString(CONTENT);
@@ -181,28 +203,53 @@ public class HttpConnectionService extends Service implements Handler.Callback {
                                         }
                                         sEmail = email;
                                         sPass = password;
+                                        
                                         if (FETCH_CMD_FETCH.equals(sFetchBean.getFetch_cmd())) {
-                                            Toast.makeText(mContext, "登录成功!", Toast.LENGTH_LONG).show();
-                                        }
-                                        if (FETCH_CMD_FETCH.equals(sFetchBean.getFetch_cmd()) 
-                                                && sFetchBean.getFetch_result()) {
-                                            List<NoteBean> list = sFetchBean.getResult_data();
-                                            if (list !=null) {
-                                                getContentResolver().unregisterContentObserver(mContentObserver);
-                                                syncServerToLocal(list);
-                                                
-                                                getContentResolver().registerContentObserver(NotePad.Notes.CONTENT_URI, true, mContentObserver);
-                                                dumpLocalDataBase();
+                                            if (sFetchBean.getFetch_result()) {
+                                                List<NoteBean> list = sFetchBean.getResult_data();
+                                                Toast.makeText(mContext, "登录成功,下载服务器数据成功!", Toast.LENGTH_SHORT).show();
+                                                if (list !=null) {
+                                                    getContentResolver().unregisterContentObserver(mContentObserver);
+                                                    syncServerToLocal(list);
+                                                    
+                                                    getContentResolver().registerContentObserver(NotePad.Notes.CONTENT_URI, true, mContentObserver);
+                                                    dumpLocalDataBase();
+                                                }
+                                            } else {
+                                                showDialog("登录成功,但是下载服务器数据失败!", sFetchBean.getError_info());
+                                            }
+                                            dismissProgressDialog();
+                                        } else if (FETCH_CMD_INSERT.equals(sFetchBean.getFetch_cmd())) {
+                                            dismissProgressDialog();
+                                            if (sFetchBean.getFetch_result()) {
+                                                Toast.makeText(mContext, "登录成功,插入服务器数据成功!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                showDialog("登录成功,但是插入服务器数据失败!", sFetchBean.getError_info());
+                                            }
+                                        } else if (FETCH_CMD_UPDATE.equals(sFetchBean.getFetch_cmd())) {
+                                            dismissProgressDialog();
+                                            if (sFetchBean.getFetch_result()) {
+                                                Toast.makeText(mContext, "登录成功,更新服务器数据成功!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                showDialog("登录成功,但是更新服务器数据失败!", sFetchBean.getError_info());
+                                            }
+                                        } else if (FETCH_CMD_DELETE.equals(sFetchBean.getFetch_cmd())) {
+                                            dismissProgressDialog();
+                                            if (sFetchBean.getFetch_result()) {
+                                                Toast.makeText(mContext, "登录成功,删除服务器数据成功!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                showDialog("登录成功,但是删除服务器数据失败!", sFetchBean.getError_info());
                                             }
                                         }
                                     } else {
-                                        Toast.makeText(mContext, "登录失败!", Toast.LENGTH_LONG).show();
+                                        showDialog("登录失败!", "");
                                     }
                                 }
                             } else {
-                                Toast.makeText(mContext, "http post error : "+result_data, Toast.LENGTH_LONG).show();
+                                showDialog("网络错误!", result_data);
                             }
                         }
+                        dismissProgressDialog();
                         break;
                     }
                     default:
@@ -228,6 +275,10 @@ public class HttpConnectionService extends Service implements Handler.Callback {
         getContentResolver().registerContentObserver(NotePad.Notes.CONTENT_URI, true, mContentObserver);
         Notification notification = new Notification();
         this.startForeground(0x200, notification);
+        
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(mNetStatusReceiver, intentFilter);
     }
 
     private Long convertDate(String str) {
@@ -382,6 +433,7 @@ public class HttpConnectionService extends Service implements Handler.Callback {
             Log.v(TAG, "service onDestroy");
         mHandlerThread.quit();
         getContentResolver().unregisterContentObserver(mContentObserver);
+        unregisterReceiver(mNetStatusReceiver);
         this.stopForeground(true);
         super.onDestroy();
     }
@@ -403,5 +455,61 @@ public class HttpConnectionService extends Service implements Handler.Callback {
                 return false;
         }
         return true;
+    }
+    
+    private void checkNetStatus() {
+        // TODO Auto-generated method stub
+        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo activeInfo = cm.getActiveNetworkInfo();
+        if (activeInfo == null) {
+            mIsNetConnected = false;
+            mIsWifi = false;
+            Toast.makeText(this, "当前没有可用网络连接!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        mIsNetConnected = activeInfo.isConnected();
+        mIsWifi = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
+        if (!mIsNetConnected) {
+            Toast.makeText(this, "当前没有可用网络连接!", Toast.LENGTH_LONG).show();
+        } else if (mIsNetConnected && !mIsWifi) {
+            //Toast.makeText(this, "当前不是WiFi连接,注意流量使用!", Toast.LENGTH_LONG).show();
+        } else {
+            //Toast.makeText(this, R.string.is_wifi, Toast.LENGTH_LONG).show();
+        }
+    }
+    
+    private void showDialog(String title, String message) {
+        AlertDialog ad = new AlertDialog.Builder(mContext).setTitle(title).setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).create();
+        //android.permission.SYSTEM_ALERT_WINDOW 
+        //允许一个程序打开窗口使用 TYPE_SYSTEM_ALERT，显示在其他所有程序的顶层
+        ad.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        ad.setCancelable(false);
+        ad.show();
+    }
+    
+    private void showProgressDialog(String title, String message) {
+        Log.i(TAG, "showProgressDialog ==" + mProgressDialog);
+        dismissProgressDialog();
+        mProgressDialog = new ProgressDialog(mContext);
+        mProgressDialog.setTitle(title);
+        mProgressDialog.setMessage(message);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setCancelable(false);
+        //android.permission.SYSTEM_ALERT_WINDOW 
+        //允许一个程序打开窗口使用 TYPE_SYSTEM_ALERT，显示在其他所有程序的顶层
+        mProgressDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        mProgressDialog.show();
+    }
+    
+    private void dismissProgressDialog() {
+        Log.i(TAG, "dismissProgressDialog ==" + mProgressDialog);
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+            mProgressDialog = null;
+        }
     }
 }
