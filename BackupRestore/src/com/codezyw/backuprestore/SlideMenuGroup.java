@@ -1,6 +1,7 @@
 
-package com.lenovo.component.listviewslidemenu;
+package com.codezyw.backuprestore;
 
+import android.R.anim;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -15,9 +16,8 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
 import android.widget.TextView;
 
-import com.lenovo.internal.R;
 
-public class LenovoListViewSlideMenuGroupViewMaterial extends ViewGroup {
+public class SlideMenuGroup extends ViewGroup {
 
     private String TAG = "zyw";
     private boolean DEBUG = false;
@@ -42,38 +42,38 @@ public class LenovoListViewSlideMenuGroupViewMaterial extends ViewGroup {
     private boolean mRightMenuHide = false;
     
     public interface OnLeftMenuClickListener {
-        void onLeftMenuClicked(LenovoListViewSlideMenuGroupViewMaterial listItemViewGroup);
+        void onLeftMenuClicked(SlideMenuGroup listItemViewGroup);
     }
     
     public interface OnRightMenuClickListener {
-        void onRightMenuClicked(LenovoListViewSlideMenuGroupViewMaterial listItemViewGroup);
+        void onRightMenuClicked(SlideMenuGroup listItemViewGroup);
     }
     
     public interface OnMenuClickListener {
-        void onMenuClicked(LenovoListViewSlideMenuGroupViewMaterial listItemViewGroup);
+        void onMenuClicked(SlideMenuGroup listItemViewGroup);
     }
 
-    public LenovoListViewSlideMenuGroupViewMaterial(Context context) {
+    public SlideMenuGroup(Context context) {
         this(context, null);
     }
 
-    public LenovoListViewSlideMenuGroupViewMaterial(Context context, AttributeSet attrs) {
+    public SlideMenuGroup(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public LenovoListViewSlideMenuGroupViewMaterial(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SlideMenuGroup(Context context, AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public LenovoListViewSlideMenuGroupViewMaterial(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+    public SlideMenuGroup(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr);
         mContext = context;
         mInflater = LayoutInflater.from(context);
         mScroller = new Scroller(context, new LinearInterpolator());
         mDensity = getResources().getDisplayMetrics().density;
         
         TextView leftMenu = new TextView(mContext);
-        Drawable dLeft = mContext.getDrawable(R.drawable.listviewslidemenu_ic_list_slidemenu_top);
+        Drawable dLeft = mContext.getResources().getDrawable(R.drawable.listviewslidemenu_ic_list_slidemenu_top);
         dLeft.setBounds(0, 0, dLeft.getIntrinsicWidth(), dLeft.getIntrinsicHeight());
         leftMenu.setCompoundDrawables(dLeft, null, null, null);
         leftMenu.setCompoundDrawablePadding((int) (16*mDensity));
@@ -88,7 +88,7 @@ public class LenovoListViewSlideMenuGroupViewMaterial extends ViewGroup {
         final int selectableItemBackground =  outValue.resourceId;
         */
         
-        leftMenu.setBackgroundResource(R.drawable.listviewslidemenu_ripple_left_menu);
+        leftMenu.setBackgroundResource(android.R.drawable.list_selector_background);
         leftMenu.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
                 LayoutParams.WRAP_CONTENT));
         if (mLeftMenu != null) {
@@ -98,7 +98,7 @@ public class LenovoListViewSlideMenuGroupViewMaterial extends ViewGroup {
         addView(mLeftMenu);
         
         TextView rightMenu = new TextView(mContext);
-        Drawable dRight = mContext.getDrawable(R.drawable.listviewslidemenu_ic_list_slidemenu_delete);
+        Drawable dRight = mContext.getResources().getDrawable(R.drawable.listviewslidemenu_ic_list_slidemenu_delete);
         dRight.setBounds(0, 0, dRight.getIntrinsicWidth(), dRight.getIntrinsicHeight());
         rightMenu.setCompoundDrawables(null, null, dRight, null);
         rightMenu.setCompoundDrawablePadding((int) (16*mDensity));
@@ -106,7 +106,7 @@ public class LenovoListViewSlideMenuGroupViewMaterial extends ViewGroup {
         rightMenu.setGravity(Gravity.CENTER);
         rightMenu.setTextColor(0xfffafafa);
         rightMenu.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        rightMenu.setBackgroundResource(R.drawable.listviewslidemenu_ripple_right_menu);
+        rightMenu.setBackgroundResource(android.R.drawable.list_selector_background);
         rightMenu.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
                 LayoutParams.WRAP_CONTENT));
         //rightMenu.setLayoutParams(new LayoutParams((int) (60 * mDensity), (int) (60 * mDensity)));
@@ -357,10 +357,10 @@ public class LenovoListViewSlideMenuGroupViewMaterial extends ViewGroup {
                 public void onClick(View v) {
                     // TODO Auto-generated method stub
                     if (mOnMenuClickListener != null) {
-                        mOnMenuClickListener.onMenuClicked(LenovoListViewSlideMenuGroupViewMaterial.this);
+                        mOnMenuClickListener.onMenuClicked(SlideMenuGroup.this);
                     }
                     if (mOnLeftMenuClickListener != null) {
-                        mOnLeftMenuClickListener.onLeftMenuClicked(LenovoListViewSlideMenuGroupViewMaterial.this);
+                        mOnLeftMenuClickListener.onLeftMenuClicked(SlideMenuGroup.this);
                     }
                 }
             });
@@ -384,10 +384,10 @@ public class LenovoListViewSlideMenuGroupViewMaterial extends ViewGroup {
                 public void onClick(View v) {
                     // TODO Auto-generated method stub
                     if (mOnMenuClickListener != null) {
-                        mOnMenuClickListener.onMenuClicked(LenovoListViewSlideMenuGroupViewMaterial.this);
+                        mOnMenuClickListener.onMenuClicked(SlideMenuGroup.this);
                     }
                     if (mOnRightMenuClickListener != null) {
-                        mOnRightMenuClickListener.onRightMenuClicked(LenovoListViewSlideMenuGroupViewMaterial.this);
+                        mOnRightMenuClickListener.onRightMenuClicked(SlideMenuGroup.this);
                     }
                 }
             });

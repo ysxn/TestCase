@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BackupRestore</string>
+    <string name="app_name">APK备份管理</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="backup">"立即备份到/BackupApp"</string>
+    <string name="seeapk">"查看应用安装包"</string>
+    <string name="files">"文件浏览"</string>
 
 </resources>

@@ -11,6 +11,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -23,15 +24,27 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
     private boolean DEBUG = true;
+
     private String TAG = "zyw";
+
     private PackageManager mPm;
+
     private List<ApplicationInfo> mApps;
+
     private ProgressDialog mProgressDialog;
+
     private Button mBackUp;
+
+    private Button mSeeapk;
+
+    private Button mFiles;
+
     private int mTotal = 0;
-    
+
     private final int REQUEST_UPDATE_DATA = 0x123;
+
     private final int REQUEST_DISMISS_PROGRESS = 0x122;
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -42,7 +55,7 @@ public class MainActivity extends Activity {
                         String label = (String) msg.obj;
                         mProgressDialog.setMax(mTotal);
                         mProgressDialog.setProgress(value);
-                        mProgressDialog.setTitle("正在备份中..."+label);
+                        mProgressDialog.setTitle("正在备份中..." + label);
                     }
                 }
                     break;
@@ -61,7 +74,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mBackUp = (Button) findViewById(R.id.button_backup);
-        
+        mSeeapk = (Button) findViewById(R.id.button_seeapk);
+        mFiles = (Button) findViewById(R.id.button_files);
+
         mPm = this.getPackageManager();
 
         mProgressDialog = new ProgressDialog(MainActivity.this);
@@ -71,16 +86,15 @@ public class MainActivity extends Activity {
         mProgressDialog.setMax(0);
         mProgressDialog.setCancelable(false);
         mProgressDialog.setProgress(0);
-        
-        
+
         mBackUp.setOnClickListener(new View.OnClickListener() {
-            
+
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 mProgressDialog.show();
                 new Thread(new Runnable() {
-                    
+
                     @Override
                     public void run() {
                         // TODO Auto-generated method stub
@@ -89,13 +103,30 @@ public class MainActivity extends Activity {
                 }).start();
             }
         });
+
+        mSeeapk.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, ApkBrowser.class);
+                startActivity(i);
+            }
+        });
+
+        mFiles.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, FileBrowser.class);
+                startActivity(i);
+            }
+        });
     }
-    
+
     private void initApp() {
         // Retrieve all known applications.
-        mApps = mPm.getInstalledApplications(
-                PackageManager.GET_UNINSTALLED_PACKAGES |
-                PackageManager.GET_DISABLED_COMPONENTS);
+        mApps = mPm.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES
+                | PackageManager.GET_DISABLED_COMPONENTS);
         if (mApps == null) {
             mApps = new ArrayList<ApplicationInfo>();
         }
@@ -112,11 +143,12 @@ public class MainActivity extends Activity {
                 progress++;
                 String label = (String) app.loadLabel(mPm);
                 if (DEBUG) {
-                    Log.i(TAG, ">>>>>>>>>>app="+app.sourceDir);
-                    Log.i(TAG, ">>>>>>>>>>app="+label);
-                    Log.i(TAG, ">>>>>>>>>>app="+app.packageName);
+                    Log.i(TAG, ">>>>>>>>>>app=" + app.sourceDir);
+                    Log.i(TAG, ">>>>>>>>>>app=" + label);
+                    Log.i(TAG, ">>>>>>>>>>app=" + app.packageName);
                 }
-                mHandler.sendMessage(mHandler.obtainMessage(REQUEST_UPDATE_DATA, progress, 0, label));
+                mHandler.sendMessage(mHandler
+                        .obtainMessage(REQUEST_UPDATE_DATA, progress, 0, label));
                 try {
                     backupApp(app.packageName, app.sourceDir, label);
                 } catch (IOException e) {
@@ -128,7 +160,7 @@ public class MainActivity extends Activity {
         Log.i(TAG, ">>>>>>>>>>finish!!!!!");
         mHandler.sendMessage(mHandler.obtainMessage(REQUEST_DISMISS_PROGRESS));
     }
-    
+
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub
@@ -137,25 +169,27 @@ public class MainActivity extends Activity {
         }
         super.onPause();
     }
-    
+
     private void backupApp(String packageName, String sourceDir, String label) throws IOException {
         if (DEBUG) {
-            Log.i(TAG, ">>>>>>>>>>packageName="+packageName);
+            Log.i(TAG, ">>>>>>>>>>packageName=" + packageName);
         }
-        File in = new File(sourceDir);//File("/data/app/" + packageName + ".apk");
+        File in = new File(sourceDir);// File("/data/app/" + packageName +
+                                      // ".apk");
         if (in == null || !in.exists() || !in.canRead()) {
-            Log.i(TAG, ">>>>>>>>>>packageName : "+packageName+" file can not save.");
+            Log.i(TAG, ">>>>>>>>>>packageName : " + packageName + " file can not save.");
             return;
         }
-        File dir = new File(Environment.getExternalStorageDirectory()+"/BackupApp");
+        File dir = new File(Environment.getExternalStorageDirectory() + "/BackupApp");
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        File out = new File(Environment.getExternalStorageDirectory()+"/BackupApp/" + label + ".apk");
-        
+        File out = new File(Environment.getExternalStorageDirectory() + "/BackupApp/" + label
+                + ".apk");
+
         FileInputStream fis = null;
         FileOutputStream fos = null;
-        
+
         try {
             out.createNewFile();
             fis = new FileInputStream(in);
