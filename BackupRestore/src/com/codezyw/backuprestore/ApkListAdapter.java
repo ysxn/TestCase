@@ -23,9 +23,12 @@ public class ApkListAdapter extends BaseAdapter {
     private final LayoutInflater mInflater;
 
     private List<FileData> mApkList;
+    
+    private Util mUtil;
 
     public ApkListAdapter(Context c) {
         mContext = c;
+        mUtil = new Util(c);
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -58,21 +61,25 @@ public class ApkListAdapter extends BaseAdapter {
         ImageView icon = (ImageView) listItem.findViewById(R.id.icon);
         FileData file = mApkList.get(position);
         textView1.setText(file.mFile.getName());
-        textView2.setText(file.mFile.getAbsolutePath());
+
+        long b = file.mFile.length();
+        if (b > 1024*1024) {
+            textView2.setText(file.mFile.getAbsolutePath() + "\n文件大小：" + b / 1024 / 1024 + "MB" +"\n创建时间："+mUtil.convetTime(file.mFile.lastModified()));
+        } else {
+            textView2.setText(file.mFile.getAbsolutePath() + "\n文件大小：" + b / 1024 + "KB" +"\n创建时间："+mUtil.convetTime(file.mFile.lastModified()));
+        }
         if (file.mDrawable != null) {
             icon.setImageDrawable(file.mDrawable);
         }
         convertView.setTag(file);
-        TextView menuTextView = (TextView) ((SlideMenuGroup) convertView)
-                .getRightMenu();
+        TextView menuTextView = (TextView) ((SlideMenuGroup) convertView).getRightMenu();
         menuTextView.setText("删除");
         ((SlideMenuGroup) convertView).setLeftMenuHide(true);
         ((SlideMenuGroup) convertView)
                 .setLeftMenuClickListener(new SlideMenuGroup.OnLeftMenuClickListener() {
 
                     @Override
-                    public void onLeftMenuClicked(
-                            SlideMenuGroup listItemViewGroup) {
+                    public void onLeftMenuClicked(SlideMenuGroup listItemViewGroup) {
 
                     }
                 });
@@ -80,12 +87,11 @@ public class ApkListAdapter extends BaseAdapter {
                 .setRightMenuClickListener(new SlideMenuGroup.OnRightMenuClickListener() {
 
                     @Override
-                    public void onRightMenuClicked(
-                            SlideMenuGroup listItemViewGroup) {
+                    public void onRightMenuClicked(SlideMenuGroup listItemViewGroup) {
                         FileData fdData = (FileData) listItemViewGroup.getTag();
                         Toast.makeText(
                                 mContext,
-                                "删除安装包：" + fdData.mFile.getName() + "\n 路径："
+                                "删除安装包：" + fdData.mFile.getName() + "\n路径："
                                         + fdData.mFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
 
                         fdData.mFile.delete();

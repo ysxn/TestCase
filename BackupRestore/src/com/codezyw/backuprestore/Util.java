@@ -11,6 +11,9 @@ import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -35,11 +38,29 @@ import android.widget.Toast;
  */
 public class Util {
     private Context mContext;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置格式 
+    
 
     public Util(Context c) {
         mContext = c;
     }
 
+    private Long convertDate(String str) {
+        if (str == null || str.isEmpty()) {
+            return Long.valueOf(System.currentTimeMillis());//0L;
+        }
+        try {
+            Date date = mFormat.parse(str);
+            return date.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return Long.valueOf(System.currentTimeMillis());
+    }
+    
+    public String convetTime(long modify) {
+        return mFormat.format(new Date(modify));
+    }
     public void installApk(File file) {
         // 安装
         Intent intent = new Intent(Intent.ACTION_VIEW);
