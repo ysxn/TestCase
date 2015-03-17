@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ViewFlipperTest</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="animation_2_text_1">animation_2_text_1</string>
+    <string name="animation_2_text_2">animation_2_text_2</string>
+    <string name="animation_2_text_3">animation_2_text_3</string>
+    <string name="animation_2_text_4">animation_2_text_4</string>
+    <string name="animation_2_instructions">animation_2_instructions</string>
+
+</resources>
