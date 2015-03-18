@@ -13,9 +13,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- -->
+-->
 
 <resources>
+
     <!-- Camera Preferences Video Quality entries -->
     <string-array name="pref_video_quality_entries" translatable="false">
         <item>@string/pref_video_quality_entry_1080p</item>
@@ -23,9 +24,9 @@
         <item>@string/pref_video_quality_entry_480p</item>
         <item>@string/pref_video_quality_entry_high</item>
         <item>@string/pref_video_quality_entry_low</item>
-   </string-array>
-
+    </string-array>
     <string-array name="pref_video_quality_entryvalues" translatable="false">
+
         <!-- The integer value of CamcorderProfile.QUALITY_1080P -->
         <item>6</item>
         <!-- The integer value of CamcorderProfile.QUALITY_720P -->
@@ -34,12 +35,14 @@
         <item>4</item>
         <!-- The integer value of CamcorderProfile.QUALITY_HIGH -->
         <item>1</item>
-         <!-- The integer value of CamcorderProfile.QUALITY_LOW -->
+        <!-- The integer value of CamcorderProfile.QUALITY_LOW -->
         <item>0</item>
     </string-array>
 
-    <!-- These values correspond to the time interval between frame capture in millseconds
-    for time lapse recording -->
+    <!--
+    These values correspond to the time interval between frame capture in millseconds
+    for time lapse recording
+    -->
     <string-array name="pref_video_time_lapse_frame_interval_entryvalues" translatable="false">
         <item>0</item>
         <item>500</item>
@@ -83,8 +86,10 @@
         <item>86400000</item>
     </string-array>
 
-    <!-- These values correspond to the time interval between frame capture in
-    different units (i.e. seconds, minutes, hours) for time lapse recording -->
+    <!--
+    These values correspond to the time interval between frame capture in
+    different units (i.e. seconds, minutes, hours) for time lapse recording
+    -->
     <string-array name="pref_video_time_lapse_frame_interval_entries">
         <item>@string/pref_video_time_lapse_frame_interval_off</item>
         <item>@string/pref_video_time_lapse_frame_interval_500</item>
@@ -128,8 +133,10 @@
         <item>@string/pref_video_time_lapse_frame_interval_86400000</item>
     </string-array>
 
-    <!-- These values correspond to the time interval between frame capture
-    for time lapse recording -->
+    <!--
+    These values correspond to the time interval between frame capture
+    for time lapse recording
+    -->
     <string-array name="pref_video_time_lapse_frame_interval_duration_values" translatable="false">
         <item>0.5</item>
         <item>1</item>
@@ -145,7 +152,6 @@
         <item>15</item>
         <item>24</item>
     </string-array>
-
     <string-array name="pref_video_time_lapse_frame_interval_units">
         <item>@string/time_lapse_seconds</item>
         <item>@string/time_lapse_minutes</item>
@@ -169,9 +175,11 @@
         <item>@string/pref_camera_picturesize_entry_qvga</item>
     </string-array>
 
-    <!-- When launching the camera app first time, we will set the picture
+    <!--
+         When launching the camera app first time, we will set the picture
          size to the first one in the list that is also supported by the
-         driver -->
+         driver
+    -->
     <string-array name="pref_camera_picturesize_entryvalues" translatable="false">
         <item>4128x3096</item>
         <item>3264x2448</item>
@@ -194,13 +202,11 @@
         <item>@string/pref_camera_focusmode_entry_infinity</item>
         <item>@string/pref_camera_focusmode_entry_macro</item>
     </string-array>
-
     <string-array name="pref_camera_focusmode_entryvalues" translatable="false">
         <item>auto</item>
         <item>infinity</item>
         <item>macro</item>
     </string-array>
-
     <string-array name="pref_camera_focusmode_labels" translatable="false">
         <item>@string/pref_camera_focusmode_label_auto</item>
         <item>@string/pref_camera_focusmode_label_infinity</item>
@@ -213,13 +219,11 @@
         <item>@string/pref_camera_flashmode_entry_auto</item>
         <item>@string/pref_camera_flashmode_entry_on</item>
     </string-array>
-
     <string-array name="pref_camera_flashmode_labels" translatable="false">
         <item>@string/pref_camera_flashmode_label_off</item>
         <item>@string/pref_camera_flashmode_label_auto</item>
         <item>@string/pref_camera_flashmode_label_on</item>
     </string-array>
-
     <string-array name="pref_camera_flashmode_entryvalues" translatable="false">
         <item>off</item>
         <item>auto</item>
@@ -231,7 +235,6 @@
         <item>@drawable/ic_flash_auto_holo_light</item>
         <item>@drawable/ic_flash_on_holo_light</item>
     </array>
-
     <array name="camera_flashmode_largeicons" translatable="false">
         <item>@drawable/ic_flash_off_holo_light</item>
         <item>@drawable/ic_flash_auto_holo_light</item>
@@ -243,12 +246,10 @@
         <item>@string/pref_camera_flashmode_entry_on</item>
         <item>@string/pref_camera_flashmode_entry_off</item>
     </string-array>
-
     <string-array name="pref_camera_video_flashmode_labels" translatable="false">
         <item>@string/pref_camera_flashmode_label_on</item>
         <item>@string/pref_camera_flashmode_label_off</item>
     </string-array>
-
     <string-array name="pref_camera_video_flashmode_entryvalues" translatable="false">
         <item>torch</item>
         <item>off</item>
@@ -258,7 +259,6 @@
         <item>@drawable/ic_flash_on_holo_light</item>
         <item>@drawable/ic_flash_off_holo_light</item>
     </array>
-
     <array name="video_flashmode_largeicons" translatable="false">
         <item>@drawable/ic_flash_on_holo_light</item>
         <item>@drawable/ic_flash_off_holo_light</item>
@@ -273,17 +273,14 @@
         <item>@string/setting_off</item>
         <item>@string/setting_on</item>
     </array>
-
     <array name="pref_camera_recordlocation_labels" translatable="false">
         <item>@string/pref_camera_location_label</item>
         <item>@string/pref_camera_location_label</item>
     </array>
-
     <array name="camera_recordlocation_icons" translatable="false">
         <item>@drawable/ic_location_off</item>
         <item>@drawable/ic_location</item>
     </array>
-
     <array name="camera_recordlocation_largeicons" translatable="false">
         <item>@drawable/ic_location_off</item>
         <item>@drawable/ic_location</item>
@@ -297,7 +294,6 @@
         <item>@string/pref_camera_whitebalance_entry_daylight</item>
         <item>@string/pref_camera_whitebalance_entry_cloudy</item>
     </string-array>
-
     <string-array name="pref_camera_whitebalance_labels" translatable="false">
         <item>@string/pref_camera_whitebalance_label_incandescent</item>
         <item>@string/pref_camera_whitebalance_label_fluorescent</item>
@@ -305,7 +301,6 @@
         <item>@string/pref_camera_whitebalance_label_daylight</item>
         <item>@string/pref_camera_whitebalance_label_cloudy</item>
     </string-array>
-
     <string-array name="pref_camera_whitebalance_entryvalues" translatable="false">
         <item>incandescent</item>
         <item>fluorescent</item>
@@ -321,7 +316,6 @@
         <item>@drawable/ic_wb_sunlight</item>
         <item>@drawable/ic_wb_cloudy</item>
     </array>
-
     <array name="whitebalance_largeicons" translatable="false">
         <item>@drawable/ic_wb_incandescent</item>
         <item>@drawable/ic_wb_fluorescent</item>
@@ -329,7 +323,6 @@
         <item>@drawable/ic_wb_sunlight</item>
         <item>@drawable/ic_wb_cloudy</item>
     </array>
-
     <array name="camera_wb_indicators" translatable="false">
         <item>@drawable/ic_indicator_wb_tungsten</item>
         <item>@drawable/ic_indicator_wb_fluorescent</item>
@@ -346,7 +339,6 @@
         <item>@string/pref_camera_scenemode_entry_sunset</item>
         <item>@string/pref_camera_scenemode_entry_party</item>
     </string-array>
-
     <string-array name="pref_camera_scenemode_labels">
         <item>@string/pref_camera_scenemode_label_action</item>
         <item>@string/pref_camera_scenemode_label_night</item>
@@ -375,17 +367,14 @@
         <item>@string/pref_camera_id_entry_back</item>
         <item>@string/pref_camera_id_entry_front</item>
     </array>
-
     <array name="camera_id_labels" translatable="false">
         <item>@string/pref_camera_id_label_back</item>
         <item>@string/pref_camera_id_label_front</item>
     </array>
-
     <array name="camera_id_icons" translatable="false">
         <item>@drawable/ic_switch_back</item>
         <item>@drawable/ic_switch_front</item>
     </array>
-
     <array name="camera_id_largeicons" translatable="false">
         <item>@drawable/ic_switch_back</item>
         <item>@drawable/ic_switch_front</item>
@@ -403,7 +392,6 @@
         <item>@string/effect_backdropper_sunset</item>
         <item>@string/effect_backdropper_gallery</item>
     </string-array>
-
     <string-array name="pref_video_effect_entryvalues" translatable="false">
         <item>@string/pref_video_effect_default</item>
         <item>goofy_face/squeeze</item>
@@ -434,33 +422,28 @@
         <item>@string/setting_off</item>
         <item>@string/setting_on</item>
     </string-array>
-
     <string-array name="pref_camera_hdr_labels" translatable="false">
         <item>@string/pref_camera_hdr_label</item>
         <item>@string/pref_camera_hdr_label</item>
     </string-array>
-
     <string-array name="pref_camera_hdr_icons" translatable="false">
         <item>@drawable/ic_hdr_off</item>
         <item>@drawable/ic_hdr</item>
     </string-array>
-
     <string-array name="pref_camera_hdr_entryvalues" translatable="false">
         <item>@string/setting_off_value</item>
         <item>@string/setting_on_value</item>
     </string-array>
-
     <string-array name="pref_camera_timer_sound_entries" translatable="false">
         <item>@string/setting_off</item>
         <item>@string/setting_on</item>
     </string-array>
-
     <string-array name="pref_camera_timer_sound_entryvalues" translatable="false">
         <item>@string/setting_off_value</item>
         <item>@string/setting_on_value</item>
     </string-array>
 
-    <!-- Default focus mode setting.-->
+    <!-- Default focus mode setting. -->
     <string-array name="pref_camera_focusmode_default_array" translatable="false">
         <item>continuous-picture</item>
         <item>auto</item>
@@ -477,7 +460,7 @@
         <item>@drawable/ic_exposure_p3</item>
     </array>
 
-    <!--  Labels for Countdown timer -->
+    <!-- Labels for Countdown timer -->
     <string-array name="pref_camera_countdown_labels">
         <item>@string/pref_camera_countdown_label_off</item>
         <item>@string/pref_camera_countdown_label_one</item>
@@ -485,5 +468,64 @@
         <item>@string/pref_camera_countdown_label_ten</item>
         <item>@string/pref_camera_countdown_label_fifteen</item>
     </string-array>
+
+    <array name="fileEndingImage">
+        <item>.png</item>
+        <item>.gif</item>
+        <item>.jpg</item>
+        <item>.jpeg</item>
+        <item>.bmp</item>
+    </array>
+    <array name="fileEndingAudio">
+        <item>.mp3</item>
+        <item>.wav</item>
+        <item>.ogg</item>
+        <item>.midi</item>
+    </array>
+    <array name="fileEndingVideo">
+        <item>.mp4</item>
+        <item>.rmvb</item>
+        <item>.avi</item>
+        <item>.flv</item>
+    </array>
+    <array name="fileEndingPackage">
+        <item>.jar</item>
+        <item>.zip</item>
+        <item>.rar</item>
+        <item>.gz</item>
+        <item>.apk</item>
+        <item>.img</item>
+    </array>
+    <array name="fileEndingWebText">
+        <item>.htm</item>
+        <item>.html</item>
+        <item>.php</item>
+        <item>.jsp</item>
+    </array>
+    <array name="fileEndingText">
+        <item>.txt</item>
+        <item>.java</item>
+        <item>.c</item>
+        <item>.cpp</item>
+        <item>.py</item>
+        <item>.xml</item>
+        <item>.json</item>
+        <item>.log</item>
+    </array>
+    <array name="fileEndingWord">
+        <item>.doc</item>
+        <item>.docx</item>
+    </array>
+    <array name="fileEndingExcel">
+        <item>.xls</item>
+        <item>.xlsx</item>
+    </array>
+    <array name="fileEndingPPT">
+        <item>.ppt</item>
+        <item>.pptx</item>
+    </array>
+    <array name="fileEndingPdf">
+        <item>.pdf</item>
+    </array>
 
 </resources>
