@@ -5,6 +5,7 @@ import java.io.*;
 import java.net.*;
 
 public class Server {
+	private static int mPort = 43211;
 
     public static class SocketServer {
 
@@ -34,11 +35,11 @@ public class Server {
                                 while (!socket.isClosed()) {
                                     String str;
                                     str = in.readLine();
-                                    out.println("Hello!world!! " + str);
+                                    out.println("server feedback origin = " + str);
                                     out.flush();
                                     if (str == null || str.equals("end"))
                                         break;
-                                    System.out.println(str);
+                                    System.out.println("server print : "+str);
                                 }
                                 socket.close();
                             } catch (IOException e) {
@@ -54,7 +55,7 @@ public class Server {
     }
 
     public static void main(String[] argvs) {
-        SocketServer server = new SocketServer(12345);
+        SocketServer server = new SocketServer(mPort);
         server.beginListen();
     }
 }

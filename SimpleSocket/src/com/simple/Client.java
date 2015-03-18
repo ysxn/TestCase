@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.*;
 
  public class Client {
+	 private static int mPort = 43211;
+	 private static String mSite = "127.0.0.1";
      public static class SocketClient {
          static Socket client;
          
@@ -42,20 +44,20 @@ import java.net.*;
     
    public static void main(String[] args){
        
-       SocketClient client = new SocketClient("127.0.0.1",12345);
-       System.out.println(client.sendMsg("nimei1"));
+       SocketClient client = new SocketClient(mSite,mPort);
+       System.out.println("client print : " +client.sendMsg("message 111"));
        client.closeSocket();
        
-       SocketClient client1 = new SocketClient("127.0.0.1",12345);
-       System.out.println(client1.sendMsg("nimei1111"));
+       SocketClient client1 = new SocketClient(mSite,mPort);
+       System.out.println("client print : " +client1.sendMsg("message 222"));
        client1.closeSocket();
        
-       SocketClient client11 = new SocketClient("127.0.0.1",12345);
-       System.out.println(client11.sendMsg("nimei11111111"));
+       SocketClient client11 = new SocketClient(mSite,mPort);
+       System.out.println("client print : " +client11.sendMsg("message 333"));
        client11.closeSocket();
        
-       SocketClient client111 = new SocketClient("127.0.0.1",12345);
-       System.out.println(client111.sendMsg("nimei11111111111111111"));
+       SocketClient client111 = new SocketClient(mSite,mPort);
+       System.out.println("client print : " +client111.sendMsg("message 444"));
            client111.closeSocket();
            
        }
