@@ -46,19 +46,14 @@ import java.net.*;
        
        SocketClient client = new SocketClient(mSite,mPort);
        System.out.println("client print : " +client.sendMsg("message 111"));
+
+       System.out.println("client print : " +client.sendMsg("message 222"));
+
+       System.out.println("client print : " +client.sendMsg("message 333"));
+
+       System.out.println("client print : " +client.sendMsg("message 444"));
+
        client.closeSocket();
-       
-       SocketClient client1 = new SocketClient(mSite,mPort);
-       System.out.println("client print : " +client1.sendMsg("message 222"));
-       client1.closeSocket();
-       
-       SocketClient client11 = new SocketClient(mSite,mPort);
-       System.out.println("client print : " +client11.sendMsg("message 333"));
-       client11.closeSocket();
-       
-       SocketClient client111 = new SocketClient(mSite,mPort);
-       System.out.println("client print : " +client111.sendMsg("message 444"));
-           client111.closeSocket();
            
        }
    
