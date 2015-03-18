@@ -11,9 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class FileListAdapter extends ArrayAdapter<File> {
+    private Util mUtil;
 
     public FileListAdapter(Context context, int Resource, List<File> objects) {
         super(context, Resource, objects);
+        mUtil = new Util(context);
     }
 
     @Override
@@ -25,7 +27,18 @@ public class FileListAdapter extends ArrayAdapter<File> {
         } else if (position == 1 && !isRoot()) {
             view.setText("返回上一个目录");
         } else {
-            view.setText(file.getName());
+            if (file.isDirectory()) {
+                view.setText(file.getName()+"\n    "+mUtil.convetTime(file.lastModified()));
+            } else {
+                long b = file.length();
+                if (b > 1024*1024) {
+                    view.setText(file.getName() + "\n    " + b / 1024 / 1024 + "MB" +"\n    "+mUtil.convetTime(file.lastModified()));
+                } else if (b > 1024) {
+                    view.setText(file.getName() + "\n    " + b / 1024 + "KB" +"\n    "+mUtil.convetTime(file.lastModified()));
+                } else {
+                    view.setText(file.getName() + "\n    " + b + "Bytes" +"\n    "+mUtil.convetTime(file.lastModified()));
+                }
+            }
         }
         return view;
     }
