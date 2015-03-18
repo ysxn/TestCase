@@ -36,6 +36,7 @@ public class Server {
                                     String str;
                                     str = in.readLine();
                                     out.println("server feedback origin = " + str);
+                                    //out.write("server feedback origin = " + str+"\n");
                                     out.flush();
                                     if (str == null || str.equals("end"))
                                         break;
