@@ -45,7 +45,17 @@ public class Util {
         mContext = c;
     }
 
-    private Long convertDate(String str) {
+    public boolean checkFile(File a, File b) {
+    	if (a == null || b == null) {
+    		return false;
+    	}
+    	if (a.length() == b.length()) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public Long convertDate(String str) {
         if (str == null || str.isEmpty()) {
             return Long.valueOf(System.currentTimeMillis());//0L;
         }
