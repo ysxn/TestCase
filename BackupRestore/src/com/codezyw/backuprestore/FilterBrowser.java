@@ -1,11 +1,7 @@
-
 package com.codezyw.backuprestore;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,10 +9,14 @@ import java.util.List;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,23 +27,41 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnLongClickListener;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
-public class FileBrowser extends ListActivity {
+public class FilterBrowser extends ListActivity {
     private final String TAG = "zyw";
+    
+    private static String mSuffix = "";
 
     private static final FileFilter FILTER = new FileFilter() {
         public boolean accept(File f) {
             // return f.isDirectory() ||
             // f.getName().matches("^.*?\\.(jpg|png|bmp|gif)$");
-            return true;
+        	return true;
         }
     };
 
-    private FileListAdapter mFileListAdapter;
+    private FilterBrowserAdapter mFileListAdapter;
+    
+    private ProgressDialog mProgressDialog;
+    
+    private ListView mListView;
+    
+    private List<File> mFilesList = new ArrayList<File>();
 
-    private static final int REQUEST_UPDATE_DATA = 299;
+    private static final int REQUEST_UPDATE_PROGRESS = 299;
+
+    private final int REQUEST_UPDATE_DATA = 0x123;
+
+    private final int REQUEST_DISMISS_PROGRESS = 0x122;
+
+
 
     private Handler mHandler = new Handler() {
         @Override
@@ -55,6 +73,26 @@ public class FileBrowser extends ListActivity {
                         mFileListAdapter.notifyDataSetChanged();
                     }
                 }
+
+                    break;
+                case REQUEST_UPDATE_PROGRESS: {
+                    if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                        int count = msg.arg1;
+                        String fileName = (String) msg.obj;
+                        mProgressDialog.setMessage("已经扫描到 " + count + " 个"+mSuffix+"文件：" + fileName);
+                    }
+                }
+                    break;
+                case REQUEST_DISMISS_PROGRESS: {
+                    if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                        mProgressDialog.dismiss();
+                    }
+
+                    mFileListAdapter = new FilterBrowserAdapter(FilterBrowser.this, android.R.layout.simple_list_item_1, mFilesList);
+                    setListAdapter(mFileListAdapter);
+                    Toast.makeText(FilterBrowser.this, "已经扫描到 " + mFilesList.size() +" 个"+mSuffix+"文件：",
+                            Toast.LENGTH_LONG).show();
+                }
                     break;
             }
         }
@@ -62,9 +100,35 @@ public class FileBrowser extends ListActivity {
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        File sdcard = android.os.Environment.getExternalStorageDirectory();
+        mListView = getListView();
+        Intent i = getIntent();
+        mSuffix = i.getStringExtra("suffix");
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setIconAttribute(android.R.attr.alertDialogIcon);
+        mProgressDialog.setTitle("正在扫描"+mSuffix+"文件"+"中...");
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.show();
+
+        final File sdcard = android.os.Environment.getExternalStorageDirectory();
         Log.i(TAG, "sdcard=" + sdcard);
-        setListAdapterByPath(sdcard);
+        new Thread() {
+            public void run() {
+            	setListAdapterByPath(sdcard);
+                mHandler.sendEmptyMessage(REQUEST_DISMISS_PROGRESS);
+            };
+        }.start();
+
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            	File file = (File) mFileListAdapter.getItem(position);
+                Toast.makeText(FilterBrowser.this, "路径："+file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
     }
 
 	@Override
@@ -87,47 +151,23 @@ public class FileBrowser extends ListActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && !mFileListAdapter.isRoot()) {
-            setListAdapterByPath((File) mFileListAdapter.getItem(1));
-            /*
-             * Intent intent = new Intent(); intent.setClass(FileBrowser.this,
-             * FlashActivity.class); startActivity(intent);
-             */
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
     private void setListAdapterByPath(File folder) {
-        List<File> filesList = new ArrayList<File>();
-
         Log.i(TAG, "setListAdapterByPath folder=" + folder);
         File[] listFiles = folder.listFiles(FILTER);
         if (listFiles == null) {
             Log.e(TAG, "setListAdapterByPath listFiles == null");
         } else {
             for (File file : listFiles) {
-                filesList.add(file);
-            }
-            Collections.sort(filesList, new Comparator<File>() {
-                @Override
-                public int compare(File fileA, File fileB) {
-                    if (fileA.isDirectory() && fileB.isFile())
-                        return -1;
-                    if (fileA.isFile() && fileB.isDirectory())
-                        return 1;
-
-                    return fileA.getName().toUpperCase().compareTo(fileB.getName().toUpperCase());
+                if (!file.isDirectory() && file.getName().endsWith(mSuffix)) {
+                    // file.getName().matches("^.*?\\.(jpg|png|bmp|gif)$");
+                    mFilesList.add(file);
+                    mHandler.sendMessage(mHandler.obtainMessage(REQUEST_UPDATE_PROGRESS,
+                            mFilesList.size(), 0, file.getName()));
+                } else if (file.isDirectory()) {
+                	setListAdapterByPath(file);
                 }
-            });
+            }
         }
-        filesList.add(0, folder);
-        if (folder.getParentFile() != null) {
-            filesList.add(1, folder.getParentFile());
-        }
-        mFileListAdapter = new FileListAdapter(this, android.R.layout.simple_list_item_1, filesList);
-        setListAdapter(mFileListAdapter);
     }
 
     @Override
@@ -144,7 +184,7 @@ public class FileBrowser extends ListActivity {
             tryOpenFile(file);
         }
     }
-
+    
     private boolean checkEndsWithInStringArray(String checkItsEnd, String[] fileEndings) {
         for (String aEnd : fileEndings) {
             if (checkItsEnd.endsWith(aEnd))
@@ -210,7 +250,6 @@ public class FileBrowser extends ListActivity {
         }
     }
     
-
     private void showEditDialog(final Context c) {
         View v = LayoutInflater.from(c).inflate(R.layout.rename_fingerprint, null);
         final EditText et = (EditText) v.findViewById(R.id.title);
