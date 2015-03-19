@@ -165,6 +165,13 @@ public class Util {
         }
         return null;
     }
+    
+    public PackageInfo getPackageInfo(Context context, String archiveFilePath) {
+        PackageManager pm = context.getPackageManager();
+        PackageInfo info = pm.getPackageArchiveInfo(archiveFilePath, 0);// PackageManager.GET_ACTIVITIES);
+
+        return info;
+    }
 
     //
     private void showUninstallAPKIcon(String apkPath) {

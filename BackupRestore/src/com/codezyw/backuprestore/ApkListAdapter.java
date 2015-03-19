@@ -1,4 +1,3 @@
-
 package com.codezyw.backuprestore;
 
 import java.io.File;
@@ -18,87 +17,99 @@ import android.widget.TwoLineListItem;
 
 public class ApkListAdapter extends BaseAdapter {
 
-    private final Context mContext;
+	private final Context mContext;
 
-    private final LayoutInflater mInflater;
+	private final LayoutInflater mInflater;
 
-    private List<FileData> mApkList;
-    
-    private Util mUtil;
+	private List<FileData> mApkList;
 
-    public ApkListAdapter(Context c) {
-        mContext = c;
-        mUtil = new Util(c);
-        mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
+	private Util mUtil;
 
-    public void setData(List<FileData> list) {
-        mApkList = list;
-    }
+	public ApkListAdapter(Context c) {
+		mContext = c;
+		mUtil = new Util(c);
+		mInflater = (LayoutInflater) c
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	}
 
-    public int getCount() {
-        return mApkList.size();
-    }
+	public void setData(List<FileData> list) {
+		mApkList = list;
+	}
 
-    public Object getItem(int position) {
-        return mApkList.get(position);
-    }
+	public int getCount() {
+		return mApkList.size();
+	}
 
-    public long getItemId(int position) {
-        return position;
-    }
+	public Object getItem(int position) {
+		return mApkList.get(position);
+	}
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = new SlideMenuGroup(mContext);
-            View listItem = (View) mInflater.inflate(R.layout.list_item, parent, false);
-            // android.R.layout.simple_list_item_2, parent, false);
-            ((SlideMenuGroup) convertView).setListItemView(listItem);
-        }
-        View listItem = ((SlideMenuGroup) convertView).getListItemView();
-        TextView textView1 = (TextView) listItem.findViewById(android.R.id.text1);
-        TextView textView2 = (TextView) listItem.findViewById(android.R.id.text2);
-        ImageView icon = (ImageView) listItem.findViewById(R.id.icon);
-        FileData file = mApkList.get(position);
-        textView1.setText(file.mFile.getName());
+	public long getItemId(int position) {
+		return position;
+	}
 
-        long b = file.mFile.length();
-        if (b > 1024*1024) {
-            textView2.setText(file.mFile.getAbsolutePath() + "\n文件大小：" + b / 1024 / 1024 + "MB" +"\n创建时间："+mUtil.convetTime(file.mFile.lastModified()));
-        } else {
-            textView2.setText(file.mFile.getAbsolutePath() + "\n文件大小：" + b / 1024 + "KB" +"\n创建时间："+mUtil.convetTime(file.mFile.lastModified()));
-        }
-        if (file.mDrawable != null) {
-            icon.setImageDrawable(file.mDrawable);
-        }
-        convertView.setTag(file);
-        TextView menuTextView = (TextView) ((SlideMenuGroup) convertView).getRightMenu();
-        menuTextView.setText("删除");
-        ((SlideMenuGroup) convertView).setLeftMenuHide(true);
-        ((SlideMenuGroup) convertView)
-                .setLeftMenuClickListener(new SlideMenuGroup.OnLeftMenuClickListener() {
+	public View getView(int position, View convertView, ViewGroup parent) {
+		if (convertView == null) {
+			convertView = new SlideMenuGroup(mContext);
+			View listItem = (View) mInflater.inflate(R.layout.list_item,
+					parent, false);
+			// android.R.layout.simple_list_item_2, parent, false);
+			((SlideMenuGroup) convertView).setListItemView(listItem);
+		}
+		View listItem = ((SlideMenuGroup) convertView).getListItemView();
+		TextView textView1 = (TextView) listItem
+				.findViewById(android.R.id.text1);
+		TextView textView2 = (TextView) listItem
+				.findViewById(android.R.id.text2);
+		ImageView icon = (ImageView) listItem.findViewById(R.id.icon);
+		FileData file = mApkList.get(position);
+		textView1.setText(file.mFile.getName());
 
-                    @Override
-                    public void onLeftMenuClicked(SlideMenuGroup listItemViewGroup) {
+		long b = file.mFile.length();
+		if (b > 1024 * 1024) {
+			textView2.setText(file.mFile.getAbsolutePath() + "\n文件大小：" + b
+					/ 1024 / 1024 + "MB" + "\n创建时间："
+					+ mUtil.convetTime(file.mFile.lastModified())+"\n"+file.mVersion);
+		} else {
+			textView2.setText(file.mFile.getAbsolutePath() + "\n文件大小：" + b
+					/ 1024 + "KB" + "\n创建时间："
+					+ mUtil.convetTime(file.mFile.lastModified())+"\n"+file.mVersion);
+		}
+		if (file.mDrawable != null) {
+			icon.setImageDrawable(file.mDrawable);
+		}
+		convertView.setTag(file);
+		TextView menuTextView = (TextView) ((SlideMenuGroup) convertView)
+				.getRightMenu();
+		menuTextView.setText("删除");
+		((SlideMenuGroup) convertView).setLeftMenuHide(true);
+		((SlideMenuGroup) convertView)
+				.setLeftMenuClickListener(new SlideMenuGroup.OnLeftMenuClickListener() {
 
-                    }
-                });
-        ((SlideMenuGroup) convertView)
-                .setRightMenuClickListener(new SlideMenuGroup.OnRightMenuClickListener() {
+					@Override
+					public void onLeftMenuClicked(
+							SlideMenuGroup listItemViewGroup) {
 
-                    @Override
-                    public void onRightMenuClicked(SlideMenuGroup listItemViewGroup) {
-                        FileData fdData = (FileData) listItemViewGroup.getTag();
-                        Toast.makeText(
-                                mContext,
-                                "删除安装包：" + fdData.mFile.getName() + "\n路径："
-                                        + fdData.mFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
+					}
+				});
+		((SlideMenuGroup) convertView)
+				.setRightMenuClickListener(new SlideMenuGroup.OnRightMenuClickListener() {
 
-                        fdData.mFile.delete();
-                        mApkList.remove(fdData);
-                        ApkListAdapter.this.notifyDataSetChanged();
-                    }
-                });
-        return convertView;
-    }
+					@Override
+					public void onRightMenuClicked(
+							SlideMenuGroup listItemViewGroup) {
+						FileData fdData = (FileData) listItemViewGroup.getTag();
+						Toast.makeText(
+								mContext,
+								"删除安装包：" + fdData.mFile.getName() + "\n路径："
+										+ fdData.mFile.getAbsolutePath(),
+								Toast.LENGTH_LONG).show();
+
+						fdData.mFile.delete();
+						mApkList.remove(fdData);
+						ApkListAdapter.this.notifyDataSetChanged();
+					}
+				});
+		return convertView;
+	}
 }

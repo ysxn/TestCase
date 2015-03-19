@@ -15,6 +15,9 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,7 +49,13 @@ public class ApkBrowser extends ListActivity {
 
     private SlideMenuListener mSwipeTouchListener;
     
-    private List<FileData> mFilesList = new ArrayList<FileData>();;
+    private List<FileData> mFilesList = new ArrayList<FileData>();
+    
+    private PackageManager mPm;
+    
+    private List<ApplicationInfo> mApps;
+    
+    private List<PackageInfo> mPackages;
 
     private static final int REQUEST_UPDATE_PROGRESS = 299;
 
@@ -102,11 +111,23 @@ public class ApkBrowser extends ListActivity {
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
+        mPm = getPackageManager();
 
         final File sdcard = android.os.Environment.getExternalStorageDirectory();
         Log.i(TAG, "sdcard=" + sdcard);
         new Thread() {
             public void run() {
+            	// Retrieve all known applications.
+        		mApps = mPm
+        				.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES
+        						| PackageManager.GET_DISABLED_COMPONENTS);
+        		if (mApps == null) {
+        			mApps = new ArrayList<ApplicationInfo>();
+        		}
+        		mPackages = mPm.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
+        		if (mPackages == null) {
+        			mPackages = new ArrayList<PackageInfo>();
+        		}
                 scanApkFileByPath(sdcard);
                 mHandler.sendEmptyMessage(REQUEST_DISMISS_PROGRESS);
             };
@@ -141,6 +162,9 @@ public class ApkBrowser extends ListActivity {
                     FileData fdData = new FileData();
                     fdData.mFile = file;
                     fdData.mDrawable = mUtil.getUninatllApkInfo(ApkBrowser.this, file.getAbsolutePath(), file);
+                    fdData.mPi = mUtil.getPackageInfo(ApkBrowser.this, file.getAbsolutePath());
+                    fdData.mAi = (fdData.mPi != null) ? fdData.mPi.applicationInfo : null;
+                    fdData.mInstalled = checkInstallStat(fdData);
                     mFilesList.add(fdData);
                     mHandler.sendMessage(mHandler.obtainMessage(REQUEST_UPDATE_PROGRESS,
                             mFilesList.size(), 0, file.getName()));
@@ -172,5 +196,28 @@ public class ApkBrowser extends ListActivity {
         } else if (file.getName().endsWith(".apk")) {
             mUtil.installApk(file);
         }
+    }
+    
+    private int checkInstallStat(FileData fd) {
+    	fd.mInstalled = Constant.NONE;
+    	fd.mVersion = "安装状态：未安装";
+    	if (fd.mAi == null || fd.mPi == null || fd.mPi.packageName == null || fd.mPi.versionName == null) {
+        	return fd.mInstalled;
+    	}
+    	for (PackageInfo pi :mPackages) {
+    		if (fd.mAi.packageName.equals(pi.packageName)) {
+    			if (fd.mPi.versionCode == pi.versionCode
+        				&& fd.mPi.versionName.equals(pi.versionName)) {
+    				fd.mInstalled = Constant.SAME;
+    				fd.mVersion = "安装状态：已安装:"+pi.versionName+" : "+pi.versionCode;
+    			} else {
+    				fd.mInstalled = Constant.SAME;
+    				fd.mVersion = "安装状态：已安装:"+pi.versionName+" : "+pi.versionCode
+    						+"->"
+    						+fd.mPi.versionName+" : "+fd.mPi.versionCode;
+    			}
+    		}
+    	}
+    	return fd.mInstalled;
     }
 }
