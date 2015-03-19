@@ -30,7 +30,7 @@ import android.widget.TextView;
 
 public class ControlActivity extends Activity {
 	// 服务器ip地址
-	public static final String DEFULT_PRES = "127.0.0.1";
+	public static final String DEFULT_IP = "127.0.0.1";
 	public static final String PREFS_NAME = "PreferencesFile";
 	public static final int CONNENTED = 0;
 	public static final int UPDATALOG = 1;
@@ -48,6 +48,23 @@ public class ControlActivity extends Activity {
 	private BufferedWriter writer;
 	private InetSocketAddress isa = null;
 	Context mContext;
+	
+	Handler mHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+
+			case CONNENTED:
+				logMsg += "Server Connented\n";
+				log.setText(logMsg);
+				break;
+
+			case UPDATALOG:
+				log.setText(logMsg);
+				log.setScrollContainer(true);
+				break;
+			}
+		}
+	};
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -91,7 +108,11 @@ public class ControlActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				logMsg = "";
+
+				Log.i("zyw", "before>>>>>log="+log.getText());
 				log.setText(logMsg);
+				log.postInvalidate();
+				Log.i("zyw", ">>>>>log="+log.getText());
 			}
 		});
 	}
@@ -103,6 +124,11 @@ public class ControlActivity extends Activity {
 		if (socket.isConnected()) {
 			Message msg = new Message();
 			msg.what = CONNENTED;
+			mHandler.sendMessage(msg);
+		} else {
+			logMsg = "连接服务器失败！";
+			Message msg = new Message();
+			msg.what = UPDATALOG;
 			mHandler.sendMessage(msg);
 		}
 	}
@@ -165,31 +191,48 @@ public class ControlActivity extends Activity {
 				recv = ReceiveMsg(socket);
 				if (recv != null) {
 					logMsg += recv;
-					// close BufferedWriter and socket
-					writer.close();
-					socket.close();
-					// 将服务器返回的消息显示出来
-					Message msg = new Message();
-					msg.what = UPDATALOG;
-					mHandler.sendMessage(msg);
 				}
+				// close BufferedWriter and socket
+				writer.close();
+				socket.close();
+				// 将服务器返回的消息显示出来
+				Message msg = new Message();
+				msg.what = UPDATALOG;
+				mHandler.sendMessage(msg);
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
+				logMsg = "UnknownHostException";
+				Message msg = new Message();
+				msg.what = UPDATALOG;
+				mHandler.sendMessage(msg);
 			} catch (IOException e) {
 				e.printStackTrace();
+				logMsg = "IOException";
+				Message msg = new Message();
+				msg.what = UPDATALOG;
+				mHandler.sendMessage(msg);
+			} finally {
+				if (socket != null && !socket.isClosed()) {
+					try {
+						socket.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 	}
 
 	private String onLoad() {
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		String mPreferences = settings.getString("preferences", DEFULT_PRES);
+		String mPreferences = settings.getString("preferences", DEFULT_IP);
 		return mPreferences;
 	}
 
 	private void onSave(String save) {
 		if (TextUtils.isEmpty(save)) {
-			setPreferences(DEFULT_PRES);
+			setPreferences(DEFULT_IP);
 		} else {
 			setPreferences(save);
 		}
@@ -249,20 +292,4 @@ public class ControlActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	Handler mHandler = new Handler() {
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-
-			case CONNENTED:
-				logMsg += "Server Connented\n";
-				log.setText(logMsg);
-				break;
-
-			case UPDATALOG:
-				log.setText(logMsg);
-				log.setScrollContainer(true);
-				break;
-			}
-		}
-	};
 }
