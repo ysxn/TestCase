@@ -19,6 +19,7 @@ package com.zyw.videofileplayer;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -258,6 +259,7 @@ public abstract class CommonControllerOverlay extends FrameLayout implements
         // We don't set the paddings of this View, otherwise,
         // the content will get cropped outside window
         mWindowInsets.set(insets);
+        Log.i("zyw", "mWindowInsets"+mWindowInsets);
         return true;
     }
 
