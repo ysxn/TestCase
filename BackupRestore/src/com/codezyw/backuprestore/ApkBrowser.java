@@ -56,6 +56,10 @@ public class ApkBrowser extends ListActivity {
     private List<ApplicationInfo> mApps;
     
     private List<PackageInfo> mPackages;
+    
+
+    private static String mSuffix = "";
+    private static String mDirectory = "";
 
     private static final int REQUEST_UPDATE_PROGRESS = 299;
 
@@ -104,6 +108,9 @@ public class ApkBrowser extends ListActivity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mListView = getListView();
+        Intent i = getIntent();
+        mSuffix = i.getStringExtra(Constant.SUFFFIX);
+        mDirectory = i.getStringExtra(Constant.DIRECTORY);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIconAttribute(android.R.attr.alertDialogIcon);
         mProgressDialog.setTitle("正在扫描APK安装包中...");
@@ -113,25 +120,47 @@ public class ApkBrowser extends ListActivity {
         mProgressDialog.show();
         mPm = getPackageManager();
 
-        final File sdcard = android.os.Environment.getExternalStorageDirectory();
-        Log.i(TAG, "sdcard=" + sdcard);
-        new Thread() {
-            public void run() {
-            	// Retrieve all known applications.
-        		mApps = mPm
-        				.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES
-        						| PackageManager.GET_DISABLED_COMPONENTS);
-        		if (mApps == null) {
-        			mApps = new ArrayList<ApplicationInfo>();
-        		}
-        		mPackages = mPm.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
-        		if (mPackages == null) {
-        			mPackages = new ArrayList<PackageInfo>();
-        		}
-                scanApkFileByPath(sdcard);
-                mHandler.sendEmptyMessage(REQUEST_DISMISS_PROGRESS);
-            };
-        }.start();
+        if (mDirectory != null && !mDirectory.isEmpty()) {
+            final File sdcard = new File(mDirectory);//android.os.Environment.getExternalStorageDirectory();
+            Log.i(TAG, "sdcard=" + sdcard);
+            new Thread() {
+                public void run() {
+                	// Retrieve all known applications.
+            		mApps = mPm
+            				.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES
+            						| PackageManager.GET_DISABLED_COMPONENTS);
+            		if (mApps == null) {
+            			mApps = new ArrayList<ApplicationInfo>();
+            		}
+            		mPackages = mPm.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
+            		if (mPackages == null) {
+            			mPackages = new ArrayList<PackageInfo>();
+            		}
+                    scanApkFileByPath(sdcard);
+                    mHandler.sendEmptyMessage(REQUEST_DISMISS_PROGRESS);
+                };
+            }.start();
+        } else {
+            final File sdcard = android.os.Environment.getExternalStorageDirectory();
+            Log.i(TAG, "sdcard=" + sdcard);
+            new Thread() {
+                public void run() {
+                	// Retrieve all known applications.
+            		mApps = mPm
+            				.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES
+            						| PackageManager.GET_DISABLED_COMPONENTS);
+            		if (mApps == null) {
+            			mApps = new ArrayList<ApplicationInfo>();
+            		}
+            		mPackages = mPm.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
+            		if (mPackages == null) {
+            			mPackages = new ArrayList<PackageInfo>();
+            		}
+                    scanApkFileByPath(sdcard);
+                    mHandler.sendEmptyMessage(REQUEST_DISMISS_PROGRESS);
+                };
+            }.start();
+        }
 
     }
     

@@ -226,10 +226,17 @@ public class FileBrowser extends ListActivity {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         String title = et.getText().toString();
-                        Intent i = new Intent(c, FilterBrowser.class);
-                        i.putExtra(Constant.SUFFFIX, title);
-                        i.putExtra(Constant.DIRECTORY, mDirectory.getAbsolutePath());
-                        c.startActivity(i);
+                    	if ("apk".equalsIgnoreCase(title)) {
+	                        Intent i = new Intent(c, ApkBrowser.class);
+	                        i.putExtra(Constant.SUFFFIX, title);
+	                        i.putExtra(Constant.DIRECTORY, mDirectory.getAbsolutePath());
+	                        c.startActivity(i);
+                    	} else if (title != null && !title.isEmpty()) {
+	                        Intent i = new Intent(c, FilterBrowser.class);
+	                        i.putExtra(Constant.SUFFFIX, title);
+	                        i.putExtra(Constant.DIRECTORY, mDirectory.getAbsolutePath());
+	                        c.startActivity(i);
+                    	}
                         finish();
                     }
                 })
