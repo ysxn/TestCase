@@ -6,6 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="backup">"立即备份到/BackupApp"</string>
     <string name="seeapk">"查看应用安装包"</string>
+    <string name="filter">"文件搜索结果"</string>
     <string name="files">"文件浏览"</string>
     <string name="suffix">"按文件后缀名搜索"</string>
     <string name="directory">"设置文件目录"</string>

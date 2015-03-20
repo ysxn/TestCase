@@ -51,7 +51,7 @@
         <activity
             android:name=".FilterBrowser"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/seeapk" >
+            android:label="@string/filter" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
