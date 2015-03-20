@@ -62,7 +62,7 @@ public class FileBrowser extends ListActivity {
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        File sdcard = android.os.Environment.getExternalStorageDirectory();
+        File sdcard = new File("/");//android.os.Environment.getExternalStorageDirectory();
         Log.i(TAG, "sdcard=" + sdcard);
         setListAdapterByPath(sdcard);
     }

@@ -111,7 +111,7 @@ public class FilterBrowser extends ListActivity {
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
 
-        final File sdcard = android.os.Environment.getExternalStorageDirectory();
+        final File sdcard = new File("/");//android.os.Environment.getExternalStorageDirectory();
         Log.i(TAG, "sdcard=" + sdcard);
         new Thread() {
             public void run() {
