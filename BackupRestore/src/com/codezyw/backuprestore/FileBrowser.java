@@ -42,6 +42,8 @@ public class FileBrowser extends ListActivity {
     };
 
     private FileListAdapter mFileListAdapter;
+    
+    private File mDirectory;
 
     private static final int REQUEST_UPDATE_DATA = 299;
 
@@ -62,9 +64,9 @@ public class FileBrowser extends ListActivity {
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        File sdcard = new File("/");//android.os.Environment.getExternalStorageDirectory();
-        Log.i(TAG, "sdcard=" + sdcard);
-        setListAdapterByPath(sdcard);
+        mDirectory = android.os.Environment.getExternalStorageDirectory();
+        Log.i(TAG, "sdcard=" + mDirectory);
+        setListAdapterByPath(mDirectory);
     }
 
 	@Override
@@ -84,6 +86,9 @@ public class FileBrowser extends ListActivity {
 			showEditDialog(this);
 			return true;
 		}
+		if (id == R.id.directory) {
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -100,6 +105,7 @@ public class FileBrowser extends ListActivity {
     }
 
     private void setListAdapterByPath(File folder) {
+    	mDirectory = folder;
         List<File> filesList = new ArrayList<File>();
 
         Log.i(TAG, "setListAdapterByPath folder=" + folder);
@@ -215,13 +221,14 @@ public class FileBrowser extends ListActivity {
         View v = LayoutInflater.from(c).inflate(R.layout.rename_fingerprint, null);
         final EditText et = (EditText) v.findViewById(R.id.title);
         new AlertDialog.Builder(c)
-        		.setTitle("输入过滤后缀名：")
+        		.setTitle(R.string.suffix)
                 .setView(v)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         String title = et.getText().toString();
                         Intent i = new Intent(c, FilterBrowser.class);
-                        i.putExtra("suffix", title);
+                        i.putExtra(Constant.SUFFFIX, title);
+                        i.putExtra(Constant.DIRECTORY, mDirectory.getAbsolutePath());
                         c.startActivity(i);
                         finish();
                     }

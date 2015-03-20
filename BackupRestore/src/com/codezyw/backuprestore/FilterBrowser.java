@@ -38,6 +38,7 @@ public class FilterBrowser extends ListActivity {
     private final String TAG = "zyw";
     
     private static String mSuffix = "";
+    private static String mDirectory = "";
 
     private static final FileFilter FILTER = new FileFilter() {
         public boolean accept(File f) {
@@ -102,7 +103,8 @@ public class FilterBrowser extends ListActivity {
         super.onCreate(icicle);
         mListView = getListView();
         Intent i = getIntent();
-        mSuffix = i.getStringExtra("suffix");
+        mSuffix = i.getStringExtra(Constant.SUFFFIX);
+        mDirectory = i.getStringExtra(Constant.DIRECTORY);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIconAttribute(android.R.attr.alertDialogIcon);
         mProgressDialog.setTitle("正在扫描"+mSuffix+"文件"+"中...");
@@ -111,14 +113,26 @@ public class FilterBrowser extends ListActivity {
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
 
-        final File sdcard = new File("/");//android.os.Environment.getExternalStorageDirectory();
-        Log.i(TAG, "sdcard=" + sdcard);
-        new Thread() {
-            public void run() {
-            	setListAdapterByPath(sdcard);
-                mHandler.sendEmptyMessage(REQUEST_DISMISS_PROGRESS);
-            };
-        }.start();
+        
+        if (mDirectory != null && !mDirectory.isEmpty()) {
+        	final File sdcard = new File(mDirectory);
+            Log.i(TAG, "sdcard=" + sdcard);
+            new Thread() {
+                public void run() {
+                	setListAdapterByPath(sdcard);
+                    mHandler.sendEmptyMessage(REQUEST_DISMISS_PROGRESS);
+                };
+            }.start();
+        } else {
+        	final File sdcard = android.os.Environment.getExternalStorageDirectory();
+            Log.i(TAG, "sdcard=" + sdcard);
+            new Thread() {
+                public void run() {
+                	setListAdapterByPath(sdcard);
+                    mHandler.sendEmptyMessage(REQUEST_DISMISS_PROGRESS);
+                };
+            }.start();
+        }
 
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
@@ -146,6 +160,9 @@ public class FilterBrowser extends ListActivity {
 		int id = item.getItemId();
 		if (id == R.id.file_filter) {
 			showEditDialog(this);
+			return true;
+		}
+		if (id == R.id.directory) {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -254,13 +271,14 @@ public class FilterBrowser extends ListActivity {
         View v = LayoutInflater.from(c).inflate(R.layout.rename_fingerprint, null);
         final EditText et = (EditText) v.findViewById(R.id.title);
         new AlertDialog.Builder(c)
-        		.setTitle("输入过滤后缀名：")
+        		.setTitle(R.string.suffix)
                 .setView(v)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         String title = et.getText().toString();
                         Intent i = new Intent(c, FilterBrowser.class);
-                        i.putExtra("suffix", title);
+                        i.putExtra(Constant.SUFFFIX, title);
+                        i.putExtra(Constant.DIRECTORY, mDirectory);
                         c.startActivity(i);
                         finish();
                     }

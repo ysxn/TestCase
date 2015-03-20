@@ -5,6 +5,12 @@
         android:id="@+id/file_filter"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="设置文件后缀名"/>
+        android:title="按文件后缀名搜索"/>
+    
+    <item
+        android:id="@+id/directory"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="设置文件目录"/>
 
 </menu>

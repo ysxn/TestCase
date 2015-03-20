@@ -113,7 +113,7 @@ public class ApkBrowser extends ListActivity {
         mProgressDialog.show();
         mPm = getPackageManager();
 
-        final File sdcard = new File("/");//android.os.Environment.getExternalStorageDirectory();
+        final File sdcard = android.os.Environment.getExternalStorageDirectory();
         Log.i(TAG, "sdcard=" + sdcard);
         new Thread() {
             public void run() {
