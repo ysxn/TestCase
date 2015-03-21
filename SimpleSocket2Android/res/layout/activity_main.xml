@@ -19,13 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/command" />
 
-    <TextView
-        android:id="@+id/log"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/ipEdit" />
-
     <LinearLayout
+        android:id="@+id/group_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -46,4 +41,17 @@
             android:text="@string/action_send" />
     </LinearLayout>
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ipEdit"
+        android:layout_above="@id/group_menu" >
+            
+        <TextView
+            android:id="@+id/log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
+    </ScrollView>
 </RelativeLayout>

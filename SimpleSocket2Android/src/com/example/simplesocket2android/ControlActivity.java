@@ -32,35 +32,24 @@ public class ControlActivity extends Activity {
 	// 服务器ip地址
 	public static final String DEFULT_IP = "107.170.224.94";
 	public static final String PREFS_NAME = "PreferencesFile";
-	public static final int CONNENTED = 0;
 	public static final int UPDATALOG = 1;
 
 	private static final int PORT = 43211;
 
-	private EditText command;
-	private EditText ipEdit;
-	private TextView log;
-	private Button send;
-	private Button clean;
-	private String ip;
-	private String logMsg;
-	private Socket socket;
-	private BufferedWriter writer;
-	private InetSocketAddress isa = null;
+	private EditText mCommand;
+	private EditText mIpEdit;
+	private TextView mResult;
+	private Button mSend;
+	private Button mClean;
+	private String mIp;
 	Context mContext;
 	
 	Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
-
-			case CONNENTED:
-				logMsg += "Server Connented\n";
-				log.setText(logMsg);
-				break;
-
 			case UPDATALOG:
-				log.setText(logMsg);
-				log.setScrollContainer(true);
+			    String s = (String) msg.obj;
+				mResult.setText(mResult.getText()+"\n"+s);
 				break;
 			}
 		}
@@ -70,151 +59,114 @@ public class ControlActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		mContext = this;
-		findviews();
-		setonclick();
-		init();
+
+        mCommand = (EditText) this.findViewById(R.id.command);
+        mResult = (TextView) this.findViewById(R.id.log);
+        mSend = (Button) this.findViewById(R.id.send);
+        mIpEdit = (EditText) this.findViewById(R.id.ipEdit);
+        mClean = (Button) this.findViewById(R.id.clean);
+		mSend.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mIp = mIpEdit.getText().toString();
+                // 当点击发送按钮时，开启一个tcpClient线程，向服务器发送消息
+                SocketClient tcp = new SocketClient(mCommand.getText().toString());
+                tcp.start();
+            }
+        });
+
+        mClean.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                mResult.setText("");
+            }
+        });
+
+        mIp = onLoad();
+        if (mIp != null) {
+            mIpEdit.setText(mIp);
+        }
 	}
 
-	public void findviews() {
-		command = (EditText) this.findViewById(R.id.command);
-		log = (TextView) this.findViewById(R.id.log);
-		send = (Button) this.findViewById(R.id.send);
-		ipEdit = (EditText) this.findViewById(R.id.ipEdit);
-		clean = (Button) this.findViewById(R.id.clean);
-	}
+	class SocketClient extends Thread {
+		String cmd = "ls";
 
-	private void init() {
-		log.setMovementMethod(ScrollingMovementMethod.getInstance());
-		logMsg = log.getText().toString();
-		// 创建一个socket实例
-		socket = new Socket();
-		ip = onLoad();
-		if (ip != null) {
-			ipEdit.setText(ip);
-		}
-	}
-
-	private void setonclick() {
-		send.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				ip = ipEdit.getText().toString();
-				// 当点击发送按钮时，开启一个tcpClient线程，向服务器发送消息
-				tcpClient tcp = new tcpClient(command.getText().toString());
-				tcp.start();
-			}
-		});
-
-		clean.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				logMsg = "";
-
-				Log.i("zyw", "before>>>>>log="+log.getText());
-				log.setText(logMsg);
-				log.postInvalidate();
-				Log.i("zyw", ">>>>>log="+log.getText());
-			}
-		});
-	}
-
-	// 在向服务器发送消息之前，必须先链接到服务器。
-	public void connecttoserver() throws UnknownHostException, IOException {
-		socket = RequestSocket(ip, PORT);
-		// 判断是否链接成功
-		if (socket.isConnected()) {
-			Message msg = new Message();
-			msg.what = CONNENTED;
-			mHandler.sendMessage(msg);
-		} else {
-			logMsg = "连接服务器失败！";
-			Message msg = new Message();
-			msg.what = UPDATALOG;
-			mHandler.sendMessage(msg);
-		}
-	}
-
-	// 链接服务器
-	private Socket RequestSocket(String host, int port)
-			throws UnknownHostException, IOException {
-		Socket ConSocket = new Socket();
-		// 创建套接字地址，其中 IP 地址为通配符地址，端口号为指定值。
-		// 有效端口值介于 0 和 65535 之间。端口号 zero 允许系统在 bind 操作中挑选暂时的端口。
-		isa = new InetSocketAddress(host, port);
-		// 建立一个远程链接
-		ConSocket.connect(isa);
-
-		return ConSocket;
-	}
-
-	// 向服务器发送信息
-	private void SendMsg(Socket socket, String msg) throws IOException {
-		writer = new BufferedWriter(new OutputStreamWriter(
-				socket.getOutputStream()));
-
-		Log.i("msg", msg.replace("\n", " ") + "\n");
-		writer.write(msg.replace("\n", " ") + "\n");
-		writer.flush();
-	}
-
-	// 接收服务器信息
-	private String ReceiveMsg(Socket socket) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				socket.getInputStream()));
-		String line;
-		String txt = "";
-		while ((line = reader.readLine()) != null) {
-			txt += line + "\n";
-		}
-		reader.close();
-		return txt;
-
-	}
-
-	class tcpClient extends Thread {
-		String commandString;
-
-		public tcpClient() {
-			commandString = "ls";
-		}
-
-		public tcpClient(String command) {
-			commandString = command;
+	    private Socket socket;
+	    private BufferedWriter out;
+	    private BufferedReader in;
+		
+		public SocketClient(String c) {
+		    if (c != null && !c.isEmpty()) {
+		        cmd = c;
+		    }
 		}
 
 		public void run() {
-			String recv;
 			try {
-				connecttoserver();
-				// 向服务器发送命令
-				SendMsg(socket, commandString);
-				// 等待，接收来自服务器返回的消息
-				recv = ReceiveMsg(socket);
-				if (recv != null) {
-					logMsg += recv;
-				}
-				// close BufferedWriter and socket
-				writer.close();
-				socket.close();
-				// 将服务器返回的消息显示出来
-				Message msg = new Message();
-				msg.what = UPDATALOG;
-				mHandler.sendMessage(msg);
+
+	            // 创建一个socket实例
+	            socket = new Socket();
+		        // 建立一个远程链接
+		        socket.connect(new InetSocketAddress(mIp, PORT));
+		        // 判断是否链接成功
+		        if (socket.isConnected()) {
+		            mHandler.obtainMessage(UPDATALOG, "Server Connented").sendToTarget();
+		        } else {
+		            mHandler.obtainMessage(UPDATALOG, "连接服务器失败！").sendToTarget();
+		            return;
+		        }
+				out = new BufferedWriter(new OutputStreamWriter(
+	                    socket.getOutputStream()));
+                in = new BufferedReader(new InputStreamReader(
+                        socket.getInputStream()));
+
+	            out.write(cmd.replace("\n", " ") + "\n");
+	            out.flush();
+//                socket.setSoTimeout(10000);
+//	            Thread.sleep(5000);
+                while (!socket.isClosed()) {
+                    String result;
+                    result = in.readLine();
+                    System.out.println("client print : " + result);
+                    if (result != null) {
+                        mHandler.obtainMessage(UPDATALOG, result).sendToTarget();
+                    } else {
+                        socket.close();
+                    }
+                }
+	            mHandler.obtainMessage(UPDATALOG, "client thread finish").sendToTarget();
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
-				logMsg = "UnknownHostException";
-				Message msg = new Message();
-				msg.what = UPDATALOG;
-				mHandler.sendMessage(msg);
+				mHandler.obtainMessage(UPDATALOG, "UnknownHostException").sendToTarget();
 			} catch (IOException e) {
-				e.printStackTrace();
-				logMsg = "IOException";
-				Message msg = new Message();
-				msg.what = UPDATALOG;
-				mHandler.sendMessage(msg);
-			} finally {
+                e.printStackTrace();
+                mHandler.obtainMessage(UPDATALOG, "IOException").sendToTarget();
+            }  catch (Exception e) {
+                e.printStackTrace();
+                mHandler.obtainMessage(UPDATALOG, "Exception").sendToTarget();
+            } finally {
+                System.out.println("client print : finally");
+                if (in != null) {
+                    try {
+                        in.close();
+                        System.out.println("client print : in.close");
+                    } catch (IOException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                }
+                
+                if (out != null) {
+                    try {
+                        out.close();
+                        System.out.println("client print : out.close");
+                    } catch (IOException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                }
 				if (socket != null && !socket.isClosed()) {
 					try {
 						socket.close();
+						System.out.println("client print : socket.close");
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -253,7 +205,7 @@ public class ControlActivity extends Activity {
 			builder.setPositiveButton("Yes",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
-							onSave(ipEdit.getText().toString());
+							onSave(mIpEdit.getText().toString());
 							finish();
 						}
 					});
@@ -278,11 +230,11 @@ public class ControlActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case 1:
-			tcpClient tcp = new tcpClient("sudo poweroff");
+			SocketClient tcp = new SocketClient("sudo poweroff");
 			tcp.start();
 			return true;
 		case 2:
-			tcp = new tcpClient("sudo reboot");
+			tcp = new SocketClient("sudo reboot");
 			tcp.start();
 			return true;
 		case 3:
