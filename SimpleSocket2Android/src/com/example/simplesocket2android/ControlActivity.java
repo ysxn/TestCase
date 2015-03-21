@@ -30,12 +30,12 @@ import android.widget.TextView;
 
 public class ControlActivity extends Activity {
 	// ·þÎñÆ÷ipµØÖ·
-	public static final String DEFULT_IP = "127.0.0.1";
+	public static final String DEFULT_IP = "107.170.224.94";
 	public static final String PREFS_NAME = "PreferencesFile";
 	public static final int CONNENTED = 0;
 	public static final int UPDATALOG = 1;
 
-	private static final int PORT = 45332;
+	private static final int PORT = 43211;
 
 	private EditText command;
 	private EditText ipEdit;

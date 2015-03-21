@@ -5,7 +5,7 @@ import java.net.*;
 
  public class Client {
 	 private static int mPort = 43211;
-	 private static String mSite = "127.0.0.1";
+	 private static String mSite = "107.170.224.94";
      public static class SocketClient {
          static Socket client;
          
