@@ -31,7 +31,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ControlActivity extends Activity {
+public class LongControl extends Activity {
     // 服务器ip地址
     public static final String DEFULT_IP = "107.170.224.94";
 
@@ -117,8 +117,12 @@ public class ControlActivity extends Activity {
 
                 // 创建一个socket实例
                 socket = new Socket();
+                //将此选项设为非零的超时值时，在与此 Socket 关联的 InputStream 上调用 read() 将只阻塞此时间长度。  
+                //如果超过超时值，将引发 java.net.SocketTimeoutException，虽然 Socket 仍旧有效。选项必须在进入阻塞操作前被启用才能生效。 
+                socket.setSoTimeout(5000);
                 // 建立一个远程链接
-                socket.connect(new InetSocketAddress(mIp, PORT));
+                //3秒内连接不上则超时
+                socket.connect(new InetSocketAddress(mIp, PORT), 3000);
                 // 判断是否链接成功
                 if (socket.isConnected()) {
                     mHandler.obtainMessage(UPDATALOG, "Server Connented").sendToTarget();
@@ -250,29 +254,11 @@ public class ControlActivity extends Activity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 1, 1, "关机");
-        menu.add(0, 2, 2, "重启");
-        menu.add(0, 3, 3, "退出");
-        menu.add(0, 4, 4, "长连接");
         return super.onCreateOptionsMenu(menu);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case 1:
-                SocketClient tcp = new SocketClient("sudo poweroff");
-                tcp.start();
-                return true;
-            case 2:
-                tcp = new SocketClient("sudo reboot");
-                tcp.start();
-                return true;
-            case 3:
-                finish();
-                break;
-            case 4:
-                startActivity(new Intent(this, LongControl.class));
-                break;
         }
         return super.onOptionsItemSelected(item);
     }
