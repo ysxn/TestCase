@@ -13,4 +13,5 @@ public class FileData {
     public PackageInfo mPi;
     public ApplicationInfo mAi;
     public String mVersion = "";
+    public String mCert = "";
 }

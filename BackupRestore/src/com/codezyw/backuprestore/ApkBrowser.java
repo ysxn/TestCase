@@ -6,6 +6,7 @@ import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.Signature;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -25,6 +26,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -161,6 +163,16 @@ public class ApkBrowser extends ListActivity {
                 };
             }.start();
         }
+        
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            	FileData fileData = (FileData) view.getTag();
+                Toast.makeText(ApkBrowser.this, "Ç©Ãû£º"+fileData.mCert, Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
 
     }
     
@@ -194,6 +206,7 @@ public class ApkBrowser extends ListActivity {
                     fdData.mPi = mUtil.getPackageInfo(ApkBrowser.this, file.getAbsolutePath());
                     fdData.mAi = (fdData.mPi != null) ? fdData.mPi.applicationInfo : null;
                     fdData.mInstalled = checkInstallStat(fdData);
+                    fdData.mCert = getSignatures(fdData.mPi.signatures);
                     mFilesList.add(fdData);
                     mHandler.sendMessage(mHandler.obtainMessage(REQUEST_UPDATE_PROGRESS,
                             mFilesList.size(), 0, file.getName()));
@@ -248,5 +261,18 @@ public class ApkBrowser extends ListActivity {
     		}
     	}
     	return fd.mInstalled;
+    }
+    
+    private String getSignatures(android.content.pm.Signature[] signatures) {
+    	if (signatures == null || signatures.length <= 0) {
+    		return "";
+    	}
+    	String r = "";
+    	for (android.content.pm.Signature s : signatures) {
+    		Log.i("zyw", ">>>"+new String(s.toChars()));
+    		Log.i("zyw", ">>>"+new String(s.toChars()));
+    		r = r + s.toCharsString();
+    	}
+    	return r;
     }
 }

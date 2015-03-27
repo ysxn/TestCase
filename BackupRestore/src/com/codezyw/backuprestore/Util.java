@@ -3,6 +3,7 @@ package com.codezyw.backuprestore;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -45,6 +46,59 @@ import android.widget.Toast;
 public class Util {
     private Context mContext;
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置格式 
+    
+    
+    
+    /**
+     * 应用程序运行命令获取 Root权限，设备必须已破解(获得ROOT权限)
+     * 
+     * @return 应用程序是/否获取Root权限
+     */
+    public static boolean getRootPermission() {
+        Process process = null;
+        try {
+            process = Runtime.getRuntime().exec("su"); //切换到root帐号
+            process.waitFor();
+        } catch (Exception e) {
+            return false;
+        } finally {
+            try {
+                process.destroy();
+            } catch (Exception e) {
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * 应用程序运行命令获取 Root权限，设备必须已破解(获得ROOT权限)
+     * 
+     * @return 应用程序是/否获取Root权限
+     */
+    public static boolean upgradeRootPermission(String pkgCodePath) {
+        Process process = null;
+        DataOutputStream os = null;
+        try {
+            String cmd="chmod 777 " + pkgCodePath;
+            process = Runtime.getRuntime().exec("su"); //切换到root帐号
+            os = new DataOutputStream(process.getOutputStream());
+            os.writeBytes(cmd + "\n");
+            os.writeBytes("exit\n");
+            os.flush();
+            process.waitFor();
+        } catch (Exception e) {
+            return false;
+        } finally {
+            try {
+                if (os != null) {
+                    os.close();
+                }
+                process.destroy();
+            } catch (Exception e) {
+            }
+        }
+        return true;
+    }
     
 	/**
 	 * 获取手机自身内存路径
@@ -290,7 +344,7 @@ public class Util {
     // 其实可以的，见appInfo.publicSourceDir = "file.getAbsolutePath()";
     public Drawable getUninatllApkInfo(Context context, String archiveFilePath, File file) {
         PackageManager pm = context.getPackageManager();
-        PackageInfo info = pm.getPackageArchiveInfo(archiveFilePath, 0);// PackageManager.GET_ACTIVITIES);
+        PackageInfo info = pm.getPackageArchiveInfo(archiveFilePath, PackageManager.GET_SIGNATURES);// PackageManager.GET_ACTIVITIES);
         if (info != null) {
             ApplicationInfo appInfo = info.applicationInfo;
             // 这是因为对于未安装应用ApplicationInfo未能获取到对应的source path。
@@ -305,7 +359,7 @@ public class Util {
     
     public PackageInfo getPackageInfo(Context context, String archiveFilePath) {
         PackageManager pm = context.getPackageManager();
-        PackageInfo info = pm.getPackageArchiveInfo(archiveFilePath, 0);// PackageManager.GET_ACTIVITIES);
+        PackageInfo info = pm.getPackageArchiveInfo(archiveFilePath, PackageManager.GET_SIGNATURES);// PackageManager.GET_ACTIVITIES);
 
         return info;
     }

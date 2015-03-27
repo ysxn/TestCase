@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class FileBrowser extends ListActivity {
     private final String TAG = "zyw";
@@ -44,7 +45,7 @@ public class FileBrowser extends ListActivity {
     private FileListAdapter mFileListAdapter;
     
     private File mDirectory;
-
+    
     private static final int REQUEST_UPDATE_DATA = 299;
 
     private Handler mHandler = new Handler() {
@@ -66,7 +67,13 @@ public class FileBrowser extends ListActivity {
         super.onCreate(icicle);
         mDirectory = android.os.Environment.getExternalStorageDirectory();
         Log.i(TAG, "sdcard=" + mDirectory);
+    	
         setListAdapterByPath(mDirectory);
+    }
+    
+    @Override
+    protected void onDestroy() {
+    	super.onDestroy();
     }
 
 	@Override
