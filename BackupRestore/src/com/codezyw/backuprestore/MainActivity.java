@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.android.notepad.HttpConnectionService;
-import com.example.android.notepad.LoginActivity;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
