@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.android.notepad.HttpConnectionService;
+import com.example.android.notepad.LoginActivity;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -119,6 +122,29 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Intent i = new Intent(MainActivity.this, FileBrowser.class);
 				startActivity(i);
+			}
+		});
+		
+		Button start = (Button) findViewById(R.id.logcat_start);
+		Button stop = (Button) findViewById(R.id.logcat_stop);
+		
+		start.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(MainActivity.this, LogcatService.class);
+				i.putExtra(LogcatService.CMD, LogcatService.CMD_START);
+				MainActivity.this.startService(i);
+			}
+		});
+		
+		stop.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(MainActivity.this, LogcatService.class);
+				i.putExtra(LogcatService.CMD, LogcatService.CMD_STOP);
+				MainActivity.this.startService(i);
 			}
 		});
 	}
