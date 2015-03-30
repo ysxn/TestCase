@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/guide_arrow" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/biz_setting_guide_arrow_bg" />
+    <RelativeLayout android:gravity="center_horizontal" android:id="@id/guide_zone" android:background="@drawable/biz_setting_guide_new_bg" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/guide_arrow">
+        <com.netease.nr.base.view.MyTextView android:textSize="17.0sp" android:textColor="@color/base_white" android:gravity="center_vertical" android:id="@id/guide_content" android:paddingLeft="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:text="@string/biz_setting_guide_gesture_slide" android:drawableLeft="@drawable/biz_setting_guide_ic_gesture_slide" android:drawablePadding="5.0dip" android:layout_centerVertical="true" />
+        <ImageView android:id="@id/guide_close" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/biz_setting_guide_ic_close" android:layout_toRightOf="@id/guide_content" android:layout_centerVertical="true" />
+    </RelativeLayout>
+</RelativeLayout>

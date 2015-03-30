@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/Widget.AppCompat.ActionButton"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_gravity="center" android:layout_width="32.0dip" android:layout_height="32.0dip">
+        <com.netease.nr.base.view.FitImageView android:layout_gravity="center" android:id="@id/login_icon_bg" android:layout_width="27.0dip" android:layout_height="27.0dip" />
+        <com.netease.nr.base.view.FitImageView android:layout_gravity="center" android:id="@id/login_icon" android:layout_width="27.0dip" android:layout_height="27.0dip" />
+        <ImageView android:layout_gravity="top|right|center" android:id="@id/tag" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/biz_pc_other_tag" />
+    </FrameLayout>
+</FrameLayout>

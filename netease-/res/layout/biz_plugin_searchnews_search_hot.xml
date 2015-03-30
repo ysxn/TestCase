@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/search_layout" android:background="@drawable/biz_pc_search_hot_search_bg" android:paddingLeft="@dimen/biz_news_searchnews_paddingLeft" android:paddingTop="20.0dip" android:paddingRight="@dimen/biz_news_searchnews_paddingRight" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="12.0dip" android:id="@id/hot_recent_tag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginBottom="10.0dip" android:text="@string/biz_plugin_searchnews_hot_recent" />
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <GridView android:id="@id/search_hot_grid_view" android:layout_width="fill_parent" android:layout_height="wrap_content" android:numColumns="2" />
+        <View android:id="@id/center_split_line" android:background="#ffeeeeee" android:visibility="gone" android:layout_width="1.0px" android:layout_height="fill_parent" android:layout_marginTop="10.0dip" android:layout_marginBottom="10.0dip" android:layout_alignTop="@id/search_hot_grid_view" android:layout_alignBottom="@id/search_hot_grid_view" android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</LinearLayout>

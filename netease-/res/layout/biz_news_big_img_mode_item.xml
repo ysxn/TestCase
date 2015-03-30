@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/big_img_item" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:paddingLeft="@dimen/base_listitem_padding_left_right" android:paddingTop="@dimen/base_listitem_padding_top_bottom" android:paddingRight="@dimen/base_listitem_padding_left_right" android:paddingBottom="@dimen/base_listitem_padding_top_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_title_style" android:ellipsize="end" android:id="@id/title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:singleLine="true" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" />
+        <com.netease.nr.base.view.BigImgEditorFrameLayout android:id="@id/img_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:layout_below="@id/title">
+            <com.netease.nr.base.view.FitImageView android:id="@id/img" android:layout_width="fill_parent" android:layout_height="wrap_content" android:scaleType="fitXY" />
+            <RelativeLayout android:layout_gravity="bottom" android:id="@id/editor_container" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.netease.nr.base.view.MyImageView android:id="@id/editor_img1" android:layout_width="@dimen/base_listitem_editor_img_size" android:layout_height="@dimen/base_listitem_editor_img_size" android:layout_marginLeft="5.0dip" android:layout_alignParentLeft="true" />
+                <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_editor_name_style" android:id="@id/editor_name1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="4.0dip" android:layout_toRightOf="@id/editor_img1" android:layout_alignBottom="@id/editor_img1" />
+                <com.netease.nr.base.view.MyImageView android:id="@id/editor_img2" android:layout_width="@dimen/base_listitem_editor_img_size" android:layout_height="@dimen/base_listitem_editor_img_size" android:layout_marginLeft="18.0dip" android:layout_toRightOf="@id/editor_name1" android:layout_alignBottom="@id/editor_img1" />
+                <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_editor_name_style" android:id="@id/editor_name2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="4.0dip" android:layout_toRightOf="@id/editor_img2" android:layout_alignBottom="@id/editor_img2" />
+            </RelativeLayout>
+        </com.netease.nr.base.view.BigImgEditorFrameLayout>
+        <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_desc_style" android:id="@id/desc" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:maxLines="2" android:minLines="2" android:layout_below="@id/img_container" android:lineSpacingExtra="@dimen/biz_desc_line_space_extra" />
+        <RelativeLayout android:paddingBottom="@dimen/biz_tag_padding_bottom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignBottom="@id/desc" android:layout_alignParentRight="true">
+            <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_tag_style" android:id="@id/tag" android:paddingLeft="1.0dip" android:paddingRight="1.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:layout_alignParentRight="true" />
+            <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_tag_style" android:id="@id/tag_new" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:singleLine="true" android:layout_toLeftOf="@id/tag" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <include layout="@layout/biz_news_list_item_bottom_container" />
+</LinearLayout>

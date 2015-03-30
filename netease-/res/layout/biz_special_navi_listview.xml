@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListView android:id="@id/navi_list" android:background="@color/base_main_bg_color" android:layout_width="fill_parent" android:layout_height="fill_parent" style="@style/base_listview_style"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

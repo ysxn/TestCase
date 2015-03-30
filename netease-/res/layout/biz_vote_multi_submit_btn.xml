@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.netease.nr.base.view.MyButton android:textAppearance="@style/biz_topic_vote_submit_digest" android:textColor="@android:color/white" android:id="@id/vote_submit" android:background="@android:color/transparent" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="30.0dip" android:text="@string/post"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

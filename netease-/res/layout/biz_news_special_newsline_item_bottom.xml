@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.netease.nr.base.view.MyButton android:textAppearance="@style/base_list_title_style" android:textColor="@color/base_list_title_color" android:id="@id/newsline_extend_button" android:padding="10.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="7.0dip" android:text="@string/biz_news_special_newsline_extend_text" android:layout_centerInParent="true" />
+</RelativeLayout>

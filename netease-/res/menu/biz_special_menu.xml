@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:icon="@drawable/biz_news_special_un_collect_icon" android:id="@id/biz_special_menu_fav" android:orderInCategory="100" android:title="@string/biz_menu_fav" app:showAsAction="always" />
+    <item android:icon="@drawable/biz_special_share_icon" android:id="@id/biz_special_menu_share" android:orderInCategory="200" android:title="@string/biz_menu_share" app:showAsAction="always" />
+</menu>

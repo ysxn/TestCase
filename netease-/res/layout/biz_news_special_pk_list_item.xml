@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/special_pk" android:paddingTop="@dimen/base_listitem_padding_top_bottom" android:paddingBottom="@dimen/base_listitem_padding_top_bottom" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip">
+        <RelativeLayout android:id="@id/pk_header" android:paddingLeft="@dimen/base_listitem_padding_left_right" android:paddingRight="@dimen/base_listitem_padding_left_right" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <RelativeLayout android:id="@id/pk_header_left" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:layout_alignParentLeft="true">
+                <ImageView android:id="@id/pk_header_left_flag" android:paddingLeft="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scaleType="fitXY" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+                <com.netease.nr.base.view.MyTextView android:gravity="left|center" android:id="@id/pk_header_left_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/biz_news_special_pk_pros_text" android:layout_toRightOf="@id/pk_header_left_flag" android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <RelativeLayout android:id="@id/pk_header_right" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_alignParentRight="true">
+                <com.netease.nr.base.view.MyTextView android:gravity="right|center" android:id="@id/pk_header_right_text" android:paddingRight="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/biz_news_special_pk_cons_text" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+                <ImageView android:id="@id/pk_header_right_flag" android:paddingRight="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scaleType="fitXY" android:layout_toLeftOf="@id/pk_header_right_text" android:layout_centerVertical="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+        <ImageView android:id="@id/divider1" android:background="#ffe5e5e5" android:layout_width="fill_parent" android:layout_height="1.0px" android:layout_marginLeft="@dimen/base_listitem_padding_left_right" android:layout_marginTop="5.0dip" android:layout_marginRight="@dimen/base_listitem_padding_left_right" android:layout_marginBottom="5.0dip" android:scaleType="fitXY" />
+        <LinearLayout android:orientation="horizontal" android:id="@id/pk_content_desc" android:paddingLeft="@dimen/base_listitem_padding_left_right" android:paddingTop="5.0dip" android:paddingRight="@dimen/base_listitem_padding_left_right" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <com.netease.nr.base.view.MyTextView android:id="@id/pk_content_desc_left" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="30.0dip" android:maxLines="3" android:layout_weight="1.0" />
+            <ImageView android:id="@id/divider2" android:background="#ffe5e5e5" android:layout_width="1.0px" android:layout_height="fill_parent" android:scaleType="fitXY" />
+            <com.netease.nr.base.view.MyTextView android:id="@id/pk_content_desc_right" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:maxLines="3" android:layout_weight="1.0" />
+        </LinearLayout>
+        <RelativeLayout android:id="@id/pk_content_action" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="52.0dip">
+            <ImageView android:id="@id/pk_content_button_left" android:paddingLeft="@dimen/base_listitem_padding_left_right" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scaleType="fitXY" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <ImageView android:id="@id/pk_content_button_right" android:paddingRight="@dimen/base_listitem_padding_left_right" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scaleType="fitXY" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+            <LinearLayout android:id="@id/pk_content_progress" android:layout_width="fill_parent" android:layout_height="4.0dip" android:layout_marginLeft="6.0dip" android:layout_marginRight="6.0dip" android:weightSum="100.0" android:layout_toLeftOf="@id/pk_content_button_right" android:layout_toRightOf="@id/pk_content_button_left" android:layout_centerVertical="true">
+                <TextView android:layout_gravity="left" android:id="@id/pk_content_progress_left" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginRight="1.0dip" />
+                <TextView android:layout_gravity="right" android:id="@id/pk_content_progress_right" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginLeft="1.0dip" />
+            </LinearLayout>
+            <com.netease.nr.base.view.MyTextView android:id="@id/pk_content_num_left" android:paddingTop="20.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:layout_toRightOf="@id/pk_content_button_left" android:layout_alignLeft="@id/pk_content_progress" android:layout_centerVertical="true" />
+            <com.netease.nr.base.view.MyTextView android:id="@id/pk_content_num_right" android:paddingTop="20.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:layout_toLeftOf="@id/pk_content_button_right" android:layout_alignRight="@id/pk_content_progress" android:layout_centerVertical="true" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

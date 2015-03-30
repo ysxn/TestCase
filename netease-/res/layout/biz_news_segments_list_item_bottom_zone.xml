@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:paddingLeft="@dimen/biz_segments_content_padding_left_right" android:paddingTop="4.0dip" android:paddingRight="@dimen/biz_segments_content_padding_left_right" android:paddingBottom="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/support_zone" android:paddingTop="5.0dip" android:paddingBottom="5.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <ImageView android:id="@id/support_icon" android:paddingBottom="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="2.0dip" android:src="@drawable/biz_news_list_other_segments_support" android:layout_centerVertical="true" />
+        <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_desc_style" android:id="@id/support_num" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="23415" android:singleLine="true" android:layout_toRightOf="@id/support_icon" android:layout_centerVertical="true" />
+    </RelativeLayout>
+    <RelativeLayout android:id="@id/tread_zone" android:paddingTop="5.0dip" android:paddingBottom="5.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <ImageView android:id="@id/tread_icon" android:paddingTop="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="2.0dip" android:src="@drawable/biz_news_list_other_segments_tread" android:layout_centerVertical="true" />
+        <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_desc_style" android:id="@id/tread_num" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="23415" android:singleLine="true" android:layout_toRightOf="@id/tread_icon" android:layout_centerVertical="true" />
+    </RelativeLayout>
+    <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_desc_style" android:layout_gravity="center_vertical" android:id="@id/share" android:background="@drawable/biz_news_list_other_segments_share_press" android:paddingLeft="8.0dip" android:paddingTop="4.0dip" android:paddingRight="8.0dip" android:paddingBottom="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/share" android:singleLine="true" android:drawableLeft="@drawable/biz_news_list_other_segments_share" android:drawablePadding="2.0dip" />
+    <RelativeLayout android:layout_gravity="center_vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.5">
+        <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_desc_style" android:gravity="center" android:id="@id/comment" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1234跟贴" android:singleLine="true" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:icon="@drawable/biz_sns_publish_send" android:id="@id/biz_sns_menu_publish" android:title="@string/biz_score_menu_submit" app:showAsAction="always" />
+    <item android:icon="@drawable/biz_sns_publish_send" android:id="@id/biz_sns_menu_bind" android:title="@string/biz_score_menu_submit" app:showAsAction="always" />
+</menu>

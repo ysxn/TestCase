@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:paddingRight="8.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="@dimen/biz_fb_my_fb_margin_right"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.netease.nr.base.view.MyTextView android:textSize="@dimen/biz_fb_my_fb_text_size" android:textColor="@color/biz_feedback_my_fb" android:id="@id/my_fb" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/feedback_action_my_feedback" />
+    <ImageView android:id="@id/new_fb_tag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="1.0dip" android:src="@drawable/biz_pc_other_tag" android:layout_toRightOf="@id/my_fb" android:layout_alignTop="@id/my_fb" />
+</RelativeLayout>

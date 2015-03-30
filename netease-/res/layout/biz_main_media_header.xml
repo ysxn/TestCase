@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.netease.nr.base.view.HeadScrollView android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.netease.nr.base.view.FitImageView android:id="@id/header_bg_img" android:background="@drawable/biz_media_list_header_cover_bg" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <com.netease.nr.base.view.FitImageView android:id="@id/header_bg_cover" android:background="@drawable/biz_media__list_item_header_cover_bg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignTop="@id/header_bg_img" android:layout_alignBottom="@id/header_bg_img" />
+    <RelativeLayout android:id="@id/header_info_alias_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="28.0dip" android:layout_alignBottom="@id/header_bg_img" android:layout_centerHorizontal="true">
+        <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:textColor="#80ffffff" android:gravity="center" android:id="@id/header_info_alias" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:layout_centerInParent="true" />
+        <View android:id="@id/header_info_alias_left" android:background="#50ffffff" android:visibility="gone" android:layout_width="40.0dip" android:layout_height="1.0dip" android:layout_marginRight="5.0dip" android:layout_toLeftOf="@id/header_info_alias" android:layout_centerVertical="true" />
+        <View android:id="@id/header_info_alias_right" android:background="#50ffffff" android:visibility="gone" android:layout_width="40.0dip" android:layout_height="1.0dip" android:layout_marginLeft="5.0dip" android:layout_toRightOf="@id/header_info_alias" android:layout_centerVertical="true" />
+    </RelativeLayout>
+    <com.netease.nr.base.view.MyTextView android:textSize="@dimen/biz_media_subscribe_list_title_size_big" android:textColor="@color/base_list_desc_color" android:gravity="center" android:id="@id/header_info_title" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:layout_above="@id/header_info_alias_layout" android:layout_centerHorizontal="true" />
+    <com.netease.nr.biz.news.list.other.media.MediaIconView android:id="@id/header_info_media_icon" android:layout_width="@dimen/biz_news_media_header_icon_size" android:layout_height="@dimen/biz_news_media_header_icon_size" android:layout_marginBottom="10.0dip" android:layout_above="@id/header_info_alias_layout" android:layout_centerHorizontal="true" />
+</com.netease.nr.base.view.HeadScrollView>

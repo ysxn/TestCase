@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:padding="@dimen/biz_sns_select_padding" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListView android:id="@id/reward_list" android:layout_width="fill_parent" android:layout_height="wrap_content" android:divider="@android:color/transparent" android:dividerHeight="10.0dip" android:layout_alignParentTop="true" />
+    <ImageView android:id="@id/reward_divider_line" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_below="@id/reward_list" />
+    <com.netease.nr.base.view.MyTextView android:textSize="20.0sp" android:gravity="center" android:layout_gravity="center" android:id="@id/cancel" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="@string/biz_reward_cancel" android:layout_below="@id/reward_divider_line" android:layout_centerHorizontal="true" />
+</RelativeLayout>

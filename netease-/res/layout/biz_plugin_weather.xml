@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.netease.nr.base.view.MyImageView android:id="@id/weather_bg" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/biz_news_local_weather_bg_big" android:scaleType="centerCrop" />
+    <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:textColor="@color/biz_plugin_weather_source" android:gravity="center" android:id="@id/weather_source" android:background="@color/biz_plugin_weather_bottom_bg" android:paddingBottom="15.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/biz_plugin_weather_source" android:layout_alignParentBottom="true" />
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/weather_source" android:layout_below="@id/base_action_bar">
+        <include android:id="@id/weather_today" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="2.0" layout="@layout/biz_plugin_weather_item_first" />
+        <com.netease.nr.base.view.ViewPagerWithIndicator android:id="@id/viewpager" android:background="@color/biz_plugin_weather_bottom_bg" android:paddingLeft="@dimen/biz_plugin_weather_paddingLeftAndRight" android:paddingRight="@dimen/biz_plugin_weather_paddingLeftAndRight" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" android:overScrollMode="never" />
+    </LinearLayout>
+    <com.netease.nr.base.view.FitImageView android:id="@id/ad_img" android:layout_width="54.0dip" android:layout_height="54.0dip" android:layout_marginLeft="@dimen/biz_localnews_select_city_margin_left" android:layout_marginTop="@dimen/biz_localnews_select_city_margin_top" android:layout_below="@id/base_action_bar" android:layout_alignParentLeft="true" />
+</RelativeLayout>

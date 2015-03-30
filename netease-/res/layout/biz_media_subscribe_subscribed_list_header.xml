@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_gravity="center_horizontal" android:id="@id/subscribe_login" android:paddingTop="8.0dip" android:paddingBottom="8.0dip" android:descendantFocusability="blocksDescendants" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.netease.nr.base.view.MyTextView android:textSize="12.0sp" android:id="@id/login_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/biz_subscribe_login_synchronize" android:singleLine="true" android:layout_centerInParent="true" />
+        <com.netease.nr.base.view.FitImageView android:id="@id/login_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toLeftOf="@id/login_text" android:layout_centerVertical="true" />
+    </RelativeLayout>
+    <ImageView android:id="@id/divider_header" android:layout_width="fill_parent" android:layout_height="1.0px" />
+    <RelativeLayout android:id="@id/subscribe_daily" android:paddingRight="@dimen/biz_news_column_subscribe_item_paddingRight" android:descendantFocusability="blocksDescendants" android:layout_width="fill_parent" android:layout_height="fill_parent" android:minHeight="90.0dip">
+        <com.netease.nr.base.view.FitImageView android:id="@id/daily_icon" android:layout_width="@dimen/biz_news_media_icon_size" android:layout_height="@dimen/biz_news_media_icon_size" android:layout_marginLeft="@dimen/biz_media_subscribe_list_margin_left_right" android:src="@drawable/icon" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+        <com.netease.nr.base.view.MyTextView android:textSize="20.0sp" android:id="@id/daily_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:text="@string/biz_subscribe_daily_recommend" android:singleLine="true" android:layout_toRightOf="@id/daily_icon" android:layout_centerVertical="true" />
+        <ImageView android:id="@id/daily_arrow" android:paddingRight="@dimen/biz_media_subscribe_list_margin_left_right" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+    </RelativeLayout>
+    <View android:id="@id/list_divider" android:layout_width="fill_parent" android:layout_height="1.0px" />
+    <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:gravity="left|center" android:id="@id/mymedia" android:paddingLeft="@dimen/biz_media_subscribe_list_margin_left_right" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="@string/biz_subscribe_media_mymedia_title_text" android:drawablePadding="5.0dip" />
+</LinearLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:paddingLeft="@dimen/biz_sns_select_padding_left" android:paddingTop="@dimen/biz_sns_select_padding_top" android:paddingRight="@dimen/biz_sns_select_padding_left" android:paddingBottom="@dimen/biz_sns_select_padding_top" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/creative_screenshot_container" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.netease.nr.base.view.MyTextView android:textSize="@dimen/biz_sns_select_title_size" android:textColor="@color/base_list_title_color" android:layout_gravity="left|center" android:id="@id/creative_screenshot_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip" android:text="@string/biz_sns_creative_screenshot" />
+        <RelativeLayout android:id="@id/creative_screenshot_item" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip">
+            <com.netease.nr.base.view.MyImageView android:id="@id/creative_screenshot_icon" android:layout_width="60.0dip" android:layout_height="60.0dip" android:src="@drawable/biz_screenshot_attitude_archimedes_1" android:layout_alignParentLeft="true" />
+            <com.netease.nr.base.view.MyTextView android:textSize="@dimen/biz_sns_select_desc_size" android:textColor="@color/base_list_title_color" android:id="@id/creative_screenshot_desc" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/biz_sns_creative_screenshot_desc" android:layout_toRightOf="@id/creative_screenshot_icon" android:layout_centerVertical="true" />
+            <com.netease.nr.base.view.MyImageView android:id="@id/creative_screenshot_arrow" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="4.0dip" android:src="@drawable/biz_sns_creative_screenshot_arrow" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <ImageView android:id="@id/divider" android:background="@color/biz_sns_select_divider" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginBottom="15.0dip" />
+    </LinearLayout>
+    <com.netease.nr.base.view.MyTextView android:textSize="@dimen/biz_sns_select_title_size" android:layout_gravity="left|center" android:id="@id/select_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:text="@string/biz_sns_share_to" />
+    <GridView android:id="@id/select_grid" android:layout_width="fill_parent" android:layout_height="fill_parent" android:listSelector="@drawable/biz_sns_select_item_bg" android:verticalSpacing="@dimen/biz_sns_select_verticalSpacing" android:numColumns="4" />
+</LinearLayout>

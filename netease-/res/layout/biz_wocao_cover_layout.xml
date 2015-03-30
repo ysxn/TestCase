@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.netease.nr.base.view.FitImageView android:id="@id/bg_view" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/biz_wocao_cover_bg" android:scaleType="centerCrop" />
+        <com.netease.nr.base.view.FitImageView android:id="@id/bg_view1" android:background="@drawable/biz_wocao_cover_bg1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" />
+        <com.netease.nr.base.view.MyTextView android:textSize="13.0sp" android:textColor="#ffedadad" android:id="@id/do_make_view_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="40.0dip" android:text="@string/biz_wocao_cover_info" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" />
+        <com.netease.nr.base.view.MyButton android:textSize="14.0sp" android:textColor="#ffd70202" android:id="@id/do_make_view" android:background="@drawable/biz_wocao_cover_btn_bg" android:paddingLeft="35.0dip" android:paddingTop="12.0dip" android:paddingRight="40.0dip" android:paddingBottom="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="100.0dip" android:layout_marginBottom="10.0dip" android:text="@string/biz_wocao_cover_do_make" android:singleLine="true" android:drawableRight="@drawable/biz_wocao_cover_btn_arrow" android:layout_above="@id/do_make_view_info" android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</FrameLayout>

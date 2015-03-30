@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="@dimen/biz_list_head_entrance"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.LinearLayoutCompat android:orientation="horizontal" android:id="@id/car_entrance" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_centerInParent="true" app:divider="@drawable/biz_news_list_other_car_divider_shape" app:showDividers="middle">
+        <include android:layout_gravity="center_vertical" android:id="@id/item1" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" layout="@layout/biz_news_list_car_extra_item" />
+        <include android:layout_gravity="center_vertical" android:id="@id/item2" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" layout="@layout/biz_news_list_car_extra_item" />
+        <include android:layout_gravity="center_vertical" android:id="@id/item3" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" layout="@layout/biz_news_list_car_extra_item" />
+    </android.support.v7.widget.LinearLayoutCompat>
+    <View android:id="@id/top_line" android:layout_width="fill_parent" android:layout_height="1.0px" android:layout_above="@id/car_entrance" />
+    <View android:id="@id/bottom_line" android:layout_width="fill_parent" android:layout_height="1.0px" android:layout_below="@id/car_entrance" />
+</RelativeLayout>

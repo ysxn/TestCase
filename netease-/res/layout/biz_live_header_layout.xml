@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/content_layout" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/live_header" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ViewStub android:id="@id/video_stub" android:layout="@layout/biz_live_header_video_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <RelativeLayout android:id="@id/live_head_view" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ViewStub android:id="@id/sport_score_stub" android:layout="@layout/biz_live_header_score_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            <ViewStub android:id="@id/live_default_stub" android:layout="@layout/biz_live_header_default_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <com.netease.nr.base.view.ViewPagerForSlider android:id="@id/pager" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/comment_reply" android:layout_below="@id/live_header"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+        <RelativeLayout android:id="@id/tabs" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <com.netease.nr.base.view.SlidingTabLayout android:id="@id/indicator" android:layout_width="fill_parent" android:layout_height="@dimen/biz_pager_indicator_height" />
+            <ImageView android:id="@id/edit_img" android:paddingLeft="15.0dip" android:paddingRight="15.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_alignTop="@id/indicator" android:layout_alignBottom="@id/indicator" android:layout_alignParentRight="true" />
+        </RelativeLayout>
+    </com.netease.nr.base.view.ViewPagerForSlider>
+    <FrameLayout android:id="@id/comment_reply" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" />
+</RelativeLayout>

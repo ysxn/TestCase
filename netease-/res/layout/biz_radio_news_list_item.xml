@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:progressbar_custom="http://schemas.android.com/apk/res/com.netease.newsreader.activity">
+    <RelativeLayout android:paddingLeft="@dimen/base_listitem_padding_left_right" android:paddingTop="@dimen/base_listitem_padding_top_bottom" android:paddingBottom="@dimen/base_listitem_padding_top_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.netease.nr.base.view.MyImageView android:id="@id/img" android:layout_width="@dimen/base_listitem_img_width" android:layout_height="@dimen/base_listitem_img_height" android:layout_marginRight="8.0dip" android:scaleType="fitXY" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" />
+        <FrameLayout android:id="@id/offlinestate" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_alignParentRight="true" android:layout_centerVertical="true">
+            <com.netease.nr.base.view.RoundProgressBar android:layout_gravity="center" android:id="@id/offlinestate_progress" android:layout_width="19.0dip" android:layout_height="19.0dip" progressbar_custom:roundColor="#ff999999" progressbar_custom:roundNightColor="#ff434343" progressbar_custom:roundProgressColor="#ffff0000" progressbar_custom:roundWidth="1.0dip" />
+            <ImageView android:layout_gravity="center" android:id="@id/offlinestate_control" android:layout_width="22.0dip" android:layout_height="22.0dip" />
+        </FrameLayout>
+        <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_desc_style" android:id="@id/source" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:layout_toLeftOf="@id/offlinestate" android:layout_toRightOf="@id/img" android:layout_alignTop="@id/img" />
+        <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_title_style" android:gravity="top|left|center" android:id="@id/title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" android:singleLine="true" android:layout_toLeftOf="@id/offlinestate" android:layout_toRightOf="@id/img" android:layout_below="@id/source" android:layout_alignLeft="@id/author" />
+        <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_desc_style" android:id="@id/datetime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:layout_toRightOf="@id/img" android:layout_below="@id/title" android:layout_alignLeft="@id/title" />
+        <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_desc_style" android:id="@id/size" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:singleLine="true" android:layout_toLeftOf="@id/offlinestate" android:layout_toRightOf="@id/datetime" android:layout_below="@id/title" />
+    </RelativeLayout>
+    <ImageView android:id="@id/divider" android:paddingLeft="14.0dip" android:paddingRight="14.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/base_list_divider_drawable" android:scaleType="fitXY" />
+</LinearLayout>

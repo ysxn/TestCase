@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/header_container" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <FrameLayout android:layout_gravity="center_vertical" android:id="@id/header_viewpager" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <com.netease.nr.base.view.ViewPagerForSlider android:id="@id/pager" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+            <com.netease.nr.base.view.DotIndicator android:layout_gravity="bottom|right|center" android:id="@id/indicator" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:layout_marginBottom="10.0dip" />
+        </FrameLayout>
+        <com.netease.nr.base.view.FitImageView android:id="@id/banner" android:layout_width="fill_parent" android:layout_height="wrap_content" android:scaleType="fitXY" android:adjustViewBounds="true" android:layout_alignParentTop="true" />
+    </FrameLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/introduce" android:paddingLeft="@dimen/base_listitem_padding_left_right" android:paddingTop="@dimen/base_listitem_padding_top_bottom" android:paddingRight="@dimen/base_listitem_padding_left_right" android:paddingBottom="@dimen/base_listitem_padding_top_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <View android:id="@id/header_intro_tag" android:layout_width="3.0dip" android:layout_height="fill_parent" />
+        <FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip">
+            <com.netease.nr.base.view.MyTextView android:textAppearance="@style/biz_special_intro" android:textStyle="bold" android:id="@id/header_intro_pic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/biz_news_special_header_introduce_tag_text" />
+            <com.netease.nr.base.view.MyTextView android:textAppearance="@style/biz_special_intro" android:id="@id/header_intro" android:layout_width="fill_parent" android:layout_height="wrap_content" android:lineSpacingExtra="6.0dip" />
+        </FrameLayout>
+    </LinearLayout>
+    <LinearLayout android:gravity="left|center" android:orientation="horizontal" android:id="@id/webviews_container" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</LinearLayout>

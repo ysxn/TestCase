@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:icon="@drawable/biz_pics_ic_xiegentie_tp" android:id="@id/biz_picshow_write_comment" android:title="@string/biz_menu_comment_write" app:showAsAction="withText" />
+    <item android:icon="@drawable/biz_news_newspage_share_icon" android:id="@id/biz_picshow_share" android:title="@string/biz_menu_share" app:showAsAction="withText" />
+    <item android:icon="@drawable/biz_news_newspage_collect_icon" android:id="@id/biz_picshow_fav" android:title="@string/biz_menu_fav" app:showAsAction="withText" />
+    <item android:icon="@drawable/biz_pics_ic_download_tp" android:id="@id/biz_picshow_save" android:title="@string/biz_menu_save" app:showAsAction="withText" />
+</menu>

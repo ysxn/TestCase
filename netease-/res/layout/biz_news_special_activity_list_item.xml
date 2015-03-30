@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/special_activity" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="13.0dip" android:layout_marginTop="7.0dip" android:layout_marginRight="13.0dip" android:layout_marginBottom="7.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.netease.nr.base.view.FitImageView android:id="@id/activity_img1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="3.0dip" android:scaleType="fitXY" android:layout_weight="1.0" />
+        <com.netease.nr.base.view.FitImageView android:id="@id/activity_img2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="3.0dip" android:scaleType="fitXY" android:layout_weight="1.0" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.netease.nr.base.view.FitImageView android:id="@id/activity_img3" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="3.0dip" android:scaleType="fitXY" android:layout_weight="1.0" />
+        <com.netease.nr.base.view.FitImageView android:id="@id/activity_img4" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="3.0dip" android:scaleType="fitXY" android:layout_weight="1.0" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@drawable/biz_screenshot_edit_tab_bg" android:layout_width="75.0dip" android:layout_height="30.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/divider_left" android:background="@color/biz_creative_screenshot_divider" android:layout_width="0.5dip" android:layout_height="fill_parent" android:layout_alignParentLeft="true" />
+    <ImageView android:id="@id/biz_screenshot_edit_tab_img" android:layout_width="26.0dip" android:layout_height="26.0dip" android:layout_centerInParent="true" />
+    <ImageView android:id="@id/divider_right" android:background="@color/biz_creative_screenshot_divider" android:visibility="gone" android:layout_width="0.5dip" android:layout_height="fill_parent" android:layout_alignParentRight="true" />
+</RelativeLayout>

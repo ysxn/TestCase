@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.netease.nr.phone.main.guide.VideoLayout android:id="@id/guide_video_layout" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.netease.nr.biz.video.MyVideoView android:layout_gravity="center" android:id="@id/guide_video" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    </com.netease.nr.phone.main.guide.VideoLayout>
+    <FrameLayout android:id="@id/guide_action" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.netease.nr.phone.main.guide.VideoLayout android:id="@id/guide_action_bg_view" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <View android:layout_gravity="fill" android:background="@drawable/biz_news_main_entry_fragment_bg" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        </com.netease.nr.phone.main.guide.VideoLayout>
+        <RelativeLayout android:layout_gravity="bottom|right|center" android:paddingBottom="170.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageView android:id="@id/guide_game_btn" android:paddingLeft="0.0dip" android:paddingRight="20.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/biz_news_main_entry_guide_game" android:layout_alignParentRight="true" />
+            <ImageView android:id="@id/guide_news_btn" android:paddingLeft="0.0dip" android:paddingRight="17.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/biz_news_main_entry_guide_news" android:layout_below="@id/guide_game_btn" android:layout_alignParentRight="true" />
+        </RelativeLayout>
+        <LinearLayout android:layout_gravity="bottom|left|center" android:orientation="horizontal" android:id="@id/guide_share" android:paddingLeft="40.0dip" android:paddingBottom="15.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <com.netease.nr.base.view.MyImageView android:gravity="center" android:id="@id/sina" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:src="@drawable/biz_news_main_entry_share_weibo" android:scaleType="center" android:layout_weight="1.0" />
+            <com.netease.nr.base.view.MyImageView android:gravity="center" android:id="@id/weixin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="5.0dip" android:src="@drawable/biz_news_main_entry_share_weixin" android:scaleType="center" android:layout_weight="1.0" />
+            <com.netease.nr.base.view.MyImageView android:gravity="center" android:id="@id/yixin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:src="@drawable/biz_news_main_entry_share_yixin" android:scaleType="center" android:layout_weight="1.0" />
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

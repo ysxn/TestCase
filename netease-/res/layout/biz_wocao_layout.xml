@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#ff910000" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.netease.nr.biz.plugin.wocao.WocaoBgView android:background="@drawable/biz_wocao_home_bg" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageView android:id="@id/header_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:src="@drawable/biz_wocao_home_header_icon" android:layout_centerHorizontal="true" />
+    </com.netease.nr.biz.plugin.wocao.WocaoBgView>
+    <com.netease.nr.base.view.MyButton android:textSize="21.0sp" android:textColor="#ffffffff" android:id="@id/start" android:background="@drawable/biz_wocao_home_start_bg_normal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginRight="30.0dip" android:layout_marginBottom="50.0dip" android:text="来一发" android:layout_alignParentBottom="true" />
+    <com.netease.nr.base.view.MyEditText android:textSize="21.0sp" android:textColor="#ff000000" android:id="@id/name" android:background="@drawable/biz_wocao_home_name_bg" android:padding="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginRight="30.0dip" android:layout_marginBottom="10.0dip" android:hint="填写你的名字" android:singleLine="true" android:layout_above="@id/start" />
+</RelativeLayout>

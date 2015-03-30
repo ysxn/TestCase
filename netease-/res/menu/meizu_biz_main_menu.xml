@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:icon="@drawable/base_main_action_personal_normal" android:id="@id/biz_main_menu_pc" android:title="@string/biz_main_menu_pc" app:showAsAction="always" />
+    <item android:icon="@drawable/biz_main_menu_weather" android:id="@id/biz_main_menu_weather" android:title="@string/biz_main_menu_weather" app:showAsAction="withText" />
+    <item android:icon="@drawable/biz_main_menu_offline" android:id="@id/biz_main_menu_offline" android:title="@string/biz_main_menu_offline" app:showAsAction="withText" />
+    <item android:icon="@drawable/biz_main_menu_theme" android:id="@id/biz_main_menu_theme" android:title="@string/biz_main_menu_theme_day" app:showAsAction="withText" />
+    <item android:icon="@drawable/biz_main_menu_search" android:id="@id/biz_main_menu_search" android:title="@string/biz_main_menu_search" app:showAsAction="withText" />
+    <item android:icon="@drawable/biz_main_menu_scan" android:id="@id/biz_main_menu_scan" android:title="@string/biz_main_menu_scan" app:showAsAction="withText" />
+    <item android:icon="@drawable/biz_main_menu_setting" android:id="@id/biz_main_menu_setting" android:title="@string/biz_main_menu_setting" app:showAsAction="withText" />
+</menu>

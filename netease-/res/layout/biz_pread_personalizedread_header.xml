@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/tag" android:paddingTop="5.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageView android:id="@id/pread_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" />
+        <TextView android:id="@id/pread_login" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/biz_pr_login" />
+        <TextView android:id="@id/pread_desc" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:text="@string/biz_pr_login_desc" />
+    </LinearLayout>
+    <View android:id="@id/divider" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+</LinearLayout>

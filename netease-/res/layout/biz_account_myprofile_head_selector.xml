@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/my_profile_bg" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.netease.nr.base.view.MyTextView android:textSize="@dimen/base_text_size_18" android:textColor="@color/biz_account_head_selector_title_color" android:layout_gravity="left" android:id="@id/my_profile_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="20.0dip" android:layout_marginBottom="15.0dip" android:text="@string/biz_pc_account_label_head_selector" />
+    <GridView android:gravity="center" android:id="@id/biz_pc_account_head_selector_gridview" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:layout_marginBottom="10.0dip" android:listSelector="@drawable/biz_sns_select_item_bg" android:horizontalSpacing="5.0dip" android:numColumns="3" android:minHeight="@dimen/biz_account_profile_head_selector_height" />
+</LinearLayout>

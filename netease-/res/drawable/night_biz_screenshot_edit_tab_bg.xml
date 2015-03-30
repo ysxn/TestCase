@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true" android:drawable="@color/night_biz_screenshot_tab_selected_bg" />
+    <item android:drawable="@color/night_biz_creative_screenshot_grid_bg_color" />
+</selector>

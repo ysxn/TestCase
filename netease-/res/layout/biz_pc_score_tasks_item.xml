@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/task_item" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:paddingLeft="15.0dip" android:paddingTop="12.0dip" android:paddingRight="15.0dip" android:paddingBottom="12.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:layout_weight="3.4">
+            <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:textColor="@color/biz_pc_task_detail_title" android:id="@id/title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="开启网易新闻" android:singleLine="true" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <ImageView android:id="@id/new_tag" android:paddingBottom="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/biz_fb_no_read" android:layout_toRightOf="@id/title" />
+        </RelativeLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="7.0">
+            <LinearLayout android:orientation="horizontal" android:id="@id/coin_zone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:textColor="@color/biz_pc_task_detail_desc" android:gravity="left" android:id="@id/coin_desc" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="5" android:singleLine="true" android:layout_weight="1.0" />
+                <LinearLayout android:gravity="center_vertical" android:layout_gravity="center" android:orientation="horizontal" android:id="@id/coin_count" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_weight="6.0">
+                    <ImageView android:id="@id/count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/biz_pc_task_coin_undo" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:id="@id/point_zone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip">
+                <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:textColor="@color/biz_pc_task_detail_desc" android:gravity="left" android:id="@id/point_desc" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="2" android:singleLine="true" android:layout_weight="1.0" />
+                <LinearLayout android:gravity="center_vertical" android:layout_gravity="center" android:orientation="horizontal" android:id="@id/point_count" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_weight="6.0" />
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:id="@id/jfq_zone" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:textColor="@color/biz_pc_task_detail_desc" android:gravity="left|center" android:id="@id/jfq_coin" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="+10-30" android:singleLine="true" android:drawableRight="@drawable/biz_pc_task_coin_done" android:drawablePadding="10.0dip" />
+                <com.netease.nr.base.view.MyTextView android:textSize="13.0sp" android:textColor="@color/biz_pc_task_detail_desc" android:gravity="left|center" android:id="@id/jfq_desc" android:paddingLeft="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/biz_pc_task_install_app_gold_desc_2" android:singleLine="true" />
+            </LinearLayout>
+        </LinearLayout>
+        <ImageView android:layout_gravity="center_vertical" android:id="@id/go_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/biz_pc_task_detail_go_icon" />
+    </LinearLayout>
+    <ImageView android:id="@id/divider" android:layout_width="fill_parent" android:layout_height="1.0px" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:src="@drawable/biz_plugin_manage_normal_divider" android:scaleType="fitXY" />
+</LinearLayout>

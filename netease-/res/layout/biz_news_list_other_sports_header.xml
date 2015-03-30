@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/sports_panel" android:paddingLeft="@dimen/base_listitem_padding_left_right" android:paddingRight="@dimen/base_listitem_padding_left_right" android:layout_width="fill_parent" android:layout_height="@dimen/biz_list_head_entrance">
+        <include android:id="@id/sports1_panel" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" layout="@layout/biz_news_list_other_sports_item" />
+        <ImageView android:id="@id/middle_line" android:layout_width="1.0dip" android:layout_height="fill_parent" android:layout_marginLeft="5.0dip" android:layout_marginTop="25.0dip" android:layout_marginRight="5.0dip" android:layout_marginBottom="16.0dip" />
+        <include android:id="@id/sports2_panel" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" layout="@layout/biz_news_list_other_sports_item" />
+    </LinearLayout>
+    <ImageView android:id="@id/bottom_line" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="@dimen/base_listitem_padding_left_right" android:layout_marginRight="@dimen/base_listitem_padding_left_right" />
+</LinearLayout>

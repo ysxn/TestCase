@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="4.0dip" />
+    <gradient android:startColor="@color/night_biz_news_special_pk_color_red" android:endColor="@color/night_biz_news_special_pk_color_red" android:angle="270.0" android:centerY="0.75" />
+</shape>

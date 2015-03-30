@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:progressbar_custom="http://schemas.android.com/apk/res/com.netease.newsreader.activity">
+    <RelativeLayout android:paddingTop="@dimen/base_listitem_padding_top_bottom" android:paddingBottom="@dimen/base_listitem_padding_top_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/base_listitem_padding_top_bottom" android:layout_marginBottom="@dimen/base_listitem_padding_top_bottom">
+        <ImageView android:id="@id/current_tag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="2.0dip" android:layout_marginTop="5.0dip" android:src="@drawable/biz_audio_extra_list_current_tag" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" />
+        <FrameLayout android:id="@id/offlinestate" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_alignParentTop="true" android:layout_alignParentRight="true" android:layout_alignParentBottom="true">
+            <com.netease.nr.base.view.RoundProgressBar android:layout_gravity="center" android:id="@id/offlinestate_progress" android:layout_width="19.0dip" android:layout_height="19.0dip" progressbar_custom:roundColor="#ff999999" progressbar_custom:roundNightColor="#ff434343" progressbar_custom:roundProgressColor="#ffff0000" progressbar_custom:roundWidth="1.0dip" />
+            <ImageView android:layout_gravity="center" android:id="@id/offlinestate_control" android:layout_width="22.0dip" android:layout_height="22.0dip" />
+        </FrameLayout>
+        <com.netease.nr.base.view.MyTextView android:textSize="16.0sp" android:textColor="@color/biz_audio_list_textcolor" android:id="@id/title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxLines="2" android:layout_toLeftOf="@id/offlinestate" android:layout_toRightOf="@id/current_tag" android:layout_alignParentTop="true" />
+        <com.netease.nr.base.view.MyTextView android:textSize="12.0sp" android:textColor="@color/biz_audio_list_textcolor" android:id="@id/ptime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="1.0dip" android:singleLine="true" android:layout_toRightOf="@id/current_tag" android:layout_below="@id/title" />
+        <com.netease.nr.base.view.MyTextView android:textSize="12.0sp" android:textColor="@color/biz_audio_list_textcolor" android:id="@id/size" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:singleLine="true" android:layout_toRightOf="@id/ptime" android:layout_below="@id/title" />
+    </RelativeLayout>
+    <ImageView android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/biz_audio_extra_list_divider" android:scaleType="fitXY" />
+</LinearLayout>

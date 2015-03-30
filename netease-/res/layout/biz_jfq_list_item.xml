@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/root" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/content" android:paddingTop="12.0dip" android:paddingBottom="12.0dip" android:descendantFocusability="blocksDescendants" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="16.0dip" android:layout_marginRight="16.0dip">
+        <com.netease.nr.base.view.FitImageView android:id="@id/jfq_icon" android:layout_width="@dimen/biz_news_media_icon_size" android:layout_height="@dimen/biz_news_media_icon_size" android:src="@drawable/biz_news_column_subscribe_default_icon" />
+        <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:textColor="#ffffffff" android:id="@id/jfq_condition" android:paddingLeft="3.0dip" android:paddingTop="1.0dip" android:paddingRight="3.0dip" android:paddingBottom="1.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" android:singleLine="true" android:layout_alignParentRight="true" />
+        <com.netease.nr.base.view.MyTextView android:textSize="20.0sp" android:textColor="#ff1f1f1f" android:id="@id/jfq_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:singleLine="true" android:layout_toLeftOf="@id/jfq_condition" android:layout_toRightOf="@id/jfq_icon" android:layout_alignTop="@id/jfq_condition" />
+        <FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginTop="5.0dip" android:layout_toLeftOf="@id/jfq_condition" android:layout_toRightOf="@id/jfq_icon" android:layout_below="@id/jfq_name">
+            <com.netease.nr.base.view.MyTextView android:textSize="16.0sp" android:textColor="#ffc53c3c" android:id="@id/jfq_point" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:drawableLeft="@drawable/biz_jfq_goldcoin_tag" android:drawablePadding="5.0dip" />
+            <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:textColor="#ffb1b1b1" android:id="@id/jfq_status" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" />
+        </FrameLayout>
+    </RelativeLayout>
+    <View android:id="@id/divider" android:background="#ffe2e2e2" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="13.0dip" android:layout_marginRight="13.0dip" android:layout_below="@id/content" android:layout_alignParentBottom="true" />
+</RelativeLayout>

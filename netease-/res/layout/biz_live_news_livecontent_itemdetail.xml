@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/live_main_bg" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:paddingLeft="11.0dip" android:paddingRight="11.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_marginBottom="5.0dip">
+        <com.netease.nr.base.view.FitImageView android:layout_gravity="center_horizontal" android:id="@id/hoster_header" android:layout_width="30.0dip" android:layout_height="30.0dip" />
+        <RelativeLayout android:orientation="vertical" android:id="@id/content" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <RelativeLayout android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="8.0dip" android:layout_marginRight="9.0dip">
+                <com.netease.nr.base.view.MyTextView android:textSize="15.0sp" android:id="@id/hoster_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" />
+                <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:id="@id/live_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignTop="@id/hoster_name" android:layout_alignParentRight="true" />
+                <ImageView android:id="@id/hoster_icon" android:visibility="gone" android:layout_width="13.0dip" android:layout_height="13.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="5.0dip" android:layout_toRightOf="@id/hoster_name" android:layout_alignParentTop="true" />
+                <com.netease.nr.base.view.MyTextView android:textSize="16.0sp" android:id="@id/live_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:includeFontPadding="false" android:layout_below="@id/hoster_name" android:lineSpacingExtra="5.0dip" />
+                <FrameLayout android:id="@id/content_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" android:layout_below="@id/live_content" />
+                <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:id="@id/live_score" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" android:includeFontPadding="false" android:layout_below="@id/content_container" android:layout_alignRight="@id/live_time" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" />
+            </RelativeLayout>
+            <ImageView android:id="@id/live_top" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_alignParentTop="true" android:layout_alignParentRight="true" />
+            <ImageView android:id="@id/live_list" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_alignParentTop="true" android:layout_alignParentRight="true" />
+        </RelativeLayout>
+    </LinearLayout>
+    <ImageView android:id="@id/divider_line" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="1.0px" android:src="@drawable/base_list_divider_drawable" android:scaleType="fitXY" />
+</LinearLayout>

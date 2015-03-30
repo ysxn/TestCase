@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@drawable/biz_ad_new_version1_img_bg2" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/ad_share_bg" android:background="@drawable/biz_ad_new_version1_share_bg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+        <LinearLayout android:orientation="horizontal" android:id="@id/shares" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="50.0dip" android:layout_marginTop="27.0dip" android:layout_marginRight="50.0dip">
+            <com.netease.nr.base.view.MyImageView android:gravity="center" android:id="@id/sina" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:src="@drawable/biz_ad_news_version1_share_sina" android:scaleType="center" android:layout_weight="1.0" />
+            <com.netease.nr.base.view.MyImageView android:gravity="center" android:id="@id/weixin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/biz_ad_new_version1_share_weixin" android:scaleType="center" android:layout_weight="1.0" />
+            <com.netease.nr.base.view.MyImageView android:gravity="center" android:id="@id/yixin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:src="@drawable/biz_ad_new_version1_share_yixin" android:scaleType="center" android:layout_weight="1.0" />
+        </LinearLayout>
+        <com.netease.nr.base.view.MyImageView android:id="@id/start" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:src="@drawable/biz_ad_new_version1_share_start" android:layout_below="@id/shares" android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+    <com.netease.nr.base.view.MyImageView android:gravity="center" android:id="@id/report" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="40.0dip" android:src="@drawable/biz_ad_news_version1_to_report" android:scaleType="center" android:layout_above="@id/ad_share_bg" />
+</RelativeLayout>

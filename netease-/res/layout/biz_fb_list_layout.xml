@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/feedback_list_panel" android:background="@color/biz_feedback_my_fb_bg" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="@dimen/biz_fb_thanks_your_fb_size" android:textColor="@color/biz_feedback_thanks_your_fb" android:gravity="center" android:id="@id/thanks_your_fb" android:background="@drawable/biz_fb_problem_write_bg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/biz_fb_my_fb_item_margin_left_right" android:layout_marginTop="@dimen/biz_fb_my_fb_item_margin_top_bottom" android:layout_marginRight="@dimen/biz_fb_my_fb_item_margin_left_right" android:layout_marginBottom="@dimen/biz_fb_my_fb_item_margin_top_bottom" android:text="@string/feedback_thanks_your_fb" android:layout_alignParentBottom="true" />
+    <ListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_height="fill_parent" android:drawSelectorOnTop="false" android:cacheColorHint="@android:color/transparent" android:layout_above="@id/thanks_your_fb" />
+    <com.netease.nr.base.view.MyTextView android:textAppearance="@style/base_list_title_style" android:gravity="center" android:layout_gravity="center" android:id="@android:id/empty" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/feedback_welcome" />
+</RelativeLayout>

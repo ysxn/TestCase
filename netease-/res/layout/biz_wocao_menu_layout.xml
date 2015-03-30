@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/webview_menu_bg" android:background="@drawable/base_bottom_menu_bg" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.netease.nr.base.view.MyButton android:textColor="@color/base_webview_menu_text_color" android:id="@id/bottom_menu_camera" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="15.0dip" android:layout_marginRight="20.0dip" android:text="@string/biz_pc_photo" />
+    <com.netease.nr.base.view.MyButton android:textColor="@color/base_webview_menu_text_color" android:id="@id/bottom_menu_pic" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="20.0dip" android:text="@string/biz_pc_pic" />
+    <com.netease.nr.base.view.MyButton android:textColor="@color/base_webview_menu_text_color" android:id="@id/bottom_menu_cancel" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="8.0dip" android:layout_marginRight="20.0dip" android:layout_marginBottom="15.0dip" android:text="@string/base_bottom_menu_cancel" />
+</LinearLayout>

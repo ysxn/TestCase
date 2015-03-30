@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:scrollbarThumbVertical="@drawable/base_list_scrollbar_handle" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/view_bg" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:id="@id/banner" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="15.0dip" android:src="@drawable/biz_pc_task_banner" />
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="15.0dip">
+            <TextView android:textColor="@color/biz_pc_task_detail_header" android:gravity="left|center" android:id="@id/today" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:text="@string/biz_pc_task_title_today" android:layout_weight="3.4" />
+            <TextView android:textColor="@color/biz_pc_task_detail_header" android:gravity="left|center" android:id="@id/reword" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/biz_pc_task_reword" android:layout_weight="1.5" />
+            <LinearLayout android:gravity="right" android:orientation="horizontal" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="5.5">
+                <TextView android:textColor="@color/biz_pc_task_detail_header" android:gravity="right|center" android:id="@id/coin_legend" android:paddingLeft="4.0dip" android:paddingRight="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/biz_pc_task_header_desc_gold" android:singleLine="true" android:drawableLeft="@drawable/biz_pc_task_coin_done" android:drawablePadding="2.0dip" />
+                <TextView android:textColor="@color/biz_pc_task_detail_header" android:gravity="right|center" android:id="@id/point_legend" android:paddingLeft="4.0dip" android:paddingRight="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/biz_pc_task_header_desc_point" android:singleLine="true" android:drawableLeft="@drawable/biz_pc_task_point_done" android:drawablePadding="2.0dip" />
+                <TextView android:textColor="@color/biz_pc_task_detail_header" android:gravity="right|center" android:id="@id/undo_legend" android:paddingLeft="4.0dip" android:paddingRight="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/biz_pc_task_header_desc_undo" android:singleLine="true" android:drawableLeft="@drawable/biz_pc_task_point_undo" android:drawablePadding="2.0dip" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/task_list" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <ImageView android:id="@id/task_divider1" android:layout_width="fill_parent" android:layout_height="1.0px" android:src="@drawable/biz_plugin_manage_normal_divider" android:scaleType="fitXY" />
+        <ImageView android:id="@id/guide_score_mall" android:layout_width="fill_parent" android:layout_height="wrap_content" android:scaleType="fitXY" />
+        <ImageView android:id="@id/task_divider2" android:layout_width="fill_parent" android:layout_height="1.0px" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:src="@drawable/biz_plugin_manage_normal_divider" android:scaleType="fitXY" />
+        <ImageView android:id="@id/guide_upgrade" android:layout_width="fill_parent" android:layout_height="wrap_content" android:scaleType="fitXY" />
+    </LinearLayout>
+</ScrollView>

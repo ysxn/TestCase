@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/jfq_record" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:id="@id/jfq_record_layout1" android:background="#ffeaeaea" android:paddingLeft="16.0dip" android:paddingTop="5.0dip" android:paddingRight="16.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <com.netease.nr.base.view.MyTextView android:textSize="18.0sp" android:textColor="#ff1f1f1f" android:gravity="left|center" android:id="@id/jfq_record_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="@string/biz_pc_credits_wall_record_title" android:singleLine="true" android:drawableLeft="@drawable/biz_plugin_manage_category_divider" android:drawablePadding="5.0dip" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <com.netease.nr.base.view.MyTextView android:textSize="16.0sp" android:textColor="#ff1f1f1f" android:gravity="left|center" android:id="@id/jfq_record_more" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/biz_pc_credits_wall_record_entry" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <View android:id="@id/divider1" android:background="#ffe2e2e2" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+        <RelativeLayout android:id="@id/jfq_record_layout2" android:paddingLeft="16.0dip" android:paddingTop="20.0dip" android:paddingRight="16.0dip" android:paddingBottom="20.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:textColor="#ff9f9f9f" android:gravity="right|center" android:id="@id/jfq_record_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="100.0dip" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+            <RelativeLayout android:id="@id/jfq_record_left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:layout_toLeftOf="@id/jfq_record_time">
+                <com.netease.nr.base.view.MyTextView android:textSize="16.0sp" android:textColor="#ff565656" android:id="@id/jfq_record_point" android:layout_width="wrap_content" android:layout_height="wrap_content" android:drawableLeft="@drawable/biz_jfq_goldcoin_tag" android:drawablePadding="3.0dip" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+                <com.netease.nr.base.view.MyTextView android:textSize="18.0sp" android:textColor="#ff1f1f1f" android:id="@id/jfq_record_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:layout_toLeftOf="@id/jfq_record_point" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <RelativeLayout android:id="@id/jfq_list_title_header" android:background="#ffeaeaea" android:paddingLeft="16.0dip" android:paddingTop="5.0dip" android:paddingRight="16.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.netease.nr.base.view.MyTextView android:textSize="18.0sp" android:textColor="#ff1f1f1f" android:gravity="left|center" android:id="@id/jfq_list_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="@string/biz_pc_credits_wall_list_header_title" android:drawableLeft="@drawable/biz_plugin_manage_category_divider" android:drawablePadding="5.0dip" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+        <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:textColor="#ff666666" android:gravity="left|center" android:id="@id/jfq_list_prompt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/biz_pc_credits_wall_list_header_digest" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+    </RelativeLayout>
+    <View android:id="@id/divider2" android:background="#ffe2e2e2" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+</LinearLayout>

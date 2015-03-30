@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@android:color/black" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/video_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_centerHorizontal="true">
+        <com.netease.vshow.android.player.PlayerView android:id="@id/videoview" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <RelativeLayout android:id="@id/loading_container" android:background="@drawable/biz_bobo_video_bg" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="horizontal" android:id="@id/loading_content" android:paddingTop="40.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+                <ProgressBar android:id="@id/laoding_progressbar" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/base_small_progressbar_style" />
+                <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:id="@id/loading_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" />
+            </LinearLayout>
+        </RelativeLayout>
+        <View android:id="@id/video_cover" android:background="#80000000" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <RelativeLayout android:layout_gravity="bottom" android:id="@id/anchor_info" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="110.0dip">
+            <FrameLayout android:id="@id/anchor_head_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginBottom="10.0dip" android:layout_alignParentBottom="true">
+                <View android:layout_gravity="center" android:id="@id/anchor_head_circle1" android:layout_width="93.0dip" android:layout_height="93.0dip" />
+                <View android:layout_gravity="center" android:id="@id/anchor_head_circle2" android:layout_width="87.0dip" android:layout_height="87.0dip" />
+                <com.netease.nr.base.view.MyImageView android:layout_gravity="center" android:id="@id/anchor_head" android:layout_width="80.0dip" android:layout_height="80.0dip" android:scaleType="centerCrop" />
+            </FrameLayout>
+            <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:id="@id/anchor_viewers" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="18.0dip" android:layout_marginBottom="15.0dip" android:text="0" android:layout_toRightOf="@id/anchor_head_layout" android:layout_alignParentBottom="true" />
+            <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:id="@id/anchor_viewers_unit" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="8.0dip" android:text="@string/biz_bobo_anchor_info_viewers_unit" android:layout_toRightOf="@id/anchor_viewers" android:layout_alignTop="@id/anchor_viewers" />
+            <View android:id="@id/anchor_info_divider" android:layout_width="1.0dip" android:layout_height="wrap_content" android:layout_marginLeft="11.0dip" android:layout_marginRight="11.0dip" android:layout_toRightOf="@id/anchor_viewers_unit" android:layout_alignTop="@id/anchor_viewers_unit" android:layout_alignBottom="@id/anchor_viewers_unit" />
+            <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:id="@id/anchor_focus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toRightOf="@id/anchor_info_divider" android:layout_alignTop="@id/anchor_viewers" />
+            <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:id="@id/anchor_focus_unit" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/biz_bobo_anchor_info_follows_unit" android:layout_toRightOf="@id/anchor_focus" android:layout_alignTop="@id/anchor_viewers" />
+            <com.netease.nr.base.view.MyTextView android:textSize="20.0sp" android:id="@id/anchor_nick" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:maxLines="2" android:layout_toLeftOf="@id/anchor_focus_btn" android:layout_toRightOf="@id/anchor_head_layout" android:layout_above="@id/anchor_viewers" android:layout_alignLeft="@id/anchor_viewers" />
+            <CheckBox android:gravity="center" android:id="@id/anchor_focus_btn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" />
+            <View android:id="@id/anchor_focus_unlogin" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignLeft="@id/anchor_focus_btn" android:layout_alignTop="@id/anchor_focus_btn" android:layout_alignRight="@id/anchor_focus_btn" android:layout_alignBottom="@id/anchor_focus_btn" />
+        </RelativeLayout>
+        <ImageView android:layout_gravity="center" android:id="@id/gift_img" android:visibility="gone" android:layout_width="120.0dip" android:layout_height="120.0dip" android:scaleType="fitXY" />
+    </FrameLayout>
+    <RelativeLayout android:id="@id/chat_reply" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:layout_width="fill_parent" android:layout_height="60.0dip" android:layout_alignParentBottom="true">
+        <RelativeLayout android:id="@id/chat_gift_zone" android:layout_width="55.0dip" android:layout_height="50.0dip" android:layout_alignParentRight="true" android:layout_centerVertical="true">
+            <FrameLayout android:id="@id/chat_reply_flower_layout" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true">
+                <ImageView android:layout_gravity="center" android:id="@id/chat_reply_flower_circle1" android:layout_width="40.0dip" android:layout_height="40.0dip" android:scaleType="centerInside" />
+                <com.netease.nr.biz.bobo.FlowerProgressView android:layout_gravity="center" android:id="@id/chat_reply_flower_circle2" android:layout_width="40.0dip" android:layout_height="40.0dip" />
+                <View android:layout_gravity="center" android:id="@id/chat_reply_flower_bg" android:layout_width="33.0dip" android:layout_height="33.0dip" />
+                <ImageView android:layout_gravity="center" android:id="@id/chat_reply_flower" android:layout_width="33.0dip" android:layout_height="33.0dip" android:scaleType="centerInside" />
+            </FrameLayout>
+            <com.netease.nr.base.view.MyTextView android:textSize="10.0sp" android:gravity="center" android:id="@id/chat_flower_count_tag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" />
+        </RelativeLayout>
+        <com.netease.nr.base.view.MyTextView android:id="@id/chat_reply_btn" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:layout_marginBottom="15.0dip" android:text="@string/biz_bobo_peration_edit_entry_text" android:layout_toLeftOf="@id/chat_gift_zone" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+    <ListView android:orientation="horizontal" android:id="@id/chat_list" android:layout_width="fill_parent" android:layout_height="fill_parent" android:transcriptMode="normal" android:divider="#00000000" android:dividerHeight="0.0dip" android:layout_above="@id/chat_reply" android:layout_below="@id/video_container" />
+    <ListView android:orientation="horizontal" android:id="@id/recommend_list" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:divider="#00000000" android:dividerHeight="0.0dip" android:layout_above="@id/chat_reply" android:layout_below="@id/video_container" />
+    <View android:id="@id/chat_list_head_cover" android:background="@drawable/biz_bobo_chat_list_head_cover_bg" android:layout_width="fill_parent" android:layout_height="30.0dip" android:layout_marginTop="-5.0dip" android:layout_below="@id/video_container" />
+    <LinearLayout android:orientation="vertical" android:id="@id/chat_edit" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+        <View android:id="@id/chat_edit_divider" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+        <RelativeLayout android:id="@id/chat_edit_head_layout" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ImageView android:id="@id/chat_edit_close" android:padding="15.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scaleType="centerInside" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <ImageView android:id="@id/chat_edit_send" android:padding="15.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+            <com.netease.nr.base.view.MyTextView android:textSize="20.0sp" android:id="@id/chat_edit_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/biz_bobo_peration_edit_title" android:layout_centerInParent="true" />
+        </RelativeLayout>
+        <FrameLayout android:id="@id/chat_edit_layout" android:padding="15.0dip" android:layout_width="fill_parent" android:layout_height="140.0dip">
+            <com.netease.nr.base.view.MyEditText android:textSize="18.0sp" android:gravity="top|left|center" android:id="@id/chat_edit_zone" android:background="#00000000" android:layout_width="fill_parent" android:layout_height="fill_parent" android:maxLength="100" android:imeOptions="actionDone" />
+            <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:layout_gravity="bottom|right|center" android:id="@id/chat_edit_num_prompt" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </FrameLayout>
+        <RelativeLayout android:id="@id/chat_edit_nick_layout" android:paddingLeft="15.0dip" android:paddingRight="15.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <com.netease.nr.base.view.MyTextView android:textSize="16.0sp" android:id="@id/chat_edit_nick" android:paddingTop="10.0dip" android:paddingBottom="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <com.netease.nr.base.view.MyTextView android:textSize="16.0sp" android:id="@id/chat_edit_modify_nick_btn" android:paddingLeft="4.0dip" android:paddingTop="1.0dip" android:paddingRight="4.0dip" android:paddingBottom="1.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:text="@string/biz_bobo_peration_edit_nick_btn_text" android:layout_toRightOf="@id/chat_edit_nick" android:layout_centerVertical="true" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

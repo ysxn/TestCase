@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/biz_navi_tab" android:paddingLeft="@dimen/biz_navi_paddingLeft" android:paddingTop="@dimen/biz_navi_paddingTop" android:paddingBottom="@dimen/biz_navi_paddingTop" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/biz_navi_list_height">
+        <ImageView android:id="@id/biz_navi_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="15.0dip" />
+        <com.netease.nr.base.view.MyTextView android:textSize="16.0sp" android:textColor="@color/biz_navi_title_color_selector" android:id="@id/biz_navi_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:lineSpacingExtra="0.0dip" />
+        <com.netease.nr.base.view.MyImageView android:layout_gravity="top" android:id="@id/biz_tag_new" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginTop="2.0dip" android:src="@drawable/biz_pc_other_read_tag" />
+    </LinearLayout>
+</FrameLayout>

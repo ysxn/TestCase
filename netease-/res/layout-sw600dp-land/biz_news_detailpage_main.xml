@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:background="@color/base_main_bg_color" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:id="@id/newspage_webview_container" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <FrameLayout android:id="@id/newspage_reply_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" />
+            <com.netease.nr.biz.news.detailpage.NeteaseWebView android:scrollbarThumbVertical="@drawable/base_list_scrollbar_handle" android:id="@id/webView" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/newspage_reply_container" />
+            <ImageView android:id="@id/newspage_reply_container_fade" android:background="@drawable/biz_tie_comment_reply_fade" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_above="@id/newspage_reply_container" />
+        </RelativeLayout>
+        <include android:id="@id/newspage_progressContainer" android:layout_width="fill_parent" android:layout_height="fill_parent" layout="@layout/base_loadingbar_layout" />
+        <include android:id="@id/newspage_empty" android:layout_width="fill_parent" android:layout_height="fill_parent" layout="@layout/base_load_empty_layout" />
+    </RelativeLayout>
+</FrameLayout>

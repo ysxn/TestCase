@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:padding="@dimen/biz_tie_comment_floor_normal_padding" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/show_floor_content" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.netease.nr.base.view.MyTextView android:textAppearance="@style/biz_tie_comment_date_style" android:id="@id/floor_num" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentRight="true" />
+        <LinearLayout android:orientation="vertical" android:id="@id/floor_name_zone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_toLeftOf="@id/floor_num" android:layout_alignParentLeft="true" android:layout_alignParentTop="true">
+            <com.netease.nr.base.view.MyTextView android:textAppearance="@style/biz_tie_comment_username_style" android:id="@id/floor_username" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" />
+        </LinearLayout>
+        <com.netease.nr.biz.tie.comment.common.CommentContentView android:textAppearance="@style/biz_tie_comment_content_style" android:id="@id/floor_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/floor_name_zone" android:lineSpacingExtra="3.0dip" />
+        <com.netease.nr.base.view.MyTextView android:textSize="12.0sp" android:gravity="center" android:id="@id/floor_content_fold" android:padding="3.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="@string/biz_tie_expand" android:drawablePadding="1.0dip" android:layout_below="@id/floor_content" android:layout_alignParentRight="true" />
+        <RelativeLayout android:id="@id/floor_audio" android:paddingLeft="12.0dip" android:paddingTop="6.0dip" android:paddingRight="12.0dip" android:paddingBottom="6.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:layout_below="@id/floor_content" android:layout_alignParentLeft="true">
+            <FrameLayout android:id="@id/floor_audio_icon" android:focusable="false" android:layout_width="@dimen/biz_tie_comment_audio_size" android:layout_height="@dimen/biz_tie_comment_audio_size" android:layout_centerVertical="true">
+                <ProgressBar android:layout_gravity="center_vertical" android:id="@id/floor_audio_progressbar" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/base_small_progressbar_style" />
+                <ImageView android:layout_gravity="center_vertical" android:id="@id/floor_audio_wave" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            </FrameLayout>
+            <com.netease.nr.base.view.MyTextView android:textAppearance="@style/biz_tie_comment_audio_time_style" android:gravity="right|center" android:id="@id/floor_audio_time" android:paddingLeft="12.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toRightOf="@id/floor_audio_icon" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <com.netease.nr.base.view.MyTextView android:textSize="12.0sp" android:gravity="center_vertical" android:id="@id/floor_flag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:drawablePadding="2.0dip" android:layout_below="@id/floor_content_fold" android:layout_alignParentRight="true" />
+        <RelativeLayout android:id="@id/reword" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:layout_below="@id/floor_content_fold" android:layout_alignParentRight="true">
+            <RelativeLayout android:id="@id/reword_diamond" android:paddingLeft="5.0dip" android:paddingRight="5.0dip" android:paddingBottom="1.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_centerVertical="true">
+                <ImageView android:id="@id/diamond" android:paddingTop="2.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerVertical="true" />
+                <com.netease.nr.base.view.MyTextView android:textSize="11.0sp" android:gravity="center_vertical" android:id="@id/diamond_num" android:paddingBottom="2.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toRightOf="@id/diamond" android:layout_centerVertical="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout android:orientation="horizontal" android:id="@id/hide_floor_content" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.netease.nr.base.view.MyTextView android:textAppearance="@style/biz_tie_comment_content_style" android:gravity="center" android:id="@id/hide_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/biz_tie_show_hidden_comment" android:drawablePadding="10.0dip" android:layout_centerInParent="true" />
+        <ProgressBar android:id="@id/hide_pb" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toLeftOf="@id/hide_text" android:layout_centerVertical="true" style="@style/base_small_progressbar_style" />
+    </RelativeLayout>
+</FrameLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.netease.nr.base.view.draggrid.DragLayer android:id="@id/drag_layer" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/edit_layout" android:background="#fffefefe" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.netease.nr.base.view.draggrid.DragGridView android:id="@id/top_grid" android:paddingLeft="5.0dip" android:paddingRight="5.0dip" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="wrap_content" android:listSelector="@android:color/transparent" android:horizontalSpacing="5.0dip" android:verticalSpacing="1.0dip" android:numColumns="4" android:layout_alignParentTop="true" />
+        <com.netease.nr.base.view.MyTextView android:textSize="12.0sp" android:textColor="#ffcccccc" android:gravity="right|center" android:id="@id/top_tip" android:paddingLeft="5.0dip" android:paddingTop="5.0dip" android:paddingRight="10.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/biz_news_column_edit_for_dialog" android:layout_below="@id/top_grid" />
+        <RelativeLayout android:id="@id/more_title_layout" android:background="#fff8f8f8" android:paddingTop="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/top_tip">
+            <com.netease.nr.base.view.MyTextView android:textSize="14.0sp" android:textColor="#ff838383" android:gravity="left|center" android:id="@id/more_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:text="@string/biz_news_column_add_for_dialog" />
+        </RelativeLayout>
+        <com.netease.nr.base.view.draggrid.DragGridView android:id="@id/more_grid" android:background="#fff8f8f8" android:paddingLeft="5.0dip" android:paddingRight="5.0dip" android:paddingBottom="10.0dip" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:listSelector="@android:color/transparent" android:horizontalSpacing="5.0dip" android:verticalSpacing="1.0dip" android:numColumns="4" android:layout_below="@id/more_title_layout" />
+    </RelativeLayout>
+</com.netease.nr.base.view.draggrid.DragLayer>

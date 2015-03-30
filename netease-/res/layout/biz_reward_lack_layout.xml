@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@drawable/biz_reward_sucess_bg" android:paddingLeft="@dimen/biz_sns_select_padding" android:paddingTop="@dimen/biz_sns_select_padding" android:paddingRight="@dimen/biz_sns_select_padding" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.netease.nr.base.view.MyTextView android:textSize="25.0sp" android:gravity="center_horizontal" android:id="@id/title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_centerHorizontal="true" />
+    <com.netease.nr.base.view.MyTextView android:textSize="15.0sp" android:gravity="center_horizontal" android:id="@id/desc" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_below="@id/title" android:layout_centerHorizontal="true" />
+    <LinearLayout android:background="@drawable/biz_reward_operate_bg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_below="@id/desc">
+        <com.netease.nr.base.view.MyTextView android:textSize="20.0sp" android:gravity="center" android:id="@id/cancel" android:paddingTop="10.0dip" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/biz_reward_cancel" android:layout_weight="1.0" />
+        <com.netease.nr.base.view.MyTextView android:textSize="20.0sp" android:gravity="center" android:id="@id/buy" android:paddingTop="10.0dip" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/biz_reward_goepay" android:layout_weight="1.0" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:icon="@drawable/base_main_action_personal_normal" android:id="@id/biz_main_menu_pc" android:orderInCategory="100" android:title="@string/biz_main_menu_pc" app:showAsAction="always" />
+    <item android:icon="@drawable/ic_menu_moreoverflow" android:id="@id/biz_main_menu_more" android:orderInCategory="100" android:title="@string/base_menu_more" app:showAsAction="always">
+        <menu />
+    </item>
+</menu>

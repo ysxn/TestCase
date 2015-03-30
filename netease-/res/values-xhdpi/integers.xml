@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="biz_pc_scale_bottom">508</integer>
+    <integer name="biz_pc_scale_top">332</integer>
+</resources>

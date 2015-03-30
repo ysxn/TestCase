@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="abc_action_bar_home_description">转到主屏幕</string>
+    <string name="abc_action_bar_home_description_format">%1$s：%2$s</string>
+    <string name="abc_action_bar_home_subtitle_description_format">%1$s - %2$s：%3$s</string>
+    <string name="abc_action_bar_up_description">转到上一层级</string>
+    <string name="abc_action_menu_overflow_description">更多选项</string>
+    <string name="abc_action_mode_done">完成</string>
+    <string name="abc_activity_chooser_view_see_all">查看全部</string>
+    <string name="abc_activitychooserview_choose_application">选择应用</string>
+    <string name="abc_searchview_description_clear">清除查询</string>
+    <string name="abc_searchview_description_query">搜索查询</string>
+    <string name="abc_searchview_description_search">搜索</string>
+    <string name="abc_searchview_description_submit">提交查询</string>
+    <string name="abc_searchview_description_voice">语音搜索</string>
+    <string name="abc_shareactionprovider_share_with">分享方式</string>
+    <string name="abc_shareactionprovider_share_with_application">通过%s分享</string>
+    <string name="app_name">网易新闻</string>
+    <string name="app_name_nightly">网易新闻体验版</string>
+    <string name="application_name_CHN">网易新闻</string>
+    <string name="biz_ad_flowremind_exit">退出</string>
+    <string name="biz_ad_flowremind_noask">不再提示</string>
+    <string name="biz_ad_flowremind_ok">确定</string>
+    <string name="biz_ad_flowremind_tipcontent">欢迎使用网易新闻客户端软件，客户端使用完全免费，在使用过程中产生的数据流量费，请咨询当地运营商，是否允许应用建立连接？</string>
+    <string name="biz_ad_flowremind_title">系统提示</string>
+    <string name="version_build_num_str">更新序号：Build %s</string>
+</resources>

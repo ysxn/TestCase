@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/update_divider_view" android:paddingLeft="@dimen/base_listitem_padding_left_right" android:paddingTop="5.0dip" android:paddingRight="@dimen/base_listitem_padding_left_right" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/update_divider_content" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+        <ImageView android:id="@id/update_divider_view_image" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerVertical="true" />
+        <com.netease.nr.base.view.MyTextView android:textSize="12.0sp" android:gravity="center" android:id="@id/update_divider_view_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:text="@string/biz_pr_update_divider_text" android:layout_toRightOf="@id/update_divider_view_image" android:layout_centerVertical="true" />
+    </RelativeLayout>
+    <View android:id="@id/update_divider_view_left_line" android:layout_width="fill_parent" android:layout_height="1.0px" android:layout_marginRight="10.0dip" android:layout_toLeftOf="@id/update_divider_content" android:layout_centerVertical="true" />
+    <View android:id="@id/update_divider_view_right_line" android:layout_width="fill_parent" android:layout_height="1.0px" android:layout_marginLeft="10.0dip" android:layout_toRightOf="@id/update_divider_content" android:layout_centerVertical="true" />
+</RelativeLayout>

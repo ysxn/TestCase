@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/bottom_container" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:id="@id/top_divider" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+    <RelativeLayout android:id="@id/enter_special_container" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.netease.nr.base.view.MyTextView android:textSize="15.0sp" android:textColor="@color/base_list_block_special_enter_color" android:id="@id/enter_special" android:paddingTop="10.0dip" android:paddingBottom="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/biz_news_list_enter_special" android:drawableRight="@drawable/biz_news_list_arrow" android:drawablePadding="6.0dip" android:layout_centerInParent="true" />
+    </RelativeLayout>
+    <include android:id="@id/bottom_divider" android:layout_width="fill_parent" android:layout_height="wrap_content" layout="@layout/biz_news_normal_reconmend_list_item_divider_layout" />
+</LinearLayout>

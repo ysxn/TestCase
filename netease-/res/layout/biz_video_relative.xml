@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:paddingLeft="@dimen/biz_relative_video_padding" android:paddingTop="@dimen/biz_relative_video_padding" android:paddingRight="@dimen/biz_relative_video_padding" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/image_container" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentLeft="true">
+        <com.netease.nr.base.view.FitImageView android:id="@id/image" android:layout_width="@dimen/biz_video_img_width" android:layout_height="@dimen/biz_video_img_height" android:layout_centerInParent="true" />
+        <ImageView android:id="@id/icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/biz_video_play_big_icon" android:layout_centerInParent="true" />
+    </RelativeLayout>
+    <com.netease.nr.base.view.MyTextView android:textSize="16.0sp" android:textColor="@color/biz_video_relative_list_title" android:id="@id/title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="13.0dip" android:layout_marginTop="3.0dip" android:maxLines="2" android:layout_toRightOf="@id/image_container" android:layout_alignTop="@id/image_container" android:lineSpacingExtra="3.0dip" />
+    <ImageView android:id="@id/divider" android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/base_card_list_divider_drawable" android:scaleType="fitXY" android:layout_alignLeft="@id/title" android:layout_alignRight="@id/title" android:layout_alignBottom="@id/image_container" />
+    <com.netease.nr.base.view.MyTextView android:textSize="12.0sp" android:textColor="@color/biz_video_relative_list_time" android:id="@id/time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip" android:layout_above="@id/divider" android:layout_alignLeft="@id/title" />
+</RelativeLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/img_edit_menu" android:background="@drawable/base_bottom_menu_bg" android:paddingLeft="24.0dip" android:paddingRight="24.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.netease.nr.base.view.MyButton android:textSize="18.0sp" android:textColor="@color/biz_fb_menu_reselect_color" android:id="@id/menu_reselect" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:text="@string/feedback_edit_img_reselect" />
+    <com.netease.nr.base.view.MyButton android:textSize="18.0sp" android:textColor="@color/biz_fb_menu_delete_color" android:id="@id/menu_delete" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:layout_marginBottom="12.0dip" android:text="@string/feedback_edit_img_delete" />
+    <com.netease.nr.base.view.MyButton android:textSize="18.0sp" android:textColor="@color/biz_fb_menu_cancel_color" android:id="@id/menu_cancel" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="15.0dip" android:text="@string/feedback_edit_img_cancel" />
+</LinearLayout>

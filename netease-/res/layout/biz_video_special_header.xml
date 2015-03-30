@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat android:orientation="vertical" android:id="@id/special_header_item" android:layout_width="fill_parent" android:layout_height="wrap_content" app:divider="@drawable/base_card_list_divider_drawable" app:showDividers="end"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:paddingLeft="14.0dip" android:paddingTop="8.0dip" android:paddingRight="14.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.netease.nr.base.view.MyTextView android:textSize="16.0sp" android:textColor="@color/biz_video_special_list_intro_title" android:layout_gravity="left" android:id="@id/intro_title" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <com.netease.nr.base.view.MyTextView android:textSize="12.0sp" android:textColor="@color/biz_video_special_list_intro_content" android:id="@id/intro_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:lineSpacingExtra="4.0dip" />
+    </LinearLayout>
+</android.support.v7.widget.LinearLayoutCompat>

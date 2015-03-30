@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/video_container" android:background="@android:color/black" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_centerHorizontal="true">
+        <com.netease.nr.biz.video.MyVideoView android:layout_gravity="center" android:id="@id/videoview" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <master.flame.danmaku.ui.widget.DanmakuSurfaceView android:layout_gravity="center" android:id="@id/danmaku" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:id="@id/loading_container" android:background="@drawable/biz_video_loading_bg" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <ProgressBar android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/base_large_progressbar_style" />
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:src="@drawable/biz_video_loading_icon" />
+        </LinearLayout>
+    </FrameLayout>
+</RelativeLayout>
