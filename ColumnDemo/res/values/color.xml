@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="white">#ffffff</color> <!-- 白色 -->
+    <color name="black">#000000</color> <!-- 黑色 -->
+    <color name="gray">#F5F5F5</color>
+	<color name="app_bg">#eff5f8</color>
+	<color name="column_tv_bg1">#3567a6</color>
+	<color name="column_tv_bg2">#5dc9e6</color>
+</resources>

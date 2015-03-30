@@ -84,36 +84,67 @@ public class LogcatService extends Service implements Handler.Callback {
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
 				case MSG_START_LOGCAT: {
-					if (process != null) {
-						return;
-					}
+//					if (process != null) {
+//						return;
+//					}
 					String path = android.os.Environment
 							.getExternalStorageDirectory().getAbsolutePath() + "/autolog";
 					File dir = new File(path);
 					if (!dir.exists()) {
 						dir.mkdirs();
 					}
-					List<String> commandList = new ArrayList<String>();  
-			        commandList.add("logcat");  
-			        commandList.add("-f");  
-			        commandList.add(path+File.separator+"logcat_"+mFormat.format(new Date())+".xt");  
-			        commandList.add("-v");  
-			        commandList.add("time");  
-			  
-			        try {
-			        	String cmd = path+File.separator+"logcat_"+mFormat.format(new Date())+".ttxt"+"\n";
-			        	Log.i(TAG, cmd);
-			            process = Runtime.getRuntime().exec("logcat -f  "+cmd);
-//			                    commandList.toArray(new String[commandList.size()]));  
-			            process.waitFor();
-			            Log.i(TAG, "finish");
-			        } catch (Exception e) {
-			        	e.printStackTrace();
-			            Log.e(TAG,e.getMessage(), e);  
-			        }
-//					File outFile = null;
-//					
-//					outFile = new File("");
+//					List<String> commandList = new ArrayList<String>();  
+//			        commandList.add("logcat");  
+//			        commandList.add("-f");  
+//			        commandList.add(path+File.separator+"logcat_"+mFormat.format(new Date())+".xt");  
+//			        commandList.add("-v");  
+//			        commandList.add("time");  
+//			  
+//			        try {
+			        	path = path+File.separator+"logcat_"+mFormat.format(new Date())+".ttxt";
+//			        	Log.i(TAG, cmd);
+//			            process = Runtime.getRuntime().exec("logcat -f  "+cmd);
+////			                    commandList.toArray(new String[commandList.size()]));  
+//			            process.waitFor();
+//			            Log.i(TAG, "finish");
+//			        } catch (Exception e) {
+//			        	e.printStackTrace();
+//			            Log.e(TAG,e.getMessage(), e);  
+//			        }
+			        
+			        final StringBuilder log = new StringBuilder();
+			        try {        
+			            ArrayList<String> commandLine = new ArrayList<String>();
+			            commandLine.add("logcat");
+			            commandLine.add("-d");
+//			            ArrayList<String> arguments = ((params != null) && (params.length > 0)) ? params[0] : null;
+//			            if (null != arguments){
+//			                commandLine.addAll(arguments);
+//			            }
+
+			            Process process = Runtime.getRuntime().exec(commandLine.toArray(new String[commandLine.size()]));
+			            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+			            String line;
+			            while ((line = bufferedReader.readLine()) != null){ 
+			                log.append(line);
+			                log.append("\n"); 
+			            }
+			        } 
+			        catch (IOException e){
+			                //
+			        } 
+
+//			        return log;
+					File outFile = new File(path);
+					try {
+						outFile.createNewFile();
+						FileOutputStream out = new FileOutputStream(outFile);
+						out.write(log.toString().getBytes());
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 //					
 //					FileOutputStream out = null;
 //					BufferedReader in = null;

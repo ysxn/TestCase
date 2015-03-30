@@ -206,7 +206,7 @@ public class ApkBrowser extends ListActivity {
                     fdData.mPi = mUtil.getPackageInfo(ApkBrowser.this, file.getAbsolutePath());
                     fdData.mAi = (fdData.mPi != null) ? fdData.mPi.applicationInfo : null;
                     fdData.mInstalled = checkInstallStat(fdData);
-                    fdData.mCert = getSignatures(fdData.mPi.signatures);
+                    //fdData.mCert = getSignatures(fdData.mPi.signatures);
                     mFilesList.add(fdData);
                     mHandler.sendMessage(mHandler.obtainMessage(REQUEST_UPDATE_PROGRESS,
                             mFilesList.size(), 0, file.getName()));
