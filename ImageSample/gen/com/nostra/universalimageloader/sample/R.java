@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.nostra13.universalimageloader.sample;
+package com.nostra.universalimageloader.sample;
 
 public final class R {
     public static final class attr {
