@@ -1,3 +1,4 @@
+
 package in.srain.cube.views.loadmore;
 
 import android.content.Context;
@@ -12,16 +13,23 @@ import android.widget.LinearLayout;
 public abstract class LoadMoreContainerBase extends LinearLayout implements LoadMoreContainer {
 
     private AbsListView.OnScrollListener mOnScrollListener;
+
     private LoadMoreUIHandler mLoadMoreUIHandler;
+
     private LoadMoreHandler mLoadMoreHandler;
 
     private boolean mIsLoading;
+
     private boolean mHasMore = false;
+
     private boolean mAutoLoadMore = true;
+
     private boolean mLoadError = false;
 
     private boolean mListEmpty = true;
+
     private boolean mShowLoadingForFirstPage = false;
+
     private View mFooterView;
 
     private AbsListView mAbsListView;
@@ -80,9 +88,11 @@ public abstract class LoadMoreContainerBase extends LinearLayout implements Load
             }
 
             @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+                    int totalItemCount) {
                 if (null != mOnScrollListener) {
-                    mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+                    mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount,
+                            totalItemCount);
                 }
                 if (firstVisibleItem + visibleItemCount >= totalItemCount - 1) {
                     mIsEnd = true;
@@ -178,7 +188,7 @@ public abstract class LoadMoreContainerBase extends LinearLayout implements Load
 
     /**
      * page has loaded
-     *
+     * 
      * @param emptyResult
      * @param hasMore
      */

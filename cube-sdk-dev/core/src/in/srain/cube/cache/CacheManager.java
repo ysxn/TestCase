@@ -1,3 +1,4 @@
+
 package in.srain.cube.cache;
 
 import android.content.Context;
@@ -17,26 +18,37 @@ import java.io.IOException;
 public class CacheManager {
 
     private static final boolean DEBUG = CubeDebug.DEBUG_CACHE;
+
     private static final String LOG_TAG = "cube-cache-manager";
 
     private static final byte AFTER_READ_FROM_FILE = 0x01;
+
     private static final byte AFTER_READ_FROM_ASSERT = 0x02;
+
     private static final byte AFTER_CONVERT = 0x04;
 
     private static final byte DO_READ_FROM_FILE = 0x01;
+
     private static final byte DO_READ_FROM_ASSERT = 0x02;
+
     private static final byte DO_CONVERT = 0x04;
 
     private static final byte CONVERT_FOR_MEMORY = 0x03;
+
     private static final byte CONVERT_FOR_FILE = 0x01;
+
     private static final byte CONVERT_FOR_ASSERT = 0x02;
+
     private static final byte CONVERT_FOR_CREATE = 0x04;
 
     private LruCache<String, CacheMetaData> mMemoryCache;
+
     private DiskCacheProvider mFileCache;
+
     private Context mContext;
 
-    public CacheManager(Context content, String cacheDir, int memoryCacheSizeInKB, int fileCacheSizeInKB) {
+    public CacheManager(Context content, String cacheDir, int memoryCacheSizeInKB,
+            int fileCacheSizeInKB) {
         mContext = content;
 
         if (TextUtils.isEmpty(cacheDir)) {
@@ -57,14 +69,13 @@ public class CacheManager {
             }
         };
 
-
-        DiskFileUtils.CacheDirInfo cacheDirInfo = DiskFileUtils.getDiskCacheDir(content, cacheDir, fileCacheSizeInKB, null);
+        DiskFileUtils.CacheDirInfo cacheDirInfo = DiskFileUtils.getDiskCacheDir(content, cacheDir,
+                fileCacheSizeInKB, null);
         mFileCache = DiskCacheProvider.createLru(content, cacheDirInfo.path, cacheDirInfo.realSize);
 
         if (DEBUG) {
-            CLog.d(LOG_TAG,
-                    "CacheManger: cache dir: %s => %s, size: %s => %s",
-                    cacheDir, cacheDirInfo.path, cacheDirInfo.requireSize, cacheDirInfo.realSize);
+            CLog.d(LOG_TAG, "CacheManger: cache dir: %s => %s, size: %s => %s", cacheDir,
+                    cacheDirInfo.path, cacheDirInfo.requireSize, cacheDirInfo.realSize);
         }
     }
 
@@ -88,16 +99,15 @@ public class CacheManager {
         }
         SimpleExecutor.getInstance().execute(
 
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        CacheMetaData cacheMetaData = CacheMetaData.createForNow(data);
-                        putDataToMemoryCache(cacheKey, cacheMetaData);
-                        mFileCache.write(cacheKey, cacheMetaData.getCacheData());
-                        mFileCache.flushDiskCacheAsyncWithDelay(1000);
-                    }
-                }
-        );
+        new Runnable() {
+            @Override
+            public void run() {
+                CacheMetaData cacheMetaData = CacheMetaData.createForNow(data);
+                putDataToMemoryCache(cacheKey, cacheMetaData);
+                mFileCache.write(cacheKey, cacheMetaData.getCacheData());
+                mFileCache.flushDiskCacheAsyncWithDelay(1000);
+            }
+        });
     }
 
     private void putDataToMemoryCache(String key, CacheMetaData data) {
@@ -112,7 +122,7 @@ public class CacheManager {
 
     /**
      * delete cache by key
-     *
+     * 
      * @param key
      */
     public void invalidateCache(String key) {
@@ -140,7 +150,7 @@ public class CacheManager {
 
     /**
      * get the spaced has been used
-     *
+     * 
      * @return
      */
     public int getMemoryCacheUsedSpace() {
@@ -149,7 +159,7 @@ public class CacheManager {
 
     /**
      * get the spaced max space in config
-     *
+     * 
      * @return
      */
     public int getMemoryCacheMaxSpace() {
@@ -173,7 +183,7 @@ public class CacheManager {
 
     /**
      * return the file cache path
-     *
+     * 
      * @return
      */
     public String getFileCachePath() {
@@ -185,7 +195,7 @@ public class CacheManager {
 
     /**
      * get the used space in file cache
-     *
+     * 
      * @return
      */
     public long getFileCacheUsedSpace() {
@@ -194,7 +204,7 @@ public class CacheManager {
 
     /**
      * get the max space for file cache
-     *
+     * 
      * @return
      */
     public long getFileCacheMaxSpace() {
@@ -205,15 +215,17 @@ public class CacheManager {
     }
 
     /**
-     * Request cache synchronously.
-     * If there is not cache data available, return null,
-     * and {@link ICacheAble#onNoCacheData} will not no be called.
-     *
+     * Request cache synchronously. If there is not cache data available, return
+     * null, and {@link ICacheAble#onNoCacheData} will not no be called.
+     * 
      * @param cacheAble
      * @param <T>
-     * @return if not cache data available, return null, {@link ICacheAble#onNoCacheData} will not no be called.
+     * @return if not cache data available, return null,
+     *         {@link ICacheAble#onNoCacheData} will not no be called.
      */
-    @SuppressWarnings({"unused"})
+    @SuppressWarnings({
+        "unused"
+    })
     public <T> T requestCacheSync(ICacheAble<T> cacheAble) {
 
         if (cacheAble.cacheIsDisabled()) {
@@ -277,9 +289,13 @@ public class CacheManager {
         private ICacheAble<T1> mCacheAble;
 
         private CacheMetaData mRawData;
+
         private T1 mResult;
+
         private byte mWorkType = 0;
+
         private byte mConvertFor = 0;
+
         private byte mCurrentStatus = 0;
 
         public InnerCacheTask(ICacheAble<T1> cacheAble) {
@@ -330,7 +346,8 @@ public class CacheManager {
         @Override
         public void doInBackground() {
             if (DEBUG) {
-                CLog.d(LOG_TAG, "key: %s, doInBackground: mWorkType: %s", mCacheAble.getCacheKey(), mWorkType);
+                CLog.d(LOG_TAG, "key: %s, doInBackground: mWorkType: %s", mCacheAble.getCacheKey(),
+                        mWorkType);
             }
             switch (mWorkType) {
 
@@ -384,7 +401,8 @@ public class CacheManager {
 
         private void beginQueryFromAssertCacheFileAsync() {
             if (DEBUG) {
-                CLog.d(LOG_TAG, "key: %s, beginQueryFromAssertCacheFileAsync", mCacheAble.getCacheKey());
+                CLog.d(LOG_TAG, "key: %s, beginQueryFromAssertCacheFileAsync",
+                        mCacheAble.getCacheKey());
             }
             mWorkType = DO_READ_FROM_ASSERT;
             restart();
@@ -414,10 +432,12 @@ public class CacheManager {
         private void doQueryFromAssertCacheFileInBackground() {
 
             if (DEBUG) {
-                CLog.d(LOG_TAG, "key: %s, try read cache data from assert file", mCacheAble.getCacheKey());
+                CLog.d(LOG_TAG, "key: %s, try read cache data from assert file",
+                        mCacheAble.getCacheKey());
             }
 
-            String cacheContent = DiskFileUtils.readAssert(mContext, mCacheAble.getAssertInitDataPath());
+            String cacheContent = DiskFileUtils.readAssert(mContext,
+                    mCacheAble.getAssertInitDataPath());
             mRawData = CacheMetaData.createInvalidated(cacheContent);
             putDataToMemoryCache(mCacheAble.getCacheKey(), mRawData);
         }

@@ -1,3 +1,4 @@
+
 package in.srain.cube.views.loadmore;
 
 import android.content.Context;
@@ -25,7 +26,8 @@ public class LoadMoreDefaultFooterView extends RelativeLayout implements LoadMor
     }
 
     private void setupViews() {
-        LayoutInflater.from(getContext()).inflate(R.layout.cube_views_load_more_default_footer, this);
+        LayoutInflater.from(getContext()).inflate(R.layout.cube_views_load_more_default_footer,
+                this);
         mTextView = (TextView) findViewById(R.id.cube_views_load_more_default_footer_text_view);
     }
 

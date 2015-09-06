@@ -1,9 +1,12 @@
+
 package in.srain.cube.request;
 
 public abstract class RequestBase<T> implements IRequest<T> {
 
     private RequestData mRequestData = new RequestData();
+
     private FailData mFailData;
+
     private boolean mHasBeenCanceled = false;
 
     public RequestData getRequestData() {

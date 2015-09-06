@@ -30,47 +30,76 @@ import java.util.concurrent.*;
 public final class LruActionTracer implements Runnable {
 
     final static int REDUNDANT_OP_COMPACT_THRESHOLD = 2000;
+
     static final String JOURNAL_FILE = "journal";
+
     static final String JOURNAL_FILE_TMP = "journal.tmp";
+
     static final String MAGIC = "lru-tracer";
+
     static final String VERSION_1 = "1";
 
     private static final byte ACTION_CLEAN = 1;
+
     private static final byte ACTION_DIRTY = 2;
+
     private static final byte ACTION_DELETE = 3;
+
     private static final byte ACTION_READ = 4;
+
     private static final byte ACTION_PENDING_DELETE = 5;
+
     private static final byte ACTION_FLUSH = 6;
 
-    private static final String[] sACTION_LIST = new String[]{"UN_KNOW", "CLEAN", "DIRTY", "DELETE", "READ", "DELETE_PENDING", "FLUSH"};
+    private static final String[] sACTION_LIST = new String[] {
+            "UN_KNOW", "CLEAN", "DIRTY", "DELETE", "READ", "DELETE_PENDING", "FLUSH"
+    };
 
     private static final int IO_BUFFER_SIZE = 8 * 1024;
 
     private static final byte[] sPoolSync = new byte[0];
+
     private static final int MAX_POOL_SIZE = 50;
+
     private static ActionMessage sPoolHeader;
+
     private static int sPoolSize = 0;
-    private final LinkedHashMap<String, CacheEntry> mLruEntries
-            = new LinkedHashMap<String, CacheEntry>(0, 0.75f, true);
+
+    private final LinkedHashMap<String, CacheEntry> mLruEntries = new LinkedHashMap<String, CacheEntry>(
+            0, 0.75f, true);
+
     /**
      * This cache uses a single background thread to evict entries.
      */
-    private final ExecutorService mExecutorService = new ThreadPoolExecutor(0, 1,
-            60L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+    private final ExecutorService mExecutorService = new ThreadPoolExecutor(0, 1, 60L,
+            TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+
     private final File mJournalFile;
+
     private final File mJournalFileTmp;
+
     private boolean mIsRunning = false;
+
     private DiskCache mDiskCache;
+
     private long mSize = 0;
+
     private ConcurrentLinkedQueue<ActionMessage> mActionQueue;
 
     private File mDirectory;
+
     private long mCapacity;
+
     private int mAppVersion;
+
     private SimpleHashSet mNewCreateList;
+
     private Object mLock = new Object();
+
     private Writer mJournalWriter;
+
     private int mRedundantOpCount;
+
     private HashMap<String, CacheEntry> mEditList;
 
     public LruActionTracer(DiskCache diskCache, File directory, int appVersion, long capacity) {
@@ -88,14 +117,14 @@ public final class LruActionTracer implements Runnable {
 
     private static void validateKey(String key) {
         if (key.contains(" ") || key.contains("\n") || key.contains("\r")) {
-            throw new IllegalArgumentException(
-                    "keys must not contain spaces or newlines: \"" + key + "\"");
+            throw new IllegalArgumentException("keys must not contain spaces or newlines: \"" + key
+                    + "\"");
         }
     }
 
     /**
      * try to resume last status when we got off
-     *
+     * 
      * @throws java.io.IOException
      */
     public void tryToResume() throws IOException {
@@ -154,9 +183,9 @@ public final class LruActionTracer implements Runnable {
     }
 
     /**
-     * Returns a {@link in.srain.cube.diskcache.CacheEntry} named {@code key}, or null if it doesn't
-     * exist is not currently readable. If a value is returned, it is moved to
-     * the head of the LRU queue.
+     * Returns a {@link in.srain.cube.diskcache.CacheEntry} named {@code key},
+     * or null if it doesn't exist is not currently readable. If a value is
+     * returned, it is moved to the head of the LRU queue.
      */
     public synchronized CacheEntry getEntry(String key) throws IOException {
         checkNotClosed();
@@ -264,7 +293,7 @@ public final class LruActionTracer implements Runnable {
      */
     private void processJournal() throws IOException {
         FileUtils.deleteIfExists(mJournalFileTmp);
-        for (Iterator<CacheEntry> i = mLruEntries.values().iterator(); i.hasNext(); ) {
+        for (Iterator<CacheEntry> i = mLruEntries.values().iterator(); i.hasNext();) {
             CacheEntry cacheEntry = i.next();
             if (!cacheEntry.isUnderEdit()) {
                 mSize += cacheEntry.getSize();
@@ -295,9 +324,11 @@ public final class LruActionTracer implements Runnable {
 
         for (CacheEntry cacheEntry : mLruEntries.values()) {
             if (cacheEntry.isUnderEdit()) {
-                writer.write(sACTION_LIST[ACTION_DIRTY] + ' ' + cacheEntry.getKey() + " " + cacheEntry.getSize() + '\n');
+                writer.write(sACTION_LIST[ACTION_DIRTY] + ' ' + cacheEntry.getKey() + " "
+                        + cacheEntry.getSize() + '\n');
             } else {
-                writer.write(sACTION_LIST[ACTION_CLEAN] + ' ' + cacheEntry.getKey() + " " + cacheEntry.getSize() + '\n');
+                writer.write(sACTION_LIST[ACTION_CLEAN] + ' ' + cacheEntry.getKey() + " "
+                        + cacheEntry.getSize() + '\n');
             }
         }
 
@@ -313,12 +344,10 @@ public final class LruActionTracer implements Runnable {
             String version = FileUtils.readAsciiLine(in);
             String appVersionString = FileUtils.readAsciiLine(in);
             String blank = FileUtils.readAsciiLine(in);
-            if (!MAGIC.equals(magic)
-                    || !VERSION_1.equals(version)
-                    || !Integer.toString(mAppVersion).equals(appVersionString)
-                    || !"".equals(blank)) {
-                throw new IOException("unexpected journal header: ["
-                        + magic + ", " + version + ", " + blank + "]");
+            if (!MAGIC.equals(magic) || !VERSION_1.equals(version)
+                    || !Integer.toString(mAppVersion).equals(appVersionString) || !"".equals(blank)) {
+                throw new IOException("unexpected journal header: [" + magic + ", " + version
+                        + ", " + blank + "]");
             }
 
             while (true) {
@@ -350,9 +379,11 @@ public final class LruActionTracer implements Runnable {
     }
 
     private void writeActionLog(byte action, CacheEntry cacheEntry) throws IOException {
-        mJournalWriter.write(sACTION_LIST[action] + ' ' + cacheEntry.getKey() + ' ' + cacheEntry.getSize() + '\n');
+        mJournalWriter.write(sACTION_LIST[action] + ' ' + cacheEntry.getKey() + ' '
+                + cacheEntry.getSize() + '\n');
         mRedundantOpCount++;
-        if (mRedundantOpCount >= REDUNDANT_OP_COMPACT_THRESHOLD && mRedundantOpCount >= mLruEntries.size()) {
+        if (mRedundantOpCount >= REDUNDANT_OP_COMPACT_THRESHOLD
+                && mRedundantOpCount >= mLruEntries.size()) {
             mRedundantOpCount = 0;
             rebuildJournal();
         }
@@ -364,7 +395,9 @@ public final class LruActionTracer implements Runnable {
                 try {
                     ActionMessage message = mActionQueue.poll();
                     doUntil(message);
-                    // if every thread get a IOexception, and mLock.notify would not call. so in sometimes this will cause mLock's deadlock
+                    // if every thread get a IOexception, and mLock.notify would
+                    // not call. so in sometimes this will cause mLock's
+                    // deadlock
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -379,8 +412,8 @@ public final class LruActionTracer implements Runnable {
         message.recycle();
 
         if (SimpleDiskLruCache.DEBUG) {
-            CLog.d(SimpleDiskLruCache.LOG_TAG, "doAction: %s, key: %s",
-                    sACTION_LIST[action], cacheEntry != null ? cacheEntry.getKey() : null);
+            CLog.d(SimpleDiskLruCache.LOG_TAG, "doAction: %s, key: %s", sACTION_LIST[action],
+                    cacheEntry != null ? cacheEntry.getKey() : null);
         }
 
         switch (action) {
@@ -418,7 +451,8 @@ public final class LruActionTracer implements Runnable {
             CLog.d(SimpleDiskLruCache.LOG_TAG, "waitJobDone");
         }
 
-        // remove synchronized method , exclude this code block for dead lock digging
+        // remove synchronized method , exclude this code block for dead lock
+        // digging
         synchronized (mLock) {
             if (mIsRunning) {
                 while (!mActionQueue.isEmpty()) {
@@ -488,7 +522,9 @@ public final class LruActionTracer implements Runnable {
             mSize -= cacheEntry.getSize();
             addActionLog(ACTION_PENDING_DELETE, cacheEntry);
             if (SimpleDiskLruCache.DEBUG) {
-                CLog.d(SimpleDiskLruCache.LOG_TAG, "pending remove: %s, size: %s, after remove total: %s", key, cacheEntry.getSize(), mSize);
+                CLog.d(SimpleDiskLruCache.LOG_TAG,
+                        "pending remove: %s, size: %s, after remove total: %s", key,
+                        cacheEntry.getSize(), mSize);
             }
         }
     }
@@ -532,7 +568,9 @@ public final class LruActionTracer implements Runnable {
 
     private static class ActionMessage {
         private byte mAction;
+
         private CacheEntry mCacheEntry;
+
         private ActionMessage mNext;
 
         public ActionMessage(byte action, CacheEntry cacheEntry) {

@@ -1,3 +1,4 @@
+
 package in.srain.cube.views.banner;
 
 import android.support.v4.view.PagerAdapter;

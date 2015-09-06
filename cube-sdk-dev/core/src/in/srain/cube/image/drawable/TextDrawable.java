@@ -1,3 +1,4 @@
+
 package in.srain.cube.image.drawable;
 
 import android.graphics.*;
@@ -6,11 +7,17 @@ import android.graphics.drawable.Drawable;
 public class TextDrawable extends Drawable {
 
     private final String mText;
+
     private final Paint mPaint;
+
     private int mBackgroundColor = 0xfff1f1f1;
+
     private int mTextColor = Color.BLACK;
+
     private float mX = 0;
+
     private float mY = 0;
+
     private float mTextSize = 40;
 
     public TextDrawable(String text) {

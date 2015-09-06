@@ -1,3 +1,4 @@
+
 package in.srain.cube.image.impl;
 
 import android.graphics.drawable.BitmapDrawable;
@@ -11,7 +12,9 @@ import in.srain.cube.util.CubeDebug;
 public class DefaultMemoryCache implements ImageMemoryCache {
 
     protected static final boolean DEBUG = CubeDebug.DEBUG_IMAGE;
+
     protected static final String LOG_TAG = CubeDebug.DEBUG_IMAGE_LOG_TAG_PROVIDER;
+
     private LruCache<String, BitmapDrawable> mMemoryCache;
 
     public DefaultMemoryCache(int cacheSizeInKB) {
@@ -27,7 +30,8 @@ public class DefaultMemoryCache implements ImageMemoryCache {
              * Notify the removed entry that is no longer being cached
              */
             @Override
-            protected void entryRemoved(boolean evicted, String key, BitmapDrawable oldValue, BitmapDrawable newValue) {
+            protected void entryRemoved(boolean evicted, String key, BitmapDrawable oldValue,
+                    BitmapDrawable newValue) {
                 if (RecyclingBitmapDrawable.class.isInstance(oldValue)) {
                     // The removed entry is a recycling drawable, so notify it
                     // that it has been removed from the memory cache
@@ -39,7 +43,8 @@ public class DefaultMemoryCache implements ImageMemoryCache {
             }
 
             /**
-             * Measure item size in kilobytes rather than units which is more practical for a bitmap cache
+             * Measure item size in kilobytes rather than units which is more
+             * practical for a bitmap cache
              */
             @Override
             protected int sizeOf(String key, BitmapDrawable value) {

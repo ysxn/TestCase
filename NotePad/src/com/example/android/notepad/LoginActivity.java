@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -19,24 +18,22 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.codezyw.common.DbHelper;
+
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class LoginActivity extends Activity {
     /** Called when the activity is first created. */
     private EditText user;
 
-    private EditText password;
+    private EditText pass;
 
     private Button loginBtn;
 
@@ -46,18 +43,16 @@ public class LoginActivity extends Activity {
 
     // 主要是记录用户会话过程中的一些用户的基本信息
     private HashMap<String, String> session = new HashMap<String, String>();
-
-    private DataBase mDataBase;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String username = SharedPreferenceUtils.getPrefString(this, SharedPreferenceUtils.KEY_USERNAME, "");
-        String pass = SharedPreferenceUtils.getPrefString(this, SharedPreferenceUtils.KEY_PASSWORD, "");
+        String username = DbHelper.getInstance(this).getString(HttpConnectionService.EMAIL, "");
+        String password = DbHelper.getInstance(this).getString(HttpConnectionService.PASSWORD, "");
 
         setContentView(R.layout.login_main);
         user = (EditText) findViewById(R.id.user);
-        password = (EditText) findViewById(R.id.password);
+        pass = (EditText) findViewById(R.id.password);
         loginBtn = (Button) findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(loginClick);
         logoutBtn = (Button) findViewById(R.id.logoutBtn);
@@ -65,14 +60,11 @@ public class LoginActivity extends Activity {
         newCountBtn = (Button) findViewById(R.id.newCountBtn);
         newCountBtn.setOnClickListener(newCountClick);
         newCountBtn.setVisibility(View.GONE);
-        mDataBase = new DataBase(this);
-        username = mDataBase.getEmail(0);
-        pass = mDataBase.getPassword(0);
-        if (username == null || username.isEmpty() || pass == null || pass.isEmpty()) {
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
             logoutBtn.setVisibility(View.GONE);
         } else {
             user.setText(username);
-            password.setText(pass);
+            pass.setText(password);
             loginBtn.setVisibility(View.GONE);
         }
     }
@@ -81,13 +73,13 @@ public class LoginActivity extends Activity {
         @Override
         public void onClick(View v) {
             final String username = user.getText().toString().trim();
-            final String pass = password.getText().toString().trim();
+            final String password = pass.getText().toString().trim();
+            DbHelper.getInstance(LoginActivity.this).putString(HttpConnectionService.EMAIL, username);
+            DbHelper.getInstance(LoginActivity.this).putString(HttpConnectionService.PASSWORD, password);
             Intent i = new Intent(LoginActivity.this, HttpConnectionService.class);
-            i.putExtra(HttpConnectionService.CMD, HttpConnectionService.FETCH);
-            i.putExtra(HttpConnectionService.EMAIL, username);
-            i.putExtra(HttpConnectionService.PASSWORD, pass);
-            LoginActivity.this.startService(i);
-            LoginActivity.this.finish();
+            i.putExtra(HttpConnectionService.CMD_KEY, HttpConnectionService.MSG_FETCH);
+            startService(i);
+            finish();
             return;
             
 //            if (checkUser()) {
@@ -107,9 +99,8 @@ public class LoginActivity extends Activity {
     OnClickListener logoutClick = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            mDataBase.remove(0);
-            SharedPreferenceUtils.setPrefString(LoginActivity.this, SharedPreferenceUtils.KEY_USERNAME, "");
-            SharedPreferenceUtils.setPrefString(LoginActivity.this, SharedPreferenceUtils.KEY_PASSWORD, "");
+            DbHelper.getInstance(LoginActivity.this).delete(HttpConnectionService.EMAIL);
+            DbHelper.getInstance(LoginActivity.this).delete(HttpConnectionService.PASSWORD);
             Intent i = new Intent(LoginActivity.this, HttpConnectionService.class);
             startService(i);
             finish();
@@ -124,14 +115,14 @@ public class LoginActivity extends Activity {
 
     private boolean checkUser() {
         String username = user.getText().toString();
-        String pass = password.getText().toString();
+        String password = pass.getText().toString();
         DefaultHttpClient mHttpClient = new DefaultHttpClient();
         HttpPost mPost = new HttpPost("http://10.0.2.2/web/php/login.php");
         // 传递用户名和密码相当于
         // http://10.0.2.2/web/php/login.php?username=''&password=''
         List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
         pairs.add(new BasicNameValuePair("username", username));
-        pairs.add(new BasicNameValuePair("password", pass));
+        pairs.add(new BasicNameValuePair("password", password));
         try {
             mPost.setEntity(new UrlEncodedFormEntity(pairs, HTTP.UTF_8));
         } catch (UnsupportedEncodingException e) {

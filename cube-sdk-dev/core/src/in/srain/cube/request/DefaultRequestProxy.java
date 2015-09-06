@@ -1,3 +1,4 @@
+
 package in.srain.cube.request;
 
 import in.srain.cube.concurrent.SimpleExecutor;
@@ -13,9 +14,11 @@ import in.srain.cube.util.CubeDebug;
 public class DefaultRequestProxy implements IRequestProxy {
 
     private static final boolean DEBUG = CubeDebug.DEBUG_REQUEST;
+
     private static final String LOG_TAG = CubeDebug.DEBUG_REQUEST_LOG_TAG;
 
     private static IRequestProxy sInstance;
+
     private SimpleExecutor mSimpleExecutor;
 
     protected DefaultRequestProxy() {
@@ -96,6 +99,7 @@ public class DefaultRequestProxy implements IRequestProxy {
     private static class DoRequestTask<T> extends SimpleTask {
 
         private T mData;
+
         private IRequest<T> mRequest;
 
         private DoRequestTask(IRequest<T> request) {

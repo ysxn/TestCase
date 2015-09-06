@@ -1,3 +1,4 @@
+
 package in.srain.cube.photos;
 
 import android.app.Activity;
@@ -17,26 +18,37 @@ import java.io.IOException;
 public final class SelectPhotoManager {
 
     private static final int REQUEST_CODE_CAMERA = 1;
+
     private static final int REQUEST_CODE_ALBUM = 2;
+
     private static final int REQUEST_CODE_CROP = 3;
+
     public static final int ACTION_TAKE_PHOTO = 0;
+
     public static final int ACTION_ALBUM = 1;
+
     public static final int ACTION_CANCEL = 2;
+
     private static SelectPhotoManager sInstance;
 
     private static String TEMP_PATH_NAME = "cube-tmp-photo";
 
     public interface SelectClickHandler {
         /**
-         * @param action can be one of {{@link #ACTION_TAKE_PHOTO} {@link #ACTION_ALBUM} {@link #ACTION_CANCEL}}
+         * @param action can be one of {{@link #ACTION_TAKE_PHOTO}
+         *            {@link #ACTION_ALBUM} {@link #ACTION_CANCEL}
          */
         public void onClick(int action);
     }
 
     private PhotoReadyHandler mPhotoReadyHandler;
+
     private File mTempDir;
+
     private File mTempFile;
+
     private Activity mActivity;
+
     private CropOption mCropOption;
 
     private SelectPhotoManager() {
@@ -63,7 +75,8 @@ public final class SelectPhotoManager {
 
     public void start(final Activity activity, final SelectClickHandler handler) {
 
-        DiskFileUtils.CacheDirInfo info = DiskFileUtils.getDiskCacheDir(activity, TEMP_PATH_NAME, 1024 * 1024 * 30);
+        DiskFileUtils.CacheDirInfo info = DiskFileUtils.getDiskCacheDir(activity, TEMP_PATH_NAME,
+                1024 * 1024 * 30);
         File path = info.path;
         try {
             FileUtils.deleteDirectoryQuickly(path);
@@ -71,7 +84,8 @@ public final class SelectPhotoManager {
             e.printStackTrace();
         }
         if (!path.exists() && !path.mkdirs()) {
-            Toast.makeText(activity, R.string.cube_photo_can_not_use_camera, Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, R.string.cube_photo_can_not_use_camera, Toast.LENGTH_SHORT)
+                    .show();
             return;
         } else {
             path.deleteOnExit();
@@ -146,7 +160,8 @@ public final class SelectPhotoManager {
             return false;
         }
         File f = new File(imgPath);
-        mTempFile = new File(mTempDir.getAbsolutePath(), Long.toString(System.nanoTime()) + "_cropped.jpg");
+        mTempFile = new File(mTempDir.getAbsolutePath(), Long.toString(System.nanoTime())
+                + "_cropped.jpg");
         PhotoUtils.toCrop(mActivity, f, mTempFile, mCropOption, REQUEST_CODE_CROP);
         return true;
     }

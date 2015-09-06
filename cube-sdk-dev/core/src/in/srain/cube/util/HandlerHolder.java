@@ -1,3 +1,4 @@
+
 package in.srain.cube.util;
 
 /**
@@ -6,6 +7,7 @@ package in.srain.cube.util;
 public class HandlerHolder<T> {
 
     private T mHandler;
+
     private HandlerHolder mNext;
 
     private boolean contains(T handler) {
@@ -38,7 +40,7 @@ public class HandlerHolder<T> {
         }
 
         HandlerHolder current = head;
-        for (; ; current = current.mNext) {
+        for (;; current = current.mNext) {
 
             // duplicated
             if (current.contains(handler)) {

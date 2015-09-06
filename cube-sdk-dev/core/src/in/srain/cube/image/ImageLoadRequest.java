@@ -1,3 +1,4 @@
+
 package in.srain.cube.image;
 
 public class ImageLoadRequest {
@@ -5,14 +6,19 @@ public class ImageLoadRequest {
     public String mUrl;
 
     private int mViewWidth;
+
     private int mViewHeight;
+
     private int mSpecifiedWidth;
+
     private int mSpecifiedHeight;
 
     private int mPriority;
+
     private ImageReuseInfo mImageReuseInfo;
 
     private static final int AUTO_DECIDE_LOAD_SIZE = 0x01;
+
     private int mFlag = AUTO_DECIDE_LOAD_SIZE;
 
     public static ImageLoadRequest create(String url) {
@@ -20,7 +26,8 @@ public class ImageLoadRequest {
         return request;
     }
 
-    public ImageLoadRequest(String url, int specifiedWidth, int specifiedHeight, int priority, ImageReuseInfo reuseInfo) {
+    public ImageLoadRequest(String url, int specifiedWidth, int specifiedHeight, int priority,
+            ImageReuseInfo reuseInfo) {
         mUrl = url;
         mSpecifiedWidth = specifiedWidth;
         mSpecifiedHeight = specifiedHeight;

@@ -1,3 +1,4 @@
+
 package in.srain.cube.app.lifecycle;
 
 import java.util.HashMap;
@@ -13,21 +14,24 @@ public class LifeCycleComponentManager implements IComponentContainer {
 
     /**
      * Try to add component to container
-     *
+     * 
      * @param component
      * @param matrixContainer
      */
-    public static void tryAddComponentToContainer(LifeCycleComponent component, Object matrixContainer) {
+    public static void tryAddComponentToContainer(LifeCycleComponent component,
+            Object matrixContainer) {
         tryAddComponentToContainer(component, matrixContainer, true);
     }
 
-    public static boolean tryAddComponentToContainer(LifeCycleComponent component, Object matrixContainer, boolean throwEx) {
+    public static boolean tryAddComponentToContainer(LifeCycleComponent component,
+            Object matrixContainer, boolean throwEx) {
         if (matrixContainer instanceof IComponentContainer) {
             ((IComponentContainer) matrixContainer).addComponent(component);
             return true;
         } else {
             if (throwEx) {
-                throw new IllegalArgumentException("componentContainerContext should implements IComponentContainer");
+                throw new IllegalArgumentException(
+                        "componentContainerContext should implements IComponentContainer");
             }
             return false;
         }

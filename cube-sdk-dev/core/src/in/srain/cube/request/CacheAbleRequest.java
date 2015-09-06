@@ -1,3 +1,4 @@
+
 package in.srain.cube.request;
 
 import android.text.TextUtils;
@@ -13,30 +14,35 @@ import java.net.URISyntaxException;
 public class CacheAbleRequest<T> extends RequestBase<T> implements ICacheAbleRequest<T> {
 
     public static enum ResultType {
-        USE_CACHE_NOT_EXPIRED,
-        USE_CACHE_ANYWAY,
-        USE_CACHE_ON_TIMEOUT,
-        USE_DATA_FROM_SERVER,
-        USE_CACHE_ON_FAIL,
+        USE_CACHE_NOT_EXPIRED, USE_CACHE_ANYWAY, USE_CACHE_ON_TIMEOUT, USE_DATA_FROM_SERVER, USE_CACHE_ON_FAIL,
     }
 
     protected static final boolean DEBUG = CubeDebug.DEBUG_CACHE;
+
     protected static final String LOG_TAG = "cube-cache-request";
 
     private CacheAbleRequestHandler<T> mHandler;
 
     private T mCacheData;
+
     private boolean mOutOfDate;
+
     private String mCacheKey = null;
 
     private int mTimeout = 0;
+
     private boolean mHasTimeout = false;
+
     private boolean mUseCacheAnyway = false;
+
     private boolean mHasNotified = false;
+
     protected boolean mForceQueryFromServer = false;
 
     private String mInitDataPath;
+
     private boolean mDisableCache = false;
+
     private long mCacheTime;
 
     public CacheAbleRequest() {
@@ -64,7 +70,7 @@ public class CacheAbleRequest<T> extends RequestBase<T> implements ICacheAbleReq
 
     /**
      * Timeout will not be considerate
-     *
+     * 
      * @return
      */
     @Override
@@ -115,7 +121,8 @@ public class CacheAbleRequest<T> extends RequestBase<T> implements ICacheAbleReq
             mHandler.onRequestFinish(data);
 
             // cache data is not available or
-            // cache is available and time duration not reach timeout or not always use the cache
+            // cache is available and time duration not reach timeout or not
+            // always use the cache
             if (mCacheData == null || (!mHasTimeout && !mUseCacheAnyway)) {
                 notifyRequestFinish(ResultType.USE_DATA_FROM_SERVER, data, false);
             } else {
@@ -250,7 +257,8 @@ public class CacheAbleRequest<T> extends RequestBase<T> implements ICacheAbleReq
 
     @Override
     public T processOriginDataFromServer(JsonData rawData) {
-        rawData = RequestManager.getInstance().getRequestProxy(this).processOriginDataFromServer(this, rawData);
+        rawData = RequestManager.getInstance().getRequestProxy(this)
+                .processOriginDataFromServer(this, rawData);
         return mHandler.processOriginData(rawData);
     }
 
@@ -261,7 +269,7 @@ public class CacheAbleRequest<T> extends RequestBase<T> implements ICacheAbleReq
 
     /**
      * will only notify once
-     *
+     * 
      * @param type
      * @param outOfDate
      */

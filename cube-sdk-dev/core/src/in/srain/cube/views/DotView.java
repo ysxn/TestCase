@@ -1,3 +1,4 @@
+
 package in.srain.cube.views;
 
 import android.content.Context;
@@ -18,14 +19,19 @@ public class DotView extends LinearLayout implements PagerIndicator {
     }
 
     private int mLittleDotSize = -2;
+
     private int mDotSpan = 36;
+
     private float mDotRadius = 6f;
 
     private int mCurrent = 0;
+
     private int mTotal = 0;
 
     private int mSelectedColor = 0xFF377BEE;
+
     private int mUnSelectedColor = 0xFFC5CEDB;
+
     private OnDotClickHandler mOnDotClickHandler;
 
     public DotView(Context context) {
@@ -48,7 +54,8 @@ public class DotView extends LinearLayout implements PagerIndicator {
             }
 
             mSelectedColor = arr.getColor(R.styleable.DotView_dot_selected_color, mSelectedColor);
-            mUnSelectedColor = arr.getColor(R.styleable.DotView_dot_unselected_color, mUnSelectedColor);
+            mUnSelectedColor = arr.getColor(R.styleable.DotView_dot_unselected_color,
+                    mUnSelectedColor);
             arr.recycle();
         }
 
@@ -115,7 +122,9 @@ public class DotView extends LinearLayout implements PagerIndicator {
     private class LittleDot extends View {
 
         private int mColor;
+
         private Paint mPaint;
+
         private int mIndex;
 
         public LittleDot(Context context, int index) {

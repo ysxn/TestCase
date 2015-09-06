@@ -1,3 +1,4 @@
+
 package in.srain.cube.update;
 
 import android.webkit.URLUtil;
@@ -17,13 +18,19 @@ public class DownloadTask extends SimpleTask {
     private static final String LOG_TAG = "cube-update";
 
     public static final int RESULT_OK = 1;
+
     public static final int RESULT_URL_ERROR = 2;
+
     public static final int RESULT_DOWNLOAD_ERROR = 3;
+
     public static final int RESULT_NO_ENOUGH_SPACE = 4;
 
     private int mResult = RESULT_OK;
+
     private String mUrl;
+
     private String mFileName;
+
     private DownLoadListener mDownLoadListener;
 
     public DownloadTask(DownLoadListener listener, String url, String fileName) {

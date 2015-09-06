@@ -1,3 +1,4 @@
+
 package in.srain.cube.uri;
 
 import android.content.Intent;
@@ -12,13 +13,19 @@ import java.util.Iterator;
 public class CustomizedUri {
 
     private static final String KEY = "CUBE_URL";
-    private static final String[] PUB_SCHEMA_LIST = new String[]{"http://", "https://"};
+
+    private static final String[] PUB_SCHEMA_LIST = new String[] {
+            "http://", "https://"
+    };
 
     private JsonData mQueryData = JsonData.newMap();
 
     private String mSchemaPre = null;
+
     private String mPath = null;
+
     private String mQuery = null;
+
     private String mOriginUrl = null;
 
     private boolean mIsCustomized;

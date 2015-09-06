@@ -1,3 +1,4 @@
+
 package in.srain.cube.set.hash;
 
 import java.util.*;
@@ -5,12 +6,17 @@ import java.util.*;
 public class SimpleHashSet<T> extends AbstractSet<T> implements Set<T>, Cloneable {
 
     private static final int MINIMUM_CAPACITY = 4;
+
     private static final int MAXIMUM_CAPACITY = 1 << 30;
 
     private static final SimpleHashSetEntry[] EMPTY_TABLE = new SimpleHashSetEntry[MINIMUM_CAPACITY >>> 1];
+
     transient SimpleHashSetEntry<T>[] mTable;
+
     transient int mSize;
+
     private transient int threshold;
+
     private SimpleHashSetEntry<T> mEntryForNull;
 
     public SimpleHashSet() {
@@ -138,7 +144,7 @@ public class SimpleHashSet<T> extends AbstractSet<T> implements Set<T>, Cloneabl
 
     /**
      * Allocate a table of the given capacity and set the threshold accordingly.
-     *
+     * 
      * @param newCapacity must be a power of two
      */
     private SimpleHashSetEntry<T>[] makeTable(int newCapacity) {
@@ -152,8 +158,8 @@ public class SimpleHashSet<T> extends AbstractSet<T> implements Set<T>, Cloneabl
     /**
      * Doubles the capacity of the hash table. Existing entries are placed in
      * the correct bucket on the enlarged table. If the current capacity is,
-     * MAXIMUM_CAPACITY, this method is a no-op. Returns the table, which
-     * will be new unless we were already at MAXIMUM_CAPACITY.
+     * MAXIMUM_CAPACITY, this method is a no-op. Returns the table, which will
+     * be new unless we were already at MAXIMUM_CAPACITY.
      */
     private SimpleHashSetEntry<T>[] doubleCapacity() {
         SimpleHashSetEntry<T>[] oldTable = mTable;
@@ -169,8 +175,8 @@ public class SimpleHashSet<T> extends AbstractSet<T> implements Set<T>, Cloneabl
 
         for (int j = 0; j < oldCapacity; j++) {
             /*
-             * Rehash the bucket using the minimum number of field writes.
-             * This is the most subtle and delicate code in the class.
+             * Rehash the bucket using the minimum number of field writes. This
+             * is the most subtle and delicate code in the class.
              */
             SimpleHashSetEntry<T> e = oldTable[j];
             if (e == null) {
@@ -225,8 +231,8 @@ public class SimpleHashSet<T> extends AbstractSet<T> implements Set<T>, Cloneabl
     @Override
     public Object clone() {
         /*
-         * This could be made more efficient. It unnecessarily hashes all of
-         * the elements in the map.
+         * This could be made more efficient. It unnecessarily hashes all of the
+         * elements in the map.
          */
         SimpleHashSet<T> result;
         try {
@@ -250,7 +256,9 @@ public class SimpleHashSet<T> extends AbstractSet<T> implements Set<T>, Cloneabl
     private static class SimpleHashSetEntry<T> {
 
         private int mHash;
+
         private T mKey;
+
         private SimpleHashSetEntry<T> mNext;
 
         private SimpleHashSetEntry(int hash, T key) {
@@ -262,7 +270,9 @@ public class SimpleHashSet<T> extends AbstractSet<T> implements Set<T>, Cloneabl
     private class HashSetIterator implements Iterator<T> {
 
         int nextIndex;
+
         SimpleHashSetEntry<T> nextEntry = mEntryForNull;
+
         SimpleHashSetEntry<T> lastEntryReturned;
 
         private HashSetIterator() {

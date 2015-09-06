@@ -1,3 +1,4 @@
+
 package in.srain.cube.request;
 
 import android.text.TextUtils;
@@ -12,18 +13,27 @@ import java.util.Map;
 public class RequestData {
 
     private static final String EMPTY = "";
+
     private static final String CHAR_QM = "?";
+
     private static final String CHAR_AND = "&";
+
     private static final String CHAR_EQ = "=";
+
     private static final String CHAR_SET = "UTF-8";
 
     public String mUrl;
 
     private HashMap<String, Object> mQueryData;
+
     private HashMap<String, Object> mPostData;
+
     private HashMap<String, Object> mHeaderData;
+
     private HashMap<String, UploadFileInfo> mUploadFileInfoHashMap;
+
     private boolean mUsePost = false;
+
     private String mTag;
 
     public static String buildQueryString(Map<String, ?> data, String url) {
@@ -138,12 +148,14 @@ public class RequestData {
 
     /**
      * add file to be uploaded
-     *
+     * 
      * @param fieldName
      * @param uploadFile, will extract extension from the file name
      * @return
      */
-    @SuppressWarnings({"unused"})
+    @SuppressWarnings({
+        "unused"
+    })
     public RequestData addFile(String fieldName, String uploadFile) {
         addFile(fieldName, uploadFile, null);
         return this;
@@ -151,13 +163,15 @@ public class RequestData {
 
     /**
      * add file to be uploaded
-     *
+     * 
      * @param fieldName
      * @param uploadFile
-     * @param fileName   if provided, will use this as filename
+     * @param fileName if provided, will use this as filename
      * @return
      */
-    @SuppressWarnings({"unused"})
+    @SuppressWarnings({
+        "unused"
+    })
     public RequestData addFile(String fieldName, String uploadFile, String fileName) {
         addFile(fieldName, new File(uploadFile), fileName);
         return this;
@@ -168,13 +182,17 @@ public class RequestData {
      * @param uploadFile
      * @return
      */
-    @SuppressWarnings({"unused"})
+    @SuppressWarnings({
+        "unused"
+    })
     public RequestData addFile(String fieldName, File uploadFile) {
         addFile(fieldName, uploadFile, null);
         return this;
     }
 
-    @SuppressWarnings({"unused"})
+    @SuppressWarnings({
+        "unused"
+    })
     public RequestData addFile(String fieldName, File uploadFile, String fileName) {
 
         if (mUploadFileInfoHashMap == null) {
@@ -223,12 +241,15 @@ public class RequestData {
 
     @Override
     public String toString() {
-        return String.format("RequestData: [%s, G: %s, P: %s, F: %s]", getRequestUrl(), mQueryData, mPostData, mUploadFileInfoHashMap);
+        return String.format("RequestData: [%s, G: %s, P: %s, F: %s]", getRequestUrl(), mQueryData,
+                mPostData, mUploadFileInfoHashMap);
     }
 
     public static class UploadFileInfo {
         public File uploadFile;
+
         public String fileName;
+
         public String fieldName;
 
         @Override

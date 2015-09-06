@@ -1,3 +1,4 @@
+
 package in.srain.cube.image.iface;
 
 import android.graphics.drawable.BitmapDrawable;
@@ -8,11 +9,13 @@ import in.srain.cube.image.ImageTask;
  * A handler that used in loading a image.
  * <p/>
  * <p>
- * {@link ImageLoadHandler#onLoading(ImageTask, CubeImageView)} will be called when begin to load the image.
+ * {@link ImageLoadHandler#onLoading(ImageTask, CubeImageView)} will be called
+ * when begin to load the image.
  * </p>
  * <p/>
  * <p>
- * {@link ImageLoadHandler#onLoadFinish(ImageTask, CubeImageView, BitmapDrawable)} will be called after the image is loaded.
+ * {@link ImageLoadHandler#onLoadFinish(ImageTask, CubeImageView, BitmapDrawable)}
+ * will be called after the image is loaded.
  * </p>
  */
 public interface ImageLoadHandler {

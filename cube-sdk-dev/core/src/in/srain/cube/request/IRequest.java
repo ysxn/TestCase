@@ -1,3 +1,4 @@
+
 package in.srain.cube.request;
 
 public interface IRequest<T> {
@@ -28,7 +29,7 @@ public interface IRequest<T> {
 
     /**
      * filter the origin data or convert its structure.
-     *
+     * 
      * @param jsonData
      * @return
      */

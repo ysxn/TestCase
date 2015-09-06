@@ -1,3 +1,4 @@
+
 package in.srain.cube.views.block;
 
 import android.view.LayoutInflater;
@@ -8,13 +9,16 @@ import java.util.List;
 public abstract class BlockListAdapter<T> {
 
     private List<T> mItemList;
+
     private BlockListView mView;
 
     // default size is wrap_content
     private int mBlockWidth = -2;
+
     private int mBlockHeight = -2;
 
     private int mWidthSpace = 0;
+
     private int mHeightSpace = 0;
 
     private int mColumnNum = 0;

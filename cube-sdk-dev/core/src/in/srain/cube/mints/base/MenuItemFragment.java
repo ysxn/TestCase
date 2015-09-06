@@ -1,3 +1,4 @@
+
 package in.srain.cube.mints.base;
 
 import android.graphics.Color;
@@ -36,7 +37,8 @@ public abstract class MenuItemFragment extends TitleBaseFragment {
     protected abstract int getLayoutId();
 
     @Override
-    protected View createView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    protected View createView(final LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutId(), null);
         addItemInfo(mItemInfos);
         setupViews(view);
@@ -50,8 +52,11 @@ public abstract class MenuItemFragment extends TitleBaseFragment {
 
     protected static class MenuItemInfo {
         private int mColor;
+
         private String mTitle;
+
         private String mDes;
+
         private OnClickListener mOnClickListener;
 
         public MenuItemInfo(String title, int color, OnClickListener onClickListener) {

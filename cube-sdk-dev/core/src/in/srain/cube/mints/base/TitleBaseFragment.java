@@ -1,3 +1,4 @@
+
 package in.srain.cube.mints.base;
 
 import android.os.Bundle;
@@ -10,22 +11,27 @@ import in.srain.cube.R;
 import in.srain.cube.app.CubeFragment;
 
 /**
- * <a href="http://www.liaohuqiu.net/unified-title-header/">http://www.liaohuqiu.net/unified-title-header/</a>
- *
+ * <a
+ * href="http://www.liaohuqiu.net/unified-title-header/">http://www.liaohuqiu.
+ * net/unified-title-header/</a>
+ * 
  * @author http://www.liaohuqiu.net
  */
 public abstract class TitleBaseFragment extends CubeFragment {
 
     protected TitleHeaderBar mTitleHeaderBar;
+
     protected LinearLayout mContentContainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         ViewGroup view = (ViewGroup) inflater.inflate(getFrameLayoutId(), null);
-        LinearLayout contentContainer = (LinearLayout) view.findViewById(R.id.cube_mints_content_frame_content);
+        LinearLayout contentContainer = (LinearLayout) view
+                .findViewById(R.id.cube_mints_content_frame_content);
 
-        mTitleHeaderBar = (TitleHeaderBar) view.findViewById(R.id.cube_mints_content_frame_title_header);
+        mTitleHeaderBar = (TitleHeaderBar) view
+                .findViewById(R.id.cube_mints_content_frame_title_header);
         if (enableDefaultBack()) {
             mTitleHeaderBar.setLeftOnClickListener(new OnClickListener() {
 

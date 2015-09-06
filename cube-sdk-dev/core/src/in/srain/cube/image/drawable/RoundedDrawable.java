@@ -1,12 +1,12 @@
+
 package in.srain.cube.image.drawable;
 
 import android.graphics.*;
 import android.graphics.drawable.Drawable;
 
 /**
- * A drawable with rounded corners;
- * CenterCrop
- *
+ * A drawable with rounded corners; CenterCrop
+ * 
  * @author http://www.liaohuqiu.net
  */
 public class RoundedDrawable extends Drawable {
@@ -14,9 +14,13 @@ public class RoundedDrawable extends Drawable {
     protected final float mCornerRadius;
 
     protected final RectF mRect = new RectF();
+
     protected final BitmapShader mBitmapShader;
+
     protected final Paint mPaint;
+
     private int mBitmapWidth;
+
     private int mBitmapHeight;
 
     public RoundedDrawable(Bitmap bitmap, float cornerRadius) {
@@ -37,7 +41,8 @@ public class RoundedDrawable extends Drawable {
         mRect.set(0, 0, bounds.width(), bounds.height());
 
         Matrix shaderMatrix = new Matrix();
-        shaderMatrix.setRectToRect(new RectF(0, 0, mBitmapWidth, mBitmapHeight), mRect, Matrix.ScaleToFit.FILL);
+        shaderMatrix.setRectToRect(new RectF(0, 0, mBitmapWidth, mBitmapHeight), mRect,
+                Matrix.ScaleToFit.FILL);
         mBitmapShader.setLocalMatrix(shaderMatrix);
     }
 
@@ -51,9 +56,12 @@ public class RoundedDrawable extends Drawable {
         paint.setAntiAlias(true);
         paint.setShader(new BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
 
-        Bitmap output = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap output = Bitmap.createBitmap(source.getWidth(), source.getHeight(),
+                Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
-        canvas.drawRoundRect(new RectF(margin, margin, source.getWidth() - margin, source.getHeight() - margin), radius, radius, paint);
+        canvas.drawRoundRect(
+                new RectF(margin, margin, source.getWidth() - margin, source.getHeight() - margin),
+                radius, radius, paint);
 
         if (source != output) {
             source.recycle();

@@ -1,3 +1,4 @@
+
 package in.srain.cube.image.impl;
 
 import android.os.Build;
@@ -22,6 +23,7 @@ public class SimpleDownloader implements ImageDownloader {
     protected static final String LOG_TAG = CubeDebug.DEBUG_IMAGE_LOG_TAG_PROVIDER;
 
     private static final int IO_BUFFER_SIZE = 8 * 1024;
+
     private static SimpleDownloader sInstance;
 
     public static SimpleDownloader getInstance() {
@@ -34,7 +36,8 @@ public class SimpleDownloader implements ImageDownloader {
     /**
      * Download a bitmap from a URL and write the content to an output stream.
      */
-    public boolean downloadToStream(ImageTask imageTask, String urlString, OutputStream outputStream, ProgressUpdateHandler progressUpdateHandler) {
+    public boolean downloadToStream(ImageTask imageTask, String urlString,
+            OutputStream outputStream, ProgressUpdateHandler progressUpdateHandler) {
         disableConnectionReuseIfNecessary();
         HttpURLConnection urlConnection = null;
         BufferedOutputStream out = null;
@@ -77,7 +80,8 @@ public class SimpleDownloader implements ImageDownloader {
     }
 
     /**
-     * Workaround for bug pre-Froyo, see here for more info: http://android-developers.blogspot.com/2011/09/androids-http-clients.html
+     * Workaround for bug pre-Froyo, see here for more info:
+     * http://android-developers.blogspot.com/2011/09/androids-http-clients.html
      */
     public static void disableConnectionReuseIfNecessary() {
         // HTTP connection reuse which was buggy pre-froyo

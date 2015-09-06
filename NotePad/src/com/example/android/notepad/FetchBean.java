@@ -115,15 +115,16 @@ public class FetchBean implements Parcelable {
             };
 
     public String dump() {
-        String string = "login_result=" + login_result + "\n" 
-                    + "fetch_result=" + fetch_result + "\n"
-                    + "fetch_cmd=" + fetch_cmd + "\n"
-                    + "error_info=" + error_info + "\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append("login_result=").append(login_result).append("\n");
+        sb.append("fetch_result=").append(fetch_result).append("\n");
+        sb.append("fetch_cmd=").append(fetch_cmd).append("\n");
+        sb.append("error_info=").append(error_info).append("\n");
         if (result_data != null) {
             for (NoteBean n : result_data) {
-                string += n.dump();
+                sb.append(n.dump());
             }
         }
-        return string;
+        return sb.toString();
     }
 }

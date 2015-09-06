@@ -1,3 +1,4 @@
+
 package in.srain.cube.request.sender;
 
 import in.srain.cube.request.IRequest;
@@ -12,8 +13,11 @@ import java.util.Map;
 public abstract class BaseRequestSender implements IRequestSender {
 
     protected final static String EMPTY_VALUE = "";
+
     protected HttpURLConnection mHttpURLConnection;
+
     protected RequestData mRequestData;
+
     protected IRequest<?> mRequest;
 
     public BaseRequestSender(IRequest<?> request, HttpURLConnection httpURLConnection) {
@@ -42,9 +46,9 @@ public abstract class BaseRequestSender implements IRequestSender {
 
     /**
      * Completes the request and receives response from the server.
-     *
-     * @return a list of Strings as response in case the server returned
-     * status OK, otherwise an exception is thrown.
+     * 
+     * @return a list of Strings as response in case the server returned status
+     *         OK, otherwise an exception is thrown.
      * @throws IOException
      */
     public void getResponse(StringBuilder sb) throws IOException {

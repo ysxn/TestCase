@@ -1,3 +1,4 @@
+
 package in.srain.cube.app;
 
 import android.app.Activity;
@@ -20,20 +21,23 @@ import in.srain.cube.util.CubeDebug;
 public abstract class CubeFragment extends Fragment implements ICubeFragment, IComponentContainer {
 
     private static final boolean DEBUG = CubeDebug.DEBUG_LIFE_CYCLE;
+
     protected Object mDataIn;
+
     private boolean mFirstResume = true;
 
     private LifeCycleComponentManager mComponentContainer = new LifeCycleComponentManager();
 
-    protected abstract View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
+    protected abstract View createView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState);
 
     public CubeFragmentActivity getContext() {
         return (CubeFragmentActivity) getActivity();
     }
 
     /**
-     * ===========================================================
-     * Implements {@link ICubeFragment}
+     * =========================================================== Implements
+     * {@link ICubeFragment}
      * ===========================================================
      */
     @Override
@@ -74,8 +78,8 @@ public abstract class CubeFragment extends Fragment implements ICubeFragment, IC
     }
 
     /**
-     * ===========================================================
-     * Implements {@link IComponentContainer}
+     * =========================================================== Implements
+     * {@link IComponentContainer}
      * ===========================================================
      */
     @Override
@@ -96,8 +100,8 @@ public abstract class CubeFragment extends Fragment implements ICubeFragment, IC
     }
 
     /**
-     * Only when Activity resume, not very precise.
-     * When activity recover from partly invisible, onBecomesPartiallyInvisible will be triggered.
+     * Only when Activity resume, not very precise. When activity recover from
+     * partly invisible, onBecomesPartiallyInvisible will be triggered.
      */
     @Override
     public void onResume() {

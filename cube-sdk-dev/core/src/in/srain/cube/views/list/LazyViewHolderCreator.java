@@ -1,3 +1,4 @@
+
 package in.srain.cube.views.list;
 
 import java.lang.reflect.Constructor;
@@ -6,6 +7,7 @@ import java.lang.reflect.Modifier;
 public class LazyViewHolderCreator<T> implements ViewHolderCreator<T> {
 
     private final Constructor<?> mConstructor;
+
     private Object[] mInstanceObjects;
 
     private LazyViewHolderCreator(Constructor<?> constructor, Object[] instanceObjects) {
@@ -13,7 +15,8 @@ public class LazyViewHolderCreator<T> implements ViewHolderCreator<T> {
         mInstanceObjects = instanceObjects;
     }
 
-    public static <ItemDataType> ViewHolderCreator<ItemDataType> create(final Object enclosingInstance, final Class<?> cls, final Object... args) {
+    public static <ItemDataType> ViewHolderCreator<ItemDataType> create(
+            final Object enclosingInstance, final Class<?> cls, final Object... args) {
         if (cls == null) {
             throw new IllegalArgumentException("ViewHolderClass is null.");
         }
@@ -30,7 +33,8 @@ public class LazyViewHolderCreator<T> implements ViewHolderCreator<T> {
         final Object[] instanceObjects = new Object[argsLen];
 
         int copyStart = 0;
-        // if it is inner instance class, first argument should be the enclosing class instance
+        // if it is inner instance class, first argument should be the enclosing
+        // class instance
         if (isEnclosingInstanceClass) {
             instanceObjects[0] = enclosingInstance;
             copyStart = 1;

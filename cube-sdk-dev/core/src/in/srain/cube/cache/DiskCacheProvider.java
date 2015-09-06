@@ -1,3 +1,4 @@
+
 package in.srain.cube.cache;
 
 import android.content.Context;
@@ -12,8 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * It's easy to use.
- * Auto open.
+ * It's easy to use. Auto open.
  */
 public class DiskCacheProvider {
 
@@ -22,16 +22,23 @@ public class DiskCacheProvider {
     }
 
     public static final boolean DEBUG = true;
+
     protected static final String LOG_TAG = "cube-disk-cache-provider";
 
     public static final byte TASK_INIT_CACHE = 1;
+
     public static final byte TASK_CLOSE_CACHE = 2;
+
     public static final byte TASK_FLUSH_CACHE = 3;
 
     protected DiskCache mDiskCache;
+
     private boolean mIsDelayFlushing = false;
+
     private final Object mDiskCacheLock = new Object();
+
     private boolean mDiskCacheStarting = true;
+
     private boolean mDiskCacheReady = false;
 
     private AsyncTaskEventHandler mAsyncTaskEventHandler;
@@ -128,13 +135,15 @@ public class DiskCacheProvider {
 
     /**
      * If disk is not read, will prepare it first.
-     *
+     * 
      * @return
      */
     public DiskCache getDiskCache() {
         if (!mDiskCacheReady) {
             if (DEBUG) {
-                CLog.d(LOG_TAG, "%s, try to access disk cache, but it is not open, try to open it.", mDiskCache);
+                CLog.d(LOG_TAG,
+                        "%s, try to access disk cache, but it is not open, try to open it.",
+                        mDiskCache);
             }
             openDiskCacheAsync();
         }
@@ -142,7 +151,8 @@ public class DiskCacheProvider {
             while (mDiskCacheStarting) {
                 try {
                     if (DEBUG) {
-                        CLog.d(LOG_TAG, "%s, try to access, but disk cache is not ready, wait", mDiskCache);
+                        CLog.d(LOG_TAG, "%s, try to access, but disk cache is not ready, wait",
+                                mDiskCache);
                     }
                     mDiskCacheLock.wait();
                 } catch (InterruptedException e) {
@@ -153,7 +163,8 @@ public class DiskCacheProvider {
     }
 
     /**
-     * A helper class to encapsulate the operate into a Work which will be executed by the Worker.
+     * A helper class to encapsulate the operate into a Work which will be
+     * executed by the Worker.
      */
     private class FileCacheTask extends SimpleTask {
 
@@ -187,7 +198,8 @@ public class DiskCacheProvider {
                         mDiskCacheReady = true;
                         mDiskCacheStarting = false;
                         if (DEBUG) {
-                            CLog.d(LOG_TAG, "disk cache open successfully, notify all lock: " + mDiskCache);
+                            CLog.d(LOG_TAG, "disk cache open successfully, notify all lock: "
+                                    + mDiskCache);
                         }
                         mDiskCacheLock.notifyAll();
                     }

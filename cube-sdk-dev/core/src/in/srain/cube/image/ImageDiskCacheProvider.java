@@ -1,3 +1,4 @@
+
 package in.srain.cube.image;
 
 import android.graphics.Bitmap;
@@ -16,17 +17,22 @@ import java.io.*;
 /**
  * This class handles disk and memory caching of bitmaps.
  * <p/>
- * Most of the code is taken from the Android best practice of displaying Bitmaps <a href="http://developer.android.com/training/displaying-bitmaps/index.html">Displaying Bitmaps Efficiently</a>.
- *
+ * Most of the code is taken from the Android best practice of displaying
+ * Bitmaps <a
+ * href="http://developer.android.com/training/displaying-bitmaps/index.html"
+ * >Displaying Bitmaps Efficiently</a>.
+ * 
  * @author http://www.liaohuqiu.net
  */
 public class ImageDiskCacheProvider extends DiskCacheProvider {
 
     protected static final boolean DEBUG = CubeDebug.DEBUG_IMAGE;
+
     protected static final String LOG_TAG = CubeDebug.DEBUG_IMAGE_LOG_TAG_PROVIDER;
 
     // Compression settings when writing images to disk cache
     private static final CompressFormat DEFAULT_COMPRESS_FORMAT = CompressFormat.JPEG;
+
     private static final int DEFAULT_COMPRESS_QUALITY = 70;
 
     public ImageDiskCacheProvider(DiskCache diskCache) {
@@ -65,7 +71,8 @@ public class ImageDiskCacheProvider extends DiskCacheProvider {
         return null;
     }
 
-    public FileInputStream downloadAndGetInputStream(ImageDownloader imageDownloader, ImageTask imageTask, String fileCacheKey, String url) {
+    public FileInputStream downloadAndGetInputStream(ImageDownloader imageDownloader,
+            ImageTask imageTask, String fileCacheKey, String url) {
         if (imageDownloader == null) {
             imageDownloader = SimpleDownloader.getInstance();
         }
@@ -97,8 +104,8 @@ public class ImageDiskCacheProvider extends DiskCacheProvider {
 
     /**
      * Adds a bitmap to both memory and disk cache
-     *
-     * @param key    Unique identifier for the bitmap to store
+     * 
+     * @param key Unique identifier for the bitmap to store
      * @param bitmap The bitmap to store
      */
     public void write(String key, Bitmap bitmap) {

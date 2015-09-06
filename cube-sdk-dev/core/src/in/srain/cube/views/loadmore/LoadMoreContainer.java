@@ -1,3 +1,4 @@
+
 package in.srain.cube.views.loadmore;
 
 import android.view.View;
@@ -19,7 +20,7 @@ public interface LoadMoreContainer {
 
     /**
      * When data has loaded
-     *
+     * 
      * @param emptyResult
      * @param hasMore
      */
@@ -27,7 +28,7 @@ public interface LoadMoreContainer {
 
     /**
      * When something unexpected happened while loading the data
-     *
+     * 
      * @param errorCode
      * @param errorMessage
      */

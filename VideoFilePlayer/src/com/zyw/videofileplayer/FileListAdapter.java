@@ -4,6 +4,8 @@ package com.zyw.videofileplayer;
 import java.io.File;
 import java.util.List;
 
+import com.codezyw.common.FileIOHelper;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class FileListAdapter extends ArrayAdapter<File> {
-    private Util mUtil;
+    private FileIOHelper mUtil;
 
     public FileListAdapter(Context context, int Resource, List<File> objects) {
         super(context, Resource, objects);
-        mUtil = new Util(context);
+        mUtil = new FileIOHelper(context);
     }
 
     @Override

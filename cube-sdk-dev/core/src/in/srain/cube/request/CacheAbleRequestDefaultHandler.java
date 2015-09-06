@@ -1,3 +1,4 @@
+
 package in.srain.cube.request;
 
 import in.srain.cube.util.CLog;
@@ -10,8 +11,10 @@ public abstract class CacheAbleRequestDefaultHandler<T1> implements CacheAbleReq
 
     @Override
     public void onRequestFail(FailData failData) {
-        if (failData != null && failData.getRequest() != null && failData.getRequest().getRequestData() != null) {
-            CLog.e(CubeDebug.DEBUG_REQUEST_LOG_TAG, "onRequestFail: %s", failData.getRequest().getRequestData().getRequestUrl());
+        if (failData != null && failData.getRequest() != null
+                && failData.getRequest().getRequestData() != null) {
+            CLog.e(CubeDebug.DEBUG_REQUEST_LOG_TAG, "onRequestFail: %s", failData.getRequest()
+                    .getRequestData().getRequestUrl());
         }
     }
 

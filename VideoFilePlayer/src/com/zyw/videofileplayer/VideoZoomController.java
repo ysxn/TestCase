@@ -8,14 +8,11 @@ import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewTreeObserver;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.VideoView;
 
-import com.zyw.videofileplayer.GestureRecognizer;
+import com.codezyw.common.GestureRecognizer;
 import com.zyw.videofileplayer.MovieControllerOverlay;
-import com.zyw.videofileplayer.GestureRecognizer.Listener;
 
 public class VideoZoomController
         implements GestureRecognizer.Listener

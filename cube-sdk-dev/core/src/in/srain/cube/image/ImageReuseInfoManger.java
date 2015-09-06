@@ -1,3 +1,4 @@
+
 package in.srain.cube.image;
 
 import java.util.ArrayList;
@@ -7,8 +8,9 @@ public class ImageReuseInfoManger {
     private String[] mSizeList;
 
     /**
-     * Create Reuse Info Manger, the smaller size is in the front of the size array.
-     *
+     * Create Reuse Info Manger, the smaller size is in the front of the size
+     * array.
+     * 
      * @param size new String[] { "small_180", "big_360", "big_720" }
      */
     public ImageReuseInfoManger(String[] size) {
@@ -17,7 +19,7 @@ public class ImageReuseInfoManger {
 
     /**
      * Find out the size list can be re-sued.
-     *
+     * 
      * @param thisSize if "small_180" is input
      * @return {"big_360", "big_720"} will be returned.
      */

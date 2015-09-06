@@ -29,15 +29,19 @@ public class Version {
 
     }
 
-    @TargetApi(11) // @TargetApi(VERSION_CODES.HONEYCOMB)
+    @TargetApi(11)
+    // @TargetApi(VERSION_CODES.HONEYCOMB)
     public static void enableStrictMode() {
         if (Version.hasGingerbread()) {
-            StrictMode.ThreadPolicy.Builder threadPolicyBuilder = new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog();
-            StrictMode.VmPolicy.Builder vmPolicyBuilder = new StrictMode.VmPolicy.Builder().detectAll().penaltyLog();
+            StrictMode.ThreadPolicy.Builder threadPolicyBuilder = new StrictMode.ThreadPolicy.Builder()
+                    .detectAll().penaltyLog();
+            StrictMode.VmPolicy.Builder vmPolicyBuilder = new StrictMode.VmPolicy.Builder()
+                    .detectAll().penaltyLog();
 
             if (Version.hasHoneycomb()) {
                 threadPolicyBuilder.penaltyFlashScreen();
-                // vmPolicyBuilder.setClassInstanceLimit(ImageGridActivity.class, 1).setClassInstanceLimit(ImageDetailActivity.class, 1);
+                // vmPolicyBuilder.setClassInstanceLimit(ImageGridActivity.class,
+                // 1).setClassInstanceLimit(ImageDetailActivity.class, 1);
             }
             StrictMode.setThreadPolicy(threadPolicyBuilder.build());
             StrictMode.setVmPolicy(vmPolicyBuilder.build());
@@ -49,7 +53,8 @@ public class Version {
      */
     public static boolean hasFroyo() {
         // Can use static final constants like FROYO, declared in later versions
-        // of the OS since they are inlined at compile time. This is guaranteed behavior.
+        // of the OS since they are inlined at compile time. This is guaranteed
+        // behavior.
         return Build.VERSION.SDK_INT >= 8; // VERSION_CODES.FROYO;
     }
 

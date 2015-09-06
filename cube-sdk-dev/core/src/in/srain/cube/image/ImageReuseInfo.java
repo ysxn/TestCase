@@ -1,8 +1,10 @@
+
 package in.srain.cube.image;
 
 public class ImageReuseInfo {
 
     private String mIdentitySize;
+
     private String[] mReuseSize;
 
     public ImageReuseInfo(String identitySize, String[] reuseSize) {

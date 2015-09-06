@@ -1,3 +1,4 @@
+
 package in.srain.cube.image;
 
 import in.srain.cube.image.iface.ImageLoadProfiler;
@@ -5,6 +6,7 @@ import in.srain.cube.image.iface.ImageLoadProfiler;
 public class ImagePerformanceStatistics {
 
     private static int sSAMPLE_NUM = 0;
+
     private static ImageLoadProfiler sImageLoadProfiler;
 
     public static void setSample(int num) {
@@ -18,7 +20,9 @@ public class ImagePerformanceStatistics {
     /**
      * @param profiler
      */
-    @SuppressWarnings({"unused"})
+    @SuppressWarnings({
+        "unused"
+    })
     public static void setImageLoadProfile(ImageLoadProfiler profiler) {
         sImageLoadProfiler = profiler;
     }

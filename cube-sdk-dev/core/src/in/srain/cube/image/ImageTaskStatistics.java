@@ -1,3 +1,4 @@
+
 package in.srain.cube.image;
 
 /**
@@ -5,22 +6,29 @@ package in.srain.cube.image;
  */
 public class ImageTaskStatistics {
 
-
     private long m0Start;
+
     private long m1BeginLoad;
+
     private long m2AfterCheckFileCache;
+
     private long m3AfterDownload;
+
     private long m4AfterDecode;
+
     private long m5ShowStart;
+
     private long m6ShowComplete;
 
     /**
      * in byte
      */
     private long mImageFileSize;
+
     private long mBitmapDrawableSize;
 
     private boolean mHitMemoryCache;
+
     private boolean mHitFileCache;
 
     public ImageTaskStatistics() {
@@ -30,7 +38,8 @@ public class ImageTaskStatistics {
     public void s0_afterCheckMemoryCache(boolean hasCache) {
         mHitMemoryCache = hasCache;
         if (hasCache) {
-            m1BeginLoad = m2AfterCheckFileCache = m3AfterDownload = m4AfterDecode = System.currentTimeMillis();
+            m1BeginLoad = m2AfterCheckFileCache = m3AfterDownload = m4AfterDecode = System
+                    .currentTimeMillis();
         }
     }
 
@@ -67,14 +76,16 @@ public class ImageTaskStatistics {
     /**
      * @return
      */
-    @SuppressWarnings({"unused"})
+    @SuppressWarnings({
+        "unused"
+    })
     public long getBitmapDrawableSize() {
         return mBitmapDrawableSize;
     }
 
     /**
      * Decode from file cache
-     *
+     * 
      * @return
      */
     public int getDecodeTime() {
@@ -83,7 +94,7 @@ public class ImageTaskStatistics {
 
     /**
      * Download from remote server
-     *
+     * 
      * @return
      */
     public int getDownloadTime() {
@@ -92,21 +103,23 @@ public class ImageTaskStatistics {
 
     /**
      * check if has file cache
-     *
+     * 
      * @return
      */
     public int getCheckFileCacheTime() {
         return (int) (m2AfterCheckFileCache - m1BeginLoad);
     }
 
-    @SuppressWarnings({"unused"})
+    @SuppressWarnings({
+        "unused"
+    })
     public long getImageFileSize() {
         return mImageFileSize;
     }
 
     /**
      * KillBytes / s
-     *
+     * 
      * @return -1 means did not do download
      */
     public int getDownLoadSpeed() {
@@ -117,19 +130,12 @@ public class ImageTaskStatistics {
     }
 
     public String getStatisticsInfo() {
-        return String.format("mc=%d, fc=%d, wait_to_load=%d, check_file_cache=%d, download=%d/%dKB/s, decode=%d, wait_ui=%s, all=%d, size=%d/%d",
-                mHitMemoryCache ? 1 : 0,
-                mHitFileCache ? 1 : 0,
-                getWaitForLoadTime(),
-                getCheckFileCacheTime(),
-                getDownloadTime(),
-                getDownLoadSpeed(),
-                getDecodeTime(),
-                getWaitToPostMessage(),
-                getTotalLoadTime(),
-                mBitmapDrawableSize,
-                mImageFileSize
-        );
+        return String
+                .format("mc=%d, fc=%d, wait_to_load=%d, check_file_cache=%d, download=%d/%dKB/s, decode=%d, wait_ui=%s, all=%d, size=%d/%d",
+                        mHitMemoryCache ? 1 : 0, mHitFileCache ? 1 : 0, getWaitForLoadTime(),
+                        getCheckFileCacheTime(), getDownloadTime(), getDownLoadSpeed(),
+                        getDecodeTime(), getWaitToPostMessage(), getTotalLoadTime(),
+                        mBitmapDrawableSize, mImageFileSize);
     }
 
     public int getTotalLoadTime() {

@@ -1,3 +1,4 @@
+
 package in.srain.cube.app;
 
 import android.os.Bundle;
@@ -9,7 +10,7 @@ import in.srain.cube.util.CubeDebug;
 
 /**
  * 1. manager the components when move from a lifetime to another
- *
+ * 
  * @author http://www.liaohuqiu.net
  */
 public abstract class XActivity extends CubeFragmentActivity implements IComponentContainer {

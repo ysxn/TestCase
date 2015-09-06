@@ -1,3 +1,4 @@
+
 package in.srain.cube.image;
 
 import android.content.Context;
@@ -15,21 +16,26 @@ import in.srain.cube.image.drawable.RecyclingBitmapDrawable;
 /**
  * Sub-class of ImageView which:
  * <ul>
- * <li>
- * automatically notifies the Drawable when it is being displayed.
+ * <li>automatically notifies the Drawable when it is being displayed.
  * </ul>
  * <p/>
- * Part of the code is taken from the Android best practice of displaying Bitmaps
+ * Part of the code is taken from the Android best practice of displaying
+ * Bitmaps
  * <p/>
- * <a href="http://developer.android.com/training/displaying-bitmaps/index.html">Displaying Bitmaps Efficiently</a>.
+ * <a
+ * href="http://developer.android.com/training/displaying-bitmaps/index.html">
+ * Displaying Bitmaps Efficiently</a>.
  */
 public class CubeImageView extends ImageView {
 
     private ImageLoader mImageLoader;
 
     private ImageTask mImageTask;
+
     private boolean mClearWhenDetached = true;
+
     private String mStr;
+
     private ImageLoadRequest mRequest;
 
     public CubeImageView(Context context) {
@@ -46,7 +52,7 @@ public class CubeImageView extends ImageView {
 
     /**
      * Notifies the drawable that it's displayed state has changed.
-     *
+     * 
      * @param drawable
      * @param isDisplayed
      */
@@ -152,11 +158,13 @@ public class CubeImageView extends ImageView {
         loadImage(imageLoader, url, specifiedSize, specifiedSize, null);
     }
 
-    public void loadImage(ImageLoader imageLoader, String url, int specifiedSize, ImageReuseInfo imageReuseInfo) {
+    public void loadImage(ImageLoader imageLoader, String url, int specifiedSize,
+            ImageReuseInfo imageReuseInfo) {
         loadImage(imageLoader, url, specifiedSize, specifiedSize, imageReuseInfo);
     }
 
-    public void loadImage(ImageLoader imageLoader, String url, int specifiedWidth, int specifiedHeight) {
+    public void loadImage(ImageLoader imageLoader, String url, int specifiedWidth,
+            int specifiedHeight) {
         loadImage(imageLoader, url, specifiedWidth, specifiedHeight, null);
     }
 
@@ -165,14 +173,16 @@ public class CubeImageView extends ImageView {
         mImageLoader = imageLoader;
 
         if (request == null || TextUtils.isEmpty(request.getUrl())) {
-            mImageLoader.getImageLoadHandler().onLoadError(mImageTask, this, ImageTask.ERROR_EMPTY_URL);
+            mImageLoader.getImageLoadHandler().onLoadError(mImageTask, this,
+                    ImageTask.ERROR_EMPTY_URL);
             mImageTask = null;
             return;
         }
         tryLoadImage();
     }
 
-    public void loadImage(ImageLoader imageLoader, String url, int specifiedWidth, int specifiedHeight, ImageReuseInfo imageReuseInfo) {
+    public void loadImage(ImageLoader imageLoader, String url, int specifiedWidth,
+            int specifiedHeight, ImageReuseInfo imageReuseInfo) {
         mRequest = new ImageLoadRequest(url, specifiedWidth, specifiedHeight, 0, imageReuseInfo);
         loadImage(imageLoader, mRequest);
     }
@@ -193,8 +203,10 @@ public class CubeImageView extends ImageView {
         int height = getHeight();
 
         ViewGroup.LayoutParams lyp = getLayoutParams();
-        boolean isFullyWrapContent = lyp != null && lyp.height == LayoutParams.WRAP_CONTENT && lyp.width == LayoutParams.WRAP_CONTENT;
-        // if the view's bounds aren't known yet, and this is not a wrap-content/wrap-content
+        boolean isFullyWrapContent = lyp != null && lyp.height == LayoutParams.WRAP_CONTENT
+                && lyp.width == LayoutParams.WRAP_CONTENT;
+        // if the view's bounds aren't known yet, and this is not a
+        // wrap-content/wrap-content
         // view, hold off on loading the image.
         if (width == 0 && height == 0 && !isFullyWrapContent) {
             return;
@@ -209,15 +221,17 @@ public class CubeImageView extends ImageView {
             if (mImageTask.isLoadingThisUrl(mRequest)) {
                 return;
             }
-            // ImageView is reused, detach it from the related ImageViews of the previous ImageTask.
+            // ImageView is reused, detach it from the related ImageViews of the
+            // previous ImageTask.
             else {
                 mImageLoader.detachImageViewFromImageTask(mImageTask, this);
             }
         }
 
-        // 2. Let the ImageView hold this ImageTask. When ImageView is reused next time, check it in step 1.
+        // 2. Let the ImageView hold this ImageTask. When ImageView is reused
+        // next time, check it in step 1.
         ImageTask imageTask = mImageLoader.createImageTask(mRequest);
-        //.createImageTask(mUrl, width, height, mImageReuseInfo);
+        // .createImageTask(mUrl, width, height, mImageReuseInfo);
         mImageTask = imageTask;
 
         // 3. Query cache, if hit, return at once.

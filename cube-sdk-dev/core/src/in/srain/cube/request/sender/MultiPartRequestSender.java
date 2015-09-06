@@ -1,3 +1,4 @@
+
 package in.srain.cube.request.sender;
 
 import android.text.TextUtils;
@@ -14,11 +15,15 @@ import java.util.Map;
 public class MultiPartRequestSender extends PostRequestSender {
 
     private static final String LINE_FEED = "\r\n";
+
     private static final String CHARSET_DEFAULT = "UTF-8";
+
     private String mBoundary;
+
     private String mCharset = CHARSET_DEFAULT;
 
     private OutputStream mOutputStream;
+
     private PrintWriter mWriter;
 
     public MultiPartRequestSender(IRequest<?> request, HttpURLConnection httpURLConnection) {
@@ -29,7 +34,8 @@ public class MultiPartRequestSender extends PostRequestSender {
     public void setup() throws IOException {
         super.setup();
         mBoundary = "===" + System.currentTimeMillis() + "===";
-        mHttpURLConnection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + mBoundary);
+        mHttpURLConnection.setRequestProperty("Content-Type", "multipart/form-data; boundary="
+                + mBoundary);
         mOutputStream = mHttpURLConnection.getOutputStream();
         mWriter = new PrintWriter(new OutputStreamWriter(mOutputStream), true);
     }
@@ -57,11 +63,13 @@ public class MultiPartRequestSender extends PostRequestSender {
         }
 
         // send file to server
-        Iterator<Map.Entry<String, RequestData.UploadFileInfo>> iterator = uploadFiles.entrySet().iterator();
+        Iterator<Map.Entry<String, RequestData.UploadFileInfo>> iterator = uploadFiles.entrySet()
+                .iterator();
         while (iterator.hasNext()) {
             Map.Entry<String, RequestData.UploadFileInfo> item = iterator.next();
             RequestData.UploadFileInfo uploadFileInfo = item.getValue();
-            addFilePart(uploadFileInfo.fieldName, uploadFileInfo.uploadFile, uploadFileInfo.fileName);
+            addFilePart(uploadFileInfo.fieldName, uploadFileInfo.uploadFile,
+                    uploadFileInfo.fileName);
         }
     }
 
@@ -75,16 +83,14 @@ public class MultiPartRequestSender extends PostRequestSender {
 
     /**
      * Adds a form field to the request
-     *
-     * @param name  field name
+     * 
+     * @param name field name
      * @param value field value
      */
     public void addFormField(String name, String value) {
         mWriter.append("--" + mBoundary).append(LINE_FEED);
-        mWriter.append("Content-Disposition: form-data; name=\"" + name + "\"")
-                .append(LINE_FEED);
-        mWriter.append("Content-Type: text/plain; charset=" + mCharset).append(
-                LINE_FEED);
+        mWriter.append("Content-Disposition: form-data; name=\"" + name + "\"").append(LINE_FEED);
+        mWriter.append("Content-Type: text/plain; charset=" + mCharset).append(LINE_FEED);
         mWriter.append(LINE_FEED);
         mWriter.append(value).append(LINE_FEED);
         mWriter.flush();
@@ -92,10 +98,10 @@ public class MultiPartRequestSender extends PostRequestSender {
 
     /**
      * Adds a upload file section to the request
-     *
-     * @param fieldName  name attribute in <input type="file" name="..." />
+     * 
+     * @param fieldName name attribute in <input type="file" name="..." />
      * @param uploadFile a File to be uploaded
-     * @param fileName   the filename field
+     * @param fileName the filename field
      * @throws IOException
      */
     public void addFilePart(String fieldName, File uploadFile, String fileName) throws IOException {
@@ -104,12 +110,10 @@ public class MultiPartRequestSender extends PostRequestSender {
         }
         mWriter.append("--" + mBoundary).append(LINE_FEED);
         mWriter.append(
-                "Content-Disposition: form-data; name=\"" + fieldName
-                        + "\"; filename=\"" + fileName + "\"")
-                .append(LINE_FEED);
-        mWriter.append(
-                "Content-Type: " + URLConnection.guessContentTypeFromName(fileName))
-                .append(LINE_FEED);
+                "Content-Disposition: form-data; name=\"" + fieldName + "\"; filename=\""
+                        + fileName + "\"").append(LINE_FEED);
+        mWriter.append("Content-Type: " + URLConnection.guessContentTypeFromName(fileName)).append(
+                LINE_FEED);
         mWriter.append("Content-Transfer-Encoding: binary").append(LINE_FEED);
         mWriter.append(LINE_FEED);
         mWriter.flush();

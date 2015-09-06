@@ -1,3 +1,4 @@
+
 package in.srain.cube.mints.base;
 
 import android.content.Context;
@@ -13,9 +14,13 @@ import in.srain.cube.R;
 public class TitleHeaderBar extends RelativeLayout {
 
     private TextView mCenterTitleTextView;
+
     private ImageView mLeftReturnImageView;
+
     private RelativeLayout mLeftViewContainer;
+
     private RelativeLayout mRightViewContainer;
+
     private RelativeLayout mCenterViewContainer;
 
     private String mTitle;
@@ -72,7 +77,7 @@ public class TitleHeaderBar extends RelativeLayout {
 
     /**
      * set customized view to left side
-     *
+     * 
      * @param view the view to be added to left side
      */
     public void setCustomizedLeftView(View view) {
@@ -85,7 +90,7 @@ public class TitleHeaderBar extends RelativeLayout {
 
     /**
      * set customized view to left side
-     *
+     * 
      * @param layoutId the xml layout file id
      */
     public void setCustomizedLeftView(int layoutId) {
@@ -95,7 +100,7 @@ public class TitleHeaderBar extends RelativeLayout {
 
     /**
      * set customized view to center
-     *
+     * 
      * @param view the view to be added to center
      */
     public void setCustomizedCenterView(View view) {
@@ -107,7 +112,7 @@ public class TitleHeaderBar extends RelativeLayout {
 
     /**
      * set customized view to center
-     *
+     * 
      * @param layoutId the xml layout file id
      */
     public void setCustomizedCenterView(int layoutId) {
@@ -117,7 +122,7 @@ public class TitleHeaderBar extends RelativeLayout {
 
     /**
      * set customized view to right side
-     *
+     * 
      * @param view the view to be added to right side
      */
     public void setCustomizedRightView(View view) {

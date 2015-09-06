@@ -1,3 +1,4 @@
+
 package in.srain.cube.image.iface;
 
 import android.graphics.drawable.BitmapDrawable;
@@ -14,14 +15,14 @@ public interface ImageMemoryCache {
 
     /**
      * max byte
-     *
+     * 
      * @return
      */
     public long getMaxSize();
 
     /**
      * used byte
-     *
+     * 
      * @return
      */
     public long getUsedSpace();

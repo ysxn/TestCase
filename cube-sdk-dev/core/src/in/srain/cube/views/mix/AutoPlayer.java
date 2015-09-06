@@ -1,15 +1,19 @@
+
 package in.srain.cube.views.mix;
 
 import android.os.Handler;
 import android.os.Looper;
 
 /**
- * A player who can play a @Playable object. It can play next till end and play previous till head.
+ * A player who can play a @Playable object. It can play next till end and play
+ * previous till head.
  * <p/>
- * Once it go to the last element, it can play by the reverse order or jump to the first and play again.
+ * Once it go to the last element, it can play by the reverse order or jump to
+ * the first and play again.
  * <p/>
- * Between each frame, there is a pause, you can call `setTimeInterval()` to set the time interval you want.
- *
+ * Between each frame, there is a pause, you can call `setTimeInterval()` to set
+ * the time interval you want.
+ * 
  * @author huqiu.lhq
  */
 public class AutoPlayer {
@@ -39,15 +43,21 @@ public class AutoPlayer {
     }
 
     private PlayDirection mDirection = PlayDirection.to_right;
+
     private PlayRecycleMode mPlayRecycleMode = PlayRecycleMode.repeat_from_start;
+
     private int mTimeInterval = 5000;
+
     private Playable mPlayable;
 
     private Runnable mTimerTask;
 
     private boolean mSkipNext = false;
+
     private int mTotal;
+
     private boolean mPlaying = false;
+
     private boolean mPaused = false;
 
     public AutoPlayer(Playable playable) {

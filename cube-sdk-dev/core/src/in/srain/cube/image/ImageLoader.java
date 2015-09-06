@@ -1,3 +1,4 @@
+
 package in.srain.cube.image;
 
 import android.content.Context;
@@ -23,44 +24,66 @@ public class ImageLoader implements LifeCycleComponent {
 
     // for LoadImageTask
     private static final Object sPoolSync = new Object();
+
     private static LoadImageTask sTopLoadImageTask;
+
     private static int sPoolSize = 0;
+
     private static final int MAX_POOL_SIZE = 0;
 
     private static final String MSG_ATTACK_TO_RUNNING_TASK = "%s attach to running: %s";
 
     private static final String MSG_TASK_DO_IN_BACKGROUND = "%s, %s LoadImageTask.doInBackground";
+
     private static final String MSG_TASK_WAITING = "%s, %s LoadImageTask.waiting";
+
     private static final String MSG_TASK_FINISH = "%s, %s LoadImageTask.onFinish, mExitTasksEarly? %s";
+
     private static final String MSG_TASK_AFTER_fetchBitmapData = "%s, %s LoadImageTask.afterFetchBitmapData, canceled? %s";
+
     private static final String MSG_TASK_CANCEL = "%s, %s LoadImageTask.onCancel";
+
     private static final String MSG_TASK_RECYCLE = "%s, %s LoadImageTask.removeAndRecycle";
+
     private static final String MSG_HIT_CACHE = "%s hit cache %s %s";
 
     protected static final boolean DEBUG = CubeDebug.DEBUG_IMAGE;
+
     protected static final String LOG_TAG = CubeDebug.DEBUG_IMAGE_LOG_TAG;
 
     protected ImageTaskExecutor mImageTaskExecutor;
+
     protected ImageReSizer mImageReSizer;
+
     protected ImageProvider mImageProvider;
+
     protected ImageLoadHandler mImageLoadHandler;
+
     protected ImageLoadProgressHandler mLoadImageLoadProgressHandler;
+
     protected ImageDownloader mImageDownloader;
 
     protected boolean mPauseWork = false;
+
     protected boolean mExitTasksEarly = false;
 
     private final Object mPauseWorkLock = new Object();
+
     private ConcurrentHashMap<String, LoadImageTask> mLoadWorkList;
+
     protected Context mContext;
 
     protected Resources mResources;
+
     protected boolean mHasBeenAddedToComponentManager = false;
 
     public static final int TASK_ORDER_FIRST_IN_FIRST_OUT = 1;
+
     public static final int TASK_ORDER_LAST_IN_FIRST_OUT = 2;
 
-    public ImageLoader(Context context, ImageProvider imageProvider, ImageTaskExecutor imageTaskExecutor, ImageReSizer imageReSizer, ImageLoadHandler imageLoadHandler) {
+    public ImageLoader(Context context, ImageProvider imageProvider,
+            ImageTaskExecutor imageTaskExecutor, ImageReSizer imageReSizer,
+            ImageLoadHandler imageLoadHandler) {
         mContext = context;
         mResources = context.getResources();
 
@@ -114,9 +137,9 @@ public class ImageLoader implements LifeCycleComponent {
     }
 
     /**
-     * Create an ImageTask.
-     * You can override this method to return a customized {@link ImageTask}.
-     *
+     * Create an ImageTask. You can override this method to return a customized
+     * {@link ImageTask}.
+     * 
      * @param url
      * @param requestWidth
      * @param requestHeight
@@ -124,12 +147,14 @@ public class ImageLoader implements LifeCycleComponent {
      * @return
      */
     @Deprecated
-    public ImageTask createImageTask(String url, int requestWidth, int requestHeight, ImageReuseInfo imageReuseInfo) {
+    public ImageTask createImageTask(String url, int requestWidth, int requestHeight,
+            ImageReuseInfo imageReuseInfo) {
         ImageTask imageTask = ImageTask.obtain();
         if (imageTask == null) {
             imageTask = new ImageTask();
         }
-        ImageLoadRequest imageLoadRequest = new ImageLoadRequest(url, requestWidth, requestHeight, -1, imageReuseInfo);
+        ImageLoadRequest imageLoadRequest = new ImageLoadRequest(url, requestWidth, requestHeight,
+                -1, imageReuseInfo);
         imageTask.renewForRequest(imageLoadRequest);
         return imageTask;
     }
@@ -146,7 +171,7 @@ public class ImageLoader implements LifeCycleComponent {
 
     /**
      * Detach the ImageView from the ImageTask.
-     *
+     * 
      * @param imageTask
      * @param imageView
      */
@@ -170,7 +195,7 @@ public class ImageLoader implements LifeCycleComponent {
 
     /**
      * Add the ImageTask into loading list.
-     *
+     * 
      * @param imageTask
      * @param imageView
      */
@@ -182,7 +207,8 @@ public class ImageLoader implements LifeCycleComponent {
         if (runningTask != null) {
             if (imageView != null) {
                 if (DEBUG) {
-                    CLog.d(LOG_TAG, MSG_ATTACK_TO_RUNNING_TASK, imageTask, runningTask.getImageTask());
+                    CLog.d(LOG_TAG, MSG_ATTACK_TO_RUNNING_TASK, imageTask,
+                            runningTask.getImageTask());
                 }
                 runningTask.getImageTask().addImageView(imageView);
                 runningTask.getImageTask().notifyLoading(mImageLoadHandler, imageView);
@@ -216,7 +242,8 @@ public class ImageLoader implements LifeCycleComponent {
         }
 
         if (DEBUG) {
-            CLog.d(LOG_TAG, MSG_HIT_CACHE, imageTask, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+            CLog.d(LOG_TAG, MSG_HIT_CACHE, imageTask, drawable.getIntrinsicWidth(),
+                    drawable.getIntrinsicHeight());
         }
         imageTask.addImageView(imageView);
         imageTask.onLoadTaskFinish(drawable, mImageLoadHandler);
@@ -224,11 +251,14 @@ public class ImageLoader implements LifeCycleComponent {
     }
 
     /**
-     * set task executed order: {@link @TASK_ORDER_LAST_IN_FIRST_OUT} or {@link #TASK_ORDER_FIRST_IN_FIRST_OUT}
-     *
+     * set task executed order: {@link @TASK_ORDER_LAST_IN_FIRST_OUT} or
+     * {@link #TASK_ORDER_FIRST_IN_FIRST_OUT}
+     * 
      * @param order
      */
-    @SuppressWarnings({"unused"})
+    @SuppressWarnings({
+        "unused"
+    })
     public void setTaskOrder(int order) {
         if (null != mImageTaskExecutor) {
             mImageTaskExecutor.setTaskOrder(order);
@@ -263,17 +293,20 @@ public class ImageLoader implements LifeCycleComponent {
     /**
      * Inner class to process the image loading task in background threads.
      * <p/>
-     * Memory required:
-     * Shadow heap size: 24(Parent class, {@link SimpleTask}) + 4 * 3 = 36. Align to 40 bytes.
-     * Retained heap size: 40 + 24(AtomicInteger introduced by {@link SimpleTask} = 64 bytes.
-     *
+     * Memory required: Shadow heap size: 24(Parent class, {@link SimpleTask}) +
+     * 4 * 3 = 36. Align to 40 bytes. Retained heap size: 40 + 24(AtomicInteger
+     * introduced by {@link SimpleTask} = 64 bytes.
+     * 
      * @author http://www.liaohuqiu.net
      */
     public static class LoadImageTask extends SimpleTask {
 
         private ImageTask mImageTask;
+
         private BitmapDrawable mDrawable;
+
         private LoadImageTask mNextImageTask;
+
         private ImageLoader mImageLoader;
 
         public ImageTask getImageTask() {
@@ -311,17 +344,24 @@ public class ImageLoader implements LifeCycleComponent {
             }
 
             // If this task has not been cancelled by another
-            // thread and the ImageView that was originally bound to this task is still bound back
-            // to this task and our "exit early" flag is not set then try and fetch the bitmap from
+            // thread and the ImageView that was originally bound to this task
+            // is still bound back
+            // to this task and our "exit early" flag is not set then try and
+            // fetch the bitmap from
             // the cache
-            if (!isCancelled() && !mImageLoader.mExitTasksEarly && (mImageTask.isPreLoad() || mImageTask.stillHasRelatedImageView())) {
+            if (!isCancelled() && !mImageLoader.mExitTasksEarly
+                    && (mImageTask.isPreLoad() || mImageTask.stillHasRelatedImageView())) {
                 try {
-                    bitmap = mImageLoader.mImageProvider.fetchBitmapData(mImageLoader, mImageTask, mImageLoader.mImageReSizer);
+                    bitmap = mImageLoader.mImageProvider.fetchBitmapData(mImageLoader, mImageTask,
+                            mImageLoader.mImageReSizer);
                     if (DEBUG) {
-                        CLog.d(LOG_TAG, MSG_TASK_AFTER_fetchBitmapData, this, mImageTask, isCancelled());
+                        CLog.d(LOG_TAG, MSG_TASK_AFTER_fetchBitmapData, this, mImageTask,
+                                isCancelled());
                     }
-                    mDrawable = mImageLoader.mImageProvider.createBitmapDrawable(mImageLoader.mResources, bitmap);
-                    mImageLoader.mImageProvider.addBitmapToMemCache(mImageTask.getIdentityKey(), mDrawable);
+                    mDrawable = mImageLoader.mImageProvider.createBitmapDrawable(
+                            mImageLoader.mResources, bitmap);
+                    mImageLoader.mImageProvider.addBitmapToMemCache(mImageTask.getIdentityKey(),
+                            mDrawable);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } catch (OutOfMemoryError e) {
@@ -421,7 +461,8 @@ public class ImageLoader implements LifeCycleComponent {
         }
         mExitTasksEarly = false;
         setPause(false);
-        Iterator<Entry<String, LoadImageTask>> it = (Iterator<Entry<String, LoadImageTask>>) mLoadWorkList.entrySet().iterator();
+        Iterator<Entry<String, LoadImageTask>> it = (Iterator<Entry<String, LoadImageTask>>) mLoadWorkList
+                .entrySet().iterator();
         while (it.hasNext()) {
             Entry<String, LoadImageTask> item = it.next();
             LoadImageTask task = item.getValue();
@@ -453,7 +494,8 @@ public class ImageLoader implements LifeCycleComponent {
         mExitTasksEarly = true;
         setPause(false);
 
-        Iterator<Entry<String, LoadImageTask>> it = (Iterator<Entry<String, LoadImageTask>>) mLoadWorkList.entrySet().iterator();
+        Iterator<Entry<String, LoadImageTask>> it = (Iterator<Entry<String, LoadImageTask>>) mLoadWorkList
+                .entrySet().iterator();
         while (it.hasNext()) {
             Entry<String, LoadImageTask> item = it.next();
             final LoadImageTask task = item.getValue();
@@ -466,8 +508,8 @@ public class ImageLoader implements LifeCycleComponent {
     }
 
     /**
-     * The UI becomes partially invisible.
-     * like {@link android.app.Activity#onPause}
+     * The UI becomes partially invisible. like
+     * {@link android.app.Activity#onPause}
      */
     @Override
     public void onBecomesPartiallyInvisible() {
@@ -475,8 +517,8 @@ public class ImageLoader implements LifeCycleComponent {
     }
 
     /**
-     * The UI becomes visible from partially invisible.
-     * like {@link android.app.Activity#onResume}
+     * The UI becomes visible from partially invisible. like
+     * {@link android.app.Activity#onResume}
      */
     @Override
     public void onBecomesVisible() {
@@ -484,8 +526,8 @@ public class ImageLoader implements LifeCycleComponent {
     }
 
     /**
-     * The UI becomes totally invisible.
-     * like {@link android.app.Activity#onStop}
+     * The UI becomes totally invisible. like
+     * {@link android.app.Activity#onStop}
      */
     @Override
     public void onBecomesTotallyInvisible() {
@@ -493,8 +535,8 @@ public class ImageLoader implements LifeCycleComponent {
     }
 
     /**
-     * The UI becomes visible from totally invisible.
-     * like {@link android.app.Activity#onRestart}
+     * The UI becomes visible from totally invisible. like
+     * {@link android.app.Activity#onRestart}
      */
     @Override
     public void onBecomesVisibleFromTotallyInvisible() {
@@ -528,8 +570,9 @@ public class ImageLoader implements LifeCycleComponent {
     }
 
     /**
-     * LiefCycle phase will be same to CubeFragment, an will be processed automatically.
-     *
+     * LiefCycle phase will be same to CubeFragment, an will be processed
+     * automatically.
+     * 
      * @param fragment
      * @return
      */

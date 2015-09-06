@@ -1,3 +1,4 @@
+
 package in.srain.cube.image.iface;
 
 public interface ProgressUpdateHandler {

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package in.srain.cube.views.pager;
 
 import android.content.Context;
@@ -39,6 +40,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 public class TabPageIndicator extends HorizontalScrollView implements PageIndicator {
 
     private static final String LOG_TAG = "cube-views-page-indicator";
+
     private static final boolean DEBUG = CubeDebug.DEBUG_PAGE_INDICATOR;
 
     /**
@@ -47,7 +49,7 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
     public interface OnTabReselectedListener {
         /**
          * Callback when the selected tab has been reselected.
-         *
+         * 
          * @param position Position of the current center item.
          */
         void onTabReselected(int position);
@@ -97,9 +99,11 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
     private final LinearLayout mTabLayout;
 
     private ViewPager mViewPager;
+
     private OnPageChangeListener mListener;
 
     private int mMaxTabWidth;
+
     private int mSelectedTabIndex = -1;
 
     private OnTabReselectedListener mTabReselectedListener;
@@ -127,7 +131,8 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
         setFillViewport(lockedExpanded);
 
         final int childCount = mTabLayout.getChildCount();
-        if (childCount > 1 && (widthMode == MeasureSpec.EXACTLY || widthMode == MeasureSpec.AT_MOST)) {
+        if (childCount > 1
+                && (widthMode == MeasureSpec.EXACTLY || widthMode == MeasureSpec.AT_MOST)) {
             if (childCount > 2) {
                 mMaxTabWidth = (int) (MeasureSpec.getSize(widthMeasureSpec) * 0.4f);
             } else {

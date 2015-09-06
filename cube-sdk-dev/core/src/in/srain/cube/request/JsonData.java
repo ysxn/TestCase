@@ -1,3 +1,4 @@
+
 package in.srain.cube.request;
 
 import org.json.JSONArray;
@@ -11,8 +12,11 @@ import java.util.*;
 public final class JsonData {
 
     private static final String EMPTY_STRING = "";
+
     private static final JSONArray EMPTY_JSON_ARRAY = new JSONArray();
+
     private static final JSONObject EMPTY_JSON_OBJECT = new JSONObject();
+
     private Object mJson;
 
     public static JsonData newMap() {

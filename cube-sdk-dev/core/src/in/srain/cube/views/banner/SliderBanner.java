@@ -1,3 +1,4 @@
+
 package in.srain.cube.views.banner;
 
 import android.content.Context;
@@ -13,14 +14,23 @@ import in.srain.cube.views.mix.AutoPlayer;
 public class SliderBanner extends RelativeLayout {
 
     protected int mIdForViewPager;
+
     protected int mIdForIndicator;
+
     protected int mTimeInterval = 2000;
+
     private ViewPager mViewPager;
+
     private BannerAdapter mBannerAdapter;
+
     private ViewPager.OnPageChangeListener mOnPageChangeListener;
+
     private PagerIndicator mPagerIndicator;
+
     private AutoPlayer mAutoPlayer;
+
     private OnTouchListener mViewPagerOnTouchListener;
+
     private AutoPlayer.Playable mGalleryPlayable = new AutoPlayer.Playable() {
 
         @Override
@@ -58,12 +68,15 @@ public class SliderBanner extends RelativeLayout {
         TypedArray arr = context.obtainStyledAttributes(attrs, R.styleable.SliderBanner, 0, 0);
         if (arr != null) {
             if (arr.hasValue(R.styleable.SliderBanner_slider_banner_pager)) {
-                mIdForViewPager = arr.getResourceId(R.styleable.SliderBanner_slider_banner_pager, 0);
+                mIdForViewPager = arr
+                        .getResourceId(R.styleable.SliderBanner_slider_banner_pager, 0);
             }
             if (arr.hasValue(R.styleable.SliderBanner_slider_banner_indicator)) {
-                mIdForIndicator = arr.getResourceId(R.styleable.SliderBanner_slider_banner_indicator, 0);
+                mIdForIndicator = arr.getResourceId(
+                        R.styleable.SliderBanner_slider_banner_indicator, 0);
             }
-            mTimeInterval = arr.getInt(R.styleable.SliderBanner_slider_banner_time_interval, mTimeInterval);
+            mTimeInterval = arr.getInt(R.styleable.SliderBanner_slider_banner_time_interval,
+                    mTimeInterval);
             arr.recycle();
         }
     }
@@ -130,7 +143,8 @@ public class SliderBanner extends RelativeLayout {
             }
         });
 
-        mAutoPlayer = new AutoPlayer(mGalleryPlayable).setPlayRecycleMode(AutoPlayer.PlayRecycleMode.play_back);
+        mAutoPlayer = new AutoPlayer(mGalleryPlayable)
+                .setPlayRecycleMode(AutoPlayer.PlayRecycleMode.play_back);
         mAutoPlayer.setTimeInterval(mTimeInterval);
     }
 

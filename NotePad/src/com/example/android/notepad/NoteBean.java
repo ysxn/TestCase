@@ -130,11 +130,13 @@ public class NoteBean implements Parcelable {
     }
 
     public String dump() {
-        return "note_id="+note_id+"\n"
-                +"email="+email+"\n"
-                +"note_title="+note_title+"\n"
-                +"note_content="+note_content+"\n"
-                +"create_date="+create_date+"\n"
-                +"modify_date="+modify_date+"\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append("note_id=").append(note_id).append("\n");
+        sb.append("email=").append(email).append("\n");
+        sb.append("note_title=").append(note_title).append("\n");
+        sb.append("note_content=").append(note_content).append("\n");
+        sb.append("create_date=").append(create_date).append("\n");
+        sb.append("modify_date=").append(modify_date).append("\n");
+        return sb.toString();
     }
 }

@@ -1,3 +1,4 @@
+
 package in.srain.cube.util;
 
 import android.content.Context;
@@ -8,10 +9,15 @@ import android.view.WindowManager;
 public class LocalDisplay {
 
     public static int SCREEN_WIDTH_PIXELS;
+
     public static int SCREEN_HEIGHT_PIXELS;
+
     public static float SCREEN_DENSITY;
+
     public static int SCREEN_WIDTH_DP;
+
     public static int SCREEN_HEIGHT_DP;
+
     private static boolean sInitialed;
 
     public static void init(Context context) {

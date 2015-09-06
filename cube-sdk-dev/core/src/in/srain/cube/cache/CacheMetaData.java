@@ -1,3 +1,4 @@
+
 package in.srain.cube.cache;
 
 import in.srain.cube.request.JsonData;
@@ -9,7 +10,9 @@ import org.json.JSONObject;
 public class CacheMetaData {
 
     private String mData;
+
     private long mTime;
+
     private int mSize;
 
     public static CacheMetaData createForNow(String data) {

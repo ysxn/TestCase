@@ -1,3 +1,4 @@
+
 package in.srain.cube.request;
 
 /**
@@ -52,7 +53,8 @@ public class SimpleRequest<T> extends RequestBase<T> implements IRequest<T> {
 
     @Override
     public T processOriginDataFromServer(JsonData rawData) {
-        rawData = RequestManager.getInstance().getRequestProxy(this).processOriginDataFromServer(this, rawData);
+        rawData = RequestManager.getInstance().getRequestProxy(this)
+                .processOriginDataFromServer(this, rawData);
         if (null != mRequestHandler) {
             return mRequestHandler.processOriginData(rawData);
         }

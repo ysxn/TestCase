@@ -1,3 +1,4 @@
+
 package in.srain.cube;
 
 import android.app.Application;
@@ -35,7 +36,8 @@ public class Cube {
     }
 
     public String getAndroidId() {
-        String id = Settings.Secure.getString(mApplication.getContentResolver(), Settings.Secure.ANDROID_ID);
+        String id = Settings.Secure.getString(mApplication.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
         return id;
     }
 }

@@ -1,3 +1,4 @@
+
 package in.srain.cube.cache;
 
 import android.annotation.TargetApi;
@@ -19,13 +20,13 @@ public class DiskFileUtils {
 
     /**
      * @param context
-     * @param absolutePath         if it's not absolutePath, will be path under cache dir
+     * @param absolutePath if it's not absolutePath, will be path under cache
+     *            dir
      * @param sizeInKB
      * @param fallbackRelativePath
      * @return
      */
-    public static CacheDirInfo getDiskCacheDir(
-            Context context, String absolutePath, int sizeInKB,
+    public static CacheDirInfo getDiskCacheDir(Context context, String absolutePath, int sizeInKB,
             String fallbackRelativePath) {
 
         long size = (long) sizeInKB * 1024;
@@ -59,13 +60,11 @@ public class DiskFileUtils {
 
     /**
      * Get a usable cache directory (external if available, internal otherwise).
-     * .
-     * Check if media is mounted or storage is built-in, if so, try and use external cache folder
-     * otherwise use internal cache folder
-     * .
-     * If both of them can not meet the requirement, use the bigger one.
-     *
-     * @param context    The context to use
+     * . Check if media is mounted or storage is built-in, if so, try and use
+     * external cache folder otherwise use internal cache folder . If both of
+     * them can not meet the requirement, use the bigger one.
+     * 
+     * @param context The context to use
      * @param uniqueName A unique folder name to append to the cache folder
      * @return The cache folder
      */
@@ -126,31 +125,35 @@ public class DiskFileUtils {
 
     /**
      * Get the external application cache directory.
-     *
+     * 
      * @param context The context to use
-     * @return The external cache folder : /storage/sdcard0/Android/data/com.srain.sdk/cache
+     * @return The external cache folder :
+     *         /storage/sdcard0/Android/data/com.srain.sdk/cache
      */
     @TargetApi(Build.VERSION_CODES.FROYO)
     public static File getExternalCacheDir(Context context) {
         if (Version.hasFroyo()) {
             File path = context.getExternalCacheDir();
 
-            // In some case, even the sd card is mounted, getExternalCacheDir will return null, may be it is nearly full.
+            // In some case, even the sd card is mounted, getExternalCacheDir
+            // will return null, may be it is nearly full.
             if (path != null) {
                 return path;
             }
         }
 
-        // Before Froyo or the path is null, we need to construct the external cache folder ourselves
+        // Before Froyo or the path is null, we need to construct the external
+        // cache folder ourselves
         final String cacheDir = "/Android/data/" + context.getPackageName() + "/cache/";
         return new File(Environment.getExternalStorageDirectory().getPath() + cacheDir);
     }
 
     /**
      * Check how much usable space is available at a given path.
-     *
+     * 
      * @param path The path to check
-     * @return The space available in bytes by user, not by root, -1 means path is null, 0 means path is not exist.
+     * @return The space available in bytes by user, not by root, -1 means path
+     *         is null, 0 means path is not exist.
      */
     @SuppressWarnings("deprecation")
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
@@ -184,7 +187,8 @@ public class DiskFileUtils {
                 return -1;
             } else {
                 final StatFs stats = new StatFs(path.getPath());
-                return (long) stats.getBlockSize() * (stats.getBlockCount() - stats.getAvailableBlocks());
+                return (long) stats.getBlockSize()
+                        * (stats.getBlockCount() - stats.getAvailableBlocks());
             }
         }
     }
@@ -227,7 +231,8 @@ public class DiskFileUtils {
     public static String wantFilesPath(Context context, boolean externalStorageFirst) {
         String path = null;
         File f = null;
-        if (externalStorageFirst && DiskFileUtils.hasSDCardMounted() && (f = context.getExternalFilesDir("xxx")) != null) {
+        if (externalStorageFirst && DiskFileUtils.hasSDCardMounted()
+                && (f = context.getExternalFilesDir("xxx")) != null) {
             path = f.getAbsolutePath();
         } else {
             path = context.getFilesDir().getAbsolutePath();
@@ -237,7 +242,8 @@ public class DiskFileUtils {
 
     /**
      * @param context
-     * @param filePath file path relative to assets, like request_init1/search_index.json
+     * @param filePath file path relative to assets, like
+     *            request_init1/search_index.json
      * @return
      */
     public static String readAssert(Context context, String filePath) {
@@ -263,9 +269,13 @@ public class DiskFileUtils {
 
     public static class CacheDirInfo {
         public File path;
+
         public boolean isInternal = false;
+
         public boolean isNotEnough = false;
+
         public long realSize;
+
         public long requireSize;
     }
 }

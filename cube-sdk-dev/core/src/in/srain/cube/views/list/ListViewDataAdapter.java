@@ -1,10 +1,11 @@
+
 package in.srain.cube.views.list;
 
 import java.util.ArrayList;
 
 /**
  * A adapter using View Holder to display the item of a list view;
- *
+ * 
  * @param <ItemDataType>
  * @author http://www.liaohuqiu.net
  */
@@ -17,7 +18,8 @@ public class ListViewDataAdapter<ItemDataType> extends ListViewDataAdapterBase<I
     }
 
     /**
-     * @param viewHolderCreator The view holder creator will create a View Holder that extends {@link ViewHolderBase}
+     * @param viewHolderCreator The view holder creator will create a View
+     *            Holder that extends {@link ViewHolderBase}
      */
     public ListViewDataAdapter(ViewHolderCreator<ItemDataType> viewHolderCreator) {
         super(viewHolderCreator);

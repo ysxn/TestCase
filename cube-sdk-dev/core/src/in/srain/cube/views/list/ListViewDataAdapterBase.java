@@ -1,3 +1,4 @@
+
 package in.srain.cube.views.list;
 
 import android.view.LayoutInflater;
@@ -9,7 +10,7 @@ import in.srain.cube.util.CubeDebug;
 
 /**
  * A adapter using View Holder to display the item of a list view;
- *
+ * 
  * @param <ItemDataType>
  * @author http://www.liaohuqiu.net
  */
@@ -18,7 +19,9 @@ public abstract class ListViewDataAdapterBase<ItemDataType> extends BaseAdapter 
     private static final String LOG_TAG = "cube-list";
 
     protected ViewHolderCreator<ItemDataType> mViewHolderCreator;
+
     protected ViewHolderCreator<ItemDataType> mLazyCreator;
+
     protected boolean mForceCreateView = false;
 
     public ListViewDataAdapterBase() {
@@ -30,7 +33,8 @@ public abstract class ListViewDataAdapterBase<ItemDataType> extends BaseAdapter 
     }
 
     /**
-     * @param viewHolderCreator The view holder creator will create a View Holder that extends {@link ViewHolderBase}
+     * @param viewHolderCreator The view holder creator will create a View
+     *            Holder that extends {@link ViewHolderBase}
      */
     public ListViewDataAdapterBase(ViewHolderCreator<ItemDataType> viewHolderCreator) {
         mViewHolderCreator = viewHolderCreator;
@@ -40,7 +44,8 @@ public abstract class ListViewDataAdapterBase<ItemDataType> extends BaseAdapter 
         mViewHolderCreator = viewHolderCreator;
     }
 
-    public void setViewHolderClass(final Object enclosingInstance, final Class<?> cls, final Object... args) {
+    public void setViewHolderClass(final Object enclosingInstance, final Class<?> cls,
+            final Object... args) {
         mLazyCreator = LazyViewHolderCreator.create(enclosingInstance, cls, args);
     }
 
@@ -69,7 +74,8 @@ public abstract class ListViewDataAdapterBase<ItemDataType> extends BaseAdapter 
         }
         ItemDataType itemData = getItem(position);
         ViewHolderBase<ItemDataType> holderBase = null;
-        if (mForceCreateView || convertView == null || (!(convertView.getTag() instanceof ViewHolderBase<?>))) {
+        if (mForceCreateView || convertView == null
+                || (!(convertView.getTag() instanceof ViewHolderBase<?>))) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             holderBase = createViewHolder(position);
             if (holderBase != null) {

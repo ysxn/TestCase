@@ -1,3 +1,4 @@
+
 package in.srain.cube.update;
 
 import android.app.Notification;
@@ -23,22 +24,35 @@ public class UpdateController implements DownLoadListener {
     private static final int NOTIFY_ID = 10000;
 
     private static final String MSG_ERROR_URL = "错误的下载地址";
+
     private static final String MSG_DOWNLOAD_FINISH_TICKER_TEXT = "下载已完成，请到系统通知栏查看和安装";
+
     private static final String MSG_DOWNLOAD_FINISH_TITLE = "下载已完成，点击安装";
+
     private static final String MSG_DOWN_LOAD_START = "已转入后台下载，请稍候";
+
     private static final String MSG_DOWNLOAD_FAIL = "下载失败";
 
     private static final String ACTION_CANCEL_DOWNLOAD = ".cancelDownloadApk";
+
     private static UpdateController sInstance;
+
     Notification mNotification = null;
+
     NotificationManager mNotifyManager = null;
+
     private String mDownLoadErrorMsg = MSG_DOWNLOAD_FAIL;
+
     private String mPackageName;
+
     private DownloadTask mDownloadTask;
 
     private Context mContext;
+
     private String mActionCancel;
+
     private String mApkPath;
+
     private PackageInfo mPackageInfo;
 
     private int mIcon;
@@ -75,7 +89,8 @@ public class UpdateController implements DownLoadListener {
         mPackageName = mPackageInfo.packageName;
         mActionCancel = mPackageName + ACTION_CANCEL_DOWNLOAD;
 
-        mNotifyManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotifyManager = (NotificationManager) mContext
+                .getSystemService(Context.NOTIFICATION_SERVICE);
 
         mNotification = new Notification();
         mNotification.icon = mIcon;
@@ -86,7 +101,8 @@ public class UpdateController implements DownLoadListener {
 
         Intent openIntent = new Intent(Intent.ACTION_VIEW);
         openIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        openIntent.setDataAndType(Uri.fromFile(new File(mApkPath)), "application/vnd.android.package-archive");
+        openIntent.setDataAndType(Uri.fromFile(new File(mApkPath)),
+                "application/vnd.android.package-archive");
         PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, openIntent, 0);
 
         Notification notification = new Notification();
@@ -95,7 +111,8 @@ public class UpdateController implements DownLoadListener {
         notification.contentView = new RemoteViews(mPackageName, R.layout.cube_mints_update_notify);
         notification.contentView.setImageViewResource(R.id.update_notification_icon, mIcon);
         notification.contentView.setProgressBar(R.id.update_notification_progress, 100, 100, false);
-        notification.contentView.setTextViewText(R.id.update_notification_text, MSG_DOWNLOAD_FINISH_TITLE);
+        notification.contentView.setTextViewText(R.id.update_notification_text,
+                MSG_DOWNLOAD_FINISH_TITLE);
         notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND;
 
         notification.tickerText = MSG_DOWNLOAD_FINISH_TICKER_TEXT;
@@ -127,10 +144,13 @@ public class UpdateController implements DownLoadListener {
 
         mNotification.contentView = new RemoteViews(mPackageName, R.layout.cube_mints_update_notify);
         mNotification.contentView.setImageViewResource(R.id.update_notification_icon, mIcon);
-        mNotification.contentView.setProgressBar(R.id.update_notification_progress, 100, updatePercent, false);
-        mNotification.contentView.setTextViewText(R.id.update_notification_text, "下载进度  " + updatePercent + "%, 点击取消下载");
+        mNotification.contentView.setProgressBar(R.id.update_notification_progress, 100,
+                updatePercent, false);
+        mNotification.contentView.setTextViewText(R.id.update_notification_text, "下载进度  "
+                + updatePercent + "%, 点击取消下载");
 
-        mNotification.contentView.setOnClickPendingIntent(R.id.update_notification_layout, contentIntent);
+        mNotification.contentView.setOnClickPendingIntent(R.id.update_notification_layout,
+                contentIntent);
 
         mNotifyManager.notify(NOTIFY_ID, mNotification);
     }
@@ -163,7 +183,8 @@ public class UpdateController implements DownLoadListener {
     private void openFile() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setDataAndType(Uri.fromFile(new File(mApkPath)), "application/vnd.android.package-archive");
+        intent.setDataAndType(Uri.fromFile(new File(mApkPath)),
+                "application/vnd.android.package-archive");
         mContext.startActivity(intent);
         mNotifyManager.cancel(NOTIFY_ID);
     }

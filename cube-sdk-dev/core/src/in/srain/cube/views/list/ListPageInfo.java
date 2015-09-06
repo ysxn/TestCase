@@ -1,3 +1,4 @@
+
 package in.srain.cube.views.list;
 
 import java.util.ArrayList;
@@ -6,9 +7,13 @@ import java.util.List;
 public class ListPageInfo<T> {
 
     private int mNumPerPage = 0;
+
     private int mStart = 0;
+
     private int mLastStart = 0;
+
     private boolean mHasMore;
+
     private boolean mIsBusy = false;
 
     private List<T> mDataList;
@@ -62,7 +67,7 @@ public class ListPageInfo<T> {
 
     /**
      * start from 0
-     *
+     * 
      * @return
      */
     public int getPage() {
@@ -86,7 +91,7 @@ public class ListPageInfo<T> {
 
     /**
      * try to move to next page
-     *
+     * 
      * @return
      */
     public boolean prepareForNextPage() {
@@ -111,7 +116,7 @@ public class ListPageInfo<T> {
 
     /**
      * the first item in list
-     *
+     * 
      * @return
      */
     public T firstItem() {
@@ -123,7 +128,7 @@ public class ListPageInfo<T> {
 
     /**
      * the last item in list
-     *
+     * 
      * @return
      */
     public T lastItem() {

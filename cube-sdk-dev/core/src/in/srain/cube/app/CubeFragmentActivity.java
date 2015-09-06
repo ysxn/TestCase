@@ -1,3 +1,4 @@
+
 package in.srain.cube.app;
 
 import android.content.Context;
@@ -17,14 +18,16 @@ public abstract class CubeFragmentActivity extends FragmentActivity {
     private final static String LOG_TAG = "cube-fragment";
 
     public static boolean DEBUG = true;
+
     protected CubeFragment mCurrentFragment;
+
     private boolean mCloseWarned;
 
     /**
      * return the string id of close warning
      * <p/>
      * return value which lower than 1 will exit instantly when press back key
-     *
+     * 
      * @return
      */
     protected abstract String getCloseWarning();
@@ -53,7 +56,8 @@ public abstract class CubeFragmentActivity extends FragmentActivity {
             String fragmentTag = getFragmentTag(param);
             FragmentManager fm = getSupportFragmentManager();
             if (DEBUG) {
-                CLog.d(LOG_TAG, "before operate, stack entry count: %s", fm.getBackStackEntryCount());
+                CLog.d(LOG_TAG, "before operate, stack entry count: %s",
+                        fm.getBackStackEntryCount());
             }
             CubeFragment fragment = (CubeFragment) fm.findFragmentByTag(fragmentTag);
             if (fragment == null) {
@@ -92,7 +96,8 @@ public abstract class CubeFragmentActivity extends FragmentActivity {
         if (cls == null) {
             return;
         }
-        CubeFragment fragment = (CubeFragment) getSupportFragmentManager().findFragmentByTag(cls.toString());
+        CubeFragment fragment = (CubeFragment) getSupportFragmentManager().findFragmentByTag(
+                cls.toString());
         if (fragment != null) {
             mCurrentFragment = fragment;
             fragment.onBackWithData(data);
@@ -117,9 +122,9 @@ public abstract class CubeFragmentActivity extends FragmentActivity {
     }
 
     /**
-     * process the return back logic
-     * return true if back pressed event has been processed and should stay in current view
-     *
+     * process the return back logic return true if back pressed event has been
+     * processed and should stay in current view
+     * 
      * @return
      */
     protected boolean processBackPressed() {

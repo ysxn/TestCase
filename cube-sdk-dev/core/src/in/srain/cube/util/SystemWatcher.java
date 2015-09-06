@@ -1,3 +1,4 @@
+
 package in.srain.cube.util;
 
 import android.app.Activity;
@@ -27,6 +28,7 @@ public class SystemWatcher {
     }
 
     private Timer mTimer;
+
     private TimerTask mTimerTask;
 
     public void run() {
@@ -36,12 +38,16 @@ public class SystemWatcher {
             public void run() {
 
                 MemoryInfo mi = new MemoryInfo();
-                ActivityManager activityManager = (ActivityManager) mContext.getSystemService(Activity.ACTIVITY_SERVICE);
+                ActivityManager activityManager = (ActivityManager) mContext
+                        .getSystemService(Activity.ACTIVITY_SERVICE);
                 activityManager.getMemoryInfo(mi);
                 Runtime runtime = Runtime.getRuntime();
-                String s = String.format("free:%s%% %sKB total:%sKB max:%sKB ", runtime.freeMemory() * 100f / runtime.totalMemory(), runtime.freeMemory(), runtime.totalMemory() / 1024,
-                        runtime.maxMemory() / 1024);
-                // s += String.format("native: free:%sKB total:%sKB max:%sKB", android.os.Debug.getNativeHeapFreeSize() / 1024, android.os.Debug.getNativeHeapAllocatedSize() / 1024,
+                String s = String.format("free:%s%% %sKB total:%sKB max:%sKB ",
+                        runtime.freeMemory() * 100f / runtime.totalMemory(), runtime.freeMemory(),
+                        runtime.totalMemory() / 1024, runtime.maxMemory() / 1024);
+                // s += String.format("native: free:%sKB total:%sKB max:%sKB",
+                // android.os.Debug.getNativeHeapFreeSize() / 1024,
+                // android.os.Debug.getNativeHeapAllocatedSize() / 1024,
                 // android.os.Debug.getNativeHeapSize() / 1024);
                 // s += String.format("| availMem:%sKB", mi.availMem / 1024);
                 Log.d("memory", s);

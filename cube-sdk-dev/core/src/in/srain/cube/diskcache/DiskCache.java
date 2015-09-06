@@ -1,3 +1,4 @@
+
 package in.srain.cube.diskcache;
 
 import java.io.File;
@@ -7,7 +8,7 @@ public interface DiskCache {
 
     /**
      * Check if has this key
-     *
+     * 
      * @param key
      * @return
      */
@@ -15,21 +16,21 @@ public interface DiskCache {
 
     /**
      * open disk cache
-     *
+     * 
      * @throws java.io.IOException
      */
     public void open() throws IOException;
 
     /**
      * clear all data
-     *
+     * 
      * @throws java.io.IOException
      */
     public void clear() throws IOException;
 
     /**
      * close the cache
-     *
+     * 
      * @throws java.io.IOException
      */
     public void close() throws IOException;
@@ -48,7 +49,7 @@ public interface DiskCache {
 
     /**
      * begin edit an {@CacheEntry }
-     *
+     * 
      * @param key
      * @return
      * @throws java.io.IOException
@@ -57,14 +58,14 @@ public interface DiskCache {
 
     /**
      * abort edit
-     *
+     * 
      * @param cacheEntry
      */
     public void abortEdit(CacheEntry cacheEntry);
 
     /**
      * abort edit by key
-     *
+     * 
      * @param key
      */
     public void abortEdit(String key);
@@ -76,7 +77,7 @@ public interface DiskCache {
 
     /**
      * delete if key exist, under edit can not be deleted
-     *
+     * 
      * @param key
      * @return
      */

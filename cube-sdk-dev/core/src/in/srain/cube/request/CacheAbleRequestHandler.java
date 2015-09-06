@@ -1,3 +1,4 @@
+
 package in.srain.cube.request;
 
 public interface CacheAbleRequestHandler<T1> extends RequestHandler<T1> {
@@ -7,5 +8,6 @@ public interface CacheAbleRequestHandler<T1> extends RequestHandler<T1> {
      */
     public void onCacheData(T1 data, boolean outOfDate);
 
-    public void onCacheAbleRequestFinish(T1 data, CacheAbleRequest.ResultType type, boolean outOfDate);
+    public void onCacheAbleRequestFinish(T1 data, CacheAbleRequest.ResultType type,
+            boolean outOfDate);
 }

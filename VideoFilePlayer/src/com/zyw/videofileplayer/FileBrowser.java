@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.codezyw.common.OpenFileHelper;
+
 import android.app.ListActivity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -161,49 +163,49 @@ public class FileBrowser extends ListActivity {
             Intent intent;
             if (checkEndsWithInStringArray(fileName,
                     getResources().getStringArray(R.array.fileEndingImage))) {
-                intent = OpenFiles.getImageFileIntent(f);
+                intent = OpenFileHelper.getImageFileIntent(f);
                 startActivity(intent);
             } else if (checkEndsWithInStringArray(fileName,
                     getResources().getStringArray(R.array.fileEndingWebText))) {
-                intent = OpenFiles.getHtmlFileIntent(f);
+                intent = OpenFileHelper.getHtmlFileIntent(f);
                 startActivity(intent);
             } else if (checkEndsWithInStringArray(fileName,
                     getResources().getStringArray(R.array.fileEndingPackage))) {
-                intent = OpenFiles.getApkFileIntent(f);
+                intent = OpenFileHelper.getApkFileIntent(f);
                 startActivity(intent);
 
             } else if (checkEndsWithInStringArray(fileName,
                     getResources().getStringArray(R.array.fileEndingAudio))) {
-                intent = OpenFiles.getAudioFileIntent(f);
+                intent = OpenFileHelper.getAudioFileIntent(f);
                 startActivity(intent);
             } else if (checkEndsWithInStringArray(fileName,
                     getResources().getStringArray(R.array.fileEndingVideo))) {
-                intent = OpenFiles.getVideoFileIntent(f);
+                intent = OpenFileHelper.getVideoFileIntent(f);
                 startActivity(intent);
             } else if (checkEndsWithInStringArray(fileName,
                     getResources().getStringArray(R.array.fileEndingText))) {
-                intent = OpenFiles.getTextFileIntent(f);
+                intent = OpenFileHelper.getTextFileIntent(f);
                 startActivity(intent);
             } else if (checkEndsWithInStringArray(fileName,
                     getResources().getStringArray(R.array.fileEndingPdf))) {
-                intent = OpenFiles.getPdfFileIntent(f);
+                intent = OpenFileHelper.getPdfFileIntent(f);
                 startActivity(intent);
             } else if (checkEndsWithInStringArray(fileName,
                     getResources().getStringArray(R.array.fileEndingWord))) {
-                intent = OpenFiles.getWordFileIntent(f);
+                intent = OpenFileHelper.getWordFileIntent(f);
                 startActivity(intent);
             } else if (checkEndsWithInStringArray(fileName,
                     getResources().getStringArray(R.array.fileEndingExcel))) {
-                intent = OpenFiles.getExcelFileIntent(f);
+                intent = OpenFileHelper.getExcelFileIntent(f);
                 startActivity(intent);
             } else if (checkEndsWithInStringArray(fileName,
                     getResources().getStringArray(R.array.fileEndingPPT))) {
-                intent = OpenFiles.getPPTFileIntent(f);
+                intent = OpenFileHelper.getPPTFileIntent(f);
                 startActivity(intent);
             } else {
 //                showMessage("无法打开，请安装相应的软件！");
                 try {
-                    intent = OpenFiles.getTextFileIntent(f);
+                    intent = OpenFileHelper.getTextFileIntent(f);
                     startActivity(intent);
                 } catch (ActivityNotFoundException e) {
                     

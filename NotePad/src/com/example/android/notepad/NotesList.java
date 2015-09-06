@@ -16,9 +16,22 @@
 
 package com.example.android.notepad;
 
+import org.apache.http.entity.mime.content.ByteArrayBody;
+import org.apache.http.util.ByteArrayBuffer;
+
+import cn.trinea.android.common.util.ImageUtils;
+
+import com.codezyw.common.BitmapHelper;
+import com.codezyw.common.DbHelper;
+import com.codezyw.common.HttpPostAsyncTask;
+import com.codezyw.common.ProgressMultipartEntity;
+import com.codezyw.common.HttpPostAsyncTask.PostListener;
+import com.codezyw.common.UIHelper;
 import com.example.android.notepad.NotePad;
 
+import android.R.anim;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ClipboardManager;
 import android.content.ClipData;
@@ -28,11 +41,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -71,7 +86,6 @@ public class NotesList extends ListActivity {
     /** The index of the title column */
     private static final int COLUMN_INDEX_TITLE = 1;
     
-    private DataBase mDataBase;
     private long mBackPressed = 0L;
 
     /**
@@ -83,10 +97,9 @@ public class NotesList extends ListActivity {
         Intent i = new Intent(this, HttpConnectionService.class);
         startService(i);
 
-        mDataBase = new DataBase(this);
-        String username = mDataBase.getEmail(0);
-        String password = mDataBase.getPassword(0);
-        if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+        String username = DbHelper.getInstance(this).getString(HttpConnectionService.EMAIL, "");
+        String password = DbHelper.getInstance(this).getString(HttpConnectionService.PASSWORD, "");
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
             startActivity(new Intent(this, LoginActivity.class));
         }
         // The user does not need to hold down the key to use menu shortcuts.
@@ -289,9 +302,9 @@ public class NotesList extends ListActivity {
             }
 
         MenuItem syncItem = menu.findItem(R.id.menu_sync);
-        String username = mDataBase.getEmail(0);
-        String password = mDataBase.getPassword(0);
-        if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+        String username = DbHelper.getInstance(this).getString(HttpConnectionService.EMAIL, "");
+        String password = DbHelper.getInstance(this).getString(HttpConnectionService.PASSWORD, "");
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
             syncItem.setEnabled(false);
         } else {
             syncItem.setEnabled(true);
@@ -335,13 +348,40 @@ public class NotesList extends ListActivity {
             startActivity(new Intent(this, LoginActivity.class));
             return true;
         case R.id.menu_sync:
-            String username = mDataBase.getEmail(0);
-            String password = mDataBase.getPassword(0);
-            Intent i = new Intent(NotesList.this, HttpConnectionService.class);
-            i.putExtra(HttpConnectionService.CMD, HttpConnectionService.FETCH);
-            i.putExtra(HttpConnectionService.EMAIL, username);
-            i.putExtra(HttpConnectionService.PASSWORD, password);
-            startService(i);
+//            Intent i = new Intent(NotesList.this, HttpConnectionService.class);
+//            i.putExtra(HttpConnectionService.CMD_KEY, HttpConnectionService.MSG_FETCH);
+//            startService(i);
+            Bitmap bitmap = BitmapHelper.getShot(this);
+            if (bitmap == null) {
+                return true;
+            }
+            ProgressMultipartEntity multipartEntity = new ProgressMultipartEntity();
+            byte[] data = ImageUtils.bitmapToByte(bitmap);
+            multipartEntity.addPart("bitmap", new ByteArrayBody(data, "logo.png"));
+            bitmap.recycle();
+            HttpPostAsyncTask task = new HttpPostAsyncTask(new PostListener() {
+                
+                @Override
+                public void onProgressUpdate(int progress) {
+                    UIHelper.updateProgressDialog(progress);
+                }
+                
+                @Override
+                public void onPreExecute() {
+                    UIHelper.showProgressDialog(NotesList.this, "post", "上传进度......", ProgressDialog.STYLE_HORIZONTAL, false, 100);
+                }
+                
+                @Override
+                public void onPostExecute(String result) {
+                    UIHelper.dismissProgressDialog();
+                }
+                
+                @Override
+                public void onCancelled() {
+                    UIHelper.dismissProgressDialog();
+                }
+            }, multipartEntity);
+            task.execute("http://php.codezyw.com/update_note_android.php");
             return true;
         default:
             return super.onOptionsItemSelected(item);

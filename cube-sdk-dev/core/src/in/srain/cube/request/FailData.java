@@ -1,16 +1,24 @@
+
 package in.srain.cube.request;
 
 public class FailData {
 
     public static final int ERROR_UNKNOWN = 0;
+
     public static final int ERROR_INPUT = 1;
+
     public static final int ERROR_NETWORK = 2;
+
     public static final int ERROR_DATA_FORMAT = 3;
+
     public static final int ERROR_CUSTOMIZED = 100;
 
     public int mErrorType = ERROR_DATA_FORMAT;
+
     public int mCustomErrorType;
+
     public IRequest<?> mRequest;
+
     public Object mData;
 
     public static FailData unknown(IRequest<?> request) {

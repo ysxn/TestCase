@@ -1,3 +1,4 @@
+
 package in.srain.cube.image.drawable;
 
 import android.graphics.*;
@@ -11,16 +12,25 @@ import in.srain.cube.util.CLog;
  */
 public class CircleProgress extends Drawable {
     private String prefixText = "";
+
     private String suffixText = "%";
 
     private Paint mTextPaint;
+
     private RectF rectF = new RectF();
+
     private float mTextSize;
+
     private int textColor = Color.WHITE;
+
     private int progress = 0;
+
     private int mMax = 100;
+
     private int mFinishedColor = Color.rgb(66, 145, 241);
+
     private int mUnfinishedColor = Color.rgb(204, 204, 204);
+
     private Paint mPaint = new Paint();
 
     private int mSize;
@@ -156,7 +166,8 @@ public class CircleProgress extends Drawable {
         String text = getDrawText();
         if (!TextUtils.isEmpty(text)) {
             float textHeight = mTextPaint.descent() + mTextPaint.ascent();
-            canvas.drawText(text, (mSize - mTextPaint.measureText(text)) / 2.0f, (mSize - textHeight) / 2.0f, mTextPaint);
+            canvas.drawText(text, (mSize - mTextPaint.measureText(text)) / 2.0f,
+                    (mSize - textHeight) / 2.0f, mTextPaint);
         }
     }
 

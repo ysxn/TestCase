@@ -26,50 +26,74 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 /**
- * A wrapper for a broadcast receiver that provides network connectivity state information, independent of network type (mobile, Wi-Fi, etc.). {@hide}
+ * A wrapper for a broadcast receiver that provides network connectivity state
+ * information, independent of network type (mobile, Wi-Fi, etc.). {@hide
+ * }
  */
 public class NetworkStatusManager {
-
 
     /**
      * 未知网络类别
      */
     public static final int NETWORK_CLASS_UNKNOWN = 0;
+
     public static final String NETWORK_CLASS_UNKNOWN_NAME = "UNKNOWN";
+
     /**
      * 2G网络
      */
     public static final int NETWORK_CLASS_2G = 1;
+
     public static final String NETWORK_CLASS_2G_NAME = "2G";
+
     /**
      * 3G网络
      */
     public static final int NETWORK_CLASS_3G = 2;
+
     public static final String NETWORK_CLASS_3G_NAME = "3G";
+
     /**
      * 4G网络
      */
     public static final int NETWORK_CLASS_4G = 3;
+
     public static final String NETWORK_CLASS_4G_NAME = "4G";
+
     /**
      * WIFI网络
      */
     public static final int NETWORK_CLASS_WIFI = 999;
+
     public static final String NETWORK_CLASS_WIFI_NAME = "WIFI";
+
     private static final String TAG = "NetworkStatusManager";
+
     private static final boolean DBG = true;
+
     private static NetworkStatusManager sInstance;
+
     private Context mContext;
+
     private State mState;
+
     private boolean mListening;
+
     private String mReason;
+
     private boolean mIsFailOver;
+
     private NetworkInfo mNetworkInfo;
+
     private boolean mIsWifi = false;
+
     /**
-     * In case of a Disconnect, the connectivity manager may have already established, or may be attempting to establish, connectivity with another network. If so, {@code mOtherNetworkInfo} will be non-null.
+     * In case of a Disconnect, the connectivity manager may have already
+     * established, or may be attempting to establish, connectivity with another
+     * network. If so, {@code mOtherNetworkInfo} will be non-null.
      */
     private NetworkInfo mOtherNetworkInfo;
+
     private ConnectivityBroadcastReceiver mReceiver;
 
     private NetworkStatusManager() {
@@ -116,7 +140,8 @@ public class NetworkStatusManager {
     }
 
     public static boolean checkIsWifi(Context context) {
-        ConnectivityManager connectivity = (ConnectivityManager) (context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        ConnectivityManager connectivity = (ConnectivityManager) (context
+                .getSystemService(Context.CONNECTIVITY_SERVICE));
         if (connectivity != null) {
             NetworkInfo networkInfo = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
             if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
@@ -128,7 +153,7 @@ public class NetworkStatusManager {
 
     /**
      * 2G/3G/4G/WIFI
-     *
+     * 
      * @return
      */
     public int getNetworkType() {
@@ -151,7 +176,7 @@ public class NetworkStatusManager {
 
     /**
      * This method starts listening for network connectivity state changes.
-     *
+     * 
      * @param context
      */
     public synchronized void startListening(Context context) {
@@ -181,17 +206,23 @@ public class NetworkStatusManager {
     }
 
     /**
-     * Return the NetworkInfo associated with the most recent connectivity event.
-     *
-     * @return {@code NetworkInfo} for the network that had the most recent connectivity event.
+     * Return the NetworkInfo associated with the most recent connectivity
+     * event.
+     * 
+     * @return {@code NetworkInfo} for the network that had the most recent
+     *         connectivity event.
      */
     public NetworkInfo getNetworkInfo() {
         return mNetworkInfo;
     }
 
     /**
-     * If the most recent connectivity event was a DISCONNECT, return any information supplied in the broadcast about an alternate network that might be available. If this returns a non-null value, then another broadcast should follow shortly indicating whether connection to the other network succeeded.
-     *
+     * If the most recent connectivity event was a DISCONNECT, return any
+     * information supplied in the broadcast about an alternate network that
+     * might be available. If this returns a non-null value, then another
+     * broadcast should follow shortly indicating whether connection to the
+     * other network succeeded.
+     * 
      * @return NetworkInfo
      */
     public NetworkInfo getOtherNetworkInfo() {
@@ -199,18 +230,22 @@ public class NetworkStatusManager {
     }
 
     /**
-     * Returns true if the most recent event was for an attempt to switch over to a new network following loss of connectivity on another network.
-     *
-     * @return {@code true} if this was a fail over attempt, {@code false} otherwise.
+     * Returns true if the most recent event was for an attempt to switch over
+     * to a new network following loss of connectivity on another network.
+     * 
+     * @return {@code true} if this was a fail over attempt, {@code false}
+     *         otherwise.
      */
     public boolean isFailover() {
         return mIsFailOver;
     }
 
     /**
-     * An optional reason for the connectivity state change may have been supplied. This returns it.
-     *
-     * @return the reason for the state change, if available, or {@code null} otherwise.
+     * An optional reason for the connectivity state change may have been
+     * supplied. This returns it.
+     * 
+     * @return the reason for the state change, if available, or {@code null}
+     *         otherwise.
      */
     public String getReason() {
         return mReason;
@@ -244,10 +279,13 @@ public class NetworkStatusManager {
          */
         CONNECTED,
         /**
-         * This state is returned if there is no connectivity to any network. This is set to true under two circumstances:
+         * This state is returned if there is no connectivity to any network.
+         * This is set to true under two circumstances:
          * <ul>
-         * <li>When connectivity is lost to one network, and there is no other available network to attempt to switch to.</li>
-         * <li>When connectivity is lost to one network, and the attempt to switch to another network fails.</li>
+         * <li>When connectivity is lost to one network, and there is no other
+         * available network to attempt to switch to.</li>
+         * <li>When connectivity is lost to one network, and the attempt to
+         * switch to another network fails.</li>
          */
         NOT_CONNECTED
     }
@@ -263,7 +301,8 @@ public class NetworkStatusManager {
                 return;
             }
 
-            boolean noConnectivity = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
+            boolean noConnectivity = intent.getBooleanExtra(
+                    ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
 
             if (noConnectivity) {
                 mState = State.NOT_CONNECTED;
@@ -271,14 +310,19 @@ public class NetworkStatusManager {
                 mState = State.CONNECTED;
             }
 
-            mNetworkInfo = (NetworkInfo) intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
-            mOtherNetworkInfo = (NetworkInfo) intent.getParcelableExtra(ConnectivityManager.EXTRA_OTHER_NETWORK_INFO);
+            mNetworkInfo = (NetworkInfo) intent
+                    .getParcelableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
+            mOtherNetworkInfo = (NetworkInfo) intent
+                    .getParcelableExtra(ConnectivityManager.EXTRA_OTHER_NETWORK_INFO);
 
             mReason = intent.getStringExtra(ConnectivityManager.EXTRA_REASON);
             mIsFailOver = intent.getBooleanExtra(ConnectivityManager.EXTRA_IS_FAILOVER, false);
             if (DBG) {
-                Log.d(TAG, "onReceive(): mNetworkInfo=" + mNetworkInfo + " mOtherNetworkInfo = " + (mOtherNetworkInfo == null ? "[none]" : mOtherNetworkInfo + " noConn=" + noConnectivity)
-                        + " mState=" + mState.toString());
+                Log.d(TAG, "onReceive(): mNetworkInfo="
+                        + mNetworkInfo
+                        + " mOtherNetworkInfo = "
+                        + (mOtherNetworkInfo == null ? "[none]" : mOtherNetworkInfo + " noConn="
+                                + noConnectivity) + " mState=" + mState.toString());
             }
 
             mIsWifi = checkIsWifi(mContext);

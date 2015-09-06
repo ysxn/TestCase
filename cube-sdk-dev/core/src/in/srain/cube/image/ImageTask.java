@@ -1,3 +1,4 @@
+
 package in.srain.cube.image;
 
 import android.graphics.Point;
@@ -11,16 +12,21 @@ import java.lang.ref.WeakReference;
 
 /**
  * A wrapper of the related information used in loading a bitmap
- *
+ * 
  * @author http://www.liaohuqiu.net
  */
 public class ImageTask {
 
     protected static final String LOG_TAG = CubeDebug.DEBUG_IMAGE_LOG_TAG_TASK;
+
     private static final Object sPoolSync = new Object();
+
     private static ImageTask sTop;
+
     private static int sPoolSize = 0;
+
     private static final int MAX_POOL_SIZE = 20;
+
     private static boolean USE_POOL = false;
 
     private static int sId = 0;
@@ -32,27 +38,27 @@ public class ImageTask {
 
     // error code, max 0x07
     public final static int ERROR_NETWORK = 0x01;
+
     public final static int ERROR_BAD_FORMAT = 0x02;
+
     public final static int ERROR_EMPTY_URL = 0x03;
 
     /**
-     * bits:
-     * 1 error-code
-     * 2 error-code
-     * 3 error-code
-     * 4 loading
-     * 5 pre-load
+     * bits: 1 error-code 2 error-code 3 error-code 4 loading 5 pre-load
      */
     private final static int STATUS_LOADING = 0x01 << 3;
+
     private final static int STATUS_PRE_LOAD = 0x02 << 3;
 
     private int mFlag = 0;
+
     protected int mId = 0;
 
     // the origin request url for the image.
     protected String mOriginUrl;
 
-    // In some situations, we may store the same image in some different servers. So the same image will related to some different urls.
+    // In some situations, we may store the same image in some different
+    // servers. So the same image will related to some different urls.
     private String mIdentityUrl;
 
     // The key related to the image this ImageTask is requesting.
@@ -62,10 +68,13 @@ public class ImageTask {
     private String mStr;
 
     protected Point mRequestSize = new Point();
+
     protected Point mBitmapOriginSize = new Point();
+
     protected ImageLoadRequest mRequest;
 
     protected ImageViewHolder mFirstImageViewHolder;
+
     protected ImageTaskStatistics mImageTaskStatistics;
 
     ImageTask next;
@@ -162,7 +171,7 @@ public class ImageTask {
 
     /**
      * For accessing the identity url
-     *
+     * 
      * @return
      */
     public String getIdentityUrl() {
@@ -173,13 +182,14 @@ public class ImageTask {
     }
 
     /**
-     * In some situations, we may store the same image in some different servers. So the same image will related to some different urls.
-     * Generate the identity url according your situation.
-     * {@link #mIdentityUrl}
-     *
+     * In some situations, we may store the same image in some different
+     * servers. So the same image will related to some different urls. Generate
+     * the identity url according your situation. {@link #mIdentityUrl}
+     * 
      * @return
-     * @deprecated Do not overwrite this method, use {@link in.srain.cube.image.iface.NameGenerator} instead.
-     * should be used.
+     * @deprecated Do not overwrite this method, use
+     *             {@link in.srain.cube.image.iface.NameGenerator} instead.
+     *             should be used.
      */
     @Deprecated
     protected String generateIdentityUrl(String originUrl) {
@@ -189,15 +199,17 @@ public class ImageTask {
     /**
      * Generate the identity key.
      * <p/>
-     * This key should be related to the unique image this task is requesting: the size, the remote url.
-     *
+     * This key should be related to the unique image this task is requesting:
+     * the size, the remote url.
+     * 
      * @return
      */
     protected String generateIdentityKey() {
         if (mRequest.getImageReuseInfo() == null) {
             return getIdentityUrl();
         } else {
-            return joinSizeTagToKey(getIdentityUrl(), mRequest.getImageReuseInfo().getIdentitySize());
+            return joinSizeTagToKey(getIdentityUrl(), mRequest.getImageReuseInfo()
+                    .getIdentitySize());
         }
     }
 
@@ -215,9 +227,10 @@ public class ImageTask {
 
     /**
      * Check the given {@link in.srain.cube.image.ImageLoadRequest} is loading.
-     *
+     * 
      * @param request
-     * @return Identify the given url, if same to {@link #mIdentityUrl} return true.
+     * @return Identify the given url, if same to {@link #mIdentityUrl} return
+     *         true.
      */
     public boolean isLoadingThisUrl(ImageLoadRequest request) {
         String url2 = ImageLoaderFactory.getNameGenerator().generateIdentityUrlFor(request);
@@ -226,7 +239,7 @@ public class ImageTask {
 
     /**
      * Bind ImageView with ImageTask
-     *
+     * 
      * @param imageView
      */
     public void addImageView(CubeImageView imageView) {
@@ -239,7 +252,7 @@ public class ImageTask {
         }
 
         ImageViewHolder holder = mFirstImageViewHolder;
-        for (; ; holder = holder.mNext) {
+        for (;; holder = holder.mNext) {
             if (holder.contains(imageView)) {
                 return;
             }
@@ -255,7 +268,7 @@ public class ImageTask {
 
     /**
      * Remove the ImageView from ImageTask
-     *
+     * 
      * @param imageView
      */
     public void removeImageView(CubeImageView imageView) {
@@ -286,7 +299,7 @@ public class ImageTask {
 
     /**
      * Check if this ImageTask has any related ImageViews.
-     *
+     * 
      * @return
      */
     public boolean stillHasRelatedImageView() {
@@ -299,7 +312,7 @@ public class ImageTask {
 
     /**
      * When loading from network
-     *
+     * 
      * @param handler
      */
     public void onLoading(ImageLoadHandler handler) {
@@ -324,7 +337,7 @@ public class ImageTask {
 
     /**
      * notify loading
-     *
+     * 
      * @param handler
      * @param imageView
      */
@@ -337,7 +350,7 @@ public class ImageTask {
 
     /**
      * Will be called when begin load image data from dish or network
-     *
+     * 
      * @param drawable
      */
     public void onLoadTaskFinish(BitmapDrawable drawable, ImageLoadHandler handler) {
@@ -405,10 +418,12 @@ public class ImageTask {
     }
 
     /**
-     * If you have a thumbnail web service which can return multiple size image according the url,
+     * If you have a thumbnail web service which can return multiple size image
+     * according the url,
      * <p/>
-     * you can implements this method to return the specified url according the request size.
-     *
+     * you can implements this method to return the specified url according the
+     * request size.
+     * 
      * @return
      */
     public String getRemoteUrl() {
@@ -417,7 +432,7 @@ public class ImageTask {
 
     /**
      * Return the origin request url
-     *
+     * 
      * @return
      */
     public String getOriginUrl() {
@@ -448,7 +463,7 @@ public class ImageTask {
 
     /**
      * Join the key and the size information.
-     *
+     * 
      * @param key
      * @param w
      * @param h
@@ -456,14 +471,15 @@ public class ImageTask {
      */
     public static String joinSizeInfoToKey(String key, int w, int h) {
         if (w > 0 && h != Integer.MAX_VALUE && h > 0 && h != Integer.MAX_VALUE) {
-            return new StringBuilder(key).append(SIZE_SP).append(w).append(SIZE_SP).append(h).toString();
+            return new StringBuilder(key).append(SIZE_SP).append(w).append(SIZE_SP).append(h)
+                    .toString();
         }
         return key;
     }
 
     /**
      * Join the tag with the key.
-     *
+     * 
      * @param key
      * @param tag
      * @return "$key" + "_" + "$tag"
@@ -474,7 +490,7 @@ public class ImageTask {
 
     /**
      * Return the cache key for file cache.
-     *
+     * 
      * @return the cache key for file cache.
      */
     public String getFileCacheKey() {
@@ -500,7 +516,8 @@ public class ImageTask {
     @Override
     public String toString() {
         if (mStr == null) {
-            mStr = String.format("[ImageTask@%s %s %sx%s %s]", Integer.toHexString(hashCode()), mId, mRequestSize.x, mRequestSize.y, mHasRecycled);
+            mStr = String.format("[ImageTask@%s %s %sx%s %s]", Integer.toHexString(hashCode()),
+                    mId, mRequestSize.x, mRequestSize.y, mHasRecycled);
         }
         return mStr;
     }
@@ -510,11 +527,14 @@ public class ImageTask {
     }
 
     /**
-     * A tiny and light linked-list like container to hold all the ImageViews related to the ImageTask.
+     * A tiny and light linked-list like container to hold all the ImageViews
+     * related to the ImageTask.
      */
     private static class ImageViewHolder {
         private WeakReference<CubeImageView> mImageViewRef;
+
         private ImageViewHolder mNext;
+
         private ImageViewHolder mPrev;
 
         public ImageViewHolder(CubeImageView imageView) {

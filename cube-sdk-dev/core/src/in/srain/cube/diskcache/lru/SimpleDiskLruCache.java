@@ -26,7 +26,9 @@ import java.io.IOException;
 public final class SimpleDiskLruCache implements DiskCache {
 
     public static final String LOG_TAG = "cube-disk-cache-simple-lru";
+
     public static boolean DEBUG = false;
+
     private String mString;
 
     private LruActionTracer mActionTracer;
@@ -42,7 +44,8 @@ public final class SimpleDiskLruCache implements DiskCache {
         }
         mActionTracer = new LruActionTracer(this, directory, appVersion, capacity);
         if (DEBUG) {
-            CLog.d(LOG_TAG, "Construct: path: %s version: %s capacity: %s", directory, appVersion, capacity);
+            CLog.d(LOG_TAG, "Construct: path: %s version: %s capacity: %s", directory, appVersion,
+                    capacity);
         }
     }
 
@@ -65,9 +68,9 @@ public final class SimpleDiskLruCache implements DiskCache {
     }
 
     /**
-     * Returns a {@link in.srain.cube.diskcache.CacheEntry} named {@code key}, or null if it doesn't
-     * exist is not currently readable. If a value is returned, it is moved to
-     * the head of the LRU queue.
+     * Returns a {@link in.srain.cube.diskcache.CacheEntry} named {@code key},
+     * or null if it doesn't exist is not currently readable. If a value is
+     * returned, it is moved to the head of the LRU queue.
      */
     @Override
     public synchronized CacheEntry getEntry(String key) throws IOException {
@@ -97,7 +100,7 @@ public final class SimpleDiskLruCache implements DiskCache {
     /**
      * Drops the entry for {@code key} if it exists and can be removed. Entries
      * actively being edited cannot be removed.
-     *
+     * 
      * @return true if an entry was removed.
      */
     public synchronized boolean delete(String key) throws IOException {
@@ -145,7 +148,8 @@ public final class SimpleDiskLruCache implements DiskCache {
     @Override
     public String toString() {
         if (mString == null) {
-            mString = String.format("[SimpleDiskLruCache/%s@%s]", getDirectory().getName(), Integer.toHexString(hashCode()));
+            mString = String.format("[SimpleDiskLruCache/%s@%s]", getDirectory().getName(),
+                    Integer.toHexString(hashCode()));
         }
         return mString;
     }

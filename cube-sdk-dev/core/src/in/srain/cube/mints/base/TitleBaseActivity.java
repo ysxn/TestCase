@@ -1,3 +1,4 @@
+
 package in.srain.cube.mints.base;
 
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import in.srain.cube.R;
 public abstract class TitleBaseActivity extends MintsBaseActivity {
 
     protected TitleHeaderBar mTitleHeaderBar;
+
     protected LinearLayout mContentContainer;
 
     @Override
@@ -59,7 +61,8 @@ public abstract class TitleBaseActivity extends MintsBaseActivity {
     @Override
     public void setContentView(int layoutResID) {
         View view = LayoutInflater.from(this).inflate(layoutResID, null);
-        view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
         mContentContainer.addView(view);
     }
 

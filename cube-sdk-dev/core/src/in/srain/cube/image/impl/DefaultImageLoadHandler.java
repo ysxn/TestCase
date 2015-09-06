@@ -1,3 +1,4 @@
+
 package in.srain.cube.image.impl;
 
 import android.content.Context;
@@ -21,27 +22,35 @@ import in.srain.cube.util.Version;
  * A simple implementation of {@link ImageLoadHandler}.
  * <p/>
  * This loader will put a background to ImageView when the image is loading.
- *
+ * 
  * @author http://www.liaohuqiu.net
  */
 public class DefaultImageLoadHandler implements ImageLoadHandler {
 
     private final static boolean DEBUG = CubeDebug.DEBUG_IMAGE;
+
     private final static String LOG_TAG = CubeDebug.DEBUG_IMAGE_LOG_TAG;
+
     private final static String MSG_LOADING = "%s => %s handler on loading";
+
     private final static String MSG_LOAD_ERROR = "%s => %s handler on load error";
+
     private final static String MSG_LOAD_FINISH = "%s => %s handler on load finish: %s %s %s %s";
 
     private Context mContext;
+
     private final static int DISPLAY_FADE_IN = 0x01;
+
     private final static int DISPLAY_ROUNDED = 0x02;
 
     private int mDisplayTag = DISPLAY_FADE_IN;
 
     private Drawable mLoadingDrawable;
+
     private Drawable mErrorDrawable;
 
     private int mLoadingColor = -1;
+
     private float mCornerRadius = 10;
 
     private boolean mResizeImageViewAfterLoad = false;
@@ -53,7 +62,8 @@ public class DefaultImageLoadHandler implements ImageLoadHandler {
     }
 
     /**
-     * If set to true, the image will fade-in once it has been loaded by the background thread.
+     * If set to true, the image will fade-in once it has been loaded by the
+     * background thread.
      */
     public void setImageFadeIn(boolean fadeIn) {
         if (fadeIn) {
@@ -90,7 +100,7 @@ public class DefaultImageLoadHandler implements ImageLoadHandler {
 
     /**
      * set the placeholder Image
-     *
+     * 
      * @param loadingBitmap the resources id
      */
     public void setLoadingResources(int loadingBitmap) {
@@ -105,7 +115,7 @@ public class DefaultImageLoadHandler implements ImageLoadHandler {
 
     /**
      * set the error Image
-     *
+     * 
      * @param resId
      */
     public void setErrorResources(int resId) {
@@ -114,7 +124,7 @@ public class DefaultImageLoadHandler implements ImageLoadHandler {
 
     /**
      * set the placeholder by color
-     *
+     * 
      * @param color
      */
     public void setLoadingImageColor(int color) {
@@ -124,7 +134,7 @@ public class DefaultImageLoadHandler implements ImageLoadHandler {
 
     /**
      * set the placeholder image by color string like: #ffffff
-     *
+     * 
      * @param colorString
      */
     public void setLoadingImageColor(String colorString) {
@@ -140,7 +150,8 @@ public class DefaultImageLoadHandler implements ImageLoadHandler {
             CLog.d(LOG_TAG, MSG_LOADING, imageTask, imageView);
         }
         if (Version.hasHoneycomb()) {
-            if (mLoadingDrawable != null && imageView != null && imageView.getDrawable() != mLoadingDrawable) {
+            if (mLoadingDrawable != null && imageView != null
+                    && imageView.getDrawable() != mLoadingDrawable) {
                 imageView.setImageDrawable(mLoadingDrawable);
             }
         } else {
@@ -155,7 +166,8 @@ public class DefaultImageLoadHandler implements ImageLoadHandler {
         }
         if (imageView != null) {
             if (Version.hasHoneycomb()) {
-                if (mErrorDrawable != null && imageView != null && imageView.getDrawable() != mErrorDrawable) {
+                if (mErrorDrawable != null && imageView != null
+                        && imageView.getDrawable() != mErrorDrawable) {
                     imageView.setImageDrawable(mErrorDrawable);
                 }
             } else {
@@ -190,7 +202,8 @@ public class DefaultImageLoadHandler implements ImageLoadHandler {
                 }
             }
 
-            // RoundedDrawable will not recycle automatically when API level is lower than 11
+            // RoundedDrawable will not recycle automatically when API level is
+            // lower than 11
             if ((mDisplayTag & DISPLAY_ROUNDED) == DISPLAY_ROUNDED && Version.hasHoneycomb()) {
                 d = new RoundedDrawable(drawable.getBitmap(), mCornerRadius);
             }
@@ -199,7 +212,9 @@ public class DefaultImageLoadHandler implements ImageLoadHandler {
                 if (mLoadingColor != -1 && (mDisplayTag & DISPLAY_ROUNDED) != DISPLAY_ROUNDED) {
                     loadingColor = mLoadingColor;
                 }
-                final TransitionDrawable td = new TransitionDrawable(new Drawable[]{new ColorDrawable(loadingColor), d});
+                final TransitionDrawable td = new TransitionDrawable(new Drawable[] {
+                        new ColorDrawable(loadingColor), d
+                });
                 imageView.setImageDrawable(td);
                 td.startTransition(200);
             } else {
@@ -211,8 +226,8 @@ public class DefaultImageLoadHandler implements ImageLoadHandler {
                         w = oldDrawable.getIntrinsicWidth();
                         h = oldDrawable.getIntrinsicHeight();
                     }
-                    CLog.d(LOG_TAG, MSG_LOAD_FINISH,
-                            imageTask, imageView, w, h, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                    CLog.d(LOG_TAG, MSG_LOAD_FINISH, imageTask, imageView, w, h,
+                            drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
                 }
                 imageView.setImageDrawable(drawable);
             }

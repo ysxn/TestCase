@@ -1,3 +1,4 @@
+
 package in.srain.cube.request;
 
 public abstract class RequestJsonHandler extends RequestDefaultHandler<JsonData> {

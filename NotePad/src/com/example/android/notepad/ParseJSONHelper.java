@@ -15,6 +15,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 public class ParseJSONHelper {
+    @SuppressWarnings("unused")
     private static final boolean DEBUG = true;
     private static final String TAG = "zyw";
     

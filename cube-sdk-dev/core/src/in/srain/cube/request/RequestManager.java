@@ -1,8 +1,10 @@
+
 package in.srain.cube.request;
 
 public class RequestManager {
 
     private static RequestManager sInstance;
+
     private RequestProxyFactory mFactory;
 
     public static RequestManager getInstance() {

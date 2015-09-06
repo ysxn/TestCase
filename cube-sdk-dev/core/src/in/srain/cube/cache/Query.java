@@ -1,3 +1,4 @@
+
 package in.srain.cube.cache;
 
 import android.text.TextUtils;
@@ -6,18 +7,21 @@ import in.srain.cube.request.JsonData;
 public class Query<T> implements ICacheAble<T> {
 
     public enum RequestType {
-        USE_CACHE_NOT_EXPIRED,
-        USE_DATA_CREATED,
-        USE_CACHE_ANYWAY,
-        FAIL,
+        USE_CACHE_NOT_EXPIRED, USE_DATA_CREATED, USE_CACHE_ANYWAY, FAIL,
     }
 
     private QueryHandler mHandler;
+
     private CacheManager mCacheManager;
+
     private long mCacheTime = 86400;
+
     private String mCacheKey;
+
     private boolean mUseCacheAnyway = false;
+
     private boolean mDisable = false;
+
     private String mInitAssertPath = null;
 
     public Query(CacheManager cacheManager) {

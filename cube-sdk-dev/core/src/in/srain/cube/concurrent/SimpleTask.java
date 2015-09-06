@@ -1,3 +1,4 @@
+
 package in.srain.cube.concurrent;
 
 import android.os.Handler;
@@ -7,23 +8,27 @@ import android.os.Message;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * A class which encapsulate a task that can execute in background thread and can be cancelled.
- * memory require:
+ * A class which encapsulate a task that can execute in background thread and
+ * can be cancelled. memory require:
  * <p/>
- * Shadow heap size of AtomicInteger: 12 + 4  = 16 bytes;
- * Shadow heap size of SimpleTask: 12 + 4 + 4 = 20. After aligned: 24 bytes;
- * Retained heap size of SimpleTask: 16 + 24 = 40 bytes.
- *
+ * Shadow heap size of AtomicInteger: 12 + 4 = 16 bytes; Shadow heap size of
+ * SimpleTask: 12 + 4 + 4 = 20. After aligned: 24 bytes; Retained heap size of
+ * SimpleTask: 16 + 24 = 40 bytes.
+ * 
  * @author http://www.liaohuqiu.net
  */
 public abstract class SimpleTask implements Runnable {
 
     private static final int STATE_NEW = 0x01;
+
     private static final int STATE_RUNNING = 0x02;
+
     private static final int STATE_FINISH = 0x04;
+
     private static final int STATE_CANCELLED = 0x08;
 
     private static final int MSG_TASK_DONE = 0x01;
+
     private static InternalHandler sHandler = null;
 
     static {
@@ -31,6 +36,7 @@ public abstract class SimpleTask implements Runnable {
     }
 
     private Thread mCurrentThread;
+
     private AtomicInteger mState = new AtomicInteger(STATE_NEW);
 
     /**
@@ -75,10 +81,12 @@ public abstract class SimpleTask implements Runnable {
 
     /**
      * check whether this work has done
-     *
+     * 
      * @return
      */
-    @SuppressWarnings({"unused"})
+    @SuppressWarnings({
+        "unused"
+    })
     public boolean isDone() {
         return mState.get() == STATE_FINISH;
     }

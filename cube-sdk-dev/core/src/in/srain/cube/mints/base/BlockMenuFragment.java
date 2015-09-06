@@ -1,3 +1,4 @@
+
 package in.srain.cube.mints.base;
 
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import in.srain.cube.views.block.BlockListView.OnItemClickListener;
 public abstract class BlockMenuFragment extends MenuItemFragment {
 
     private BlockListView mBlockListView;
+
     private int mSize = 0;
 
     @Override
@@ -37,10 +39,12 @@ public abstract class BlockMenuFragment extends MenuItemFragment {
     protected View getViewForBlock(LayoutInflater layoutInflater, int position) {
         MenuItemInfo itemInfo = mBlockListAdapter.getItem(position);
 
-        ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.cube_mints_base_block_menu_item, null);
+        ViewGroup view = (ViewGroup) layoutInflater.inflate(
+                R.layout.cube_mints_base_block_menu_item, null);
 
         if (itemInfo != null) {
-            TextView textView = ((TextView) view.findViewById(R.id.cube_mints_base_block_menu_item_title));
+            TextView textView = ((TextView) view
+                    .findViewById(R.id.cube_mints_base_block_menu_item_title));
             textView.setText(itemInfo.getTitle());
             view.setBackgroundColor(itemInfo.getColor());
         }

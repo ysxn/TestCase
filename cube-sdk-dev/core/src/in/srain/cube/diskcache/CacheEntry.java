@@ -1,3 +1,4 @@
+
 package in.srain.cube.diskcache;
 
 import java.io.*;
@@ -8,10 +9,15 @@ public class CacheEntry {
     private static final Charset UTF_8 = Charset.forName("UTF-8");
 
     private final String mKey;
+
     private DiskCache mDiskCache;
+
     private long mOldSize;
+
     private long mSize;
+
     private boolean mIsUnderEdit;
+
     private boolean hasErrors;
 
     public CacheEntry(DiskCache diskCache, String key) {
@@ -56,8 +62,8 @@ public class CacheEntry {
     }
 
     /**
-     * Returns an unbuffered input stream to read the last committed value,
-     * or null if no value has been committed.
+     * Returns an unbuffered input stream to read the last committed value, or
+     * null if no value has been committed.
      */
     public InputStream getInputStream() throws IOException {
         synchronized (mDiskCache) {
@@ -69,8 +75,8 @@ public class CacheEntry {
     }
 
     /**
-     * Returns the last committed value as a string, or null if no value
-     * has been committed.
+     * Returns the last committed value as a string, or null if no value has
+     * been committed.
      */
     public String getString() throws IOException {
         InputStream in = getInputStream();
@@ -92,11 +98,10 @@ public class CacheEntry {
     }
 
     /**
-     * Returns a new unbuffered output stream to write the value
-     * If the underlying output stream encounters errors
-     * when writing to the filesystem, this edit will be aborted when
-     * {@link #commit} is called. The returned output stream does not throw
-     * IOExceptions.
+     * Returns a new unbuffered output stream to write the value If the
+     * underlying output stream encounters errors when writing to the
+     * filesystem, this edit will be aborted when {@link #commit} is called. The
+     * returned output stream does not throw IOExceptions.
      */
     public OutputStream newOutputStream() throws IOException {
         synchronized (mDiskCache) {
@@ -115,7 +120,7 @@ public class CacheEntry {
 
     /**
      * delete all content
-     *
+     * 
      * @return
      */
     public boolean delete() throws IOException {
@@ -128,8 +133,8 @@ public class CacheEntry {
     }
 
     /**
-     * Commits this edit so it is visible to readers.  This releases the
-     * edit lock so another edit may be started on the same key.
+     * Commits this edit so it is visible to readers. This releases the edit
+     * lock so another edit may be started on the same key.
      */
     public void commit() throws IOException {
         if (!mIsUnderEdit) {
@@ -207,4 +212,3 @@ public class CacheEntry {
         }
     }
 }
-

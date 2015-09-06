@@ -1,3 +1,4 @@
+
 package in.srain.cube.views;
 
 import android.content.Context;
@@ -12,9 +13,11 @@ import in.srain.cube.R;
 
 public class MoreActionView extends View {
     private int mColor = 0xFFFFFFFF;
+
     private Paint mPaint;
 
     private float mDotRadius = 3;
+
     private float mDotSpan = 5;
 
     public MoreActionView(Context context, AttributeSet attrs) {
@@ -23,11 +26,13 @@ public class MoreActionView extends View {
         TypedArray arr = context.obtainStyledAttributes(attrs, R.styleable.MoreActionView, 0, 0);
         if (arr != null) {
             if (arr.hasValue(R.styleable.MoreActionView_more_action_dot_radius)) {
-                mDotRadius = arr.getDimension(R.styleable.MoreActionView_more_action_dot_radius, mDotRadius);
+                mDotRadius = arr.getDimension(R.styleable.MoreActionView_more_action_dot_radius,
+                        mDotRadius);
             }
 
             if (arr.hasValue(R.styleable.MoreActionView_more_action_dot_span)) {
-                mDotSpan = (int) arr.getDimension(R.styleable.MoreActionView_more_action_dot_span, mDotSpan);
+                mDotSpan = (int) arr.getDimension(R.styleable.MoreActionView_more_action_dot_span,
+                        mDotSpan);
             }
 
             mColor = arr.getColor(R.styleable.MoreActionView_more_action_dot_color, mColor);

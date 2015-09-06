@@ -1,3 +1,4 @@
+
 package in.srain.cube.request;
 
 import android.content.Context;
@@ -14,7 +15,8 @@ public class RequestCacheManager {
         return sInstance;
     }
 
-    public static void init(Context content, String cacheDir, int memoryCacheSizeInKB, int fileCacheSizeInKB) {
+    public static void init(Context content, String cacheDir, int memoryCacheSizeInKB,
+            int fileCacheSizeInKB) {
         sInstance = new CacheManager(content, cacheDir, memoryCacheSizeInKB, fileCacheSizeInKB);
     }
 }

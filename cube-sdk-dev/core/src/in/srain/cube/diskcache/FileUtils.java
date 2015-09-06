@@ -1,3 +1,4 @@
+
 package in.srain.cube.diskcache;
 
 import java.io.*;
@@ -26,9 +27,9 @@ public class FileUtils {
     /**
      * Returns the ASCII characters up to but not including the next "\r\n", or
      * "\n".
-     *
-     * @throws java.io.EOFException if the stream is exhausted before the next newline
-     *                              character.
+     * 
+     * @throws java.io.EOFException if the stream is exhausted before the next
+     *             newline character.
      */
     public static String readAsciiLine(InputStream in) throws IOException {
         StringBuilder result = new StringBuilder(80);
@@ -50,7 +51,8 @@ public class FileUtils {
     }
 
     /**
-     * Closes 'closeable', ignoring any checked exceptions. Does nothing if 'closeable' is null.
+     * Closes 'closeable', ignoring any checked exceptions. Does nothing if
+     * 'closeable' is null.
      */
     public static void closeQuietly(Closeable closeable) {
         if (closeable != null) {
@@ -113,10 +115,9 @@ public class FileUtils {
         }
     }
 
-
     /**
      * recursively delete
-     *
+     * 
      * @param dir
      * @throws java.io.IOException
      */

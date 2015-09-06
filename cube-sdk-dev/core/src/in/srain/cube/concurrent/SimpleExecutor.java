@@ -1,3 +1,4 @@
+
 package in.srain.cube.concurrent;
 
 import android.annotation.TargetApi;
@@ -9,18 +10,21 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Use a Thread pool to manager the thread.
- *
+ * 
  * @author http://www.liaohuqiu.net
  */
 public class SimpleExecutor {
 
     private static final TimeUnit KEEP_ALIVE_TIME_UNIT;
+
     private static final int KEEP_ALIVE_TIME = 1;
+
     private static final String sDefaultThreadNamePrefix = "simple-executor-pool-";
 
     private static SimpleExecutor sInstance = null;
 
     private final ThreadPoolExecutor mThreadPool;
+
     private final BlockingQueue<Runnable> mTaskWorkQueue;
 
     static {
@@ -31,7 +35,8 @@ public class SimpleExecutor {
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     private SimpleExecutor(String threadNamePrefix, int corePoolSize, int maxPoolSize) {
         mTaskWorkQueue = new LinkedBlockingQueue<Runnable>();
-        mThreadPool = new ThreadPoolExecutor(corePoolSize, maxPoolSize, KEEP_ALIVE_TIME, KEEP_ALIVE_TIME_UNIT, mTaskWorkQueue, new DefaultThreadFactory(threadNamePrefix));
+        mThreadPool = new ThreadPoolExecutor(corePoolSize, maxPoolSize, KEEP_ALIVE_TIME,
+                KEEP_ALIVE_TIME_UNIT, mTaskWorkQueue, new DefaultThreadFactory(threadNamePrefix));
         if (Version.hasGingerbread()) {
             mThreadPool.allowCoreThreadTimeOut(true);
         }
@@ -54,9 +59,13 @@ public class SimpleExecutor {
      */
     static class DefaultThreadFactory implements ThreadFactory {
         private static final AtomicInteger poolNumber = new AtomicInteger(1);
+
         private static final String sPost = "-thread-";
+
         private final ThreadGroup group;
+
         private final AtomicInteger threadNumber = new AtomicInteger(1);
+
         private final String namePrefix;
 
         private DefaultThreadFactory(String threadNamePrefix) {
