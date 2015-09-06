@@ -3,6 +3,8 @@ package com.codezyw.backuprestore;
 import java.io.File;
 import java.util.List;
 
+import com.codezyw.common.FileIOHelper;
+
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,11 +25,11 @@ public class ApkListAdapter extends BaseAdapter {
 
 	private List<FileData> mApkList;
 
-	private Util mUtil;
+	private FileIOHelper mUtil;
 
 	public ApkListAdapter(Context c) {
 		mContext = c;
-		mUtil = new Util(c);
+		mUtil = new FileIOHelper(c);
 		mInflater = (LayoutInflater) c
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}

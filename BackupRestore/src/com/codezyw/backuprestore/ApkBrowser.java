@@ -12,6 +12,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.codezyw.common.FileIOHelper;
+
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -42,7 +44,7 @@ public class ApkBrowser extends ListActivity {
         }
     };
 
-    private Util mUtil = new Util(this);
+    private FileIOHelper mUtil = new FileIOHelper(this);
     private ApkListAdapter mFileListAdapter;
 
     private ProgressDialog mProgressDialog;
