@@ -45,6 +45,7 @@ public class UIHelper {
             mAlertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         }
         mAlertDialog.setCancelable(false);
+        mAlertDialog.setCanceledOnTouchOutside(false);
         mAlertDialog.show();
     }
 
@@ -60,6 +61,7 @@ public class UIHelper {
         mProgressDialog.setIndeterminate(isIndeterminate);
         mProgressDialog.setMax(max);
         mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
         // android.permission.SYSTEM_ALERT_WINDOW
         // 允许一个程序打开窗口使用 TYPE_SYSTEM_ALERT，显示在其他所有程序的顶层
         if (context instanceof Activity) {
