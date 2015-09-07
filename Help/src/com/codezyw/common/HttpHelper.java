@@ -10,6 +10,7 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -513,6 +514,64 @@ public class HttpHelper {
             DataOutputStream out = new DataOutputStream(urlConn.getOutputStream());
             String para = HttpUtils.joinParasWithEncodedValue(parasMap);
             out.writeBytes(para);
+            out.flush();
+            out.close();
+            buffer = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+            StringBuilder sb = new StringBuilder();
+            String inputLine = null;
+            while (((inputLine = buffer.readLine()) != null)) {
+                sb.append(inputLine).append("\n");
+            }
+            resultData = sb.toString();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (buffer != null) {
+                try {
+                    buffer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (urlConn != null) {
+                urlConn.disconnect();
+            }
+        }
+        return resultData;
+    }
+    
+    /**
+     * HttpURLConnection
+     * <p>
+     * http://stackoverflow.com/questions/28559377/sending-multipartentity-using-httpurlconnection
+     * <p>
+     * http://archive.apache.org/dist/httpcomponents/httpclient/source/
+     */
+    public static String httpPostMultipart(String httpUrl, MultipartEntity multipartEntity) {
+        if (TextUtils.isEmpty(httpUrl)) {
+            return null;
+        }
+        String resultData = null;
+        BufferedReader buffer = null;
+        HttpURLConnection urlConn = null;
+        try {
+        	URL urlc = new URL(httpUrl);
+            urlConn = (HttpURLConnection) urlc.openConnection();
+            urlConn.setReadTimeout(10000);
+            urlConn.setConnectTimeout(15000);
+            urlConn.setRequestMethod("POST");
+            urlConn.setDoOutput(true);
+            urlConn.setDoInput(true);
+            urlConn.setUseCaches(false);
+            urlConn.setRequestProperty("Connection", "Keep-Alive");
+            urlConn.addRequestProperty("Content-length", multipartEntity.getContentLength()+"");
+            urlConn.addRequestProperty(multipartEntity.getContentType().getName(), multipartEntity.getContentType().getValue());
+
+            urlConn.connect();
+            OutputStream  out = urlConn.getOutputStream();
+            multipartEntity.writeTo(out);
             out.flush();
             out.close();
             buffer = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
