@@ -20,40 +20,59 @@ import com.apache.commons.codec.binary.Base64;
 
 import junit.framework.Test;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.wifi.WifiInfo;
 import android.app.AlertDialog;
-import android.os.Bundle;
+import android.net.wifi.WifiManager;
+import android.os.*;
+import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class GetMetricsActivity extends Activity {
-	/** Called when the activity is first created. */
+	private TelephonyManager mTelephonyMgr;
+	private WifiManager mWifiManager;
+	private TextView mIMSI;
+	private TextView mIMEI;
+	private TextView mMacAddress;
+	private TextView mSerialno;
+	private TextView mGoogle;
+	private TextView mGetMetrics;
+	private NetworkConnectChangedReceiver receiver = new NetworkConnectChangedReceiver();
+	private boolean mFakeOpenWifi = false;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		DisplayMetrics dm = this.getResources().getDisplayMetrics();
-		Log.i("zhuyawen", dm.toString());
-		Log.i("zhuyawen", ">>>>>>>>>>>>>>>>>" + ", metrics"
-				+ this.getResources().getDisplayMetrics().toString()
-				+ " , screenDensity = "
-				+ this.getResources().getDisplayMetrics().densityDpi);
-		Toast.makeText(
-				this,
-				">>>>>>>>>>>>>>>>>" + ", metrics"
-						+ this.getResources().getDisplayMetrics().toString()
-						+ " , screenDensity = "
-						+ this.getResources().getDisplayMetrics().densityDpi,
-				Toast.LENGTH_LONG).show();
-		String s = "xxx";
-		Log.i("zhuyawen", "before test s=" + s);
-		Log.i("zhuyawen", "after test s=" + s);
-		EditText v = new EditText(this);
-		v.setText(dm.toString());
-//		new AlertDialog.Builder(this).setTitle("DisplayMetrics").setView(v)
-//				.create().show();
+		mIMSI = (TextView)findViewById(R.id.get_imsi);
+		mIMEI = (TextView)findViewById(R.id.get_imei);
+		mMacAddress = (TextView)findViewById(R.id.get_mac);
+		mSerialno = (TextView)findViewById(R.id.get_serialno);
+		mGoogle = (TextView)findViewById(R.id.get_google);
+		mGetMetrics = (TextView)findViewById(R.id.get_metrics);
 		
+		mIMSI.setText(mIMSI.getText()+" "+getIMSI());
+		mIMEI.setText(mIMEI.getText()+" "+getIMEI());
+		mMacAddress.setText(mMacAddress.getText()+" "+getMacFromDevice());
+		mSerialno.setText(mSerialno.getText()+" "+getSerialNumberBuild());
+		mGoogle.setText(mGoogle.getText()+" "+getAndroidId());
+		
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+		this.registerReceiver(receiver, filter);
+
+		
+		DisplayMetrics dm = this.getResources().getDisplayMetrics();
+		Log.i("GUH", dm.toString());
+		mGetMetrics.setText(dm.toString());
+
 		
 		
 		
@@ -67,6 +86,138 @@ public class GetMetricsActivity extends Activity {
 		result = result.replace('=', '.');
 		Log.i("zzz", "result2=" + result);
 	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(receiver);
+	}
+	
+	/**
+	 * 获取IMSI
+	 * @return
+	 */
+	private String getIMSI() {
+		mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+		String imsi = mTelephonyMgr.getSubscriberId();
+		return imsi;
+	}
+	
+	/**
+	 * 获取IMEI
+	 * @return
+	 */
+	private String getIMEI() {
+		mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+		String imei = mTelephonyMgr.getDeviceId();
+		return imei;
+	}
+	
+	/**
+	 * 获取手机串号
+	 * @return
+	 */
+	public static String getSerialNumberBuild() {
+	    return android.os.Build.SERIAL;
+	}
+
+	/**
+	 * 获取Google账号对应的Android Id
+	 * @return
+	 */
+	public String getAndroidId() {
+	    return android.provider.Settings.Secure.getString(getContentResolver(),
+	    		android.provider.Settings.Secure.ANDROID_ID);
+	}
+
+	/**
+	 * 为了获取MAC尝试打开WiFi
+	 * @return
+	 */
+	private boolean tryOpenMAC() {
+		mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+		boolean softOpenWifi = false;
+		int state = mWifiManager.getWifiState();
+		if (state != WifiManager.WIFI_STATE_ENABLED && state != WifiManager.WIFI_STATE_ENABLING) {
+			mWifiManager.setWifiEnabled(true);
+			softOpenWifi = true;
+		}
+		return softOpenWifi;
+	}
+
+	/**
+	 * 如果前面为了获取MAC打开了WiFi，现在关闭WiFi
+	 * @return
+	 */
+	private void tryCloseMAC() {
+		mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+		mWifiManager.setWifiEnabled(false);
+	}
+
+	/**
+	 * 尝试读取MAC地址
+	 * @return
+	 */
+	private String tryGetMAC() {
+		mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+		WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
+		return wifiInfo.getMacAddress();
+	}
+
+	/**
+	 * 尝试读取MAC地址,如果读不到，需要打开WiFi
+	 * @return
+	 */
+	private String getMacFromDevice() {
+		mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+		String mac = null;
+		mac = tryGetMAC();
+		if (!isNull(mac)) {
+			return mac;
+		}
+		// 获取失败，尝试打开wifi获取
+		mFakeOpenWifi = tryOpenMAC();
+		return mac;
+	}
+	
+	private boolean isNull(String s) {
+		if (s == null || s.isEmpty() || "NULL".equalsIgnoreCase(s)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 尝试读取MAC地址,如果读不到，需要打开WiFi
+	 * 这个监听wifi的打开与关闭，与wifi的连接无关
+	 *
+	 */
+	public class NetworkConnectChangedReceiver extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (WifiManager.WIFI_STATE_CHANGED_ACTION.equals(intent.getAction())) {
+				int wifiState = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, 0);
+				switch (wifiState) {
+				case WifiManager.WIFI_STATE_DISABLED:
+					break;
+				case WifiManager.WIFI_STATE_DISABLING:
+					break;
+				case WifiManager.WIFI_STATE_ENABLED:
+					String mac = tryGetMAC();
+					mMacAddress.setText("本机MAC地址"+" "+mac);
+					// 尝试关闭wifi
+					if (mFakeOpenWifi) {
+						tryCloseMAC();
+						mFakeOpenWifi = false;
+					}
+					break;
+				case WifiManager.WIFI_STATE_ENABLING:
+					break;
+				}
+			}
+		}
+	}
+	
 	private static byte[] key = new byte[] {'h','e','l','l','o','w','o','r','l','d','.','.','.','.','.','.'};
 
 	public static byte[] encrypt(String data) {

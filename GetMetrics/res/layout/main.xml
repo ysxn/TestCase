@@ -7,6 +7,36 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello" />
+        android:text="获取本机信息!" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/get_imsi"
+        android:text="本机IMSI:" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/get_imei"
+        android:text="本机IMEI:" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/get_mac"
+        android:text="本机MAC地址:" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/get_serialno"
+        android:text="本机Serialno:" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/get_google"
+        android:text="本机谷歌账户ANDROID_ID:" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/get_metrics"
+        android:text="本机屏幕参数:" />
 
 </LinearLayout>

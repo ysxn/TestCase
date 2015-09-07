@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 public class PaixuActivity extends Activity {
@@ -60,6 +61,9 @@ public class PaixuActivity extends Activity {
         //递归排序之快速排序
         QuickSort(a,0,a.length);//从小到大
         Log.i(TAG  ,"i="+Arrays.toString(a));
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        Log.i("GUH"  ,"metrics="+metrics);
     }
 
     private int swap;
