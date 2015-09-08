@@ -13,8 +13,18 @@ public class ProgressMultipartEntity extends MultipartEntity {
 
     private ProgressListener listener;
 
+    private volatile static boolean  mCancel = false;
+
     public static interface ProgressListener {
         void transferred(long num);
+    }
+    
+    public static void enable() {
+    	mCancel = false;
+    }
+    
+    public static void cancel() {
+    	mCancel = true;
     }
 
     public ProgressMultipartEntity() {
@@ -51,14 +61,27 @@ public class ProgressMultipartEntity extends MultipartEntity {
         }
 
         public void write(byte[] b, int off, int len) throws IOException {
-            out.write(b, off, len);
-            this.transferred += len;
-            if (this.listener != null) {
-                this.listener.transferred(this.transferred);
-            }
+        	if (mCancel) {
+        		out.close();
+        		return;
+        	}
+        	int last = off + len;
+        	int index = off;
+        	while (index <= last - 1 && !mCancel) {
+	            out.write(b, index, 1);
+	            index += 1;
+	            this.transferred += 1;
+	            if (this.listener != null) {
+	                this.listener.transferred(this.transferred);
+	            }
+        	}
         }
 
         public void write(int b) throws IOException {
+        	if (mCancel) {
+        		out.close();
+        		return;
+        	}
             out.write(b);
             this.transferred++;
             if (this.listener != null) {

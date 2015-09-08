@@ -1,16 +1,17 @@
 
 package com.codezyw.common;
 
-import android.R.integer;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -70,6 +71,41 @@ public class UIHelper {
         }
         mProgressDialog.show();
     }
+    
+    public static void showAlertDialog(Context context, String title, String message, int style, boolean isIndeterminate, int max) {
+        if (context == null) {
+            return;
+        }
+        AlertDialog mAlertDialog = new AlertDialog.Builder(new ContextThemeWrapper(context, android.R.style.Theme_DeviceDefault_Dialog))
+		.setView(new TextView(context)).create();
+		mAlertDialog.setMessage("MESSAGE");
+		mAlertDialog.setTitle("TITLE");
+		mAlertDialog.setCancelable(true);
+		mAlertDialog.setCanceledOnTouchOutside(false);
+		mAlertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+		mAlertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "ok", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+			}
+		});
+		mAlertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+			}
+		});
+		mAlertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+			}
+		});					
+        // android.permission.SYSTEM_ALERT_WINDOW
+        // 允许一个程序打开窗口使用 TYPE_SYSTEM_ALERT，显示在其他所有程序的顶层
+        if (context instanceof Activity) {
+        } else {
+            mAlertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        }
+        mAlertDialog.show();
+    }
 
     public static void updateProgressDialog(int progress) {
         if (mProgressDialog != null && mProgressDialog.isShowing() && !mProgressDialog.isIndeterminate()) {
@@ -95,6 +131,7 @@ public class UIHelper {
         if (context == null || context.isFinishing() || context.getWindow() == null || context.getWindow().getDecorView() == null) {
             return;
         }
+        LayoutInflater factory = LayoutInflater.from(context);
         LinearLayout parent = new LinearLayout(context);
         parent.setOrientation(LinearLayout.VERTICAL);
         TextView titleTextView = new TextView(context);
@@ -105,9 +142,67 @@ public class UIHelper {
         messageTextView.setText(message);
         parent.addView(titleTextView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         parent.addView(messageTextView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        PopupWindow popupWindow = new PopupWindow(parent, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        final PopupWindow popupWindow = new PopupWindow(parent, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0));
         popupWindow.setOutsideTouchable(true);
         popupWindow.showAtLocation(context.getWindow().getDecorView(), Gravity.CENTER, 0, 0);
     }
+    
+//    <style name="Theme_dialog_Transparent" parent="@android:Theme.Holo.Light.Dialog">
+//    <item name="android:windowIsTranslucent">true</item>
+//    <item name="android:windowBackground">@android:color/transparent</item>
+//    <item name="android:windowContentOverlay">@null</item>
+//    <item name="android:windowNoTitle">true</item>
+//</style>
+    
+//    <?xml version="1.0" encoding="utf-8"?>
+//    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+//
+//        <item android:state_pressed="true"><shape android:shape="rectangle">
+//
+//                <!-- 填充颜色 -->
+//                <solid android:color="#ffefefef"></solid>
+//
+//                <!-- 线的宽度，颜色灰色 -->
+//                <stroke android:width="1dp" android:color="#ffefefef"></stroke>
+//
+//                <!-- 矩形的圆角半径 -->
+//                <corners 
+//                    android:topLeftRadius="0dp"
+//                    android:topRightRadius="0dp"
+//                    android:bottomLeftRadius="5dp"
+//                    android:bottomRightRadius="5dp" />
+//            </shape></item>
+//        <item android:state_focused="true"><shape android:shape="rectangle">
+//
+//                <!-- 填充颜色 -->
+//                <solid android:color="#ffefefef"></solid>
+//
+//                <!-- 线的宽度，颜色灰色 -->
+//                <stroke android:width="1dp" android:color="#ffefefef"></stroke>
+//
+//                <!-- 矩形的圆角半径 -->
+//                <corners 
+//                    android:topLeftRadius="0dp"
+//                    android:topRightRadius="0dp"
+//                    android:bottomLeftRadius="5dp"
+//                    android:bottomRightRadius="5dp" />
+//            </shape></item>
+//        <item><shape android:shape="rectangle">
+//
+//                <!-- 填充颜色 -->
+//                <solid android:color="#ffffffff"></solid>
+//
+//                <!-- 线的宽度，颜色灰色 -->
+//                <stroke android:width="1dp" android:color="#ffffffff"></stroke>
+//
+//                <!-- 矩形的圆角半径 -->
+//                <corners 
+//                    android:topLeftRadius="0dp"
+//                    android:topRightRadius="0dp"
+//                    android:bottomLeftRadius="5dp"
+//                    android:bottomRightRadius="5dp" />
+//            </shape></item>
+//
+//    </selector>
 }

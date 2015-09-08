@@ -47,17 +47,7 @@ public class BitmapHelper {
             if (drawingCache != null) {
                 try {
                     final Bitmap originalBitmap = drawingCache.copy(Bitmap.Config.ARGB_8888, false);
-                    double originalHeight = originalBitmap.getHeight();
-                    double originalWidth = originalBitmap.getWidth();
-                    int newHeight = SCALED_SCREENSHOT_MAX_HEIGHT_WIDTH;
-                    int newWidth = SCALED_SCREENSHOT_MAX_HEIGHT_WIDTH;
-                    double scaleX, scaleY;
-                    scaleX = newWidth / originalWidth;
-                    scaleY = newHeight / originalHeight;
-                    final double scale = Math.min(scaleX, scaleY);
-                    newWidth = (int) Math.round(originalWidth * scale);
-                    newHeight = (int) Math.round(originalHeight * scale);
-                    result = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+                    result = ImageHelper.scaleBitmap(originalBitmap, SCALED_SCREENSHOT_MAX_HEIGHT_WIDTH, SCALED_SCREENSHOT_MAX_HEIGHT_HEIGHT);
                     if (result != originalBitmap) {
                         originalBitmap.recycle();
                     }

@@ -241,5 +241,20 @@ public class ImageHelper {
         matrix.postScale(scaleWidth, scaleHeight);
         return Bitmap.createBitmap(org, 0, 0, org.getWidth(), org.getHeight(), matrix, true);
     }
+    
+    public static Bitmap scaleBitmap(Bitmap originalBitmap, int newHeight, int newWidth) {
+    	if (originalBitmap == null) {
+            return null;
+        }
+	    double originalHeight = originalBitmap.getHeight();
+	    double originalWidth = originalBitmap.getWidth();
+	    double scaleX, scaleY;
+	    scaleX = newWidth / originalWidth;
+	    scaleY = newHeight / originalHeight;
+	    final double scale = Math.min(scaleX, scaleY);
+	    newWidth = (int) Math.round(originalWidth * scale);
+	    newHeight = (int) Math.round(originalHeight * scale);
+	    return Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+    }
 
 }
