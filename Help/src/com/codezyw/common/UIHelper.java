@@ -12,6 +12,7 @@ import android.os.Build;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -25,6 +26,16 @@ public class UIHelper {
 
     private static ProgressDialog mProgressDialog = null;
 
+    /**
+     * 消除可以scroll的view阴影效果
+     * @param view
+     */
+    public static void disableScrollShadow(View view) {
+        view.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        view.setHorizontalFadingEdgeEnabled(false);
+        view.setVerticalFadingEdgeEnabled(false);
+    }
+    
     public static void showDialog(Context context, String title, String message) {
         if (context == null) {
             return;
