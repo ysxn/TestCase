@@ -4,11 +4,10 @@ package com.codezyw.backuprestore;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import com.codezyw.common.OpenFileHelper;
+import com.codezyw.common.UIHelper;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -17,21 +16,15 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnLongClickListener;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -89,7 +82,6 @@ public class FilterBrowser extends ListActivity {
                     if (mProgressDialog != null && mProgressDialog.isShowing()) {
                         mProgressDialog.dismiss();
                     }
-
                     mFileListAdapter = new FilterBrowserAdapter(FilterBrowser.this, android.R.layout.simple_list_item_1, mFilesList);
                     setListAdapter(mFileListAdapter);
                     Toast.makeText(FilterBrowser.this, "已经扫描到 " + mFilesList.size() + " 个" + mSuffix + "文件：", Toast.LENGTH_LONG).show();
@@ -134,7 +126,6 @@ public class FilterBrowser extends ListActivity {
         }
 
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 File file = (File) mFileListAdapter.getItem(position);
@@ -146,22 +137,15 @@ public class FilterBrowser extends ListActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.file_filter) {
             showEditDialog(this);
-            return true;
-        }
-        if (id == R.id.directory) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -175,7 +159,6 @@ public class FilterBrowser extends ListActivity {
         } else {
             for (File file : listFiles) {
                 if (!file.isDirectory() && file.getName().endsWith(mSuffix)) {
-                    // file.getName().matches("^.*?\\.(jpg|png|bmp|gif)$");
                     mFilesList.add(file);
                     mHandler.sendMessage(mHandler.obtainMessage(REQUEST_UPDATE_PROGRESS, mFilesList.size(), 0, file.getName()));
                 } else if (file.isDirectory()) {
@@ -221,7 +204,6 @@ public class FilterBrowser extends ListActivity {
             } else if (checkEndsWithInStringArray(fileName, getResources().getStringArray(R.array.fileEndingPackage))) {
                 intent = OpenFileHelper.getApkFileIntent(f);
                 startActivity(intent);
-
             } else if (checkEndsWithInStringArray(fileName, getResources().getStringArray(R.array.fileEndingAudio))) {
                 intent = OpenFileHelper.getAudioFileIntent(f);
                 startActivity(intent);
@@ -244,12 +226,12 @@ public class FilterBrowser extends ListActivity {
                 intent = OpenFileHelper.getPPTFileIntent(f);
                 startActivity(intent);
             } else {
-                // showMessage("无法打开，请安装相应的软件！");
+                UIHelper.showToast(this, "文件无法打开，请安装相应的软件！");
                 try {
                     intent = OpenFileHelper.getTextFileIntent(f);
                     startActivity(intent);
                 } catch (ActivityNotFoundException e) {
-
+                    e.printStackTrace();
                 }
             }
         }

@@ -30,7 +30,6 @@ public class SlideMenuListener implements View.OnTouchListener {
     private boolean mSlideEnabled = true;
 
     public SlideMenuListener(Context context, ListView listView) {
-        // TODO Auto-generated constructor stub
         mContext = context;
         mListView = listView;
         ViewConfiguration vc = ViewConfiguration.get(mContext);
@@ -44,7 +43,6 @@ public class SlideMenuListener implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        // TODO Auto-generated method stub
         if (!mSlideEnabled) {
             if (mTouchDownListItemViewGroup != null) {
                 scrollBack(true);
@@ -205,9 +203,7 @@ public class SlideMenuListener implements View.OnTouchListener {
                     mVelocityTracker.recycle();
                     mVelocityTracker = null;
                 }
-
                 break;
-
             default:
                 break;
         }

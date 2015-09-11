@@ -1,23 +1,19 @@
 
 package com.codezyw.backuprestore;
 
-import java.io.File;
 import java.util.List;
 
 import com.codezyw.common.FileIOHelper;
 import com.codezyw.common.SlideMenuGroup;
+import com.codezyw.common.UIHelper;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.TwoLineListItem;
 
 public class ApkListAdapter extends BaseAdapter {
 
@@ -40,10 +36,16 @@ public class ApkListAdapter extends BaseAdapter {
     }
 
     public int getCount() {
+        if (mApkList == null) {
+            return 0;
+        }
         return mApkList.size();
     }
 
     public Object getItem(int position) {
+        if (mApkList == null) {
+            return 0;
+        }
         return mApkList.get(position);
     }
 
@@ -64,7 +66,6 @@ public class ApkListAdapter extends BaseAdapter {
         ImageView icon = (ImageView) listItem.findViewById(R.id.icon);
         FileData file = mApkList.get(position);
         textView1.setText(file.mFile.getName());
-
         long b = file.mFile.length();
         if (b > 1024 * 1024) {
             textView2.setText(file.mFile.getAbsolutePath() + "\n文件大小：" + b / 1024 / 1024 + "MB" + "\n创建时间：" + mUtil.convetTime(file.mFile.lastModified())
@@ -81,22 +82,25 @@ public class ApkListAdapter extends BaseAdapter {
         menuTextView.setText("删除");
         ((SlideMenuGroup) convertView).setLeftMenuHide(true);
         ((SlideMenuGroup) convertView).setLeftMenuClickListener(new SlideMenuGroup.OnLeftMenuClickListener() {
-
             @Override
             public void onLeftMenuClicked(SlideMenuGroup listItemViewGroup) {
-
             }
         });
         ((SlideMenuGroup) convertView).setRightMenuClickListener(new SlideMenuGroup.OnRightMenuClickListener() {
-
             @Override
             public void onRightMenuClicked(SlideMenuGroup listItemViewGroup) {
                 FileData fdData = (FileData) listItemViewGroup.getTag();
-                Toast.makeText(mContext, "删除安装包：" + fdData.mFile.getName() + "\n路径：" + fdData.mFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
-
-                fdData.mFile.delete();
-                mApkList.remove(fdData);
-                ApkListAdapter.this.notifyDataSetChanged();
+                boolean ok = fdData.mFile.delete();
+                if (ok) {
+                    mApkList.remove(fdData);
+                    ApkListAdapter.this.notifyDataSetChanged();
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("成功删除安装包：")
+                    .append(fdData.mFile.getName())
+                    .append("\n路径：")
+                    .append(fdData.mFile.getAbsolutePath());
+                    UIHelper.showToast(mContext,  sb.toString());
+                }
             }
         });
         return convertView;

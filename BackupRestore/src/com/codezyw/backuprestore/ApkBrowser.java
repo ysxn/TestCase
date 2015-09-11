@@ -3,13 +3,7 @@ package com.codezyw.backuprestore;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.security.Signature;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import com.codezyw.common.FileIOHelper;
@@ -17,7 +11,6 @@ import com.codezyw.common.SlideMenuListener;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -27,10 +20,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -56,7 +47,7 @@ public class ApkBrowser extends ListActivity {
 
     private List<FileData> mFilesList = new ArrayList<FileData>();
 
-    private PackageManager mPm;
+    private PackageManager mPackageManager;
 
     private List<ApplicationInfo> mApps;
 
@@ -81,7 +72,6 @@ public class ApkBrowser extends ListActivity {
                         mFileListAdapter.notifyDataSetChanged();
                     }
                 }
-
                     break;
                 case REQUEST_UPDATE_PROGRESS: {
                     if (mProgressDialog != null && mProgressDialog.isShowing()) {
@@ -95,7 +85,6 @@ public class ApkBrowser extends ListActivity {
                     if (mProgressDialog != null && mProgressDialog.isShowing()) {
                         mProgressDialog.dismiss();
                     }
-
                     mFileListAdapter = new ApkListAdapter(ApkBrowser.this);
                     mFileListAdapter.setData(mFilesList);
                     setListAdapter(mFileListAdapter);
@@ -121,7 +110,7 @@ public class ApkBrowser extends ListActivity {
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
-        mPm = getPackageManager();
+        mPackageManager = getPackageManager();
 
         if (mDirectory != null && !mDirectory.isEmpty()) {
             final File sdcard = new File(mDirectory);// android.os.Environment.getExternalStorageDirectory();
@@ -129,11 +118,11 @@ public class ApkBrowser extends ListActivity {
             new Thread() {
                 public void run() {
                     // Retrieve all known applications.
-                    mApps = mPm.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES | PackageManager.GET_DISABLED_COMPONENTS);
+                    mApps = mPackageManager.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES | PackageManager.GET_DISABLED_COMPONENTS);
                     if (mApps == null) {
                         mApps = new ArrayList<ApplicationInfo>();
                     }
-                    mPackages = mPm.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
+                    mPackages = mPackageManager.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
                     if (mPackages == null) {
                         mPackages = new ArrayList<PackageInfo>();
                     }
@@ -147,11 +136,11 @@ public class ApkBrowser extends ListActivity {
             new Thread() {
                 public void run() {
                     // Retrieve all known applications.
-                    mApps = mPm.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES | PackageManager.GET_DISABLED_COMPONENTS);
+                    mApps = mPackageManager.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES | PackageManager.GET_DISABLED_COMPONENTS);
                     if (mApps == null) {
                         mApps = new ArrayList<ApplicationInfo>();
                     }
-                    mPackages = mPm.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
+                    mPackages = mPackageManager.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
                     if (mPackages == null) {
                         mPackages = new ArrayList<PackageInfo>();
                     }
@@ -162,7 +151,6 @@ public class ApkBrowser extends ListActivity {
         }
 
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 FileData fileData = (FileData) view.getTag();
@@ -175,13 +163,11 @@ public class ApkBrowser extends ListActivity {
 
     @Override
     protected void onPause() {
-        // TODO Auto-generated method stub
         super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        // TODO Auto-generated method stub
         super.onDestroy();
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
