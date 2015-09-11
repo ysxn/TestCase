@@ -1,3 +1,4 @@
+
 package com.codezyw.backuprestore;
 
 import java.io.File;
@@ -7,7 +8,7 @@ import android.content.pm.PackageInfo;
 import android.graphics.drawable.Drawable;
 
 public class FileData {
-	public int mInstalled = Constant.NONE;
+    public int mInstalled = Constant.NONE;
     public File mFile;
     public Drawable mDrawable;
     public PackageInfo mPi;

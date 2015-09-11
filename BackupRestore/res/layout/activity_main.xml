@@ -30,26 +30,4 @@
         android:layout_below="@id/button_seeapk"
         android:layout_marginTop="14dp"
         android:text="@string/files" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/logcat_start"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:text="开始LOG" />
-
-        <Button
-            android:id="@+id/logcat_stop"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:text="停止LOG" />
-    </LinearLayout>
-
 </RelativeLayout>

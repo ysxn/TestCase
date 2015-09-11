@@ -13,6 +13,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.codezyw.common.FileIOHelper;
+import com.codezyw.common.SlideMenuListener;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -48,19 +49,18 @@ public class ApkBrowser extends ListActivity {
     private ApkListAdapter mFileListAdapter;
 
     private ProgressDialog mProgressDialog;
-    
+
     private ListView mListView;
 
     private SlideMenuListener mSwipeTouchListener;
-    
+
     private List<FileData> mFilesList = new ArrayList<FileData>();
-    
+
     private PackageManager mPm;
-    
+
     private List<ApplicationInfo> mApps;
-    
+
     private List<PackageInfo> mPackages;
-    
 
     private static String mSuffix = "";
     private static String mDirectory = "";
@@ -101,8 +101,7 @@ public class ApkBrowser extends ListActivity {
                     setListAdapter(mFileListAdapter);
                     mSwipeTouchListener = new SlideMenuListener(ApkBrowser.this, mListView);
                     mListView.setOnTouchListener(mSwipeTouchListener);
-                    Toast.makeText(ApkBrowser.this, "已经扫描到 " + mFilesList.size() + " 个APK安装包：",
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(ApkBrowser.this, "已经扫描到 " + mFilesList.size() + " 个APK安装包：", Toast.LENGTH_LONG).show();
                 }
                     break;
             }
@@ -125,21 +124,19 @@ public class ApkBrowser extends ListActivity {
         mPm = getPackageManager();
 
         if (mDirectory != null && !mDirectory.isEmpty()) {
-            final File sdcard = new File(mDirectory);//android.os.Environment.getExternalStorageDirectory();
+            final File sdcard = new File(mDirectory);// android.os.Environment.getExternalStorageDirectory();
             Log.i(TAG, "sdcard=" + sdcard);
             new Thread() {
                 public void run() {
-                	// Retrieve all known applications.
-            		mApps = mPm
-            				.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES
-            						| PackageManager.GET_DISABLED_COMPONENTS);
-            		if (mApps == null) {
-            			mApps = new ArrayList<ApplicationInfo>();
-            		}
-            		mPackages = mPm.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
-            		if (mPackages == null) {
-            			mPackages = new ArrayList<PackageInfo>();
-            		}
+                    // Retrieve all known applications.
+                    mApps = mPm.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES | PackageManager.GET_DISABLED_COMPONENTS);
+                    if (mApps == null) {
+                        mApps = new ArrayList<ApplicationInfo>();
+                    }
+                    mPackages = mPm.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
+                    if (mPackages == null) {
+                        mPackages = new ArrayList<PackageInfo>();
+                    }
                     scanApkFileByPath(sdcard);
                     mHandler.sendEmptyMessage(REQUEST_DISMISS_PROGRESS);
                 };
@@ -149,41 +146,39 @@ public class ApkBrowser extends ListActivity {
             Log.i(TAG, "sdcard=" + sdcard);
             new Thread() {
                 public void run() {
-                	// Retrieve all known applications.
-            		mApps = mPm
-            				.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES
-            						| PackageManager.GET_DISABLED_COMPONENTS);
-            		if (mApps == null) {
-            			mApps = new ArrayList<ApplicationInfo>();
-            		}
-            		mPackages = mPm.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
-            		if (mPackages == null) {
-            			mPackages = new ArrayList<PackageInfo>();
-            		}
+                    // Retrieve all known applications.
+                    mApps = mPm.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES | PackageManager.GET_DISABLED_COMPONENTS);
+                    if (mApps == null) {
+                        mApps = new ArrayList<ApplicationInfo>();
+                    }
+                    mPackages = mPm.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
+                    if (mPackages == null) {
+                        mPackages = new ArrayList<PackageInfo>();
+                    }
                     scanApkFileByPath(sdcard);
                     mHandler.sendEmptyMessage(REQUEST_DISMISS_PROGRESS);
                 };
             }.start();
         }
-        
+
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-            	FileData fileData = (FileData) view.getTag();
-                Toast.makeText(ApkBrowser.this, "签名："+fileData.mCert, Toast.LENGTH_LONG).show();
+                FileData fileData = (FileData) view.getTag();
+                Toast.makeText(ApkBrowser.this, "签名：" + fileData.mCert, Toast.LENGTH_LONG).show();
                 return true;
             }
         });
 
     }
-    
+
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub
         super.onPause();
     }
-    
+
     @Override
     protected void onDestroy() {
         // TODO Auto-generated method stub
@@ -208,10 +203,9 @@ public class ApkBrowser extends ListActivity {
                     fdData.mPi = mUtil.getPackageInfo(ApkBrowser.this, file.getAbsolutePath());
                     fdData.mAi = (fdData.mPi != null) ? fdData.mPi.applicationInfo : null;
                     fdData.mInstalled = checkInstallStat(fdData);
-                    //fdData.mCert = getSignatures(fdData.mPi.signatures);
+                    // fdData.mCert = getSignatures(fdData.mPi.signatures);
                     mFilesList.add(fdData);
-                    mHandler.sendMessage(mHandler.obtainMessage(REQUEST_UPDATE_PROGRESS,
-                            mFilesList.size(), 0, file.getName()));
+                    mHandler.sendMessage(mHandler.obtainMessage(REQUEST_UPDATE_PROGRESS, mFilesList.size(), 0, file.getName()));
                 } else if (file.isDirectory()) {
                     scanApkFileByPath(file);
                 }
@@ -241,40 +235,37 @@ public class ApkBrowser extends ListActivity {
             mUtil.installApk(file);
         }
     }
-    
+
     private int checkInstallStat(FileData fd) {
-    	fd.mInstalled = Constant.NONE;
-    	fd.mVersion = "安装状态：未安装";
-    	if (fd.mAi == null || fd.mPi == null || fd.mPi.packageName == null || fd.mPi.versionName == null) {
-        	return fd.mInstalled;
-    	}
-    	for (PackageInfo pi :mPackages) {
-    		if (fd.mAi.packageName.equals(pi.packageName)) {
-    			if (fd.mPi.versionCode == pi.versionCode
-        				&& fd.mPi.versionName.equals(pi.versionName)) {
-    				fd.mInstalled = Constant.SAME;
-    				fd.mVersion = "安装状态：已安装:"+pi.versionName+" : "+pi.versionCode;
-    			} else {
-    				fd.mInstalled = Constant.SAME;
-    				fd.mVersion = "安装状态：已安装:"+pi.versionName+" : "+pi.versionCode
-    						+"->"
-    						+fd.mPi.versionName+" : "+fd.mPi.versionCode;
-    			}
-    		}
-    	}
-    	return fd.mInstalled;
+        fd.mInstalled = Constant.NONE;
+        fd.mVersion = "安装状态：未安装";
+        if (fd.mAi == null || fd.mPi == null || fd.mPi.packageName == null || fd.mPi.versionName == null) {
+            return fd.mInstalled;
+        }
+        for (PackageInfo pi : mPackages) {
+            if (fd.mAi.packageName.equals(pi.packageName)) {
+                if (fd.mPi.versionCode == pi.versionCode && fd.mPi.versionName.equals(pi.versionName)) {
+                    fd.mInstalled = Constant.SAME;
+                    fd.mVersion = "安装状态：已安装:" + pi.versionName + " : " + pi.versionCode;
+                } else {
+                    fd.mInstalled = Constant.SAME;
+                    fd.mVersion = "安装状态：已安装:" + pi.versionName + " : " + pi.versionCode + "->" + fd.mPi.versionName + " : " + fd.mPi.versionCode;
+                }
+            }
+        }
+        return fd.mInstalled;
     }
-    
+
     private String getSignatures(android.content.pm.Signature[] signatures) {
-    	if (signatures == null || signatures.length <= 0) {
-    		return "";
-    	}
-    	String r = "";
-    	for (android.content.pm.Signature s : signatures) {
-    		Log.i("zyw", ">>>"+new String(s.toChars()));
-    		Log.i("zyw", ">>>"+new String(s.toChars()));
-    		r = r + s.toCharsString();
-    	}
-    	return r;
+        if (signatures == null || signatures.length <= 0) {
+            return "";
+        }
+        String r = "";
+        for (android.content.pm.Signature s : signatures) {
+            Log.i("zyw", ">>>" + new String(s.toChars()));
+            Log.i("zyw", ">>>" + new String(s.toChars()));
+            r = r + s.toCharsString();
+        }
+        return r;
     }
 }

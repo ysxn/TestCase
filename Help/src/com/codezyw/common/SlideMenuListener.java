@@ -1,5 +1,5 @@
 
-package com.codezyw.backuprestore;
+package com.codezyw.common;
 
 import android.content.Context;
 import android.graphics.Rect;

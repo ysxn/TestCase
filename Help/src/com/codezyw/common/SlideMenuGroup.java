@@ -1,7 +1,6 @@
 
-package com.codezyw.backuprestore;
+package com.codezyw.common;
 
-import android.R.anim;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -11,7 +10,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
 import android.widget.TextView;
@@ -73,8 +71,10 @@ public class SlideMenuGroup extends ViewGroup {
         mDensity = getResources().getDisplayMetrics().density;
         
         TextView leftMenu = new TextView(mContext);
-        Drawable dLeft = mContext.getResources().getDrawable(R.drawable.listviewslidemenu_ic_list_slidemenu_top);
-        dLeft.setBounds(0, 0, dLeft.getIntrinsicWidth(), dLeft.getIntrinsicHeight());
+        Drawable dLeft = null;
+        if (dLeft != null) {
+            dLeft.setBounds(0, 0, dLeft.getIntrinsicWidth(), dLeft.getIntrinsicHeight());
+        }
         leftMenu.setCompoundDrawables(dLeft, null, null, null);
         leftMenu.setCompoundDrawablePadding((int) (16*mDensity));
         leftMenu.setPadding((int) (16*mDensity), 0, (int) (16*mDensity), 0);
@@ -98,8 +98,10 @@ public class SlideMenuGroup extends ViewGroup {
         addView(mLeftMenu);
         
         TextView rightMenu = new TextView(mContext);
-        Drawable dRight = mContext.getResources().getDrawable(R.drawable.listviewslidemenu_ic_list_slidemenu_delete);
-        dRight.setBounds(0, 0, dRight.getIntrinsicWidth(), dRight.getIntrinsicHeight());
+        Drawable dRight = null;
+        if (dRight != null) {
+            dRight.setBounds(0, 0, dRight.getIntrinsicWidth(), dRight.getIntrinsicHeight());
+        }
         rightMenu.setCompoundDrawables(null, null, dRight, null);
         rightMenu.setCompoundDrawablePadding((int) (16*mDensity));
         rightMenu.setPadding((int) (16*mDensity), 0, (int) (16*mDensity), 0);

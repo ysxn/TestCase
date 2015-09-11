@@ -59,15 +59,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
-        <service
-            android:name="com.codezyw.backuprestore.LogcatService"
-            android:process="com.codezyw.backuprestore.LogcatService"
-            android:exported="true">
-            <intent-filter android:priority="1000">
-                <action android:name="com.codezyw.backuprestore.LogcatService" />
-            </intent-filter>
-        </service>
     </application>
 
 </manifest>

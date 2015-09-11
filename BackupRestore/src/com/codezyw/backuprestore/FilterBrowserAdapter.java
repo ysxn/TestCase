@@ -25,18 +25,18 @@ public class FilterBrowserAdapter extends ArrayAdapter<File> {
         TextView view = (TextView) super.getView(position, convertView, parent);
         File file = getItem(position);
         if (file.isDirectory()) {
-            view.setText(file.getName()+"\n    "+mUtil.convetTime(file.lastModified()));
+            view.setText(file.getName() + "\n    " + mUtil.convetTime(file.lastModified()));
         } else {
             long b = file.length();
-            if (b > 1024*1024) {
-                view.setText(file.getName() + "\n    " + b / 1024 / 1024 + "MB" +"\n    "+mUtil.convetTime(file.lastModified()));
+            if (b > 1024 * 1024) {
+                view.setText(file.getName() + "\n    " + b / 1024 / 1024 + "MB" + "\n    " + mUtil.convetTime(file.lastModified()));
             } else if (b > 1024) {
-                view.setText(file.getName() + "\n    " + b / 1024 + "KB" +"\n    "+mUtil.convetTime(file.lastModified()));
+                view.setText(file.getName() + "\n    " + b / 1024 + "KB" + "\n    " + mUtil.convetTime(file.lastModified()));
             } else {
-                view.setText(file.getName() + "\n    " + b + "Bytes" +"\n    "+mUtil.convetTime(file.lastModified()));
+                view.setText(file.getName() + "\n    " + b + "Bytes" + "\n    " + mUtil.convetTime(file.lastModified()));
             }
         }
-        
+
         return view;
     }
 
