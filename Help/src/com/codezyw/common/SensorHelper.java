@@ -11,6 +11,10 @@ public class SensorHelper {
     private static final String TAG = "SensorHelper";
     public final static String HALL_STATE_PATH = "/sys/class/switch/hall/state";
 
+    /**
+     * 获取霍尔开关状态，用于手机皮套
+     * @return
+     */
     public static boolean getHallState() {
         int mSensorData = 0;
         FileReader file = null;

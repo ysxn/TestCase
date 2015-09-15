@@ -1,0 +1,162 @@
+0.android for acfun 加密 ，market发布
+
+1.建议使用应用商店比如腾讯的应用商店，hiapk网站的安卓市场
+
+2.GPL声明
+
+3.节能模式：手指触摸后播放5秒后就暂停，普通模式只要launcher 看见就一直播放。
+
+4.视频壁纸，视频与音乐播放器，wifi 数据线，视频截取功能
+
+5.无广告，超省电的视频壁纸。
+
+6.感谢http://android.ccpcreations.com/vlw/， http://rockplayer.freecoder.org/index_cn.html
+
+7.ffmpeg应该可以播放gif图片
+
+8.使用google的code 管理，上传apk，维护issue list
+
+10.下载qq的开源，看看怎么写播放器。
+
+11.ttDop的库文件
+
+
+
+android2011-0.6.9.0120 暴風影音的自己修改ffmepg
+chaboli  VLW的引擎
+com.qixinlive.wgirlp  VLW的引擎  而其和 chaboli的代碼一模一樣
+Kankan_General_R_1.1.10.26  迅雷的自己修改ffmepg
+QQPlayerAndroid_Setup_121_245   QQ的自己修改ffmepg
+Rockplayer.unified.v1.6.1    VLW的引擎  so库文件自己修改ffmepg
+video_live_wallpaper_1    VLW的引擎  而其和 chaboli的代碼一模一樣
+VitalPlayer V1.2.0    VLW的引擎   so库文件自己修改ffmepg
+VPlayer V0.7.7b6    VLW的引擎  so库文件自己修改ffmepg
+
+
+组成元件此计划由几个元件组成：
+
+ffmpeg 是一个命令列工具，用来对视讯档案转换格式，也支援对电视卡即时编码 
+ffserver 是一个 HTTP 多媒体即时广播串流服务器，支援时光平移 
+ffplay 是一个简单的播放器，基于 SDL 与 FFmpeg 函式库 
+libavcodec 包含了全部 FFmpeg 音讯／视讯 编解码函式库 
+libavformat 包含 demuxers 和 muxer 函式库 
+libavutil 包含一些工具函式库 
+libpostproc 对于视讯做前处理的函式库 
+libswscale 对于影像作缩放的函式库
+
+
+
+
+
+
+http://wenku.baidu.com/view/e1897b4c767f5acfa1c7cda7.html
+file:///C:/android-ndk-r5/documentation.html
+http://blog.simophin.net/?p=800
+http://www.baidu.com/s?bs=libav&f=8&rsv_bp=1&wd=ffmpeg+%B1%E0%D2%EB+android+&oq=ffmpeg&sug=ffmpeg+%B1%E0%D2%EB&rsv_n=1&rsp=4&inputT=12953
+http://hi.baidu.com/yeyingxian/blog/item/d969bd773479f403b151b90c.html
+http://ffmpeg.org/download.html
+http://ffmpeg.org/general.html#Image-Formats
+http://www.inb.uni-luebeck.de/~boehme/using_libavcodec.html
+http://dranger.com/ffmpeg/ffmpegtutorial_all.html
+http://ffmpeg.org/documentation.html
+http://ffmpeg.org/
+
+#############################先使用壁纸的so库文件实现播放功能，比较那个Java 代码写的好？
+
+#############################ndk下的so运行在那个进程？jni的c、c++代码运行在那个进程？
+
+######################jni编程调试，log怎么打?	
+
+############################system.load之后怎么卸载？
+
+####################jni类型和api用法？
+
+#################ffmpeg的api用法？
+
+################android 怎么调用ffmpeg？
+
+##############acfun的开源项目？
+
+################c，c++语法我都快忘光了？
+
+
+http://yueguc.iteye.com/blog/856638
+http://www.cnblogs.com/scottwong/archive/2010/12/17/1909455.html
+http://blog.simophin.net/?p=800
+http://hi.baidu.com/lihn1987/blog/item/45d356ae16cde2d07dd92a77.html
+http://www.2cto.com/kf/201108/99628.html
+http://blog.sina.com.cn/s/blog_51396f890102dxdn.html
+http://doandroid.info/?p=471
+http://blog.tianya.cn/blogger/post_show.asp?BlogID=196710&PostID=32259153
+http://blog.csdn.net/c_see/article/details/5567768
+http://www.cppblog.com/dragon/archive/2010/10/22/130914.html
+http://bbs.gfan.com/android-893179-1-1.html
+
+编译成后，使用ffmpeg的android 看下列地址和百度文库下载的文档：
+http://blog.simophin.net/?p=800
+http://blog.csdn.net/c_see/article/details/5567768
+http://abitno.me/use-libffmpeg-so-in-android-ndk
+http://doandroid.info/%E5%9C%A832%E4%BD%8D%E7%9A%84ubuntu-11-04%E4%B8%AD%E4%B8%BAandroid-ndk-r6%E7%BC%96%E8%AF%91ffmpeg%E6%9C%80%E6%96%B0%E7%89%880-8-1/
+http://www.cppblog.com/dragon/archive/2010/10/22/130914.html
+http://hi.baidu.com/gpf626487/blog/item/5523921647d0ce21203f2e3e.html
+
+
+
+
+jni语法，ffmpeg的用法，jni代码写成兼容mediaplayer的格式。视频壁纸，使用surface as mem ,bitmap ,jni c c++ thread,scale frame缩放，快进后退，音视频同步,packet queue-havlenapetr-FFMpeg
+
+菜单，scale，surfaceView，bitmap recycle ,https://github.com/tewilove/faplayer
+
+
+音频播放,音视频同步以及surface的2个问题,另外没有了fileManager.
+
+draw带进jni去依靠surface. SURFACE_TYPE_PUSH_BUFFERS
+
+window manager 的surface, surfaceView的surface基本两种type,一种是 另一种是
+
+activity->window->surface->view->surfaceView
+
+BufferHeap的用法,opencore里面BufferHeap要不要lock,---- MemoryHeapBase Matches (83 in 23 files) ----
+在android源码下编译一个库,set surface 和mem address.
+##################################rgba,memcpy
+声音播放和同步
+filemanager
+
+///////////////
+c++多線程
+mp3試試
+jni多線程
+
+代码format
+
+每个函数返回值ERROR_defined
+
+hiyawen bbs 游戏
+
+android版本死亡独行车.
+
+http://bbs.chinavideo.org/forumdisplay.php?fid=10
+http://my.oschina.net/u/555701/blog/56744
+http://my.oschina.net/u/555701/blog/56625
+http://my.oschina.net/u/555701/blog/56622
+http://my.oschina.net/u/555701/blog/56621
+http://my.oschina.net/u/555701/blog/56748
+http://topic.csdn.net/u/20090722/14/7eb87114-9fd1-4715-a9cb-cca46fe2edd0.html
+http://zh.wikipedia.org/wiki/C%E8%AF%AD%E8%A8%80#.E5.9F.BA.E7.A1.80.E6.95.B0.E6.8D.AE.E7.B1.BB.E5.9E.8B
+http://blog.csdn.net/c_see/article/details/5567780
+
+video pts cts dts  what is meaning?
+
+file:/ is not needed.
+
+ffmpeg屏幕录像
+
+天气widget －xml解析
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+wifi数据线
+
+
+
+
+

@@ -1,5 +1,7 @@
 package com.example.testsettingsensorhub;
 
+import com.codezyw.common.DataSource;
+
 public class OrienData extends DataSource {
     
     public OrienData(long l, float f, float g) {

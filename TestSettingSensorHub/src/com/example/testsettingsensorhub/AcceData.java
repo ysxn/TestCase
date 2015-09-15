@@ -1,5 +1,7 @@
 package com.example.testsettingsensorhub;
 
+import com.codezyw.common.DataSource;
+
 public class AcceData extends DataSource {
     public AcceData(long l, float f, float g, float h) {
         // TODO Auto-generated constructor stub
