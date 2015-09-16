@@ -60,7 +60,6 @@ public class MainActivity extends Activity implements OnPageChangeListener, OnTa
         mTabHost.addTab(tabSpec3);
 
         v1 = new ListView(this);
-        v1.setAdapter
 
         mViewPager.setAdapter(new PagerAdapter() {
 

@@ -202,11 +202,11 @@ public class UIHelper {
     }
     
 //    <style name="Theme_dialog_Transparent" parent="@android:Theme.Holo.Light.Dialog">
-//    <item name="android:windowIsTranslucent">true</item>
-//    <item name="android:windowBackground">@android:color/transparent</item>
-//    <item name="android:windowContentOverlay">@null</item>
-//    <item name="android:windowNoTitle">true</item>
-//</style>
+//        <item name="android:windowIsTranslucent">true</item>
+//        <item name="android:windowBackground">@android:color/transparent</item>
+//        <item name="android:windowContentOverlay">@null</item>
+//        <item name="android:windowNoTitle">true</item>
+//    </style>
     
 //    <?xml version="1.0" encoding="utf-8"?>
 //    <selector xmlns:android="http://schemas.android.com/apk/res/android">
