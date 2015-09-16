@@ -329,6 +329,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.StatFs;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.Toast;
@@ -338,6 +339,35 @@ public class FileIOHelper {
 
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置格式
 
+    //开始搜索文件方法
+    public static String toSearchFiles(File file, String key) {
+        //定义一个File文件数组，用来存放/sdcard目录下的文件或文件夹
+        File[] the_Files = file.listFiles();
+        //int index = sizeof(the_Files);
+        //通过遍历所有文件和文件夹
+        for (File tempF : the_Files){
+            Log.i("zyw", "infomation in sdcard search: File tempF = " + tempF.getName());
+            if (tempF.isDirectory()){
+                String path = toSearchFiles(tempF, key);
+                if (TextUtils.isEmpty(path)) {
+                    return path;
+                }
+            }else{
+                try {
+                    //是文件，则进行比较，如果文件名称包含输入搜索Key，则返回大于-1的值
+                    if (tempF.getName().indexOf(key) > -1){
+                        //获取符合条件的文件路径，进行累加
+                        return tempF.getPath();
+                    }
+                }catch (Exception e){
+                    //如果路径找不到，提示出错
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+    
     /**
      * 应用程序运行命令获取 Root权限，设备必须已破解(获得ROOT权限)
      * 

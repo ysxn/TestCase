@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-<string name="app_name">EX_Ctrl_3</string>
-<string name="dear">亲爱的圣诞老人：</string>
-<string name="sendmyWish">送出愿望</string>
-<string name="yourWish">你的愿望：</string>
-<string name="hasSend">已送达圣诞老人信箱!</string>
-</resources>

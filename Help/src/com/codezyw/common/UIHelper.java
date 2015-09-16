@@ -7,12 +7,15 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -26,6 +29,45 @@ public class UIHelper {
 
     private static ProgressDialog mProgressDialog = null;
 
+    /**
+     * 拨打电话
+     * @param phoneNumber
+     * @return
+     */
+    public static Intent getDialIntent(String phoneNumber) {
+        Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+phoneNumber));
+        dialIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return dialIntent;
+    }
+    
+    /**
+     * 拨打电话
+     * @param phoneNumber
+     * @return
+     */
+    public static Intent getCallIntent(String phoneNumber) {
+        Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+phoneNumber));
+        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return callIntent;
+    }
+    
+    //标题栏隐藏
+    public static void hideTitle(Activity activity) {
+        activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    }
+    
+    //状态栏隐藏（全屏）
+    public static void hideStatusBar(Activity activity) {
+        //标题栏隐藏
+        activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //定义全屏参数
+        int flag = WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        //获得窗口对象
+        Window myWindow = activity.getWindow();
+        //设置Flag标示
+        myWindow.setFlags(flag, flag);
+    }
+    
     /**
      * 消除可以scroll的view阴影效果
      * @param view

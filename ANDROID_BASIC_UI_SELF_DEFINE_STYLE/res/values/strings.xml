@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="hello">Hello World, selfdefinestyle!</string>
-    <string name="app_name">BASIC_UI_SELF_DEFINE_STYLE</string>
-    <string name="string_A">Application myStyle_Text1</string>
-    <string name="string_B">Application myStyle_Text2</string>
-</resources>
