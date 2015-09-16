@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+--><resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="power_off">关机</string>
+    <string name="yes">确定</string>
+    <string name="no">取消</string>        
+    <string name="schedule_power_on_off_settings_title">定时开关机</string>
+    <string name="schedule_power_on_off_time">"时间"</string>
+    <string name="schedule_power_on_off_repeat">"重复"</string>
+    <string name="schedule_power_on_off_set">设置定时开关机</string>
+    <string name="schedule_power_on_set">"设置定时开机"</string>
+    <string name="schedule_power_off_set">"设置定时关机"</string>
+    <string name="enable_schpwr">"启用"</string>
+    <!-- lenovo-sw wuzb1 2013-06-03 fix avenew-1940-->
+    <string name="disable_schpwr">"停用"</string>
+    <string-array name="alarm_set">
+        <item>"已将此定时开机设为 1 分钟内启动。"</item>
+        <item>"已将此定时开机设为 <xliff:g id="DAYS" example="2days">%1$s</xliff:g>后启动。"</item>
+        <item>"已将此定时开机设为 <xliff:g id="HOURS" example="2hours">%2$s</xliff:g>后启动。"</item>
+        <item>"已将此定时开机设为 <xliff:g id="DAYS" example="2days">%1$s</xliff:g> <xliff:g id="HOURS" example="2hours">%2$s</xliff:g>后启动。"</item>
+        <item>"已将此定时开机设为 <xliff:g id="MINUTES" example="2minutes">%3$s</xliff:g>后启动。"</item>
+        <item>"已将此定时开机设为 <xliff:g id="DAYS" example="2days">%1$s</xliff:g> <xliff:g id="MINUTES" example="2minutes">%3$s</xliff:g>后启动。"</item>
+        <item>"已将此定时开机设为 <xliff:g id="HOURS" example="2hours">%2$s</xliff:g> <xliff:g id="MINUTES" example="2minutes">%3$s</xliff:g>后启动。"</item>
+        <item>"已将此定时开机设为 <xliff:g id="DAYS" example="2days">%1$s</xliff:g>, <xliff:g id="HOURS" example="2hours">%2$s</xliff:g> <xliff:g id="MINUTES" example="2minutes">%3$s</xliff:g>后启动。"</item>
+        <item>"已将此定时关机设为 1 分钟内启动。"</item>
+        <item>"已将此定时关机设为 <xliff:g id="DAYS" example="2days">%1$s</xliff:g>后启动。"</item>
+        <item>"已将此定时关机设为 <xliff:g id="HOURS" example="2hours">%2$s</xliff:g>后启动。"</item>
+        <item>"已将此定时关机设为 <xliff:g id="DAYS" example="2days">%1$s</xliff:g> <xliff:g id="HOURS" example="2hours">%2$s</xliff:g>后启动。"</item>
+        <item>"已将此定时关机设为 <xliff:g id="MINUTES" example="2minutes">%3$s</xliff:g>后启动。"</item>
+        <item>"已将此定时关机设为 <xliff:g id="DAYS" example="2days">%1$s</xliff:g> <xliff:g id="MINUTES" example="2minutes">%3$s</xliff:g>后启动。"</item>
+        <item>"已将此定时关机设为 <xliff:g id="HOURS" example="2hours">%2$s</xliff:g> <xliff:g id="MINUTES" example="2minutes">%3$s</xliff:g>后启动。"</item>
+        <item>"已将此定时关机设为 <xliff:g id="DAYS" example="2days">%1$s</xliff:g>, <xliff:g id="HOURS" example="2hours">%2$s</xliff:g> <xliff:g id="MINUTES" example="2minutes">%3$s</xliff:g>后启动。"</item>
+    </string-array>
+    <string name="day">"1 天"</string>
+    <string name="days">"<xliff:g id="DAYS">%s</xliff:g> 天"</string>
+    <string name="hour">"1 小时"</string>
+    <string name="hours"><xliff:g id="hours">%s</xliff:g> 小时</string>
+    <string name="minute">"1 分钟"</string>
+    <string name="minutes">"<xliff:g id="minutes">%s</xliff:g> 分钟"</string>
+    <string name="every_day">"每天"</string>
+    <string name="never">"永不"</string>
+    <string name="day_concat" translatable="false">", "</string>
+    <string name="done">"完成"</string>
+    <string name="revert">"还原"</string>
+    <string name="schpwr_shutdown_message">"手机将于 <xliff:g id="second">%s</xliff:g> 秒后关机"</string>
+    <string name="schpwr_shutdown_message_second">"手机将于 <xliff:g id="second">%s</xliff:g> 秒后关机"</string>
+    <!--lenovo-sw caijh, change imageview to textview , 2013.2.20-->
+    <string name="schpwr_power_on">"开机"</string>
+    <string name="schpwr_power_off">"关机"</string>
+    <!--lenovo-sw caijh, change imageview to textview , 2013.2.20-->
+    <!--Lenovo-sw wuzb1 add 2013-09-11 begin,add text for calculate time-->
+    <string name="schpwr_time_invalid">定时开关机时间必须相差%d分钟以上</string>
+    <!--Lenovo-sw wuzb1 add 2013-09-11 end,add text for calculate time-->
+    <!--Lenovo-sw linrk1 add 2014-05-06 begin,add text for timeout-->
+    <string name="schedule_power_off_time_out_title">超时通知</string>
+    <string name="schedule_power_off_time_out_summary">定时关机已结束</string>
+    <!--Lenovo-sw linrk1 add 2014-05-06 end,add text for timeout-->
+</resources>
