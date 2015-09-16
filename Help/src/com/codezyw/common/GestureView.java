@@ -1,5 +1,5 @@
 
-package com.test.gesture;
+package com.codezyw.common;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,10 +7,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 public class GestureView extends View {
+    public static final int LEFT = 3;// 3;//2;
+    public static final int RIGHT = 4;// 3;2;//
+    public static final int DOWN = 1;// 4;5;//
+    public static final int UP = 2;// 5;4;//
     int IDLE_COLOR = Color.GRAY;
     int WORK_COLOR = Color.GREEN;
     int STROKE_WIDTH = 30;
@@ -48,7 +51,7 @@ public class GestureView extends View {
         mState = state;
         invalidate();
     }
-    
+
     public int getState() {
         return mState;
     }
@@ -71,15 +74,15 @@ public class GestureView extends View {
             canvas.drawCircle(centerX, centerY, r, mPaint);
             return;
         }
-        
+
         if (mLevel >= 5) {
-            r += r * (mLevel-5) / 6;
+            r += r * (mLevel - 5) / 6;
         }
-//        if (mLevel == MainActivity.NEAR) {
-//            r -= r * 1 / 6;
-//        } else if (mLevel == MainActivity.FAR) {
-//            r += r * 1 / 6;
-//        }
+        // if (mLevel == MainActivity.NEAR) {
+        // r -= r * 1 / 6;
+        // } else if (mLevel == MainActivity.FAR) {
+        // r += r * 1 / 6;
+        // }
         mPaint.setColor(WORK_COLOR);
 
         canvas.drawCircle(centerX, centerY, r, mPaint);
@@ -90,16 +93,16 @@ public class GestureView extends View {
                     / 3, mPaint);
         }
         switch (mDirection) {
-            case MainActivity.UP:
+            case UP:
                 canvas.drawLine(centerX, centerY, centerX, centerY - r, mPaint);
                 break;
-            case MainActivity.DOWN:
+            case DOWN:
                 canvas.drawLine(centerX, centerY, centerX, centerY + r, mPaint);
                 break;
-            case MainActivity.LEFT:
+            case LEFT:
                 canvas.drawLine(centerX, centerY, centerX - r, centerY, mPaint);
                 break;
-            case MainActivity.RIGHT:
+            case RIGHT:
                 canvas.drawLine(centerX, centerY, centerX + r, centerY, mPaint);
                 break;
         }
