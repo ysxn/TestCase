@@ -3,6 +3,7 @@ package com.example.recyclerview;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -28,7 +29,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 	@Override
 	public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		// create a new view
-		TextView v = (TextView) LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
+		TextView v = new TextView(parent.getContext());
+		ViewGroup.LayoutParams vl = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		v.setLayoutParams(vl);
+		v.setSingleLine();
 		// set the view's size, margins, paddings and layout parameters
 
 		ViewHolder vh = new ViewHolder(v);

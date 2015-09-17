@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -199,6 +200,14 @@ public class UIHelper {
         popupWindow.setBackgroundDrawable(new ColorDrawable(0));
         popupWindow.setOutsideTouchable(true);
         popupWindow.showAtLocation(context.getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+    }
+    
+    public static int measureTextHeight(Paint paint) {
+        return (int) (paint.descent() - paint.ascent());
+    }
+    
+    public static int measureTextWidth(Paint paint, String s) {
+        return (int) paint.measureText(s);
     }
     
 //    <style name="Theme_dialog_Transparent" parent="@android:Theme.Holo.Light.Dialog">
