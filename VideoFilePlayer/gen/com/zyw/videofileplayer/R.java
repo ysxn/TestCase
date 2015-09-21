@@ -28,7 +28,17 @@ public final class R {
         public static final int camera_recordlocation_icons=0x7f090018;
         public static final int camera_recordlocation_largeicons=0x7f090019;
         public static final int camera_wb_indicators=0x7f09001f;
-        /**   Labels for Countdown timer 
+        public static final int fileEndingAudio=0x7f090035;
+        public static final int fileEndingExcel=0x7f09003b;
+        public static final int fileEndingImage=0x7f090034;
+        public static final int fileEndingPPT=0x7f09003c;
+        public static final int fileEndingPackage=0x7f090037;
+        public static final int fileEndingPdf=0x7f09003d;
+        public static final int fileEndingText=0x7f090039;
+        public static final int fileEndingVideo=0x7f090036;
+        public static final int fileEndingWebText=0x7f090038;
+        public static final int fileEndingWord=0x7f09003a;
+        /**  Labels for Countdown timer 
          */
         public static final int pref_camera_countdown_labels=0x7f090033;
         /**  Icons for exposure compensation 
@@ -39,7 +49,7 @@ public final class R {
         public static final int pref_camera_flashmode_entries=0x7f09000b;
         public static final int pref_camera_flashmode_entryvalues=0x7f09000d;
         public static final int pref_camera_flashmode_labels=0x7f09000c;
-        /**  Default focus mode setting.
+        /**  Default focus mode setting. 
          */
         public static final int pref_camera_focusmode_default_array=0x7f090031;
         /**  Camera Preferences focus mode dialog box entries 
@@ -54,9 +64,11 @@ public final class R {
         /**  Camera Preferences Picture size dialog box entries 
          */
         public static final int pref_camera_picturesize_entries=0x7f090006;
-        /**  When launching the camera app first time, we will set the picture
+        /** 
+         When launching the camera app first time, we will set the picture
          size to the first one in the list that is also supported by the
-         driver 
+         driver
+    
          */
         public static final int pref_camera_picturesize_entryvalues=0x7f090007;
         public static final int pref_camera_recordlocation_entries=0x7f090016;
@@ -86,16 +98,22 @@ public final class R {
          */
         public static final int pref_video_quality_entries=0x7f090000;
         public static final int pref_video_quality_entryvalues=0x7f090001;
-        /**  These values correspond to the time interval between frame capture
-    for time lapse recording 
+        /** 
+    These values correspond to the time interval between frame capture
+    for time lapse recording
+    
          */
         public static final int pref_video_time_lapse_frame_interval_duration_values=0x7f090004;
-        /**  These values correspond to the time interval between frame capture in
-    different units (i.e. seconds, minutes, hours) for time lapse recording 
+        /** 
+    These values correspond to the time interval between frame capture in
+    different units (i.e. seconds, minutes, hours) for time lapse recording
+    
          */
         public static final int pref_video_time_lapse_frame_interval_entries=0x7f090003;
-        /**  These values correspond to the time interval between frame capture in millseconds
-    for time lapse recording 
+        /** 
+    These values correspond to the time interval between frame capture in millseconds
+    for time lapse recording
+    
          */
         public static final int pref_video_time_lapse_frame_interval_entryvalues=0x7f090002;
         public static final int pref_video_time_lapse_frame_interval_units=0x7f090005;
@@ -820,41 +838,41 @@ containing a value of this type.
         public static final int ColorHueView=0x7f0f007b;
         public static final int RelativeLayout1=0x7f0f009e;
         public static final int action_camera=0x7f0f0147;
-        public static final int action_cancel=0x7f0f01a4;
+        public static final int action_cancel=0x7f0f01a5;
         public static final int action_cluster_album=0x7f0f018d;
         public static final int action_cluster_faces=0x7f0f0192;
         public static final int action_cluster_location=0x7f0f018f;
         public static final int action_cluster_size=0x7f0f0191;
         public static final int action_cluster_tags=0x7f0f0190;
         public static final int action_cluster_time=0x7f0f018e;
-        public static final int action_crop=0x7f0f019c;
-        public static final int action_delete=0x7f0f0198;
-        public static final int action_details=0x7f0f019e;
-        public static final int action_edit=0x7f0f0199;
+        public static final int action_crop=0x7f0f019d;
+        public static final int action_delete=0x7f0f0199;
+        public static final int action_details=0x7f0f019f;
+        public static final int action_edit=0x7f0f019a;
         public static final int action_filter_all=0x7f0f0150;
         public static final int action_filter_image=0x7f0f0151;
         public static final int action_filter_video=0x7f0f0152;
         public static final int action_general_help=0x7f0f014e;
         public static final int action_group_by=0x7f0f014a;
-        public static final int action_import=0x7f0f0196;
+        public static final int action_import=0x7f0f0197;
         public static final int action_manage_offline=0x7f0f014b;
-        public static final int action_mute=0x7f0f01a2;
-        public static final int action_rotate_ccw=0x7f0f019a;
-        public static final int action_rotate_cw=0x7f0f019b;
+        public static final int action_mute=0x7f0f01a3;
+        public static final int action_rotate_ccw=0x7f0f019b;
+        public static final int action_rotate_cw=0x7f0f019c;
         public static final int action_select=0x7f0f0149;
         public static final int action_select_all=0x7f0f0021;
-        public static final int action_setas=0x7f0f019d;
+        public static final int action_setas=0x7f0f019e;
         public static final int action_settings=0x7f0f014d;
-        public static final int action_share=0x7f0f0195;
-        public static final int action_share_panorama=0x7f0f0197;
-        public static final int action_show_on_map=0x7f0f019f;
-        public static final int action_simple_edit=0x7f0f01a0;
+        public static final int action_share=0x7f0f0196;
+        public static final int action_share_panorama=0x7f0f0198;
+        public static final int action_show_on_map=0x7f0f01a0;
+        public static final int action_simple_edit=0x7f0f01a1;
         public static final int action_slideshow=0x7f0f0148;
         public static final int action_sync_picasa_albums=0x7f0f014c;
         public static final int action_toggle_full_caching=0x7f0f0020;
-        public static final int action_trim=0x7f0f01a1;
+        public static final int action_trim=0x7f0f01a2;
         public static final int addButton=0x7f0f006d;
-        public static final int add_account=0x7f0f01a5;
+        public static final int add_account=0x7f0f01a6;
         public static final int album_header_image=0x7f0f0027;
         public static final int album_header_subtitle=0x7f0f0029;
         public static final int album_header_title=0x7f0f0028;
@@ -1035,6 +1053,7 @@ containing a value of this type.
         public static final int face_view_stub=0x7f0f011e;
         public static final int falloffSeekBar=0x7f0f00f7;
         public static final int falloffValue=0x7f0f00f6;
+        public static final int file_filter=0x7f0f0195;
         public static final int filmstrip_bottom_control_panorama=0x7f0f003b;
         public static final int filmstrip_view=0x7f0f003a;
         public static final int filtershow_cp_custom=0x7f0f009d;
@@ -1148,7 +1167,7 @@ containing a value of this type.
         public static final int preview_content=0x7f0f011c;
         public static final int preview_thumb=0x7f0f0039;
         public static final int primarySeekBar=0x7f0f00b1;
-        public static final int print=0x7f0f01a3;
+        public static final int print=0x7f0f01a4;
         public static final int printButton=0x7f0f015b;
         public static final int progress=0x7f0f0110;
         public static final int progressContainer=0x7f0f0025;
@@ -1377,11 +1396,12 @@ containing a value of this type.
         public static final int gallery_multiselect=0x7f12000d;
         public static final int groupby=0x7f12000e;
         public static final int ingest_menu_item_list_selection=0x7f12000f;
-        public static final int movie=0x7f120010;
-        public static final int operation=0x7f120011;
-        public static final int photo=0x7f120012;
-        public static final int pickup=0x7f120013;
-        public static final int settings=0x7f120014;
+        public static final int main=0x7f120010;
+        public static final int movie=0x7f120011;
+        public static final int operation=0x7f120012;
+        public static final int photo=0x7f120013;
+        public static final int pickup=0x7f120014;
+        public static final int settings=0x7f120015;
     }
     public static final class mipmap {
         public static final int ic_launcher_camera=0x7f030000;

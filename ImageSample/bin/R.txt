@@ -47,7 +47,5 @@ int string menu_item_pause_on_fling 0x7f050011
 int string menu_item_pause_on_scroll 0x7f050010
 int string title_grid 0x7f05000d
 int string title_list 0x7f05000c
-int style AppBaseTheme 0x7f060000
-int style AppTheme 0x7f060001
-int style ProgressBarStyle 0x7f060002
+int style ProgressBarStyle 0x7f060000
 int xml widget_provider 0x7f040000

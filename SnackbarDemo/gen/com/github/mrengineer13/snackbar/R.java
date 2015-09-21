@@ -59,8 +59,8 @@ public final class R {
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_snack_bar=0x7f030001;
-        public static final int sb__snack=0x7f030002;
-        public static final int sb__snack_container=0x7f030003;
+        public static final int sb_snack=0x7f030002;
+        public static final int sb_snack_container=0x7f030003;
     }
     public static final class menu {
         public static final int snack_bar=0x7f0a0000;
