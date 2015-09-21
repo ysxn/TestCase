@@ -51,7 +51,7 @@
     <string name="minutes">"<xliff:g id="minutes">%s</xliff:g> 分钟"</string>
     <string name="every_day">"每天"</string>
     <string name="never">"永不"</string>
-    <string name="day_concat" translatable="false">", "</string>
+    <string name="day_concat">", "</string>
     <string name="done">"完成"</string>
     <string name="revert">"还原"</string>
     <string name="schpwr_shutdown_message">"手机将于 <xliff:g id="second">%s</xliff:g> 秒后关机"</string>
