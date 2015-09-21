@@ -4,7 +4,10 @@ package com.codezyw.common;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 
+import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -235,5 +238,53 @@ public class SensorHelper {
      */
     public static void unregisterListener(SensorManager mSensorManager, SensorEventListener listener, Sensor sensor) {
         mSensorManager.unregisterListener(listener, sensor);
+    }
+
+    // Register for updates from each continuous mode sensor, wait for 25
+    // events, call flush and
+    // wait for flushCompleteEvent before unregistering for the sensor.
+    public static void testBatchAndFlush(Context context) throws Exception {
+        SensorManager mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        final ArrayList<Sensor> mContinuousSensorList = new ArrayList<Sensor>();
+        boolean mFlagTest = true;
+        for (int i = Sensor.TYPE_ACCELEROMETER; i <= Sensor.TYPE_AMBIENT_TEMPERATURE; ++i) {
+            Sensor sensor = mSensorManager.getDefaultSensor(i);
+            mContinuousSensorList.add(sensor);
+        }
+        while (mFlagTest) {
+            for (Sensor sensor : mContinuousSensorList) {
+                if (!mFlagTest) {
+                    return;
+                }
+                final CountDownLatch eventReceived = new CountDownLatch(25);
+                SensorEventListener listener = new SensorEventListener() {
+                    @Override
+                    public void onSensorChanged(SensorEvent event) {
+                        Log.i("cts", ">>>>>>>>onSensorChanged");
+                        eventReceived.countDown();
+                    }
+
+                    @Override
+                    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+                    }
+                };
+
+                boolean result = mSensorManager.registerListener(listener, sensor,
+                        SensorManager.SENSOR_DELAY_NORMAL);
+                Log.e("cts", ">>>>>>>>start 稳定性测试 for sensor=" + sensor.toString());
+                if (result) {
+                    Log.i("cts", "current registerListener pass");
+                } else {
+                    Log.i("cts", "current registerListener fail");
+                }
+                // Wait for 25 events.
+                if (!mFlagTest) {
+                    mSensorManager.unregisterListener(listener);
+                    return;
+                }
+                eventReceived.await();
+                mSensorManager.unregisterListener(listener);
+            }
+        }
     }
 }
