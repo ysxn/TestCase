@@ -5,9 +5,13 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import com.codezyw.common.FileIOHelper;
 import com.codezyw.common.SlideMenuListener;
+import com.codezyw.common.ThreadPoolHelper.ThreadBaseRunnable;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -19,6 +23,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -55,6 +60,7 @@ public class ApkBrowser extends ListActivity {
 
     private static String mSuffix = "";
     private static String mDirectory = "";
+    private static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(6, 30, 30L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 
     private static final int REQUEST_UPDATE_PROGRESS = 299;
 
@@ -70,6 +76,7 @@ public class ApkBrowser extends ListActivity {
                     mHandler.removeMessages(REQUEST_UPDATE_DATA);
                     if (mFileListAdapter != null) {
                         mFileListAdapter.notifyDataSetChanged();
+                        Log.i(TAG, "notifyDataSetChanged");
                     }
                 }
                     break;
@@ -144,7 +151,9 @@ public class ApkBrowser extends ListActivity {
                     if (mPackages == null) {
                         mPackages = new ArrayList<PackageInfo>();
                     }
+                    long startTime = SystemClock.elapsedRealtime();
                     scanApkFileByPath(sdcard);
+                    Log.i(TAG, "scanApkFileByPath end=" + (SystemClock.elapsedRealtime() - startTime));
                     mHandler.sendEmptyMessage(REQUEST_DISMISS_PROGRESS);
                 };
             }.start();
@@ -172,6 +181,7 @@ public class ApkBrowser extends ListActivity {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
+        threadPool.shutdown();
     }
 
     private void scanApkFileByPath(File folder) {
@@ -185,11 +195,7 @@ public class ApkBrowser extends ListActivity {
                     // file.getName().matches("^.*?\\.(jpg|png|bmp|gif)$");
                     FileData fdData = new FileData();
                     fdData.mFile = file;
-                    fdData.mDrawable = mUtil.getUninatllApkInfo(ApkBrowser.this, file.getAbsolutePath(), file);
-                    fdData.mPi = mUtil.getPackageInfo(ApkBrowser.this, file.getAbsolutePath());
-                    fdData.mAi = (fdData.mPi != null) ? fdData.mPi.applicationInfo : null;
-                    fdData.mInstalled = checkInstallStat(fdData);
-                    // fdData.mCert = getSignatures(fdData.mPi.signatures);
+                    threadPool.execute(new ThreadRunnable(fdData, mHandler));
                     mFilesList.add(fdData);
                     mHandler.sendMessage(mHandler.obtainMessage(REQUEST_UPDATE_PROGRESS, mFilesList.size(), 0, file.getName()));
                 } else if (file.isDirectory()) {
@@ -253,5 +259,27 @@ public class ApkBrowser extends ListActivity {
             r = r + s.toCharsString();
         }
         return r;
+    }
+    
+    private class ThreadRunnable extends ThreadBaseRunnable {
+        private FileData fdData;
+        private Handler handler;
+        
+        public ThreadRunnable(final FileData fileData, final Handler handler) {
+            this.fdData = fileData;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            File file = fdData.mFile;
+            fdData.mDrawable = mUtil.getUninatllApkInfo(ApkBrowser.this, file.getAbsolutePath(), file);
+            fdData.mPi = mUtil.getPackageInfo(ApkBrowser.this, file.getAbsolutePath());
+            fdData.mAi = (fdData.mPi != null) ? fdData.mPi.applicationInfo : null;
+            fdData.mInstalled = checkInstallStat(fdData);
+            fdData.mCert = getSignatures(fdData.mPi.signatures);
+            handler.removeMessages(REQUEST_UPDATE_DATA);
+            handler.sendEmptyMessageDelayed(REQUEST_UPDATE_DATA, 10000);
+        }
     }
 }

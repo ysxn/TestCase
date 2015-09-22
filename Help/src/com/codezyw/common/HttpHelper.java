@@ -73,6 +73,55 @@ import android.text.TextUtils;
  * ，会立即会自动释放低层连接，并放回到连接管理器。HttpEntity#consumeContent()方法调用多次也是安全的。
  */
 public class HttpHelper {
+
+    /**
+     * <p>
+     * <a href="http://www.trinea.cn/android/android-network-sniffer/"
+     * target="_blank">http://www.trinea.cn/android/android-network-sniffer/</a>
+     * 
+     * <pre>
+     * Android利用Fiddler进行网络数据抓包
+     * 主要介绍Android及IPhone手机上如何利用Fiddler进行网络数据抓包，比如我们想抓某个应用(微博、微信、墨迹天气)的网络通信请求就可以利用这个方法。
+     *  
+     * Mac 下请使用 Charles 代替 Fiddler，Charles 免费激活码为Registered name: a!nthony ortolani   License key: a!4036b2761c9583fda (需要将 name 和 key 中的 a! 都改为 a)
+     *  
+     * 相对于tcpdump配合wireshark抓包的优势在于：(1)无需root (2)对Android和Iphone同样适用 (3)操作更简单方便(第一次安装配置，第二次只需设置代理即可) (4)数据包的查看更清晰易懂,Fiddler的UI更简单明了 (5) 可以查看https请求。如果你坚持使用tcpdump也可见：利用tcpdump和wireshark抓取网络数据包。
+     *  
+     * PS：需要1台PC做辅助，且PC需要与手机在同一局域网内或有独立公网ip
+     * 1、PC端安装Fiddler
+     * 下载地址：Fiddler.exe，下面是Fiddler的简单介绍(不感兴趣的可以直接跳过)：
+     * Fiddler是强大且好用的Web调试工具之一，它能记录客户端和服务器的http和https请求，允许你监视，设置断点，甚至修改输入输出数据，Fiddler包含了一个强大的基于事件脚本的子系统，并且能使用.net语言进行扩展，在web开发和调优中经常配合firebug使用。
+     * Fiddler的运行机制其实就是本机上监听8888端口的HTTP代理。 对于PC端Fiddler启动的时候默认IE的代理设为了127.0.0.1:8888，而其他浏览器是需要手动设置的，所以如果需要监听PC端Chrome网络请求，将其代理改为127.0.0.1:8888就可以监听数据了，手机端按照下面的设置即可完成整个系统的http代理。
+     *  
+     * 2、 配置PC端Fiddler和手机
+     * (1) 配置Fiddler允许监听https
+     * 打开Fiddler菜单项Tools->Fiddler Options，选中decrypt https traffic和ignore server certificate errors两项，如下图：
+     * fiddler https options
+     * 第一次会提示是否信任fiddler证书及安全提醒，选择yes，之后也可以在系统的证书管理中进行管理。
+     *  
+     * (2) 配置Fiddler允许远程连接
+     * 如上图的菜单中点击connections，选中allow remote computers to connect，默认监听端口为8888，若被占用也可以设置，配置好后需要重启Fiddler，如下图：
+     * fiddler remote connect
+     *  
+     * (3) 配置手机端
+     * Pc端命令行ipconfig查看Fiddler所在机器ip，本机ip为10.0.4.37，如下图
+     * ipconfig
+     * 打开手机连接到同一局域网的wifi，并修改该wifi网络详情(长按wifi选择->修改网络)->显示高级选项，选择手动代理设置，主机名填写Fiddler所在机器ip，端口填写Fiddler端口，默认8888，如下图：
+     * android network proxy
+     * 这时，手机上的网络访问在Fiddler就可以查看了，如下图微博和微信的网络请求：
+     * 微信抓数据包
+     * 可以双击上图某一行网络请求，右侧会显示具体请求内容(Request Header)和返回内容(Response Header and Content)，如下图：
+     * 微博网络拦截
+     * 可以发现Fiddler可以以各种格式查看网络请求返回的数据，包括Header, TextView(文字), ImageView(图片), HexView(十六进制)，WebView(网页形式), Auth(Proxy-Authenticate Header), Caching(Header cache), Cookies, Raw(原数据格式), JSON(json格式), XML(xml格式)很是方便。
+     *  
+     * 停止网络监控的话去掉wifi的代理设置即可，否则Fiddler退出后手机就上不网了哦。
+     *  
+     * 如果需要恢复手机无密码状态，Android端之后可以通过系统设置-安全-受信任的凭据-用户，点击证书进行删除或清除凭据删除所有用户证书，再设置密码为无。
+     *  
+     * 如果只需要监控一个软件，可结合系统流量监控，关闭其他应用网络访问的权限。
+     * </pre>
+     */
+
     @SuppressWarnings("unused")
     private final static String TAG = "HttpHelper";
 
@@ -541,11 +590,12 @@ public class HttpHelper {
         }
         return resultData;
     }
-    
+
     /**
      * HttpURLConnection
      * <p>
-     * http://stackoverflow.com/questions/28559377/sending-multipartentity-using-httpurlconnection
+     * http://stackoverflow.com/questions/28559377/sending-multipartentity-using
+     * -httpurlconnection
      * <p>
      * http://archive.apache.org/dist/httpcomponents/httpclient/source/
      */
@@ -557,7 +607,7 @@ public class HttpHelper {
         BufferedReader buffer = null;
         HttpURLConnection urlConn = null;
         try {
-        	URL urlc = new URL(httpUrl);
+            URL urlc = new URL(httpUrl);
             urlConn = (HttpURLConnection) urlc.openConnection();
             urlConn.setReadTimeout(10000);
             urlConn.setConnectTimeout(15000);
@@ -566,11 +616,11 @@ public class HttpHelper {
             urlConn.setDoInput(true);
             urlConn.setUseCaches(false);
             urlConn.setRequestProperty("Connection", "Keep-Alive");
-            urlConn.addRequestProperty("Content-length", multipartEntity.getContentLength()+"");
+            urlConn.addRequestProperty("Content-length", multipartEntity.getContentLength() + "");
             urlConn.addRequestProperty(multipartEntity.getContentType().getName(), multipartEntity.getContentType().getValue());
 
             urlConn.connect();
-            OutputStream  out = urlConn.getOutputStream();
+            OutputStream out = urlConn.getOutputStream();
             multipartEntity.writeTo(out);
             out.flush();
             out.close();
