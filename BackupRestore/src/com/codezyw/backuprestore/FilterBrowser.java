@@ -6,11 +6,11 @@ import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.codezyw.common.BaseListActicity;
 import com.codezyw.common.OpenFileHelper;
 import com.codezyw.common.UIHelper;
 
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -30,7 +30,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class FilterBrowser extends ListActivity {
+public class FilterBrowser extends BaseListActicity {
     private final String TAG = "zyw";
 
     private static String mSuffix = "";

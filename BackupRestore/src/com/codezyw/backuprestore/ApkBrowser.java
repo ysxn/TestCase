@@ -9,11 +9,11 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import com.codezyw.common.BaseListActicity;
 import com.codezyw.common.FileIOHelper;
 import com.codezyw.common.SlideMenuListener;
 import com.codezyw.common.ThreadPoolHelper.ThreadBaseRunnable;
 
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -30,7 +30,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class ApkBrowser extends ListActivity {
+public class ApkBrowser extends BaseListActicity {
     private final String TAG = "zyw";
 
     private static final FileFilter FILTER = new FileFilter() {

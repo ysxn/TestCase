@@ -15,12 +15,22 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.TextureView;
 
 @TargetApi(Build.VERSION_CODES.GINGERBREAD)
 public class SensorHelper {
+    /**
+     * frameworks\base\core\res\res\values\config.xml里面这个属性值config_autoBrightnessLevels
+     * 对应这个autoBrightnessLcdBacklightValues
+     * 代码是这个frameworks\base\services\java\com
+     * \android\server\power\DisplayPowerController.java
+     * 关系是这个config_autoBrightnessLevels 范围是0~10240，单位是流明。
+     * autoBrightnessLcdBacklightValues这个是给LCD背光，范围0~255。 驱动那边的.als_value
+     * 正好和config_autoBrightnessLevels 是同一个单位。
+     * 
+     */
     private static final String TAG = "SensorHelper";
     public final static String HALL_STATE_PATH = "/sys/class/switch/hall/state";
 
@@ -67,6 +77,18 @@ public class SensorHelper {
             }
         }
         return mSensorData > 0 ? true : false;
+    }
+
+    /**
+     * 获取sensor属性
+     * 
+     * @param sensor
+     */
+    public static void dumpSensorStruct(Sensor sensor) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("传感器最大测量范围=").append(sensor.getMaximumRange())
+                .append("; Resolution=").append(sensor.getResolution())
+                .append("; 传感器运行时电流单位mA=").append(sensor.getPower());
     }
 
     public static SensorEventListener sSensorEventListener = new SensorEventListener() {
@@ -203,6 +225,26 @@ public class SensorHelper {
                 sb.append("Acceleration minus Gx on the x-axis:").append(x).append("\n")
                         .append("Acceleration minus Gy on the y-axis:").append(y).append("\n")
                         .append("Acceleration minus Gz on the z-axis:").append(z).append("\n");
+            } else if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
+                /**
+                 * Sensor.TYPE_LIGHT: values[0]: Ambient light level in SI lux
+                 * units
+                 * <p>
+                 * 光传感器读数 ： 勒克斯（Lux，通常简写为lx）是一个标识照度的国际单位制单位，1流明每平方米面积，就是1勒克斯。
+                 * 其单位换算是 1勒克斯 = 1 流明/平方米 = 1 坎德拉·球面度/平方米（1 lx = 1 lm/m2= 1
+                 * cd·sr·m–2）。
+                 */
+                int mAmbientLightLevel = (int) event.values[0];
+            } else if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
+                /**
+                 * Sensor.TYPE_PROXIMITY: values[0]: Proximity sensor distance
+                 * measured in centimeters Note: Some proximity sensors only
+                 * support a binary near or far measurement. In this case, the
+                 * sensor should report its maximum range value in the far state
+                 * and a lesser value in the near state.<br>
+                 * 接近传感器读数 : 单位一般是厘米
+                 */
+                int mProximitySensorData = (int) event.values[0];
             }
         }
 
@@ -293,9 +335,10 @@ public class SensorHelper {
             }
         }
     }
-    
+
     /**
      * 检查系统是否存在特定硬件功能：sensor，nfc等等
+     * 
      * @param context
      * @return
      */
@@ -304,5 +347,30 @@ public class SensorHelper {
             feature = PackageManager.FEATURE_SENSOR_ACCELEROMETER;
         }
         return context.getPackageManager().hasSystemFeature(feature);
+    }
+
+    /**
+     * 当前是否自动背光
+     * 
+     * @param context
+     */
+    public static boolean checktSystemBrightness(Context context) {
+        boolean isAutoBrightness = Settings.System.getInt(
+                context.getContentResolver(),
+                Settings.System.SCREEN_BRIGHTNESS_MODE,
+                Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL) == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
+        return isAutoBrightness;
+    }
+
+    /**
+     * 当前背光亮度 如果是自动背光模式下本数值恒定, 背光亮度(0~255)
+     * 
+     * @param context
+     */
+    public static int getBrightness(Context context) {
+        int brightness = Settings.System.getInt(
+                context.getContentResolver(),
+                Settings.System.SCREEN_BRIGHTNESS, -1);
+        return brightness;
     }
 }

@@ -3,6 +3,22 @@ package com.codezyw.common;
 import android.content.Context;
 
 public class UnitHelper {
+    public static final long GB_IN_BYTES = 1073741824L;
+    public static final long KB_IN_BYTES = 1024L;
+    public static final long MB_IN_BYTES = 1048576L;
+    
+    public static long byteToKB(long num) {
+        return num / KB_IN_BYTES;
+    }
+    
+    public static long byteToMB(long num) {
+        return num / MB_IN_BYTES;
+    }
+    
+    public static long byteToGB(long num) {
+        return num / GB_IN_BYTES;
+    }
+    
 	public static float dp2px(Context context, float dp) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return dp * scale + 0.5f;

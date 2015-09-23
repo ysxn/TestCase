@@ -13,15 +13,21 @@ import java.io.File;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.CamcorderProfile;
 import android.media.MediaPlayer;
+import android.media.MediaScannerConnection;
+import android.media.MediaScannerConnection.MediaScannerConnectionClient;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -31,6 +37,10 @@ public class MediaHelper {
     public final static String IMAGE_MIME_TYPE = "image/*";
     public final static String VIDEO_MIME_TYPE = "video/*";
     public final static String AUDIO_MIME_TYPE = "audio/*";
+
+    public static final String EXTRAS_CAMERA_FACING = "android.intent.extras.CAMERA_FACING";
+    public static final int EXTRAS_CAMERA_FACING_BACK = 0;
+    public static final int EXTRAS_CAMERA_FACING_FRONT = 1;
 
     /**
      * 获取camera录像配置
@@ -324,5 +334,199 @@ public class MediaHelper {
         AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         int i = mAudioManager.getStreamVolume(streamType);
         return i;
+    }
+    
+    /**
+     * 锁屏情况下启动摄像头拍照
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void launchSecureCapture (Context context) {
+        Intent intent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE);
+        intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 启动后摄像头拍照
+     * 
+     * @param context
+     */
+    public static void launchBackCamera(Context context) {
+        Intent intent = new Intent();
+        // intent.setAction("android.media.action.STILL_IMAGE_CAMERA");
+        intent.setAction(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
+        intent.putExtra(EXTRAS_CAMERA_FACING, EXTRAS_CAMERA_FACING_BACK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 启动前摄像头拍照
+     * 
+     * @param context
+     */
+    public static void launchFrontCamera(Context context) {
+        Intent intent = new Intent();
+        // intent.setAction("android.media.action.STILL_IMAGE_CAMERA");
+        intent.setAction(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
+        intent.putExtra(EXTRAS_CAMERA_FACING, EXTRAS_CAMERA_FACING_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 启动后摄像头拍照,指定输出照片保存位置
+     * 
+     * @param context
+     */
+    public static void launchBackCameraForResult(Activity context, int id) {
+        String imgPath = Environment.getExternalStorageDirectory().getPath() + "/pickuptest/back.jpg";
+        File vFile = new File(imgPath);
+        if (!vFile.exists()) {
+            File vDirPath = vFile.getParentFile();
+            if (vDirPath != null) {
+                vDirPath.mkdirs();
+            }
+        }
+        Uri uri = Uri.fromFile(vFile);
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        i.putExtra(EXTRAS_CAMERA_FACING, EXTRAS_CAMERA_FACING_BACK);
+        i.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        context.startActivityForResult(i, id);
+    }
+
+    /**
+     * 启动前摄像头拍照,指定输出照片保存位置
+     * 
+     * @param context
+     */
+    public static void launchFrontCameraForResult(Activity context, int id) {
+        String imgPath = Environment.getExternalStorageDirectory().getPath() + "/pickuptest/front.jpg";
+        File vFile = new File(imgPath);
+        if (!vFile.exists()) {
+            File vDirPath = vFile.getParentFile();
+            if (vDirPath != null) {
+                vDirPath.mkdirs();
+            }
+        }
+        Uri uri = Uri.fromFile(vFile);
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        i.putExtra(EXTRAS_CAMERA_FACING, EXTRAS_CAMERA_FACING_FRONT);
+        i.putExtra(MediaStore.EXTRA_OUTPUT, uri);//
+        context.startActivityForResult(i, id);
+    }
+
+    public static void handleOnActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            // iViewPic.setImageURI(Uri.fromFile(new File(imgPath)));
+            // 假设不传参数MediaStore.EXTRA_OUTPUT的情况下，onActivityResult函数在resultCode为RESULT_OK的情况下，data返回的参数是经过实际拍摄照片经过缩放的图像数据，可以通过类似如下方法来打印缩放图像的尺寸
+            // 比如Android4.2.2里面PhotoModule.java
+            /**
+             * <pre>
+             * int orientation = Exif.getOrientation(data);
+             * Bitmap bitmap = Util.makeBitmap(data, 50 * 1024);
+             * bitmap = Util.rotate(bitmap, orientation);
+             * mActivity.setResultEx(Activity.RESULT_OK, new
+             *         Intent(&quot;inline-data&quot;).putExtra(&quot;data&quot;, bitmap));
+             * mActivity.finish();
+             * </pre>
+             */
+            Bitmap bmp = null;
+            if (data != null && data.getExtras() != null) {
+                bmp = (Bitmap) data.getExtras().get("data");
+            } else {
+                Log.d(TAG, "If had pass MediaStore.EXTRA_OUTPUT, result data is null!");
+            }
+            if (bmp != null) {
+                Log.d(TAG, "bmp width:" + bmp.getWidth() + ", height:" + bmp.getHeight());
+            } else {
+                Log.d(TAG, "bmp return null");
+            }
+        } else {
+            Log.d(TAG, "resultCode return fail!");
+        }
+    }
+
+    /**
+     * 媒体扫描监听
+     */
+    public static BroadcastReceiver mScanReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Intent.ACTION_MEDIA_SCANNER_FINISHED)) {
+            } else if (action.equals(Intent.ACTION_MEDIA_SCANNER_STARTED)) {
+            }
+        }
+
+    };
+
+    /**
+     * 监听媒体扫描
+     */
+    public static void registerScreenEvent(Context context) {
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_MEDIA_SCANNER_STARTED);
+        intentFilter.addAction(Intent.ACTION_MEDIA_SCANNER_FINISHED);
+        intentFilter.addDataScheme("file");
+        context.registerReceiver(mScanReceiver, intentFilter);
+    }
+
+    /**
+     * 解除监听媒体扫描
+     */
+    public static void unregisterScreenEvent(Context context) {
+        context.unregisterReceiver(mScanReceiver);
+    }
+
+    /**
+     * 请求媒体扫描器扫描指定目录
+     * 
+     * @param context
+     */
+    public static void scanPathMedia(Context context) {
+        /**
+         * 老的API
+         * <pre>
+         * MainActivity.this.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse(&quot;file://&quot; + Environment.getExternalStorageDirectory())));
+         * </pre>
+         */
+        MediaScannerConnection.scanFile(context, new String[] {
+            Environment.getExternalStorageDirectory().getPath()
+        }, null, null);
+    }
+
+    /**
+     * 启动MediaScannerService对下载的文件进行扫描
+     * 
+     * @param context
+     * @see MediaScannerConnection
+     * @see MediaScannerConnectionClient
+     * @see android.media.MediaScanner
+     * @see com.android.providers.media.MediaScannerReceive
+     * @see com.android.providers.media.MediaScannerService
+     */
+    public static void bindMediaScanner(Context context) {
+        Intent intent = new Intent();
+        intent.setClassName("com.android.providers.media",
+                "com.android.providers.media.MediaScannerService");
+        context.bindService(intent, new MediaScannerConnection(context, null), Context.BIND_AUTO_CREATE);
+    }
+
+    /**
+     * 获取系统铃声文件路径
+     * 
+     * @param context
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static String getSoundPath(Context context) {
+        /* Settings.Global.UNLOCK_SOUND */
+        String soundPath = Settings.Global.getString(context.getApplicationContext().getContentResolver(), "unlock_sound");
+        // soundPath==/system/media/audio/ui/Unlock.ogg
+        return soundPath;
     }
 }

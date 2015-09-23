@@ -8,10 +8,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.codezyw.common.BaseListActicity;
 import com.codezyw.common.OpenFileHelper;
 
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,7 +27,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 ;
-public class FileBrowser extends ListActivity {
+public class FileBrowser extends BaseListActicity {
     private final String TAG = "zyw";
 
     private static final FileFilter FILTER = new FileFilter() {
