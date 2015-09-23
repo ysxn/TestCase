@@ -7,13 +7,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.TextureView;
 
+@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 public class SensorHelper {
     private static final String TAG = "SensorHelper";
     public final static String HALL_STATE_PATH = "/sys/class/switch/hall/state";
@@ -286,5 +292,17 @@ public class SensorHelper {
                 mSensorManager.unregisterListener(listener);
             }
         }
+    }
+    
+    /**
+     * 检查系统是否存在特定硬件功能：sensor，nfc等等
+     * @param context
+     * @return
+     */
+    public static boolean has(Context context, String feature) {
+        if (TextUtils.isEmpty(feature)) {
+            feature = PackageManager.FEATURE_SENSOR_ACCELEROMETER;
+        }
+        return context.getPackageManager().hasSystemFeature(feature);
     }
 }

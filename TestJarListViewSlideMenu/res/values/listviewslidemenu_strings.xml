@@ -1,9 +1,0 @@
-<resources>
-
-    <string name="listviewslidemenu_app_name">ListView滑出菜单</string>
-    
-    <string name="listviewslidemenu_slide_menu_tip">向左向右滑出菜单</string>
-    <string name="listviewslidemenu_slide_menu_item_left">置顶</string>
-    <string name="listviewslidemenu_slide_menu_item_right">删除</string>
-
-</resources>
