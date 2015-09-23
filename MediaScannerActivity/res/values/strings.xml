@@ -1,9 +1,0 @@
-<resources>
-
-    <string name="app_name">MediaScannerActivity</string>
-    <string name="button_scan">scan sdcard</string>
-    <string name="scan_idle">Idle!</string>
-    <string name="scan_finish">finish scan sdcard......</string>
-    <string name="scan_start">start scan sdcard......</string>
-
-</resources>
