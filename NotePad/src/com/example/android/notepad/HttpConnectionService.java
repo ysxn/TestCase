@@ -84,15 +84,14 @@ public class HttpConnectionService extends Service implements Handler.Callback {
                             UIHelper.showToast(mContext, "JsonHelper.MSG_FETCH intent is null error!");
                             return;
                         }
-                        UIHelper.showProgressDialog(mContext, "ÕıÔÚÏÂÔØ·şÎñÆ÷Êı¾İ......", "", ProgressDialog.STYLE_SPINNER, true, 100);
+                        UIHelper.showProgressDialog(mContext, "æ­£åœ¨ä¸‹è½½æœåŠ¡å™¨æ•°æ®......", "", ProgressDialog.STYLE_SPINNER, true, 100);
                         synchronized (mHttpLock) {
                             List<HttpDataContentBean> list = HttpHelper.fetchServer(mContext);
                             if (list != null) {
-                                // ±ÜÃâ´íÎóµÄÎŞÏŞÍ¬²½Ñ­»·
+                                // é¿å…é”™è¯¯çš„æ— é™åŒæ­¥å¾ªç¯
                                 getContentResolver().unregisterContentObserver(mContentObserver);
                                 syncServerToLocal(list);
-                                getContentResolver().registerContentObserver(
-                                        NotePad.Notes.CONTENT_URI, true, mContentObserver);
+                                getContentResolver().registerContentObserver(NotePad.Notes.CONTENT_URI, true, mContentObserver);
                                 dumpLocalDataBase();
                             }
                         }
@@ -101,7 +100,7 @@ public class HttpConnectionService extends Service implements Handler.Callback {
                     case JsonHelper.MSG_UPDATE: {
                         Bundle bundle = (Bundle) msg.obj;
                         if (bundle != null) {
-                            UIHelper.showProgressDialog(mContext, "ÕıÔÚ¸üĞÂ·şÎñÆ÷Êı¾İ......", "", ProgressDialog.STYLE_SPINNER, true, 100);
+                            UIHelper.showProgressDialog(mContext, "æ­£åœ¨æ›´æ–°æœåŠ¡å™¨æ•°æ®......", "", ProgressDialog.STYLE_SPINNER, true, 100);
                             synchronized (mHttpLock) {
                                 HttpHelper.updateServer(mContext, bundle);
                             }
@@ -136,8 +135,7 @@ public class HttpConnectionService extends Service implements Handler.Callback {
                 syncLocalToServer(uri);
             }
         };
-        getContentResolver().registerContentObserver(NotePad.Notes.CONTENT_URI, true,
-                mContentObserver);
+        getContentResolver().registerContentObserver(NotePad.Notes.CONTENT_URI, true, mContentObserver);
         Notification notification = new Notification();
         this.startForeground(0x200, notification);
         mNetManager.onCreate(mContext);
@@ -146,19 +144,14 @@ public class HttpConnectionService extends Service implements Handler.Callback {
     private void dumpLocalDataBase() {
         Cursor cursor = null;
         try {
-            cursor = getContentResolver().query(NotePad.Notes.CONTENT_URI, READ_NOTE_PROJECTION,
-                    null, null, NotePad.Notes.DEFAULT_SORT_ORDER);
+            cursor = getContentResolver().query(NotePad.Notes.CONTENT_URI, READ_NOTE_PROJECTION, null, null, NotePad.Notes.DEFAULT_SORT_ORDER);
             if (cursor != null && cursor.moveToFirst() && cursor.getCount() > 0) {
                 do {
                     int id = cursor.getInt(cursor.getColumnIndexOrThrow(NotePad.Notes._ID));
-                    String title = cursor.getString(cursor
-                            .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_TITLE));
-                    String content = cursor.getString(cursor
-                            .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_NOTE));
-                    long create = cursor.getLong(cursor
-                            .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_CREATE_DATE));
-                    long modify = cursor.getLong(cursor
-                            .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE));
+                    String title = cursor.getString(cursor.getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_TITLE));
+                    String content = cursor.getString(cursor.getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_NOTE));
+                    long create = cursor.getLong(cursor.getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_CREATE_DATE));
+                    long modify = cursor.getLong(cursor.getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE));
                     StringBuilder sb = new StringBuilder();
                     sb.append(">>>>>>>>>>>>dumpLocalDataBase start").append("\n");
                     sb.append("id:").append(id).append("\n");
@@ -186,15 +179,12 @@ public class HttpConnectionService extends Service implements Handler.Callback {
         }
         Cursor cursor = null;
         try {
-            cursor = getContentResolver().query(uri, READ_NOTE_PROJECTION, null, null,
-                    NotePad.Notes.DEFAULT_SORT_ORDER);
+            cursor = getContentResolver().query(uri, READ_NOTE_PROJECTION, null, null, NotePad.Notes.DEFAULT_SORT_ORDER);
             if (cursor != null && cursor.moveToFirst() && cursor.getCount() > 0) {
                 do {
                     int id = cursor.getInt(cursor.getColumnIndexOrThrow(NotePad.Notes._ID));
-                    String title = cursor.getString(cursor
-                            .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_TITLE));
-                    String content = cursor.getString(cursor
-                            .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_NOTE));
+                    String title = cursor.getString(cursor.getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_TITLE));
+                    String content = cursor.getString(cursor.getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_NOTE));
                     StringBuilder sb = new StringBuilder();
                     sb.append(">>>>>>>>>>>>syncLocalToServer start").append("\n");
                     sb.append("id:").append(id).append("\n");
@@ -225,10 +215,8 @@ public class HttpConnectionService extends Service implements Handler.Callback {
         }
         for (HttpDataContentBean n : list) {
             ContentValues values = new ContentValues();
-            values.put(NotePad.Notes.COLUMN_NAME_CREATE_DATE,
-                    TimeHelper.getTimeInLong(n.getCreate_date()));
-            values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE,
-                    TimeHelper.getTimeInLong(n.getModify_date()));
+            values.put(NotePad.Notes.COLUMN_NAME_CREATE_DATE, TimeHelper.getTimeInLong(n.getCreate_date()));
+            values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, TimeHelper.getTimeInLong(n.getModify_date()));
             values.put(NotePad.Notes.COLUMN_NAME_TITLE, n.getNote_title());
             values.put(NotePad.Notes.COLUMN_NAME_NOTE, n.getNote_content());
             values.put(NotePad.Notes._ID, n.getNote_id());
@@ -260,18 +248,13 @@ public class HttpConnectionService extends Service implements Handler.Callback {
         Cursor cursor = null;
         long serverTime = TimeHelper.getTimeInLong(serverModifyTime);
         try {
-            cursor = getContentResolver().query(uri, READ_NOTE_PROJECTION, null, null,
-                    NotePad.Notes.DEFAULT_SORT_ORDER);
+            cursor = getContentResolver().query(uri, READ_NOTE_PROJECTION, null, null, NotePad.Notes.DEFAULT_SORT_ORDER);
             if (cursor != null && cursor.moveToFirst() && cursor.getCount() == 1) {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(NotePad.Notes._ID));
-                String title = cursor.getString(cursor
-                        .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_TITLE));
-                String content = cursor.getString(cursor
-                        .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_NOTE));
-                long create = cursor.getLong(cursor
-                        .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_CREATE_DATE));
-                long modify = cursor.getLong(cursor
-                        .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_TITLE));
+                String content = cursor.getString(cursor.getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_NOTE));
+                long create = cursor.getLong(cursor.getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_CREATE_DATE));
+                long modify = cursor.getLong(cursor.getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE));
                 StringBuilder sb = new StringBuilder();
                 sb.append(">>>>>>>>>>>>checkServerModify start").append("\n");
                 sb.append("id:").append(id).append("\n");

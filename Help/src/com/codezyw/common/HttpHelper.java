@@ -710,7 +710,9 @@ public class HttpHelper {
      * 1．    THREAD_POOL_EXECUTOR, 异步线程池
      * 2．    SERIAL_EXECUTOR，同步线程池
      * 正如上面名称描述的那样，一个是异步线程池，多个任务在线程池中并发执行；还有一个是同步执行的。
-     * 默认的话，直接调用execute的话，是使用SERIAL_EXECUTOR
+     * 默认的话，直接调用execute的话，是使用SERIAL_EXECUTOR.
+     * 
+     * 但是系统默认只能执行一次，因为execute调用第二次会抛出异常@see {@link AsyncTask}。
      * </pre>
      */
     public static void asyncHttpPostMultipart(final String url, final Activity activity,

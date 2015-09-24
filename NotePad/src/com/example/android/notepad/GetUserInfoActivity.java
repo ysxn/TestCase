@@ -2,13 +2,15 @@
 package com.example.android.notepad;
 
 import java.util.HashMap;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+
 /**
- * GetUserInfoActivity.javaÀàÊÇ¸ù¾İÓÃ»§µÇÂ¼ºó²úÉúÎ¨Ò»session ±êÊ¶½øĞĞ²Ù×÷»ñÈ¡ÓÃ»§ÏêÏ¸ĞÅÏ¢µÄÀà¡£
+ * GetUserInfoActivity.javaç±»æ˜¯æ ¹æ®ç”¨æˆ·ç™»å½•åäº§ç”Ÿå”¯ä¸€session æ ‡è¯†è¿›è¡Œæ“ä½œè·å–ç”¨æˆ·è¯¦ç»†ä¿¡æ¯çš„ç±»ã€‚
+ * 
  * @author zhuyawen
- *
  */
 public class GetUserInfoActivity extends Activity {
     private HashMap<String, String> session;
@@ -19,14 +21,13 @@ public class GetUserInfoActivity extends Activity {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.get_info);
-        // »ñÈ¡´ÓµÇÂ¼³É¹¦ºó½çÃæµÄÔÙ´Î´«µİµÄ²ÎÊı
-        session = (HashMap<String, String>) this.getIntent().getBundleExtra("session")
-                .getSerializable("sessionid");
-        // ¶ÁÈ¡sessionµÄ»ù±¾ĞÅÏ¢£¬²¢ÏÔÊ¾ÏàÓ¦µÄ¿Ø¼ş
+        // è·å–ä»ç™»å½•æˆåŠŸåç•Œé¢çš„å†æ¬¡ä¼ é€’çš„å‚æ•°
+        session = (HashMap<String, String>) this.getIntent().getBundleExtra("session").getSerializable("sessionid");
+        // è¯»å–sessionçš„åŸºæœ¬ä¿¡æ¯ï¼Œå¹¶æ˜¾ç¤ºç›¸åº”çš„æ§ä»¶
         String session_info = session.get("info_userinfo");
         String session_level = session.get("info_level");
         String session_id = session.get("info_sessionid");
-        // ÏÔÊ¾ÏàÓ¦µÄÄÚÈİµ½¿Ø¼ş
+        // æ˜¾ç¤ºç›¸åº”çš„å†…å®¹åˆ°æ§ä»¶
         System.out.println("session_info--------" + session_info);
         TextView get_info = (TextView) findViewById(R.id.get_info);
         get_info.setText(session_info);

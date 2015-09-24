@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -17,6 +18,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,10 +30,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * LoginSuccessActivity.javaÖ÷Òª»ñÈ¡phpµÄsessionÎ¨Ò»µÄ±êÊ¶idÒÔ¼°ÓÃ»§µÄÒ»Ğ©»ù±¾ĞÅÏ¢£¬session
- * idÔò×÷Îª±¾´ÎÓÃ»§µÇÂ¼×´Ì¬ÔÚ·şÎñÆ÷µÄÎ¨Ò»±êÊ¶
- * £¬¼´È·¶¨ÓÃ»§µÄÎ¨Ò»×´Ì¬½øĞĞÏà¹Ø²Ù×÷¡£LoginSuccessActivity.javaÀàµÄ·½·¨ÓëGetWebSession
- * .javaÀàËÆ¡£ÆäÖ÷Òª¹¦ÄÜÊÇ»ñÈ¡session idºóÔÙ´Î·¢ËÍsession idµ½·şÎñÆ÷½øĞĞÑéÖ¤£¬¸ù¾İ·â×°µÄsessionÊı¾İÑéÖ¤ÓÃ»§²Ù×÷È¨ÏŞµÈ¡£
+ * LoginSuccessActivity.javaä¸»è¦è·å–phpçš„sessionå”¯ä¸€çš„æ ‡è¯†idä»¥åŠç”¨æˆ·çš„ä¸€äº›åŸºæœ¬ä¿¡æ¯ï¼Œsession
+ * idåˆ™ä½œä¸ºæœ¬æ¬¡ç”¨æˆ·ç™»å½•çŠ¶æ€åœ¨æœåŠ¡å™¨çš„å”¯ä¸€æ ‡è¯†
+ * ï¼Œå³ç¡®å®šç”¨æˆ·çš„å”¯ä¸€çŠ¶æ€è¿›è¡Œç›¸å…³æ“ä½œã€‚LoginSuccessActivity.javaç±»çš„æ–¹æ³•ä¸GetWebSession
+ * .javaç±»ä¼¼ã€‚å…¶ä¸»è¦åŠŸèƒ½æ˜¯è·å–session idåå†æ¬¡å‘é€session idåˆ°æœåŠ¡å™¨è¿›è¡ŒéªŒè¯ï¼Œæ ¹æ®å°è£…çš„sessionæ•°æ®éªŒè¯ç”¨æˆ·æ“ä½œæƒé™ç­‰ã€‚
  * 
  * @author zhuyawen
  */
@@ -44,21 +46,20 @@ public class LoginSuccessActivity extends Activity {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_success);
-        // »ñÈ¡´ÓµÇÂ¼³É¹¦ºó½çÃæµÄ´«µİµÄ²ÎÊı
-        session = (HashMap<String, String>) this.getIntent().getBundleExtra("session")
-                .getSerializable("sessionid");
-        // ¶ÁÈ¡sessionµÄ»ù±¾ĞÅÏ¢£¬²¢ÏÔÊ¾ÏàÓ¦µÄ¿Ø¼ş
+        // è·å–ä»ç™»å½•æˆåŠŸåç•Œé¢çš„ä¼ é€’çš„å‚æ•°
+        session = (HashMap<String, String>) this.getIntent().getBundleExtra("session").getSerializable("sessionid");
+        // è¯»å–sessionçš„åŸºæœ¬ä¿¡æ¯ï¼Œå¹¶æ˜¾ç¤ºç›¸åº”çš„æ§ä»¶
         String userid_info = session.get("s_userid");
         String username_info = session.get("s_username");
         String session_id = session.get("s_sessionid");
-        // ÏÔÊ¾ÏàÓ¦µÄÄÚÈİµ½¿Ø¼ş
+        // æ˜¾ç¤ºç›¸åº”çš„å†…å®¹åˆ°æ§ä»¶
         TextView userid_show = (TextView) findViewById(R.id.userid_show);
         userid_show.setText(userid_info);
         TextView username_show = (TextView) findViewById(R.id.username_show);
         username_show.setText(username_info);
         TextView sessionid_show = (TextView) findViewById(R.id.sessionid_show);
         sessionid_show.setText(session_id);
-        // ¸ù¾İ±¾´ÎsessionÔÙ´Î»ñÈ¡ÓÃ»§ĞÅÏ¢
+        // æ ¹æ®æœ¬æ¬¡sessionå†æ¬¡è·å–ç”¨æˆ·ä¿¡æ¯
         Button getInfo = (Button) findViewById(R.id.getinfo);
         getInfo.setOnClickListener(getInfoClick);
     }
@@ -70,13 +71,13 @@ public class LoginSuccessActivity extends Activity {
             if (getUserInfo()) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, GetUserInfoActivity.class);
-                // ´«µİsession²ÎÊı,ÔÚÓÃ»§µÇÂ¼³É¹¦ºóÎªsession³õÊ¼»¯¸³Öµ,¼´´«µİHashMapµÄÖµ
+                // ä¼ é€’sessionå‚æ•°,åœ¨ç”¨æˆ·ç™»å½•æˆåŠŸåä¸ºsessionåˆå§‹åŒ–èµ‹å€¼,å³ä¼ é€’HashMapçš„å€¼
                 Bundle map = new Bundle();
                 map.putSerializable("sessionid", session);
                 intent.putExtra("session", map);
-                context.startActivity(intent); // Ìø×ªµ½³É¹¦Ò³Ãæ
+                context.startActivity(intent); // è·³è½¬åˆ°æˆåŠŸé¡µé¢
             } else {
-                Toast.makeText(v.getContext(), "Êı¾İÎª¿Õ£¡", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "æ•°æ®ä¸ºç©ºï¼", Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -105,9 +106,9 @@ public class LoginSuccessActivity extends Activity {
                 if (entity != null) {
                     String info = EntityUtils.toString(entity);
                     System.out.println("info-----------" + info);
-                    // ÒÔÏÂÖ÷ÒªÊÇ¶Ô·şÎñÆ÷¶Ë·µ»ØµÄÊı¾İ½øĞĞ½âÎö
+                    // ä»¥ä¸‹ä¸»è¦æ˜¯å¯¹æœåŠ¡å™¨ç«¯è¿”å›çš„æ•°æ®è¿›è¡Œè§£æ
                     JSONObject jsonObject = null;
-                    // flagÎªµÇÂ¼³É¹¦Óë·ñµÄ±ê¼Ç,´Ó·şÎñÆ÷¶Ë·µ»ØµÄÊı¾İ
+                    // flagä¸ºç™»å½•æˆåŠŸä¸å¦çš„æ ‡è®°,ä»æœåŠ¡å™¨ç«¯è¿”å›çš„æ•°æ®
                     String flag = "";
                     String userinfo = "";
                     String level = "";
@@ -122,9 +123,9 @@ public class LoginSuccessActivity extends Activity {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-                    // ¸ù¾İ·şÎñÆ÷¶Ë·µ»ØµÄ±ê¼Ç,ÅĞ¶Ï·şÎñ¶Ë¶ËÑéÖ¤ÊÇ·ñ³É¹¦
+                    // æ ¹æ®æœåŠ¡å™¨ç«¯è¿”å›çš„æ ‡è®°,åˆ¤æ–­æœåŠ¡ç«¯ç«¯éªŒè¯æ˜¯å¦æˆåŠŸ
                     if (flag.equals("notempty")) {
-                        // Îªsession´«µİÏàÓ¦µÄÖµ,ÓÃÓÚÔÚsession¹ı³ÌÖĞ¼ÇÂ¼Ïà¹ØÓÃ»§ĞÅÏ¢
+                        // ä¸ºsessionä¼ é€’ç›¸åº”çš„å€¼,ç”¨äºåœ¨sessionè¿‡ç¨‹ä¸­è®°å½•ç›¸å…³ç”¨æˆ·ä¿¡æ¯
                         session.put("info_userinfo", userinfo);
                         session.put("info_level", level);
                         session.put("info_sessionid", sessionid);
