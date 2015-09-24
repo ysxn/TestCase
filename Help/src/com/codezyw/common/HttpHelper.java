@@ -80,6 +80,12 @@ import com.codezyw.common.HttpPostAsyncTask.PostListener;
  * 处理这个操作的最方便的方法是调用HttpEntity
  * #consumeContent()方法来消耗流中的任意可用内容。HttpClient探测到内容流尾部已经到达后
  * ，会立即会自动释放低层连接，并放回到连接管理器。HttpEntity#consumeContent()方法调用多次也是安全的。
+ * <p>
+ * <a href=
+ * "http://hc.apache.org/httpcomponents-client-ga/httpmime/apidocs/org/apache/http/entity/mime/MultipartEntity.html"
+ * >apache的库API说明</a>
+ * <p>
+ * <a href="http://www.w3school.com.cn/tags/tag_br.asp">html标签说明</a>
  */
 public class HttpHelper {
 
