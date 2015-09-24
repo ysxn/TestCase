@@ -106,6 +106,20 @@ public class CrashHelper implements UncaughtExceptionHandler {
     }
 
     /**
+     * 上传错误log
+     */
+    public void uploadServer(final String exception) {
+        final String httpUrl = "http://php.codezyw.com/update_note_android.php";
+        final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        postParams.add(new BasicNameValuePair("email", ""));
+        postParams.add(new BasicNameValuePair("pass", ""));
+        postParams.add(new BasicNameValuePair("note_title", "Crash log"));
+        postParams.add(new BasicNameValuePair("note_content", exception));
+        postParams.add(new BasicNameValuePair("note_id", Integer.toString(9)));
+        android.util.Log.i("zyw", "" + HttpHelper.httpPost(httpUrl, postParams));
+    }
+
+    /**
      * 获取一些简单的信息,软件版本，手机版本，型号等信息存放在HashMap中
      * 
      * @param context
@@ -178,14 +192,7 @@ public class CrashHelper implements UncaughtExceptionHandler {
                 e.printStackTrace();
             }
         }
-        final String httpUrl = "http://php.codezyw.com/update_note_android.php";
-        final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-        postParams.add(new BasicNameValuePair("email", ""));
-        postParams.add(new BasicNameValuePair("pass", ""));
-        postParams.add(new BasicNameValuePair("note_title", "Crash log"));
-        postParams.add(new BasicNameValuePair("note_content", exception));
-//        postParams.add(new BasicNameValuePair("note_id", Integer.toString(id)));
-        android.util.Log.i("zyw", HttpHelper.httpPost(httpUrl, postParams));
+        SPAsync.setString(mContext, "crash", exception);
         return fileName;
     }
 

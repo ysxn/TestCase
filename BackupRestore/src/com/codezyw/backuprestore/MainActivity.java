@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.codezyw.common.BaseActicity;
+import com.codezyw.common.CrashHelper;
+import com.codezyw.common.HttpHelper;
 import com.codezyw.common.MD5Util;
+import com.codezyw.common.SPAsync;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -20,6 +23,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -132,6 +136,15 @@ public class MainActivity extends BaseActicity {
                 mButtonFiles = null;
             }
         });
+        final String log = SPAsync.getString(this, "crash", "");
+        if (!TextUtils.isEmpty(log)) {
+            new Thread(){
+                @Override
+                public void run() {
+                    CrashHelper.getInstance().uploadServer(log);
+                };
+            }.start();
+        }
     }
     
     @Override

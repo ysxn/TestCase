@@ -4,14 +4,16 @@ package com.codezyw.backuprestore;
 import java.io.File;
 import java.util.List;
 
-import com.codezyw.common.ColorHelper;
-import com.codezyw.common.FileIOHelper;
-import com.codezyw.common.ShapeHelper;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.codezyw.common.ColorHelper;
+import com.codezyw.common.FileIOHelper;
+import com.codezyw.common.ShapeHelper;
+import com.codezyw.common.UnitHelper;
 
 public class FileListAdapter extends ArrayAdapter<File> {
     private FileIOHelper mUtil;
@@ -20,12 +22,12 @@ public class FileListAdapter extends ArrayAdapter<File> {
         super(context, Resource, objects);
         mUtil = new FileIOHelper(context);
     }
-    
+
     @Override
     public int getViewTypeCount() {
         return 3;
     }
-    
+
     @Override
     public int getItemViewType(int position) {
         if (position == 0) {
@@ -59,16 +61,8 @@ public class FileListAdapter extends ArrayAdapter<File> {
                 view.setText(sb.toString());
             } else {
                 long b = file.length();
-                if (b > 1024 * 1024) {
-                    sb.append("文件大小 : ").append(b / 1024 / 1024 + "MB").append("\n").append("修改时间 : ").append(mUtil.convetTime(file.lastModified()));
-                    view.setText(sb.toString());
-                } else if (b > 1024) {
-                    sb.append("文件大小 : ").append(b / 1024 + "KB").append("\n").append("修改时间 : ").append(mUtil.convetTime(file.lastModified()));
-                    view.setText(sb.toString());
-                } else {
-                    sb.append("文件大小 : ").append(b + "Bytes").append("\n").append("修改时间 : ").append(mUtil.convetTime(file.lastModified()));
-                    view.setText(sb.toString());
-                }
+                sb.append("文件大小 : ").append(UnitHelper.byteToHumanNumber(b)).append("\n").append("修改时间 : ").append(mUtil.convetTime(file.lastModified()));
+                view.setText(sb.toString());
             }
         }
         return view;

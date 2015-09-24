@@ -1,18 +1,9 @@
 
 package com.example.android.notepad;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
-import com.codezyw.common.DbHelper;
-import com.codezyw.common.HttpHelper;
-import com.codezyw.common.NetManager;
-import com.codezyw.common.TimeHelper;
-import com.codezyw.common.UIHelper;
-
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.ProgressDialog;
 import android.app.Service;
@@ -22,16 +13,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
-
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Message;
-import android.text.TextUtils;
 import android.util.Log;
 
+import com.codezyw.common.HttpDataContentBean;
+import com.codezyw.common.HttpHelper;
+import com.codezyw.common.JsonHelper;
+import com.codezyw.common.NetManager;
+import com.codezyw.common.TimeHelper;
+import com.codezyw.common.UIHelper;
+
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class HttpConnectionService extends Service implements Handler.Callback {
 
     private static final String TAG = "zyw";
@@ -44,34 +42,6 @@ public class HttpConnectionService extends Service implements Handler.Callback {
 
     private Handler mServiceMainHandler;
 
-    // Job queen design
-
-    public static final String NOTE_ID = "note_id";
-
-    public static final String EMAIL = "email";
-
-    public static final String PASSWORD = "pass";
-
-    public static final String TITLE = "note_title";
-
-    public static final String CONTENT = "note_content";
-
-    public static final String CMD_KEY = "cmd";
-
-    public static final String FETCH_CMD_DELETE = "delete_note";
-
-    public static final String FETCH_CMD_UPDATE = "update_note";
-
-    public static final String FETCH_CMD_INSERT = "insert_note";
-
-    public static final String FETCH_CMD_FETCH = "fetch_note";
-
-    public static final int MSG_FETCH = 0x1000;
-
-    public static final int MSG_DELETE = 0x1001;
-
-    public static final int MSG_UPDATE = 0x1002;
-
     private final static Object mHttpLock = new Object();
 
     private HandlerThread mHandlerThread;
@@ -79,10 +49,8 @@ public class HttpConnectionService extends Service implements Handler.Callback {
     private Handler mWorkHandler;
 
     private Context mContext = HttpConnectionService.this;
-    
-    private NetManager mNetManager = new NetManager();
 
-    public static FetchBean sFetchBean = null;
+    private NetManager mNetManager = new NetManager();
 
     ContentObserver mContentObserver = null;
 
@@ -110,59 +78,41 @@ public class HttpConnectionService extends Service implements Handler.Callback {
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
-                    case MSG_FETCH: {
+                    case JsonHelper.MSG_FETCH: {
                         Intent intent = (Intent) msg.obj;
                         if (intent == null) {
-                            UIHelper.showToast(mContext, "MSG_FETCH intent is null error!");
+                            UIHelper.showToast(mContext, "JsonHelper.MSG_FETCH intent is null error!");
                             return;
                         }
                         UIHelper.showProgressDialog(mContext, "正在下载服务器数据......", "", ProgressDialog.STYLE_SPINNER, true, 100);
-                        final String httpUrl = "http://php.codezyw.com/fetch_note_android.php";
-                        final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-                        postParams.add(new BasicNameValuePair(EMAIL, DbHelper.getInstance(mContext)
-                                .getString(EMAIL, "")));
-                        postParams.add(new BasicNameValuePair(PASSWORD, DbHelper.getInstance(
-                                mContext).getString(PASSWORD, "")));
                         synchronized (mHttpLock) {
-                            parseServerResult(HttpHelper.httpPost(httpUrl, postParams));
-                        }
-                        break;
-                    }
-                    case MSG_UPDATE: {
-                        Bundle bundle = (Bundle) msg.obj;
-                        if (bundle != null) {
-                            UIHelper.showProgressDialog(mContext, "正在更新服务器数据......", "", ProgressDialog.STYLE_SPINNER, true, 100);
-                            int id = bundle.getInt(NOTE_ID);
-                            String title = bundle.getString(TITLE);
-                            String content = bundle.getString(CONTENT);
-                            final String httpUrl = "http://php.codezyw.com/update_note_android.php";
-                            final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-                            postParams.add(new BasicNameValuePair(EMAIL, DbHelper.getInstance(
-                                    mContext).getString(EMAIL, "")));
-                            postParams.add(new BasicNameValuePair(PASSWORD, DbHelper.getInstance(
-                                    mContext).getString(PASSWORD, "")));
-                            postParams.add(new BasicNameValuePair(TITLE, title));
-                            postParams.add(new BasicNameValuePair(CONTENT, content));
-                            postParams.add(new BasicNameValuePair(NOTE_ID, Integer.toString(id)));
-                            synchronized (mHttpLock) {
-                                parseServerResult(HttpHelper.httpPost(httpUrl, postParams));
+                            List<HttpDataContentBean> list = HttpHelper.fetchServer(mContext);
+                            if (list != null) {
+                                // 避免错误的无限同步循环
+                                getContentResolver().unregisterContentObserver(mContentObserver);
+                                syncServerToLocal(list);
+                                getContentResolver().registerContentObserver(
+                                        NotePad.Notes.CONTENT_URI, true, mContentObserver);
+                                dumpLocalDataBase();
                             }
                         }
                         break;
                     }
-                    case MSG_DELETE: {
+                    case JsonHelper.MSG_UPDATE: {
                         Bundle bundle = (Bundle) msg.obj;
                         if (bundle != null) {
-                            int id = bundle.getInt(NOTE_ID);
-                            final String phpString = "http://php.codezyw.com/delete_note_android.php";
-                            final List<NameValuePair> phpParams = new ArrayList<NameValuePair>();
-                            phpParams.add(new BasicNameValuePair(EMAIL, DbHelper.getInstance(
-                                    mContext).getString(EMAIL, "")));
-                            phpParams.add(new BasicNameValuePair(PASSWORD, DbHelper.getInstance(
-                                    mContext).getString(PASSWORD, "")));
-                            phpParams.add(new BasicNameValuePair(NOTE_ID, Integer.toString(id)));
+                            UIHelper.showProgressDialog(mContext, "正在更新服务器数据......", "", ProgressDialog.STYLE_SPINNER, true, 100);
                             synchronized (mHttpLock) {
-                                parseServerResult(HttpHelper.httpPost(phpString, phpParams));
+                                HttpHelper.updateServer(mContext, bundle);
+                            }
+                        }
+                        break;
+                    }
+                    case JsonHelper.MSG_DELETE: {
+                        Bundle bundle = (Bundle) msg.obj;
+                        if (bundle != null) {
+                            synchronized (mHttpLock) {
+                                HttpHelper.deleteServer(mContext, bundle);
                             }
                         }
                         break;
@@ -193,72 +143,6 @@ public class HttpConnectionService extends Service implements Handler.Callback {
         mNetManager.onCreate(mContext);
     }
 
-    private void parseServerResult(String result_data) {
-        Log.i(TAG, "after http post result_data = " + result_data);
-        if (!TextUtils.isEmpty(result_data)) {
-            sFetchBean = ParseJSONHelper.parseFetchBeanByJSONSingle(result_data);
-            if (sFetchBean != null) {
-                Log.i(TAG, "start dump sFetchBean = " + sFetchBean.dump()
-                        + " \n end dump sFetchBean");
-                if (sFetchBean.getLogin_result()) {
-                    if (FETCH_CMD_FETCH.equals(sFetchBean.getFetch_cmd())) {
-                        if (sFetchBean.getFetch_result()) {
-                            List<NoteBean> list = sFetchBean.getResult_data();
-                            UIHelper.showToast(mContext, "登录成功,下载服务器数据成功!");
-                            if (list != null) {
-                                // 避免错误的无限同步循环
-                                getContentResolver().unregisterContentObserver(mContentObserver);
-                                syncServerToLocal(list);
-                                getContentResolver().registerContentObserver(
-                                        NotePad.Notes.CONTENT_URI, true, mContentObserver);
-                                dumpLocalDataBase();
-                                UIHelper.dismissProgressDialog();
-                            }
-                        } else {
-                            UIHelper.dismissProgressDialog();
-                            UIHelper.showDialog(mContext, "登录成功,但是下载服务器数据失败!",
-                                    sFetchBean.getError_info());
-                        }
-                    } else if (FETCH_CMD_INSERT.equals(sFetchBean.getFetch_cmd())) {
-                        UIHelper.dismissProgressDialog();
-                        if (sFetchBean.getFetch_result()) {
-                            UIHelper.showToast(mContext, "登录成功,插入服务器数据成功!");
-                        } else {
-                            UIHelper.showDialog(mContext, "登录成功,但是插入服务器数据失败!",
-                                    sFetchBean.getError_info());
-                        }
-                    } else if (FETCH_CMD_UPDATE.equals(sFetchBean.getFetch_cmd())) {
-                        UIHelper.dismissProgressDialog();
-                        if (sFetchBean.getFetch_result()) {
-                            UIHelper.showToast(mContext, "登录成功,更新服务器数据成功!");
-                        } else {
-                            UIHelper.showDialog(mContext, "登录成功,但是更新服务器数据失败!",
-                                    sFetchBean.getError_info());
-                        }
-                    } else if (FETCH_CMD_DELETE.equals(sFetchBean.getFetch_cmd())) {
-                        UIHelper.dismissProgressDialog();
-                        if (sFetchBean.getFetch_result()) {
-                            UIHelper.showToast(mContext, "登录成功,删除服务器数据成功!");
-                        } else {
-                            UIHelper.showDialog(mContext, "登录成功,但是删除服务器数据失败!",
-                                    sFetchBean.getError_info());
-                        }
-                    }
-                } else {
-                    UIHelper.dismissProgressDialog();
-                    UIHelper.showDialog(mContext, "登录失败!", result_data);
-                }
-            } else {
-                UIHelper.dismissProgressDialog();
-                UIHelper.showDialog(mContext, "JSON错误!", result_data);
-            }
-        } else {
-            UIHelper.dismissProgressDialog();
-            UIHelper.showDialog(mContext, "网络错误!", result_data);
-        }
-        UIHelper.dismissProgressDialog();
-    }
-
     private void dumpLocalDataBase() {
         Cursor cursor = null;
         try {
@@ -275,9 +159,15 @@ public class HttpConnectionService extends Service implements Handler.Callback {
                             .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_CREATE_DATE));
                     long modify = cursor.getLong(cursor
                             .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE));
-                    Log.i(TAG, ">>>>dumpLocalDataBase = id=" + id + "; title=" + title
-                            + "; content=" + content + "; create=" + TimeHelper.getTime(create)
-                            + "; modify=" + TimeHelper.getTime(modify));
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(">>>>>>>>>>>>dumpLocalDataBase start").append("\n");
+                    sb.append("id:").append(id).append("\n");
+                    sb.append("title:").append("\n").append(title).append("\n");
+                    sb.append("content:").append("\n").append(content).append("\n");
+                    sb.append("create time:").append("\n").append(TimeHelper.getTime(create)).append("\n");
+                    sb.append("modify time:").append("\n").append(TimeHelper.getTime(modify)).append("\n");
+                    sb.append(">>>>>>>>>>>>dumpLocalDataBase end");
+                    Log.i(TAG, sb.toString());
                 } while (cursor.moveToNext());
             }
         } catch (Exception e) {
@@ -305,13 +195,18 @@ public class HttpConnectionService extends Service implements Handler.Callback {
                             .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_TITLE));
                     String content = cursor.getString(cursor
                             .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_NOTE));
-                    Log.i(TAG, ">>>>syncLocalToServer id=" + id + "; title=" + title + "; content="
-                            + content);
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(">>>>>>>>>>>>syncLocalToServer start").append("\n");
+                    sb.append("id:").append(id).append("\n");
+                    sb.append("title:").append("\n").append(title).append("\n");
+                    sb.append("content:").append("\n").append(content).append("\n");
+                    sb.append(">>>>>>>>>>>>syncLocalToServer end");
+                    Log.i(TAG, sb.toString());
                     Bundle bundle = new Bundle();
-                    bundle.putInt(NOTE_ID, id);
-                    bundle.putString(TITLE, title);
-                    bundle.putString(CONTENT, content);
-                    mWorkHandler.obtainMessage(MSG_UPDATE, bundle).sendToTarget();
+                    bundle.putInt(JsonHelper.NOTE_ID, id);
+                    bundle.putString(JsonHelper.TITLE, title);
+                    bundle.putString(JsonHelper.CONTENT, content);
+                    mWorkHandler.obtainMessage(JsonHelper.MSG_UPDATE, bundle).sendToTarget();
                 } while (cursor.moveToNext());
             }
         } catch (Exception e) {
@@ -324,11 +219,11 @@ public class HttpConnectionService extends Service implements Handler.Callback {
         }
     }
 
-    private void syncServerToLocal(List<NoteBean> list) {
+    private void syncServerToLocal(List<HttpDataContentBean> list) {
         if (list == null || list.isEmpty()) {
             return;
         }
-        for (NoteBean n : list) {
+        for (HttpDataContentBean n : list) {
             ContentValues values = new ContentValues();
             values.put(NotePad.Notes.COLUMN_NAME_CREATE_DATE,
                     TimeHelper.getTimeInLong(n.getCreate_date()));
@@ -338,20 +233,20 @@ public class HttpConnectionService extends Service implements Handler.Callback {
             values.put(NotePad.Notes.COLUMN_NAME_NOTE, n.getNote_content());
             values.put(NotePad.Notes._ID, n.getNote_id());
             Uri uri = getContentResolver().insert(NotePad.Notes.CONTENT_URI, values);
-            Log.i(TAG, ">>>>syncServerToLocal uri = " + uri + "; note_id" + n.getNote_id());
+            Log.i(TAG, "syncServerToLocal uri = " + uri + "; note_id" + n.getNote_id());
             if (uri == null) {
                 // insert failed, try update
                 uri = ContentUris.withAppendedId(NotePad.Notes.CONTENT_ID_URI_BASE, n.getNote_id());
                 if (checkServerModify(uri, n.getModify_date())) {
-                    getContentResolver().update(uri, // The URI for the record
-                                                     // to update.
-                            values, // The map of column names and new values to
-                                    // apply to them.
-                            null, // No selection criteria are used, so no where
-                                  // columns are necessary.
-                            null // No where columns are used, so no where
-                                 // arguments are necessary.
-                            );
+                    /**
+                     * <pre>
+                     * uri, The URI for the record to update.
+                     * values, The map of column names and new values to apply to them.
+                     * null,  No selection criteria are used, so no where columns are necessary.
+                     * null  No where columns are used, so no where arguments are necessary.
+                     * </pre>
+                     */
+                    getContentResolver().update(uri, values, null, null);
                 }
             }
         }
@@ -377,11 +272,16 @@ public class HttpConnectionService extends Service implements Handler.Callback {
                         .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_CREATE_DATE));
                 long modify = cursor.getLong(cursor
                         .getColumnIndexOrThrow(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE));
-                Log.i(TAG,
-                        ">>>>checkServerModify = id=" + id + "; title=" + title + "; content="
-                                + content + "; create=" + TimeHelper.getTime(create) + "; modify="
-                                + TimeHelper.getTime(modify) + "; serverTime="
-                                + TimeHelper.getTime(serverTime));
+                StringBuilder sb = new StringBuilder();
+                sb.append(">>>>>>>>>>>>checkServerModify start").append("\n");
+                sb.append("id:").append(id).append("\n");
+                sb.append("title:").append("\n").append(title).append("\n");
+                sb.append("content:").append("\n").append(content).append("\n");
+                sb.append("create time:").append("\n").append(TimeHelper.getTime(create)).append("\n");
+                sb.append("modify time:").append("\n").append(TimeHelper.getTime(modify)).append("\n");
+                sb.append("server time:").append("\n").append(TimeHelper.getTime(serverTime)).append("\n");
+                sb.append(">>>>>>>>>>>>checkServerModify end");
+                Log.i(TAG, sb.toString());
                 if (serverTime < modify) {
                     override = false;
                 }
@@ -399,11 +299,11 @@ public class HttpConnectionService extends Service implements Handler.Callback {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        int cmd = intent.getIntExtra(CMD_KEY, 0);
+        int cmd = intent.getIntExtra(JsonHelper.CMD_KEY, 0);
         if (DEBUG)
             Log.v(TAG, "onStartCommand CMD=" + cmd + " flags=" + flags + " , startId=" + startId);
-        if (MSG_FETCH == cmd) {
-            Message msg = mWorkHandler.obtainMessage(MSG_FETCH, intent);
+        if (JsonHelper.MSG_FETCH == cmd) {
+            Message msg = mWorkHandler.obtainMessage(JsonHelper.MSG_FETCH, intent);
             mWorkHandler.sendMessage(msg);
         }
         return Service.START_REDELIVER_INTENT;

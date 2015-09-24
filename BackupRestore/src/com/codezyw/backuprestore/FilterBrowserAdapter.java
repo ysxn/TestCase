@@ -4,13 +4,14 @@ package com.codezyw.backuprestore;
 import java.io.File;
 import java.util.List;
 
-import com.codezyw.common.FileIOHelper;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.codezyw.common.FileIOHelper;
+import com.codezyw.common.UnitHelper;
 
 public class FilterBrowserAdapter extends ArrayAdapter<File> {
     private FileIOHelper mUtil;
@@ -24,19 +25,16 @@ public class FilterBrowserAdapter extends ArrayAdapter<File> {
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView view = (TextView) super.getView(position, convertView, parent);
         File file = getItem(position);
+        StringBuilder sb = new StringBuilder();
+        sb.append(file.getName()).append("\n");
         if (file.isDirectory()) {
-            view.setText(file.getName() + "\n    " + mUtil.convetTime(file.lastModified()));
+            sb.append("修改时间 : ").append(mUtil.convetTime(file.lastModified()));
+            view.setText(sb.toString());
         } else {
             long b = file.length();
-            if (b > 1024 * 1024) {
-                view.setText(file.getName() + "\n    " + b / 1024 / 1024 + "MB" + "\n    " + mUtil.convetTime(file.lastModified()));
-            } else if (b > 1024) {
-                view.setText(file.getName() + "\n    " + b / 1024 + "KB" + "\n    " + mUtil.convetTime(file.lastModified()));
-            } else {
-                view.setText(file.getName() + "\n    " + b + "Bytes" + "\n    " + mUtil.convetTime(file.lastModified()));
-            }
+            sb.append("文件大小 : ").append(UnitHelper.byteToHumanNumber(b)).append("\n").append("修改时间 : ").append(mUtil.convetTime(file.lastModified()));
+            view.setText(sb.toString());
         }
-
         return view;
     }
 

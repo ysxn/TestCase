@@ -1,3 +1,4 @@
+
 package com.codezyw.common;
 
 import android.content.Context;
@@ -6,20 +7,36 @@ public class UnitHelper {
     public static final long GB_IN_BYTES = 1073741824L;
     public static final long KB_IN_BYTES = 1024L;
     public static final long MB_IN_BYTES = 1048576L;
-    
+    public static final String GB = "GB";
+    public static final String KB = "KB";
+    public static final String MB = "MB";
+    public static final String BYTES = "Bytes";
+
     public static long byteToKB(long num) {
         return num / KB_IN_BYTES;
     }
-    
+
     public static long byteToMB(long num) {
         return num / MB_IN_BYTES;
     }
-    
+
     public static long byteToGB(long num) {
         return num / GB_IN_BYTES;
     }
-    
-	public static float dp2px(Context context, float dp) {
+
+    public static String byteToHumanNumber(long b) {
+        StringBuilder sb = new StringBuilder();
+        if (b > 1024 * 1024) {
+            sb.append(b / 1024 / 1024 + MB);
+        } else if (b > 1024) {
+            sb.append(b / 1024 + KB);
+        } else {
+            sb.append(b + BYTES);
+        }
+        return sb.toString();
+    }
+
+    public static float dp2px(Context context, float dp) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return dp * scale + 0.5f;
     }
@@ -28,10 +45,11 @@ public class UnitHelper {
         final float scale = context.getResources().getDisplayMetrics().scaledDensity;
         return sp * scale;
     }
-    
+
     /**
      * 输入数字是原始数字<br>
      * 输出处理四舍五入
+     * 
      * @param data
      * @return
      */
@@ -49,47 +67,48 @@ public class UnitHelper {
             sb.append(data);
             return sb.toString();
         } else if (num >= 10000L && num <= 999999L) {
-            String data = String.valueOf(num+50L).trim();
+            String data = String.valueOf(num + 50L).trim();
             int length = data.length();
             sb.append(data.substring(0, length - 4)).append(".").append(data.substring(length - 4, length - 2));
             sb.append("万");
             return sb.toString();
         } else if (num >= 1000000L && num <= 9999999L) {
-            String data = String.valueOf(num+500L).trim();
+            String data = String.valueOf(num + 500L).trim();
             int length = data.length();
             sb.append(data.substring(0, length - 4)).append(".").append(data.substring(length - 4, length - 3));
             sb.append("万");
             return sb.toString();
         } else if (num >= 10000000L && num <= 99999999L) {
-            String data = String.valueOf(num+5000L).trim();
+            String data = String.valueOf(num + 5000L).trim();
             int length = data.length();
             sb.append(data.substring(0, length - 4));
             sb.append("万");
             return sb.toString();
         } else if (num >= 100000000L && num <= 9999999999L) {
-            String data = String.valueOf(num+500000L).trim();
+            String data = String.valueOf(num + 500000L).trim();
             int length = data.length();
             sb.append(data.substring(0, length - 8)).append(".").append(data.substring(length - 8, length - 6));
             sb.append("亿");
             return sb.toString();
         } else if (num >= 10000000000L && num <= 99999999999L) {
-            String data = String.valueOf(num+5000000L).trim();
+            String data = String.valueOf(num + 5000000L).trim();
             int length = data.length();
             sb.append(data.substring(0, length - 8)).append(".").append(data.substring(length - 8, length - 7));
             sb.append("亿");
             return sb.toString();
         } else {
-            String data = String.valueOf(num+50000000L).trim();
+            String data = String.valueOf(num + 50000000L).trim();
             int length = data.length();
             sb.append(data.substring(0, length - 8));
             sb.append("亿");
             return sb.toString();
         }
     }
-    
+
     /**
      * 输入数字是原始数字<br>
      * 输出不处理四舍五入
+     * 
      * @param data
      * @return
      */
@@ -144,10 +163,11 @@ public class UnitHelper {
             return sb.toString();
         }
     }
-    
+
     /**
      * 输入数字已经乘以万<br>
      * 输出处理四舍五入
+     * 
      * @param num
      * @return
      */
@@ -166,19 +186,19 @@ public class UnitHelper {
             sb.append("万");
             return sb.toString();
         } else if (num >= 10000L && num <= 999999L) {
-            String data = String.valueOf(num+50L).trim();
+            String data = String.valueOf(num + 50L).trim();
             int length = data.length();
             sb.append(data.substring(0, length - 4)).append(".").append(data.substring(length - 4, length - 2));
             sb.append("亿");
             return sb.toString();
         } else if (num >= 1000000L && num <= 9999999L) {
-            String data = String.valueOf(num+500L).trim();
+            String data = String.valueOf(num + 500L).trim();
             int length = data.length();
             sb.append(data.substring(0, length - 4)).append(".").append(data.substring(length - 4, length - 3));
             sb.append("亿");
             return sb.toString();
         } else {
-            String data = String.valueOf(num+5000L).trim();
+            String data = String.valueOf(num + 5000L).trim();
             int length = data.length();
             sb.append(data.substring(0, length - 4));
             sb.append("亿");

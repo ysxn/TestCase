@@ -40,6 +40,7 @@ import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -52,12 +53,20 @@ import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-import cn.trinea.android.common.util.HttpUtils;
-
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import cn.trinea.android.common.util.HttpUtils;
+import cn.trinea.android.common.util.ImageUtils;
+
+import com.codezyw.common.HttpPostAsyncTask.PostListener;
 
 /**
  * HttpClient实际上是对Java提供方法的一些封装，在HttpURLConnection中的输入输出流操作，
@@ -124,6 +133,10 @@ public class HttpHelper {
 
     @SuppressWarnings("unused")
     private final static String TAG = "HttpHelper";
+
+    public final static String DELETE_URL = "http://php.codezyw.com/delete_note_android.php";
+    public final static String UPDATE_URL = "http://php.codezyw.com/update_note_android.php";
+    public final static String FETCH_URL = "http://php.codezyw.com/fetch_note_android.php";
 
     /** 本身就是线程安全的 */
     private static HttpClient sHttpClient;
@@ -648,5 +661,210 @@ public class HttpHelper {
             }
         }
         return resultData;
+    }
+
+    /**
+     * AsyncTask异步任务http post提交application/x-www-form-urlencoded
+     */
+    public static void asyncHttpPost(final String url, final Context context,
+            final List<NameValuePair> paramsPair,
+            final PostListener postListener) {
+        if (context == null || TextUtils.isEmpty(url) || postListener == null) {
+            return;
+        }
+        new AsyncTask<String, Integer, String>() {
+
+            @Override
+            protected String doInBackground(String... params) {
+                return httpPost(url, paramsPair);
+            }
+
+            @Override
+            public void onPreExecute() {
+                postListener.onPreExecute();
+                UIHelper.showProgressDialog(context, "HttpPost请求", "正在处理网络请求......", ProgressDialog.STYLE_HORIZONTAL, false, 100);
+            }
+
+            @Override
+            public void onPostExecute(String result) {
+                postListener.onPostExecute(result);
+                UIHelper.dismissProgressDialog();
+            }
+
+            @Override
+            public void onCancelled(String result) {
+                postListener.onCancelled(result);
+                UIHelper.dismissProgressDialog();
+            }
+        }.execute(url);
+    }
+
+    /**
+     * AsyncTask异步任务http post提交multipart/form-data
+     * <p>
+     * <a href="http://bbs.51cto.com/thread-1114378-1-1.html">http://bbs.51cto.
+     * com/thread-1114378-1-1.html</a>
+     * 
+     * <pre>
+     * 在android AsyncTask里面有两种线程池供我们调用
+     * 1．    THREAD_POOL_EXECUTOR, 异步线程池
+     * 2．    SERIAL_EXECUTOR，同步线程池
+     * 正如上面名称描述的那样，一个是异步线程池，多个任务在线程池中并发执行；还有一个是同步执行的。
+     * 默认的话，直接调用execute的话，是使用SERIAL_EXECUTOR
+     * </pre>
+     */
+    public static void asyncHttpPostMultipart(final String url, final Activity activity,
+            ProgressMultipartEntity multipartEntity,
+            final PostListener postListener) {
+        if (activity == null || TextUtils.isEmpty(url) || postListener == null) {
+            return;
+        }
+        if (multipartEntity == null) {
+            Bitmap bitmap = BitmapHelper.getShot(activity);
+            if (bitmap == null) {
+                return;
+            }
+            multipartEntity = new ProgressMultipartEntity();
+            byte[] data = ImageUtils.bitmapToByte(bitmap);
+            multipartEntity.addPart("bitmap", new ByteArrayBody(data, "screenshot.png"));
+            bitmap.recycle();
+        }
+        HttpPostAsyncTask task = new HttpPostAsyncTask(new PostListener() {
+
+            @Override
+            public void onProgressUpdate(int progress) {
+                UIHelper.updateProgressDialog(progress);
+                postListener.onProgressUpdate(progress);
+            }
+
+            @Override
+            public void onPreExecute() {
+                postListener.onPreExecute();
+                UIHelper.showProgressDialog(activity, "HttpPost请求", "正在处理网络请求......", ProgressDialog.STYLE_HORIZONTAL, false, 100);
+            }
+
+            @Override
+            public void onPostExecute(String result) {
+                postListener.onPostExecute(result);
+                UIHelper.dismissProgressDialog();
+            }
+
+            @Override
+            public void onCancelled(String result) {
+                postListener.onCancelled(result);
+                UIHelper.dismissProgressDialog();
+            }
+        }, multipartEntity);
+        task.execute(url);
+    }
+
+    /**
+     * <a href="php.codezyw.com">php.codezyw.com</a>
+     */
+    public static void deleteServer(Context mContext, Bundle bundle) {
+        int id = bundle.getInt(JsonHelper.NOTE_ID);
+        final List<NameValuePair> phpParams = new ArrayList<NameValuePair>();
+        phpParams.add(new BasicNameValuePair(JsonHelper.ACCOUNT, DbHelper.getInstance(
+                mContext).getString(JsonHelper.ACCOUNT, "")));
+        phpParams.add(new BasicNameValuePair(JsonHelper.PASSWORD, DbHelper.getInstance(
+                mContext).getString(JsonHelper.PASSWORD, "")));
+        phpParams.add(new BasicNameValuePair(JsonHelper.NOTE_ID, Integer.toString(id)));
+        parseServerResult(mContext, HttpHelper.httpPost(HttpHelper.DELETE_URL, phpParams));
+    }
+
+    /**
+     * <a href="php.codezyw.com">php.codezyw.com</a>
+     */
+    public static void updateServer(Context mContext, Bundle bundle) {
+        int id = bundle.getInt(JsonHelper.NOTE_ID);
+        String title = bundle.getString(JsonHelper.TITLE);
+        String content = bundle.getString(JsonHelper.CONTENT);
+        final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        postParams.add(new BasicNameValuePair(JsonHelper.ACCOUNT, DbHelper.getInstance(
+                mContext).getString(JsonHelper.ACCOUNT, "")));
+        postParams.add(new BasicNameValuePair(JsonHelper.PASSWORD, DbHelper.getInstance(
+                mContext).getString(JsonHelper.PASSWORD, "")));
+        postParams.add(new BasicNameValuePair(JsonHelper.TITLE, title));
+        postParams.add(new BasicNameValuePair(JsonHelper.CONTENT, content));
+        postParams.add(new BasicNameValuePair(JsonHelper.NOTE_ID, Integer.toString(id)));
+        parseServerResult(mContext, HttpHelper.httpPost(HttpHelper.UPDATE_URL, postParams));
+    }
+
+    /**
+     * <a href="php.codezyw.com">php.codezyw.com</a>
+     */
+    public static List<HttpDataContentBean> fetchServer(Context mContext) {
+        final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        postParams.add(new BasicNameValuePair(JsonHelper.ACCOUNT, DbHelper.getInstance(mContext)
+                .getString(JsonHelper.ACCOUNT, "")));
+        postParams.add(new BasicNameValuePair(JsonHelper.PASSWORD, DbHelper.getInstance(
+                mContext).getString(JsonHelper.PASSWORD, "")));
+        return parseServerResult(mContext, HttpHelper.httpPost(HttpHelper.FETCH_URL, postParams));
+    }
+
+    /**
+     * <a href="php.codezyw.com">php.codezyw.com</a>
+     */
+    public static List<HttpDataContentBean> parseServerResult(Context mContext, String result_data) {
+        Log.i(TAG, "after http post result_data = " + result_data);
+        if (!TextUtils.isEmpty(result_data)) {
+            HttpResultBean httpResultBean = JsonHelper.parseHttpResultBeanByJSONSingle(result_data);
+            if (httpResultBean != null) {
+                Log.i(TAG, ">>>>>>>>>>>>>dump httpResultBean start " + httpResultBean.dump()
+                        + ">>>>>>>>>>>>>dump httpResultBean end ");
+                if (httpResultBean.getLogin_result()) {
+                    if (JsonHelper.FETCH_CMD_FETCH.equals(httpResultBean.getFetch_cmd())) {
+                        if (httpResultBean.getFetch_result()) {
+                            List<HttpDataContentBean> list = httpResultBean.getResult_data();
+                            UIHelper.showToast(mContext, "登录成功,下载服务器数据成功!");
+                            if (list != null) {
+                                // 避免错误的无限同步循环
+                                UIHelper.dismissProgressDialog();
+                                return list;
+                            }
+                        } else {
+                            UIHelper.dismissProgressDialog();
+                            UIHelper.showDialog(mContext, "登录成功,但是下载服务器数据失败!",
+                                    httpResultBean.getError_info());
+                        }
+                    } else if (JsonHelper.FETCH_CMD_INSERT.equals(httpResultBean.getFetch_cmd())) {
+                        UIHelper.dismissProgressDialog();
+                        if (httpResultBean.getFetch_result()) {
+                            UIHelper.showToast(mContext, "登录成功,插入服务器数据成功!");
+                        } else {
+                            UIHelper.showDialog(mContext, "登录成功,但是插入服务器数据失败!",
+                                    httpResultBean.getError_info());
+                        }
+                    } else if (JsonHelper.FETCH_CMD_UPDATE.equals(httpResultBean.getFetch_cmd())) {
+                        UIHelper.dismissProgressDialog();
+                        if (httpResultBean.getFetch_result()) {
+                            UIHelper.showToast(mContext, "登录成功,更新服务器数据成功!");
+                        } else {
+                            UIHelper.showDialog(mContext, "登录成功,但是更新服务器数据失败!",
+                                    httpResultBean.getError_info());
+                        }
+                    } else if (JsonHelper.FETCH_CMD_DELETE.equals(httpResultBean.getFetch_cmd())) {
+                        UIHelper.dismissProgressDialog();
+                        if (httpResultBean.getFetch_result()) {
+                            UIHelper.showToast(mContext, "登录成功,删除服务器数据成功!");
+                        } else {
+                            UIHelper.showDialog(mContext, "登录成功,但是删除服务器数据失败!",
+                                    httpResultBean.getError_info());
+                        }
+                    }
+                } else {
+                    UIHelper.dismissProgressDialog();
+                    UIHelper.showDialog(mContext, "登录失败!", result_data);
+                }
+            } else {
+                UIHelper.dismissProgressDialog();
+                UIHelper.showDialog(mContext, "JSON错误!", result_data);
+            }
+        } else {
+            UIHelper.dismissProgressDialog();
+            UIHelper.showDialog(mContext, "网络错误!", result_data);
+        }
+        UIHelper.dismissProgressDialog();
+        return null;
     }
 }

@@ -3,10 +3,6 @@ package com.codezyw.backuprestore;
 
 import java.util.List;
 
-import com.codezyw.common.FileIOHelper;
-import com.codezyw.common.SlideMenuGroup;
-import com.codezyw.common.UIHelper;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +10,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.codezyw.common.FileIOHelper;
+import com.codezyw.common.SlideMenuGroup;
+import com.codezyw.common.UIHelper;
+import com.codezyw.common.UnitHelper;
 
 public class ApkListAdapter extends BaseAdapter {
 
@@ -66,14 +67,13 @@ public class ApkListAdapter extends BaseAdapter {
         ImageView icon = (ImageView) listItem.findViewById(R.id.icon);
         FileData file = mApkList.get(position);
         textView1.setText(file.mFile.getName());
+        StringBuilder sb = new StringBuilder();
+        sb.append(file.mFile.getAbsolutePath()).append("\n");
         long b = file.mFile.length();
-        if (b > 1024 * 1024) {
-            textView2.setText(file.mFile.getAbsolutePath() + "\n文件大小：" + b / 1024 / 1024 + "MB" + "\n创建时间：" + mUtil.convetTime(file.mFile.lastModified())
-                    + "\n" + file.mVersion);
-        } else {
-            textView2.setText(file.mFile.getAbsolutePath() + "\n文件大小：" + b / 1024 + "KB" + "\n创建时间：" + mUtil.convetTime(file.mFile.lastModified()) + "\n"
-                    + file.mVersion);
-        }
+        sb.append("文件大小 : ").append(UnitHelper.byteToHumanNumber(b)).append("\n")
+                .append("修改时间 : ").append(mUtil.convetTime(file.mFile.lastModified())).append("\n")
+                .append(file.mVersion);
+        textView2.setText(sb.toString());
         if (file.mDrawable != null) {
             icon.setImageDrawable(file.mDrawable);
         }
@@ -96,10 +96,10 @@ public class ApkListAdapter extends BaseAdapter {
                     ApkListAdapter.this.notifyDataSetChanged();
                     StringBuilder sb = new StringBuilder();
                     sb.append("成功删除安装包：")
-                    .append(fdData.mFile.getName())
-                    .append("\n路径：")
-                    .append(fdData.mFile.getAbsolutePath());
-                    UIHelper.showToast(mContext,  sb.toString());
+                            .append(fdData.mFile.getName())
+                            .append("\n路径：")
+                            .append(fdData.mFile.getAbsolutePath());
+                    UIHelper.showToast(mContext, sb.toString());
                 }
             }
         });

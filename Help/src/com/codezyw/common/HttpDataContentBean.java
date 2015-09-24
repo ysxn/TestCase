@@ -1,9 +1,13 @@
-package com.example.android.notepad;
+
+package com.codezyw.common;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class NoteBean implements Parcelable {
+/**
+ * <a href="php.codezyw.com">php.codezyw.com</a>��ݿ�ͨ��������ݱ��ֶη��ص�json
+ */
+public class HttpDataContentBean implements Parcelable {
 
     private int note_id;
 
@@ -17,11 +21,11 @@ public class NoteBean implements Parcelable {
 
     private String modify_date;
 
-    public NoteBean() {
+    public HttpDataContentBean() {
         super();
     }
-    
-    public NoteBean(int noteId, String e, String nt, String nc, String cd, String md) {
+
+    public HttpDataContentBean(int noteId, String e, String nt, String nc, String cd, String md) {
         super();
         this.note_id = noteId;
         this.email = e;
@@ -99,10 +103,10 @@ public class NoteBean implements Parcelable {
         dest.writeString(modify_date);
     }
 
-    public static final Parcelable.Creator<NoteBean> CREATOR =
-            new Parcelable.Creator<NoteBean>() {
-                public NoteBean createFromParcel(Parcel in) {
-                    NoteBean notesData = new NoteBean();
+    public static final Parcelable.Creator<HttpDataContentBean> CREATOR =
+            new Parcelable.Creator<HttpDataContentBean>() {
+                public HttpDataContentBean createFromParcel(Parcel in) {
+                    HttpDataContentBean notesData = new HttpDataContentBean();
                     notesData.note_id = in.readInt();
                     notesData.email = in.readString();
                     notesData.note_title = in.readString();
@@ -113,15 +117,14 @@ public class NoteBean implements Parcelable {
                     return notesData;
                 }
 
-                public NoteBean[] newArray(int size) {
-                    return new NoteBean[size];
+                public HttpDataContentBean[] newArray(int size) {
+                    return new HttpDataContentBean[size];
                 }
             };
 
-
     @Override
     public boolean equals(Object o) {
-        return o instanceof NoteBean && note_id == (((NoteBean) o).getNote_id());
+        return o instanceof HttpDataContentBean && note_id == (((HttpDataContentBean) o).getNote_id());
     }
 
     @Override
@@ -131,6 +134,7 @@ public class NoteBean implements Parcelable {
 
     public String dump() {
         StringBuilder sb = new StringBuilder();
+        sb.append("\n");
         sb.append("note_id=").append(note_id).append("\n");
         sb.append("email=").append(email).append("\n");
         sb.append("note_title=").append(note_title).append("\n");
