@@ -9,11 +9,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import com.codezyw.common.BaseListActicity;
-import com.codezyw.common.FileIOHelper;
-import com.codezyw.common.SlideMenuListener;
-import com.codezyw.common.ThreadPoolHelper.ThreadBaseRunnable;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -29,6 +24,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.codezyw.common.BaseListActicity;
+import com.codezyw.common.FileIOHelper;
+import com.codezyw.common.SlideMenuListener;
+import com.codezyw.common.ThreadPoolHelper.ThreadBaseRunnable;
 
 public class ApkBrowser extends BaseListActicity {
     private final String TAG = "zyw";
@@ -84,7 +84,7 @@ public class ApkBrowser extends BaseListActicity {
                     if (mProgressDialog != null && mProgressDialog.isShowing()) {
                         int count = msg.arg1;
                         String fileName = (String) msg.obj;
-                        mProgressDialog.setMessage("ÒÑ¾­É¨Ãèµ½ " + count + " ¸öAPK°²×°°ü£º" + fileName);
+                        mProgressDialog.setMessage("å·²ç»æ‰«æåˆ° " + count + " ä¸ªAPKå®‰è£…åŒ…ï¼š" + fileName);
                     }
                 }
                     break;
@@ -97,7 +97,7 @@ public class ApkBrowser extends BaseListActicity {
                     setListAdapter(mFileListAdapter);
                     mSwipeTouchListener = new SlideMenuListener(ApkBrowser.this, mListView);
                     mListView.setOnTouchListener(mSwipeTouchListener);
-                    Toast.makeText(ApkBrowser.this, "ÒÑ¾­É¨Ãèµ½ " + mFilesList.size() + " ¸öAPK°²×°°ü£º", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ApkBrowser.this, "å·²ç»æ‰«æåˆ° " + mFilesList.size() + " ä¸ªAPKå®‰è£…åŒ…ï¼š", Toast.LENGTH_LONG).show();
                 }
                     break;
             }
@@ -112,7 +112,7 @@ public class ApkBrowser extends BaseListActicity {
         mDirectory = i.getStringExtra(Constant.DIRECTORY);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIconAttribute(android.R.attr.alertDialogIcon);
-        mProgressDialog.setTitle("ÕıÔÚÉ¨ÃèAPK°²×°°üÖĞ...");
+        mProgressDialog.setTitle("æ­£åœ¨æ‰«æAPKå®‰è£…åŒ…ä¸­...");
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setCancelable(false);
@@ -163,7 +163,7 @@ public class ApkBrowser extends BaseListActicity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 FileData fileData = (FileData) view.getTag();
-                Toast.makeText(ApkBrowser.this, "Ç©Ãû£º" + fileData.mCert, Toast.LENGTH_LONG).show();
+                Toast.makeText(ApkBrowser.this, "ç­¾åï¼š" + fileData.mCert, Toast.LENGTH_LONG).show();
                 return true;
             }
         });
@@ -230,7 +230,7 @@ public class ApkBrowser extends BaseListActicity {
 
     private int checkInstallStat(FileData fd) {
         fd.mInstalled = Constant.NONE;
-        fd.mVersion = "°²×°×´Ì¬£ºÎ´°²×°";
+        fd.mVersion = "å®‰è£…çŠ¶æ€ï¼šæœªå®‰è£…";
         if (fd.mAi == null || fd.mPi == null || fd.mPi.packageName == null || fd.mPi.versionName == null) {
             return fd.mInstalled;
         }
@@ -238,10 +238,10 @@ public class ApkBrowser extends BaseListActicity {
             if (fd.mAi.packageName.equals(pi.packageName)) {
                 if (fd.mPi.versionCode == pi.versionCode && fd.mPi.versionName.equals(pi.versionName)) {
                     fd.mInstalled = Constant.SAME;
-                    fd.mVersion = "°²×°×´Ì¬£ºÒÑ°²×°:" + pi.versionName + " : " + pi.versionCode;
+                    fd.mVersion = "å®‰è£…çŠ¶æ€ï¼šå·²å®‰è£…:" + pi.versionName + " : " + pi.versionCode;
                 } else {
                     fd.mInstalled = Constant.SAME;
-                    fd.mVersion = "°²×°×´Ì¬£ºÒÑ°²×°:" + pi.versionName + " : " + pi.versionCode + "->" + fd.mPi.versionName + " : " + fd.mPi.versionCode;
+                    fd.mVersion = "å®‰è£…çŠ¶æ€ï¼šå·²å®‰è£…:" + pi.versionName + " : " + pi.versionCode + "->" + fd.mPi.versionName + " : " + fd.mPi.versionCode;
                 }
             }
         }
@@ -260,11 +260,11 @@ public class ApkBrowser extends BaseListActicity {
         }
         return r;
     }
-    
+
     private class ThreadRunnable extends ThreadBaseRunnable {
         private FileData fdData;
         private Handler handler;
-        
+
         public ThreadRunnable(final FileData fileData, final Handler handler) {
             this.fdData = fileData;
             this.handler = handler;

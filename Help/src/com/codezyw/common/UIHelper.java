@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -389,8 +390,8 @@ public class UIHelper {
 
     /**
      * 获取屏幕窗口显示属性
-     * @param activity
      * 
+     * @param activity
      * @see DisplayMetrics
      */
     public static DisplayMetrics getDisplayMetrics(Activity activity) {
@@ -399,5 +400,57 @@ public class UIHelper {
         Log.i("zyw", ">>>" + metrics.toString() + ", densityDpi=" + metrics.densityDpi);
         Toast.makeText(activity, ">>>" + metrics.toString() + ", densityDpi=" + metrics.densityDpi, Toast.LENGTH_LONG).show();
         return metrics;
+    }
+
+    /**
+     * 获取屏幕窗口宽度
+     * 
+     * @param activity
+     * @see DisplayMetrics
+     */
+    public static int getScreenWidth(Activity activity) {
+        DisplayMetrics metrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        return metrics.widthPixels;
+    }
+
+    /**
+     * 获取屏幕窗口高度
+     * 
+     * @param activity
+     * @see DisplayMetrics
+     */
+    public static int getScreenHeight(Activity activity) {
+        DisplayMetrics metrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        return metrics.heightPixels;
+    }
+
+    /**
+     * 获取触摸位置原始坐标x
+     */
+    public static int getMotionEventX(MotionEvent event) {
+        return (int) event.getRawX();
+    }
+
+    /**
+     * 获取触摸位置原始坐标y，此时的坐标没有相对系统状态栏高度调整过，会比实际位置偏下
+     */
+    public static int getMotionEventY(MotionEvent event) {
+        return (int) event.getRawY();
+    }
+
+    /**
+     * 获取触摸位置坐标x
+     */
+    public static int getMotionEventAdjustX(MotionEvent event) {
+        return (int) event.getX();
+    }
+
+    /**
+     * 获取触摸位置坐标y，此时的坐标相对系统状态栏高度调整过
+     */
+    public static int getMotionEventAdjustY(MotionEvent event) {
+        return (int) event.getY();
     }
 }

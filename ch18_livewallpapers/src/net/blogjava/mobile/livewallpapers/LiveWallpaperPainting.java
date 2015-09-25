@@ -1,8 +1,10 @@
+
 package net.blogjava.mobile.livewallpapers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -13,194 +15,193 @@ import android.view.SurfaceHolder;
 public class LiveWallpaperPainting extends Thread
 {
 
-	private SurfaceHolder surfaceHolder;
-	private Context context;
+    private SurfaceHolder surfaceHolder;
+    private Context context;
 
-	private boolean wait;
-	private boolean run;
+    private boolean wait;
+    private boolean run;
 
-	/* ³ß´çºÍ°ë¾¶  */
-	private int width;
-	private int height;
-	private int radius;
+    /* å°ºå¯¸å’ŒåŠå¾„ */
+    private int width;
+    private int height;
+    private int radius;
 
-	/** ´¥Ãşµã */
-	private List<TouchPoint> points;
+    /** è§¦æ‘¸ç‚¹ */
+    private List<TouchPoint> points;
 
-	/* Ê±¼ä¹ì¼£ */
-	private long previousTime;
+    /* æ—¶é—´è½¨è¿¹ */
+    private long previousTime;
 
-	public LiveWallpaperPainting(SurfaceHolder surfaceHolder, Context context,
-			int radius)
-	{
+    public LiveWallpaperPainting(SurfaceHolder surfaceHolder, Context context,
+            int radius)
+    {
 
-		this.surfaceHolder = surfaceHolder;
-		this.context = context;
-		// Ö±µ½surface±»´´½¨ºÍÏÔÊ¾Ê±²Å¿ªÊ¼¶¯»­
-		this.wait = true;
-		// ³õÊ¼»¯´¥Ãşµã
-		this.points = new ArrayList<TouchPoint>();
-		// ³õÊ¼»¯°ë¾¶
-		this.radius = radius;
-	}
+        this.surfaceHolder = surfaceHolder;
+        this.context = context;
+        // ç›´åˆ°surfaceè¢«åˆ›å»ºå’Œæ˜¾ç¤ºæ—¶æ‰å¼€å§‹åŠ¨ç”»
+        this.wait = true;
+        // åˆå§‹åŒ–è§¦æ‘¸ç‚¹
+        this.points = new ArrayList<TouchPoint>();
+        // åˆå§‹åŒ–åŠå¾„
+        this.radius = radius;
+    }
 
-	//  Í¨¹ıÉèÖÃÒ³Ãæ¿ÉÒÔ¸Ä±äÔ²µÄ°ë¾¶
-	public void setRadius(int radius)
-	{
-		this.radius = radius;
-	}
+    // é€šè¿‡è®¾ç½®é¡µé¢å¯ä»¥æ”¹å˜åœ†çš„åŠå¾„
+    public void setRadius(int radius)
+    {
+        this.radius = radius;
+    }
 
-    // ÔİÍ£ÊµÊ±±ÚÖ½µÄ¶¯»­
-	public void pausePainting()
-	{
-		this.wait = true;
-		synchronized (this)
-		{
-			this.notify();
-		}
-	}
+    // æš‚åœå®æ—¶å£çº¸çš„åŠ¨ç”»
+    public void pausePainting()
+    {
+        this.wait = true;
+        synchronized (this)
+        {
+            this.notify();
+        }
+    }
 
-	//  »Ö¸´ÔÚÊµÊ±±ÚÖ½ÉÏ»æÖÆ²ÊÉ«ÊµĞÄÔ²	 
-	public void resumePainting()
-	{
-		this.wait = false;
-		synchronized (this)
-		{
-			this.notify();
-		}
-	}
+    // æ¢å¤åœ¨å®æ—¶å£çº¸ä¸Šç»˜åˆ¶å½©è‰²å®å¿ƒåœ†
+    public void resumePainting()
+    {
+        this.wait = false;
+        synchronized (this)
+        {
+            this.notify();
+        }
+    }
 
-    //  Í£Ö¹ÔÚÊµÊ±±ÚÖ½ÉÏ»æÖÆ²ÊÉ«ÊµĞÄÔ²
-	public void stopPainting()
-	{
-		this.run = false;
-		synchronized (this)
-		{
-			this.notify();
-		}
-	}
+    // åœæ­¢åœ¨å®æ—¶å£çº¸ä¸Šç»˜åˆ¶å½©è‰²å®å¿ƒåœ†
+    public void stopPainting()
+    {
+        this.run = false;
+        synchronized (this)
+        {
+            this.notify();
+        }
+    }
 
-	@Override
-	public void run()
-	{
-		this.run = true;
-		Canvas canvas = null;
-		while (run)
-		{
-			try
-			{
-				canvas = this.surfaceHolder.lockCanvas(null);
-				synchronized (this.surfaceHolder)
-				{
-					doDraw(canvas);
-				}
-			} finally
-			{
-				if (canvas != null)
-				{
-					this.surfaceHolder.unlockCanvasAndPost(canvas);
-				}
-			}
-			// Èç¹û²»ĞèÒª¶¯»­ÔòÔİÍ£¶¯»­
-			synchronized (this)
-			{
-				if (wait)
-				{
-					try
-					{
-						wait();
-					}
-					catch (Exception e)
-					{
-					}
-				}
-			}
-		}
-	}
+    @Override
+    public void run()
+    {
+        this.run = true;
+        Canvas canvas = null;
+        while (run)
+        {
+            try
+            {
+                canvas = this.surfaceHolder.lockCanvas(null);
+                synchronized (this.surfaceHolder)
+                {
+                    doDraw(canvas);
+                }
+            } finally
+            {
+                if (canvas != null)
+                {
+                    this.surfaceHolder.unlockCanvasAndPost(canvas);
+                }
+            }
+            // å¦‚æœä¸éœ€è¦åŠ¨ç”»åˆ™æš‚åœåŠ¨ç”»
+            synchronized (this)
+            {
+                if (wait)
+                {
+                    try
+                    {
+                        wait();
+                    } catch (Exception e)
+                    {
+                    }
+                }
+            }
+        }
+    }
 
-	public void setSurfaceSize(int width, int height)
-	{
-		this.width = width;
-		this.height = height;
-		synchronized (this)
-		{
-			this.notify();
-		}
-	}
+    public void setSurfaceSize(int width, int height)
+    {
+        this.width = width;
+        this.height = height;
+        synchronized (this)
+        {
+            this.notify();
+        }
+    }
 
-	public void doTouchEvent(MotionEvent event)
-	{
-		synchronized (this.points)
-		{
-			
-			int color = new Random().nextInt(Integer.MAX_VALUE);
-			points.add(new TouchPoint((int) event.getX(), (int) event.getY(),
-					color, Math.min(width, height) / this.radius));
-		}
-		this.wait = false;
-		synchronized (this)
-		{
-			notify();
-		}
-	}
+    public void doTouchEvent(MotionEvent event)
+    {
+        synchronized (this.points)
+        {
 
-	private void doDraw(Canvas canvas)
-	{
-		long currentTime = System.currentTimeMillis();
-		long elapsed = currentTime - previousTime;
-		if (elapsed > 20)
-		{
-			BitmapDrawable bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.background);
-			//  »æÖÆÊµÊ±±ÚÖ½µÄ±³¾°Í¼
-			canvas.drawBitmap(bitmapDrawable.getBitmap(), 0, 0, new Paint());
-			
-			// »æÖÆ´¥Ãşµã
-			Paint paint = new Paint();
-			List<TouchPoint> pointsToRemove = new ArrayList<TouchPoint>();
-			synchronized (this.points)
-			{
-				for (TouchPoint point : points)
-				{
-					paint.setColor(point.color);
-					point.radius -= elapsed / 20;
-					if (point.radius <= 0)
-					{
-						pointsToRemove.add(point);
-					}
-					else
-					{
-						canvas
-								.drawCircle(point.x, point.y, point.radius,
-										paint);
-					}
-				}
-				points.removeAll(pointsToRemove);
-			}
-			previousTime = currentTime;
-			if (points.size() == 0)
-			{
-				wait = true;
-			}
-		}
-	}
+            int color = new Random().nextInt(Integer.MAX_VALUE);
+            points.add(new TouchPoint((int) event.getX(), (int) event.getY(),
+                    color, Math.min(width, height) / this.radius));
+        }
+        this.wait = false;
+        synchronized (this)
+        {
+            notify();
+        }
+    }
 
-	class TouchPoint
-	{
+    private void doDraw(Canvas canvas)
+    {
+        long currentTime = System.currentTimeMillis();
+        long elapsed = currentTime - previousTime;
+        if (elapsed > 20)
+        {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.background);
+            // ç»˜åˆ¶å®æ—¶å£çº¸çš„èƒŒæ™¯å›¾
+            canvas.drawBitmap(bitmapDrawable.getBitmap(), 0, 0, new Paint());
 
-		int x;
-		int y;
-		int color;
-		int radius;
+            // ç»˜åˆ¶è§¦æ‘¸ç‚¹
+            Paint paint = new Paint();
+            List<TouchPoint> pointsToRemove = new ArrayList<TouchPoint>();
+            synchronized (this.points)
+            {
+                for (TouchPoint point : points)
+                {
+                    paint.setColor(point.color);
+                    point.radius -= elapsed / 20;
+                    if (point.radius <= 0)
+                    {
+                        pointsToRemove.add(point);
+                    }
+                    else
+                    {
+                        canvas
+                                .drawCircle(point.x, point.y, point.radius,
+                                        paint);
+                    }
+                }
+                points.removeAll(pointsToRemove);
+            }
+            previousTime = currentTime;
+            if (points.size() == 0)
+            {
+                wait = true;
+            }
+        }
+    }
 
-		public TouchPoint(int x, int y, int color, int radius)
-		{
-			this.x = x;
-			this.y = y;
-			this.radius = radius;
-			
-			this.color = color;
-		}
+    class TouchPoint
+    {
 
-	}
+        int x;
+        int y;
+        int color;
+        int radius;
+
+        public TouchPoint(int x, int y, int color, int radius)
+        {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+
+            this.color = color;
+        }
+
+    }
 
 }
