@@ -50,6 +50,8 @@ package com.codezyw.common;
  * href="http://www.trinea.cn/android/android-open-project-summary/">常用开源项目4</a>
  * <br>
  * <p>
+ * 14.Canvas常用画图函数
+ * <p>
  */
 public class ReadMe {
 

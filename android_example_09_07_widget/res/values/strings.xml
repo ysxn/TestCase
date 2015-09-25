@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="hello">Hello World, android_example_09_07_widget!</string>
-    <string name="app_name">android_example_09_07_widget</string>
-<string name="appwidget_text_format">atf</string>
-<string name="appwidget_prefix_default">apd</string>
-</resources>
