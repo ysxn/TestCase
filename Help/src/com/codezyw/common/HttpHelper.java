@@ -137,7 +137,6 @@ public class HttpHelper {
      * </pre>
      */
 
-    @SuppressWarnings("unused")
     private final static String TAG = "HttpHelper";
 
     public final static String DELETE_URL = "http://php.codezyw.com/delete_note_android.php";
@@ -678,11 +677,11 @@ public class HttpHelper {
         if (context == null || TextUtils.isEmpty(url) || postListener == null) {
             return;
         }
-        new AsyncTask<String, Integer, String>() {
-
+        HttpPostNamedAsyncTask task = new HttpPostNamedAsyncTask(new PostListener() {
             @Override
-            protected String doInBackground(String... params) {
-                return httpPost(url, paramsPair);
+            public void onProgressUpdate(int progress) {
+                UIHelper.updateProgressDialog(progress);
+                postListener.onProgressUpdate(progress);
             }
 
             @Override
@@ -702,7 +701,8 @@ public class HttpHelper {
                 postListener.onCancelled(result);
                 UIHelper.dismissProgressDialog();
             }
-        }.execute(url);
+        }, paramsPair);
+        task.execute(url);
     }
 
     /**
@@ -783,7 +783,7 @@ public class HttpHelper {
     /**
      * <a href="php.codezyw.com">php.codezyw.com</a>
      */
-    public static void updateServer(Context mContext, Bundle bundle) {
+    public static void updateServer(final Context mContext, Bundle bundle) {
         int id = bundle.getInt(JsonHelper.NOTE_ID);
         String title = bundle.getString(JsonHelper.TITLE);
         String content = bundle.getString(JsonHelper.CONTENT);
@@ -795,7 +795,29 @@ public class HttpHelper {
         postParams.add(new BasicNameValuePair(JsonHelper.TITLE, title));
         postParams.add(new BasicNameValuePair(JsonHelper.CONTENT, content));
         postParams.add(new BasicNameValuePair(JsonHelper.NOTE_ID, Integer.toString(id)));
-        parseServerResult(mContext, HttpHelper.httpPost(HttpHelper.UPDATE_URL, postParams));
+        // parseServerResult(mContext,
+        // HttpHelper.httpPost(HttpHelper.UPDATE_URL, postParams));
+        PostListener postListener = new PostListener() {
+
+            @Override
+            public void onProgressUpdate(int progress) {
+            }
+
+            @Override
+            public void onPreExecute() {
+            }
+
+            @Override
+            public void onPostExecute(String result) {
+                parseServerResult(mContext, result);
+            }
+
+            @Override
+            public void onCancelled(String result) {
+                parseServerResult(mContext, result);
+            }
+        };
+        asyncHttpPost(HttpHelper.UPDATE_URL, mContext, postParams, postListener);
     }
 
     /**

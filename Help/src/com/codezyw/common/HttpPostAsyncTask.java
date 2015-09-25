@@ -10,12 +10,11 @@ import java.net.URL;
 
 import org.apache.http.client.ClientProtocolException;
 
-import android.os.AsyncTask;
 import android.text.TextUtils;
 
 import com.codezyw.common.ProgressMultipartEntity.ProgressListener;
 
-public class HttpPostAsyncTask extends AsyncTask<String, Integer, String> {
+public class HttpPostAsyncTask extends NamedAsyncTask<String, Integer, String> {
     private long mTotalSize;
 
     private PostListener mPostListener;
@@ -25,6 +24,10 @@ public class HttpPostAsyncTask extends AsyncTask<String, Integer, String> {
     private HttpURLConnection mHttpURLConnection;
 
     private BufferedReader mBuffer;
+
+    public HttpPostAsyncTask() {
+
+    }
 
     public HttpPostAsyncTask(PostListener listener, ProgressMultipartEntity multipartEntity) {
         mPostListener = listener;
