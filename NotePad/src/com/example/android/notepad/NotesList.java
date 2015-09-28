@@ -177,7 +177,7 @@ public class NotesList extends ListActivity {
         if (mBackPressed - previous < 3500) {
             finish();
         } else {
-            Toast.makeText(this, "ÔÙ°´Ò»ÏÂ·µ»Ø¼üÍË³öÓ¦ÓÃ.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "å†æŒ‰ä¸€ä¸‹è¿”å›žé”®é€€å‡ºåº”ç”¨.", Toast.LENGTH_SHORT).show();
         }
     }
 

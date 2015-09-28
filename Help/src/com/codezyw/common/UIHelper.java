@@ -90,67 +90,68 @@ public class UIHelper {
         view.setVerticalFadingEdgeEnabled(false);
     }
 
+    /**
+     * 显示普通的Dialog
+     * 
+     * @param context
+     * @param title
+     * @param message
+     */
     public static void showDialog(Context context, String title, String message) {
         if (context == null) {
             return;
         }
-        if (mAlertDialog != null) {
-            mAlertDialog.dismiss();
-            mAlertDialog = null;
-        }
+        dismissDialog();
         mAlertDialog = new AlertDialog.Builder(context).setTitle(title).setMessage(message)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        dismissDialog();
                     }
                 }).create();
         // android.permission.SYSTEM_ALERT_WINDOW
         // 允许一个程序打开窗口使用 TYPE_SYSTEM_ALERT，显示在其他所有程序的顶层
         if (context instanceof Activity) {
         } else {
-            mAlertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+            // mAlertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         }
         mAlertDialog.setCancelable(false);
         mAlertDialog.setCanceledOnTouchOutside(false);
         mAlertDialog.show();
     }
 
-    public static void showProgressDialog(Context context, String title, String message, int style, boolean isIndeterminate, int max) {
+    /**
+     * 显示自定义Dialog
+     * <p>
+     * 
+     * @see UIHelper#getXmlDialogStyle 背景透明的Dialog
+     * @param context
+     * @param resId
+     * @param title
+     * @param message
+     * @param style
+     */
+    public static void showDialog(Context context, int resId, String title, String message, int style) {
         if (context == null) {
             return;
         }
-        dismissProgressDialog();
-        mProgressDialog = new ProgressDialog(context);
-        mProgressDialog.setProgressStyle(style);
-        mProgressDialog.setTitle(title);
-        mProgressDialog.setMessage(message);
-        mProgressDialog.setIndeterminate(isIndeterminate);
-        mProgressDialog.setMax(max);
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.setCanceledOnTouchOutside(false);
-        // android.permission.SYSTEM_ALERT_WINDOW
-        // 允许一个程序打开窗口使用 TYPE_SYSTEM_ALERT，显示在其他所有程序的顶层
-        if (context instanceof Activity) {
-        } else {
-            mProgressDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        dismissDialog();
+        LayoutInflater factory = LayoutInflater.from(context);
+        View ui = factory.inflate(resId, null);
+        if (style <= 0) {
+            style = android.R.style.Theme_DeviceDefault_Dialog;
         }
-        mProgressDialog.show();
-    }
-
-    public static void showAlertDialog(Context context, String title, String message, int style, boolean isIndeterminate, int max) {
-        if (context == null) {
-            return;
-        }
-        AlertDialog mAlertDialog = new AlertDialog.Builder(new ContextThemeWrapper(context, android.R.style.Theme_DeviceDefault_Dialog))
-                .setView(new TextView(context)).create();
-        mAlertDialog.setMessage("MESSAGE");
-        mAlertDialog.setTitle("TITLE");
+        mAlertDialog = new AlertDialog.Builder(new ContextThemeWrapper(context, android.R.style.Theme_DeviceDefault_Dialog))
+                .setView(ui).create();
+        mAlertDialog.setMessage(title);
+        mAlertDialog.setTitle(message);
         mAlertDialog.setCancelable(true);
         mAlertDialog.setCanceledOnTouchOutside(false);
         mAlertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        mAlertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "ok", new DialogInterface.OnClickListener() {
+        mAlertDialog.setButton(DialogInterface.BUTTON_POSITIVE, context.getString(android.R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                dismissDialog();
             }
         });
         mAlertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -167,9 +168,45 @@ public class UIHelper {
         // 允许一个程序打开窗口使用 TYPE_SYSTEM_ALERT，显示在其他所有程序的顶层
         if (context instanceof Activity) {
         } else {
-            mAlertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+            // mAlertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         }
         mAlertDialog.show();
+    }
+
+    public static void dismissDialog() {
+        if (mAlertDialog != null) {
+            mAlertDialog.dismiss();
+            mAlertDialog = null;
+        }
+    }
+
+    public static void showProgressDialog(Context context, String title, String message, int style, boolean isIndeterminate, int max) {
+        if (context == null) {
+            return;
+        }
+        dismissProgressDialog();
+        mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setProgressStyle(style);
+        mProgressDialog.setTitle(title);
+        mProgressDialog.setMessage(message);
+        mProgressDialog.setIndeterminate(isIndeterminate);
+        mProgressDialog.setMax(max);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setButton(DialogInterface.BUTTON_POSITIVE, context.getString(android.R.string.ok), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dismissProgressDialog();
+            }
+        });
+        // android.permission.SYSTEM_ALERT_WINDOW
+        // 允许一个程序打开窗口使用 TYPE_SYSTEM_ALERT，显示在其他所有程序的顶层
+        if (context instanceof Activity) {
+        } else {
+            // mProgressDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        }
+        mProgressDialog.show();
     }
 
     public static void updateProgressDialog(int progress) {
@@ -192,6 +229,13 @@ public class UIHelper {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 显示PopupWindow
+     * 
+     * @param context
+     * @param title
+     * @param message
+     */
     public static void showPopup(Activity context, String title, String message) {
         if (context == null || context.isFinishing() || context.getWindow() == null || context.getWindow().getDecorView() == null) {
             return;
@@ -211,6 +255,11 @@ public class UIHelper {
         popupWindow.setBackgroundDrawable(new ColorDrawable(0));
         popupWindow.setOutsideTouchable(true);
         popupWindow.showAtLocation(context.getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+    }
+
+    public static BottomMenuLayout createBottomMenuLayout(Activity context) {
+        BottomMenuLayout parent = new BottomMenuLayout(context);
+        return parent;
     }
 
     public static int measureTextHeight(Paint paint) {

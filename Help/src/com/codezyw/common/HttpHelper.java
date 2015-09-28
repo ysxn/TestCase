@@ -677,31 +677,7 @@ public class HttpHelper {
         if (context == null || TextUtils.isEmpty(url) || postListener == null) {
             return;
         }
-        HttpPostNamedAsyncTask task = new HttpPostNamedAsyncTask(new PostListener() {
-            @Override
-            public void onProgressUpdate(int progress) {
-                UIHelper.updateProgressDialog(progress);
-                postListener.onProgressUpdate(progress);
-            }
-
-            @Override
-            public void onPreExecute() {
-                postListener.onPreExecute();
-                UIHelper.showProgressDialog(context, "HttpPost请求", "正在处理网络请求......", ProgressDialog.STYLE_HORIZONTAL, false, 100);
-            }
-
-            @Override
-            public void onPostExecute(String result) {
-                postListener.onPostExecute(result);
-                UIHelper.dismissProgressDialog();
-            }
-
-            @Override
-            public void onCancelled(String result) {
-                postListener.onCancelled(result);
-                UIHelper.dismissProgressDialog();
-            }
-        }, paramsPair);
+        HttpPostNamedAsyncTask task = new HttpPostNamedAsyncTask(postListener, paramsPair);
         task.execute(url);
     }
 
@@ -737,32 +713,7 @@ public class HttpHelper {
             multipartEntity.addPart("bitmap", new ByteArrayBody(data, "screenshot.png"));
             bitmap.recycle();
         }
-        HttpPostAsyncTask task = new HttpPostAsyncTask(new PostListener() {
-
-            @Override
-            public void onProgressUpdate(int progress) {
-                UIHelper.updateProgressDialog(progress);
-                postListener.onProgressUpdate(progress);
-            }
-
-            @Override
-            public void onPreExecute() {
-                postListener.onPreExecute();
-                UIHelper.showProgressDialog(activity, "HttpPost请求", "正在处理网络请求......", ProgressDialog.STYLE_HORIZONTAL, false, 100);
-            }
-
-            @Override
-            public void onPostExecute(String result) {
-                postListener.onPostExecute(result);
-                UIHelper.dismissProgressDialog();
-            }
-
-            @Override
-            public void onCancelled(String result) {
-                postListener.onCancelled(result);
-                UIHelper.dismissProgressDialog();
-            }
-        }, multipartEntity);
+        HttpPostAsyncTask task = new HttpPostAsyncTask(postListener, multipartEntity);
         task.execute(url);
     }
 
@@ -801,20 +752,24 @@ public class HttpHelper {
 
             @Override
             public void onProgressUpdate(int progress) {
+                UIHelper.updateProgressDialog(progress);
             }
 
             @Override
             public void onPreExecute() {
+                UIHelper.showProgressDialog(mContext, "HttpPost请求", "正在处理网络请求......", ProgressDialog.STYLE_HORIZONTAL, false, 100);
             }
 
             @Override
             public void onPostExecute(String result) {
                 parseServerResult(mContext, result);
+                UIHelper.dismissProgressDialog();
             }
 
             @Override
             public void onCancelled(String result) {
                 parseServerResult(mContext, result);
+                UIHelper.dismissProgressDialog();
             }
         };
         asyncHttpPost(HttpHelper.UPDATE_URL, mContext, postParams, postListener);

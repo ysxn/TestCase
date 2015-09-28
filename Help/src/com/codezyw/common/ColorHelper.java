@@ -18,4 +18,8 @@ public class ColorHelper {
     public static final int GREEN = 0xFF00FF00;
     /** 蓝色 **/
     public static final int BLUE = 0xFF0000FF;
+
+    public static int getColor(byte alpha, byte red, byte green, byte blue) {
+        return alpha << 24 | red << 16 | green << 8 | blue;
+    }
 }

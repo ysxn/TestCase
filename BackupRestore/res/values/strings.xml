@@ -10,5 +10,6 @@
     <string name="files">"文件浏览"</string>
     <string name="suffix">"按文件后缀名搜索"</string>
     <string name="directory">"设置文件目录"</string>
+    <string name="set_user">设置账号</string>
 
 </resources>

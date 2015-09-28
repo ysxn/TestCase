@@ -18,6 +18,8 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -27,6 +29,8 @@ import android.os.Environment;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.codezyw.common.HttpPostAsyncTask.PostListener;
 
 /**
  * 自定义系统的Crash捕捉类，用Toast替换系统的对话框 将软件版本信息，设备信息，出错信息保存在sd卡中，你可以上传到服务器中
@@ -108,15 +112,38 @@ public class CrashHelper implements UncaughtExceptionHandler {
     /**
      * 上传错误log
      */
-    public void uploadServer(final String exception) {
-        final String httpUrl = "http://php.codezyw.com/update_note_android.php";
+    public void uploadServer(final Activity context, final String exception) {
+        final String httpUrl = HttpHelper.UPDATE_URL;
         final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-        postParams.add(new BasicNameValuePair("email", ""));
-        postParams.add(new BasicNameValuePair("pass", ""));
-        postParams.add(new BasicNameValuePair("note_title", "Crash log"));
-        postParams.add(new BasicNameValuePair("note_content", exception));
-        postParams.add(new BasicNameValuePair("note_id", Integer.toString(9)));
-        android.util.Log.i("zyw", "" + HttpHelper.httpPost(httpUrl, postParams));
+        postParams.add(new BasicNameValuePair(JsonHelper.ACCOUNT, DbHelper.getInstance(context).getString(JsonHelper.ACCOUNT, "")));
+        postParams.add(new BasicNameValuePair(JsonHelper.PASSWORD, DbHelper.getInstance(context).getString(JsonHelper.PASSWORD, "")));
+        postParams.add(new BasicNameValuePair(JsonHelper.TITLE, "Crash log"));
+        postParams.add(new BasicNameValuePair(JsonHelper.CONTENT, exception));
+        postParams.add(new BasicNameValuePair(JsonHelper.NOTE_ID, Integer.toString(9)));
+        HttpHelper.asyncHttpPost(httpUrl, context, postParams, new PostListener() {
+
+            @Override
+            public void onProgressUpdate(int progress) {
+                UIHelper.updateProgressDialog(progress);
+            }
+
+            @Override
+            public void onPreExecute() {
+                UIHelper.showProgressDialog(context, "上传崩溃日志", "上传中......", ProgressDialog.STYLE_HORIZONTAL, false, 100);
+            }
+
+            @Override
+            public void onPostExecute(String result) {
+                UIHelper.dismissProgressDialog();
+                UIHelper.showDialog(context, "上传崩溃日志结束", result);
+            }
+
+            @Override
+            public void onCancelled(String result) {
+                UIHelper.dismissProgressDialog();
+                UIHelper.showDialog(context, "上传崩溃日志被取消", result);
+            }
+        });
     }
 
     /**
