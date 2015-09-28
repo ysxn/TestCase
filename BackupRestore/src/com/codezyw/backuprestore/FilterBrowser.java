@@ -6,31 +6,24 @@ import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.codezyw.common.BaseListActicity;
+import com.codezyw.common.BaseListFragment;
 import com.codezyw.common.OpenFileHelper;
 import com.codezyw.common.UIHelper;
 
-public class FilterBrowser extends BaseListActicity {
+public class FilterBrowser extends BaseListFragment {
     private final String TAG = "zyw";
 
     private static String mSuffix = "";
@@ -82,9 +75,9 @@ public class FilterBrowser extends BaseListActicity {
                     if (mProgressDialog != null && mProgressDialog.isShowing()) {
                         mProgressDialog.dismiss();
                     }
-                    mFileListAdapter = new FilterBrowserAdapter(FilterBrowser.this, android.R.layout.simple_list_item_1, mFilesList);
+                    mFileListAdapter = new FilterBrowserAdapter(getActivity(), android.R.layout.simple_list_item_1, mFilesList);
                     setListAdapter(mFileListAdapter);
-                    Toast.makeText(FilterBrowser.this, "已经扫描到 " + mFilesList.size() + " 个" + mSuffix + "文件：", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "已经扫描到 " + mFilesList.size() + " 个" + mSuffix + "文件：", Toast.LENGTH_LONG).show();
                 }
                     break;
             }
@@ -94,10 +87,10 @@ public class FilterBrowser extends BaseListActicity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mListView = getListView();
-        Intent i = getIntent();
+        Intent i = getActivity().getIntent();
         mSuffix = i.getStringExtra(Constant.SUFFFIX);
         mDirectory = i.getStringExtra(Constant.DIRECTORY);
-        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setIconAttribute(android.R.attr.alertDialogIcon);
         mProgressDialog.setTitle("正在扫描" + mSuffix + "文件" + "中...");
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -129,26 +122,10 @@ public class FilterBrowser extends BaseListActicity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 File file = (File) mFileListAdapter.getItem(position);
-                Toast.makeText(FilterBrowser.this, "路径：" + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "路径：" + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
                 return true;
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.file_filter) {
-            showEditDialog(this);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void setListAdapterByPath(File folder) {
@@ -169,7 +146,7 @@ public class FilterBrowser extends BaseListActicity {
     }
 
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
+    public void onListItemClick(ListView l, View v, int position, long id) {
         File file = (File) mFileListAdapter.getItem(position);
         Intent intent = new Intent();
         intent.setAction(android.content.Intent.ACTION_VIEW);
@@ -226,7 +203,7 @@ public class FilterBrowser extends BaseListActicity {
                 intent = OpenFileHelper.getPPTFileIntent(f);
                 startActivity(intent);
             } else {
-                UIHelper.showToast(this, "文件无法打开，请安装相应的软件！");
+                UIHelper.showToast(getActivity(), "文件无法打开，请安装相应的软件！");
                 try {
                     intent = OpenFileHelper.getTextFileIntent(f);
                     startActivity(intent);
@@ -237,21 +214,4 @@ public class FilterBrowser extends BaseListActicity {
         }
     }
 
-    private void showEditDialog(final Context c) {
-        View v = LayoutInflater.from(c).inflate(R.layout.rename_fingerprint, null);
-        final EditText et = (EditText) v.findViewById(R.id.title);
-        new AlertDialog.Builder(c).setTitle(R.string.suffix).setView(v).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                String title = et.getText().toString();
-                Intent i = new Intent(c, FilterBrowser.class);
-                i.putExtra(Constant.SUFFFIX, title);
-                i.putExtra(Constant.DIRECTORY, mDirectory);
-                c.startActivity(i);
-                finish();
-            }
-        }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-            }
-        }).setCancelable(false).create().show();
-    }
 }

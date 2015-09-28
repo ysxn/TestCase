@@ -25,12 +25,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.codezyw.common.BaseListActicity;
+import com.codezyw.common.BaseListFragment;
 import com.codezyw.common.FileIOHelper;
 import com.codezyw.common.SlideMenuListener;
 import com.codezyw.common.ThreadPoolHelper.ThreadBaseRunnable;
 
-public class ApkBrowser extends BaseListActicity {
+public class ApkBrowser extends BaseListFragment {
     private final String TAG = "zyw";
 
     private static final FileFilter FILTER = new FileFilter() {
@@ -41,7 +41,7 @@ public class ApkBrowser extends BaseListActicity {
         }
     };
 
-    private FileIOHelper mUtil = new FileIOHelper(this);
+    private FileIOHelper mUtil = new FileIOHelper(getActivity());
     private ApkListAdapter mFileListAdapter;
 
     private ProgressDialog mProgressDialog;
@@ -92,12 +92,12 @@ public class ApkBrowser extends BaseListActicity {
                     if (mProgressDialog != null && mProgressDialog.isShowing()) {
                         mProgressDialog.dismiss();
                     }
-                    mFileListAdapter = new ApkListAdapter(ApkBrowser.this);
+                    mFileListAdapter = new ApkListAdapter(getActivity());
                     mFileListAdapter.setData(mFilesList);
                     setListAdapter(mFileListAdapter);
-                    mSwipeTouchListener = new SlideMenuListener(ApkBrowser.this, mListView);
+                    mSwipeTouchListener = new SlideMenuListener(getActivity(), mListView);
                     mListView.setOnTouchListener(mSwipeTouchListener);
-                    Toast.makeText(ApkBrowser.this, "已经扫描到 " + mFilesList.size() + " 个APK安装包：", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "已经扫描到 " + mFilesList.size() + " 个APK安装包：", Toast.LENGTH_LONG).show();
                 }
                     break;
             }
@@ -107,17 +107,17 @@ public class ApkBrowser extends BaseListActicity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mListView = getListView();
-        Intent i = getIntent();
+        Intent i = getActivity().getIntent();
         mSuffix = i.getStringExtra(Constant.SUFFFIX);
         mDirectory = i.getStringExtra(Constant.DIRECTORY);
-        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setIconAttribute(android.R.attr.alertDialogIcon);
         mProgressDialog.setTitle("正在扫描APK安装包中...");
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
-        mPackageManager = getPackageManager();
+        mPackageManager = getActivity().getPackageManager();
 
         if (mDirectory != null && !mDirectory.isEmpty()) {
             final File sdcard = new File(mDirectory);// android.os.Environment.getExternalStorageDirectory();
@@ -163,7 +163,7 @@ public class ApkBrowser extends BaseListActicity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 FileData fileData = (FileData) view.getTag();
-                Toast.makeText(ApkBrowser.this, "签名：" + fileData.mCert, Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "签名：" + fileData.mCert, Toast.LENGTH_LONG).show();
                 return true;
             }
         });
@@ -171,12 +171,12 @@ public class ApkBrowser extends BaseListActicity {
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
@@ -206,7 +206,7 @@ public class ApkBrowser extends BaseListActicity {
     }
 
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
+    public void onListItemClick(ListView l, View v, int position, long id) {
         FileData fileData = (FileData) v.getTag();
         File file = fileData.mFile;
         Intent intent = new Intent();
@@ -273,8 +273,8 @@ public class ApkBrowser extends BaseListActicity {
         @Override
         public void run() {
             File file = fdData.mFile;
-            fdData.mDrawable = mUtil.getUninatllApkInfo(ApkBrowser.this, file.getAbsolutePath(), file);
-            fdData.mPi = mUtil.getPackageInfo(ApkBrowser.this, file.getAbsolutePath());
+            fdData.mDrawable = mUtil.getUninatllApkInfo(getActivity(), file.getAbsolutePath(), file);
+            fdData.mPi = mUtil.getPackageInfo(getActivity(), file.getAbsolutePath());
             fdData.mAi = (fdData.mPi != null) ? fdData.mPi.applicationInfo : null;
             fdData.mInstalled = checkInstallStat(fdData);
             fdData.mCert = getSignatures(fdData.mPi.signatures);

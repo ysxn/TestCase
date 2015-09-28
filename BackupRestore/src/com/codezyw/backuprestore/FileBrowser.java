@@ -8,9 +8,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.codezyw.common.BaseListActicity;
-import com.codezyw.common.OpenFileHelper;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,14 +17,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.codezyw.common.BaseListFragment;
+import com.codezyw.common.OpenFileHelper;
+
 ;
-public class FileBrowser extends BaseListActicity {
+public class FileBrowser extends BaseListFragment {
     private final String TAG = "zyw";
 
     private static final FileFilter FILTER = new FileFilter() {
@@ -50,24 +48,8 @@ public class FileBrowser extends BaseListActicity {
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.file_filter) {
-            showEditDialog(this);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -75,7 +57,7 @@ public class FileBrowser extends BaseListActicity {
             setListAdapterByPath((File) mFileListAdapter.getItem(1));
             return true;
         }
-        return super.onKeyDown(keyCode, event);
+        return false;
     }
 
     private void setListAdapterByPath(File folder) {
@@ -106,12 +88,12 @@ public class FileBrowser extends BaseListActicity {
         if (folder.getParentFile() != null) {
             filesList.add(1, folder.getParentFile());
         }
-        mFileListAdapter = new FileListAdapter(this, android.R.layout.simple_list_item_1, filesList);
+        mFileListAdapter = new FileListAdapter(getActivity(), android.R.layout.simple_list_item_1, filesList);
         setListAdapter(mFileListAdapter);
     }
 
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
+    public void onListItemClick(ListView l, View v, int position, long id) {
         File file = (File) mFileListAdapter.getItem(position);
         Intent intent = new Intent();
         intent.setAction(android.content.Intent.ACTION_VIEW);
@@ -121,7 +103,7 @@ public class FileBrowser extends BaseListActicity {
             intent.setDataAndType(Uri.fromFile(file), "image/*");
             startActivity(intent);
         } else {
-            OpenFileHelper.tryOpenFile(this, file);
+            OpenFileHelper.tryOpenFile(getActivity(), file);
         }
     }
 
@@ -142,7 +124,7 @@ public class FileBrowser extends BaseListActicity {
                     i.putExtra(Constant.DIRECTORY, mDirectory.getAbsolutePath());
                     c.startActivity(i);
                 }
-                finish();
+                getActivity().finish();
             }
         }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {

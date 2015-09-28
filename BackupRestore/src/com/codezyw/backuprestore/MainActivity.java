@@ -1,11 +1,19 @@
 
 package com.codezyw.backuprestore;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 
 import com.codezyw.common.BackupAppFragment;
 import com.codezyw.common.BaseFragmentActivity;
@@ -65,5 +73,39 @@ public class MainActivity extends BaseFragmentActivity {
         if (!TextUtils.isEmpty(log)) {
             CrashHelper.getInstance().uploadServer(MainActivity.this, log);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.file_filter) {
+            showEditDialog(this);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showEditDialog(final Context c) {
+        View v = LayoutInflater.from(c).inflate(R.layout.rename_fingerprint, null);
+        final EditText et = (EditText) v.findViewById(R.id.title);
+        new AlertDialog.Builder(c).setTitle(R.string.suffix).setView(v).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                String title = et.getText().toString();
+                Intent i = new Intent(c, FilterBrowser.class);
+                i.putExtra(Constant.SUFFFIX, title);
+                i.putExtra(Constant.DIRECTORY, ""/* mDirectory */);
+                c.startActivity(i);
+                finish();
+            }
+        }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        }).setCancelable(false).create().show();
     }
 }
