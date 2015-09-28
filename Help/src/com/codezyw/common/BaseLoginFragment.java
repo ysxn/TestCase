@@ -50,6 +50,9 @@ public class BaseLoginFragment extends BaseFragment {
         return f;
     }
 
+    public BaseLoginFragment() {
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
