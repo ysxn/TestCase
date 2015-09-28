@@ -70,8 +70,8 @@ public class ApkListAdapter extends BaseAdapter {
         StringBuilder sb = new StringBuilder();
         sb.append(file.mFile.getAbsolutePath()).append("\n");
         long b = file.mFile.length();
-        sb.append("ÎÄ¼ş´óĞ¡ : ").append(UnitHelper.byteToHumanNumber(b)).append("\n")
-                .append("ĞŞ¸ÄÊ±¼ä : ").append(mUtil.convetTime(file.mFile.lastModified())).append("\n")
+        sb.append("æ–‡ä»¶å¤§å° : ").append(UnitHelper.byteToHumanNumber(b)).append("\n")
+                .append("ä¿®æ”¹æ—¶é—´ : ").append(mUtil.convetTime(file.mFile.lastModified())).append("\n")
                 .append(file.mVersion);
         textView2.setText(sb.toString());
         if (file.mDrawable != null) {
@@ -79,7 +79,7 @@ public class ApkListAdapter extends BaseAdapter {
         }
         convertView.setTag(file);
         TextView menuTextView = (TextView) ((SlideMenuGroup) convertView).getRightMenu();
-        menuTextView.setText("É¾³ı");
+        menuTextView.setText("åˆ é™¤");
         ((SlideMenuGroup) convertView).setLeftMenuHide(true);
         ((SlideMenuGroup) convertView).setLeftMenuClickListener(new SlideMenuGroup.OnLeftMenuClickListener() {
             @Override
@@ -95,9 +95,9 @@ public class ApkListAdapter extends BaseAdapter {
                     mApkList.remove(fdData);
                     ApkListAdapter.this.notifyDataSetChanged();
                     StringBuilder sb = new StringBuilder();
-                    sb.append("³É¹¦É¾³ı°²×°°ü£º")
+                    sb.append("æˆåŠŸåˆ é™¤å®‰è£…åŒ…ï¼š")
                             .append(fdData.mFile.getName())
-                            .append("\nÂ·¾¶£º")
+                            .append("\nè·¯å¾„ï¼š")
                             .append(fdData.mFile.getAbsolutePath());
                     UIHelper.showToast(mContext, sb.toString());
                 }

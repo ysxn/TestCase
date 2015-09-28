@@ -44,11 +44,11 @@ public class FileListAdapter extends ArrayAdapter<File> {
         TextView view = (TextView) super.getView(position, convertView, parent);
         File file = getItem(position);
         if (getItemViewType(position) == 0) {
-            view.setText("µ±Ç°Ä¿Â¼:" + file.getAbsolutePath());
+            view.setText("å½“å‰ç›®å½•:" + file.getAbsolutePath());
             view.setBackground(ShapeHelper.createRectShape(ColorHelper.GREEN));
             view.setTextColor(ColorHelper.BLACK);
         } else if (getItemViewType(position) == 1) {
-            view.setText("·µ»ØÉÏÒ»¸öÄ¿Â¼");
+            view.setText("è¿”å›ä¸Šä¸€ä¸ªç›®å½•");
             view.getPaint().setFakeBoldText(true);
             view.setTextColor(ColorHelper.RED);
         } else {
@@ -57,11 +57,11 @@ public class FileListAdapter extends ArrayAdapter<File> {
             StringBuilder sb = new StringBuilder();
             sb.append(file.getName()).append("\n");
             if (file.isDirectory()) {
-                sb.append("ĞŞ¸ÄÊ±¼ä : ").append(mUtil.convetTime(file.lastModified()));
+                sb.append("ä¿®æ”¹æ—¶é—´ : ").append(mUtil.convetTime(file.lastModified()));
                 view.setText(sb.toString());
             } else {
                 long b = file.length();
-                sb.append("ÎÄ¼ş´óĞ¡ : ").append(UnitHelper.byteToHumanNumber(b)).append("\n").append("ĞŞ¸ÄÊ±¼ä : ").append(mUtil.convetTime(file.lastModified()));
+                sb.append("æ–‡ä»¶å¤§å° : ").append(UnitHelper.byteToHumanNumber(b)).append("\n").append("ä¿®æ”¹æ—¶é—´ : ").append(mUtil.convetTime(file.lastModified()));
                 view.setText(sb.toString());
             }
         }

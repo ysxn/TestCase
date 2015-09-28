@@ -6,10 +6,6 @@ import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.codezyw.common.BaseListActicity;
-import com.codezyw.common.OpenFileHelper;
-import com.codezyw.common.UIHelper;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -29,6 +25,10 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.codezyw.common.BaseListActicity;
+import com.codezyw.common.OpenFileHelper;
+import com.codezyw.common.UIHelper;
 
 public class FilterBrowser extends BaseListActicity {
     private final String TAG = "zyw";
@@ -74,7 +74,7 @@ public class FilterBrowser extends BaseListActicity {
                     if (mProgressDialog != null && mProgressDialog.isShowing()) {
                         int count = msg.arg1;
                         String fileName = (String) msg.obj;
-                        mProgressDialog.setMessage("ÒÑ¾­É¨Ãèµ½ " + count + " ¸ö" + mSuffix + "ÎÄ¼ş£º" + fileName);
+                        mProgressDialog.setMessage("å·²ç»æ‰«æåˆ° " + count + " ä¸ª" + mSuffix + "æ–‡ä»¶ï¼š" + fileName);
                     }
                 }
                     break;
@@ -84,7 +84,7 @@ public class FilterBrowser extends BaseListActicity {
                     }
                     mFileListAdapter = new FilterBrowserAdapter(FilterBrowser.this, android.R.layout.simple_list_item_1, mFilesList);
                     setListAdapter(mFileListAdapter);
-                    Toast.makeText(FilterBrowser.this, "ÒÑ¾­É¨Ãèµ½ " + mFilesList.size() + " ¸ö" + mSuffix + "ÎÄ¼ş£º", Toast.LENGTH_LONG).show();
+                    Toast.makeText(FilterBrowser.this, "å·²ç»æ‰«æåˆ° " + mFilesList.size() + " ä¸ª" + mSuffix + "æ–‡ä»¶ï¼š", Toast.LENGTH_LONG).show();
                 }
                     break;
             }
@@ -99,7 +99,7 @@ public class FilterBrowser extends BaseListActicity {
         mDirectory = i.getStringExtra(Constant.DIRECTORY);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIconAttribute(android.R.attr.alertDialogIcon);
-        mProgressDialog.setTitle("ÕıÔÚÉ¨Ãè" + mSuffix + "ÎÄ¼ş" + "ÖĞ...");
+        mProgressDialog.setTitle("æ­£åœ¨æ‰«æ" + mSuffix + "æ–‡ä»¶" + "ä¸­...");
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setCancelable(false);
@@ -129,7 +129,7 @@ public class FilterBrowser extends BaseListActicity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 File file = (File) mFileListAdapter.getItem(position);
-                Toast.makeText(FilterBrowser.this, "Â·¾¶£º" + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                Toast.makeText(FilterBrowser.this, "è·¯å¾„ï¼š" + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
                 return true;
             }
         });
@@ -226,7 +226,7 @@ public class FilterBrowser extends BaseListActicity {
                 intent = OpenFileHelper.getPPTFileIntent(f);
                 startActivity(intent);
             } else {
-                UIHelper.showToast(this, "ÎÄ¼şÎŞ·¨´ò¿ª£¬Çë°²×°ÏàÓ¦µÄÈí¼ş£¡");
+                UIHelper.showToast(this, "æ–‡ä»¶æ— æ³•æ‰“å¼€ï¼Œè¯·å®‰è£…ç›¸åº”çš„è½¯ä»¶ï¼");
                 try {
                     intent = OpenFileHelper.getTextFileIntent(f);
                     startActivity(intent);

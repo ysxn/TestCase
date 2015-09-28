@@ -28,11 +28,11 @@ public class FilterBrowserAdapter extends ArrayAdapter<File> {
         StringBuilder sb = new StringBuilder();
         sb.append(file.getName()).append("\n");
         if (file.isDirectory()) {
-            sb.append("修改时间 : ").append(mUtil.convetTime(file.lastModified()));
+            sb.append("淇敼鏃堕棿 : ").append(mUtil.convetTime(file.lastModified()));
             view.setText(sb.toString());
         } else {
             long b = file.length();
-            sb.append("文件大小 : ").append(UnitHelper.byteToHumanNumber(b)).append("\n").append("修改时间 : ").append(mUtil.convetTime(file.lastModified()));
+            sb.append("鏂囦欢澶у皬 : ").append(UnitHelper.byteToHumanNumber(b)).append("\n").append("淇敼鏃堕棿 : ").append(mUtil.convetTime(file.lastModified()));
             view.setText(sb.toString());
         }
         return view;
