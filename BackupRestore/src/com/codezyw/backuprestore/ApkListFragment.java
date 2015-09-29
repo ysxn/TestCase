@@ -219,6 +219,8 @@ public class ApkListFragment extends BaseListFragment {
             textView2.setText(sb.toString());
             if (file.mDrawable != null) {
                 icon.setImageDrawable(file.mDrawable);
+            } else {
+                icon.setImageDrawable(null);
             }
             convertView.setTag(file);
             TextView menuTextView = (TextView) ((SlideMenuGroup) convertView).getRightMenu();
