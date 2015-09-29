@@ -2,7 +2,9 @@
 package com.codezyw.common;
 
 /**
- * 1.仿照AsyncTask可以设置线程名称. 但是默认只能执行一次。能否结合ThreadPoolHelper做到线程池和主线程回调一一对应。
+ * 1.仿照AsyncTask可以设置线程名称. 但是默认只能执行一次。能否结合ThreadPoolHelper做到线程池和主线程回调一一对应。<br>
+ * AsyncTask名称不对，java.lang.class,而且执行完还在？ <br>
+ * edittext的密码
  * <p>
  * 2.在BaseActivity的onCreate里面把崩溃统计提交给线程池上传服务器
  * ，线程池里面只有一个线程，队列无限大(newSingleThreadExecutor

@@ -752,7 +752,7 @@ public class HttpHelper {
 
             @Override
             public void onProgressUpdate(int progress) {
-                UIHelper.updateProgressDialog(progress);
+                UIHelper.updateProgressDialog(100, progress);
             }
 
             @Override

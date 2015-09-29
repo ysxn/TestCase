@@ -31,6 +31,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+@SuppressWarnings("deprecation")
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class UIHelper {
 
@@ -98,7 +99,7 @@ public class UIHelper {
      * @param message
      */
     public static void showDialog(Context context, String title, String message) {
-        if (context == null) {
+        if (context == null || !(context instanceof Activity)) {
             return;
         }
         dismissDialog();
@@ -132,7 +133,7 @@ public class UIHelper {
      * @param style
      */
     public static void showDialog(Context context, int resId, String title, String message, int style) {
-        if (context == null) {
+        if (context == null || !(context instanceof Activity)) {
             return;
         }
         dismissDialog();
@@ -181,7 +182,7 @@ public class UIHelper {
     }
 
     public static void showProgressDialog(Context context, String title, String message, int style, boolean isIndeterminate, int max) {
-        if (context == null) {
+        if (context == null || !(context instanceof Activity)) {
             return;
         }
         dismissProgressDialog();
@@ -209,9 +210,28 @@ public class UIHelper {
         mProgressDialog.show();
     }
 
-    public static void updateProgressDialog(int progress) {
+    /**
+     * 更新进度条进度
+     * 
+     * @param progress
+     */
+    public static void updateProgressDialog(int max, int progress) {
         if (mProgressDialog != null && mProgressDialog.isShowing() && !mProgressDialog.isIndeterminate()) {
+            mProgressDialog.setMax(max);
             mProgressDialog.setProgress(progress);
+        }
+    }
+
+    /**
+     * 更新进度对话框文字
+     * 
+     * @param title
+     * @param message
+     */
+    public static void updateProgressDialogText(String title, String message) {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.setTitle(title);
+            mProgressDialog.setMessage(message);
         }
     }
 
@@ -220,6 +240,13 @@ public class UIHelper {
             mProgressDialog.dismiss();
             mProgressDialog = null;
         }
+    }
+
+    public static boolean isProgressShowing() {
+        if (mProgressDialog == null || !mProgressDialog.isShowing()) {
+            return false;
+        }
+        return true;
     }
 
     public static void showToast(Context context, String message) {
@@ -240,6 +267,7 @@ public class UIHelper {
         if (context == null || context.isFinishing() || context.getWindow() == null || context.getWindow().getDecorView() == null) {
             return;
         }
+        @SuppressWarnings("unused")
         LayoutInflater factory = LayoutInflater.from(context);
         LinearLayout parent = new LinearLayout(context);
         parent.setOrientation(LinearLayout.VERTICAL);

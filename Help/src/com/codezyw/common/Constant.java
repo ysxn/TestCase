@@ -1,5 +1,5 @@
 
-package com.codezyw.backuprestore;
+package com.codezyw.common;
 
 public class Constant {
     public static final int NONE = 0;
