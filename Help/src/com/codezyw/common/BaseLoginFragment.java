@@ -19,7 +19,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.InputType;
@@ -50,6 +49,9 @@ public class BaseLoginFragment extends BaseFragment {
         return f;
     }
 
+    /**
+     * 必须有无参构造函数，否则影响状态恢复
+     */
     public BaseLoginFragment() {
     }
 
@@ -96,19 +98,32 @@ public class BaseLoginFragment extends BaseFragment {
         mNewAccountMenu.setOnClickListener(newAccountClickListener);
         mNewAccountMenu.setVisibility(View.GONE);
 
+        return mRootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        changeState();
+    }
+
+    private void changeState() {
         String username = DbHelper.getInstance(getActivity()).getString(JsonHelper.ACCOUNT, "");
         String password = DbHelper.getInstance(getActivity()).getString(JsonHelper.PASSWORD, "");
 
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+            mAccount.setText("");
+            mPassword.setText("");
+            mLoginMenu.setVisibility(View.VISIBLE);
             mLogoutMenu.setVisibility(View.GONE);
         } else {
             mAccount.setText(username);
             mPassword.setText(password);
             mLoginMenu.setVisibility(View.GONE);
+            mLogoutMenu.setVisibility(View.VISIBLE);
         }
         mAccount.setSelection(mAccount.getText().length());
         mPassword.setSelection(mPassword.getText().length());
-        return mRootView;
     }
 
     OnClickListener loginClickListener = new OnClickListener() {
@@ -116,10 +131,12 @@ public class BaseLoginFragment extends BaseFragment {
         public void onClick(View v) {
             final String username = mAccount.getText().toString().trim();
             final String password = mPassword.getText().toString().trim();
+            if (TextUtils.isEmpty(password) || TextUtils.isEmpty(username)) {
+                return;
+            }
             DbHelper.getInstance(getActivity()).putString(JsonHelper.ACCOUNT, username);
             DbHelper.getInstance(getActivity()).putString(JsonHelper.PASSWORD, password);
-            getActivity().finish();
-            return;
+            changeState();
 
             // if (checkUser()) {
             // Toast.makeText(v.getContext(), "用户登录成功！",
@@ -142,9 +159,7 @@ public class BaseLoginFragment extends BaseFragment {
         public void onClick(View v) {
             DbHelper.getInstance(getActivity()).delete(JsonHelper.ACCOUNT);
             DbHelper.getInstance(getActivity()).delete(JsonHelper.PASSWORD);
-            Intent i = new Intent(getActivity(), JsonHelper.class);
-            getActivity().startService(i);
-            getActivity().finish();
+            changeState();
         }
     };
 
