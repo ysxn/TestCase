@@ -70,7 +70,6 @@ public class BaseLoginFragment extends BaseFragment {
         mAccount = new EditText(getActivity());
         mAccount.setSingleLine(true);
         mPassword = new EditText(getActivity());
-        mPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         mPassword.setSingleLine(true);
         mLoginMenu = new Button(getActivity());
         mLogoutMenu = new Button(getActivity());
@@ -105,6 +104,7 @@ public class BaseLoginFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         changeState();
+        changePasswordVisible(false);
     }
 
     private void changeState() {
@@ -124,6 +124,21 @@ public class BaseLoginFragment extends BaseFragment {
         }
         mAccount.setSelection(mAccount.getText().length());
         mPassword.setSelection(mPassword.getText().length());
+    }
+
+    /**
+     * 设置密码是否可见
+     * 
+     * @param visible
+     */
+    private void changePasswordVisible(boolean visible) {
+        if (!visible) {
+            // mPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            mPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        } else {
+            // mPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            mPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        }
     }
 
     OnClickListener loginClickListener = new OnClickListener() {

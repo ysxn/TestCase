@@ -209,7 +209,7 @@ public abstract class NamedAsyncTask<Params, Progress, Result> {
     private static final String LOG_TAG = "AsyncTask";
     @SuppressWarnings("unused")
     private static final String TAG = NamedAsyncTask.class.getSimpleName();
-    private static final String CLASS = NamedAsyncTask.class.getClass().getName();
+    private static final String CLASS = "NamedAsyncTask";
     @SuppressWarnings("unused")
     private static final String PACKAGE = NamedAsyncTask.class.getClass().getPackage().getName();
 
