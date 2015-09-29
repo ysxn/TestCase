@@ -90,8 +90,10 @@ public class AppBackupFragment extends BaseFragment {
 
     @Override
     public void onDestroy() {
-        UIHelper.isProgressShowing();
+        UIHelper.dismissProgressDialog();
+        if (mBackupAsyncTast != null) {
+            mBackupAsyncTast.cancel(true);
+        }
         super.onDestroy();
     }
-
 }

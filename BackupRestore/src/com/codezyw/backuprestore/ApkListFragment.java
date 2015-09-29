@@ -112,7 +112,7 @@ public class ApkListFragment extends BaseListFragment {
                 mApkListAdapter = new ApkListAdapter(getActivity());
                 mApkListAdapter.setData(mApkList);
                 setListAdapter(mApkListAdapter);
-                Toast.makeText(getActivity(), "已经扫描到 " + mApkList.size() + " 个APK安装包：", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "已经扫描到 " + mApkList.size() + " 个APK安装包", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -138,6 +138,14 @@ public class ApkListFragment extends BaseListFragment {
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mAppScanAsyncTask != null) {
+            mAppScanAsyncTask.cancel(true);
+        }
+        super.onDestroy();
     }
 
     @Override

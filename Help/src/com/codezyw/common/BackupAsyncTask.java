@@ -32,14 +32,17 @@ public class BackupAsyncTask extends NamedAsyncTask<Boolean, Integer, Boolean> {
     }
 
     public BackupAsyncTask(Activity activity) {
-        mActivity = activity;
-        mPackageManager = activity.getPackageManager();
+        this(activity, null);
     }
 
     public BackupAsyncTask(Activity activity, PostListener listener) {
         mPostListener = listener;
         mActivity = activity;
         mPackageManager = activity.getPackageManager();
+        mApps = mPackageManager.getInstalledApplications(0);
+        if (mApps == null) {
+            mApps = new ArrayList<ApplicationInfo>();
+        }
     }
 
     @Override
@@ -68,7 +71,6 @@ public class BackupAsyncTask extends NamedAsyncTask<Boolean, Integer, Boolean> {
 
     @Override
     protected void onPostExecute(Boolean result) {
-        UIHelper.dismissProgressDialog();
         if (mPostListener != null) {
             mPostListener.onPostExecute(null);
         }
@@ -76,17 +78,12 @@ public class BackupAsyncTask extends NamedAsyncTask<Boolean, Integer, Boolean> {
 
     @Override
     protected void onCancelled(Boolean result) {
-        UIHelper.dismissProgressDialog();
         if (mPostListener != null) {
             mPostListener.onCancelled(null);
         }
     }
 
     private void backupApp() {
-        mApps = mPackageManager.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES | PackageManager.GET_DISABLED_COMPONENTS);
-        if (mApps == null) {
-            mApps = new ArrayList<ApplicationInfo>();
-        }
         mTotal = 0;
         mProgress = 0;
         for (ApplicationInfo app : mApps) {
@@ -95,7 +92,10 @@ public class BackupAsyncTask extends NamedAsyncTask<Boolean, Integer, Boolean> {
             }
         }
         for (ApplicationInfo app : mApps) {
-            if (UIHelper.isProgressShowing() && app.sourceDir != null && app.sourceDir.startsWith("/data/app/")) {
+            if (isCancelled() || !UIHelper.isProgressShowing()) {
+                return;
+            }
+            if (app.sourceDir != null && app.sourceDir.startsWith("/data/app/")) {
                 mProgress++;
                 String label = (String) app.loadLabel(mPackageManager);
                 mCurrent = label;

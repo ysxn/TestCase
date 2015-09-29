@@ -55,9 +55,7 @@ public class AppScanAsyncTask extends NamedAsyncTask<File, Integer, List<ApkData
     }
 
     public AppScanAsyncTask(Activity activity) {
-        mActivity = activity;
-        mPackageManager = activity.getPackageManager();
-        mUtil = new FileIOHelper(activity);
+        this(activity, null);
     }
 
     public AppScanAsyncTask(Activity activity, PostListener listener) {
@@ -65,6 +63,15 @@ public class AppScanAsyncTask extends NamedAsyncTask<File, Integer, List<ApkData
         mActivity = activity;
         mPackageManager = activity.getPackageManager();
         mUtil = new FileIOHelper(activity);
+
+        mApps = mPackageManager.getInstalledApplications(0);
+        if (mApps == null) {
+            mApps = new ArrayList<ApplicationInfo>();
+        }
+        mPackages = mPackageManager.getInstalledPackages(0);
+        if (mPackages == null) {
+            mPackages = new ArrayList<PackageInfo>();
+        }
     }
 
     @Override
@@ -80,15 +87,6 @@ public class AppScanAsyncTask extends NamedAsyncTask<File, Integer, List<ApkData
         if (params == null || params.length <= 0) {
             return null;
         }
-        // Retrieve all known applications.
-        mApps = mPackageManager.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES | PackageManager.GET_DISABLED_COMPONENTS);
-        if (mApps == null) {
-            mApps = new ArrayList<ApplicationInfo>();
-        }
-        mPackages = mPackageManager.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
-        if (mPackages == null) {
-            mPackages = new ArrayList<PackageInfo>();
-        }
         scanApkFileByPath(params[0]);
         return mApkList;
     }
@@ -103,7 +101,6 @@ public class AppScanAsyncTask extends NamedAsyncTask<File, Integer, List<ApkData
 
     @Override
     protected void onPostExecute(List<ApkData> r) {
-        UIHelper.dismissProgressDialog();
         if (mPostListener != null) {
             mPostListener.onPostExecute(mApkList);
         }
@@ -111,13 +108,15 @@ public class AppScanAsyncTask extends NamedAsyncTask<File, Integer, List<ApkData
 
     @Override
     protected void onCancelled(List<ApkData> r) {
-        UIHelper.dismissProgressDialog();
         if (mPostListener != null) {
             mPostListener.onCancelled(mApkList);
         }
     }
 
     private void scanApkFileByPath(File folder) {
+        if (isCancelled()) {
+            return;
+        }
         File[] listFiles = folder.listFiles(FILTER);
         if (listFiles == null) {
             Log.e("zyw", "scanApkFileByPath listFiles == null");

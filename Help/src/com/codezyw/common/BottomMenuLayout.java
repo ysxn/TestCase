@@ -170,6 +170,15 @@ public class BottomMenuLayout extends LinearLayout {
             ft.show(mCurrent);
         }
         ft.commitAllowingStateLoss();
+        for (int index = 0; index < mAllMenu.size(); index++) {
+            View v = mAllMenu.get(index);
+            TextView text = (TextView) ((LinearLayout) v).getChildAt(1);
+            if (index == i) {
+                text.setTextColor(ColorHelper.BLUE);
+            } else {
+                text.setTextColor(ColorHelper.WHITE);
+            }
+        }
     }
 
     /**

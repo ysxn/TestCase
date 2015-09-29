@@ -6,15 +6,12 @@ import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +24,7 @@ import android.widget.Toast;
 import com.codezyw.common.BaseListFragment;
 import com.codezyw.common.Constant;
 import com.codezyw.common.FileIOHelper;
+import com.codezyw.common.FileScanAsyncTask;
 import com.codezyw.common.OpenFileHelper;
 import com.codezyw.common.UIHelper;
 import com.codezyw.common.UnitHelper;
@@ -34,7 +32,6 @@ import com.codezyw.common.UnitHelper;
 public class SearchFragment extends BaseListFragment {
     private final String TAG = "zyw";
 
-    private String mTitle = "";
     private static String mSuffix = "";
     private static String mDirectory = "";
 
@@ -49,35 +46,7 @@ public class SearchFragment extends BaseListFragment {
     private SearchResultAdapter mFileListAdapter;
     private ListView mListView;
     private List<File> mFilesList = new ArrayList<File>();
-
-    private static final int MSG_UPDATE_PROGRESS = 299;
-    private static final int MSG_UPDATE_DATA = 0x123;
-    private static final int MSG_DISMISS_PROGRESS = 0x122;
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_UPDATE_DATA:
-                    mHandler.removeMessages(MSG_UPDATE_DATA);
-                    if (mFileListAdapter != null) {
-                        mFileListAdapter.notifyDataSetChanged();
-                    }
-                    break;
-                case MSG_UPDATE_PROGRESS:
-                    int count = msg.arg1;
-                    String fileName = (String) msg.obj;
-                    UIHelper.updateProgressDialogText(mTitle, "已经扫描到 " + count + " 个" + mSuffix + "文件：" + fileName);
-                    break;
-                case MSG_DISMISS_PROGRESS:
-                    UIHelper.dismissProgressDialog();
-                    mFileListAdapter = new SearchResultAdapter(getActivity(), android.R.layout.simple_list_item_1, mFilesList);
-                    setListAdapter(mFileListAdapter);
-                    Toast.makeText(getActivity(), "已经扫描到 " + mFilesList.size() + " 个" + mSuffix + "文件：", Toast.LENGTH_LONG).show();
-                    break;
-            }
-        }
-    };
+    private FileScanAsyncTask mFileScanAsyncTask;
 
     /**
      * 必须有无参构造函数，否则影响状态恢复
@@ -107,31 +76,38 @@ public class SearchFragment extends BaseListFragment {
     Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mListView = getListView();
-        Intent i = getActivity().getIntent();
-        mSuffix = i.getStringExtra(Constant.SUFFFIX);
-        mDirectory = i.getStringExtra(Constant.DIRECTORY);
-        mTitle = "正在扫描" + mSuffix + "文件中...";
-        UIHelper.showProgressDialog(getActivity(), mTitle
-                , "", ProgressDialog.STYLE_SPINNER, true, 100);
+        Bundle bd = getArguments();
+        if (bd != null) {
+            mDirectory = bd.getString(Constant.DIRECTORY);
+            mSuffix = bd.getString(Constant.SUFFFIX);
+        }
+        mFileScanAsyncTask = new FileScanAsyncTask(getActivity(), new FileScanAsyncTask.PostListener() {
 
-        if (mDirectory != null && !mDirectory.isEmpty()) {
-            final File sdcard = new File(mDirectory);
-            Log.i(TAG, "sdcard=" + sdcard);
-            new Thread() {
-                public void run() {
-                    setListAdapterByPath(sdcard);
-                    mHandler.sendEmptyMessage(MSG_DISMISS_PROGRESS);
-                };
-            }.start();
+            @Override
+            public void onProgressUpdate(int progress) {
+            }
+
+            @Override
+            public void onPreExecute() {
+            }
+
+            @Override
+            public void onPostExecute(List<File> result) {
+                mFilesList = result;
+                mFileListAdapter = new SearchResultAdapter(getActivity(), android.R.layout.simple_list_item_1, mFilesList);
+                setListAdapter(mFileListAdapter);
+            }
+
+            @Override
+            public void onCancelled(List<File> result) {
+            }
+        });
+
+        if (!TextUtils.isEmpty(mDirectory) && !TextUtils.isEmpty(mSuffix)) {
+            mFileScanAsyncTask.execute(mDirectory, mSuffix);
         } else {
-            final File sdcard = android.os.Environment.getExternalStorageDirectory();
-            Log.i(TAG, "sdcard=" + sdcard);
-            new Thread() {
-                public void run() {
-                    setListAdapterByPath(sdcard);
-                    mHandler.sendEmptyMessage(MSG_DISMISS_PROGRESS);
-                };
-            }.start();
+            UIHelper.showToast(getActivity(), "参数错误： mDirectory=" + mDirectory + ",mSuffix=" + mSuffix);
+            getActivity().finish();
         }
 
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -144,20 +120,12 @@ public class SearchFragment extends BaseListFragment {
         });
     }
 
-    private void setListAdapterByPath(File folder) {
-        File[] listFiles = folder.listFiles(FILTER);
-        if (listFiles == null) {
-            Log.e(TAG, "setListAdapterByPath listFiles == null");
-        } else {
-            for (File file : listFiles) {
-                if (!file.isDirectory() && file.getName().endsWith(mSuffix)) {
-                    mFilesList.add(file);
-                    mHandler.sendMessage(mHandler.obtainMessage(MSG_UPDATE_PROGRESS, mFilesList.size(), 0, file.getName()));
-                } else if (file.isDirectory()) {
-                    setListAdapterByPath(file);
-                }
-            }
+    @Override
+    public void onDestroy() {
+        if (mFileScanAsyncTask != null) {
+            mFileScanAsyncTask.cancel(true);
         }
+        super.onDestroy();
     }
 
     @Override
@@ -165,9 +133,7 @@ public class SearchFragment extends BaseListFragment {
         File file = (File) mFileListAdapter.getItem(position);
         Intent intent = new Intent();
         intent.setAction(android.content.Intent.ACTION_VIEW);
-        if (file.isDirectory()) {
-            setListAdapterByPath(file);
-        } else if (file.getName().matches("^.*?\\.(jpg|png|bmp|gif)$")) {
+        if (file.getName().matches("^.*?\\.(jpg|png|bmp|gif)$")) {
             intent.setDataAndType(Uri.fromFile(file), "image/*");
             startActivity(intent);
         } else {

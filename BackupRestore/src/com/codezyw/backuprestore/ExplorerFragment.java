@@ -183,13 +183,8 @@ public class ExplorerFragment extends BaseListFragment {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         String suffix = input.getText().toString().trim();
-                        if ("apk".equalsIgnoreCase(suffix)) {
-                            Intent i = new Intent(c, ApkListFragment.class);
-                            i.putExtra(Constant.SUFFFIX, suffix);
-                            i.putExtra(Constant.DIRECTORY, path);
-                            c.startActivity(i);
-                        } else if (!TextUtils.isEmpty(suffix)) {
-                            Intent i = new Intent(c, SearchFragment.class);
+                        if (!TextUtils.isEmpty(suffix)) {
+                            Intent i = new Intent(c, SearchActivity.class);
                             i.putExtra(Constant.SUFFFIX, suffix);
                             i.putExtra(Constant.DIRECTORY, path);
                             c.startActivity(i);
