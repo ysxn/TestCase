@@ -83,6 +83,101 @@ import android.widget.AdapterView;
  * state, this may be a snapshot slightly before what the user last saw.
  * </p>
  * </ul>
+ * <p>
+ * <a
+ * href="http://www.cnblogs.com/chuanstone/p/4672096.html">http://www.cnblogs.
+ * com/chuanstone/p/4672096.html</a>
+ * <p>
+ * 
+ * <pre>
+ * 自从在Android 3.0引入Fragment以来，它被使用的频率也随之增多。Fragment带来的好处不言而喻，解决了不同屏幕分辨率的动态和灵活UI设计。但是在Activity管理多个Fragment中，通常会遇到这些问题：
+ * 1、Fragment的状态保存
+ * 2、Fragment的重影
+ * 当然，这些问题也一直出现我的开发过程中，虽然有时候通过各种手段也能解决一些问题，但是总是同时完美解决这两个问题。近来因为项目需要，查阅了很多官方资料（Android官方资料也慢慢有中文资料了，我大Google果然是Don't be evil，扯远了~~），终于彻底解决了这些问题。
+ * 设备：nexus 5
+ * 条件：
+ * 1、打开“不保留活动”（开发者选项里，主要用于模拟Activity被及时回收）
+ * 2、关闭“不保留活动”（正常状态下）
+ * 结果：目前没发现问题，由于设备有限，大家如果发现在其他设备上有问题，请在下方回帖！
+ * 首先我先来解释下上面问题出现的原因：
+ * 1、有时候，我们需要在多个Fragment间切换，并且保存每个Fragment的状态。官方的方法是使用replace()来替换Fragment，但是replace()的调用会导致Fragment的onCreteView()被调用，所以切换界面时会无法保存当前的状态。因此一般采用add()、hide()与show()配合，来达到保存Fragment的状态。以下为代码片段：
+ * private void setTabSelection(int position) {
+ *         //记录position
+ *         this.position = position;
+ *         //更改底部导航栏按钮状态
+ *         changeButtonStatus(position);
+ *         FragmentTransaction transaction = fragmentManager.beginTransaction();
+ *         // 先隐藏掉所有的Fragment，以防止有多个Fragment显示在界面上的情况
+ *         hideFragments(transaction);
+ *         switch (position) {
+ *             case TAB_HOME:
+ *                 btnHomePager.setSelected(true);
+ *                 btnShoppingCart.setSelected(false);
+ *                 btnMine.setSelected(false);
+ *                 if (homeFragment == null) {
+ *                     homeFragment = new HomePagerFragment();
+ *                     transaction.add(R.id.fragment_container, homeFragment);
+ *                 } else {
+ *                     transaction.show(homeFragment);
+ *                 }
+ *                 break;
+ *             case TAB_SHOP:
+ *                 btnHomePager.setSelected(false);
+ *                 btnShoppingCart.setSelected(true);
+ *                 btnMine.setSelected(false);
+ *                 if (shoppingFragment == null) {
+ *                     shoppingFragment = new ShoppingCartFragment();
+ *                     transaction.add(R.id.fragment_container, shoppingFragment);
+ *                 } else {
+ *                     transaction.show(shoppingFragment);
+ *                 }
+ *                 break;
+ *             case TAB_MINE:
+ *                 btnHomePager.setSelected(false);
+ *                 btnShoppingCart.setSelected(false);
+ *                 btnMine.setSelected(true);
+ *                 if (mineFragment == null) {
+ *                     mineFragment = new MineFragment();
+ *                     transaction.add(R.id.fragment_container, mineFragment);
+ *                 } else {
+ *                     transaction.show(mineFragment);
+ *                 }
+ *                 break;
+ *         }
+ *         transaction.commitAllowingStateLoss();
+ *     }
+ *  
+ * 2、第二个问题的出现正是因为使用了Fragment的状态保存，当系统内存不足，Fragment的宿主Activity回收的时候，Fragment的实例并没有随之被回收。Activity被系统回收时，会主动调用onSaveInstance()方法来保存视图层（View Hierarchy），所以当Activity通过导航再次被重建时，之前被实例化过的Fragment依然会出现在Activity中，然而从上述代码中可以明显看出，再次重建了新的Fragment，综上这些因素导致了多个Fragment重叠在一起。
+ * 我尝试了很多种方法去解决这个问题，比如：
+ * 在onSaveInstance()里面去remove()所有非空的Fragment，然后在onRestoreInstanceState()中去再次按照问题一的方式创建Activity。当我处于打开“不保留活动”的时候，效果非常令人满意，然而当我关闭“不保留活动”的时候，问题却出现了。当转跳到其他Activity、打开多任务窗口、使用Home回到主屏幕再返回时，发现根本没有Fragment了，一篇空白。
+ * 于是跟踪下去，我调查了onSaveInstanceState()与onRestoreInstanceState()这两个方法。原本以为只有在系统因为内存回收Activity时才会调用的onSaveInstanceState()，居然在转跳到其他Activity、打开多任务窗口、使用Home回到主屏幕这些操作中也被调用，然而onRestoreInstanceState()并没有在再次回到Activity时被调用。而且我在onResume()发现之前的Fragment只是被移除，并不是空，所以就算你在onResume()中执行问题一中创建的Fragment的方法，同样无济于事。所以通过remove()宣告失败。
+ * 接着通过调查资料发现Activity中的onSaveInstanceState()里面有一句super.onRestoreInstanceState(savedInstanceState)，Google对于这句话的解释是“Always call the superclass so it can save the view hierarchy state”，大概意思是“总是执行这句代码来调用父类去保存视图层的状态”。其实到这里大家也就明白了，就是因为这句话导致了重影的出现，于是我删除了这句话，然后onCreate()与onRestoreInstanceState()中同时使用问题一中的创建Fragment方法，然后再通过保存切换的状态，发现结果非常完美。代码如下：
+ *     //记录Fragment的位置
+ *     private int position = 0;
+ * 
+ *     @Override
+ *     protected void onCreate(Bundle savedInstanceState) {
+ *         super.onCreate(savedInstanceState);
+ *         setContentView(R.layout.activity_index);
+ * 
+ *         setTabSelection(position);
+ *     }
+ * 
+ *     @Override
+ *     protected void onRestoreInstanceState(Bundle savedInstanceState) {
+ *         position = savedInstanceState.getInt("position");
+ *         setTabSelection(position);
+ *         super.onRestoreInstanceState(savedInstanceState);
+ *     }
+ * 
+ *     @Override
+ *     protected void onSaveInstanceState(Bundle outState) {
+ *         //记录当前的position
+ *         outState.putInt("position", position);
+ *     }
+ * 
+ * 记录于此，希望能帮助到一些正遇到这种问题的朋友！
+ * </pre>
  */
 public class BaseFragmentActivity extends FragmentActivity {
 
