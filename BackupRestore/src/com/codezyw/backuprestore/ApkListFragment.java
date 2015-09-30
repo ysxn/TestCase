@@ -2,6 +2,7 @@
 package com.codezyw.backuprestore;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,9 +48,15 @@ public class ApkListFragment extends BaseListFragment {
     private static String mDirectory = "";
     private static final int MSG_UPDATE_DATA = 0x123;
 
-    private Handler mHandler = new Handler() {
+    @SuppressWarnings("unused")
+    private MyHandler mHandler = new MyHandler(getActivity()) {
         @Override
         public void handleMessage(Message msg) {
+            Context c = mContext.get();
+            if (c == null) {
+                mHandler.removeMessages(MSG_UPDATE_DATA);
+                return;
+            }
             switch (msg.what) {
                 case MSG_UPDATE_DATA:
                     mHandler.removeMessages(MSG_UPDATE_DATA);
@@ -255,4 +262,16 @@ public class ApkListFragment extends BaseListFragment {
         }
     }
 
+    /**
+     * <a href=
+     * "http://stackoverflow.com/questions/11407943/this-handler-class-should-be-static-or-leaks-might-occur-incominghandler#"
+     * >static防止handler泄露</a>
+     */
+    static class MyHandler extends Handler {
+        WeakReference<Context> mContext;
+
+        MyHandler(Context c) {
+            mContext = new WeakReference<Context>(c);
+        }
+    }
 }

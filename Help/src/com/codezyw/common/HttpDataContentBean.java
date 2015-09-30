@@ -5,7 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * <a href="php.codezyw.com">php.codezyw.com</a>��ݿ�ͨ��������ݱ��ֶη��ص�json
+ * <a href="php.codezyw.com">php.codezyw.com</a>
  */
 public class HttpDataContentBean implements Parcelable {
 

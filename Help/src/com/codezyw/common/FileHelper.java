@@ -317,6 +317,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -334,40 +335,263 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.Toast;
 
-public class FileIOHelper {
+public class FileHelper {
     private Context mContext;
 
-    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置格式
+    /**
+     * 设置时间格式
+     */
+    private SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
-    //开始搜索文件方法
+    public static final String[] fileEndingImage = {
+            ".png",
+            ".gif",
+            ".jpg",
+            ".jpeg",
+            ".bmp",
+    };
+
+    public static final String[] fileEndingAudio = {
+            ".mp3",
+            ".wav",
+            ".ogg",
+            ".midi",
+    };
+
+    public static final String[] fileEndingVideo = {
+            ".mp4",
+            ".rmvb",
+            ".avi",
+            ".flv",
+    };
+
+    public static final String[] fileEndingPackage = {
+            ".jar",
+            ".zip",
+            ".rar",
+            ".gz",
+            ".apk",
+            ".img",
+    };
+
+    public static final String[] fileEndingWebText = {
+            ".htm",
+            ".html",
+            ".php",
+            ".jsp",
+    };
+
+    public static final String[] fileEndingText = {
+            ".txt",
+            ".java",
+            ".c",
+            ".cpp",
+            ".py",
+            ".xml",
+            ".json",
+            ".log",
+    };
+
+    public static final String[] fileEndingWord = {
+            ".doc",
+            ".docx",
+    };
+
+    public static final String[] fileEndingExcel = {
+            ".xls",
+            ".xlsx",
+    };
+
+    public static final String[] fileEndingPPT = {
+            ".ppt",
+            ".pptx",
+    };
+
+    public static final String[] fileEndingPdf = {
+            ".pdf",
+    };
+
+    public static boolean checkEndsWithInStringArray(String checkItsEnd, String[] fileEndings) {
+        for (String aEnd : fileEndings) {
+            if (checkItsEnd.endsWith(aEnd))
+                return true;
+        }
+        return false;
+    }
+
+    public static void tryOpenFile(Context c, File f) {
+        if (f != null && f.isFile()) {
+            String fileName = f.getName();
+            Intent intent;
+            if (checkEndsWithInStringArray(fileName, fileEndingImage)) {
+                intent = getImageFileIntent(f);
+                c.startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, fileEndingWebText)) {
+                intent = getHtmlFileIntent(f);
+                c.startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, fileEndingPackage)) {
+                intent = getApkFileIntent(f);
+                c.startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, fileEndingAudio)) {
+                intent = getAudioFileIntent(f);
+                c.startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, fileEndingVideo)) {
+                intent = getVideoFileIntent(f);
+                c.startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, fileEndingText)) {
+                intent = getTextFileIntent(f);
+                c.startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, fileEndingPdf)) {
+                intent = getPdfFileIntent(f);
+                c.startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, fileEndingWord)) {
+                intent = getWordFileIntent(f);
+                c.startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, fileEndingExcel)) {
+                intent = getExcelFileIntent(f);
+                c.startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, fileEndingPPT)) {
+                intent = getPPTFileIntent(f);
+                c.startActivity(intent);
+            } else {
+                try {
+                    intent = getTextFileIntent(f);
+                    c.startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static Intent getHtmlFileIntent(File file) {
+        Uri uri = Uri.parse(file.toString()).buildUpon().encodedAuthority("com.android.htmlfileprovider").scheme("content").encodedPath(file.toString())
+                .build();
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.setDataAndType(uri, "text/html");
+        return intent;
+    }
+
+    public static Intent getImageFileIntent(File file) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = Uri.fromFile(file);
+        intent.setDataAndType(uri, "image/*");
+        return intent;
+    }
+
+    public static Intent getPdfFileIntent(File file) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = Uri.fromFile(file);
+        intent.setDataAndType(uri, "application/pdf");
+        return intent;
+    }
+
+    public static Intent getTextFileIntent(File file) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = Uri.fromFile(file);
+        intent.setDataAndType(uri, "text/plain");
+        return intent;
+    }
+
+    public static Intent getAudioFileIntent(File file) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("oneshot", 0);
+        intent.putExtra("configchange", 0);
+        Uri uri = Uri.fromFile(file);
+        intent.setDataAndType(uri, "audio/*");
+        return intent;
+    }
+
+    public static Intent getVideoFileIntent(File file) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("oneshot", 0);
+        intent.putExtra("configchange", 0);
+        Uri uri = Uri.fromFile(file);
+        intent.setDataAndType(uri, "video/*");
+        return intent;
+    }
+
+    public static Intent getChmFileIntent(File file) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = Uri.fromFile(file);
+        intent.setDataAndType(uri, "application/x-chm");
+        return intent;
+    }
+
+    public static Intent getWordFileIntent(File file) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = Uri.fromFile(file);
+        intent.setDataAndType(uri, "application/msword");
+        return intent;
+    }
+
+    public static Intent getExcelFileIntent(File file) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = Uri.fromFile(file);
+        intent.setDataAndType(uri, "application/vnd.ms-excel");
+        return intent;
+    }
+
+    public static Intent getPPTFileIntent(File file) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = Uri.fromFile(file);
+        intent.setDataAndType(uri, "application/vnd.ms-powerpoint");
+        return intent;
+    }
+
+    public static Intent getApkFileIntent(File file) {
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+        return intent;
+    }
+
+    // 开始搜索文件方法
     public static String toSearchFiles(File file, String key) {
-        //定义一个File文件数组，用来存放/sdcard目录下的文件或文件夹
+        // 定义一个File文件数组，用来存放/sdcard目录下的文件或文件夹
         File[] the_Files = file.listFiles();
-        //int index = sizeof(the_Files);
-        //通过遍历所有文件和文件夹
-        for (File tempF : the_Files){
+        // int index = sizeof(the_Files);
+        // 通过遍历所有文件和文件夹
+        for (File tempF : the_Files) {
             Log.i("zyw", "infomation in sdcard search: File tempF = " + tempF.getName());
-            if (tempF.isDirectory()){
+            if (tempF.isDirectory()) {
                 String path = toSearchFiles(tempF, key);
                 if (TextUtils.isEmpty(path)) {
                     return path;
                 }
-            }else{
+            } else {
                 try {
-                    //是文件，则进行比较，如果文件名称包含输入搜索Key，则返回大于-1的值
-                    if (tempF.getName().indexOf(key) > -1){
-                        //获取符合条件的文件路径，进行累加
+                    // 是文件，则进行比较，如果文件名称包含输入搜索Key，则返回大于-1的值
+                    if (tempF.getName().indexOf(key) > -1) {
+                        // 获取符合条件的文件路径，进行累加
                         return tempF.getPath();
                     }
-                }catch (Exception e){
-                    //如果路径找不到，提示出错
+                } catch (Exception e) {
+                    // 如果路径找不到，提示出错
                     e.printStackTrace();
                 }
             }
         }
         return null;
     }
-    
+
     /**
      * 应用程序运行命令获取 Root权限，设备必须已破解(获得ROOT权限)
      * 
@@ -551,7 +775,7 @@ public class FileIOHelper {
         return 0;
     }
 
-    public FileIOHelper(Context c) {
+    public FileHelper(Context c) {
         mContext = c;
     }
 

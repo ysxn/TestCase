@@ -3,29 +3,32 @@ package com.zyw.videofileplayer;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import com.codezyw.common.OpenFileHelper;
+import java.util.Locale;
 
 import android.app.ListActivity;
-import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.codezyw.common.ColorHelper;
+import com.codezyw.common.FileIOHelper;
+import com.codezyw.common.OpenFileHelper;
+import com.codezyw.common.ShapeHelper;
+import com.codezyw.common.UnitHelper;
 
 public class FileBrowser extends ListActivity {
     private final String TAG = "zyw";
@@ -40,57 +43,35 @@ public class FileBrowser extends ListActivity {
 
     private FileListAdapter mFileListAdapter;
 
-    private static final int REQUEST_UPDATE_DATA = 299;
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case REQUEST_UPDATE_DATA: {
-                    mHandler.removeMessages(REQUEST_UPDATE_DATA);
-                    if (mFileListAdapter != null) {
-                        mFileListAdapter.notifyDataSetChanged();
-                    }
-                }
-                    break;
-            }
-        }
-    };
-
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         File sdcard = android.os.Environment.getExternalStorageDirectory();
         Log.i(TAG, "sdcard=" + sdcard);
         setListAdapterByPath(sdcard);
     }
-    
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.file_filter) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.file_filter) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && !mFileListAdapter.isRoot()) {
             setListAdapterByPath((File) mFileListAdapter.getItem(1));
-            /*
-             * Intent intent = new Intent(); intent.setClass(FileBrowser.this,
-             * FlashActivity.class); startActivity(intent);
-             */
             return true;
         }
         return super.onKeyDown(keyCode, event);
@@ -98,8 +79,6 @@ public class FileBrowser extends ListActivity {
 
     private void setListAdapterByPath(File folder) {
         List<File> filesList = new ArrayList<File>();
-
-        Log.i(TAG, "setListAdapterByPath folder=" + folder);
         File[] listFiles = folder.listFiles(FILTER);
         if (listFiles == null) {
             Log.e(TAG, "setListAdapterByPath listFiles == null");
@@ -115,7 +94,7 @@ public class FileBrowser extends ListActivity {
                     if (fileA.isFile() && fileB.isDirectory())
                         return 1;
 
-                    return fileA.getName().toUpperCase().compareTo(fileB.getName().toUpperCase());
+                    return fileA.getName().toUpperCase(Locale.getDefault()).compareTo(fileB.getName().toUpperCase(Locale.getDefault()));
                 }
             });
         }
@@ -143,76 +122,66 @@ public class FileBrowser extends ListActivity {
             // file.getAbsolutePath().replace("/mnt", ""));
             intent.setData(Uri.parse(file.getAbsolutePath()));
             startActivity(intent);
-            // FileBrowser.this.finish();
         } else {
-            tryOpenFile(file);
+            OpenFileHelper.tryOpenFile(this, file);
         }
     }
 
-    private boolean checkEndsWithInStringArray(String checkItsEnd, String[] fileEndings) {
-        for (String aEnd : fileEndings) {
-            if (checkItsEnd.endsWith(aEnd))
-                return true;
+    public class FileListAdapter extends ArrayAdapter<File> {
+        private FileIOHelper mUtil;
+
+        public FileListAdapter(Context context, int Resource, List<File> objects) {
+            super(context, Resource, objects);
+            mUtil = new FileIOHelper(context);
         }
-        return false;
-    }
 
-    private void tryOpenFile(File f) {
-        if (f != null && f.isFile()) {
-            String fileName = f.getName();
-            Intent intent;
-            if (checkEndsWithInStringArray(fileName,
-                    getResources().getStringArray(R.array.fileEndingImage))) {
-                intent = OpenFileHelper.getImageFileIntent(f);
-                startActivity(intent);
-            } else if (checkEndsWithInStringArray(fileName,
-                    getResources().getStringArray(R.array.fileEndingWebText))) {
-                intent = OpenFileHelper.getHtmlFileIntent(f);
-                startActivity(intent);
-            } else if (checkEndsWithInStringArray(fileName,
-                    getResources().getStringArray(R.array.fileEndingPackage))) {
-                intent = OpenFileHelper.getApkFileIntent(f);
-                startActivity(intent);
+        @Override
+        public int getViewTypeCount() {
+            return 3;
+        }
 
-            } else if (checkEndsWithInStringArray(fileName,
-                    getResources().getStringArray(R.array.fileEndingAudio))) {
-                intent = OpenFileHelper.getAudioFileIntent(f);
-                startActivity(intent);
-            } else if (checkEndsWithInStringArray(fileName,
-                    getResources().getStringArray(R.array.fileEndingVideo))) {
-                intent = OpenFileHelper.getVideoFileIntent(f);
-                startActivity(intent);
-            } else if (checkEndsWithInStringArray(fileName,
-                    getResources().getStringArray(R.array.fileEndingText))) {
-                intent = OpenFileHelper.getTextFileIntent(f);
-                startActivity(intent);
-            } else if (checkEndsWithInStringArray(fileName,
-                    getResources().getStringArray(R.array.fileEndingPdf))) {
-                intent = OpenFileHelper.getPdfFileIntent(f);
-                startActivity(intent);
-            } else if (checkEndsWithInStringArray(fileName,
-                    getResources().getStringArray(R.array.fileEndingWord))) {
-                intent = OpenFileHelper.getWordFileIntent(f);
-                startActivity(intent);
-            } else if (checkEndsWithInStringArray(fileName,
-                    getResources().getStringArray(R.array.fileEndingExcel))) {
-                intent = OpenFileHelper.getExcelFileIntent(f);
-                startActivity(intent);
-            } else if (checkEndsWithInStringArray(fileName,
-                    getResources().getStringArray(R.array.fileEndingPPT))) {
-                intent = OpenFileHelper.getPPTFileIntent(f);
-                startActivity(intent);
+        @Override
+        public int getItemViewType(int position) {
+            if (position == 0) {
+                return 0;
+            } else if (position == 1 && !isRoot()) {
+                return 1;
             } else {
-//                showMessage("Œﬁ∑®¥Úø™£¨«Î∞≤◊∞œ‡”¶µƒ»Ìº˛£°");
-                try {
-                    intent = OpenFileHelper.getTextFileIntent(f);
-                    startActivity(intent);
-                } catch (ActivityNotFoundException e) {
-                    
-                }
+                return 2;
             }
         }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            TextView view = (TextView) super.getView(position, convertView, parent);
+            File file = getItem(position);
+            if (getItemViewType(position) == 0) {
+                view.setText("ÂΩìÂâçÁõÆÂΩï:" + file.getAbsolutePath());
+                view.setBackground(ShapeHelper.createRectShape(ColorHelper.GREEN));
+                view.setTextColor(ColorHelper.BLACK);
+            } else if (getItemViewType(position) == 1) {
+                view.setText("ËøîÂõû‰∏ä‰∏Ä‰∏™ÁõÆÂΩï");
+                view.getPaint().setFakeBoldText(true);
+                view.setTextColor(ColorHelper.RED);
+            } else {
+                view.getPaint().setFakeBoldText(false);
+                view.setTextColor(ColorHelper.WHITE);
+                StringBuilder sb = new StringBuilder();
+                sb.append(file.getName()).append("\n");
+                if (file.isDirectory()) {
+                    sb.append("‰øÆÊîπÊó∂Èó¥ : ").append(mUtil.convetTime(file.lastModified()));
+                    view.setText(sb.toString());
+                } else {
+                    long b = file.length();
+                    sb.append("Êñá‰ª∂Â§ßÂ∞è : ").append(UnitHelper.byteToHumanNumber(b)).append("\n").append("‰øÆÊîπÊó∂Èó¥ : ").append(mUtil.convetTime(file.lastModified()));
+                    view.setText(sb.toString());
+                }
+            }
+            return view;
+        }
+
+        public boolean isRoot() {
+            return getItem(0).getParent() == null;
+        }
     }
-    
-    
 }

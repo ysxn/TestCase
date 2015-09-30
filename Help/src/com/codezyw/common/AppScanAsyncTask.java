@@ -33,7 +33,7 @@ public class AppScanAsyncTask extends NamedAsyncTask<File, Integer, List<ApkData
     };
     private static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(6, 30, 30L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
     private List<ApkData> mApkList = new ArrayList<ApkData>();
-    private FileIOHelper mUtil;
+    private FileHelper mUtil;
     private PostListener mPostListener;
     private PackageManager mPackageManager;
     private List<ApplicationInfo> mApps;
@@ -62,7 +62,7 @@ public class AppScanAsyncTask extends NamedAsyncTask<File, Integer, List<ApkData
         mPostListener = listener;
         mActivity = activity;
         mPackageManager = activity.getPackageManager();
-        mUtil = new FileIOHelper(activity);
+        mUtil = new FileHelper(activity);
 
         mApps = mPackageManager.getInstalledApplications(0);
         if (mApps == null) {

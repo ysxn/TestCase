@@ -33,25 +33,13 @@ import com.codezyw.common.UIHelper;
 public class HttpConnectionService extends Service implements Handler.Callback {
 
     private static final String TAG = "zyw";
-
     public static final boolean DEBUG = true;
-
     private static final int MSG_STOP_SERVICE_BY_TIMEOUT = 110;
-
-    private boolean isServiceRunning = false;
-
-    private Handler mServiceMainHandler;
-
     private final static Object mHttpLock = new Object();
-
     private HandlerThread mHandlerThread;
-
     private Handler mWorkHandler;
-
     private Context mContext = HttpConnectionService.this;
-
     private NetManager mNetManager = new NetManager();
-
     ContentObserver mContentObserver = null;
 
     private static final String[] READ_NOTE_PROJECTION = new String[] {
@@ -70,7 +58,7 @@ public class HttpConnectionService extends Service implements Handler.Callback {
         if (DEBUG)
             Log.v(TAG, "service onCreate");
         super.onCreate();
-        mServiceMainHandler = new Handler(this);
+        new Handler(this);
         mHandlerThread = new HandlerThread("handler_thread");
         mHandlerThread.start();
         mWorkHandler = new Handler(mHandlerThread.getLooper()) {

@@ -8,7 +8,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * http�����<a href="php.codezyw.com">php.codezyw.com</a>���ص�json
+ * <a href="php.codezyw.com">php.codezyw.com</a>
  */
 public class HttpResultBean implements Parcelable {
 
