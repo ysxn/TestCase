@@ -38,6 +38,7 @@ public class AppBackupFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable
     ViewGroup container, @Nullable
     Bundle savedInstanceState) {
+        android.util.Log.i("zyw", "AppBackupFragment hashcode=" + AppBackupFragment.this);
         mRootView = new LinearLayout(getActivity());
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         mRootView.setLayoutParams(lp);

@@ -46,6 +46,11 @@ public class MainActivity extends BaseFragmentActivity {
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (mBottomMenuLayout.onKeyDown(keyCode, event)) {
             return true;
