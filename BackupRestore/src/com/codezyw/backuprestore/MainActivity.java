@@ -11,6 +11,7 @@ import com.codezyw.common.AppBackupFragment;
 import com.codezyw.common.BaseFragmentActivity;
 import com.codezyw.common.BaseLoginFragment;
 import com.codezyw.common.BottomMenuLayout;
+import com.codezyw.common.Constant;
 import com.codezyw.common.CrashHelper;
 import com.codezyw.common.SPAsync;
 
@@ -38,6 +39,11 @@ public class MainActivity extends BaseFragmentActivity {
         mBottomMenuLayout.addMenu(0, "搜索", 1, mApkBrowser);
         mBottomMenuLayout.addMenu(0, "查看", 2, mFileBrowser);
         mBottomMenuLayout.addMenu(0, "登录", 3, mBaseLoginFragment);
+        int tab = 0;
+        if (savedInstanceState != null) {
+            tab = savedInstanceState.getInt(Constant.SAVE_FRAGMENT_INDEX, 0);
+        }
+        mBottomMenuLayout.switchFragment(tab);
 
         String log = SPAsync.getString(this, "crash", "");
         if (!TextUtils.isEmpty(log)) {
@@ -53,6 +59,7 @@ public class MainActivity extends BaseFragmentActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putInt(Constant.SAVE_FRAGMENT_INDEX, mBottomMenuLayout.getCurrentTabId());
     }
 
     @Override

@@ -8,4 +8,5 @@ public class Constant {
     public static final int SAME = 3;
     public static final String SUFFFIX = "suffix";
     public static final String DIRECTORY = "directory";
+    public static final String SAVE_FRAGMENT_INDEX = "fragment_tab_index";
 }

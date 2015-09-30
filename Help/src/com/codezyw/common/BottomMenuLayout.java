@@ -3,7 +3,6 @@ package com.codezyw.common;
 
 import java.util.ArrayList;
 
-
 import android.content.Context;
 import android.support.v4.app.FragmentTransaction;
 import android.util.AttributeSet;
@@ -36,7 +35,8 @@ public class BottomMenuLayout extends LinearLayout {
     private Scroller mScroller;
     private ArrayList<View> mAllMenu = new ArrayList<View>();
     private ArrayList<BaseFragment> mAllBaseFragment = new ArrayList<BaseFragment>();
-    private BaseFragment mCurrent;
+    private BaseFragment mCurrentFragment;
+    private int mCurrentTab = 0;
     private int mFramelayoutId;
 
     public BottomMenuLayout(Context context) {
@@ -124,9 +124,6 @@ public class BottomMenuLayout extends LinearLayout {
                 switchFragment(index);
             }
         });
-        if (index == 0) {
-            switchFragment(0);
-        }
     }
 
     private View createMenuView(int imageResId, String s) {
@@ -158,19 +155,30 @@ public class BottomMenuLayout extends LinearLayout {
         return parent;
     }
 
-    private void switchFragment(int i) {
-        BaseFragment old = mCurrent;
+    /**
+     * 切换fragment
+     * 
+     * @param i
+     */
+    public void switchFragment(int i) {
+        if (mCurrentTab == i && mCurrentFragment != null) {
+            // Fragment already showing
+            return;
+        }
+        BaseFragment old = mCurrentFragment;
         FragmentTransaction ft = ((BaseFragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
         if (old != null) {
             ft.hide(old);
         }
-        mCurrent = mAllBaseFragment.get(i);
-        if (!mCurrent.isAdded()) {
-            ft.add(mFramelayoutId, mCurrent);
+        mCurrentFragment = mAllBaseFragment.get(i);
+        mCurrentTab = i;
+        if (!mCurrentFragment.isAdded()) {
+            ft.add(mFramelayoutId, mCurrentFragment);
         } else {
-            ft.show(mCurrent);
+            ft.show(mCurrentFragment);
         }
         ft.commitAllowingStateLoss();
+
         for (int index = 0; index < mAllMenu.size(); index++) {
             View v = mAllMenu.get(index);
             TextView text = (TextView) ((LinearLayout) v).getChildAt(1);
@@ -180,6 +188,20 @@ public class BottomMenuLayout extends LinearLayout {
                 text.setTextColor(ColorHelper.WHITE);
             }
         }
+    }
+
+    /**
+     * 获取当前界面fragment对应index
+     */
+    public int getCurrentTabId() {
+        return mCurrentTab;
+    }
+
+    /**
+     * 获取当前界面fragment
+     */
+    public BaseFragment getCurrentFragment() {
+        return mCurrentFragment;
     }
 
     /**
@@ -212,7 +234,7 @@ public class BottomMenuLayout extends LinearLayout {
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (mCurrent.onKeyDown(keyCode, event)) {
+        if (mCurrentFragment.onKeyDown(keyCode, event)) {
             return true;
         }
         return super.onKeyDown(keyCode, event);
