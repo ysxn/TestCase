@@ -23,18 +23,18 @@ import android.widget.Toast;
 
 import com.codezyw.common.BaseListFragment;
 import com.codezyw.common.Constant;
-import com.codezyw.common.FileIOHelper;
+import com.codezyw.common.FileHelper;
 import com.codezyw.common.FileScanAsyncTask;
-import com.codezyw.common.OpenFileHelper;
 import com.codezyw.common.UIHelper;
 import com.codezyw.common.UnitHelper;
 
 public class SearchFragment extends BaseListFragment {
+    @SuppressWarnings("unused")
     private final String TAG = "zyw";
-
     private static String mSuffix = "";
     private static String mDirectory = "";
 
+    @SuppressWarnings("unused")
     private static final FileFilter FILTER = new FileFilter() {
         public boolean accept(File f) {
             // return f.isDirectory() ||
@@ -137,17 +137,17 @@ public class SearchFragment extends BaseListFragment {
             intent.setDataAndType(Uri.fromFile(file), "image/*");
             startActivity(intent);
         } else {
-            OpenFileHelper.tryOpenFile(getActivity(), file);
+            FileHelper.tryOpenFile(getActivity(), file);
             // getResources().getStringArray(R.array.fileEndingImage);
         }
     }
 
     public class SearchResultAdapter extends ArrayAdapter<File> {
-        private FileIOHelper mUtil;
+        private FileHelper mUtil;
 
         public SearchResultAdapter(Context context, int Resource, List<File> objects) {
             super(context, Resource, objects);
-            mUtil = new FileIOHelper(context);
+            mUtil = new FileHelper(context);
         }
 
         @Override

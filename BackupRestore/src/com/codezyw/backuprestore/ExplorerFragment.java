@@ -35,8 +35,7 @@ import android.widget.TextView;
 import com.codezyw.common.BaseListFragment;
 import com.codezyw.common.ColorHelper;
 import com.codezyw.common.Constant;
-import com.codezyw.common.FileIOHelper;
-import com.codezyw.common.OpenFileHelper;
+import com.codezyw.common.FileHelper;
 import com.codezyw.common.ShapeHelper;
 import com.codezyw.common.UnitHelper;
 
@@ -140,7 +139,7 @@ public class ExplorerFragment extends BaseListFragment {
             intent.setDataAndType(Uri.fromFile(file), "image/*");
             startActivity(intent);
         } else {
-            OpenFileHelper.tryOpenFile(getActivity(), file);
+            FileHelper.tryOpenFile(getActivity(), file);
         }
     }
 
@@ -198,11 +197,11 @@ public class ExplorerFragment extends BaseListFragment {
     }
 
     public class FileListAdapter extends ArrayAdapter<File> {
-        private FileIOHelper mUtil;
+        private FileHelper mUtil;
 
         public FileListAdapter(Context context, int Resource, List<File> objects) {
             super(context, Resource, objects);
-            mUtil = new FileIOHelper(context);
+            mUtil = new FileHelper(context);
         }
 
         @Override

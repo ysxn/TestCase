@@ -25,8 +25,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.codezyw.common.ColorHelper;
-import com.codezyw.common.FileIOHelper;
-import com.codezyw.common.OpenFileHelper;
+import com.codezyw.common.FileHelper;
 import com.codezyw.common.ShapeHelper;
 import com.codezyw.common.UnitHelper;
 
@@ -123,16 +122,16 @@ public class FileBrowser extends ListActivity {
             intent.setData(Uri.parse(file.getAbsolutePath()));
             startActivity(intent);
         } else {
-            OpenFileHelper.tryOpenFile(this, file);
+            FileHelper.tryOpenFile(this, file);
         }
     }
 
     public class FileListAdapter extends ArrayAdapter<File> {
-        private FileIOHelper mUtil;
+        private FileHelper mUtil;
 
         public FileListAdapter(Context context, int Resource, List<File> objects) {
             super(context, Resource, objects);
-            mUtil = new FileIOHelper(context);
+            mUtil = new FileHelper(context);
         }
 
         @Override

@@ -29,7 +29,7 @@ import com.codezyw.common.AppScanAsyncTask;
 import com.codezyw.common.AppScanAsyncTask.ApkData;
 import com.codezyw.common.BaseListFragment;
 import com.codezyw.common.Constant;
-import com.codezyw.common.FileIOHelper;
+import com.codezyw.common.FileHelper;
 import com.codezyw.common.SlideMenuGroup;
 import com.codezyw.common.SlideMenuListener;
 import com.codezyw.common.UIHelper;
@@ -42,7 +42,7 @@ public class ApkListFragment extends BaseListFragment {
     private ListView mListView;
     private SlideMenuListener mSwipeTouchListener;
     private List<ApkData> mApkList = new ArrayList<ApkData>();
-    private FileIOHelper mUtil;
+    private FileHelper mUtil;
     private AppScanAsyncTask mAppScanAsyncTask;
 
     private static String mDirectory = "";
@@ -98,7 +98,7 @@ public class ApkListFragment extends BaseListFragment {
         mListView = getListView();
         mSwipeTouchListener = new SlideMenuListener(getActivity(), mListView);
         mListView.setOnTouchListener(mSwipeTouchListener);
-        mUtil = new FileIOHelper(getActivity());
+        mUtil = new FileHelper(getActivity());
         Bundle bd = getArguments();
         if (bd != null) {
             mDirectory = bd.getString(Constant.DIRECTORY);
@@ -182,11 +182,11 @@ public class ApkListFragment extends BaseListFragment {
         private final Context mContext;
         private final LayoutInflater mInflater;
         private List<ApkData> mApkList;
-        private FileIOHelper mUtil;
+        private FileHelper mUtil;
 
         public ApkListAdapter(Context c) {
             mContext = c;
-            mUtil = new FileIOHelper(c);
+            mUtil = new FileHelper(c);
             mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
