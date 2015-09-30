@@ -164,7 +164,7 @@ public class FileBrowser extends ListActivity {
                 view.setTextColor(ColorHelper.RED);
             } else {
                 view.getPaint().setFakeBoldText(false);
-                view.setTextColor(ColorHelper.WHITE);
+                view.setTextColor(ColorHelper.BLACK);
                 StringBuilder sb = new StringBuilder();
                 sb.append(file.getName()).append("\n");
                 if (file.isDirectory()) {
