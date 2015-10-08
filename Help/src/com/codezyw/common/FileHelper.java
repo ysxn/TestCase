@@ -262,6 +262,8 @@ package com.codezyw.common;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -280,15 +282,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import android.text.TextUtils;
@@ -302,7 +307,7 @@ public class FileHelper {
     /**
      * 设置时间格式
      */
-    private SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    private static final SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
     public static final String[] fileEndingImage = {
             ".png",
@@ -723,24 +728,218 @@ public class FileHelper {
         return mount;
     }
 
-    // 获取当前路径，可用空间
+    /**
+     * 获取当前路径，可用空间
+     * 
+     * @param path
+     * @return
+     */
     public static long getAvailableSize(String path) {
+        return getUsableSpace(new File(path));
+    }
+
+    /**
+     * Get the external application cache directory.
+     * 
+     * @param context The context to use
+     * @return The external cache folder :
+     *         /storage/sdcard0/Android/data/com.srain.sdk/cache
+     */
+    @TargetApi(Build.VERSION_CODES.FROYO)
+    public static File getExternalCacheDir(Context context) {
+        if (Version.hasFroyo()) {
+            File path = context.getExternalCacheDir();
+
+            // In some case, even the sd card is mounted, getExternalCacheDir
+            // will return null, may be it is nearly full.
+            if (path != null) {
+                return path;
+            }
+        }
+
+        // Before Froyo or the path is null, we need to construct the external
+        // cache folder ourselves
+        final String cacheDir = "/Android/data/" + context.getPackageName() + "/cache/";
+        return new File(Environment.getExternalStorageDirectory().getPath() + cacheDir);
+    }
+
+    /**
+     * 获取当前路径，可用空间<br>
+     * Check how much usable space is available at a given path.
+     * 
+     * @param path The path to check
+     * @return The space available in bytes by user, not by root, -1 means path
+     *         is null, 0 means path is not exist.
+     */
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    public static long getUsableSpace(File path) {
+        if (path == null) {
+            return -1;
+        }
+        if (Version.hasGingerbread()) {
+            return path.getUsableSpace();
+        } else {
+            if (!path.exists()) {
+                return 0;
+            } else {
+                final StatFs stats = new StatFs(path.getPath());
+                return (long) stats.getBlockSize() * (long) stats.getAvailableBlocks();
+            }
+        }
+    }
+
+    /**
+     * 获取路径下已经使用的空间大小
+     * 
+     * @param path
+     * @return
+     */
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    public static long getUsedSpace(File path) {
+        if (path == null) {
+            return -1;
+        }
+
+        if (Version.hasGingerbread()) {
+            return path.getTotalSpace() - path.getUsableSpace();
+        } else {
+            if (!path.exists()) {
+                return -1;
+            } else {
+                final StatFs stats = new StatFs(path.getPath());
+                return (long) stats.getBlockSize()
+                        * (stats.getBlockCount() - stats.getAvailableBlocks());
+            }
+        }
+    }
+
+    /**
+     * @param path
+     * @return -1 means path is null, 0 means path is not exist.
+     */
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    public static long getTotalSpace(File path) {
+        if (path == null) {
+            return -1;
+        }
+        if (Version.hasGingerbread()) {
+            return path.getTotalSpace();
+        } else {
+            if (!path.exists()) {
+                return 0;
+            } else {
+                final StatFs stats = new StatFs(path.getPath());
+                return (long) stats.getBlockSize() * (long) stats.getBlockCount();
+            }
+        }
+    }
+
+    /**
+     * 判断是否有Sdcard
+     * 
+     * @return
+     */
+    public static boolean hasSDCardMounted() {
+        String state = Environment.getExternalStorageState();
+        if (state != null && state.equals(Environment.MEDIA_MOUNTED)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 例如：<br>
+     * external: "/storage/emulated/0/Android/data/in.srain.sample/files"<br>
+     * internal: "/data/data/in.srain.sample/files"
+     */
+    public static String wantFilesPath(Context context, boolean externalStorageFirst, String dir) {
+        if (TextUtils.isEmpty(dir)) {
+            dir = "temp";
+        }
+        String path = null;
+        File f = null;
+        if (externalStorageFirst && hasSDCardMounted()
+                && (f = context.getExternalFilesDir(dir)) != null) {
+            path = f.getAbsolutePath();
+        } else {
+            path = context.getFilesDir().getAbsolutePath() + File.separator + dir;
+        }
+        return path;
+    }
+
+    /**
+     * 首选外置Sdcard根目录，例如：<br>
+     * external: "/storage/emulated/0/dir"<br>
+     * 否则返回：<br>
+     * internal: "/data/data/in.srain.sample/dir"
+     * 
+     * @param context
+     * @param dir
+     * @return
+     */
+    public static String wantExternalRootPath(Context context, String dir) {
+        if (TextUtils.isEmpty(dir)) {
+            dir = "temp";
+        }
+        String path = null;
+        File f = new File(Environment.getExternalStorageDirectory(), dir);
+        if (f != null && !f.exists()) {
+            f.mkdirs();
+        }
+        if (hasSDCardMounted()
+                && f != null && f.exists()) {
+            path = f.getAbsolutePath();
+        } else {
+            path = context.getFilesDir().getAbsolutePath() + File.separator + dir;
+        }
+        return path;
+    }
+
+    /**
+     * @param context
+     * @param filePath file path relative to assets, like
+     *            request_init1/search_index.json
+     * @return
+     */
+    public static String readAssert(Context context, String filePath) {
         try {
-            File base = new File(path);
-            StatFs stat = new StatFs(base.getPath());
-            long nAvailableCount = stat.getBlockSize() * ((long) stat.getAvailableBlocks());
-            return nAvailableCount;
+            if (filePath.startsWith(File.separator)) {
+                filePath = filePath.substring(File.separator.length());
+            }
+            AssetManager assetManager = context.getAssets();
+            InputStream inputStream = assetManager.open(filePath);
+            DataInputStream stream = new DataInputStream(inputStream);
+            int length = stream.available();
+            byte[] buffer = new byte[length];
+            stream.readFully(buffer);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            byteArrayOutputStream.write(buffer);
+            stream.close();
+            return byteArrayOutputStream.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return 0;
+        return null;
     }
 
+    /**
+     * 构造函数
+     * 
+     * @param c
+     */
     public FileHelper(Context c) {
         mContext = c;
     }
 
-    public boolean checkFile(File a, File b) {
+    /**
+     * 检查2个文件长度是否相同，不检查MD5
+     * 
+     * @param a
+     * @param b
+     * @return
+     */
+    public static boolean checkFile(File a, File b) {
         if (a == null || b == null) {
             return false;
         }
@@ -750,12 +949,18 @@ public class FileHelper {
         return false;
     }
 
-    public Long convertDate(String str) {
+    /**
+     * 解析时间格式为毫秒
+     * 
+     * @param str
+     * @return
+     */
+    public static Long convertDate(String str) {
         if (str == null || str.isEmpty()) {
             return Long.valueOf(System.currentTimeMillis());// 0L;
         }
         try {
-            Date date = mFormat.parse(str);
+            Date date = sFormat.parse(str);
             return date.getTime();
         } catch (ParseException e) {
             e.printStackTrace();
@@ -763,22 +968,45 @@ public class FileHelper {
         return Long.valueOf(System.currentTimeMillis());
     }
 
-    public String convetTime(long modify) {
-        return mFormat.format(new Date(modify));
+    /**
+     * 毫秒转换为时间格式
+     * 
+     * @param modify
+     * @return
+     */
+    public static String convetTime(long modify) {
+        return sFormat.format(new Date(modify));
     }
 
-    public void installApk(File file) {
-        // 安装
+    /**
+     * 安装apk文件
+     * 
+     * @param context
+     * @param file
+     */
+    public static void installApk(Context context, File file) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
         try {
-            mContext.startActivity(intent);
+            context.startActivity(intent);
         } catch (ActivityNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public void uninstallApk() {
+    /**
+     * 安装apk文件
+     * 
+     * @param context
+     * @param path
+     */
+    public static void installApk(Context context, String path) {
+        File file = new File(path);
+        installApk(context, file);
+    }
+
+    public static void uninstallApk(Context mContext) {
         // 卸载：
         // Environment拥有一些可以获取环境变量的方法
         // package:com.demo.CanavaCancel 这个形式是 package:程序完整的路径 (包名+程序名).
@@ -799,7 +1027,6 @@ public class FileHelper {
             tmpFile.mkdir();
         }
         final File file = new File("/sdcard/update/" + fileName);
-
         try {
             URL url = new URL(httpUrl);
             try {
@@ -827,21 +1054,15 @@ public class FileHelper {
 
                     }
                 }
-
                 conn.disconnect();
                 fos.close();
                 is.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-
                 e.printStackTrace();
             }
         } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
-
             e.printStackTrace();
         }
-
         return file;
     }
 

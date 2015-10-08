@@ -335,12 +335,12 @@ public class MediaHelper {
         int i = mAudioManager.getStreamVolume(streamType);
         return i;
     }
-    
+
     /**
      * 锁屏情况下启动摄像头拍照
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static void launchSecureCapture (Context context) {
+    public static void launchSecureCapture(Context context) {
         Intent intent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE);
         intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -491,12 +491,13 @@ public class MediaHelper {
     public static void scanPathMedia(Context context) {
         /**
          * 老的API
+         * 
          * <pre>
          * MainActivity.this.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse(&quot;file://&quot; + Environment.getExternalStorageDirectory())));
          * </pre>
          */
         MediaScannerConnection.scanFile(context, new String[] {
-            Environment.getExternalStorageDirectory().getPath()
+                Environment.getExternalStorageDirectory().getPath()
         }, null, null);
     }
 
@@ -515,6 +516,22 @@ public class MediaHelper {
         intent.setClassName("com.android.providers.media",
                 "com.android.providers.media.MediaScannerService");
         context.bindService(intent, new MediaScannerConnection(context, null), Context.BIND_AUTO_CREATE);
+    }
+
+    /**
+     * 请求媒体扫描器扫描指定目录
+     * 
+     * @param context
+     */
+    @Deprecated
+    public static void scanSdcard(Context context) throws Exception {
+        Intent scanIntent = new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"
+                + Environment.getExternalStorageDirectory()));
+        Log.v(TAG, "start the intent");
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_MEDIA_SCANNER_STARTED);
+        intentFilter.addDataScheme("file");
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"
+                + Environment.getExternalStorageDirectory())));
     }
 
     /**
