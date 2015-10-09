@@ -42,7 +42,6 @@ public class ApkListFragment extends BaseListFragment {
     private ListView mListView;
     private SlideMenuListener mSwipeTouchListener;
     private List<ApkData> mApkList = new ArrayList<ApkData>();
-    private FileHelper mUtil;
     private AppScanAsyncTask mAppScanAsyncTask;
 
     private static String mDirectory = "";
@@ -98,7 +97,6 @@ public class ApkListFragment extends BaseListFragment {
         mListView = getListView();
         mSwipeTouchListener = new SlideMenuListener(getActivity(), mListView);
         mListView.setOnTouchListener(mSwipeTouchListener);
-        mUtil = new FileHelper(getActivity());
         Bundle bd = getArguments();
         if (bd != null) {
             mDirectory = bd.getString(Constant.DIRECTORY);
@@ -173,7 +171,7 @@ public class ApkListFragment extends BaseListFragment {
             intent.setData(Uri.parse(file.getAbsolutePath()));
             startActivity(intent);
         } else if (file.getName().endsWith(".apk")) {
-            mUtil.installApk(file);
+            FileHelper.installApk(getActivity(), file);
         }
     }
 
@@ -182,11 +180,9 @@ public class ApkListFragment extends BaseListFragment {
         private final Context mContext;
         private final LayoutInflater mInflater;
         private List<ApkData> mApkList;
-        private FileHelper mUtil;
 
         public ApkListAdapter(Context c) {
             mContext = c;
-            mUtil = new FileHelper(c);
             mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
@@ -229,7 +225,7 @@ public class ApkListFragment extends BaseListFragment {
             sb.append(file.mFile.getAbsolutePath()).append("\n");
             long b = file.mFile.length();
             sb.append("文件大小 : ").append(UnitHelper.byteToHumanNumber(b)).append("\n")
-                    .append("修改时间 : ").append(mUtil.convetTime(file.mFile.lastModified())).append("\n")
+                    .append("修改时间 : ").append(FileHelper.convetTime(file.mFile.lastModified())).append("\n")
                     .append(file.mVersion);
             textView2.setText(sb.toString());
             if (file.mDrawable != null) {

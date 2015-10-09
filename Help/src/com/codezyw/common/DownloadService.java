@@ -74,7 +74,7 @@ public class DownloadService extends Service implements Handler.Callback {
             Log.i(TAG, "DownloadService onCreate");
         }
         super.onCreate();
-        mSaveDirectory = FileHelper.wantFilesPath(mContext, true, "download");
+        mSaveDirectory = FileHelper.getSdcardRootDir(mContext, "download");
         Log.i(TAG, "DownloadService onCreate mSaveDirectory=" + mSaveDirectory);
         mTotalByte = DownloadHelper.getInstance(mContext).getInt(Constant.APK_DOWNLOAD_TOTAL, 0);
         mAlreadyWrite = DownloadHelper.getInstance(mContext).getInt(Constant.APK_DOWNLOAD_PROGRESS, 0);

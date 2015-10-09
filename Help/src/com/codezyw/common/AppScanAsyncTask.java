@@ -33,7 +33,6 @@ public class AppScanAsyncTask extends NamedAsyncTask<File, Integer, List<ApkData
     };
     private static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(6, 30, 30L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
     private List<ApkData> mApkList = new ArrayList<ApkData>();
-    private FileHelper mUtil;
     private PostListener mPostListener;
     private PackageManager mPackageManager;
     private List<ApplicationInfo> mApps;
@@ -62,7 +61,6 @@ public class AppScanAsyncTask extends NamedAsyncTask<File, Integer, List<ApkData
         mPostListener = listener;
         mActivity = activity;
         mPackageManager = activity.getPackageManager();
-        mUtil = new FileHelper(activity);
 
         mApps = mPackageManager.getInstalledApplications(0);
         if (mApps == null) {
@@ -184,8 +182,8 @@ public class AppScanAsyncTask extends NamedAsyncTask<File, Integer, List<ApkData
         @Override
         public void run() {
             File file = fdData.mFile;
-            fdData.mDrawable = mUtil.getUninatllApkInfo(mActivity, file.getAbsolutePath(), file);
-            fdData.mPi = mUtil.getPackageInfo(mActivity, file.getAbsolutePath());
+            fdData.mDrawable = FileHelper.getUninatllApkInfo(mActivity, file.getAbsolutePath(), file);
+            fdData.mPi = FileHelper.getPackageInfo(mActivity, file.getAbsolutePath());
             fdData.mAi = (fdData.mPi != null) ? fdData.mPi.applicationInfo : null;
             fdData.mInstalled = checkInstallStat(fdData);
             fdData.mCert = getSignatures(fdData.mPi.signatures);

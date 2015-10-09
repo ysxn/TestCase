@@ -127,11 +127,9 @@ public class FileBrowser extends ListActivity {
     }
 
     public class FileListAdapter extends ArrayAdapter<File> {
-        private FileHelper mUtil;
 
         public FileListAdapter(Context context, int Resource, List<File> objects) {
             super(context, Resource, objects);
-            mUtil = new FileHelper(context);
         }
 
         @Override
@@ -168,11 +166,12 @@ public class FileBrowser extends ListActivity {
                 StringBuilder sb = new StringBuilder();
                 sb.append(file.getName()).append("\n");
                 if (file.isDirectory()) {
-                    sb.append("修改时间 : ").append(mUtil.convetTime(file.lastModified()));
+                    sb.append("修改时间 : ").append(FileHelper.convetTime(file.lastModified()));
                     view.setText(sb.toString());
                 } else {
                     long b = file.length();
-                    sb.append("文件大小 : ").append(UnitHelper.byteToHumanNumber(b)).append("\n").append("修改时间 : ").append(mUtil.convetTime(file.lastModified()));
+                    sb.append("文件大小 : ").append(UnitHelper.byteToHumanNumber(b)).append("\n").append("修改时间 : ")
+                            .append(FileHelper.convetTime(file.lastModified()));
                     view.setText(sb.toString());
                 }
             }

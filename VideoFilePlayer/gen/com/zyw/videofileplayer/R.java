@@ -19,109 +19,109 @@ public final class R {
         public static final int slide_out_right=0x7f050007;
     }
     public static final class array {
-        public static final int camera_flashmode_icons=0x7f09000e;
-        public static final int camera_flashmode_largeicons=0x7f09000f;
-        public static final int camera_id_entries=0x7f090024;
-        public static final int camera_id_icons=0x7f090026;
-        public static final int camera_id_labels=0x7f090025;
-        public static final int camera_id_largeicons=0x7f090027;
-        public static final int camera_recordlocation_icons=0x7f090018;
-        public static final int camera_recordlocation_largeicons=0x7f090019;
-        public static final int camera_wb_indicators=0x7f09001f;
-        public static final int fileEndingAudio=0x7f090035;
-        public static final int fileEndingExcel=0x7f09003b;
-        public static final int fileEndingImage=0x7f090034;
-        public static final int fileEndingPPT=0x7f09003c;
-        public static final int fileEndingPackage=0x7f090037;
-        public static final int fileEndingPdf=0x7f09003d;
-        public static final int fileEndingText=0x7f090039;
-        public static final int fileEndingVideo=0x7f090036;
-        public static final int fileEndingWebText=0x7f090038;
-        public static final int fileEndingWord=0x7f09003a;
+        public static final int camera_flashmode_icons=0x7f0a000e;
+        public static final int camera_flashmode_largeicons=0x7f0a000f;
+        public static final int camera_id_entries=0x7f0a0024;
+        public static final int camera_id_icons=0x7f0a0026;
+        public static final int camera_id_labels=0x7f0a0025;
+        public static final int camera_id_largeicons=0x7f0a0027;
+        public static final int camera_recordlocation_icons=0x7f0a0018;
+        public static final int camera_recordlocation_largeicons=0x7f0a0019;
+        public static final int camera_wb_indicators=0x7f0a001f;
+        public static final int fileEndingAudio=0x7f0a0035;
+        public static final int fileEndingExcel=0x7f0a003b;
+        public static final int fileEndingImage=0x7f0a0034;
+        public static final int fileEndingPPT=0x7f0a003c;
+        public static final int fileEndingPackage=0x7f0a0037;
+        public static final int fileEndingPdf=0x7f0a003d;
+        public static final int fileEndingText=0x7f0a0039;
+        public static final int fileEndingVideo=0x7f0a0036;
+        public static final int fileEndingWebText=0x7f0a0038;
+        public static final int fileEndingWord=0x7f0a003a;
         /**  Labels for Countdown timer 
          */
-        public static final int pref_camera_countdown_labels=0x7f090033;
+        public static final int pref_camera_countdown_labels=0x7f0a0033;
         /**  Icons for exposure compensation 
          */
-        public static final int pref_camera_exposure_icons=0x7f090032;
+        public static final int pref_camera_exposure_icons=0x7f0a0032;
         /**  Camera Preferences flash mode dialog box entries 
          */
-        public static final int pref_camera_flashmode_entries=0x7f09000b;
-        public static final int pref_camera_flashmode_entryvalues=0x7f09000d;
-        public static final int pref_camera_flashmode_labels=0x7f09000c;
+        public static final int pref_camera_flashmode_entries=0x7f0a000b;
+        public static final int pref_camera_flashmode_entryvalues=0x7f0a000d;
+        public static final int pref_camera_flashmode_labels=0x7f0a000c;
         /**  Default focus mode setting. 
          */
-        public static final int pref_camera_focusmode_default_array=0x7f090031;
+        public static final int pref_camera_focusmode_default_array=0x7f0a0031;
         /**  Camera Preferences focus mode dialog box entries 
          */
-        public static final int pref_camera_focusmode_entries=0x7f090008;
-        public static final int pref_camera_focusmode_entryvalues=0x7f090009;
-        public static final int pref_camera_focusmode_labels=0x7f09000a;
-        public static final int pref_camera_hdr_entries=0x7f09002b;
-        public static final int pref_camera_hdr_entryvalues=0x7f09002e;
-        public static final int pref_camera_hdr_icons=0x7f09002d;
-        public static final int pref_camera_hdr_labels=0x7f09002c;
+        public static final int pref_camera_focusmode_entries=0x7f0a0008;
+        public static final int pref_camera_focusmode_entryvalues=0x7f0a0009;
+        public static final int pref_camera_focusmode_labels=0x7f0a000a;
+        public static final int pref_camera_hdr_entries=0x7f0a002b;
+        public static final int pref_camera_hdr_entryvalues=0x7f0a002e;
+        public static final int pref_camera_hdr_icons=0x7f0a002d;
+        public static final int pref_camera_hdr_labels=0x7f0a002c;
         /**  Camera Preferences Picture size dialog box entries 
          */
-        public static final int pref_camera_picturesize_entries=0x7f090006;
+        public static final int pref_camera_picturesize_entries=0x7f0a0006;
         /** 
          When launching the camera app first time, we will set the picture
          size to the first one in the list that is also supported by the
          driver
     
          */
-        public static final int pref_camera_picturesize_entryvalues=0x7f090007;
-        public static final int pref_camera_recordlocation_entries=0x7f090016;
-        public static final int pref_camera_recordlocation_entryvalues=0x7f090015;
-        public static final int pref_camera_recordlocation_labels=0x7f090017;
+        public static final int pref_camera_picturesize_entryvalues=0x7f0a0007;
+        public static final int pref_camera_recordlocation_entries=0x7f0a0016;
+        public static final int pref_camera_recordlocation_entryvalues=0x7f0a0015;
+        public static final int pref_camera_recordlocation_labels=0x7f0a0017;
         /**  Camera Preferences Scene Mode dialog box entries 
          */
-        public static final int pref_camera_scenemode_entries=0x7f090020;
-        public static final int pref_camera_scenemode_entryvalues=0x7f090023;
-        public static final int pref_camera_scenemode_icons=0x7f090022;
-        public static final int pref_camera_scenemode_labels=0x7f090021;
-        public static final int pref_camera_timer_sound_entries=0x7f09002f;
-        public static final int pref_camera_timer_sound_entryvalues=0x7f090030;
+        public static final int pref_camera_scenemode_entries=0x7f0a0020;
+        public static final int pref_camera_scenemode_entryvalues=0x7f0a0023;
+        public static final int pref_camera_scenemode_icons=0x7f0a0022;
+        public static final int pref_camera_scenemode_labels=0x7f0a0021;
+        public static final int pref_camera_timer_sound_entries=0x7f0a002f;
+        public static final int pref_camera_timer_sound_entryvalues=0x7f0a0030;
         /**  Videocamera Preferences flash mode dialog box entries 
          */
-        public static final int pref_camera_video_flashmode_entries=0x7f090010;
-        public static final int pref_camera_video_flashmode_entryvalues=0x7f090012;
-        public static final int pref_camera_video_flashmode_labels=0x7f090011;
+        public static final int pref_camera_video_flashmode_entries=0x7f0a0010;
+        public static final int pref_camera_video_flashmode_entryvalues=0x7f0a0012;
+        public static final int pref_camera_video_flashmode_labels=0x7f0a0011;
         /**  Camera Preferences White Balance dialog box entries 
          */
-        public static final int pref_camera_whitebalance_entries=0x7f09001a;
-        public static final int pref_camera_whitebalance_entryvalues=0x7f09001c;
-        public static final int pref_camera_whitebalance_labels=0x7f09001b;
-        public static final int pref_video_effect_entries=0x7f090028;
-        public static final int pref_video_effect_entryvalues=0x7f090029;
+        public static final int pref_camera_whitebalance_entries=0x7f0a001a;
+        public static final int pref_camera_whitebalance_entryvalues=0x7f0a001c;
+        public static final int pref_camera_whitebalance_labels=0x7f0a001b;
+        public static final int pref_video_effect_entries=0x7f0a0028;
+        public static final int pref_video_effect_entryvalues=0x7f0a0029;
         /**  Camera Preferences Video Quality entries 
          */
-        public static final int pref_video_quality_entries=0x7f090000;
-        public static final int pref_video_quality_entryvalues=0x7f090001;
+        public static final int pref_video_quality_entries=0x7f0a0000;
+        public static final int pref_video_quality_entryvalues=0x7f0a0001;
         /** 
     These values correspond to the time interval between frame capture
     for time lapse recording
     
          */
-        public static final int pref_video_time_lapse_frame_interval_duration_values=0x7f090004;
+        public static final int pref_video_time_lapse_frame_interval_duration_values=0x7f0a0004;
         /** 
     These values correspond to the time interval between frame capture in
     different units (i.e. seconds, minutes, hours) for time lapse recording
     
          */
-        public static final int pref_video_time_lapse_frame_interval_entries=0x7f090003;
+        public static final int pref_video_time_lapse_frame_interval_entries=0x7f0a0003;
         /** 
     These values correspond to the time interval between frame capture in millseconds
     for time lapse recording
     
          */
-        public static final int pref_video_time_lapse_frame_interval_entryvalues=0x7f090002;
-        public static final int pref_video_time_lapse_frame_interval_units=0x7f090005;
-        public static final int video_effect_icons=0x7f09002a;
-        public static final int video_flashmode_icons=0x7f090013;
-        public static final int video_flashmode_largeicons=0x7f090014;
-        public static final int whitebalance_icons=0x7f09001d;
-        public static final int whitebalance_largeicons=0x7f09001e;
+        public static final int pref_video_time_lapse_frame_interval_entryvalues=0x7f0a0002;
+        public static final int pref_video_time_lapse_frame_interval_units=0x7f0a0005;
+        public static final int video_effect_icons=0x7f0a002a;
+        public static final int video_flashmode_icons=0x7f0a0013;
+        public static final int video_flashmode_largeicons=0x7f0a0014;
+        public static final int whitebalance_icons=0x7f0a001d;
+        public static final int whitebalance_largeicons=0x7f0a001e;
     }
     public static final class attr {
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -238,9 +238,9 @@ containing a value of this type.
  Specify the screen orientation 
  Specify the screen orientation 
          */
-        public static final int only_use_portrait=0x7f0a0001;
-        public static final int picker_is_dialog=0x7f0a0002;
-        public static final int show_action_bar_title=0x7f0a0000;
+        public static final int only_use_portrait=0x7f0b0001;
+        public static final int picker_is_dialog=0x7f0b0002;
+        public static final int show_action_bar_title=0x7f0b0000;
     }
     public static final class color {
         /**  configuration for album page 
@@ -1454,631 +1454,631 @@ containing a value of this type.
     public static final class string {
         /**  Label for when the aspect ratio is fixed to a value [CHAR LIMIT=15] 
          */
-        public static final int Fixed=0x7f0b00b5;
+        public static final int Fixed=0x7f0900b6;
         /**  A label shown on the action bar. It indicates that the operation
          to import media item(s) [CHAR LIMIT=20] 
          */
-        public static final int Import=0x7f0b0192;
+        public static final int Import=0x7f090192;
         /**  alert to the user that the camera fails to read or write the SD card. 
          */
-        public static final int access_sd_fail=0x7f0b01c4;
+        public static final int access_sd_fail=0x7f0901c4;
         /**  The button to back to the first-level indicators of the camera settings. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_back_to_first_level=0x7f0b0251;
+        public static final int accessibility_back_to_first_level=0x7f090251;
         /**  The front/back camera switch. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_camera_picker=0x7f0b024e;
+        public static final int accessibility_camera_picker=0x7f09024e;
         /**  The check box in camera settings, such as store location. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_check_box=0x7f0b0255;
+        public static final int accessibility_check_box=0x7f090255;
         /**  The decrement button in camera preference such as exposure, picture size. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_decrement=0x7f0b0253;
+        public static final int accessibility_decrement=0x7f090253;
         /**  The increment button in camera preference such as exposure, picture size. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_increment=0x7f0b0254;
+        public static final int accessibility_increment=0x7f090254;
         /**  The menu button. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_menu_button=0x7f0b024c;
+        public static final int accessibility_menu_button=0x7f09024c;
         /**  The mode picker to switch between camera, video and panorama. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_mode_picker=0x7f0b024f;
+        public static final int accessibility_mode_picker=0x7f09024f;
         /**  The button to pause the video. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_pause_video=0x7f0b025f;
+        public static final int accessibility_pause_video=0x7f09025f;
         /**  The button to play the video. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_play_video=0x7f0b025e;
+        public static final int accessibility_play_video=0x7f09025e;
         /**  The button to reload the video. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_reload_video=0x7f0b0260;
+        public static final int accessibility_reload_video=0x7f090260;
         /**  The button in review mode indicating that the photo taking, video recording, and panorama saving session should be canceled [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_review_cancel=0x7f0b025b;
+        public static final int accessibility_review_cancel=0x7f09025b;
         /**  The button in review mode indicating that the taken photo/video is OK to be attached/uploaded [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_review_ok=0x7f0b025c;
+        public static final int accessibility_review_ok=0x7f09025c;
         /**  button in review mode indicate the user want to retake another photo/video for attachment [
 CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_review_retake=0x7f0b025d;
+        public static final int accessibility_review_retake=0x7f09025d;
         /**  The button to review the thumbnail. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_review_thumbnail=0x7f0b024d;
+        public static final int accessibility_review_thumbnail=0x7f09024d;
         /**  The button to switch to the second-level indicators of the camera settings. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_second_level_indicators=0x7f0b0250;
+        public static final int accessibility_second_level_indicators=0x7f090250;
         /**  The shutter button. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_shutter_button=0x7f0b024b;
+        public static final int accessibility_shutter_button=0x7f09024b;
         /**  The button to switch to Camera mode. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_switch_to_camera=0x7f0b0256;
+        public static final int accessibility_switch_to_camera=0x7f090256;
         /**  The button to switch to new Panorama mode. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_switch_to_new_panorama=0x7f0b0259;
+        public static final int accessibility_switch_to_new_panorama=0x7f090259;
         /**  The button to switch to Panorama mode. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_switch_to_panorama=0x7f0b0258;
+        public static final int accessibility_switch_to_panorama=0x7f090258;
         /**  The button to switch to the Re-Focus mode. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_switch_to_refocus=0x7f0b025a;
+        public static final int accessibility_switch_to_refocus=0x7f09025a;
         /**  The button to switch to Video mode. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_switch_to_video=0x7f0b0257;
+        public static final int accessibility_switch_to_video=0x7f090257;
         /**  The time bar of the media player. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_time_bar=0x7f0b0261;
+        public static final int accessibility_time_bar=0x7f090261;
         /**  The zoom control button. [CHAR LIMIT = NONE] 
          */
-        public static final int accessibility_zoom_control=0x7f0b0252;
+        public static final int accessibility_zoom_control=0x7f090252;
         /**  The title of menu item where user can add a new account 
          */
-        public static final int add_account=0x7f0b01a4;
+        public static final int add_account=0x7f0901a4;
         /**  Group by Albums tab on Action Bar. [CHAR LIMIT=12] 
          */
-        public static final int albums=0x7f0b019d;
+        public static final int albums=0x7f09019d;
         /**  Text indicating aperture of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int aperture=0x7f0b0174;
-        public static final int app_name=0x7f0b0111;
+        public static final int aperture=0x7f090174;
+        public static final int app_name=0x7f090000;
         /**   Label for the apply effect button [CHAR LIMIT=15] 
          */
-        public static final int apply_effect=0x7f0b00a9;
+        public static final int apply_effect=0x7f0900aa;
         /**  Text for the empty state of the StackView AppWidget [CHAR LIMIT=30] 
          */
-        public static final int appwidget_empty_text=0x7f0b015d;
+        public static final int appwidget_empty_text=0x7f09015d;
         /**  Title of the StackView AppWidget 
          */
-        public static final int appwidget_title=0x7f0b015c;
+        public static final int appwidget_title=0x7f09015c;
         /**   Label for aspect [CHAR LIMIT=15] 
          */
-        public static final int aspect=0x7f0b00ab;
+        public static final int aspect=0x7f0900ac;
         /**   Label for the aspect 1:1 effect [CHAR LIMIT=15] 
          */
-        public static final int aspect1to1_effect=0x7f0b00ac;
+        public static final int aspect1to1_effect=0x7f0900ad;
         /**   Label for the aspect 3:4 effect [CHAR LIMIT=15] 
          */
-        public static final int aspect3to4_effect=0x7f0b00ae;
+        public static final int aspect3to4_effect=0x7f0900af;
         /**   Label for the aspect 4:3 effect [CHAR LIMIT=15] 
          */
-        public static final int aspect4to3_effect=0x7f0b00ad;
+        public static final int aspect4to3_effect=0x7f0900ae;
         /**   Label for the aspect 4:7 effect [CHAR LIMIT=15] 
          */
-        public static final int aspect4to6_effect=0x7f0b00af;
+        public static final int aspect4to6_effect=0x7f0900b0;
         /**   Label for the aspect 5:7 effect [CHAR LIMIT=15] 
          */
-        public static final int aspect5to7_effect=0x7f0b00b0;
+        public static final int aspect5to7_effect=0x7f0900b1;
         /**   Label for the aspect 7:5 effect [CHAR LIMIT=15] 
          */
-        public static final int aspect7to5_effect=0x7f0b00b1;
+        public static final int aspect7to5_effect=0x7f0900b2;
         /**   Label for the aspect 1:1 effect [CHAR LIMIT=15] 
          */
-        public static final int aspect9to16_effect=0x7f0b00b2;
+        public static final int aspect9to16_effect=0x7f0900b3;
         /**   Label for the aspect None effect [CHAR LIMIT=15] 
          */
-        public static final int aspectNone_effect=0x7f0b00b3;
+        public static final int aspectNone_effect=0x7f0900b4;
         /**   Label for the aspect None effect [CHAR LIMIT=15] 
          */
-        public static final int aspectOriginal_effect=0x7f0b00b4;
-        public static final int audio_effects=0x7f0b0017;
+        public static final int aspectOriginal_effect=0x7f0900b5;
+        public static final int audio_effects=0x7f090018;
         /**  String indicating how camera shooting feature is used. [CHAR LIMIT=8] 
          */
-        public static final int auto=0x7f0b017b;
-        public static final int bass_boost_strength=0x7f0b0015;
+        public static final int auto=0x7f09017b;
+        public static final int bass_boost_strength=0x7f090016;
         /**  Message displayed in overlay during background replacement training [CHAR LIMIT=180]
          */
-        public static final int bg_replacement_message=0x7f0b0243;
+        public static final int bg_replacement_message=0x7f090243;
         /**   Text for filters that apply a border to a picture [CHAR LIMIT=20] 
          */
-        public static final int borders=0x7f0b0091;
+        public static final int borders=0x7f090092;
         /**   Label for the image BW filter (makes black & white) button [CHAR LIMIT=10] 
          */
-        public static final int bwfilter=0x7f0b00bc;
+        public static final int bwfilter=0x7f0900bd;
         /**  String used as a small notification label above a Picasa album.
          It means the pictures of the Picasa album is currently being
          transferred to local storage, so the pictures can later be viewed
          offline. [CHAR LIMIT=15] 
          */
-        public static final int caching_label=0x7f0b0148;
+        public static final int caching_label=0x7f090148;
         /**  A toast indicating a camera is connected to the device [CHAR LIMIT=30]
          */
-        public static final int camera_connected=0x7f0b0195;
+        public static final int camera_connected=0x7f090195;
         /**  message for the dialog showing the camera is disabled because of security policies. Camera cannot be used. 
          */
-        public static final int camera_disabled=0x7f0b01bf;
+        public static final int camera_disabled=0x7f0901bf;
         /**  A toast indicating a camera is disconnected [CHAR LIMIT=30] 
          */
-        public static final int camera_disconnected=0x7f0b0196;
+        public static final int camera_disconnected=0x7f090196;
         /**  Camera resources below 
  General strings 
  title for the dialog showing the error of camera hardware 
          */
-        public static final int camera_error_title=0x7f0b01bd;
+        public static final int camera_error_title=0x7f0901bd;
         /**  label for the icon meaning 'show me all the images that were taken with the camera' 
          */
-        public static final int camera_label=0x7f0b01c0;
-        public static final int camera_menu_asd_label=0x7f0b0089;
-        public static final int camera_menu_beauty_mode_label=0x7f0b0086;
-        public static final int camera_menu_colorize_label=0x7f0b0087;
-        public static final int camera_menu_effects_label=0x7f0b0088;
-        public static final int camera_menu_enhance_label=0x7f0b0084;
+        public static final int camera_label=0x7f0901c0;
+        public static final int camera_menu_asd_label=0x7f09008a;
+        public static final int camera_menu_beauty_mode_label=0x7f090087;
+        public static final int camera_menu_colorize_label=0x7f090088;
+        public static final int camera_menu_effects_label=0x7f090089;
+        public static final int camera_menu_enhance_label=0x7f090085;
         /**  Camera menu labels 
  more options label [CHAR LIMIT=50] 
          */
-        public static final int camera_menu_more_label=0x7f0b029e;
+        public static final int camera_menu_more_label=0x7f09029e;
         /**  settings label [CHAR LIMIT=50] 
          */
-        public static final int camera_menu_settings_label=0x7f0b029f;
-        public static final int camera_menu_slow_shutter_label=0x7f0b0085;
-        public static final int camera_setas_wallpaper=0x7f0b0131;
-        public static final int can_not_trim=0x7f0b0019;
-        public static final int cancel=0x7f0b0134;
+        public static final int camera_menu_settings_label=0x7f09029f;
+        public static final int camera_menu_slow_shutter_label=0x7f090086;
+        public static final int camera_setas_wallpaper=0x7f090131;
+        public static final int can_not_trim=0x7f09001a;
+        public static final int cancel=0x7f090134;
         /**  message for the dialog showing the error of camera hardware 
          */
-        public static final int cannot_connect_camera=0x7f0b01be;
+        public static final int cannot_connect_camera=0x7f0901be;
         /**   String shown when cannot load the original image. We will edit selected image [CHAR LIMIT=NONE] 
          */
-        public static final int cannot_edit_original=0x7f0b008c;
+        public static final int cannot_edit_original=0x7f09008d;
         /**   String shown when we cannot load the image when starting the activity [CHAR LIMIT=NONE] 
          */
-        public static final int cannot_load_image=0x7f0b008b;
+        public static final int cannot_load_image=0x7f09008c;
         /**  Default text for a button that can be toggled on and off. 
          */
-        public static final int capital_off=0x7f0b0264;
+        public static final int capital_off=0x7f090264;
         /**  Default text for a button that can be toggled on and off. 
          */
-        public static final int capital_on=0x7f0b0263;
+        public static final int capital_on=0x7f090263;
         /**  A button in effect setting popup to clear the effect. [CHAR LIMIT=26] 
          */
-        public static final int clear_effects=0x7f0b0248;
+        public static final int clear_effects=0x7f090248;
         /**  A label shown on MTP albums thumbnail to instruct users to import
         [CHAR LIMIT=40] 
          */
-        public static final int click_import=0x7f0b0197;
+        public static final int click_import=0x7f090197;
         /**  format error in translation for details_title (2611396603977441273) 
  format error in translation for details_title (2611396603977441273) 
          */
-        public static final int close=0x7f0b013f;
+        public static final int close=0x7f09013f;
         /**   Label for the removing borders [CHAR LIMIT=14] 
          */
-        public static final int color_border_clear=0x7f0b00f1;
+        public static final int color_border_clear=0x7f0900f2;
         /**   Label for selecting the border color [CHAR LIMIT=14] 
          */
-        public static final int color_border_color=0x7f0b00f0;
+        public static final int color_border_color=0x7f0900f1;
         /**   Label for the border corner size (or rounding) [CHAR LIMIT=14] 
          */
-        public static final int color_border_corner_size=0x7f0b00ef;
+        public static final int color_border_corner_size=0x7f0900f0;
         /**   Label for the with of the border[CHAR LIMIT=14] 
          */
-        public static final int color_border_size=0x7f0b00ee;
+        public static final int color_border_size=0x7f0900ef;
         /**   Label for the select the color [CHAR LIMIT=35] 
          */
-        public static final int color_pick_select=0x7f0b00f2;
+        public static final int color_pick_select=0x7f0900f3;
         /**   The title for the color pick dialog [CHAR LIMIT=20] 
          */
-        public static final int color_pick_title=0x7f0b00f3;
+        public static final int color_pick_title=0x7f0900f4;
         /**   Additional filters buttons  
   Label for the compare original image filter button [CHAR LIMIT=15] 
          */
-        public static final int compare_original=0x7f0b00a8;
-        public static final int confirm=0x7f0b0133;
+        public static final int compare_original=0x7f0900a9;
+        public static final int confirm=0x7f090133;
         /**   Label for the image contrast (color difference) filter button [CHAR LIMIT=10] 
          */
-        public static final int contrast=0x7f0b00b9;
+        public static final int contrast=0x7f0900ba;
         /**  On-screen hint during timer countdown for taking a photo. [CHAR LIMIT = 60]
          */
-        public static final int count_down_title_text=0x7f0b0295;
+        public static final int count_down_title_text=0x7f090295;
         /**   Label for the image crop effect [CHAR LIMIT=15] 
          */
-        public static final int crop=0x7f0b00cb;
+        public static final int crop=0x7f0900cc;
         /**  The title of the menu item to let user crop the image. [CHAR LIMIT=15] 
          */
-        public static final int crop_action=0x7f0b0149;
+        public static final int crop_action=0x7f090149;
         /**  menu pick: crop the currently selected image [CHAR LIMIT=30]
          */
-        public static final int crop_label=0x7f0b0127;
+        public static final int crop_label=0x7f090127;
         /**  Title of a menu item to indicate performing the image crop operation
          [CHAR LIMIT=20] 
          */
-        public static final int crop_save_text=0x7f0b0121;
+        public static final int crop_save_text=0x7f090121;
         /**  Toast message shown when the cropped image has been saved in the
          %s folder (string: folder_download) [CHAR LIMIT=50]
          */
-        public static final int crop_saved=0x7f0b015e;
+        public static final int crop_saved=0x7f09015e;
         /**   Label for the image curves filter button [CHAR LIMIT=10] 
          */
-        public static final int curvesRGB=0x7f0b00c1;
+        public static final int curvesRGB=0x7f0900c2;
         /**   Label for the curves tool, Blue color channel [CHAR LIMIT=14] 
          */
-        public static final int curves_channel_blue=0x7f0b00e3;
+        public static final int curves_channel_blue=0x7f0900e4;
         /**   Label for the curves tool, Green color channel [CHAR LIMIT=14] 
          */
-        public static final int curves_channel_green=0x7f0b00e2;
+        public static final int curves_channel_green=0x7f0900e3;
         /**   Label for the curves tool, Red color channel [CHAR LIMIT=14] 
          */
-        public static final int curves_channel_red=0x7f0b00e1;
+        public static final int curves_channel_red=0x7f0900e2;
         /**   Labels for the curves tool 
   Label for the curves tool, all channels (RGB) [CHAR LIMIT=3] 
          */
-        public static final int curves_channel_rgb=0x7f0b00e0;
+        public static final int curves_channel_rgb=0x7f0900e1;
         /**  Text for the custom border filter [CHAR LIMIT=20] 
          */
-        public static final int custom_border=0x7f0b0092;
+        public static final int custom_border=0x7f090093;
         /**  Details dialog "OK" button. Dismisses dialog. 
          */
-        public static final int delete=0x7f0b0132;
+        public static final int delete=0x7f090132;
         /**  The label shown after an image is deleted [CHAR LIMIT=16] 
          */
-        public static final int deleted=0x7f0b0138;
+        public static final int deleted=0x7f090138;
         /**  Text indicating the description of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int description=0x7f0b0167;
-        public static final int deselect_all=0x7f0b013b;
-        public static final int details=0x7f0b013d;
+        public static final int description=0x7f090167;
+        public static final int deselect_all=0x7f09013b;
+        public static final int details=0x7f09013d;
         /**  Used to format video duration in Details dialog. hours:minutes:seconds e.g. 0:21:30 
          */
-        public static final int details_hms=0x7f0b0114;
+        public static final int details_hms=0x7f090114;
         /**  Used to format short video duration in Details dialog. minutes:seconds e.g. 00:30 
          */
-        public static final int details_ms=0x7f0b0113;
-        public static final int details_title=0x7f0b013e;
+        public static final int details_ms=0x7f090113;
+        public static final int details_title=0x7f09013e;
         /**  Dialog "OK" button. Dismisses dialog. 
          */
-        public static final int dialog_ok=0x7f0b0228;
+        public static final int dialog_ok=0x7f090228;
         /**  Toast telling users video snapshot is disabled when the effects are on and a user tries to tap on the viewfinder [CHAR LIMIT=65] 
          */
-        public static final int disable_video_snapshot_hint=0x7f0b0247;
+        public static final int disable_video_snapshot_hint=0x7f090247;
         /**  A label on a button. The user clicks this button after he has
          finished selection. [CHAR LIMIT=15] 
          */
-        public static final int done=0x7f0b0164;
+        public static final int done=0x7f090164;
         /**   generic strings 
   Text for to display on a download failure [CHAR LIMIT=NONE] 
          */
-        public static final int download_failure=0x7f0b008f;
+        public static final int download_failure=0x7f090090;
         /**   Label for the image downsampling effect (makes image smaller) [CHAR LIMIT=15] 
          */
-        public static final int downsample=0x7f0b00d2;
+        public static final int downsample=0x7f0900d3;
         /**   Label for the removing drawing from screen [CHAR LIMIT=14] 
          */
-        public static final int draw_clear=0x7f0b00ed;
+        public static final int draw_clear=0x7f0900ee;
         /**   Label for the color to draw in [CHAR LIMIT=14] 
          */
-        public static final int draw_color=0x7f0b00e9;
+        public static final int draw_color=0x7f0900ea;
         /**   Label for the Hue to draw in [CHAR LIMIT=14] 
          */
-        public static final int draw_hue=0x7f0b00e6;
+        public static final int draw_hue=0x7f0900e7;
         /**   Label for the color to draw in [CHAR LIMIT=14] 
          */
-        public static final int draw_saturation=0x7f0b00e7;
+        public static final int draw_saturation=0x7f0900e8;
         /**   Label for the size to draw in in [CHAR LIMIT=14] 
          */
-        public static final int draw_size=0x7f0b00e5;
+        public static final int draw_size=0x7f0900e6;
         /**   The accept the draw size [CHAR LIMIT=20] 
          */
-        public static final int draw_size_accept=0x7f0b00f5;
+        public static final int draw_size_accept=0x7f0900f6;
         /**   The title for draw size [CHAR LIMIT=50] 
          */
-        public static final int draw_size_title=0x7f0b00f4;
+        public static final int draw_size_title=0x7f0900f5;
         /**   Label for the The style to draw in [CHAR LIMIT=14] 
          */
-        public static final int draw_style=0x7f0b00e4;
+        public static final int draw_style=0x7f0900e5;
         /**   Label for the Spatter brush style of drawing in [CHAR LIMIT=14] 
          */
-        public static final int draw_style_brush_marker=0x7f0b00ec;
+        public static final int draw_style_brush_marker=0x7f0900ed;
         /**   Label for the Marker brush style of drawing in [CHAR LIMIT=14] 
          */
-        public static final int draw_style_brush_spatter=0x7f0b00eb;
+        public static final int draw_style_brush_spatter=0x7f0900ec;
         /**   Label for the line style of drawing in [CHAR LIMIT=14] 
          */
-        public static final int draw_style_line=0x7f0b00ea;
+        public static final int draw_style_line=0x7f0900eb;
         /**   Label for the Brightness to draw in [CHAR LIMIT=14] 
          */
-        public static final int draw_value=0x7f0b00e8;
+        public static final int draw_value=0x7f0900e9;
         /**  Text indicating the duration of a video item in details window [CHAR LIMIT=14] 
          */
-        public static final int duration=0x7f0b016e;
+        public static final int duration=0x7f09016e;
         /**   Label for the image edges effect (highlights edges in image) [CHAR LIMIT=10] 
          */
-        public static final int edge=0x7f0b00d0;
+        public static final int edge=0x7f0900d1;
         /**  String used as a menu label. The user can choose to edit the image
          [CHAR_LIMIT=20]
          */
-        public static final int edit=0x7f0b0145;
+        public static final int edit=0x7f090145;
         /**   Label for the blue control for per channel saturation effect [CHAR LIMIT=20] 
          */
-        public static final int editor_chan_sat_blue=0x7f0b00dc;
+        public static final int editor_chan_sat_blue=0x7f0900dd;
         /**   Label for the cyan control for per channel saturation effect [CHAR LIMIT=20] 
          */
-        public static final int editor_chan_sat_cyan=0x7f0b00db;
+        public static final int editor_chan_sat_cyan=0x7f0900dc;
         /**   Label for the green control for per channel saturation effect [CHAR LIMIT=20] 
          */
-        public static final int editor_chan_sat_green=0x7f0b00da;
+        public static final int editor_chan_sat_green=0x7f0900db;
         /**   Label for the Magenta control for per channel saturation effect [CHAR LIMIT=20] 
          */
-        public static final int editor_chan_sat_magenta=0x7f0b00dd;
+        public static final int editor_chan_sat_magenta=0x7f0900de;
         /**   Label for the Main or Master control for per channel saturation effect [CHAR LIMIT=20] 
          */
-        public static final int editor_chan_sat_main=0x7f0b00d7;
+        public static final int editor_chan_sat_main=0x7f0900d8;
         /**   Label for the red control for per channel saturation effect [CHAR LIMIT=20] 
          */
-        public static final int editor_chan_sat_red=0x7f0b00d8;
+        public static final int editor_chan_sat_red=0x7f0900d9;
         /**   Label for the yellow control for per channel saturation effect [CHAR LIMIT=20] 
          */
-        public static final int editor_chan_sat_yellow=0x7f0b00d9;
+        public static final int editor_chan_sat_yellow=0x7f0900da;
         /**   Label for the Brightness effect  [CHAR LIMIT=20] 
          */
-        public static final int editor_grad_brightness=0x7f0b00d4;
+        public static final int editor_grad_brightness=0x7f0900d5;
         /**   Label for the Contrast filter effect  [CHAR LIMIT=20] 
          */
-        public static final int editor_grad_contrast=0x7f0b00d5;
+        public static final int editor_grad_contrast=0x7f0900d6;
         /**  new virtual graduated neutral density filter  [CHAR LIMIT=20] 
          */
-        public static final int editor_grad_new=0x7f0b00df;
+        public static final int editor_grad_new=0x7f0900e0;
         /**   Label for the saturation effect  [CHAR LIMIT=20] 
          */
-        public static final int editor_grad_saturation=0x7f0b00d6;
+        public static final int editor_grad_saturation=0x7f0900d7;
         /**   Label for the image graduated filter effect  [CHAR LIMIT=20] 
          */
-        public static final int editor_grad_style=0x7f0b00de;
+        public static final int editor_grad_style=0x7f0900df;
         /**  Effect setting item that replaces background with video from gallery. [CHAR LIMIT=14] 
          */
-        public static final int effect_backdropper_gallery=0x7f0b0242;
+        public static final int effect_backdropper_gallery=0x7f090242;
         /**  Effect setting item that replaces background with Android in Space. [CHAR LIMIT=14] 
          */
-        public static final int effect_backdropper_space=0x7f0b0240;
+        public static final int effect_backdropper_space=0x7f090240;
         /**  Effect setting item that replaces background with a sunset. [CHAR LIMIT=14] 
          */
-        public static final int effect_backdropper_sunset=0x7f0b0241;
+        public static final int effect_backdropper_sunset=0x7f090241;
         /**  Title of category for background replacement effects. [CHAR LIMIT=26] 
          */
-        public static final int effect_background=0x7f0b024a;
+        public static final int effect_background=0x7f09024a;
         /**  Effect setting item that makes eyes big. [CHAR LIMIT=14] 
          */
-        public static final int effect_goofy_face_big_eyes=0x7f0b023b;
+        public static final int effect_goofy_face_big_eyes=0x7f09023b;
         /**  Effect setting item that makes mouth big. [CHAR LIMIT=14] 
          */
-        public static final int effect_goofy_face_big_mouth=0x7f0b023c;
+        public static final int effect_goofy_face_big_mouth=0x7f09023c;
         /**  Effect setting item that makes nose big. [CHAR LIMIT=14] 
          */
-        public static final int effect_goofy_face_big_nose=0x7f0b023e;
+        public static final int effect_goofy_face_big_nose=0x7f09023e;
         /**  Effect setting item that makes eyes small. [CHAR LIMIT=14] 
          */
-        public static final int effect_goofy_face_small_eyes=0x7f0b023f;
+        public static final int effect_goofy_face_small_eyes=0x7f09023f;
         /**  Effect setting item that makes mouth small. [CHAR LIMIT=14] 
          */
-        public static final int effect_goofy_face_small_mouth=0x7f0b023d;
+        public static final int effect_goofy_face_small_mouth=0x7f09023d;
         /**  Effect setting item that squeezes the face. [CHAR LIMIT=14] 
          */
-        public static final int effect_goofy_face_squeeze=0x7f0b023a;
+        public static final int effect_goofy_face_squeeze=0x7f09023a;
         /**  Effect setting item that clear the effect. [CHAR LIMIT=14] 
          */
-        public static final int effect_none=0x7f0b0239;
+        public static final int effect_none=0x7f090239;
         /**  Title of category for silly face effects. [CHAR LIMIT=26] 
          */
-        public static final int effect_silly_faces=0x7f0b0249;
+        public static final int effect_silly_faces=0x7f090249;
         /**  TODO: remove the string as it is a work-around solution to bypass the default speak of the element type. 
          */
-        public static final int empty=0x7f0b0262;
+        public static final int empty=0x7f090262;
         /**  Toast message shown when we close the AlbumPage because it is empty
             [CHAR LIMIT=50] 
          */
-        public static final int empty_album=0x7f0b0160;
+        public static final int empty_album=0x7f090160;
         /**   String displayed when exiting editor[CHAR LIMIT=NONE] 
          */
-        public static final int exit=0x7f0b00a3;
+        public static final int exit=0x7f0900a4;
         /**  Export Dialog
   Text for the dialog title to export a flattened photo[CHAR LIMIT=25] 
          */
-        public static final int export_flattened=0x7f0b0099;
+        public static final int export_flattened=0x7f09009a;
         /**   Text for the menu item to export a flattened photo[CHAR LIMIT=30] 
          */
-        public static final int export_image=0x7f0b0097;
+        public static final int export_image=0x7f090098;
         /**   Filters buttons 
   Label for the image exposure (brightness) filter button [CHAR LIMIT=10] 
          */
-        public static final int exposure=0x7f0b00b7;
+        public static final int exposure=0x7f0900b8;
         /**  Text indicating the exposure time of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int exposure_time=0x7f0b0177;
+        public static final int exposure_time=0x7f090177;
         /**  Displayed in the title of those pictures that fails to be loaded
          [CHAR LIMIT=50]
          */
-        public static final int fail_to_load=0x7f0b011d;
+        public static final int fail_to_load=0x7f09011d;
         /**  Used in a toast message when an image fails to be loaded
          [CHAR LIMIT=50]
          */
-        public static final int fail_to_load_image=0x7f0b011e;
+        public static final int fail_to_load_image=0x7f09011e;
         /**  The tips of trimming video 
          */
-        public static final int fail_trim=0x7f0b0001;
+        public static final int fail_trim=0x7f090002;
         /**  String for filter that washes out colors (filtershow_fx_0002_bleach) [CHAR LIMIT=10] 
          */
-        public static final int ffx_bleach=0x7f0b0182;
+        public static final int ffx_bleach=0x7f090182;
         /**  String for filter that makes colors a bluish (filtershow_fx_0003_blue_crush) [CHAR LIMIT=10] 
          */
-        public static final int ffx_blue_crush=0x7f0b0183;
+        public static final int ffx_blue_crush=0x7f090183;
         /**  String for filter that makes image black & white (filtershow_fx_0004_bw_contrast) [CHAR LIMIT=10] 
          */
-        public static final int ffx_bw_contrast=0x7f0b0184;
+        public static final int ffx_bw_contrast=0x7f090184;
         /**  String for filter that brightens colors like instant cameras(filtershow_fx_0001_instant) [CHAR LIMIT=10] 
          */
-        public static final int ffx_instant=0x7f0b0181;
+        public static final int ffx_instant=0x7f090181;
         /**  String for the empty not filtered image [CHAR LIMIT=10] 
          */
-        public static final int ffx_original=0x7f0b017f;
+        public static final int ffx_original=0x7f09017f;
         /**  String for filter that makes colors a yellowish (filtershow_fx_0005_punch) [CHAR LIMIT=10] 
          */
-        public static final int ffx_punch=0x7f0b0185;
+        public static final int ffx_punch=0x7f090185;
         /**  String for brown-colored old-fashion looking filter (filtershow_fx_0000_vintage) [CHAR LIMIT=10] 
          */
-        public static final int ffx_vintage=0x7f0b0180;
+        public static final int ffx_vintage=0x7f090180;
         /**  String for filter that makes image coffee-colored (filtershow_fx_0007_washout) [CHAR LIMIT=10] 
          */
-        public static final int ffx_washout=0x7f0b0187;
+        public static final int ffx_washout=0x7f090187;
         /**  String for filter that makes colors washed out and brownish
          (filtershow_fx_0008_washout_color) [CHAR LIMIT=10] 
          */
-        public static final int ffx_washout_color=0x7f0b0188;
+        public static final int ffx_washout_color=0x7f090188;
         /**  String for filter that mimics the cross-process technique in
          photography (makes colors bluish) (filtershow_fx_0006_x_process) [CHAR LIMIT=10] 
          */
-        public static final int ffx_x_process=0x7f0b0186;
+        public static final int ffx_x_process=0x7f090186;
         /**  Text indicating the file size of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int file_size=0x7f0b0170;
+        public static final int file_size=0x7f090170;
         /**  Label for the add button in the category panel [CHAR LIMIT=30] 
          */
-        public static final int filtershow_add_button_looks=0x7f0b0103;
+        public static final int filtershow_add_button_looks=0x7f090104;
         /**  Label for the add button in the versions panel [CHAR LIMIT=30] 
          */
-        public static final int filtershow_add_button_versions=0x7f0b0104;
+        public static final int filtershow_add_button_versions=0x7f090105;
         /**  Label for exif tags in the information panel [CHAR LIMIT=50] 
          */
-        public static final int filtershow_exif_aperture=0x7f0b0108;
+        public static final int filtershow_exif_aperture=0x7f090109;
         /**  Label for exif tags in the information panel [CHAR LIMIT=50] 
          */
-        public static final int filtershow_exif_copyright=0x7f0b010f;
+        public static final int filtershow_exif_copyright=0x7f090110;
         /**  Label for exif tags in the information panel [CHAR LIMIT=50] 
          */
-        public static final int filtershow_exif_date=0x7f0b010c;
+        public static final int filtershow_exif_date=0x7f09010d;
         /**  Label for exif tags in the information panel [CHAR LIMIT=50] 
          */
-        public static final int filtershow_exif_exposure_time=0x7f0b010e;
+        public static final int filtershow_exif_exposure_time=0x7f09010f;
         /**  Label for exif tags in the information panel [CHAR LIMIT=50] 
          */
-        public static final int filtershow_exif_f_stop=0x7f0b010d;
+        public static final int filtershow_exif_f_stop=0x7f09010e;
         /**  Label for exif tags in the information panel [CHAR LIMIT=50] 
          */
-        public static final int filtershow_exif_focal_length=0x7f0b0109;
+        public static final int filtershow_exif_focal_length=0x7f09010a;
         /**  Label for exif tags in the information panel [CHAR LIMIT=50] 
          */
-        public static final int filtershow_exif_iso=0x7f0b010a;
+        public static final int filtershow_exif_iso=0x7f09010b;
         /**  Label for exif tags in the information panel [CHAR LIMIT=50] 
          */
-        public static final int filtershow_exif_model=0x7f0b0107;
+        public static final int filtershow_exif_model=0x7f090108;
         /**  Label for exif tags in the information panel [CHAR LIMIT=50] 
          */
-        public static final int filtershow_exif_subject_distance=0x7f0b010b;
+        public static final int filtershow_exif_subject_distance=0x7f09010c;
         /**  Label for the manage preset menu [CHAR LIMIT=42] 
          */
-        public static final int filtershow_manage_preset=0x7f0b00fb;
+        public static final int filtershow_manage_preset=0x7f0900fc;
         /**  Label for newly created user preset [CHAR LIMIT=30] 
          */
-        public static final int filtershow_new_preset=0x7f0b00fc;
+        public static final int filtershow_new_preset=0x7f0900fd;
         /**  Label for the notification [CHAR LIMIT=50] 
          */
-        public static final int filtershow_notification_label=0x7f0b00f8;
+        public static final int filtershow_notification_label=0x7f0900f9;
         /**  Label for the notification message [CHAR LIMIT=50] 
          */
-        public static final int filtershow_notification_message=0x7f0b00f9;
+        public static final int filtershow_notification_message=0x7f0900fa;
         /**  Label for preset name [CHAR LIMIT=30] 
          */
-        public static final int filtershow_preset_name=0x7f0b00fd;
+        public static final int filtershow_preset_name=0x7f0900fe;
         /**   Text for redo menu item [CHAR LIMIT=20] 
          */
-        public static final int filtershow_redo=0x7f0b0094;
+        public static final int filtershow_redo=0x7f090095;
         /**  Label for the save preset menu [CHAR LIMIT=30] 
          */
-        public static final int filtershow_save_preset=0x7f0b00fa;
+        public static final int filtershow_save_preset=0x7f0900fb;
         /**  Toast/alert that the image is being saved after editing in filtershow [CHAR LIMIT=40]
          */
-        public static final int filtershow_saving_image=0x7f0b0125;
+        public static final int filtershow_saving_image=0x7f090125;
         /**  Label for showing the image information panel [CHAR LIMIT=50] 
          */
-        public static final int filtershow_show_info_panel=0x7f0b00fe;
+        public static final int filtershow_show_info_panel=0x7f0900ff;
         /**  Label for the information panel [CHAR LIMIT=30] 
          */
-        public static final int filtershow_show_info_panel_exif=0x7f0b0102;
+        public static final int filtershow_show_info_panel_exif=0x7f090103;
         /**  Label for the information panel [CHAR LIMIT=30] 
          */
-        public static final int filtershow_show_info_panel_histogram=0x7f0b0101;
+        public static final int filtershow_show_info_panel_histogram=0x7f090102;
         /**  Label for the information panel [CHAR LIMIT=30] 
          */
-        public static final int filtershow_show_info_panel_name=0x7f0b00ff;
+        public static final int filtershow_show_info_panel_name=0x7f090100;
         /**  Label for the information panel [CHAR LIMIT=30] 
          */
-        public static final int filtershow_show_info_panel_size=0x7f0b0100;
+        public static final int filtershow_show_info_panel_size=0x7f090101;
         /**   actionbar menu 
   Text for the undo menu item [CHAR LIMIT=20] 
          */
-        public static final int filtershow_undo=0x7f0b0093;
+        public static final int filtershow_undo=0x7f090094;
         /**  Label for the Current version in the versions panel [CHAR LIMIT=30] 
          */
-        public static final int filtershow_version_current=0x7f0b0106;
+        public static final int filtershow_version_current=0x7f090107;
         /**  Label for the Original version in the versions panel [CHAR LIMIT=30] 
          */
-        public static final int filtershow_version_original=0x7f0b0105;
+        public static final int filtershow_version_original=0x7f090106;
         /**  Text indicating flash info of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int flash=0x7f0b0173;
+        public static final int flash=0x7f090173;
         /**  String indicating camera flash is not used. [CHAR LIMIT=14] 
          */
-        public static final int flash_off=0x7f0b017d;
+        public static final int flash_off=0x7f09017d;
         /**  String indicating camera flash is fired. [CHAR LIMIT=14] 
          */
-        public static final int flash_on=0x7f0b017c;
+        public static final int flash_on=0x7f09017c;
         /**  Text indicating the focal length of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int focal_length=0x7f0b0175;
+        public static final int focal_length=0x7f090175;
         /**  The label for the folder contains pictures taken by the camera. [CHAR LIMIT=20]
          */
-        public static final int folder_camera=0x7f0b01a5;
+        public static final int folder_camera=0x7f0901a5;
         /**  The label for the folder contains downloaded pictures. [CHAR LIMIT=20]
          */
-        public static final int folder_download=0x7f0b01a6;
+        public static final int folder_download=0x7f0901a6;
         /**  The label for the folder contains edited online pictures. [CHAR LIMIT=40]
          */
-        public static final int folder_edited_online_photos=0x7f0b01a7;
+        public static final int folder_edited_online_photos=0x7f0901a7;
         /**  The label for the folder contains pictures that was imported from an
          external camera. [CHAR LIMIT=20]
          */
-        public static final int folder_imported=0x7f0b01a8;
+        public static final int folder_imported=0x7f0901a8;
         /**  The label for the folder contains screenshot images. [CHAR LIMIT=20]
          */
-        public static final int folder_screenshot=0x7f0b01a9;
+        public static final int folder_screenshot=0x7f0901a9;
         /**  Label indicating the amount on free space on the device. The parameter
          is a string representation of the amount of free space, eg. "20MB".
          [CHAR LIMIT=20]
     
          */
-        public static final int free_space_format=0x7f0b018e;
+        public static final int free_space_format=0x7f09018e;
         /**  Title for picture frame gadget to show in list of all available gadgets 
          */
-        public static final int gadget_title=0x7f0b0112;
+        public static final int gadget_title=0x7f090112;
         /**   Label for the "neutral density graduated filter" filter effect  [CHAR LIMIT=15] 
          */
-        public static final int grad=0x7f0b00d3;
+        public static final int grad=0x7f0900d4;
         /**  Group by menu item. [CHAR LIMIT=20] 
          */
-        public static final int group_by=0x7f0b01a2;
+        public static final int group_by=0x7f0901a2;
         /**  Title of a menu item to group photo by albums [CHAR LIMIT=30]
          */
-        public static final int group_by_album=0x7f0b0153;
+        public static final int group_by_album=0x7f090153;
         /**  Title of a menu item to group photo by faces [CHAR LIMIT=30]
          */
-        public static final int group_by_faces=0x7f0b0152;
+        public static final int group_by_faces=0x7f090152;
         /**  Strings for grouping operations in the menu. The photos can be grouped
          by their location, taken time, or tags. 
  The title of the menu item to let user choose the grouping rule, when
@@ -2086,69 +2086,69 @@ CHAR LIMIT = NONE]
          from the submenu. 
  Title of a menu item to group photo by location [CHAR LIMIT=30] 
          */
-        public static final int group_by_location=0x7f0b014f;
+        public static final int group_by_location=0x7f09014f;
         /**  Title of a menu item to group photo by size [CHAR LIMIT=30]
          */
-        public static final int group_by_size=0x7f0b0154;
+        public static final int group_by_size=0x7f090154;
         /**  Title of a menu item to group photo by tags [CHAR LIMIT=30]
          */
-        public static final int group_by_tags=0x7f0b0151;
+        public static final int group_by_tags=0x7f090151;
         /**  Title of a menu tiem to group photo by taken date [CHAR LIMIT=30]
          */
-        public static final int group_by_time=0x7f0b0150;
-        public static final int headset_plug=0x7f0b0018;
+        public static final int group_by_time=0x7f090150;
+        public static final int headset_plug=0x7f090019;
         /**  Text indicating the height of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int height=0x7f0b016c;
+        public static final int height=0x7f09016c;
         /**  The title of the menu item which display online help in browser. [CHAR LIMIT=20]
          */
-        public static final int help=0x7f0b01aa;
+        public static final int help=0x7f0901aa;
         /**   Text for the image state panel menu item [CHAR LIMIT=30] 
          */
-        public static final int hide_imagestate_panel=0x7f0b0096;
+        public static final int hide_imagestate_panel=0x7f090097;
         /**   Label for the image highlights recovery (lightens/darkens bright regions) filter button [CHAR LIMIT=15] 
          */
-        public static final int highlight_recovery=0x7f0b00c0;
+        public static final int highlight_recovery=0x7f0900c1;
         /**   History Panel 
   Text for the history panel title [CHAR LIMIT=50] 
          */
-        public static final int history=0x7f0b00a4;
+        public static final int history=0x7f0900a5;
         /**   Text for the original image[CHAR LIMIT=20]
          */
-        public static final int history_original=0x7f0b00a6;
+        public static final int history_original=0x7f0900a7;
         /**   Label for the image Hue filter (color, shade, tinge, tone) button [CHAR LIMIT=10] 
          */
-        public static final int hue=0x7f0b00be;
+        public static final int hue=0x7f0900bf;
         /**   Label for the that allows drawing on Image [CHAR LIMIT=10] 
          */
-        public static final int imageDraw=0x7f0b00c9;
+        public static final int imageDraw=0x7f0900ca;
         /**   Image state panel 
   Text for the image state panel title [CHAR LIMIT=50] 
          */
-        public static final int imageState=0x7f0b00a7;
+        public static final int imageState=0x7f0900a8;
         /**  Camera format string for new image files. Passed to java.text.SimpleDateFormat. 
          */
-        public static final int image_file_name_format=0x7f0b022a;
+        public static final int image_file_name_format=0x7f09022a;
         /**  A label shown on the action bar. It indicates whether the import
          operation succeeds or fails. [CHAR LIMIT=20] 
          */
-        public static final int import_complete=0x7f0b0193;
-        public static final int import_fail=0x7f0b0194;
+        public static final int import_complete=0x7f090193;
+        public static final int import_fail=0x7f090194;
         /**   Status message shown when there is no content available to be imported 
          */
-        public static final int ingest_empty_device=0x7f0b01bb;
+        public static final int ingest_empty_device=0x7f0901bb;
         /**   Status message shown when content from an external camera is being imported 
          */
-        public static final int ingest_importing=0x7f0b01ba;
+        public static final int ingest_importing=0x7f0901ba;
         /**   Status message shown when there is no MTP device connected  
          */
-        public static final int ingest_no_device=0x7f0b01bc;
+        public static final int ingest_no_device=0x7f0901bc;
         /**   Text of notification message which is shown when user attaches camera 
          */
-        public static final int ingest_scanning=0x7f0b01b7;
+        public static final int ingest_scanning=0x7f0901b7;
         /**   Status message shown when scanning the content from the camera has completed 
          */
-        public static final int ingest_scanning_done=0x7f0b01b9;
+        public static final int ingest_scanning_done=0x7f0901b9;
         /**   Status message shown when content from the camera is being sorted 
  String.format failed for translation 
  no translation found for ingest_number_of_items_scanned:zero (2623289390474007396) 
@@ -2157,835 +2157,835 @@ CHAR LIMIT = NONE]
  String.format failed for translation 
  no translation found for ingest_number_of_items_scanned:other (3138021473860555499) 
          */
-        public static final int ingest_sorting=0x7f0b01b8;
+        public static final int ingest_sorting=0x7f0901b8;
         /**  Text indicating the ISO speed rating of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int iso=0x7f0b0178;
+        public static final int iso=0x7f090178;
         /**   Label for an image effect that replicates the "pop art" style of segmenting
           images into solid colors, as popularized by Andy Warhol [CHAR LIMIT=15] 
          */
-        public static final int kmeans=0x7f0b00d1;
+        public static final int kmeans=0x7f0900d2;
         /**  Displayed in the title of those albums that are being loaded 
          */
-        public static final int loading=0x7f0b011c;
+        public static final int loading=0x7f09011c;
         /**  Message shown on the progress dialog to indicate we're loading the
             account info [CHAR LIMIT=30] 
          */
-        public static final int loading_account=0x7f0b0118;
-        public static final int loading_image=0x7f0b0117;
+        public static final int loading_account=0x7f090118;
+        public static final int loading_image=0x7f090117;
         /**  shown in the video player view while the video is being loaded, before it starts playing 
          */
-        public static final int loading_video=0x7f0b0116;
+        public static final int loading_video=0x7f090116;
         /**  Text indicating the location of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int location=0x7f0b0169;
+        public static final int location=0x7f090169;
         /**  Group by Locations tab on Action Bar. [CHAR LIMIT=12] 
          */
-        public static final int locations=0x7f0b019f;
+        public static final int locations=0x7f09019f;
         /**  A label describing that the current screen is for the user to pick
          some albums to be viewable offline [CHAR LIMIT=30] 
          */
-        public static final int make_available_offline=0x7f0b0162;
+        public static final int make_available_offline=0x7f090162;
         /**  Text indicating the maker of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int maker=0x7f0b0171;
+        public static final int maker=0x7f090171;
         /**  String indicating how camera shooting feature is used. [CHAR LIMIT=8] 
          */
-        public static final int manual=0x7f0b017a;
+        public static final int manual=0x7f09017a;
         /**  Menu item to launch the camera app [CHAR LIMIT=25] 
          */
-        public static final int menu_camera=0x7f0b029a;
+        public static final int menu_camera=0x7f09029a;
         /**  Menu item to search for photos [CHAR LIMIT=25] 
          */
-        public static final int menu_search=0x7f0b029b;
+        public static final int menu_search=0x7f09029b;
         /**   Name for the overflow menu item for settings [CHAR LIMIT=20] 
          */
-        public static final int menu_settings=0x7f0b009e;
+        public static final int menu_settings=0x7f09009f;
         /**  Text indicating the mime type of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int mimetype=0x7f0b016f;
+        public static final int mimetype=0x7f09016f;
         /**   Label for the image flip effect [CHAR LIMIT=15] 
          */
-        public static final int mirror=0x7f0b00cd;
+        public static final int mirror=0x7f0900ce;
         /**  Text indicating the model of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int model=0x7f0b0172;
+        public static final int model=0x7f090172;
         /**  Activity label. This might show up in the activity-picker 
          */
-        public static final int movie_view_label=0x7f0b0115;
+        public static final int movie_view_label=0x7f090115;
         /**  Button indicating that the cropped image should be reverted back to the original 
  Hint that appears when cropping an image with more than one face 
          */
-        public static final int multiface_crop_help=0x7f0b0123;
+        public static final int multiface_crop_help=0x7f090123;
         /**  The title of the menu item to let user mute the video. [CHAR LIMIT=15] 
          */
-        public static final int mute_action=0x7f0b014b;
+        public static final int mute_action=0x7f09014b;
         /**  Toast if the muted video is not supported. [CHAR LIMIT=80] 
          */
-        public static final int mute_nosupport=0x7f0b0000;
+        public static final int mute_nosupport=0x7f090001;
         /**  The tilte of a dialog showing muting in progress. [CHAR LIMIT=20] 
          */
-        public static final int muting=0x7f0b01b1;
+        public static final int muting=0x7f0901b1;
         /**  Name for the photo effect that inverts photo to negative images. [CHAR LIMIT=10] 
          */
-        public static final int negative=0x7f0b00ce;
+        public static final int negative=0x7f0900cf;
         /**  Toast message shown when there is no albums available [CHAR LIMIT=50]
          */
-        public static final int no_albums_alert=0x7f0b015f;
+        public static final int no_albums_alert=0x7f09015f;
         /**  This toast message is shown when network connection is lost while doing clustering 
          */
-        public static final int no_connectivity=0x7f0b0157;
+        public static final int no_connectivity=0x7f090157;
         /**  The message of a dialog showing there is no external storage. [CHAR LIMIT=none] 
          */
-        public static final int no_external_storage=0x7f0b01ac;
+        public static final int no_external_storage=0x7f0901ac;
         /**  The tilte of a dialog showing there is no external storage. [CHAR LIMIT=20] 
          */
-        public static final int no_external_storage_title=0x7f0b01ab;
+        public static final int no_external_storage_title=0x7f0901ab;
         /**  When grouping photos by locations, the label used for photos that don't
          have location information in them [CHAR LIMIT=20]
          */
-        public static final int no_location=0x7f0b0156;
+        public static final int no_location=0x7f090156;
         /**  alert to the user that an SD card must be installed before using the camera 
          */
-        public static final int no_storage=0x7f0b01c2;
+        public static final int no_storage=0x7f0901c2;
         /**  Toast message prompted when the specified item is not found [CHAR LIMIT=40]
          */
-        public static final int no_such_item=0x7f0b0144;
+        public static final int no_such_item=0x7f090144;
         /**  Displayed in place of the picture when we fail to get the thumbnail of it.
          [CHAR LIMIT=50]
          */
-        public static final int no_thumbnail=0x7f0b011f;
+        public static final int no_thumbnail=0x7f09011f;
         /**   Label for having no filters applied to the image [CHAR LIMIT=10] 
          */
-        public static final int none=0x7f0b00cf;
+        public static final int none=0x7f0900d0;
         /**  Toast after trying to select a setting that is not allowed to change in scene mode [CHAR LIMIT=NONE] 
          */
-        public static final int not_selectable_in_scene_mode=0x7f0b0220;
+        public static final int not_selectable_in_scene_mode=0x7f090220;
         /**  Title of a menu item to indicate performing the image crop operation
          [CHAR LIMIT=20] 
          */
-        public static final int ok=0x7f0b0122;
+        public static final int ok=0x7f090122;
         /**  Text indicating the orientation of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int orientation=0x7f0b016d;
+        public static final int orientation=0x7f09016d;
         /**   Text to label an image as "original" [CHAR LIMIT=20] 
          */
-        public static final int original=0x7f0b0090;
+        public static final int original=0x7f090091;
         /**   String displayed when showing the original image [CHAR LIMIT=NONE] 
          */
-        public static final int original_picture_text=0x7f0b008d;
+        public static final int original_picture_text=0x7f09008e;
         /**  The text shown on the top-left corner of the screen to indicate the capturing is on going [CHAR LIMIT=27] 
          */
-        public static final int pano_capture_indication=0x7f0b0232;
+        public static final int pano_capture_indication=0x7f090232;
         /**  The text shown in the dialog when panorama saving failed [CHAR LIMIT=40] 
          */
-        public static final int pano_dialog_panorama_failed=0x7f0b0230;
+        public static final int pano_dialog_panorama_failed=0x7f090230;
         /**  The text shown in the progress dialog when panorama preview is generating in the background [CHAR LIMIT=30] 
          */
-        public static final int pano_dialog_prepare_preview=0x7f0b022f;
+        public static final int pano_dialog_prepare_preview=0x7f09022f;
         /**  The text shown on the dialog title in the dialogs for Panorama [CHAR LIMIT=12] 
          */
-        public static final int pano_dialog_title=0x7f0b0231;
+        public static final int pano_dialog_title=0x7f090231;
         /**  The text shown in the progress dialog when waiting for previous panorama finishing [CHAR LIMIT=40] 
          */
-        public static final int pano_dialog_waiting_previous=0x7f0b0233;
+        public static final int pano_dialog_waiting_previous=0x7f090233;
         /**  Filename prefix for panorama output. 
          */
-        public static final int pano_file_name_format=0x7f0b022c;
+        public static final int pano_file_name_format=0x7f09022c;
         /**  Text to show with progress bar while stitching in Gallery 
          */
-        public static final int pano_progress_text=0x7f0b01b5;
+        public static final int pano_progress_text=0x7f0901b5;
         /**  The text shown on the screen to indicate that the panorama is rendering [CHAR LIMIT=27] 
          */
-        public static final int pano_review_rendering=0x7f0b0235;
+        public static final int pano_review_rendering=0x7f090235;
         /**  The text shown on the bottom-left corner of the screen to indicate that the saving is in process [CHAR LIMIT=13] 
          */
-        public static final int pano_review_saving_indication_str=0x7f0b0234;
+        public static final int pano_review_saving_indication_str=0x7f090234;
         /**  The text shown when the panorama panning speed is to fast [CHAR LIMIT=12] 
          */
-        public static final int pano_too_fast_prompt=0x7f0b022e;
+        public static final int pano_too_fast_prompt=0x7f09022e;
         /**  Text indicating the path of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int path=0x7f0b016a;
+        public static final int path=0x7f09016a;
         /**  Group by People tab on Action Bar. [CHAR LIMIT=12] 
          */
-        public static final int people=0x7f0b01a0;
+        public static final int people=0x7f0901a0;
         /**  Album label used to indicate the collection of PWA Buzz/Post photos 
          */
-        public static final int picasa_posts=0x7f0b0161;
+        public static final int picasa_posts=0x7f090161;
         /**  The content of a dialog showing trimming in progress. [CHAR LIMIT=30] 
          */
-        public static final int please_wait=0x7f0b01b2;
+        public static final int please_wait=0x7f0901b2;
         /**  Settings screen, Camcorder setting category title 
          */
-        public static final int pref_camcorder_settings_category=0x7f0b01e1;
-        public static final int pref_camera_beauty_mode_title=0x7f0b007b;
-        public static final int pref_camera_burst_entry_10=0x7f0b006e;
-        public static final int pref_camera_burst_entry_15=0x7f0b006f;
-        public static final int pref_camera_burst_entry_20=0x7f0b0070;
-        public static final int pref_camera_burst_entry_5=0x7f0b006d;
-        public static final int pref_camera_burst_entry_off=0x7f0b006c;
-        public static final int pref_camera_burst_title=0x7f0b006b;
-        public static final int pref_camera_coloreffect_entry_aqua=0x7f0b005b;
-        public static final int pref_camera_coloreffect_entry_bluetint=0x7f0b0062;
-        public static final int pref_camera_coloreffect_entry_cartoonize=0x7f0b006a;
-        public static final int pref_camera_coloreffect_entry_emboss=0x7f0b005c;
-        public static final int pref_camera_coloreffect_entry_greentint=0x7f0b0063;
-        public static final int pref_camera_coloreffect_entry_mono=0x7f0b0058;
-        public static final int pref_camera_coloreffect_entry_mosaic=0x7f0b0060;
-        public static final int pref_camera_coloreffect_entry_negative=0x7f0b005a;
-        public static final int pref_camera_coloreffect_entry_neon=0x7f0b005e;
-        public static final int pref_camera_coloreffect_entry_none=0x7f0b0057;
-        public static final int pref_camera_coloreffect_entry_pastel=0x7f0b005f;
-        public static final int pref_camera_coloreffect_entry_point_blue=0x7f0b0067;
-        public static final int pref_camera_coloreffect_entry_point_green=0x7f0b0068;
-        public static final int pref_camera_coloreffect_entry_point_red_yellow=0x7f0b0069;
-        public static final int pref_camera_coloreffect_entry_redtint=0x7f0b0061;
-        public static final int pref_camera_coloreffect_entry_sepia=0x7f0b0059;
-        public static final int pref_camera_coloreffect_entry_sketch=0x7f0b005d;
-        public static final int pref_camera_coloreffect_entry_vintage_cold=0x7f0b0066;
-        public static final int pref_camera_coloreffect_entry_vintage_warm=0x7f0b0065;
-        public static final int pref_camera_coloreffect_entry_washed=0x7f0b0064;
-        public static final int pref_camera_coloreffect_title=0x7f0b0056;
+        public static final int pref_camcorder_settings_category=0x7f0901e1;
+        public static final int pref_camera_beauty_mode_title=0x7f09007c;
+        public static final int pref_camera_burst_entry_10=0x7f09006f;
+        public static final int pref_camera_burst_entry_15=0x7f090070;
+        public static final int pref_camera_burst_entry_20=0x7f090071;
+        public static final int pref_camera_burst_entry_5=0x7f09006e;
+        public static final int pref_camera_burst_entry_off=0x7f09006d;
+        public static final int pref_camera_burst_title=0x7f09006c;
+        public static final int pref_camera_coloreffect_entry_aqua=0x7f09005c;
+        public static final int pref_camera_coloreffect_entry_bluetint=0x7f090063;
+        public static final int pref_camera_coloreffect_entry_cartoonize=0x7f09006b;
+        public static final int pref_camera_coloreffect_entry_emboss=0x7f09005d;
+        public static final int pref_camera_coloreffect_entry_greentint=0x7f090064;
+        public static final int pref_camera_coloreffect_entry_mono=0x7f090059;
+        public static final int pref_camera_coloreffect_entry_mosaic=0x7f090061;
+        public static final int pref_camera_coloreffect_entry_negative=0x7f09005b;
+        public static final int pref_camera_coloreffect_entry_neon=0x7f09005f;
+        public static final int pref_camera_coloreffect_entry_none=0x7f090058;
+        public static final int pref_camera_coloreffect_entry_pastel=0x7f090060;
+        public static final int pref_camera_coloreffect_entry_point_blue=0x7f090068;
+        public static final int pref_camera_coloreffect_entry_point_green=0x7f090069;
+        public static final int pref_camera_coloreffect_entry_point_red_yellow=0x7f09006a;
+        public static final int pref_camera_coloreffect_entry_redtint=0x7f090062;
+        public static final int pref_camera_coloreffect_entry_sepia=0x7f09005a;
+        public static final int pref_camera_coloreffect_entry_sketch=0x7f09005e;
+        public static final int pref_camera_coloreffect_entry_vintage_cold=0x7f090067;
+        public static final int pref_camera_coloreffect_entry_vintage_warm=0x7f090066;
+        public static final int pref_camera_coloreffect_entry_washed=0x7f090065;
+        public static final int pref_camera_coloreffect_title=0x7f090057;
         /**  Settings menu countdown timer labels [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_countdown_label=0x7f0b021a;
+        public static final int pref_camera_countdown_label=0x7f09021a;
         /**  Settings menu countdown timer 15 seconds [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_countdown_label_fifteen=0x7f0b021f;
+        public static final int pref_camera_countdown_label_fifteen=0x7f09021f;
         /**  Settings menu countdown timer off [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_countdown_label_off=0x7f0b021b;
+        public static final int pref_camera_countdown_label_off=0x7f09021b;
         /**  Settings menu countdown timer 1 second [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_countdown_label_one=0x7f0b021c;
+        public static final int pref_camera_countdown_label_one=0x7f09021c;
         /**  Settings menu countdown timer 10 seconds [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_countdown_label_ten=0x7f0b021e;
+        public static final int pref_camera_countdown_label_ten=0x7f09021e;
         /**  Settings menu countdown timer 3 seconds [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_countdown_label_three=0x7f0b021d;
+        public static final int pref_camera_countdown_label_three=0x7f09021d;
         /**  Default flash mode setting.
          */
-        public static final int pref_camera_flashmode_default=0x7f0b01f5;
+        public static final int pref_camera_flashmode_default=0x7f0901f5;
         /**  Settings screen, Flash mode dialog radio button choices 
          */
-        public static final int pref_camera_flashmode_entry_auto=0x7f0b01f9;
-        public static final int pref_camera_flashmode_entry_off=0x7f0b01fb;
-        public static final int pref_camera_flashmode_entry_on=0x7f0b01fa;
-        public static final int pref_camera_flashmode_entry_redeye=0x7f0b0079;
+        public static final int pref_camera_flashmode_entry_auto=0x7f0901f9;
+        public static final int pref_camera_flashmode_entry_off=0x7f0901fb;
+        public static final int pref_camera_flashmode_entry_on=0x7f0901fa;
+        public static final int pref_camera_flashmode_entry_redeye=0x7f09007a;
         /**  flash label [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_flashmode_label=0x7f0b01f8;
+        public static final int pref_camera_flashmode_label=0x7f0901f8;
         /**  Menu, flash mode labels [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_flashmode_label_auto=0x7f0b01fc;
-        public static final int pref_camera_flashmode_label_off=0x7f0b01fe;
-        public static final int pref_camera_flashmode_label_on=0x7f0b01fd;
-        public static final int pref_camera_flashmode_label_redeye=0x7f0b007a;
+        public static final int pref_camera_flashmode_label_auto=0x7f0901fc;
+        public static final int pref_camera_flashmode_label_off=0x7f0901fe;
+        public static final int pref_camera_flashmode_label_on=0x7f0901fd;
+        public static final int pref_camera_flashmode_label_redeye=0x7f09007b;
         /**  Value for flash off setting
          */
-        public static final int pref_camera_flashmode_no_flash=0x7f0b01f6;
+        public static final int pref_camera_flashmode_no_flash=0x7f0901f6;
         /**  Settings screen, Flash mode title 
          */
-        public static final int pref_camera_flashmode_title=0x7f0b01f7;
+        public static final int pref_camera_flashmode_title=0x7f0901f7;
         /**  Settings screen, Focus mode dialog radio button choices 
          */
-        public static final int pref_camera_focusmode_entry_auto=0x7f0b01ef;
-        public static final int pref_camera_focusmode_entry_continuouspicture=0x7f0b0043;
-        public static final int pref_camera_focusmode_entry_extended=0x7f0b0044;
-        public static final int pref_camera_focusmode_entry_facedetect=0x7f0b0045;
-        public static final int pref_camera_focusmode_entry_facepriority=0x7f0b0046;
-        public static final int pref_camera_focusmode_entry_fixed=0x7f0b0047;
-        public static final int pref_camera_focusmode_entry_hyperfocal=0x7f0b0049;
-        public static final int pref_camera_focusmode_entry_infinity=0x7f0b01f0;
-        public static final int pref_camera_focusmode_entry_macro=0x7f0b01f1;
-        public static final int pref_camera_focusmode_entry_portrait=0x7f0b0048;
+        public static final int pref_camera_focusmode_entry_auto=0x7f0901ef;
+        public static final int pref_camera_focusmode_entry_continuouspicture=0x7f090044;
+        public static final int pref_camera_focusmode_entry_extended=0x7f090045;
+        public static final int pref_camera_focusmode_entry_facedetect=0x7f090046;
+        public static final int pref_camera_focusmode_entry_facepriority=0x7f090047;
+        public static final int pref_camera_focusmode_entry_fixed=0x7f090048;
+        public static final int pref_camera_focusmode_entry_hyperfocal=0x7f09004a;
+        public static final int pref_camera_focusmode_entry_infinity=0x7f0901f0;
+        public static final int pref_camera_focusmode_entry_macro=0x7f0901f1;
+        public static final int pref_camera_focusmode_entry_portrait=0x7f090049;
         /**  Menu, focus mode labels [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_focusmode_label_auto=0x7f0b01f2;
-        public static final int pref_camera_focusmode_label_infinity=0x7f0b01f3;
-        public static final int pref_camera_focusmode_label_macro=0x7f0b01f4;
+        public static final int pref_camera_focusmode_label_auto=0x7f0901f2;
+        public static final int pref_camera_focusmode_label_infinity=0x7f0901f3;
+        public static final int pref_camera_focusmode_label_macro=0x7f0901f4;
         /**  Settings screen, Focus mode title 
          */
-        public static final int pref_camera_focusmode_title=0x7f0b01ee;
-        public static final int pref_camera_focustime_entry_10=0x7f0b0074;
-        public static final int pref_camera_focustime_entry_15=0x7f0b0075;
-        public static final int pref_camera_focustime_entry_20=0x7f0b0076;
-        public static final int pref_camera_focustime_entry_30=0x7f0b0077;
-        public static final int pref_camera_focustime_entry_5=0x7f0b0073;
-        public static final int pref_camera_focustime_entry_infinite=0x7f0b0078;
-        public static final int pref_camera_focustime_summary=0x7f0b0072;
-        public static final int pref_camera_focustime_title=0x7f0b0071;
+        public static final int pref_camera_focusmode_title=0x7f0901ee;
+        public static final int pref_camera_focustime_entry_10=0x7f090075;
+        public static final int pref_camera_focustime_entry_15=0x7f090076;
+        public static final int pref_camera_focustime_entry_20=0x7f090077;
+        public static final int pref_camera_focustime_entry_30=0x7f090078;
+        public static final int pref_camera_focustime_entry_5=0x7f090074;
+        public static final int pref_camera_focustime_entry_infinite=0x7f090079;
+        public static final int pref_camera_focustime_summary=0x7f090073;
+        public static final int pref_camera_focustime_title=0x7f090072;
         /**  Default HDR entry value 
          */
-        public static final int pref_camera_hdr_default=0x7f0b0224;
+        public static final int pref_camera_hdr_default=0x7f090224;
         /**  HDR label ON [CHAR LIMIT=60] 
          */
-        public static final int pref_camera_hdr_label=0x7f0b0225;
-        public static final int pref_camera_id_default=0x7f0b01c9;
+        public static final int pref_camera_hdr_label=0x7f090225;
+        public static final int pref_camera_id_default=0x7f0901c9;
         /**  In select camera setting, back facing camera. [CHAR LIMIT=14] 
          */
-        public static final int pref_camera_id_entry_back=0x7f0b01ca;
+        public static final int pref_camera_id_entry_back=0x7f0901ca;
         /**  In select camera setting, front-facing camera. [CHAR LIMIT=14] 
          */
-        public static final int pref_camera_id_entry_front=0x7f0b01cb;
+        public static final int pref_camera_id_entry_front=0x7f0901cb;
         /**  switch camera label back [CHAR LIMIT=60] 
          */
-        public static final int pref_camera_id_label_back=0x7f0b0226;
+        public static final int pref_camera_id_label_back=0x7f090226;
         /**  switch camera label front [CHAR LIMIT=60] 
          */
-        public static final int pref_camera_id_label_front=0x7f0b0227;
+        public static final int pref_camera_id_label_front=0x7f090227;
         /**  Settings screen, camera selection dialog title. Users can select a camera from the phone (front-facing or back-facing). [CHAR LIMIT=20] 
          */
-        public static final int pref_camera_id_title=0x7f0b01c8;
-        public static final int pref_camera_iso_entry_auto=0x7f0b004b;
-        public static final int pref_camera_iso_entry_isodeblur=0x7f0b004c;
-        public static final int pref_camera_iso_entry_isomovie=0x7f0b004f;
-        public static final int pref_camera_iso_entry_isonight=0x7f0b004e;
-        public static final int pref_camera_iso_entry_isosports=0x7f0b004d;
-        public static final int pref_camera_jpeg_entry_high=0x7f0b0053;
-        public static final int pref_camera_jpeg_entry_low=0x7f0b0055;
-        public static final int pref_camera_jpeg_entry_medium=0x7f0b0054;
-        public static final int pref_camera_jpeg_entry_super=0x7f0b0052;
-        public static final int pref_camera_jpeg_title=0x7f0b0050;
+        public static final int pref_camera_id_title=0x7f0901c8;
+        public static final int pref_camera_iso_entry_auto=0x7f09004c;
+        public static final int pref_camera_iso_entry_isodeblur=0x7f09004d;
+        public static final int pref_camera_iso_entry_isomovie=0x7f090050;
+        public static final int pref_camera_iso_entry_isonight=0x7f09004f;
+        public static final int pref_camera_iso_entry_isosports=0x7f09004e;
+        public static final int pref_camera_jpeg_entry_high=0x7f090054;
+        public static final int pref_camera_jpeg_entry_low=0x7f090056;
+        public static final int pref_camera_jpeg_entry_medium=0x7f090055;
+        public static final int pref_camera_jpeg_entry_super=0x7f090053;
+        public static final int pref_camera_jpeg_title=0x7f090051;
         /**   Label for record location preference [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_location_label=0x7f0b01ce;
-        public static final int pref_camera_picturesize_entry_10_4mp=0x7f0b0009;
-        public static final int pref_camera_picturesize_entry_11_5mp=0x7f0b0008;
-        public static final int pref_camera_picturesize_entry_12_7mp=0x7f0b0006;
-        public static final int pref_camera_picturesize_entry_12_8mp=0x7f0b0005;
-        public static final int pref_camera_picturesize_entry_12mp=0x7f0b0007;
+        public static final int pref_camera_location_label=0x7f0901ce;
+        public static final int pref_camera_picturesize_entry_10_4mp=0x7f09000a;
+        public static final int pref_camera_picturesize_entry_11_5mp=0x7f090009;
+        public static final int pref_camera_picturesize_entry_12_7mp=0x7f090007;
+        public static final int pref_camera_picturesize_entry_12_8mp=0x7f090006;
+        public static final int pref_camera_picturesize_entry_12mp=0x7f090008;
         /**  Settings screen, dialog choice for 13 megapixels picture size [CHAR LIMIT=15] 
          */
-        public static final int pref_camera_picturesize_entry_13mp=0x7f0b01e3;
-        public static final int pref_camera_picturesize_entry_18mp=0x7f0b0004;
+        public static final int pref_camera_picturesize_entry_13mp=0x7f0901e3;
+        public static final int pref_camera_picturesize_entry_18mp=0x7f090005;
         /**  Settings screen, dialog choice for 1.3 megapixels picture size [CHAR LIMIT=15] 
          */
-        public static final int pref_camera_picturesize_entry_1_3mp=0x7f0b01ea;
-        public static final int pref_camera_picturesize_entry_1_5mp=0x7f0b0014;
-        public static final int pref_camera_picturesize_entry_1_9mp=0x7f0b0013;
+        public static final int pref_camera_picturesize_entry_1_3mp=0x7f0901ea;
+        public static final int pref_camera_picturesize_entry_1_5mp=0x7f090015;
+        public static final int pref_camera_picturesize_entry_1_9mp=0x7f090014;
         /**  Settings screen, dialog choice for 1 megapixels picture size [CHAR LIMIT=15] 
          */
-        public static final int pref_camera_picturesize_entry_1mp=0x7f0b01eb;
-        public static final int pref_camera_picturesize_entry_20_7mp=0x7f0b0003;
-        public static final int pref_camera_picturesize_entry_2_1mp=0x7f0b0012;
-        public static final int pref_camera_picturesize_entry_2_5mp=0x7f0b0011;
+        public static final int pref_camera_picturesize_entry_1mp=0x7f0901eb;
+        public static final int pref_camera_picturesize_entry_20_7mp=0x7f090004;
+        public static final int pref_camera_picturesize_entry_2_1mp=0x7f090013;
+        public static final int pref_camera_picturesize_entry_2_5mp=0x7f090012;
         /**  Settings screen, dialog choice for 2 megapixels picture size [CHAR LIMIT=15] 
          */
-        public static final int pref_camera_picturesize_entry_2mp=0x7f0b01e8;
+        public static final int pref_camera_picturesize_entry_2mp=0x7f0901e8;
         /**  Settings screen, dialog choice for 2 megapixels picture size [CHAR LIMIT=15] 
          */
-        public static final int pref_camera_picturesize_entry_2mp_wide=0x7f0b01e9;
-        public static final int pref_camera_picturesize_entry_3_7mp=0x7f0b0010;
+        public static final int pref_camera_picturesize_entry_2mp_wide=0x7f0901e9;
+        public static final int pref_camera_picturesize_entry_3_7mp=0x7f090011;
         /**  Settings screen, dialog choice for 3 megapixels picture size [CHAR LIMIT=15] 
          */
-        public static final int pref_camera_picturesize_entry_3mp=0x7f0b01e7;
-        public static final int pref_camera_picturesize_entry_4_5mp=0x7f0b000f;
+        public static final int pref_camera_picturesize_entry_3mp=0x7f0901e7;
+        public static final int pref_camera_picturesize_entry_4_5mp=0x7f090010;
         /**  Settings screen, dialog choice for 4 megapixels picture size [CHAR LIMIT=15] 
          */
-        public static final int pref_camera_picturesize_entry_4mp=0x7f0b01e6;
+        public static final int pref_camera_picturesize_entry_4mp=0x7f0901e6;
         /**  Settings screen, dialog choice for 5 megapixels picture size [CHAR LIMIT=15] 
          */
-        public static final int pref_camera_picturesize_entry_5mp=0x7f0b01e5;
-        public static final int pref_camera_picturesize_entry_6_4mp=0x7f0b000d;
-        public static final int pref_camera_picturesize_entry_6mp=0x7f0b000e;
-        public static final int pref_camera_picturesize_entry_7_7mp=0x7f0b000c;
-        public static final int pref_camera_picturesize_entry_8_2mp=0x7f0b000b;
+        public static final int pref_camera_picturesize_entry_5mp=0x7f0901e5;
+        public static final int pref_camera_picturesize_entry_6_4mp=0x7f09000e;
+        public static final int pref_camera_picturesize_entry_6mp=0x7f09000f;
+        public static final int pref_camera_picturesize_entry_7_7mp=0x7f09000d;
+        public static final int pref_camera_picturesize_entry_8_2mp=0x7f09000c;
         /**  Settings screen, dialog choice for 8 megapixels picture size [CHAR LIMIT=15] 
          */
-        public static final int pref_camera_picturesize_entry_8mp=0x7f0b01e4;
-        public static final int pref_camera_picturesize_entry_9mp=0x7f0b000a;
+        public static final int pref_camera_picturesize_entry_8mp=0x7f0901e4;
+        public static final int pref_camera_picturesize_entry_9mp=0x7f09000b;
         /**  Settings screen, dialog choice for QVGA picture size [CHAR LIMIT=15] 
          */
-        public static final int pref_camera_picturesize_entry_qvga=0x7f0b01ed;
+        public static final int pref_camera_picturesize_entry_qvga=0x7f0901ed;
         /**  Settings screen, dialog choice for VGA picture size [CHAR LIMIT=15] 
          */
-        public static final int pref_camera_picturesize_entry_vga=0x7f0b01ec;
+        public static final int pref_camera_picturesize_entry_vga=0x7f0901ec;
         /**  Settings screen, Picture size title 
          */
-        public static final int pref_camera_picturesize_title=0x7f0b01e2;
-        public static final int pref_camera_power_shutter_title=0x7f0b004a;
-        public static final int pref_camera_recordlocation_default=0x7f0b01cd;
+        public static final int pref_camera_picturesize_title=0x7f0901e2;
+        public static final int pref_camera_power_shutter_title=0x7f09004b;
+        public static final int pref_camera_recordlocation_default=0x7f0901cd;
         /**  Settings screen, setting title text 
          */
-        public static final int pref_camera_recordlocation_title=0x7f0b01cc;
+        public static final int pref_camera_recordlocation_title=0x7f0901cc;
         /**  Default scene mode setting. 
          */
-        public static final int pref_camera_scenemode_default=0x7f0b020d;
+        public static final int pref_camera_scenemode_default=0x7f09020d;
         /**  Scene mode that takes an image quickly with little motion blur. [CHAR LIMIT=16] 
          */
-        public static final int pref_camera_scenemode_entry_action=0x7f0b0211;
-        public static final int pref_camera_scenemode_entry_antimotionblur=0x7f0b001b;
-        public static final int pref_camera_scenemode_entry_aqua=0x7f0b001c;
-        public static final int pref_camera_scenemode_entry_ar=0x7f0b001d;
-        public static final int pref_camera_scenemode_entry_asd=0x7f0b001e;
+        public static final int pref_camera_scenemode_entry_action=0x7f090211;
+        public static final int pref_camera_scenemode_entry_antimotionblur=0x7f09001c;
+        public static final int pref_camera_scenemode_entry_aqua=0x7f09001d;
+        public static final int pref_camera_scenemode_entry_ar=0x7f09001e;
+        public static final int pref_camera_scenemode_entry_asd=0x7f09001f;
         /**  Settings menu, scene mode choices [CHAR LIMIT=16] 
          */
-        public static final int pref_camera_scenemode_entry_auto=0x7f0b020f;
-        public static final int pref_camera_scenemode_entry_baby=0x7f0b001f;
-        public static final int pref_camera_scenemode_entry_backgroundblur=0x7f0b0020;
-        public static final int pref_camera_scenemode_entry_backlight=0x7f0b0021;
-        public static final int pref_camera_scenemode_entry_backlightportrait=0x7f0b0022;
-        public static final int pref_camera_scenemode_entry_barcode=0x7f0b0023;
-        public static final int pref_camera_scenemode_entry_beach=0x7f0b0024;
-        public static final int pref_camera_scenemode_entry_beauty=0x7f0b0025;
-        public static final int pref_camera_scenemode_entry_candlelight=0x7f0b0026;
-        public static final int pref_camera_scenemode_entry_cine=0x7f0b0027;
-        public static final int pref_camera_scenemode_entry_closeup=0x7f0b0028;
-        public static final int pref_camera_scenemode_entry_dark=0x7f0b0029;
-        public static final int pref_camera_scenemode_entry_dish=0x7f0b002a;
-        public static final int pref_camera_scenemode_entry_document=0x7f0b002b;
-        public static final int pref_camera_scenemode_entry_fallcolor=0x7f0b002c;
-        public static final int pref_camera_scenemode_entry_fireworks=0x7f0b002d;
-        public static final int pref_camera_scenemode_entry_flowers=0x7f0b002e;
+        public static final int pref_camera_scenemode_entry_auto=0x7f09020f;
+        public static final int pref_camera_scenemode_entry_baby=0x7f090020;
+        public static final int pref_camera_scenemode_entry_backgroundblur=0x7f090021;
+        public static final int pref_camera_scenemode_entry_backlight=0x7f090022;
+        public static final int pref_camera_scenemode_entry_backlightportrait=0x7f090023;
+        public static final int pref_camera_scenemode_entry_barcode=0x7f090024;
+        public static final int pref_camera_scenemode_entry_beach=0x7f090025;
+        public static final int pref_camera_scenemode_entry_beauty=0x7f090026;
+        public static final int pref_camera_scenemode_entry_candlelight=0x7f090027;
+        public static final int pref_camera_scenemode_entry_cine=0x7f090028;
+        public static final int pref_camera_scenemode_entry_closeup=0x7f090029;
+        public static final int pref_camera_scenemode_entry_dark=0x7f09002a;
+        public static final int pref_camera_scenemode_entry_dish=0x7f09002b;
+        public static final int pref_camera_scenemode_entry_document=0x7f09002c;
+        public static final int pref_camera_scenemode_entry_fallcolor=0x7f09002d;
+        public static final int pref_camera_scenemode_entry_fireworks=0x7f09002e;
+        public static final int pref_camera_scenemode_entry_flowers=0x7f09002f;
         /**  Scene mode that uses HDR (high dynamic range) [CHAR LIMIT=16] 
          */
-        public static final int pref_camera_scenemode_entry_hdr=0x7f0b0210;
-        public static final int pref_camera_scenemode_entry_highsensitivity=0x7f0b002f;
-        public static final int pref_camera_scenemode_entry_indoor=0x7f0b0030;
-        public static final int pref_camera_scenemode_entry_landscape=0x7f0b0031;
-        public static final int pref_camera_scenemode_entry_mix_illuminant=0x7f0b0032;
-        public static final int pref_camera_scenemode_entry_mood=0x7f0b0033;
+        public static final int pref_camera_scenemode_entry_hdr=0x7f090210;
+        public static final int pref_camera_scenemode_entry_highsensitivity=0x7f090030;
+        public static final int pref_camera_scenemode_entry_indoor=0x7f090031;
+        public static final int pref_camera_scenemode_entry_landscape=0x7f090032;
+        public static final int pref_camera_scenemode_entry_mix_illuminant=0x7f090033;
+        public static final int pref_camera_scenemode_entry_mood=0x7f090034;
         /**  Scene mode that takes long exposures to capture night scenes without flash. [CHAR LIMIT=16] 
          */
-        public static final int pref_camera_scenemode_entry_night=0x7f0b0212;
-        public static final int pref_camera_scenemode_entry_nightindoor=0x7f0b0035;
-        public static final int pref_camera_scenemode_entry_nightportrait=0x7f0b0034;
-        public static final int pref_camera_scenemode_entry_oldfilm=0x7f0b0036;
+        public static final int pref_camera_scenemode_entry_night=0x7f090212;
+        public static final int pref_camera_scenemode_entry_nightindoor=0x7f090036;
+        public static final int pref_camera_scenemode_entry_nightportrait=0x7f090035;
+        public static final int pref_camera_scenemode_entry_oldfilm=0x7f090037;
         /**  Scene mode optimized for taking indoor low-lights pictures. [CHAR LIMIT=16] 
          */
-        public static final int pref_camera_scenemode_entry_party=0x7f0b0214;
-        public static final int pref_camera_scenemode_entry_pet=0x7f0b0037;
-        public static final int pref_camera_scenemode_entry_portrait=0x7f0b0038;
-        public static final int pref_camera_scenemode_entry_snow=0x7f0b0039;
-        public static final int pref_camera_scenemode_entry_softskin=0x7f0b003a;
-        public static final int pref_camera_scenemode_entry_sports=0x7f0b003b;
-        public static final int pref_camera_scenemode_entry_spotlight=0x7f0b003c;
-        public static final int pref_camera_scenemode_entry_steadyphoto=0x7f0b003d;
+        public static final int pref_camera_scenemode_entry_party=0x7f090214;
+        public static final int pref_camera_scenemode_entry_pet=0x7f090038;
+        public static final int pref_camera_scenemode_entry_portrait=0x7f090039;
+        public static final int pref_camera_scenemode_entry_snow=0x7f09003a;
+        public static final int pref_camera_scenemode_entry_softskin=0x7f09003b;
+        public static final int pref_camera_scenemode_entry_sports=0x7f09003c;
+        public static final int pref_camera_scenemode_entry_spotlight=0x7f09003d;
+        public static final int pref_camera_scenemode_entry_steadyphoto=0x7f09003e;
         /**  Scene mode optimized for taking images in the sunset. [CHAR LIMIT=16] 
          */
-        public static final int pref_camera_scenemode_entry_sunset=0x7f0b0213;
-        public static final int pref_camera_scenemode_entry_supernight=0x7f0b003e;
-        public static final int pref_camera_scenemode_entry_sweepstitch=0x7f0b003f;
-        public static final int pref_camera_scenemode_entry_text=0x7f0b0040;
-        public static final int pref_camera_scenemode_entry_theatre=0x7f0b0041;
-        public static final int pref_camera_scenemode_entry_whiteboard=0x7f0b0042;
+        public static final int pref_camera_scenemode_entry_sunset=0x7f090213;
+        public static final int pref_camera_scenemode_entry_supernight=0x7f09003f;
+        public static final int pref_camera_scenemode_entry_sweepstitch=0x7f090040;
+        public static final int pref_camera_scenemode_entry_text=0x7f090041;
+        public static final int pref_camera_scenemode_entry_theatre=0x7f090042;
+        public static final int pref_camera_scenemode_entry_whiteboard=0x7f090043;
         /**  Scene mode that takes an image quickly with little motion blur. [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_scenemode_label_action=0x7f0b0216;
+        public static final int pref_camera_scenemode_label_action=0x7f090216;
         /**  Settings menu, scene mode labels [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_scenemode_label_auto=0x7f0b0215;
+        public static final int pref_camera_scenemode_label_auto=0x7f090215;
         /**  Scene mode that takes long exposures to capture night scenes without flash. [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_scenemode_label_night=0x7f0b0217;
+        public static final int pref_camera_scenemode_label_night=0x7f090217;
         /**  Scene mode optimized for taking indoor low-lights pictures. [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_scenemode_label_party=0x7f0b0219;
+        public static final int pref_camera_scenemode_label_party=0x7f090219;
         /**  Scene mode optimized for taking images in the sunset. [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_scenemode_label_sunset=0x7f0b0218;
+        public static final int pref_camera_scenemode_label_sunset=0x7f090218;
         /**  Settings screen, Select Scene mode 
          */
-        public static final int pref_camera_scenemode_title=0x7f0b020e;
+        public static final int pref_camera_scenemode_title=0x7f09020e;
         /**  Settings screen, Camera setting category title 
          */
-        public static final int pref_camera_settings_category=0x7f0b01e0;
-        public static final int pref_camera_slow_shutter_entry_1s=0x7f0b0080;
-        public static final int pref_camera_slow_shutter_entry_2s=0x7f0b0081;
-        public static final int pref_camera_slow_shutter_entry_4s=0x7f0b0082;
-        public static final int pref_camera_slow_shutter_entry_8s=0x7f0b0083;
-        public static final int pref_camera_slow_shutter_entry_auto=0x7f0b007e;
-        public static final int pref_camera_slow_shutter_entry_half_second=0x7f0b007f;
-        public static final int pref_camera_slow_shutter_entry_off=0x7f0b007d;
-        public static final int pref_camera_slow_shutter_title=0x7f0b007c;
-        public static final int pref_camera_storage_title=0x7f0b0002;
-        public static final int pref_camera_timer_default=0x7f0b01d0;
-        public static final int pref_camera_timer_sound_default=0x7f0b01d1;
+        public static final int pref_camera_settings_category=0x7f0901e0;
+        public static final int pref_camera_slow_shutter_entry_1s=0x7f090081;
+        public static final int pref_camera_slow_shutter_entry_2s=0x7f090082;
+        public static final int pref_camera_slow_shutter_entry_4s=0x7f090083;
+        public static final int pref_camera_slow_shutter_entry_8s=0x7f090084;
+        public static final int pref_camera_slow_shutter_entry_auto=0x7f09007f;
+        public static final int pref_camera_slow_shutter_entry_half_second=0x7f090080;
+        public static final int pref_camera_slow_shutter_entry_off=0x7f09007e;
+        public static final int pref_camera_slow_shutter_title=0x7f09007d;
+        public static final int pref_camera_storage_title=0x7f090003;
+        public static final int pref_camera_timer_default=0x7f0901d0;
+        public static final int pref_camera_timer_sound_default=0x7f0901d1;
         /**  Text followed by a checkbox to turn on/off sound effects during the countdown. [CHAR LIMIT = 16]
          */
-        public static final int pref_camera_timer_sound_title=0x7f0b01d2;
+        public static final int pref_camera_timer_sound_title=0x7f0901d2;
         /**  Title for countdown timer on camera settings screen [CHAR LIMIT=30]
          */
-        public static final int pref_camera_timer_title=0x7f0b01cf;
+        public static final int pref_camera_timer_title=0x7f0901cf;
         /**  Default videocamera flash mode setting.
          */
-        public static final int pref_camera_video_flashmode_default=0x7f0b01ff;
+        public static final int pref_camera_video_flashmode_default=0x7f0901ff;
         /**  Default white balance setting. 
          */
-        public static final int pref_camera_whitebalance_default=0x7f0b0200;
+        public static final int pref_camera_whitebalance_default=0x7f090200;
         /**  Settings screen, White balance dialog radio button choices 
          */
-        public static final int pref_camera_whitebalance_entry_auto=0x7f0b0203;
-        public static final int pref_camera_whitebalance_entry_cloudy=0x7f0b0207;
-        public static final int pref_camera_whitebalance_entry_daylight=0x7f0b0205;
-        public static final int pref_camera_whitebalance_entry_fluorescent=0x7f0b0206;
-        public static final int pref_camera_whitebalance_entry_incandescent=0x7f0b0204;
+        public static final int pref_camera_whitebalance_entry_auto=0x7f090203;
+        public static final int pref_camera_whitebalance_entry_cloudy=0x7f090207;
+        public static final int pref_camera_whitebalance_entry_daylight=0x7f090205;
+        public static final int pref_camera_whitebalance_entry_fluorescent=0x7f090206;
+        public static final int pref_camera_whitebalance_entry_incandescent=0x7f090204;
         /**  Menu, white balance label 
          */
-        public static final int pref_camera_whitebalance_label=0x7f0b0202;
+        public static final int pref_camera_whitebalance_label=0x7f090202;
         /**  Menu, White balance labels [CHAR LIMIT=50] 
          */
-        public static final int pref_camera_whitebalance_label_auto=0x7f0b0208;
-        public static final int pref_camera_whitebalance_label_cloudy=0x7f0b020c;
-        public static final int pref_camera_whitebalance_label_daylight=0x7f0b020a;
-        public static final int pref_camera_whitebalance_label_fluorescent=0x7f0b020b;
-        public static final int pref_camera_whitebalance_label_incandescent=0x7f0b0209;
+        public static final int pref_camera_whitebalance_label_auto=0x7f090208;
+        public static final int pref_camera_whitebalance_label_cloudy=0x7f09020c;
+        public static final int pref_camera_whitebalance_label_daylight=0x7f09020a;
+        public static final int pref_camera_whitebalance_label_fluorescent=0x7f09020b;
+        public static final int pref_camera_whitebalance_label_incandescent=0x7f090209;
         /**  Settings screen, white balance title 
          */
-        public static final int pref_camera_whitebalance_title=0x7f0b0201;
-        public static final int pref_exposure_default=0x7f0b0222;
+        public static final int pref_camera_whitebalance_title=0x7f090201;
+        public static final int pref_exposure_default=0x7f090222;
         /**   menu label exposure compensation [CHAR LIMIT=50] 
          */
-        public static final int pref_exposure_label=0x7f0b0223;
+        public static final int pref_exposure_label=0x7f090223;
         /**  Exposure settings in preference 
          */
-        public static final int pref_exposure_title=0x7f0b0221;
+        public static final int pref_exposure_title=0x7f090221;
         /**  Default effect setting that clears the effect. 
          */
-        public static final int pref_video_effect_default=0x7f0b0237;
+        public static final int pref_video_effect_default=0x7f090237;
         /**  Title of video effect setting popup window 
          */
-        public static final int pref_video_effect_title=0x7f0b0238;
-        public static final int pref_video_jpeg_title=0x7f0b0051;
+        public static final int pref_video_effect_title=0x7f090238;
+        public static final int pref_video_jpeg_title=0x7f090052;
         /**  The default quality value is 5 (720p) 
          */
-        public static final int pref_video_quality_default=0x7f0b01d8;
+        public static final int pref_video_quality_default=0x7f0901d8;
         /**  Video quality setting entry. Videos will be recorded in 1080p quality. [CHAR LIMIT=24] 
          */
-        public static final int pref_video_quality_entry_1080p=0x7f0b01d9;
+        public static final int pref_video_quality_entry_1080p=0x7f0901d9;
         /**  Video quality setting entry. Videos will be recorded in 480p quality. [CHAR LIMIT=24] 
          */
-        public static final int pref_video_quality_entry_480p=0x7f0b01db;
+        public static final int pref_video_quality_entry_480p=0x7f0901db;
         /**  Video quality setting entry. Videos will be recorded in 720p quality. [CHAR LIMIT=24] 
          */
-        public static final int pref_video_quality_entry_720p=0x7f0b01da;
-        public static final int pref_video_quality_entry_hfr=0x7f0b001a;
+        public static final int pref_video_quality_entry_720p=0x7f0901da;
+        public static final int pref_video_quality_entry_hfr=0x7f09001b;
         /**  Video quality setting entry. Videos will be recorded in the highest quality available on the device. [CHAR LIMIT=24] 
          */
-        public static final int pref_video_quality_entry_high=0x7f0b01dc;
+        public static final int pref_video_quality_entry_high=0x7f0901dc;
         /**  Video quality setting entry. Videos will be recorded in the lowest quality available on the device. [CHAR LIMIT=24] 
          */
-        public static final int pref_video_quality_entry_low=0x7f0b01dd;
+        public static final int pref_video_quality_entry_low=0x7f0901dd;
         /**  The Video quality settings in preference [CHAR LIMIT=21] 
          */
-        public static final int pref_video_quality_title=0x7f0b01d7;
+        public static final int pref_video_quality_title=0x7f0901d7;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_1000=0x7f0b0267;
+        public static final int pref_video_time_lapse_frame_interval_1000=0x7f090267;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_10000=0x7f0b026f;
+        public static final int pref_video_time_lapse_frame_interval_10000=0x7f09026f;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_10800000=0x7f0b0285;
+        public static final int pref_video_time_lapse_frame_interval_10800000=0x7f090285;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_12000=0x7f0b0270;
+        public static final int pref_video_time_lapse_frame_interval_12000=0x7f090270;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_120000=0x7f0b0276;
+        public static final int pref_video_time_lapse_frame_interval_120000=0x7f090276;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_1440000=0x7f0b027f;
+        public static final int pref_video_time_lapse_frame_interval_1440000=0x7f09027f;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_14400000=0x7f0b0286;
+        public static final int pref_video_time_lapse_frame_interval_14400000=0x7f090286;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_1500=0x7f0b0268;
+        public static final int pref_video_time_lapse_frame_interval_1500=0x7f090268;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_15000=0x7f0b0271;
+        public static final int pref_video_time_lapse_frame_interval_15000=0x7f090271;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_150000=0x7f0b0277;
+        public static final int pref_video_time_lapse_frame_interval_150000=0x7f090277;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_180000=0x7f0b0278;
+        public static final int pref_video_time_lapse_frame_interval_180000=0x7f090278;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_1800000=0x7f0b0280;
+        public static final int pref_video_time_lapse_frame_interval_1800000=0x7f090280;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_18000000=0x7f0b0287;
+        public static final int pref_video_time_lapse_frame_interval_18000000=0x7f090287;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_2000=0x7f0b0269;
+        public static final int pref_video_time_lapse_frame_interval_2000=0x7f090269;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_21600000=0x7f0b0288;
+        public static final int pref_video_time_lapse_frame_interval_21600000=0x7f090288;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_24000=0x7f0b0272;
+        public static final int pref_video_time_lapse_frame_interval_24000=0x7f090272;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_240000=0x7f0b0279;
+        public static final int pref_video_time_lapse_frame_interval_240000=0x7f090279;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_2500=0x7f0b026a;
+        public static final int pref_video_time_lapse_frame_interval_2500=0x7f09026a;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_3000=0x7f0b026b;
+        public static final int pref_video_time_lapse_frame_interval_3000=0x7f09026b;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_30000=0x7f0b0273;
+        public static final int pref_video_time_lapse_frame_interval_30000=0x7f090273;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_300000=0x7f0b027a;
+        public static final int pref_video_time_lapse_frame_interval_300000=0x7f09027a;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_360000=0x7f0b027b;
+        public static final int pref_video_time_lapse_frame_interval_360000=0x7f09027b;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_3600000=0x7f0b0281;
+        public static final int pref_video_time_lapse_frame_interval_3600000=0x7f090281;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_36000000=0x7f0b0289;
+        public static final int pref_video_time_lapse_frame_interval_36000000=0x7f090289;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_4000=0x7f0b026c;
+        public static final int pref_video_time_lapse_frame_interval_4000=0x7f09026c;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_43200000=0x7f0b028a;
+        public static final int pref_video_time_lapse_frame_interval_43200000=0x7f09028a;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_500=0x7f0b0266;
+        public static final int pref_video_time_lapse_frame_interval_500=0x7f090266;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_5000=0x7f0b026d;
+        public static final int pref_video_time_lapse_frame_interval_5000=0x7f09026d;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_5400000=0x7f0b0282;
+        public static final int pref_video_time_lapse_frame_interval_5400000=0x7f090282;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_54000000=0x7f0b028b;
+        public static final int pref_video_time_lapse_frame_interval_54000000=0x7f09028b;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_6000=0x7f0b026e;
+        public static final int pref_video_time_lapse_frame_interval_6000=0x7f09026e;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_60000=0x7f0b0274;
+        public static final int pref_video_time_lapse_frame_interval_60000=0x7f090274;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_600000=0x7f0b027c;
+        public static final int pref_video_time_lapse_frame_interval_600000=0x7f09027c;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_720000=0x7f0b027d;
+        public static final int pref_video_time_lapse_frame_interval_720000=0x7f09027d;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_7200000=0x7f0b0283;
+        public static final int pref_video_time_lapse_frame_interval_7200000=0x7f090283;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_86400000=0x7f0b028c;
+        public static final int pref_video_time_lapse_frame_interval_86400000=0x7f09028c;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_90000=0x7f0b0275;
+        public static final int pref_video_time_lapse_frame_interval_90000=0x7f090275;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_900000=0x7f0b027e;
+        public static final int pref_video_time_lapse_frame_interval_900000=0x7f09027e;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_9000000=0x7f0b0284;
-        public static final int pref_video_time_lapse_frame_interval_default=0x7f0b01df;
+        public static final int pref_video_time_lapse_frame_interval_9000000=0x7f090284;
+        public static final int pref_video_time_lapse_frame_interval_default=0x7f0901df;
         /**  Text to indicate time lapse recording frame interval [CHAR LIMIT = 30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_off=0x7f0b0265;
+        public static final int pref_video_time_lapse_frame_interval_off=0x7f090265;
         /**  Describes the preference dialog for choosing interval between frame capture for
     time lapse recording. Appears at top of the dialog. [CHAR LIMIT=30] 
          */
-        public static final int pref_video_time_lapse_frame_interval_title=0x7f0b01de;
+        public static final int pref_video_time_lapse_frame_interval_title=0x7f0901de;
         /**  alert to the user that the SD card is being disk-checked 
          */
-        public static final int preparing_sd=0x7f0b01c3;
+        public static final int preparing_sd=0x7f0901c3;
         /**  Text for the print menu item [CHAR LIMIT=20] 
          */
-        public static final int print_image=0x7f0b0098;
+        public static final int print_image=0x7f090099;
         /**  String used as a title of a progress dialog. The user can
          choose to cache some Picasa picture albums on device, so it can
          be viewed offline. This string is shown when the request is being
          processed. [CHAR LIMIT=50] 
          */
-        public static final int process_caching_requests=0x7f0b0147;
+        public static final int process_caching_requests=0x7f090147;
         /**   Text for quality value tag [CHAR LIMIT=30] 
          */
-        public static final int quality=0x7f0b009b;
+        public static final int quality=0x7f09009c;
         /**   Label for the image effect that removes redeye. [CHAR LIMIT=10] 
          */
-        public static final int redeye=0x7f0b00c8;
+        public static final int redeye=0x7f0900c9;
         /**  Negative answer for first run dialog asking if the user wants to remember photo locations [CHAR LIMIT = 20] 
          */
-        public static final int remember_location_no=0x7f0b0298;
+        public static final int remember_location_no=0x7f090298;
         /**  Message for first run dialog asking if the user wants to remember photo locations [CHAR LIMIT = None] 
          */
-        public static final int remember_location_prompt=0x7f0b0297;
+        public static final int remember_location_prompt=0x7f090297;
         /**  Title for first run dialog asking if the user wants to remember photo locations [CHAR LIMIT = 50] 
          */
-        public static final int remember_location_title=0x7f0b0296;
+        public static final int remember_location_title=0x7f090296;
         /**  Positive answer for first run dialog asking if the user wants to remember photo locations [CHAR LIMIT = 20] 
          */
-        public static final int remember_location_yes=0x7f0b0299;
+        public static final int remember_location_yes=0x7f090299;
         /**   Text for the history panel reset button [CHAR LIMIT=20]
          */
-        public static final int reset=0x7f0b00a5;
+        public static final int reset=0x7f0900a6;
         /**   Label for the reset effect button [CHAR LIMIT=15] 
          */
-        public static final int reset_effect=0x7f0b00aa;
+        public static final int reset_effect=0x7f0900ab;
         /**  Movie View Start Playing dialog title 
          */
-        public static final int resume_playing_message=0x7f0b011a;
+        public static final int resume_playing_message=0x7f09011a;
         /**  Movie View Start Playing button "Beginning" 
          */
-        public static final int resume_playing_restart=0x7f0b0120;
+        public static final int resume_playing_restart=0x7f090120;
         /**  Movie View Start Playing button "Resume from bookmark" 
          */
-        public static final int resume_playing_resume=0x7f0b011b;
+        public static final int resume_playing_resume=0x7f09011b;
         /**  Movie View Resume Playing dialog title 
          */
-        public static final int resume_playing_title=0x7f0b0119;
+        public static final int resume_playing_title=0x7f090119;
         /**  button in review mode indicating that the photo taking, video recording, and panorama saving session should be canceled [CHAR LIMIT=10] 
          */
-        public static final int review_cancel=0x7f0b01c5;
+        public static final int review_cancel=0x7f0901c5;
         /**  button in review mode indicating that the taken photo/video is OK to be attached/uploaded [CHAR LIMIT=10] 
          */
-        public static final int review_ok=0x7f0b01c6;
+        public static final int review_ok=0x7f0901c6;
         /**   Label for the image rotate effect [CHAR LIMIT=15] 
          */
-        public static final int rotate=0x7f0b00cc;
-        public static final int rotate_left=0x7f0b0142;
-        public static final int rotate_right=0x7f0b0143;
+        public static final int rotate=0x7f0900cd;
+        public static final int rotate_left=0x7f090142;
+        public static final int rotate_right=0x7f090143;
         /**   Label for the image saturation (brightens colors) filter button [CHAR LIMIT=10] 
          */
-        public static final int saturation=0x7f0b00bb;
+        public static final int saturation=0x7f0900bc;
         /**  The label on the button that will save an edited image 
          */
-        public static final int save=0x7f0b01b6;
+        public static final int save=0x7f0901b6;
         /**   String displayed when saving and exiting editor [CHAR LIMIT=NONE] 
          */
-        public static final int save_and_exit=0x7f0b00a1;
+        public static final int save_and_exit=0x7f0900a2;
         /**   String displayed when saving and exiting editor [CHAR LIMIT=NONE] 
          */
-        public static final int save_and_processing=0x7f0b00a2;
+        public static final int save_and_processing=0x7f0900a3;
         /**   String displayed when exiting with unsaved changes [CHAR LIMIT=NONE] 
          */
-        public static final int save_before_exit=0x7f0b00a0;
+        public static final int save_before_exit=0x7f0900a1;
         /**  Eorror toast message that the image cannot be saved [CHAR LIMIT=40]
          */
-        public static final int save_error=0x7f0b0126;
+        public static final int save_error=0x7f090126;
         /**  Toast after the trimming / muting is done. [CHAR LIMIT=50] 
          */
-        public static final int save_into=0x7f0b01b3;
-        public static final int saved=0x7f0b0110;
+        public static final int save_into=0x7f0901b3;
+        public static final int saved=0x7f090111;
         /**  Toast/alert that the image is being saved to the SD card 
          */
-        public static final int saving_image=0x7f0b0124;
+        public static final int saving_image=0x7f090124;
         /**  Title prompted for user to choose an album [CHAR LIMIT=20] 
          */
-        public static final int select_album=0x7f0b012c;
+        public static final int select_album=0x7f09012c;
         /**  String indicating more actions are available 
          */
-        public static final int select_all=0x7f0b013a;
+        public static final int select_all=0x7f09013a;
         /**  Title prompted for user to choose a group [CHAR LIMIT=20] 
          */
-        public static final int select_group=0x7f0b012d;
+        public static final int select_group=0x7f09012d;
         /**  Toast/alert that the face detection is being run 
  Title prompted for user to choose a photo item [CHAR LIMIT=20] 
          */
-        public static final int select_image=0x7f0b0129;
+        public static final int select_image=0x7f090129;
         /**  Title prompted for user to choose a media object [CHAR LIMIT=20] 
          */
-        public static final int select_item=0x7f0b012b;
+        public static final int select_item=0x7f09012b;
         /**   Text for selecting export image quality [CHAR LIMIT=100] 
          */
-        public static final int select_output_settings=0x7f0b009a;
+        public static final int select_output_settings=0x7f09009b;
         /**  Title prompted for user to choose a video item [CHAR LIMIT=20] 
          */
-        public static final int select_video=0x7f0b012a;
+        public static final int select_video=0x7f09012a;
         /**  String indicating the sequence of currently selected item in the
             media set eg. 3 of 5 items [CHAR LIMIT=30] 
          */
-        public static final int sequence_in_set=0x7f0b0165;
+        public static final int sequence_in_set=0x7f090165;
         /**  The title of the menu item to let user set the image as background etc. [CHAR LIMIT=15] 
          */
-        public static final int set_as=0x7f0b014c;
+        public static final int set_as=0x7f09014c;
         /**  Title in timer setting for setting the duration for the countdown timer. [CHAR LIMIT = 50]
          */
-        public static final int set_duration=0x7f0b0294;
+        public static final int set_duration=0x7f090294;
         /**  Displayed in the title of the dialog for things to do with a picture
              that is to be "set as" (e.g. set as contact photo or set as wallpaper) 
          */
-        public static final int set_image=0x7f0b012e;
+        public static final int set_image=0x7f09012e;
         /**  A label shown on the action bar. It indicates that the user is
          viewing all available albums [CHAR LIMIT=20] 
          */
-        public static final int set_label_all_albums=0x7f0b018a;
+        public static final int set_label_all_albums=0x7f09018a;
         /**  A label shown on the action bar. It indicates that the user is
          viewing albums stored locally on the device [CHAR LIMIT=20] 
          */
-        public static final int set_label_local_albums=0x7f0b018b;
+        public static final int set_label_local_albums=0x7f09018b;
         /**  A label shown on the action bar. It indicates that the user is
          viewing MTP devices connected (like other digital cameras).
          [CHAR LIMIT=20] 
          */
-        public static final int set_label_mtp_devices=0x7f0b018c;
+        public static final int set_label_mtp_devices=0x7f09018c;
         /**  A label shown on the action bar. It indicates that the user is
          viewing Picasa albums [CHAR LIMIT=20] 
          */
-        public static final int set_label_picasa_albums=0x7f0b018d;
+        public static final int set_label_picasa_albums=0x7f09018d;
         /**  Title in time interval picker for setting time interval. [CHAR LIMIT = 30]
          */
-        public static final int set_time_interval=0x7f0b0291;
+        public static final int set_time_interval=0x7f090291;
         /**  Help text that is shown when the time lapse feature is turned off. [CHAR LIMIT = 180]
          */
-        public static final int set_time_interval_help=0x7f0b0292;
+        public static final int set_time_interval_help=0x7f090292;
         /**  Help text that is shown when the countdown timer is turned off. [CHAR LIMIT = 180]
          */
-        public static final int set_timer_help=0x7f0b0293;
+        public static final int set_timer_help=0x7f090293;
         /**  Activity title for cropping picture and setting it as wallpaper [CHAR LIMIT=20] 
          */
-        public static final int set_wallpaper=0x7f0b012f;
+        public static final int set_wallpaper=0x7f09012f;
         /**  Entry of a on/off setting. The setting is turned off. [CHAR LIMIT=15] 
          */
-        public static final int setting_off=0x7f0b01d3;
+        public static final int setting_off=0x7f0901d3;
         /**  The value of a camera preference indicating the setting is off. 
          */
-        public static final int setting_off_value=0x7f0b01d5;
+        public static final int setting_off_value=0x7f0901d5;
         /**  Entry of a on/off setting. The setting is turned on. [CHAR LIMIT=15] 
          */
-        public static final int setting_on=0x7f0b01d4;
+        public static final int setting_on=0x7f0901d4;
         /**  The value of a camera preference indicating the setting is on. 
          */
-        public static final int setting_on_value=0x7f0b01d6;
+        public static final int setting_on_value=0x7f0901d6;
         /**   String displayed when setting the homepage wallpaper in the background [CHAR LIMIT=NONE] 
          */
-        public static final int setting_wallpaper=0x7f0b008e;
+        public static final int setting_wallpaper=0x7f09008f;
         /**  The title of the menu item which enable the settings [CHAR LIMIT=20] 
          */
-        public static final int settings=0x7f0b01a3;
+        public static final int settings=0x7f0901a3;
         /**   Label for the image shadow recovery (lightens/darkens shadows) filter button [CHAR LIMIT=10] 
          */
-        public static final int shadow_recovery=0x7f0b00bf;
-        public static final int share=0x7f0b0135;
-        public static final int share_as_photo=0x7f0b0137;
-        public static final int share_panorama=0x7f0b0136;
+        public static final int shadow_recovery=0x7f0900c0;
+        public static final int share=0x7f090135;
+        public static final int share_as_photo=0x7f090137;
+        public static final int share_panorama=0x7f090136;
         /**   Label for the image sharpness (clarity, distinctness) filter button [CHAR LIMIT=10] 
          */
-        public static final int sharpness=0x7f0b00b8;
+        public static final int sharpness=0x7f0900b9;
         /**  Title of a menu item to show all (both images and videos) [CHAR LIMIT=30]
          */
-        public static final int show_all=0x7f0b015b;
+        public static final int show_all=0x7f09015b;
         /**  The title of the menu item to let user choose the which portion of
          the media items the user wants to see. When pressed, a submenu will
          appear and user can choose one of "show images only",
          "show videos only", or "show all" from the submenu. 
  Title of a menu item to show images only [CHAR LIMIT=30]
          */
-        public static final int show_images_only=0x7f0b0159;
+        public static final int show_images_only=0x7f090159;
         /**   Text for the image menu item showing the filters that have been applied [CHAR LIMIT=30] 
          */
-        public static final int show_imagestate_panel=0x7f0b0095;
+        public static final int show_imagestate_panel=0x7f090096;
         /**  String indicating timestamp of photo or video 
  String.format failed for translation 
  no translation found for number_of_items_selected:zero (2142579311530586258) 
@@ -3035,221 +3035,221 @@ CHAR LIMIT = NONE]
  String.format failed for translation 
  no translation found for number_of_groups_selected:other (3512041363942842738) 
          */
-        public static final int show_on_map=0x7f0b0141;
+        public static final int show_on_map=0x7f090141;
         /**  Title of a menu item to show videos only [CHAR LIMIT=30]
          */
-        public static final int show_videos_only=0x7f0b015a;
+        public static final int show_videos_only=0x7f09015a;
         /**  String used as a menu label. The user can choose to edit the image
          [CHAR_LIMIT=20]
          */
-        public static final int simple_edit=0x7f0b0146;
+        public static final int simple_edit=0x7f090146;
         /**   Text for size value tag [CHAR LIMIT=30] 
          */
-        public static final int size=0x7f0b009c;
+        public static final int size=0x7f09009d;
         /**  Label of a group of pictures. The size of each picture in this group is
          more than a certain amount. The parameter is a string representation
          of that amount, eg. "10MB".
          [CHAR LIMIT=20]
     
          */
-        public static final int size_above=0x7f0b0190;
+        public static final int size_above=0x7f090190;
         /**  Label of a group of pictures. The size of each picture in this group is
          less than a certain amount. The parameter is a string representation
          of that amount, eg. "10MB".
          [CHAR LIMIT=20]
     
          */
-        public static final int size_below=0x7f0b018f;
+        public static final int size_below=0x7f09018f;
         /**  Label of a group of pictures. The size of each picture in this group is
          between two amounts. The parameters are string representations of the two
          amounts, eg. "10MB", "100MB".
          [CHAR LIMIT=20]
     
          */
-        public static final int size_between=0x7f0b0191;
-        public static final int slideshow=0x7f0b013c;
+        public static final int size_between=0x7f090191;
+        public static final int slideshow=0x7f09013c;
         /**  Title of the Android Dreams slideshow screensaver. [CHAR LIMIT=20] 
          */
-        public static final int slideshow_dream_name=0x7f0b019c;
+        public static final int slideshow_dream_name=0x7f09019c;
         /**  Low-memory dialog message [CHAR LIMIT=NONE] 
          */
-        public static final int spaceIsLow_content=0x7f0b0229;
+        public static final int spaceIsLow_content=0x7f090229;
         /**   Name used to indicate the original image in the state panel [CHAR LIMIT=20] 
          */
-        public static final int state_panel_original=0x7f0b00f6;
+        public static final int state_panel_original=0x7f0900f7;
         /**   Name used to indicate the final image in the state panel [CHAR LIMIT=20] 
          */
-        public static final int state_panel_result=0x7f0b00f7;
+        public static final int state_panel_result=0x7f0900f8;
         /**   Label for the image straighten effect [CHAR LIMIT=15] 
          */
-        public static final int straighten=0x7f0b00ca;
+        public static final int straighten=0x7f0900cb;
         /**  Label for album filmstrip button 
          */
-        public static final int switch_photo_filmstrip=0x7f0b01ad;
+        public static final int switch_photo_filmstrip=0x7f0901ad;
         /**  Label for fullscreen button. [CHAR LIMIT=20] 
          */
-        public static final int switch_photo_fullscreen=0x7f0b01af;
+        public static final int switch_photo_fullscreen=0x7f0901af;
         /**  Label for album grid button 
          */
-        public static final int switch_photo_grid=0x7f0b01ae;
+        public static final int switch_photo_grid=0x7f0901ae;
         /**  Title of a menu item to switch from Gallery to Camera app [CHAR LIMIT=30] 
          */
-        public static final int switch_to_camera=0x7f0b0140;
+        public static final int switch_to_camera=0x7f090140;
         /**  This toast message is shown when failed to load the album data. [CHAR LIMIT=NONE] 
          */
-        public static final int sync_album_error=0x7f0b0158;
+        public static final int sync_album_error=0x7f090158;
         /**  A label of a menu item for user to sync the content [CHAR LIMIT=30] 
          */
-        public static final int sync_picasa_albums=0x7f0b0163;
+        public static final int sync_picasa_albums=0x7f090163;
         /**  Title for the albums tab [CHAR LIMIT=25] 
          */
-        public static final int tab_albums=0x7f0b029d;
+        public static final int tab_albums=0x7f09029d;
         /**  Title for the all photos tab [CHAR LIMIT=25] 
          */
-        public static final int tab_photos=0x7f0b029c;
+        public static final int tab_photos=0x7f09029c;
         /**  Group by Tags tab on Action Bar. [CHAR LIMIT=12] 
          */
-        public static final int tags=0x7f0b01a1;
+        public static final int tags=0x7f0901a1;
         /**  Toast telling users tapping on the viewfinder will trigger autofocus [CHAR LIMIT=28] 
          */
-        public static final int tap_to_focus=0x7f0b0236;
+        public static final int tap_to_focus=0x7f090236;
         /**  Text indicating the creation time of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int time=0x7f0b0168;
+        public static final int time=0x7f090168;
         /**  Hours: a unit of time for time lapse intervals. [CHAR LIMIT = 20] 
          */
-        public static final int time_lapse_hours=0x7f0b028f;
+        public static final int time_lapse_hours=0x7f09028f;
         /**  The button to confirm time-lapse setting changes. [CHAR LIMIT = 20] 
          */
-        public static final int time_lapse_interval_set=0x7f0b0290;
+        public static final int time_lapse_interval_set=0x7f090290;
         /**  Minutes: a unit of time for time lapse intervals. [CHAR LIMIT = 20] 
          */
-        public static final int time_lapse_minutes=0x7f0b028e;
+        public static final int time_lapse_minutes=0x7f09028e;
         /**  Seconds: a unit of time for time lapse intervals. [CHAR LIMIT = 20] 
          */
-        public static final int time_lapse_seconds=0x7f0b028d;
+        public static final int time_lapse_seconds=0x7f09028d;
         /**  A label that overlays on top of the preview frame to indicate the camcorder is in time lapse mode [CHAR LIMIT=35] 
          */
-        public static final int time_lapse_title=0x7f0b01c7;
+        public static final int time_lapse_title=0x7f0901c7;
         /**  Group by Times tab on Action Bar. [CHAR LIMIT=12] 
          */
-        public static final int times=0x7f0b019e;
+        public static final int times=0x7f09019e;
         /**   Label for the tuny planet effect [CHAR LIMIT=10] 
          */
-        public static final int tinyplanet=0x7f0b00b6;
+        public static final int tinyplanet=0x7f0900b7;
         /**  Text indicating the title of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int title=0x7f0b0166;
+        public static final int title=0x7f090166;
         /**   Title for the image editor activity [CHAR LIMIT=NONE]
          */
-        public static final int title_activity_filter_show=0x7f0b008a;
+        public static final int title_activity_filter_show=0x7f09008b;
         /**  The title of the menu item to let user trim the video. [CHAR LIMIT=15] 
          */
-        public static final int trim_action=0x7f0b014a;
+        public static final int trim_action=0x7f09014a;
         /**  menu pick: trim the currently selected video [CHAR LIMIT=30]
          */
-        public static final int trim_label=0x7f0b0128;
+        public static final int trim_label=0x7f090128;
         /**  Toast if the trimmed video is too short to trim. [CHAR LIMIT=80] 
          */
-        public static final int trim_too_short=0x7f0b01b4;
+        public static final int trim_too_short=0x7f0901b4;
         /**  The tilte of a dialog showing trimming in progress. [CHAR LIMIT=20] 
          */
-        public static final int trimming=0x7f0b01b0;
+        public static final int trimming=0x7f0901b0;
         /**  Toast message shown after we try to make a local album available offline
          [CHAR LIMIT=150] 
          */
-        public static final int try_to_set_local_album_available_offline=0x7f0b0189;
+        public static final int try_to_set_local_album_available_offline=0x7f090189;
         /**  The label on the button which when clicked will undo a deletion of image [CHAR LIMIT=16]
          */
-        public static final int undo=0x7f0b0139;
+        public static final int undo=0x7f090139;
         /**  String indicating the time units in seconds. [CHAR LIMIT=8] 
  String indicating the length units in milli-meters. [CHAR LIMIT=8] 
          */
-        public static final int unit_mm=0x7f0b0179;
+        public static final int unit_mm=0x7f090179;
         /**  String indicating image width or height is unknown. [CHAR LIMIT=14] 
          */
-        public static final int unknown=0x7f0b017e;
+        public static final int unknown=0x7f09017e;
         /**   Exit Dialog 
   String displayed when exiting with unsaved changes [CHAR LIMIT=NONE] 
          */
-        public static final int unsaved=0x7f0b009f;
+        public static final int unsaved=0x7f0900a0;
         /**  When grouping photos by tags, the label used for photos without tags
          [CHAR LIMIT=20]
          */
-        public static final int untagged=0x7f0b0155;
+        public static final int untagged=0x7f090155;
         /**   Label for the image vibrance (strengthens colors) filter button [CHAR LIMIT=10] 
          */
-        public static final int vibrance=0x7f0b00ba;
+        public static final int vibrance=0x7f0900bb;
         /**  String indicating an error when playing the video. [CHAR LIMIT=30] 
          */
-        public static final int video_err=0x7f0b014e;
+        public static final int video_err=0x7f09014e;
         /**  Video Camera format string for new video files. Passed to java.text.SimpleDateFormat. 
          */
-        public static final int video_file_name_format=0x7f0b022b;
+        public static final int video_file_name_format=0x7f09022b;
         /**  String indicating an error when muting the video. [CHAR LIMIT=30] 
          */
-        public static final int video_mute_err=0x7f0b014d;
+        public static final int video_mute_err=0x7f09014d;
         /**  The message shown when video record reaches size limit. 
          */
-        public static final int video_reach_size_limit=0x7f0b022d;
+        public static final int video_reach_size_limit=0x7f09022d;
         /**  Announcement telling users video recording has just started [CHAR LIMIT=NONE] 
          */
-        public static final int video_recording_started=0x7f0b0245;
+        public static final int video_recording_started=0x7f090245;
         /**  Announcement telling users video recording has just stopped [CHAR LIMIT=NONE] 
          */
-        public static final int video_recording_stopped=0x7f0b0246;
+        public static final int video_recording_stopped=0x7f090246;
         /**  Toast telling users tapping on the viewfinder will take a picture [CHAR LIMIT=54] 
          */
-        public static final int video_snapshot_hint=0x7f0b0244;
+        public static final int video_snapshot_hint=0x7f090244;
         /**   Label for the image vignette filter (darkens photo around edges) button [CHAR LIMIT=10] 
          */
-        public static final int vignette=0x7f0b00c2;
+        public static final int vignette=0x7f0900c3;
         /**   Label for the image vignette contrast fparameter ui [CHAR LIMIT=15] 
          */
-        public static final int vignette_contrast=0x7f0b00c6;
+        public static final int vignette_contrast=0x7f0900c7;
         /**   Label for the image vignette exposure parameter ui [CHAR LIMIT=15] 
          */
-        public static final int vignette_exposure=0x7f0b00c4;
+        public static final int vignette_exposure=0x7f0900c5;
         /**   Label for the rate of change in brightness as it goes to the edge [CHAR LIMIT=15] 
          */
-        public static final int vignette_falloff=0x7f0b00c7;
+        public static final int vignette_falloff=0x7f0900c8;
         /**   Label for the image vignette main parameter ui [CHAR LIMIT=15] 
          */
-        public static final int vignette_main=0x7f0b00c3;
+        public static final int vignette_main=0x7f0900c4;
         /**   Label for the image vignette saturation parameter ui [CHAR LIMIT=15] 
          */
-        public static final int vignette_saturation=0x7f0b00c5;
-        public static final int virtualizer_strength=0x7f0b0016;
+        public static final int vignette_saturation=0x7f0900c6;
+        public static final int virtualizer_strength=0x7f090017;
         /**  alert to the user to wait for some operation to complete 
          */
-        public static final int wait=0x7f0b01c1;
+        public static final int wait=0x7f0901c1;
         /**  Toast/alert after saving wallpaper 
          */
-        public static final int wallpaper=0x7f0b0130;
+        public static final int wallpaper=0x7f090130;
         /**   Label for the image Autocolor filter (makes off-white colors whiter) button [CHAR LIMIT=10] 
          */
-        public static final int wbalance=0x7f0b00bd;
+        public static final int wbalance=0x7f0900be;
         /**  Text indicating the white balance of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int white_balance=0x7f0b0176;
+        public static final int white_balance=0x7f090176;
         /**  The title of the dialog for choosing the type of widget. [CHAR LIMIT=20] 
          */
-        public static final int widget_type=0x7f0b019b;
+        public static final int widget_type=0x7f09019b;
         /**  The label on the radio button for the widget type that shows the images randomly. [CHAR LIMIT=30]
          */
-        public static final int widget_type_album=0x7f0b0198;
+        public static final int widget_type_album=0x7f090198;
         /**  The label on the radio button for the widget type that shows only one image. [CHAR LIMIT=30]
          */
-        public static final int widget_type_photo=0x7f0b019a;
+        public static final int widget_type_photo=0x7f09019a;
         /**  The label on the radio button for the widget type that shows the images in an album. [CHAR LIMIT=30]
          */
-        public static final int widget_type_shuffle=0x7f0b0199;
+        public static final int widget_type_shuffle=0x7f090199;
         /**  Text indicating the width of a media item in details window [CHAR LIMIT=14] 
          */
-        public static final int width=0x7f0b016b;
+        public static final int width=0x7f09016b;
         /**   Text for size x [CHAR LIMIT=1] 
          */
-        public static final int x=0x7f0b009d;
+        public static final int x=0x7f09009e;
     }
     public static final class style {
         public static final int ActionBarTwoLineItem=0x7f100011;

@@ -143,11 +143,9 @@ public class SearchFragment extends BaseListFragment {
     }
 
     public class SearchResultAdapter extends ArrayAdapter<File> {
-        private FileHelper mUtil;
 
         public SearchResultAdapter(Context context, int Resource, List<File> objects) {
             super(context, Resource, objects);
-            mUtil = new FileHelper(context);
         }
 
         @Override
@@ -157,11 +155,11 @@ public class SearchFragment extends BaseListFragment {
             StringBuilder sb = new StringBuilder();
             sb.append(file.getName()).append("\n");
             if (file.isDirectory()) {
-                sb.append("修改时间 : ").append(mUtil.convetTime(file.lastModified()));
+                sb.append("修改时间 : ").append(FileHelper.convetTime(file.lastModified()));
                 view.setText(sb.toString());
             } else {
                 long b = file.length();
-                sb.append("文件大小 : ").append(UnitHelper.byteToHumanNumber(b)).append("\n").append("修改时间 : ").append(mUtil.convetTime(file.lastModified()));
+                sb.append("文件大小 : ").append(UnitHelper.byteToHumanNumber(b)).append("\n").append("修改时间 : ").append(FileHelper.convetTime(file.lastModified()));
                 view.setText(sb.toString());
             }
             return view;
