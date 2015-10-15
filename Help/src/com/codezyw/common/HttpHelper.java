@@ -54,7 +54,6 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -752,24 +751,21 @@ public class HttpHelper {
 
             @Override
             public void onProgressUpdate(int progress) {
-                UIHelper.updateProgressDialog(100, progress);
             }
 
             @Override
             public void onPreExecute() {
-                UIHelper.showProgressDialog(mContext, "HttpPost请求", "正在处理网络请求......", ProgressDialog.STYLE_HORIZONTAL, false, 100);
+                UIHelper.showToast(mContext, "正在处理HttpPost请求网络请求......");
             }
 
             @Override
             public void onPostExecute(String result) {
                 parseServerResult(mContext, result);
-                UIHelper.dismissProgressDialog();
             }
 
             @Override
             public void onCancelled(String result) {
                 parseServerResult(mContext, result);
-                UIHelper.dismissProgressDialog();
             }
         };
         asyncHttpPost(HttpHelper.UPDATE_URL, mContext, postParams, postListener);
@@ -804,52 +800,39 @@ public class HttpHelper {
                             UIHelper.showToast(mContext, "登录成功,下载服务器数据成功!");
                             if (list != null) {
                                 // 避免错误的无限同步循环
-                                UIHelper.dismissProgressDialog();
                                 return list;
                             }
                         } else {
-                            UIHelper.dismissProgressDialog();
-                            UIHelper.showDialog(mContext, "登录成功,但是下载服务器数据失败!",
-                                    httpResultBean.getError_info());
+                            UIHelper.showToast(mContext, "登录成功,但是下载服务器数据失败!" + httpResultBean.getError_info());
                         }
                     } else if (JsonHelper.FETCH_CMD_INSERT.equals(httpResultBean.getFetch_cmd())) {
-                        UIHelper.dismissProgressDialog();
                         if (httpResultBean.getFetch_result()) {
                             UIHelper.showToast(mContext, "登录成功,插入服务器数据成功!");
                         } else {
-                            UIHelper.showDialog(mContext, "登录成功,但是插入服务器数据失败!",
-                                    httpResultBean.getError_info());
+                            UIHelper.showToast(mContext, "登录成功,但是插入服务器数据失败!" + httpResultBean.getError_info());
                         }
                     } else if (JsonHelper.FETCH_CMD_UPDATE.equals(httpResultBean.getFetch_cmd())) {
-                        UIHelper.dismissProgressDialog();
                         if (httpResultBean.getFetch_result()) {
                             UIHelper.showToast(mContext, "登录成功,更新服务器数据成功!");
                         } else {
-                            UIHelper.showDialog(mContext, "登录成功,但是更新服务器数据失败!",
-                                    httpResultBean.getError_info());
+                            UIHelper.showToast(mContext, "登录成功,但是更新服务器数据失败!" + httpResultBean.getError_info());
                         }
                     } else if (JsonHelper.FETCH_CMD_DELETE.equals(httpResultBean.getFetch_cmd())) {
-                        UIHelper.dismissProgressDialog();
                         if (httpResultBean.getFetch_result()) {
                             UIHelper.showToast(mContext, "登录成功,删除服务器数据成功!");
                         } else {
-                            UIHelper.showDialog(mContext, "登录成功,但是删除服务器数据失败!",
-                                    httpResultBean.getError_info());
+                            UIHelper.showToast(mContext, "登录成功,但是删除服务器数据失败!" + httpResultBean.getError_info());
                         }
                     }
                 } else {
-                    UIHelper.dismissProgressDialog();
-                    UIHelper.showDialog(mContext, "登录失败!", result_data);
+                    UIHelper.showToast(mContext, "登录失败!" + result_data);
                 }
             } else {
-                UIHelper.dismissProgressDialog();
-                UIHelper.showDialog(mContext, "JSON错误!", result_data);
+                UIHelper.showToast(mContext, "JSON错误!" + result_data);
             }
         } else {
-            UIHelper.dismissProgressDialog();
-            UIHelper.showDialog(mContext, "网络错误!", result_data);
+            UIHelper.showToast(mContext, "网络错误!" + result_data);
         }
-        UIHelper.dismissProgressDialog();
         return null;
     }
 }

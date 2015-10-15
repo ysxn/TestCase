@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
-import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -72,7 +71,7 @@ public class HttpConnectionService extends Service implements Handler.Callback {
                             UIHelper.showToast(mContext, "JsonHelper.MSG_FETCH intent is null error!");
                             return;
                         }
-                        UIHelper.showProgressDialog(mContext, "正在下载服务器数据......", "", ProgressDialog.STYLE_SPINNER, true, 100);
+                        UIHelper.showToast(mContext, "正在下载服务器数据......");
                         synchronized (mHttpLock) {
                             List<HttpDataContentBean> list = HttpHelper.fetchServer(mContext);
                             if (list != null) {
@@ -88,7 +87,7 @@ public class HttpConnectionService extends Service implements Handler.Callback {
                     case JsonHelper.MSG_UPDATE: {
                         Bundle bundle = (Bundle) msg.obj;
                         if (bundle != null) {
-                            UIHelper.showProgressDialog(mContext, "正在更新服务器数据......", "", ProgressDialog.STYLE_SPINNER, true, 100);
+                            UIHelper.showToast(mContext, "正在更新服务器数据......");
                             synchronized (mHttpLock) {
                                 HttpHelper.updateServer(mContext, bundle);
                             }

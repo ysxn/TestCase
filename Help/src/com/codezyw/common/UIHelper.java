@@ -98,8 +98,9 @@ public class UIHelper {
      * @param title
      * @param message
      */
-    public static void showDialog(Context context, String title, String message) {
-        if (context == null || !(context instanceof Activity)) {
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void showDialog(Activity context, String title, String message) {
+        if (context == null || context.isFinishing() || context.isDestroyed()) {
             return;
         }
         dismissDialog();
@@ -132,8 +133,9 @@ public class UIHelper {
      * @param message
      * @param style
      */
-    public static void showDialog(Context context, int resId, String title, String message, int style) {
-        if (context == null || !(context instanceof Activity)) {
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void showDialog(Activity context, int resId, String title, String message, int style) {
+        if (context == null || context.isFinishing() || context.isDestroyed()) {
             return;
         }
         dismissDialog();
@@ -181,8 +183,9 @@ public class UIHelper {
         }
     }
 
-    public static void showProgressDialog(Context context, String title, String message, int style, boolean isIndeterminate, int max) {
-        if (context == null || !(context instanceof Activity)) {
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void showProgressDialog(Activity context, String title, String message, int style, boolean isIndeterminate, int max) {
+        if (context == null || context.isFinishing() || context.isDestroyed()) {
             return;
         }
         dismissProgressDialog();
