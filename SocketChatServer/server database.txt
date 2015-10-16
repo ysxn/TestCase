@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS `database`.`chat_message`;
+CREATE TABLE  `database`.`chat_message` (
+  `cmID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cmContent` text,
+  `cmFrom` varchar(45) NOT NULL,
+  `cmTo` varchar(45) NOT NULL,
+  `cmRead` int(10) unsigned NOT NULL DEFAULT '0',
+  `cmPostdate` datetime NOT NULL,
+  `cmLastupdate` datetime NOT NULL,
+  `cmDelete` int(10) unsigned NOT NULL DEFAULT '0',
+  `cmType` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`cmID`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;

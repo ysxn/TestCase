@@ -12,8 +12,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -184,6 +186,30 @@ public class HttpHelper {
 
     public static HttpClient getHttpClient() {
         return sHttpClient;
+    }
+
+    /**
+     * 有时一个域名会包含不止一个IP地址，比如微软的Web服务器，这是为了保持负载平衡。<br>
+     * InetAddress提供了一种可以得到一个域名的所有IP地址的方法。让我们来考虑以下代码：
+     */
+    public String getIP(String name) {
+        if (TextUtils.isEmpty(name)) {
+            return null;
+        }
+        InetAddress address = null;
+        try {
+            // address = InetAddress.getByName(name);
+            InetAddress[] all = InetAddress.getAllByName(name);
+            if (all != null) {
+                address = all[0];
+            }
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        if (address == null) {
+            return null;
+        }
+        return address.getHostAddress().toString();
     }
 
     /**
