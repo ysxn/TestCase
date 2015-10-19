@@ -21,8 +21,8 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 /**
- * Represents a launchable application. An application is made of a name (or title), an intent
- * and an icon.
+ * Represents a launchable application. An application is made of a name (or title), an intent and
+ * an icon.
  */
 class ApplicationInfo {
     /**
@@ -47,7 +47,7 @@ class ApplicationInfo {
 
     /**
      * Creates the application intent based on a component name and various launch flags.
-     *
+     * 
      * @param className the class name of the component representing the intent
      * @param launchFlags the launch flags
      */

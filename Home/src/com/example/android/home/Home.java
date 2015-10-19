@@ -84,7 +84,7 @@ public class Home extends Activity {
     private static final String TAG_FAVORITES = "favorites";
     private static final String TAG_FAVORITE = "favorite";
     private static final String TAG_PACKAGE = "package";
-    private static final String TAG_CLASS = "class";    
+    private static final String TAG_CLASS = "class";
 
     // Identifiers for option menu items
     private static final int MENU_WALLPAPER_SETTINGS = Menu.FIRST + 1;
@@ -117,7 +117,7 @@ public class Home extends Activity {
 
     private Animation mGridEntry;
     private Animation mGridExit;
-    
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -171,7 +171,7 @@ public class Home extends Activity {
         super.onResume();
         bindRecents();
     }
-    
+
     @Override
     protected void onRestoreInstanceState(Bundle state) {
         super.onRestoreInstanceState(state);
@@ -188,9 +188,8 @@ public class Home extends Activity {
     }
 
     /**
-     * Registers various intent receivers. The current implementation registers
-     * only a wallpaper intent receiver to let other applications change the
-     * wallpaper.
+     * Registers various intent receivers. The current implementation registers only a wallpaper
+     * intent receiver to let other applications change the wallpaper.
      */
     private void registerIntentReceivers() {
         IntentFilter filter = new IntentFilter(Intent.ACTION_WALLPAPER_CHANGED);
@@ -249,8 +248,8 @@ public class Home extends Activity {
     }
 
     /**
-     * Refreshes the favorite applications stacked over the all apps button.
-     * The number of favorites depends on the user.
+     * Refreshes the favorite applications stacked over the all apps button. The number of favorites
+     * depends on the user.
      */
     private void bindFavorites(boolean isLaunching) {
         if (!isLaunching || mFavorites == null) {
@@ -260,8 +259,8 @@ public class Home extends Activity {
             } else {
                 mFavorites.clear();
             }
-            mApplicationsStack.setFavorites(mFavorites);            
-            
+            mApplicationsStack.setFavorites(mFavorites);
+
             FileReader favReader;
 
             // Environment.getRootDirectory() is a fancy way of saying ANDROID_ROOT or "/system".
@@ -345,8 +344,8 @@ public class Home extends Activity {
     }
 
     /**
-     * Refreshes the recently launched applications stacked over the favorites. The number
-     * of recents depends on how many favorites are present.
+     * Refreshes the recently launched applications stacked over the favorites. The number of
+     * recents depends on how many favorites are present.
      */
     private void bindRecents() {
         final PackageManager manager = getPackageManager();
@@ -414,8 +413,8 @@ public class Home extends Activity {
         super.onCreateOptionsMenu(menu);
 
         menu.add(0, MENU_WALLPAPER_SETTINGS, 0, R.string.menu_wallpaper)
-                 .setIcon(android.R.drawable.ic_menu_gallery)
-                 .setAlphabeticShortcut('W');
+                .setIcon(android.R.drawable.ic_menu_gallery)
+                .setAlphabeticShortcut('W');
         menu.add(0, MENU_SEARCH, 0, R.string.menu_search)
                 .setIcon(android.R.drawable.ic_search_category_default)
                 .setAlphabeticShortcut(SearchManager.MENU_KEY);
@@ -478,7 +477,7 @@ public class Home extends Activity {
                         info.activityInfo.applicationInfo.packageName,
                         info.activityInfo.name),
                         Intent.FLAG_ACTIVITY_NEW_TASK
-                        | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+                                | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
                 application.icon = info.activityInfo.loadIcon(manager);
 
                 mApplications.add(application);
@@ -504,9 +503,9 @@ public class Home extends Activity {
 
         // This enables a layout animation; if you uncomment this code, you need to
         // comment the line mGrid.startAnimation() below
-//        mGrid.setLayoutAnimationListener(new ShowGrid());
-//        mGrid.setLayoutAnimation(mShowLayoutAnimation);
-//        mGrid.startLayoutAnimation();
+        // mGrid.setLayoutAnimationListener(new ShowGrid());
+        // mGrid.setLayoutAnimation(mShowLayoutAnimation);
+        // mGrid.startLayoutAnimation();
 
         if (animate) {
             mGridEntry.setAnimationListener(new ShowGrid());
@@ -545,9 +544,9 @@ public class Home extends Activity {
 
         // This enables a layout animation; if you uncomment this code, you need to
         // comment the line mGrid.startAnimation() above
-//        mGrid.setLayoutAnimationListener(new HideGrid());
-//        mGrid.setLayoutAnimation(mHideLayoutAnimation);
-//        mGrid.startLayoutAnimation();
+        // mGrid.setLayoutAnimationListener(new HideGrid());
+        // mGrid.setLayoutAnimation(mHideLayoutAnimation);
+        // mGrid.startLayoutAnimation();
     }
 
     /**
@@ -595,9 +594,9 @@ public class Home extends Activity {
             Drawable icon = info.icon;
 
             if (!info.filtered) {
-                //final Resources resources = getContext().getResources();
-                int width = 42;//(int) resources.getDimension(android.R.dimen.app_icon_size);
-                int height = 42;//(int) resources.getDimension(android.R.dimen.app_icon_size);
+                // final Resources resources = getContext().getResources();
+                int width = 42;// (int) resources.getDimension(android.R.dimen.app_icon_size);
+                int height = 42;// (int) resources.getDimension(android.R.dimen.app_icon_size);
 
                 final int iconWidth = icon.getIntrinsicWidth();
                 final int iconHeight = icon.getIntrinsicHeight();
@@ -619,7 +618,7 @@ public class Home extends Activity {
 
                     final Bitmap.Config c =
                             icon.getOpacity() != PixelFormat.OPAQUE ?
-                                Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
+                                    Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
                     final Bitmap thumb = Bitmap.createBitmap(width, height, c);
                     final Canvas canvas = new Canvas(thumb);
                     canvas.setDrawFilter(new PaintFlagsDrawFilter(Paint.DITHER_FLAG, 0));
@@ -700,14 +699,13 @@ public class Home extends Activity {
     }
 
     /**
-     * When a drawable is attached to a View, the View gives the Drawable its dimensions
-     * by calling Drawable.setBounds(). In this application, the View that draws the
-     * wallpaper has the same size as the screen. However, the wallpaper might be larger
-     * that the screen which means it will be automatically stretched. Because stretching
-     * a bitmap while drawing it is very expensive, we use a ClippedDrawable instead.
-     * This drawable simply draws another wallpaper but makes sure it is not stretched
-     * by always giving it its intrinsic dimensions. If the wallpaper is larger than the
-     * screen, it will simply get clipped but it won't impact performance.
+     * When a drawable is attached to a View, the View gives the Drawable its dimensions by calling
+     * Drawable.setBounds(). In this application, the View that draws the wallpaper has the same
+     * size as the screen. However, the wallpaper might be larger that the screen which means it
+     * will be automatically stretched. Because stretching a bitmap while drawing it is very
+     * expensive, we use a ClippedDrawable instead. This drawable simply draws another wallpaper but
+     * makes sure it is not stretched by always giving it its intrinsic dimensions. If the wallpaper
+     * is larger than the screen, it will simply get clipped but it won't impact performance.
      */
     private class ClippedDrawable extends Drawable {
         private final Drawable mWallpaper;

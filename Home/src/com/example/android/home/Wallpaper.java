@@ -34,12 +34,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Wallpaper picker for the Home application. User can choose from
- * a gallery of stock photos.
+ * Wallpaper picker for the Home application. User can choose from a gallery of stock photos.
  */
 public class Wallpaper extends Activity implements
         AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
-    
+
     private static final String LOG_TAG = "Home";
 
     private static final Integer[] THUMB_IDS = {
@@ -56,7 +55,7 @@ public class Wallpaper extends Activity implements
 
     private Gallery mGallery;
     private boolean mIsWallpaperSet;
-        
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -69,7 +68,7 @@ public class Wallpaper extends Activity implements
         mGallery.setOnItemSelectedListener(this);
         mGallery.setOnItemClickListener(this);
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -79,15 +78,15 @@ public class Wallpaper extends Activity implements
     public void onItemSelected(AdapterView parent, View v, int position, long id) {
         getWindow().setBackgroundDrawableResource(IMAGE_IDS[position]);
     }
-    
+
     public void onItemClick(AdapterView parent, View v, int position, long id) {
         selectWallpaper(position);
     }
 
     /*
-     * When using touch if you tap an image it triggers both the onItemClick and
-     * the onTouchEvent causing the wallpaper to be set twice. Synchronize this
-     * method and ensure we only set the wallpaper once.
+     * When using touch if you tap an image it triggers both the onItemClick and the onTouchEvent
+     * causing the wallpaper to be set twice. Synchronize this method and ensure we only set the
+     * wallpaper once.
      */
     private synchronized void selectWallpaper(int position) {
         if (mIsWallpaperSet) {
@@ -106,7 +105,7 @@ public class Wallpaper extends Activity implements
 
     public void onNothingSelected(AdapterView parent) {
     }
-    
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         selectWallpaper(mGallery.getSelectedItemPosition());
@@ -116,7 +115,7 @@ public class Wallpaper extends Activity implements
     public class ImageAdapter extends BaseAdapter {
 
         private Context mContext;
-        
+
         public ImageAdapter(Context c) {
             mContext = c;
         }
@@ -147,5 +146,3 @@ public class Wallpaper extends Activity implements
     }
 
 }
-
-    

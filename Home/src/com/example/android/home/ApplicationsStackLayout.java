@@ -31,32 +31,17 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * The ApplicationsStackLayout is a specialized layout used for the purpose of the home screen
- * only. This layout stacks various icons in three distinct areas: the recents, the favorites
- * (or faves) and the button.
- *
- * This layout supports two different orientations: vertical and horizontal. When horizontal,
- * the areas are laid out this way:
- *
- * [RECENTS][FAVES][BUTTON]
- *
- * When vertical, the layout is the following:
- *
- * [RECENTS]
- * [FAVES]
- * [BUTTON]
- *
- * The layout operates from the "bottom up" (or from right to left.) This means that the button
- * area will first be laid out, then the faves area, then the recents. When there are too many
- * favorites, the recents area is not displayed.
- *
- * The following attributes can be set in XML:
- * 
- * orientation: horizontal or vertical
- * marginLeft: the left margin of each element in the stack
- * marginTop: the top margin of each element in the stack
- * marginRight: the right margin of each element in the stack
- * marginBottom: the bottom margin of each element in the stack
+ * The ApplicationsStackLayout is a specialized layout used for the purpose of the home screen only.
+ * This layout stacks various icons in three distinct areas: the recents, the favorites (or faves)
+ * and the button. This layout supports two different orientations: vertical and horizontal. When
+ * horizontal, the areas are laid out this way: [RECENTS][FAVES][BUTTON] When vertical, the layout
+ * is the following: [RECENTS] [FAVES] [BUTTON] The layout operates from the "bottom up" (or from
+ * right to left.) This means that the button area will first be laid out, then the faves area, then
+ * the recents. When there are too many favorites, the recents area is not displayed. The following
+ * attributes can be set in XML: orientation: horizontal or vertical marginLeft: the left margin of
+ * each element in the stack marginTop: the top margin of each element in the stack marginRight: the
+ * right margin of each element in the stack marginBottom: the bottom margin of each element in the
+ * stack
  */
 public class ApplicationsStackLayout extends ViewGroup implements View.OnClickListener {
     public static final int HORIZONTAL = 0;
@@ -103,7 +88,7 @@ public class ApplicationsStackLayout extends ViewGroup implements View.OnClickLi
 
         a.recycle();
 
-        mIconSize = 42; //(int) getResources().getDimension(android.R.dimen.app_icon_size);
+        mIconSize = 42; // (int) getResources().getDimension(android.R.dimen.app_icon_size);
 
         initLayout();
     }
@@ -316,7 +301,7 @@ public class ApplicationsStackLayout extends ViewGroup implements View.OnClickLi
 
     /**
      * Sets the list of favorites.
-     *
+     * 
      * @param applications the applications to put in the favorites area
      */
     public void setFavorites(List<ApplicationInfo> applications) {
@@ -326,7 +311,7 @@ public class ApplicationsStackLayout extends ViewGroup implements View.OnClickLi
 
     /**
      * Sets the list of recents.
-     *
+     * 
      * @param applications the applications to put in the recents area
      */
     public void setRecents(List<ApplicationInfo> applications) {

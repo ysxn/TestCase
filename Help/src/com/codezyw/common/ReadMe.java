@@ -53,6 +53,35 @@ package com.codezyw.common;
  * <p>
  * 14.Canvas常用画图函数
  * <p>
+ * 
+ * <pre>
+ * Socket, NIO
+ * 
+ * http://blog.csdn.net/kongxx/article/category/1077912
+ * 
+ * http://blog.csdn.net/Anders_Zhuo/article/category/1299564
+ * 
+ * http://ifeve.com/overview/
+ * 
+ * File IO操作: https://github.com/awen83/TestCase/blob/master/Help/src/com/codezyw/common/FileHelper.java
+ * read,write IO操作: https://github.com/awen83/TestCase/blob/master/SocketChatServer/nio.doc
+ * 
+ * Android_View_View绘制流程
+ * 
+ * http://blog.csdn.net/zimo2013/article/details/44829583
+ * 
+ * android Fragments (Android官方文档中文版)
+ * 
+ * http://blog.csdn.net/xyz_lmn/article/details/6927390
+ * 
+ * android Fragments (Android官方文档中文版)
+ * 
+ * http://blog.csdn.net/xyz_lmn/article/details/6930753
+ * 
+ * 深入理解Android之Java Security第一部分
+ * 
+ * http://blog.csdn.net/innost/article/details/44081147
+ * </pre>
  */
 public class ReadMe {
 
