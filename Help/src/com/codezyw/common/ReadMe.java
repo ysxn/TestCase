@@ -21,6 +21,18 @@ package com.codezyw.common;
  * 7.开启ssl <br>
  * <a href="http://blog.csdn.net/raptor/article/details/18896375">说明1</a><br>
  * <a href="http://blog.csdn.net/raptor/article/details/18898937">说明2</a><br>
+ * 
+ * <pre>
+ * http://luhuang.sinaapp.com/linux-nginx-ssl/
+ * http://luhuang.sinaapp.com/php-banned-ip/
+ * http://www.linuxidc.com/Linux/2013-08/88271.htm
+ * http://blog.chinaunix.net/uid-25492475-id-2981372.html
+ * http://publish.it168.com/2005/0919/20050919039901.shtml
+ * http://www.oschina.net/code/snippet_248412_18578
+ * https://phphub.org/topics/206
+ * http://www.cnblogs.com/tintin1926/archive/2012/07/12/2587311.html
+ * http://blog.jobbole.com/44844/
+ * </pre>
  * <p>
  * 8.在BaseActivity里面插入滑动返回
  * <p>
@@ -55,7 +67,7 @@ package com.codezyw.common;
  * <p>
  * 
  * <pre>
- * Socket, NIO
+ * 15.Socket, NIO
  * 
  * http://blog.csdn.net/kongxx/article/category/1077912
  * 
@@ -66,11 +78,11 @@ package com.codezyw.common;
  * File IO操作: https://github.com/awen83/TestCase/blob/master/Help/src/com/codezyw/common/FileHelper.java
  * read,write IO操作: https://github.com/awen83/TestCase/blob/master/SocketChatServer/nio.doc
  * 
- * Android_View_View绘制流程
+ * 16.Android_View_View绘制流程
  * 
  * http://blog.csdn.net/zimo2013/article/details/44829583
  * 
- * android Fragments (Android官方文档中文版)
+ * 17.android Fragments (Android官方文档中文版)
  * 
  * http://blog.csdn.net/xyz_lmn/article/details/6927390
  * 
@@ -78,9 +90,15 @@ package com.codezyw.common;
  * 
  * http://blog.csdn.net/xyz_lmn/article/details/6930753
  * 
- * 深入理解Android之Java Security第一部分
+ * 18.深入理解Android之Java Security第一部分
  * 
  * http://blog.csdn.net/innost/article/details/44081147
+ * 
+ * 19.Android Design Support Library使用详解
+ * http://blog.csdn.net/eclipsexys/article/details/46349721
+ * 
+ * 20.android6.0变化
+ * http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html
  * </pre>
  */
 public class ReadMe {
