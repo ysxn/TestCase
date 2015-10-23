@@ -1,15 +1,16 @@
-package org.qii.weiciyuan.bean;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import org.qii.weiciyuan.support.utils.ObjectToStringUtility;
+package org.qii.weiciyuan.bean;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.qii.weiciyuan.support.utils.ObjectToStringUtility;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
- * User: qii
- * Date: 12-8-18
+ * User: qii Date: 12-8-18
  */
 public class FavListBean extends ListBean<MessageBean, FavListBean> implements Parcelable {
     private List<FavBean> favorites = new ArrayList<FavBean>();
@@ -54,7 +55,6 @@ public class FavListBean extends ListBean<MessageBean, FavListBean> implements P
                 }
             };
 
-
     public List<FavBean> getFavorites() {
         return favorites;
     }
@@ -67,7 +67,6 @@ public class FavListBean extends ListBean<MessageBean, FavListBean> implements P
     public int getSize() {
         return favorites.size();
     }
-
 
     @Override
     public MessageBean getItem(int position) {
@@ -93,6 +92,12 @@ public class FavListBean extends ListBean<MessageBean, FavListBean> implements P
             this.setTotal_number(newValue.getTotal_number());
 
             this.favorites.clear();
+            List<FavBean> data = newValue.getFavorites();
+            if (data != null) {
+                for (FavBean b : data) {
+                    android.util.Log.i("bean", "" + b.toString());
+                }
+            }
             this.favorites.addAll(newValue.getFavorites());
         }
     }
@@ -107,6 +112,12 @@ public class FavListBean extends ListBean<MessageBean, FavListBean> implements P
         if (oldValue != null && oldValue.getSize() > 0) {
             getItemList().addAll(oldValue.getItemList());
             setTotal_number(oldValue.getTotal_number());
+            List<FavBean> data = oldValue.getFavorites();
+            if (data != null) {
+                for (FavBean b : data) {
+                    android.util.Log.i("bean", "" + b.toString());
+                }
+            }
             this.favorites.addAll(oldValue.getFavorites());
         }
     }

@@ -14,14 +14,22 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
+import java.security.KeyStore;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -68,6 +76,7 @@ import cn.trinea.android.common.util.HttpUtils;
 import cn.trinea.android.common.util.ImageUtils;
 
 import com.codezyw.common.HttpPostAsyncTask.PostListener;
+import com.help.R;
 
 /**
  * HttpClient实际上是对Java提供方法的一些封装，在HttpURLConnection中的输入输出流操作，
@@ -861,4 +870,138 @@ public class HttpHelper {
         }
         return null;
     }
+
+    /**
+     * @see SSLTrustAllSocketFactory
+     * @return
+     */
+    public static HttpClient getTrustAllHttpClient() {
+        try {
+            HttpParams params = new BasicHttpParams();
+            HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+            HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
+
+            SchemeRegistry registry = new SchemeRegistry();
+            registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+            registry.register(new Scheme("https", SSLTrustAllSocketFactory.getSocketFactory(), 443));
+
+            ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
+
+            return new DefaultHttpClient(ccm, params);
+        } catch (Exception e) {
+            return new DefaultHttpClient();
+        }
+    }
+
+    /**
+     * 要跳过系统校验，就不能再使用系统标准的SSLSocketFactory了，需要自定义一个。
+     * 然后为了在这个自定义SSLSocketFactory里跳过校验，还需要自定义一个TrustManager，在其中忽略所有校验，即TrustAll。
+     * 以下就是SSLTrustAllSocketFactory和SSLTrustAllManager的实现：
+     * 不过这个方案虽然用了HTTPS，通讯的内容也经过了加密，嗅探程序也无法知道内容。但是通过更麻烦一些的“中间人攻击”，还是可以窃取通讯内容的：
+     * 在网内配置一个DNS，把目标服务器域名解析到本地的一个地址，然后在这个地址上用一个中间服务器作代理，它使用一个假的证书与客户端通讯，
+     * 然后再由这个代理作为客户端连到实际的服务器
+     * ，用真的证书与服务器通讯。这样所有的通讯内容就会经过这个代理。而因为客户端不校验证书，所以它用来加密的证书实际上是代理提供的假证书
+     * ，那么代理就可以完全知道通讯内容。这个代理就是所谓的“中间人”。
+     * <p>
+     * schReg.register(new Scheme("https",
+     * SSLTrustAllSocketFactory.getSocketFactory(), 443));<br>
+     * <p>
+     */
+    public static class SSLTrustAllSocketFactory extends SSLSocketFactory {
+        private static final String TAG = "SSLTrustAllSocketFactory";
+        private SSLContext mCtx;
+
+        public class SSLTrustAllManager implements X509TrustManager {
+
+            @Override
+            public void checkClientTrusted(X509Certificate[] arg0, String arg1)
+                    throws CertificateException {
+            }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] arg0, String arg1)
+                    throws CertificateException {
+            }
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
+
+        }
+
+        public SSLTrustAllSocketFactory(KeyStore truststore)
+                throws Throwable {
+            super(truststore);
+            try {
+                mCtx = SSLContext.getInstance("TLS");
+                mCtx.init(null, new TrustManager[] {
+                        new SSLTrustAllManager()
+                },
+                        null);
+                setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+            } catch (Exception ex) {
+            }
+        }
+
+        @Override
+        public Socket createSocket(Socket socket, String host,
+                int port, boolean autoClose)
+                throws IOException, UnknownHostException {
+            return mCtx.getSocketFactory().createSocket(socket, host, port, autoClose);
+        }
+
+        @Override
+        public Socket createSocket() throws IOException {
+            return mCtx.getSocketFactory().createSocket();
+        }
+
+        public static SSLSocketFactory getSocketFactory() {
+            try {
+                KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+                trustStore.load(null, null);
+                SSLSocketFactory factory = new SSLTrustAllSocketFactory(trustStore);
+                return factory;
+            } catch (Throwable e) {
+                Log.d(TAG, e.getMessage());
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+    }
+
+    /**
+     * 其中crt就是bks资源文件名，KEY_PASS就是前面设置的密码。
+     * <p>
+     * schReg.register(new Scheme("https",
+     * SSLCustomSocketFactory.getSocketFactory(context), 443));
+     */
+    public static class SSLCustomSocketFactory extends SSLSocketFactory {
+        private static final String TAG = "SSLCustomSocketFactory";
+        private static final String KEY_PASS = "pw12306";
+
+        public SSLCustomSocketFactory(KeyStore trustStore) throws Throwable {
+            super(trustStore);
+        }
+
+        public static SSLSocketFactory getSocketFactory(Context context) {
+            try {
+                InputStream ins = context.getResources().openRawResource(R.raw.crt);
+                KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+                try {
+                    trustStore.load(ins, KEY_PASS.toCharArray());
+                } finally {
+                    ins.close();
+                }
+                SSLSocketFactory factory = new SSLCustomSocketFactory(trustStore);
+                return factory;
+            } catch (Throwable e) {
+                Log.d(TAG, e.getMessage());
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
 }

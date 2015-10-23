@@ -21,18 +21,6 @@ package com.codezyw.common;
  * 7.开启ssl <br>
  * <a href="http://blog.csdn.net/raptor/article/details/18896375">说明1</a><br>
  * <a href="http://blog.csdn.net/raptor/article/details/18898937">说明2</a><br>
- * 
- * <pre>
- * http://luhuang.sinaapp.com/linux-nginx-ssl/
- * http://luhuang.sinaapp.com/php-banned-ip/
- * http://www.linuxidc.com/Linux/2013-08/88271.htm
- * http://blog.chinaunix.net/uid-25492475-id-2981372.html
- * http://publish.it168.com/2005/0919/20050919039901.shtml
- * http://www.oschina.net/code/snippet_248412_18578
- * https://phphub.org/topics/206
- * http://www.cnblogs.com/tintin1926/archive/2012/07/12/2587311.html
- * http://blog.jobbole.com/44844/
- * </pre>
  * <p>
  * 8.在BaseActivity里面插入滑动返回
  * <p>
@@ -99,6 +87,15 @@ package com.codezyw.common;
  * 
  * 20.android6.0变化
  * http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html
+ * 
+ * 21.proguard
+ * http://proguard.sourceforge.net/index.html#manual/refcard.html
+ * 
+ * 22.Android Studio
+ * http://segmentfault.com/a/1190000002401964
+ * 
+ * 23.HTML标签
+ * http://www.w3school.com.cn/tags/tag_pre.asp
  * </pre>
  */
 public class ReadMe {
