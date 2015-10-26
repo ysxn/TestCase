@@ -1,6 +1,8 @@
 
 package com.codezyw.common;
 
+import static android.util.Log.i;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -11,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
@@ -18,8 +21,14 @@ import java.net.Socket;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
+import java.security.KeyManagementException;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,8 +36,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLException;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocket;
 import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 import org.apache.http.HttpEntity;
@@ -47,7 +62,9 @@ import org.apache.http.conn.params.ConnPerRouteBean;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.scheme.SocketFactory;
 import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.conn.ssl.X509HostnameVerifier;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ByteArrayBody;
@@ -65,10 +82,12 @@ import org.apache.http.util.EntityUtils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -955,7 +974,7 @@ public class HttpHelper {
      * 要跳过系统校验，就不能再使用系统标准的SSLSocketFactory了，需要自定义一个。
      * 然后为了在这个自定义SSLSocketFactory里跳过校验，还需要自定义一个TrustManager，在其中忽略所有校验，即TrustAll。
      */
-    public static class SSLTrustAllManager implements X509TrustManager {
+    public static class TrustAllManager implements X509TrustManager {
 
         @Override
         public void checkClientTrusted(X509Certificate[] arg0, String arg1)
@@ -1010,7 +1029,7 @@ public class HttpHelper {
                 mSSLContext = SSLContext.getInstance("TLS");
                 // 使用TrustManager来初始化该上下文，TrustManager只是被SSL的Socket所使用
                 mSSLContext.init(null, new TrustManager[] {
-                        new SSLTrustAllManager()
+                        new TrustAllManager()
                 }, null);
                 setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
             } catch (Exception e) {
@@ -1116,4 +1135,380 @@ public class HttpHelper {
         }
     }
 
+    /**
+     * <a href="http://blog.csdn.net/innost/article/details/44081147">
+     * 深入理解Android之Java Security第一部分 </a>
+     * 
+     * <pre>
+     * 关于证书文件，还有一些容易混淆的事情要交待：
+     * 
+     *     前面讲过，证书有很多格式，但是目前通用格式为X.509格式。在上面的证书文件中，从Certificate这一行开始到文件最后，都是符合X.509格式的。那文件前面的“-----BEGINCERTIFICATE-----”到“-----END CERTIFICATE-----”是些什么？
+     *     X.509是证书的格式，但是证书和我们看到的文件还是有一些差异。证书需要封装在文件里。不同系统支持不同的证书文件，每种证书文件，所要求包含的具体的X.509证书内容也不一样。另外，某些证书文件还能包含除X.509之外的其他有用的数据。
+     * 
+     * 下面是一些常见的证书文件格式，一般用文件后缀名标示。
+     * 
+     *     .pem（Privacy-enhanced ElectronicMail) Base64 编码的证书，编码信息（即将示例中X.509证书的明文内容用Base64编码后得到的那个字符串）放在"-----BEGIN CERTIFICATE-----" and "-----END CERTIFICATE-----"之间。所以，Android平台里的根CA文件都是PEM证书文件。
+     *     .cer,.crt, .der：证书内容为ASCII编码，二进制格式，但也可以和PEM一样采用base64编码。
+     *     .p7b,.p7c – PKCS#7（Public-Key CryptographyStandards ，是由RSA实验室与其它安全系统开发商为促进公钥密码的发展而制订的一系列标准，#7表示第7个标准，PKCS一共有15个标准）封装的文件。其中，p7b可包含证书链信息，但是不能携带私钥，而p7c只包含证书。
+     *      .p12– PKCS#12标准,可包含公钥或私钥信息。如果包含了私钥信息的话，该文件内容可能需要输入密码才能查看。
+     * 
+     * 特别注意：
+     * 
+     * 1  证书文件相关的规范特别多，读者感兴趣的话可阅读参考文献[2][3][4][5]。
+     * 
+     * 2  X509证书规范本身是不包含私钥信息的。但是某些证书文件却可以，而且某些证书文件能包含一条证书链上所有证书的信息。
+     * 
+     * 关于证书的理论知识，我们先介绍到这，只要大家心中有下面几个概念就可以了：
+     * 
+     *     证书包含很多信息，但一般就是各种Key的内容。
+     *     证书由CA签发。为了校验某个证书是否可信，往往需要把一整条证书链都校验一把，直到根证书。
+     *     系统一般会集成很多根证书，这样免得使用者自己去下载根证书了。
+     *     证书自己的格式通用为X.509，但是证书文件的格式却有很多。不同的系统可能支持不同的证书文件。
+     * 
+     * 注意：后面介绍KeyStore的时候，我们还会继续讨论证书文件的问题。
+     * 
+     * 注意，CertificateFactory只能导入pem、der格式的证书文件
+     * </pre>
+     * 
+     * @param context
+     * @param file 例如"my-root-cert.pem"
+     */
+    public static void importCertificate(Context context, String file) {
+        i(TAG, "***Begin import Certificates***");
+        InputStream inputStream = null;
+        try {
+            // 在res/assets目录下放了一个名为“my-root-cert.pem”的证书文件
+            AssetManager assetManager = context.getAssets();
+            inputStream = assetManager.open(file);
+            // 导入证书得需要使用CertificateFactory
+            CertificateFactory certificateFactory = CertificateFactory
+                    .getInstance("X.509");
+            /**
+             * 从my-root-cert.pem中提取X509证书信息，并保存在X509Certificate对象中
+             * 注意，如果一个证书文件包含多个证书（证书链的情况），generateCertificate将只返回 第一个证书
+             * 调用generateCertificates函数可以返回一个证书数组，
+             */
+            X509Certificate myX509Cer = (X509Certificate) certificateFactory
+                    .generateCertificate(inputStream);
+            // 打印X509证书的一些信息。DN是Distinguished Name。DN通过设定很多项（类似于地址
+            // 一样，比如包括国家、省份、街道等信息）来唯一标示一个持有东西（比如发布此证书的机构等）
+            i(TAG, "==>Subjecte DN:" + myX509Cer.getSubjectDN().getName());
+            i(TAG, "==>Issuer DN:" + myX509Cer.getIssuerDN().getName());
+            i(TAG, "==>Public Key:"
+                    + bytesToHexString(myX509Cer.getPublicKey().getEncoded()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        i(TAG, "***End import Certificates***");
+    }
+
+    /**
+     * @see importCertificate
+     * @param input
+     * @return
+     */
+    public static String bytesToHexString(byte[] input) {
+        if (input == null) {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("0x");
+        for (byte one : input) {
+            sb.append(String.format("%x", one));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * <a href="http://www.tuicool.com/articles/vmUZf2">Android
+     * Https请求详细demo</a>
+     * <p>
+     * HttpUrlConnection 方式，支持指定load-der.crt证书验证，此种方式Android官方建议
+     * 
+     * @throws CertificateException
+     * @throws IOException
+     * @throws KeyStoreException
+     * @throws NoSuchAlgorithmException
+     * @throws KeyManagementException
+     */
+    public static void initSSL(Context context) throws CertificateException, IOException, KeyStoreException,
+            NoSuchAlgorithmException, KeyManagementException {
+        CertificateFactory cf = CertificateFactory.getInstance("X.509");
+        InputStream in = context.getAssets().open("load-der.crt");
+        Certificate ca = cf.generateCertificate(in);
+
+        KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
+        keystore.load(null, null);
+        keystore.setCertificateEntry("ca", ca);
+
+        String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+        TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+        tmf.init(keystore);
+
+        // Create an SSLContext that uses our TrustManager
+        SSLContext mSSLContext = SSLContext.getInstance("TLS");
+        mSSLContext.init(null, tmf.getTrustManagers(), null);
+        URL url = new URL("https://certs.cac.washington.edu/CAtest/");
+        HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+        urlConnection.setSSLSocketFactory(mSSLContext.getSocketFactory());
+        InputStream input = urlConnection.getInputStream();
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = reader.readLine()) != null) {
+            result.append(line);
+        }
+        Log.e("TTTT", result.toString());
+    }
+
+    /**
+     * <a href="http://www.tuicool.com/articles/vmUZf2">Android
+     * Https请求详细demo</a>
+     * <p>
+     * HttpUrlConnection支持所有Https免验证，不建议使用
+     * 
+     * @throws KeyManagementException
+     * @throws NoSuchAlgorithmException
+     * @throws IOException
+     */
+    public static void initSSLALL() throws KeyManagementException, NoSuchAlgorithmException, IOException {
+        URL url = new URL("https://certs.cac.washington.edu/CAtest/");
+        SSLContext mSSLContext = SSLContext.getInstance("TLS");
+        mSSLContext.init(null, new TrustManager[] {
+                new TrustAllManager()
+        }, null);
+        HttpsURLConnection.setDefaultSSLSocketFactory(mSSLContext.getSocketFactory());
+        HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+
+            @Override
+            public boolean verify(String arg0, SSLSession arg1) {
+                return true;
+            }
+        });
+        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+        connection.setDoInput(true);
+        connection.setDoOutput(false);
+        connection.setRequestMethod("GET");
+        connection.connect();
+        InputStream in = connection.getInputStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        String line = "";
+        StringBuffer result = new StringBuffer();
+        while ((line = reader.readLine()) != null) {
+            result.append(line);
+        }
+        Log.e("TTTT", result.toString());
+    }
+
+    /**
+     * <a href="http://www.tuicool.com/articles/vmUZf2">Android
+     * Https请求详细demo</a>
+     * <p>
+     * HttpClient方式实现，支持所有Https免验证方式链接
+     * 
+     * @throws ClientProtocolException
+     * @throws IOException
+     */
+    public static void initSSLAllWithHttpClient() throws ClientProtocolException, IOException {
+        int timeOut = 30 * 1000;
+        HttpParams param = new BasicHttpParams();
+        HttpConnectionParams.setConnectionTimeout(param, timeOut);
+        HttpConnectionParams.setSoTimeout(param, timeOut);
+        HttpConnectionParams.setTcpNoDelay(param, true);
+
+        SchemeRegistry registry = new SchemeRegistry();
+        registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+        registry.register(new Scheme("https", TrustAllSSLSocketFactory.getDefault(), 443));
+        ClientConnectionManager manager = new ThreadSafeClientConnManager(param, registry);
+        DefaultHttpClient client = new DefaultHttpClient(manager, param);
+
+        HttpGet request = new HttpGet("https://certs.cac.washington.edu/CAtest/");
+        // HttpGet request = new HttpGet("https://www.alipay.com/");
+        HttpResponse response = client.execute(request);
+        HttpEntity entity = response.getEntity();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+        StringBuilder result = new StringBuilder();
+        String line = "";
+        while ((line = reader.readLine()) != null) {
+            result.append(line);
+        }
+        Log.e("HTTPS TEST", result.toString());
+    }
+
+    /**
+     * <a href="http://www.tuicool.com/articles/vmUZf2">Android
+     * Https请求详细demo</a>
+     * <p>
+     * HttpClient方式实现，支持验证指定证书
+     * 
+     * @throws ClientProtocolException
+     * @throws IOException
+     */
+    public static void initSSLCertainWithHttpClient(Context context) throws ClientProtocolException, IOException {
+        int timeOut = 30 * 1000;
+        HttpParams param = new BasicHttpParams();
+        HttpConnectionParams.setConnectionTimeout(param, timeOut);
+        HttpConnectionParams.setSoTimeout(param, timeOut);
+        HttpConnectionParams.setTcpNoDelay(param, true);
+
+        SchemeRegistry registry = new SchemeRegistry();
+        registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+        registry.register(new Scheme("https", TrustCertainHostNameFactory.getDefault(context), 443));
+        ClientConnectionManager manager = new ThreadSafeClientConnManager(param, registry);
+        DefaultHttpClient client = new DefaultHttpClient(manager, param);
+
+        // HttpGet request = new
+        // HttpGet("https://certs.cac.washington.edu/CAtest/");
+        HttpGet request = new HttpGet("https://www.alipay.com/");
+        HttpResponse response = client.execute(request);
+        HttpEntity entity = response.getEntity();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+        StringBuilder result = new StringBuilder();
+        String line = "";
+        while ((line = reader.readLine()) != null) {
+            result.append(line);
+        }
+        Log.e("HTTPS TEST", result.toString());
+    }
+
+    /**
+     * <a href="http://www.tuicool.com/articles/vmUZf2">Android
+     * Https请求详细demo</a>
+     * <p>
+     */
+    public static class TrustAllSSLSocketFactory extends SSLSocketFactory {
+        private javax.net.ssl.SSLSocketFactory factory;
+        private static TrustAllSSLSocketFactory instance;
+
+        private TrustAllSSLSocketFactory() throws KeyManagementException, UnrecoverableKeyException,
+                NoSuchAlgorithmException, KeyStoreException {
+            super(null);
+
+            SSLContext context = SSLContext.getInstance("TLS");
+            context.init(null, new TrustManager[] {
+                    new TrustAllManager()
+            }, null);
+            factory = context.getSocketFactory();
+            setHostnameVerifier(new X509HostnameVerifier() {
+
+                @Override
+                public void verify(String host, String[] cns, String[] subjectAlts) throws SSLException {
+
+                }
+
+                @Override
+                public void verify(String host, X509Certificate cert) throws SSLException {
+
+                }
+
+                @Override
+                public void verify(String host, SSLSocket ssl) throws IOException {
+
+                }
+
+                @Override
+                public boolean verify(String host, SSLSession session) {
+                    return true;
+                }
+            });
+        }
+
+        public static SocketFactory getDefault() {
+            if (instance == null) {
+                try {
+                    instance = new TrustAllSSLSocketFactory();
+                } catch (KeyManagementException e) {
+                    e.printStackTrace();
+                } catch (UnrecoverableKeyException e) {
+                    e.printStackTrace();
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                } catch (KeyStoreException e) {
+                    e.printStackTrace();
+                }
+            }
+            return instance;
+        }
+
+        @Override
+        public Socket createSocket() throws IOException {
+            return factory.createSocket();
+        }
+
+        @Override
+        public Socket createSocket(Socket socket, String host, int port, boolean autoClose)
+                throws IOException, UnknownHostException {
+            if (Build.VERSION.SDK_INT < 11) { // 3.0
+                injectHostname(socket, host);
+            }
+            return factory.createSocket(socket, host, port, autoClose);
+        }
+
+        private void injectHostname(Socket socket, String host) {
+            try {
+                Field field = InetAddress.class.getDeclaredField("hostName");
+                field.setAccessible(true);
+                field.set(socket.getInetAddress(), host);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    /**
+     * <a href="http://www.tuicool.com/articles/vmUZf2">Android
+     * Https请求详细demo</a>
+     * <p>
+     */
+    public static class TrustCertainHostNameFactory extends SSLSocketFactory {
+
+        private static TrustCertainHostNameFactory mInstance;
+
+        public TrustCertainHostNameFactory(KeyStore truststore) throws NoSuchAlgorithmException,
+                KeyManagementException, KeyStoreException, UnrecoverableKeyException {
+            super(truststore);
+        }
+
+        public static TrustCertainHostNameFactory getDefault(Context context) {
+            KeyStore keystore = null;
+            try {
+                CertificateFactory cf = CertificateFactory.getInstance("X.509");
+                InputStream in;
+                in = context.getAssets().open("load-der.crt");
+                Certificate ca = cf.generateCertificate(in);
+
+                keystore = KeyStore.getInstance(KeyStore.getDefaultType());
+                keystore.load(null, null);
+                keystore.setCertificateEntry("ca", ca);
+
+                if (null == mInstance) {
+                    mInstance = new TrustCertainHostNameFactory(keystore);
+                }
+            } catch (Exception e) {
+
+            }
+            return mInstance;
+        }
+
+        @Override
+        public Socket createSocket() throws IOException {
+            return super.createSocket();
+        }
+
+        @Override
+        public Socket createSocket(Socket socket, String host, int port, boolean autoClose)
+                throws IOException, UnknownHostException {
+            return super.createSocket(socket, host, port, autoClose);
+        }
+
+    }
 }
