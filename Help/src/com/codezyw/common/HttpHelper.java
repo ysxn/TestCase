@@ -149,9 +149,9 @@ public class HttpHelper {
 
     private final static String TAG = "HttpHelper";
 
-    public final static String DELETE_URL = "http://php.codezyw.com/delete_note_android.php";
-    public final static String UPDATE_URL = "http://php.codezyw.com/update_note_android.php";
-    public final static String FETCH_URL = "http://php.codezyw.com/fetch_note_android.php";
+    public final static String DELETE_URL = "https://php.codezyw.com/delete_note_android.php";
+    public final static String UPDATE_URL = "https://php.codezyw.com/update_note_android.php";
+    public final static String FETCH_URL = "https://php.codezyw.com/fetch_note_android.php";
 
     /** 本身就是线程安全的 */
     private static HttpClient sHttpClient;
@@ -559,7 +559,7 @@ public class HttpHelper {
         try {
             HttpEntity httpentity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
             httpRequest.setEntity(httpentity);
-            HttpClient httpclient = getSSLTrustAllHttpClient();
+            HttpClient httpclient = new SSLTrustAllHttpClient();// getSSLTrustAllHttpClient();
             HttpResponse httpResponse = httpclient.execute(httpRequest);
             if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 HttpEntity resultEntity = httpResponse.getEntity();
@@ -921,6 +921,17 @@ public class HttpHelper {
 
     /**
      * @see SSLTrustAllSocketFactory
+     */
+    public static class SSLTrustAllHttpClient extends DefaultHttpClient {
+        public SSLTrustAllHttpClient() {
+            super();
+            // 通过SchemeRegistry将SSLSocketFactory注册到我们的HttpClient上
+            this.getConnectionManager().getSchemeRegistry().register(new Scheme("https", SSLTrustAllSocketFactory.getTrustAllSocketFactory(), 443));
+        }
+    }
+
+    /**
+     * @see SSLTrustAllSocketFactory
      * @return
      */
     public static HttpClient getSSLTrustAllHttpClient() {
@@ -932,14 +943,35 @@ public class HttpHelper {
             SchemeRegistry registry = new SchemeRegistry();
             registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
             // 通过SchemeRegistry将SSLSocketFactory注册到我们的HttpClient上
-            registry.register(new Scheme("https", SSLTrustAllSocketFactory.getSocketFactory(), 443));
-
+            registry.register(new Scheme("https", SSLTrustAllSocketFactory.getTrustAllSocketFactory(), 443));
             ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
-
             return new DefaultHttpClient(ccm, params);
         } catch (Exception e) {
             return new DefaultHttpClient();
         }
+    }
+
+    /**
+     * 要跳过系统校验，就不能再使用系统标准的SSLSocketFactory了，需要自定义一个。
+     * 然后为了在这个自定义SSLSocketFactory里跳过校验，还需要自定义一个TrustManager，在其中忽略所有校验，即TrustAll。
+     */
+    public static class SSLTrustAllManager implements X509TrustManager {
+
+        @Override
+        public void checkClientTrusted(X509Certificate[] arg0, String arg1)
+                throws CertificateException {
+        }
+
+        @Override
+        public void checkServerTrusted(X509Certificate[] arg0, String arg1)
+                throws CertificateException {
+        }
+
+        @Override
+        public X509Certificate[] getAcceptedIssuers() {
+            return null;
+        }
+
     }
 
     /**
@@ -968,27 +1000,7 @@ public class HttpHelper {
      * <p>
      */
     public static class SSLTrustAllSocketFactory extends SSLSocketFactory {
-        private static final String TAG = "SSLTrustAllSocketFactory";
         private SSLContext mSSLContext;
-
-        public class SSLTrustAllManager implements X509TrustManager {
-
-            @Override
-            public void checkClientTrusted(X509Certificate[] arg0, String arg1)
-                    throws CertificateException {
-            }
-
-            @Override
-            public void checkServerTrusted(X509Certificate[] arg0, String arg1)
-                    throws CertificateException {
-            }
-
-            @Override
-            public X509Certificate[] getAcceptedIssuers() {
-                return null;
-            }
-
-        }
 
         public SSLTrustAllSocketFactory(KeyStore truststore)
                 throws Throwable {
@@ -999,10 +1011,10 @@ public class HttpHelper {
                 // 使用TrustManager来初始化该上下文，TrustManager只是被SSL的Socket所使用
                 mSSLContext.init(null, new TrustManager[] {
                         new SSLTrustAllManager()
-                },
-                        null);
+                }, null);
                 setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-            } catch (Exception ex) {
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
@@ -1018,14 +1030,13 @@ public class HttpHelper {
             return mSSLContext.getSocketFactory().createSocket();
         }
 
-        public static SSLSocketFactory getSocketFactory() {
+        public static SSLSocketFactory getTrustAllSocketFactory() {
             try {
                 KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
                 trustStore.load(null, null);
                 SSLSocketFactory factory = new SSLTrustAllSocketFactory(trustStore);
                 return factory;
             } catch (Throwable e) {
-                Log.d(TAG, e.getMessage());
                 e.printStackTrace();
             }
             return null;
@@ -1033,47 +1044,11 @@ public class HttpHelper {
 
     }
 
-    public class SSLClient extends DefaultHttpClient {
-        public SSLClient() throws Exception {
-            super();
-            // TLS1.0与SSL3.0基本上没有太大的差别，可粗略理解为TLS是SSL的继承者，但它们使用的是相同的SSLContext
-            SSLContext mSSLContext = SSLContext.getInstance("TLS");
-            X509TrustManager xtm = new X509TrustManager() {
-                @Override
-                public void checkClientTrusted(X509Certificate[] chain,
-                        String authType) throws CertificateException {
-                }
-
-                @Override
-                public void checkServerTrusted(X509Certificate[] chain,
-                        String authType) throws CertificateException {
-                }
-
-                @Override
-                public X509Certificate[] getAcceptedIssuers() {
-                    return null;
-                }
-            };
-            // 使用TrustManager来初始化该上下文，TrustManager只是被SSL的Socket所使用
-            mSSLContext.init(null, new TrustManager[] {
-                    xtm
-            }, null);
-            KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
-            trustStore.load(null, null);
-            SSLSocketFactory ssf = new SSLSocketFactory(trustStore);
-            ssf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-            ClientConnectionManager ccm = this.getConnectionManager();
-            SchemeRegistry sr = ccm.getSchemeRegistry();
-            // 通过SchemeRegistry将SSLSocketFactory注册到我们的HttpClient上
-            sr.register(new Scheme("https", ssf, 443));
-        }
-    }
-
     /**
      * @see SSLCustomSocketFactory
      * @return
      */
-    public static HttpClient getSSLCustomHttpClient() {
+    public static HttpClient getSSLCustomHttpClient(Context context) {
         try {
             HttpParams params = new BasicHttpParams();
             HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
@@ -1081,10 +1056,8 @@ public class HttpHelper {
 
             SchemeRegistry registry = new SchemeRegistry();
             registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-            registry.register(new Scheme("https", SSLCustomSocketFactory.getSocketFactory(), 443));
-
+            registry.register(new Scheme("https", SSLCustomSocketFactory.getSSLCustomSocketFactory(context), 443));
             ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
-
             return new DefaultHttpClient(ccm, params);
         } catch (Exception e) {
             return new DefaultHttpClient();
@@ -1119,14 +1092,13 @@ public class HttpHelper {
      * SSLCustomSocketFactory.getSocketFactory(context), 443));
      */
     public static class SSLCustomSocketFactory extends SSLSocketFactory {
-        private static final String TAG = "SSLCustomSocketFactory";
         private static final String KEY_PASS = "pw12306";
 
         public SSLCustomSocketFactory(KeyStore trustStore) throws Throwable {
             super(trustStore);
         }
 
-        public static SSLSocketFactory getSocketFactory(Context context) {
+        public static SSLSocketFactory getSSLCustomSocketFactory(Context context) {
             try {
                 InputStream ins = context.getResources().openRawResource(R.raw.crt);
                 KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -1138,7 +1110,6 @@ public class HttpHelper {
                 SSLSocketFactory factory = new SSLCustomSocketFactory(trustStore);
                 return factory;
             } catch (Throwable e) {
-                Log.d(TAG, e.getMessage());
                 e.printStackTrace();
             }
             return null;

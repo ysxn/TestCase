@@ -7,6 +7,9 @@ import org.apache.http.NameValuePair;
 
 import android.text.TextUtils;
 
+/**
+ * 支持SSL或者非SSL
+ */
 public class HttpPostNamedAsyncTask extends HttpPostAsyncTask {
     private PostListener mPostListener;
     private List<NameValuePair> nameValuePairs;
