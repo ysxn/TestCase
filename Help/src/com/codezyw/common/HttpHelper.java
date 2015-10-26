@@ -543,6 +543,41 @@ public class HttpHelper {
     }
 
     /**
+     * HttpClient
+     * 
+     * @see SSLTrustAllSocketFactory
+     * @param httpUrl
+     * @param params
+     * @return
+     */
+    public static String httpSSLTrustAllPost(String httpUrl, List<NameValuePair> params) {
+        if (TextUtils.isEmpty(httpUrl)) {
+            return null;
+        }
+        String resultData = null;
+        HttpPost httpRequest = new HttpPost(httpUrl);
+        try {
+            HttpEntity httpentity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
+            httpRequest.setEntity(httpentity);
+            HttpClient httpclient = getSSLTrustAllHttpClient();
+            HttpResponse httpResponse = httpclient.execute(httpRequest);
+            if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                HttpEntity resultEntity = httpResponse.getEntity();
+                resultData = EntityUtils.toString(resultEntity, HTTP.UTF_8);
+            }
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+        return resultData;
+    }
+
+    /**
      * HttpURLConnection
      * 
      * @param httpUrl
@@ -716,6 +751,19 @@ public class HttpHelper {
     }
 
     /**
+     * AsyncTask异步任务http post提交application/x-www-form-urlencoded
+     */
+    public static void asyncSSLHttpPost(final String url, final Context context,
+            final List<NameValuePair> paramsPair,
+            final PostListener postListener) {
+        if (context == null || TextUtils.isEmpty(url) || postListener == null) {
+            return;
+        }
+        HttpPostNamedAsyncTask task = new HttpPostNamedAsyncTask(postListener, paramsPair, true);
+        task.execute(url);
+    }
+
+    /**
      * AsyncTask异步任务http post提交multipart/form-data
      * <p>
      * <a href="http://bbs.51cto.com/thread-1114378-1-1.html">http://bbs.51cto.
@@ -762,7 +810,7 @@ public class HttpHelper {
         phpParams.add(new BasicNameValuePair(JsonHelper.PASSWORD, DbHelper.getInstance(
                 mContext).getString(JsonHelper.PASSWORD, "")));
         phpParams.add(new BasicNameValuePair(JsonHelper.NOTE_ID, Integer.toString(id)));
-        parseServerResult(mContext, HttpHelper.httpPost(HttpHelper.DELETE_URL, phpParams));
+        parseServerResult(mContext, HttpHelper.httpSSLTrustAllPost(HttpHelper.DELETE_URL, phpParams));
     }
 
     /**
@@ -803,7 +851,7 @@ public class HttpHelper {
                 parseServerResult(mContext, result);
             }
         };
-        asyncHttpPost(HttpHelper.UPDATE_URL, mContext, postParams, postListener);
+        asyncSSLHttpPost(HttpHelper.UPDATE_URL, mContext, postParams, postListener);
     }
 
     /**
@@ -815,7 +863,7 @@ public class HttpHelper {
                 .getString(JsonHelper.ACCOUNT, "")));
         postParams.add(new BasicNameValuePair(JsonHelper.PASSWORD, DbHelper.getInstance(
                 mContext).getString(JsonHelper.PASSWORD, "")));
-        return parseServerResult(mContext, HttpHelper.httpPost(HttpHelper.FETCH_URL, postParams));
+        return parseServerResult(mContext, HttpHelper.httpSSLTrustAllPost(HttpHelper.FETCH_URL, postParams));
     }
 
     /**
@@ -875,7 +923,7 @@ public class HttpHelper {
      * @see SSLTrustAllSocketFactory
      * @return
      */
-    public static HttpClient getTrustAllHttpClient() {
+    public static HttpClient getSSLTrustAllHttpClient() {
         try {
             HttpParams params = new BasicHttpParams();
             HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
@@ -883,6 +931,7 @@ public class HttpHelper {
 
             SchemeRegistry registry = new SchemeRegistry();
             registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+            // 通过SchemeRegistry将SSLSocketFactory注册到我们的HttpClient上
             registry.register(new Scheme("https", SSLTrustAllSocketFactory.getSocketFactory(), 443));
 
             ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
@@ -903,13 +952,24 @@ public class HttpHelper {
      * ，用真的证书与服务器通讯。这样所有的通讯内容就会经过这个代理。而因为客户端不校验证书，所以它用来加密的证书实际上是代理提供的假证书
      * ，那么代理就可以完全知道通讯内容。这个代理就是所谓的“中间人”。
      * <p>
+     * 
+     * <pre>
+     *  TrustManager是一个用于检查给定的证书是否有效的类
+     *  SSL使用的模式是X.509....对于该模式,Java有一个特定的TrustManager,称为X509TrustManager
+     *  所以我们自己创建一个X509TrustManager实例
+     *  而在X509TrustManager实例中，若证书无效，那么TrustManager在它的checkXXX()方法中将抛出CertificateException
+     *  既然我们要接受所有的证书,那么X509TrustManager里面的方法体中不抛出异常就行了
+     *  然后创建一个SSLContext并使用X509TrustManager实例来初始化之
+     *  接着通过SSLContext创建SSLSocketFactory，最后将SSLSocketFactory注册给HttpClient就可以了
+     * </pre>
+     * <p>
      * schReg.register(new Scheme("https",
      * SSLTrustAllSocketFactory.getSocketFactory(), 443));<br>
      * <p>
      */
     public static class SSLTrustAllSocketFactory extends SSLSocketFactory {
         private static final String TAG = "SSLTrustAllSocketFactory";
-        private SSLContext mCtx;
+        private SSLContext mSSLContext;
 
         public class SSLTrustAllManager implements X509TrustManager {
 
@@ -934,8 +994,10 @@ public class HttpHelper {
                 throws Throwable {
             super(truststore);
             try {
-                mCtx = SSLContext.getInstance("TLS");
-                mCtx.init(null, new TrustManager[] {
+                // TLS1.0与SSL3.0基本上没有太大的差别，可粗略理解为TLS是SSL的继承者，但它们使用的是相同的SSLContext
+                mSSLContext = SSLContext.getInstance("TLS");
+                // 使用TrustManager来初始化该上下文，TrustManager只是被SSL的Socket所使用
+                mSSLContext.init(null, new TrustManager[] {
                         new SSLTrustAllManager()
                 },
                         null);
@@ -948,12 +1010,12 @@ public class HttpHelper {
         public Socket createSocket(Socket socket, String host,
                 int port, boolean autoClose)
                 throws IOException, UnknownHostException {
-            return mCtx.getSocketFactory().createSocket(socket, host, port, autoClose);
+            return mSSLContext.getSocketFactory().createSocket(socket, host, port, autoClose);
         }
 
         @Override
         public Socket createSocket() throws IOException {
-            return mCtx.getSocketFactory().createSocket();
+            return mSSLContext.getSocketFactory().createSocket();
         }
 
         public static SSLSocketFactory getSocketFactory() {
@@ -971,7 +1033,86 @@ public class HttpHelper {
 
     }
 
+    public class SSLClient extends DefaultHttpClient {
+        public SSLClient() throws Exception {
+            super();
+            // TLS1.0与SSL3.0基本上没有太大的差别，可粗略理解为TLS是SSL的继承者，但它们使用的是相同的SSLContext
+            SSLContext mSSLContext = SSLContext.getInstance("TLS");
+            X509TrustManager xtm = new X509TrustManager() {
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain,
+                        String authType) throws CertificateException {
+                }
+
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain,
+                        String authType) throws CertificateException {
+                }
+
+                @Override
+                public X509Certificate[] getAcceptedIssuers() {
+                    return null;
+                }
+            };
+            // 使用TrustManager来初始化该上下文，TrustManager只是被SSL的Socket所使用
+            mSSLContext.init(null, new TrustManager[] {
+                    xtm
+            }, null);
+            KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+            trustStore.load(null, null);
+            SSLSocketFactory ssf = new SSLSocketFactory(trustStore);
+            ssf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+            ClientConnectionManager ccm = this.getConnectionManager();
+            SchemeRegistry sr = ccm.getSchemeRegistry();
+            // 通过SchemeRegistry将SSLSocketFactory注册到我们的HttpClient上
+            sr.register(new Scheme("https", ssf, 443));
+        }
+    }
+
     /**
+     * @see SSLCustomSocketFactory
+     * @return
+     */
+    public static HttpClient getSSLCustomHttpClient() {
+        try {
+            HttpParams params = new BasicHttpParams();
+            HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+            HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
+
+            SchemeRegistry registry = new SchemeRegistry();
+            registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+            registry.register(new Scheme("https", SSLCustomSocketFactory.getSocketFactory(), 443));
+
+            ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
+
+            return new DefaultHttpClient(ccm, params);
+        } catch (Exception e) {
+            return new DefaultHttpClient();
+        }
+    }
+
+    /**
+     * <a href="http://blog.csdn.net/raptor/article/details/18898937">
+     * 在Android应用中使用自定义证书的HTTPS连接（下） </a>
+     * <p>
+     * 
+     * <pre>
+     * 要验证自定义证书，首先要把证书编译到应用中去，这需要JSSE提供的keytool工具来生成KeyStore文件。参考《Java 安全套接字编程以及 keytool 使用最佳实践》，我试过了用JKS格式，但是结果连接失败，报错：Wrong version of key store。后来看了SO的这个帖才知道必须使用BKS的1.46版。更详细的内容参考这篇《Using a Custom Certificate Trust Store on Android》。
+     * 这里所谓的证书，实际上就是公钥，你可以从web服务器配置的.crt文件或.pem文件里获得。比如12306就直接提供了公钥证书下载，真是“服务周到”啊。
+     * 还 有一个比较简单的办法就是直接从浏览器里获得。比如用 FireFox 打开 https 链接，在地址栏顶部的小锁上点一下，然后点“更多信息……”－“查看证书”－“详细内容”－“导出”，即可将网站的X.509证书导出为一个文本文件。不 过需要注意的是，这种方法只对某些HTTPS服务器有效——通常是使用自签名证书或是使用类似StarCom免费证书服务器，但是对 12306 或 google 这种的就无效了，具体原因不明。
+     * 另外，不论是浏览器导出，还是服务器端获得，都是公钥证书，有两种格式：纯文本的.crt格式或是二进制的.cer格式。两种都可以用。
+     * 然后，你需要一个特定版本的JCE Provider，就是上面说过的那个SO帖里给的：http://www.bouncycastle.org/download/bcprov-jdk15on-146.jar 。注意，bouncycastle官网上目前发布的1.50版我试了一下不可用，不知道是不是我打开的方式不对，总之用这个1.46版的是没错的。
+     * 把这两个文件放在一起，然后在这个目录下运行以下命令：
+     * 
+     * keytool -importcert -v -trustcacerts -alias cert12306 -file srca.cer \
+     * -keystore cert12306.bks -storetype BKS \
+     * -providerclass org.bouncycastle.jce.provider.BouncyCastleProvider \
+     * -providerpath ./bcprov-jdk15on-146.jar -storepass pw12306
+     * 
+     * 运行后将显示证书内容并提示你是否确认，按Y回车确认即可。
+     * 其中cert12306是个随便取的别名，供keytool管理时方便而已。srca.cer就是从12306网站下载的证书文件。cert12306.bks是生成的keyStore文件，注意，这个文件必须以JAVA变量名的方式命名，比如不能直接叫12306.bks，否则在加载资源时会因为名字不是合格的JAVA变量名而出错。 ./bcprov-jdk15on-146.jar 就是刚才下载的那个JCE Provider。最后pw12306是一个密码，用于确保KeyStore文件本身的安全。
+     * </pre>
+     * 
      * 其中crt就是bks资源文件名，KEY_PASS就是前面设置的密码。
      * <p>
      * schReg.register(new Scheme("https",
