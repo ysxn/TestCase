@@ -2,7 +2,10 @@
 package com.codezyw.common;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.Window;
 
@@ -59,5 +62,31 @@ public class BitmapHelper {
             return result;
         }
         return null;
+    }
+
+    /**
+     * 对原始图片用指定颜色使用滤镜效果，设置原始图片必须使用getOriginDrawable
+     * 
+     * @see getOriginDrawable
+     * @param context
+     * @param resId
+     * @param color
+     * @return
+     */
+    public static Drawable getFilterDrawable(Context context, int resId, int color) {
+        Drawable d = context.getResources().getDrawable(resId);
+        d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        return d;
+    }
+
+    /**
+     * 使用过滤镜的图片，再次设置原始图片必须调用这个
+     * 
+     * @see getFilterDrawable
+     */
+    public static Drawable getOriginDrawable(Context context, int resId) {
+        Drawable d = context.getResources().getDrawable(resId);
+        d.clearColorFilter();
+        return d;
     }
 }
