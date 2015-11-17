@@ -65,7 +65,7 @@ public class BitmapHelper {
     }
 
     /**
-     * ¶ÔÔ­Ê¼Í¼Æ¬ÓÃÖ¸¶¨ÑÕÉ«Ê¹ÓÃÂË¾µĞ§¹û£¬ÉèÖÃÔ­Ê¼Í¼Æ¬±ØĞëÊ¹ÓÃgetOriginDrawable
+     * å¯¹åŸå§‹å›¾ç‰‡ç”¨æŒ‡å®šé¢œè‰²ä½¿ç”¨æ»¤é•œæ•ˆæœï¼Œè®¾ç½®åŸå§‹å›¾ç‰‡å¿…é¡»ä½¿ç”¨getOriginDrawable
      * 
      * @see getOriginDrawable
      * @param context
@@ -80,7 +80,7 @@ public class BitmapHelper {
     }
 
     /**
-     * Ê¹ÓÃ¹ıÂË¾µµÄÍ¼Æ¬£¬ÔÙ´ÎÉèÖÃÔ­Ê¼Í¼Æ¬±ØĞëµ÷ÓÃÕâ¸ö
+     * ä½¿ç”¨è¿‡æ»¤é•œçš„å›¾ç‰‡ï¼Œå†æ¬¡è®¾ç½®åŸå§‹å›¾ç‰‡å¿…é¡»è°ƒç”¨è¿™ä¸ª
      * 
      * @see getFilterDrawable
      */
