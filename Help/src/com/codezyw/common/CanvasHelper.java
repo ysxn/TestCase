@@ -29,66 +29,54 @@ public class CanvasHelper {
      */
 
     /**
-     * <a
-     * href="http://www.2cto.com/kf/201503/379761.html">http://www.2cto.com/kf
-     * /201503/379761.html</a>
-     * 
      * <pre>
-     * Paint 代表了Canvas上的画笔、画刷、颜料等等；
-     * Paint类常用方法:
-     * setARGB(int a, int r, int g, int b) // 设置 Paint对象颜色，参数一为alpha透明值
-     * setAlpha(int a) // 设置alpha不透明度，范围为0~255
-     * setAntiAlias(boolean aa) // 是否抗锯齿
-     * setColor(int color) // 设置颜色，这里Android内部定义的有Color类包含了一些常见颜色定义
-     * setTextScaleX(float scaleX) // 设置文本缩放倍数，1.0f为原始
-     * setTextSize(float textSize) // 设置字体大小
-     * setUnderlineText(booleanunderlineText) // 设置下划线
      * 
      * 
-     * // 1、将会以颜色ARBG填充整个控件的Canvas背景
-     * //mCanvas.drawARGB(122, 10, 159, 163) ;
-     * // 2、将会以颜色ARBG填充整个控件的Canvas背景
-     * //mCanvas.drawColor(Color.BLUE) ;
-     * // 3、绘制颜色，但是要制定一个mode
-     * //mCanvas.drawColor(Color.BLUE, Mode.SCREEN) ;
-     * // 4、画背景，跟2等效
-     * //mCanvas.drawPaint(mPaint) ;
-     * // 5、画一个点
-     * //mCanvas.drawPoint(23, 23, mPaint) ;
-     * // 6、画很多点这里的float[] 表示{x0,y0,x1,y1,x2,y2,x3,y3.....}
-     * //mCanvas.drawPoints(new float[]{10,11,10,12,10,13,10,14,10,15,10,16}, mPaint) ;
-     * // 7、画线
-     * //mCanvas.drawLine(...) ;
-     * // 8、画长方形 Rect 和RectF的区别？
-     * //精度不一样，Rect是使用int类型作为数值，RectF是使用float类型作为数值
-     * //Rect r = new Rect(10,10,50,50) ;
-     * //mCanvas.drawRect(r, mPaint) ;
-     * //RectF rf = new RectF(10,10,50,50) ;
-     * //mCanvas.drawRect(rf, mPaint) ;
-     * //mCanvas.drawRect(10, 10, 50, 50, mPaint) ;
-     * // 9、画椭圆 初始化RectF的参数是（left,top,right,bottom）
-     * //RectF rf = new RectF(100,100 ,200 ,250) ;
-     * //mCanvas.drawOval(rf, mPaint) ;
-     * // 10、画圆 （圆心x0,圆心y0,半径，paint）
-     * //mCanvas.drawCircle(100, 100, 50, mPaint) ;
-     * // 11、画圆弧 RectF对象表明内切矩形的（left,top,right,bottom）
-     * //RectF rf = new RectF(100 ,100 ,200 ,200) ;
-     * // 参数(rf,startAngle ,angle ,sweepAngle ,paint) sweepAngle表明是否显示圆弧三角形 angle画多少度
-     * //mCanvas.drawArc(rf, 60, 30, true, mPaint) ;
-     * // 12、绘制圆角矩形 RectF是矩形的（left,top,right,bottom）
-     * //RectF rf = new RectF(100 ,100 ,200 ,200) ;
-     * // 50表明x方向的半径，20表示y方向的半径
-     * //mCanvas.drawRoundRect(rf, 50, 20, mPaint) ;
-     * // 13、画任意多边形
-     * //Path path = new Path() ;
-     * //path.moveTo(100, 100) ;
-     * //path.lineTo(200, 200) ;
-     * //path.lineTo(300, 200) ;
-     * //mCanvas.drawPath(path, mPaint) ;
-     * // 14、通过Path对象，也可以画其他的图形
-     * //Path path = new Path() ;
-     * //path.addCircle(100, 100, 20, Path.Direction.CCW) ;
-     * //mCanvas.drawPath(path ,mPaint);
+     * 
+     * 1、将会以颜色ARBG填充整个控件的Canvas背景
+     * mCanvas.drawARGB(122, 10, 159, 163) ;
+     * 2、将会以颜色ARBG填充整个控件的Canvas背景
+     * mCanvas.drawColor(Color.BLUE) ;
+     * 3、绘制颜色，但是要制定一个mode
+     * mCanvas.drawColor(Color.BLUE, Mode.SCREEN) ;
+     * 4、画背景，跟2等效
+     * mCanvas.drawPaint(mPaint) ;
+     * 5、画一个点
+     * mCanvas.drawPoint(23, 23, mPaint) ;
+     * 6、画很多点这里的float[] 表示{x0,y0,x1,y1,x2,y2,x3,y3.....}
+     * mCanvas.drawPoints(new float[]{10,11,10,12,10,13,10,14,10,15,10,16}, mPaint) ;
+     * 7、画线
+     * mCanvas.drawLine(...) ;
+     * 8、画长方形 Rect 和RectF的区别？
+     * 精度不一样，Rect是使用int类型作为数值，RectF是使用float类型作为数值
+     * Rect r = new Rect(10,10,50,50) ;
+     * mCanvas.drawRect(r, mPaint) ;
+     * RectF rf = new RectF(10,10,50,50) ;
+     * mCanvas.drawRect(rf, mPaint) ;
+     * mCanvas.drawRect(10, 10, 50, 50, mPaint) ;
+     * 9、画椭圆 初始化RectF的参数是（left,top,right,bottom）
+     * RectF rf = new RectF(100,100 ,200 ,250) ;
+     * mCanvas.drawOval(rf, mPaint) ;
+     * 10、画圆 （圆心x0,圆心y0,半径，paint）
+     * mCanvas.drawCircle(100, 100, 50, mPaint) ;
+     * 11、画圆弧 RectF对象表明内切矩形的（left,top,right,bottom）
+     * RectF rf = new RectF(100 ,100 ,200 ,200) ;
+     * 参数(rf,startAngle ,angle ,sweepAngle ,paint) sweepAngle表明是否显示圆弧三角形 angle画多少度
+     * mCanvas.drawArc(rf, 60, 30, true, mPaint) ;
+     * 12、绘制圆角矩形 RectF是矩形的（left,top,right,bottom）
+     * RectF rf = new RectF(100 ,100 ,200 ,200) ;
+     * 50表明x方向的半径，20表示y方向的半径
+     * mCanvas.drawRoundRect(rf, 50, 20, mPaint) ;
+     * 13、画任意多边形
+     * Path path = new Path() ;
+     * path.moveTo(100, 100) ;
+     * path.lineTo(200, 200) ;
+     * path.lineTo(300, 200) ;
+     * mCanvas.drawPath(path, mPaint) ;
+     * 14、通过Path对象，也可以画其他的图形
+     * Path path = new Path() ;
+     * path.addCircle(100, 100, 20, Path.Direction.CCW) ;
+     * mCanvas.drawPath(path ,mPaint);
      * 
      * drawBitmap
      * drawText
@@ -133,66 +121,45 @@ public class CanvasHelper {
      * /blog.csdn.net/ygc973797893/article/details/7226167</a>
      * 
      * <pre>
-     *  Canvas类主要实现了屏幕的绘制过程，其中包含了很多实用的方法，比如绘制一条路径、区域、贴图、画点、画线、渲染文本，下面是Canvas类常用的方法，当然Android开发网提示大家很多方法有不同的重载版本，参数更灵活。
-     * 
+     *  Canvas类主要实现了屏幕的绘制过程，其中包含了很多实用的方法，比如绘制一条路径、区域、贴图、画点、画线、渲染文本，下面是Canvas类常用的方法，当然很多方法有不同的重载版本，参数更灵活。
      *   void drawRect(RectF rect, Paint paint) //绘制区域，参数一为RectF一个区域
-     * 
      *   void drawPath(Path path, Paint paint) //绘制一个路径，参数一为Path路径对象 
-     * 
-     *   void  drawBitmap(Bitmap bitmap, Rect src, Rect dst, Paint paint)   //贴图，参数一就是我们常规的Bitmap对象，参数二是源区域(Android123提示这里是bitmap)，参数三是目标区域(应该在canvas的位置和大小)，参数四是Paint画刷对象，因为用到了缩放和拉伸的可能，当原始Rect不等于目标Rect时性能将会有大幅损失。 
-     * 
-     *   void  drawLine(float startX, float startY, float stopX, float stopY, Paint paint)  //画线，参数一起始点的x轴位置，参数二起始点的y轴位置，参数三终点的x轴水平位置，参数四y轴垂直位置，最后一个参数为Paint画刷对象。
-     * 
-     *   void  drawPoint(float x, float y, Paint paint) //画点，参数一水平x轴，参数二垂直y轴，第三个参数为Paint对象。
+     *   void drawBitmap(Bitmap bitmap, Rect src, Rect dst, Paint paint)   //贴图，参数一就是我们常规的Bitmap对象，参数二是源区域(Android123提示这里是bitmap)，参数三是目标区域(应该在canvas的位置和大小)，参数四是Paint画刷对象，因为用到了缩放和拉伸的可能，当原始Rect不等于目标Rect时性能将会有大幅损失。 
+     *   void drawLine(float startX, float startY, float stopX, float stopY, Paint paint)  //画线，参数一起始点的x轴位置，参数二起始点的y轴位置，参数三终点的x轴水平位置，参数四y轴垂直位置，最后一个参数为Paint画刷对象。
+     *   void drawPoint(float x, float y, Paint paint) //画点，参数一水平x轴，参数二垂直y轴，第三个参数为Paint对象。
+     *   void drawText(String text, float x, float y, Paint paint)  //渲染文本，Canvas类除了上面的还可以描绘文字，参数一是String类型的文本，参数二x轴，参数三y轴，参数四是Paint对象。
+     *   void drawTextOnPath(String text, Path path, float hOffset, float vOffset, Paint paint) //在路径上绘制文本，相对于上面第二个参数是Path路径对象
      *  
-     *          void drawText(String text, float x, float y, Paint paint)  //渲染文本，Canvas类除了上面的还可以描绘文字，参数一是String类型的文本，参数二x轴，参数三y轴，参数四是Paint对象。
-     * 
-     *   void  drawTextOnPath(String text, Path path, float hOffset, float vOffset, Paint paint) //在路径上绘制文本，相对于上面第二个参数是Path路径对象
-     * 
-     *   从上面来看我们可以看出Canvas绘制类比较简单同时很灵活，实现一般的方法通常没有问题，同时可以叠加的处理设计出一些效果，不过细心的网友可能发现最后一个参数均为Paint对象。如果我们把Canvas当做绘画师来看，那么Paint就是我们绘画的工具，比如画笔、画刷、颜料等等
+     *  最后一个参数均为Paint对象。如果我们把Canvas当做绘画师来看，那么Paint就是我们绘画的工具，比如画笔、画刷、颜料等等
      *  Paint类常用方法:
+     *   void  setARGB(int a, int r, int g, int b)      //设置Paint对象颜色，参数一为alpha透明通道
+     *   void  setAlpha(int a)                          //设置alpha不透明度，范围为0~255
+     *   void  setAntiAlias(boolean is)                 //是否抗锯齿
+     *   void  setColor(int color)                      //设置颜色，这里Android内部定义的有Color类包含了一些常见颜色定义 
+     *   void  setFakeBoldText(boolean fakeBoldText)    //设置伪粗体文本
+     *   void  setLinearText(boolean linearText)        //设置线性文本
+     *   PathEffect  setPathEffect(PathEffect effect)   //设置路径效果
+     *   Rasterizer  setRasterizer(Rasterizer rasterizer) //设置光栅化
+     *   Shader  setShader(Shader shader)               //设置阴影 
+     *   void  setTextAlign(Paint.Align align)          //设置文本对齐
+     *   void  setTextScaleX(float scaleX)              //设置文本缩放倍数，1.0f为原始
+     *   void  setTextSize(float textSize)              //设置字体大小
+     *   Typeface  setTypeface(Typeface typeface)       //设置字体，Typeface包含了字体的类型，粗细，还有倾斜、颜色等。
+     *   void  setUnderlineText(boolean underlineText)  //设置下划线
      * 
-     *  void  setARGB(int a, int r, int g, int b)  设置Paint对象颜色，参数一为alpha透明通道
-     * 
-     *        void  setAlpha(int a)  设置alpha不透明度，范围为0~255
-     * 
-     *  void  setAntiAlias(boolean aa)  //是否抗锯齿
-     * 
-     *  void  setColor(int color)  //设置颜色，这里Android内部定义的有Color类包含了一些常见颜色定义 
-     * 
-     *  void  setFakeBoldText(boolean fakeBoldText)  //设置伪粗体文本
-     *   
-     *        void  setLinearText(boolean linearText)  //设置线性文本
-     *  
-     *        PathEffect  setPathEffect(PathEffect effect)  //设置路径效果
-     *  
-     *        Rasterizer  setRasterizer(Rasterizer rasterizer) //设置光栅化
-     *  
-     *        Shader  setShader(Shader shader)  //设置阴影 
-     * 
-     *  void  setTextAlign(Paint.Align align)  //设置文本对齐
-     * 
-     *        void  setTextScaleX(float scaleX)  //设置文本缩放倍数，1.0f为原始
-     *   
-     *        void  setTextSize(float textSize)  //设置字体大小
-     *  
-     *        Typeface  setTypeface(Typeface typeface)  //设置字体，Typeface包含了字体的类型，粗细，还有倾斜、颜色等。
-     * 
-     *  void  setUnderlineText(boolean underlineText)  //设置下划线
-     *  
      * Path路径类在位于android.graphics.Path中，Path的构造方法比较简单，如下
      * 
-     *    Path cwj = new Path();  //构造方法
+     *    Path path = new Path();  //构造方法
      * 
      *    下面我们画一个封闭的原型路径，我们使用Path类的addCircle方法
      * 
-     *    cwj.addCircle(10,10,50,Direction.CW); //参数一为x轴水平位置，参数二为y轴垂直位置，第三个参数为圆形的半径，最后是绘制的方向，CW为顺时针方向，而CCW是逆时针方向。
+     *    path.addCircle(10,10,50,Direction.CW); //参数一为x轴水平位置，参数二为y轴垂直位置，第三个参数为圆形的半径，最后是绘制的方向，CW为顺时针方向，而CCW是逆时针方向。
      * 
      *     结合Android上次提到的Canvas类中的绘制方法drawPath和drawTextOnPath，我们继续可以在onDraw中加入。
      * 
-     *    canvas.drawPath(cwj,paintPath); //Android123提示大家这里paintPath为路径的画刷颜色，可以见下文完整的源代码。
+     *    canvas.drawPath(path,paintPath); //Android123提示大家这里paintPath为路径的画刷颜色，可以见下文完整的源代码。
      * 
-     *    canvas.drawTextOnPath("Android123 - CWJ",cwj,0,15,paintText); //将文字绘制到路径中去，有关drawTextOnPath的参数如下:
+     *    canvas.drawTextOnPath("Android123 - PATH",path,0,15,paintText); //将文字绘制到路径中去，有关drawTextOnPath的参数如下:
      * 
      *    方法原型public void drawTextOnPath (String text, Path path, float hOffset, float vOffset, Paint paint) 
      *      参数列表:
@@ -206,126 +173,69 @@ public class CanvasHelper {
      *               paint  最后仍然是一个Paint对象用于制定Text本文的颜色、字体、大小等属性。
      *               
      * 有关路径类常用的方法如下:
-     * 
-     *  void  addArc(RectF oval, float startAngle, float sweepAngle)  //为路径添加一个多边形
-     *  
-     *        void  addCircle(float x, float y, float radius, Path.Direction dir)  //给path添加圆圈
-     *  
+     * void  addArc(RectF oval, float startAngle, float sweepAngle)  //为路径添加一个多边形
+     * void  addCircle(float x, float y, float radius, Path.Direction dir)  //给path添加圆圈
      * void  addOval(RectF oval, Path.Direction dir)  //添加椭圆形
-     * 
      * void  addRect(RectF rect, Path.Direction dir)  //添加一个区域
-     *   
      * void  addRoundRect(RectF rect, float[] radii, Path.Direction dir)  //添加一个圆角区域
-     *  
      * boolean  isEmpty()  //判断路径是否为空
-     *   
      * void  transform(Matrix matrix)  //应用矩阵变换
-     *  
      * void  transform(Matrix matrix, Path dst)  //应用矩阵变换并将结果放到新的路径中，即第二个参数。
-     * 
-     *   有关路径的高级效果大家可以使用PathEffect类.
+     * 有关路径的高级效果大家可以使用PathEffect类.
      * </pre>
      */
 
     /**
-     * <a href="http://blog.csdn.net/dinko321/article/details/6715290">http://
-     * blog.csdn.net/dinko321/article/details/6715290</a>
-     * 
      * <pre>
      *  canvas相关（渐变、阴影、path）
      * 1、setShader
-     * 
-     * Paint对象的setShader函数，我的感觉是设置一种方式来填充图形。
-     * 
+     * Paint对象的setShader函数，设置一种方式来填充图形。
      * 可以设置为渐变，代码如下：
-     * 
-     * [java] view plaincopy
-     * 
      *     Paint paint=new Paint();  //定义一个Paint  
      *     Shader mShader = new LinearGradient(0,0,40,60,new int[] {Color.RED,Color.GREEN,Color.BLUE},null,Shader.TileMode.REPEAT);    
      *     //新建一个线性渐变，前两个参数是渐变开始的点坐标，第三四个参数是渐变结束的点的坐标。连接这2个点就拉出一条渐变线了，玩过PS的都懂。然后那个数组是渐变的颜色。下一个参数是渐变颜色的分布，如果为空，每个颜色就是均匀分布的。最后是模式，这里设置的是循环渐变  
-     *       
      *     paint.setShader(mShader);  
-     * 
-     * 
      * Shader可以有以下几种：
-     * 
      * bitmapShader         位图平铺
-     * 
      * linearGradient         线性渐变
-     * 
      * radialGradient         圆形渐变
-     * 
      * sweepGradient       角度渐变
-     * 
      * composeShader    组合效果（组合以上几种）
      * 
-     * 
-     * 
-     * 
      * 2、setShadowLayer
-     * 
      * 设置了这个之后，再画出来的图形后面，会有一个阴影
-     * 
-     * [java] view plaincopy
-     * 
-     *     paint.setShaderLayer(15,10,10,Color.GRAY);  //第一个参数是阴影扩散半径，紧接着的2个参数是阴影在X和Y方向的偏移量，最后一个参数是颜色  
-     * 
-     * 
-     * 但是这里有个问题，在画bitmap的时候，如果设置了shadowLayer，画出来的图形并不会有阴影，而是2个bitmap叠加在一起。也就是说，他的阴影层也和他本身一样。根据分析，因该是bitmap也被设置成了阴影层。暂时还没找到比较好的在图下面添加阴影的办法。
-     * 
-     * 
-     * 
+     *     paint.setShaderLayer(15,10,10,Color.GRAY);  //第一个参数是阴影扩散半径，紧接着的2个参数是阴影在X和Y方向的偏移量，最后一个参数是颜色。
+     * 但是这里有个问题，在画bitmap的时候，如果设置了shadowLayer，画出来的图形并不会有阴影，而是2个bitmap叠加在一起。
+     * 也就是说，他的阴影层也和他本身一样。根据分析，因该是bitmap也被设置成了阴影层。
      * 
      * 3、Path的6种效果
-     * 
-     * CornerPathEffect              在路径的转折处是圆角，构造参数为圆角半径
-     * 
-     * 
-     * DiscretePathEffect           不规则的锯齿线（类似心电图）
-     * 
+     * CornerPathEffect              //在路径的转折处是圆角，构造参数为圆角半径
+     * DiscretePathEffect            //不规则的锯齿线（类似心电图）
      * 构造参数：
-     * 
      *     第一个是小三角的开口宽度（心电图每个波之间的宽度）
-     * 
      *     一个是偏移量（心电图高度）
-     * 
-     * 
-     * DashPathEffect                 虚线
-     * 
+     * DashPathEffect                //虚线
      * 构造参数：
-     * 
      *     第一个是一个数组，数组长度必须>=2，数组的值定义了宽度，比如 {20,10,5,10}，意思就是第一个实线段长20，他后面的空白长10，然后又是一个长5的实线段，然后是长度10的空白。
-     * 
      *     第二个参数说是偏移量，没发现具体作用
-     * 
-     * 
-     * PathDashPathEffect        类似上面一个，不过是由path图形组成的线段（如由三角形组成的线段，正方形组成的线段）。
-     * 
+     * PathDashPathEffect            //类似上面一个，不过是由path图形组成的线段（如由三角形组成的线段，正方形组成的线段）。
      * 构造参数：
-     * 
      *     第一个参数是一个path，由他定义图形。
-     * 
      *     第二个是间距
-     * 
      *     第三个和上面一样   
-     * 
      *     第四个是变换方式，有PathDashPathEffect.Style.TRANSLATE，ROTATE，MORPH三种。第一个就是直接把图形摆出路径，第二个会依据路径旋转，第三个是依据路径自动变形
-     * 
-     * 
-     * ComposePathEffect       把两个上面其他的方式组合起来
-     * 
+     * ComposePathEffect             //把两个上面其他的方式组合起来
      * 构造参数：
-     * 
      *     第一个是一个effect
-     * 
      *     第二个还是一个effect
-     * 
-     * 
-     * SumPathEffect                把两个其他方法加起来，和上面类似，差别不好描述。。。
+     * SumPathEffect                 //把两个其他方法加起来，和上面类似，差别不好描述。。。
      * </pre>
      */
-    public static void ShaderAndPathEffect(Canvas canvas) {
+    public static void Shader(Canvas canvas) {
+
+    }
+
+    public static void PathEffect(Canvas canvas) {
 
     }
 
