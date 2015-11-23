@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.browser;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -63,8 +64,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * User: qii
- * Date: 12-9-1
+ * User: qii Date: 12-9-1
  */
 public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRemoveItem {
 
@@ -116,7 +116,6 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
 
     private BroadcastReceiver sendRepostCompletedReceiver;
 
-
     private RemoveTask removeTask;
 
     private boolean canLoadOldCommentData = true;
@@ -167,7 +166,6 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
     public BrowserWeiboMsgFragment() {
     }
 
-
     public BrowserWeiboMsgFragment(MessageBean msg) {
         this.msg = msg;
     }
@@ -179,8 +177,8 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-//        if (hasGpsInfo())
-//            layout.mapView.onSaveInstanceState(outState);
+        // if (hasGpsInfo())
+        // layout.mapView.onSaveInstanceState(outState);
         outState.putParcelable("msg", msg);
     }
 
@@ -192,7 +190,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
                 MapsInitializer.initialize(getActivity());
             }
         } catch (GooglePlayServicesNotAvailableException impossible) {
-                      /* Impossible */
+            /* Impossible */
         }
     }
 
@@ -218,7 +216,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
                 loadNewCommentData();
                 break;
             case SCREEN_ROTATE:
-                //nothing
+                // nothing
                 buildViewData(true);
                 break;
             case ACTIVITY_DESTROY_AND_CREATE:
@@ -239,17 +237,19 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
 
     }
 
-
-    //android has a bug,I am tired. I use another color and disable underline for link,but when I open "dont save activity" in
-    //developer option,click the link to open another activity, then press back,this fragment is restored,
-    //but the link color is restored to android own blue color,not my custom color,the underline appears
-    //the workaround is set textview value in onresume() method
+    // android has a bug,I am tired. I use another color and disable underline for link,but when I
+    // open "dont save activity" in
+    // developer option,click the link to open another activity, then press back,this fragment is
+    // restored,
+    // but the link color is restored to android own blue color,not my custom color,the underline
+    // appears
+    // the workaround is set textview value in onresume() method
     @Override
     public void onResume() {
         super.onResume();
-//        buildViewData(false);
-//        if (hasGpsInfo())
-//            layout.mapView.onResume();
+        // buildViewData(false);
+        // if (hasGpsInfo())
+        // layout.mapView.onResume();
 
         sendCommentCompletedReceiver = new BroadcastReceiver() {
             @Override
@@ -289,7 +289,6 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
                 .unregisterReceiver(sendRepostCompletedReceiver);
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -299,7 +298,6 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         layout.content_pic.setImageDrawable(null);
         layout.repost_pic.setImageDrawable(null);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -323,7 +321,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         switchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //empty
+                // empty
             }
         });
 
@@ -392,7 +390,6 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         layout.repost_layout = (LinearLayout) view.findViewById(R.id.repost_layout);
     }
 
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -445,7 +442,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         layout.content_pic.setVisibility(View.GONE);
         layout.content_pic_multi.setVisibility(View.GONE);
 
-        //sina weibo official account can send repost message with picture, fuck sina weibo
+        // sina weibo official account can send repost message with picture, fuck sina weibo
         if (!TextUtils.isEmpty(msg.getBmiddle_pic()) && msg.getRetweeted_status() == null) {
             displayPictures(msg, layout.content_pic_multi, layout.content_pic, refreshPic);
         }
@@ -455,7 +452,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         layout.repost_layout.setVisibility(repostMsg != null ? View.VISIBLE : View.GONE);
 
         if (repostMsg != null) {
-            //sina weibo official account can send repost message with picture, fuck sina weibo
+            // sina weibo official account can send repost message with picture, fuck sina weibo
             layout.content_pic.setVisibility(View.GONE);
 
             layout.repost_layout.setVisibility(View.VISIBLE);
@@ -483,7 +480,6 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         ((BrowserWeiboMsgActivity) getActivity()).updateRepostCount(msg.getReposts_count());
 
     }
-
 
     private void displayPictures(final MessageBean msg, GridLayout layout,
             WeiboDetailImageView view, boolean refreshPic) {
@@ -556,7 +552,6 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         }
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -620,7 +615,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         }
     }
 
-    //only can remove comment
+    // only can remove comment
     @Override
     public void removeItem(int position) {
         clearActionMode();
@@ -662,13 +657,12 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         }
     }
 
-
     private View.OnClickListener repostContentOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
-            //This condition will satisfy only when it is not an autolinked text
-            //onClick action
+            // This condition will satisfy only when it is not an autolinked text
+            // onClick action
             boolean isNotLink = layout.recontent.getSelectionStart() == -1
                     && layout.recontent.getSelectionEnd() == -1;
             boolean isDeleted = msg.getRetweeted_status() == null
@@ -713,9 +707,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         }
     };
 
-
-    private AdapterView.OnItemLongClickListener repostOnItemLongClickListener
-            = new AdapterView.OnItemLongClickListener() {
+    private AdapterView.OnItemLongClickListener repostOnItemLongClickListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -725,7 +717,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
                 MessageBean msg = repostList.getItemList()
                         .get(position - getListView().getHeaderViewsCount());
                 StatusSingleChoiceModeListener choiceModeListener
-                        = new StatusSingleChoiceModeListener(getListView(), adapter,
+                = new StatusSingleChoiceModeListener(getListView(), adapter,
                         BrowserWeiboMsgFragment.this, msg);
                 if (actionMode != null) {
                     actionMode.finish();
@@ -742,8 +734,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         }
     };
 
-    private AdapterView.OnItemLongClickListener commentOnItemLongClickListener
-            = new AdapterView.OnItemLongClickListener() {
+    private AdapterView.OnItemLongClickListener commentOnItemLongClickListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
             if (position - listView.getHeaderViewsCount() < commentList.getSize()
@@ -756,7 +747,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
                     actionMode = getActivity().startActionMode(
                             new CommentSingleChoiceModeListener(getListView(), adapter,
                                     BrowserWeiboMsgFragment.this, commentList.getItemList()
-                                    .get(position - listView.getHeaderViewsCount())));
+                                            .get(position - listView.getHeaderViewsCount())));
                     return true;
                 } else {
                     getListView().setItemChecked(position, true);
@@ -764,7 +755,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
                     actionMode = getActivity().startActionMode(
                             new CommentSingleChoiceModeListener(getListView(), adapter,
                                     BrowserWeiboMsgFragment.this, commentList.getItemList()
-                                    .get(position - listView.getHeaderViewsCount())));
+                                            .get(position - listView.getHeaderViewsCount())));
                     return true;
                 }
             }
@@ -773,8 +764,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
 
     };
 
-    private AdapterView.OnItemClickListener repostOnItemClickListener
-            = new AdapterView.OnItemClickListener() {
+    private AdapterView.OnItemClickListener repostOnItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if (resetActionMode()) {
@@ -794,8 +784,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         }
     };
 
-    private AdapterView.OnItemClickListener commentOnItemClickListener
-            = new AdapterView.OnItemClickListener() {
+    private AdapterView.OnItemClickListener commentOnItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if (resetActionMode()) {
@@ -805,18 +794,18 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
             getListView().clearChoices();
 
             if (position - listView.getHeaderViewsCount() < commentList.getSize()) {
-//                   Intent intent = new Intent(getActivity(), BrowserWeiboMsgActivity.class);
-//                   intent.putExtra("msg", repostList.getItemList().get(position - listView.getHeaderViewsCount()));
-//                   intent.putExtra("token", GlobalContext.getInstance().getSpecialToken());
-//                   startActivity(intent);
+                // Intent intent = new Intent(getActivity(), BrowserWeiboMsgActivity.class);
+                // intent.putExtra("msg", repostList.getItemList().get(position -
+                // listView.getHeaderViewsCount()));
+                // intent.putExtra("token", GlobalContext.getInstance().getSpecialToken());
+                // startActivity(intent);
             } else {
                 loadOldCommentData();
             }
         }
     };
 
-    private PullToRefreshBase.OnLastItemVisibleListener onLastItemVisibleListener
-            = new PullToRefreshBase.OnLastItemVisibleListener() {
+    private PullToRefreshBase.OnLastItemVisibleListener onLastItemVisibleListener = new PullToRefreshBase.OnLastItemVisibleListener() {
         @Override
         public void onLastItemVisible() {
             if (isCommentList) {
@@ -831,8 +820,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         }
     };
 
-    private AbsListView.OnScrollListener listViewOnScrollListener
-            = new AbsListView.OnScrollListener() {
+    private AbsListView.OnScrollListener listViewOnScrollListener = new AbsListView.OnScrollListener() {
         @Override
         public void onScrollStateChanged(AbsListView view, int scrollState) {
 
@@ -852,7 +840,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
 
             if (getListView().getLastVisiblePosition() > 7
                     && getListView().getFirstVisiblePosition() != getListView()
-                    .getHeaderViewsCount()) {
+                            .getHeaderViewsCount()) {
 
                 if (isCommentList) {
 
@@ -959,7 +947,6 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         }
     }
 
-
     public void loadNewCommentData() {
         canLoadOldCommentData = true;
         if (getLoaderManager().getLoader(NEW_COMMENT_LOADER_ID) != null) {
@@ -999,9 +986,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         getLoaderManager().restartLoader(OLD_REPOST_LOADER_ID, null, repostMsgCallback);
     }
 
-    protected LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<CommentListBean>>
-            commentMsgCallback
-            = new LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<CommentListBean>>() {
+    protected LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<CommentListBean>> commentMsgCallback = new LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<CommentListBean>>() {
 
         @Override
         public Loader<AsyncTaskLoaderResult<CommentListBean>> onCreateLoader(int id, Bundle args) {
@@ -1089,9 +1074,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
         }
     };
 
-
-    protected LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<RepostListBean>> repostMsgCallback
-            = new LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<RepostListBean>>() {
+    protected LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<RepostListBean>> repostMsgCallback = new LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<RepostListBean>>() {
 
         @Override
         public Loader<AsyncTaskLoaderResult<RepostListBean>> onCreateLoader(int id, Bundle args) {

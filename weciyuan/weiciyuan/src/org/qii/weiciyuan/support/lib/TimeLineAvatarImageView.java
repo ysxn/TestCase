@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.content.Context;
@@ -17,8 +18,7 @@ import org.qii.weiciyuan.support.asyncdrawable.IWeiciyuanDrawable;
 import org.qii.weiciyuan.support.utils.Utility;
 
 /**
- * User: qii
- * Date: 12-12-19
+ * User: qii Date: 12-12-19
  */
 public class TimeLineAvatarImageView extends PerformanceImageView implements IWeiciyuanDrawable {
 
@@ -28,7 +28,6 @@ public class TimeLineAvatarImageView extends PerformanceImageView implements IWe
     private boolean pressed = false;
 
     private int vType = UserBean.V_TYPE_NONE;
-
 
     public TimeLineAvatarImageView(Context context) {
         this(context, null);
@@ -64,7 +63,6 @@ public class TimeLineAvatarImageView extends PerformanceImageView implements IWe
             canvas.drawColor(getResources().getColor(R.color.transparent_cover));
         }
     }
-
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -155,7 +153,6 @@ public class TimeLineAvatarImageView extends PerformanceImageView implements IWe
         }
 
     }
-
 
     @Override
     public void setPressesStateVisibility(boolean value) {

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.nearby;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -42,8 +43,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * User: qii
- * Date: 13-3-8
+ * User: qii Date: 13-3-8
  */
 public class NearbyTimeLineActivity extends AbstractAppActivity {
 
@@ -58,7 +58,6 @@ public class NearbyTimeLineActivity extends AbstractAppActivity {
     private Marker melbourne;
 
     private Map<Marker, MessageBean> bindEvent = new HashMap<Marker, MessageBean>();
-
 
     private GetGoogleLocationInfo locationTask;
 
@@ -154,7 +153,6 @@ public class NearbyTimeLineActivity extends AbstractAppActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     private class GetGoogleLocationInfo extends MyAsyncTask<Void, String, String> {
 
         GeoBean geoBean;
@@ -199,7 +197,6 @@ public class NearbyTimeLineActivity extends AbstractAppActivity {
         }
     }
 
-
     private void addLocation() {
         LocationManager locationManager = (LocationManager) NearbyTimeLineActivity.this
                 .getSystemService(Context.LOCATION_SERVICE);
@@ -224,7 +221,6 @@ public class NearbyTimeLineActivity extends AbstractAppActivity {
         }
     }
 
-
     private void updateWithNewLocation(Location result) {
         GeoBean geoBean = new GeoBean();
         lat = result.getLatitude();
@@ -245,7 +241,6 @@ public class NearbyTimeLineActivity extends AbstractAppActivity {
                 .getSystemService(Context.LOCATION_SERVICE)).removeUpdates(locationListener);
 
     }
-
 
     private final LocationListener locationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
@@ -311,7 +306,7 @@ public class NearbyTimeLineActivity extends AbstractAppActivity {
                         .position(MELBOURNE)
                         .title(msg.getUser().getScreen_name())
                         .snippet(msg.getText())
-                );
+                        );
                 melbourne.showInfoWindow();
                 bindEvent.put(melbourne, msg);
             }

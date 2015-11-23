@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import com.google.gson.Gson;
@@ -22,8 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-2-11
+ * User: qii Date: 13-2-11
  */
 public class HomeOtherGroupTimeLineDBTask {
 
@@ -41,7 +41,6 @@ public class HomeOtherGroupTimeLineDBTask {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         return databaseHelper.getReadableDatabase();
     }
-
 
     private static void addHomeLineMsg(MessageListBean list, String accountId, String groupId) {
 
@@ -153,7 +152,9 @@ public class HomeOtherGroupTimeLineDBTask {
         Gson gson = new Gson();
         if (c.moveToNext()) {
             try {
-                String[] args = {accountId, groupId};
+                String[] args = {
+                        accountId, groupId
+                };
                 ContentValues cv = new ContentValues();
                 cv.put(HomeOtherGroupTable.TIMELINEDATA, gson.toJson(position));
                 getWsd().update(HomeOtherGroupTable.TABLE_NAME, cv,
@@ -233,7 +234,7 @@ public class HomeOtherGroupTimeLineDBTask {
             }
         }
 
-        //delete the null flag at the head positon and the end position
+        // delete the null flag at the head positon and the end position
         for (int i = msgList.size() - 1; i >= 0; i--) {
             if (msgList.get(i) == null) {
                 msgList.remove(i);
@@ -273,7 +274,9 @@ public class HomeOtherGroupTimeLineDBTask {
                     MessageBean value = gson.fromJson(json, MessageBean.class);
                     value.setComments_count(commentCount);
                     value.setReposts_count(repostCount);
-                    String[] args = {id};
+                    String[] args = {
+                        id
+                    };
                     ContentValues cv = new ContentValues();
                     cv.put(HomeOtherGroupTable.HomeOtherGroupDataTable.JSONDATA,
                             gson.toJson(value));

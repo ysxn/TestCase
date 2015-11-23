@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.topic;
 
 import com.google.gson.Gson;
@@ -18,8 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-9-26
+ * User: qii Date: 12-9-26
  */
 public class SearchTopicDao {
 
@@ -36,9 +36,7 @@ public class SearchTopicDao {
         map.put("count", count);
         map.put("page", page);
 
-
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
-
 
         return jsonData;
     }
@@ -60,7 +58,6 @@ public class SearchTopicDao {
             List<MessageBean> msgList = value.getStatuses();
             Iterator<MessageBean> iterator = msgList.iterator();
 
-
             while (iterator.hasNext()) {
                 MessageBean msg = iterator.next();
                 if (msg.getUser() == null) {
@@ -73,10 +70,8 @@ public class SearchTopicDao {
 
         }
 
-
         return value;
     }
-
 
     public SearchTopicDao(String token, String q) {
         this.access_token = token;

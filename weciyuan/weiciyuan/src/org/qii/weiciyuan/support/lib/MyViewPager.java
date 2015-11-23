@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.animation.Animator;
@@ -14,8 +15,7 @@ import org.qii.weiciyuan.support.debug.AppLogger;
 import org.qii.weiciyuan.support.utils.Utility;
 
 /**
- * User: qii
- * Date: 13-2-26
+ * User: qii Date: 13-2-26
  */
 public class MyViewPager extends ViewPager {
 
@@ -30,7 +30,6 @@ public class MyViewPager extends ViewPager {
     private static final int OFFSET = 5;
 
     private int max_motion_event_down_x_position;
-
 
     public MyViewPager(Context context) {
         super(context);
@@ -62,7 +61,6 @@ public class MyViewPager extends ViewPager {
         if (this.gestureDetector != null)
             this.gestureDetector.onTouchEvent(ev);
 
-
         if ((ev.getActionMasked() == MotionEvent.ACTION_UP || ev.getActionMasked() == MotionEvent.ACTION_CANCEL)
                 && firstPosition[0] <= max_motion_event_down_x_position) {
             int x = (int) (ev.getRawX() - firstPosition[0]);
@@ -77,12 +75,12 @@ public class MyViewPager extends ViewPager {
             } else if (getCurrentItem() == 0) {
                 this.topView.animate().translationX(0)
                         .setDuration(300L).withLayer().setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        super.onAnimationEnd(animation);
-                        topView.animate().setListener(null);
-                    }
-                });
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                topView.animate().setListener(null);
+                            }
+                        });
             }
         }
         if (isDragging) {
@@ -99,7 +97,6 @@ public class MyViewPager extends ViewPager {
 
         return super.onTouchEvent(ev);
     }
-
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {

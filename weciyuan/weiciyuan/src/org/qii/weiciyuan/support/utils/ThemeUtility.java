@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.utils;
 
 import org.qii.weiciyuan.R;
@@ -11,8 +12,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 /**
- * User: qii
- * Date: 13-8-4
+ * User: qii Date: 13-8-4
  */
 public class ThemeUtility {
 
@@ -21,7 +21,9 @@ public class ThemeUtility {
     }
 
     public static int getColor(Activity activity, int attr) {
-        int[] attrs = new int[]{attr};
+        int[] attrs = new int[] {
+            attr
+        };
         TypedArray ta = activity.obtainStyledAttributes(attrs);
         int color = ta.getColor(0, 430);
         ta.recycle();
@@ -29,7 +31,9 @@ public class ThemeUtility {
     }
 
     public static Drawable getDrawable(int attr) {
-        int[] attrs = new int[]{attr};
+        int[] attrs = new int[] {
+            attr
+        };
         Context context = GlobalContext.getInstance().getActivity();
         TypedArray ta = context.obtainStyledAttributes(attrs);
         Drawable drawable = ta.getDrawable(0);
@@ -39,7 +43,9 @@ public class ThemeUtility {
     }
 
     public static int getResourceId(int attr) {
-        int[] attrs = new int[]{attr};
+        int[] attrs = new int[] {
+            attr
+        };
         Context context = GlobalContext.getInstance().getActivity();
         TypedArray ta = context.obtainStyledAttributes(attrs);
         int id = ta.getResourceId(0, 430);
@@ -48,14 +54,16 @@ public class ThemeUtility {
     }
 
     public static int getDimensionPixelSize(Activity activity, int attr, int defaultValue) {
-        int[] attrs = new int[]{attr};
+        int[] attrs = new int[] {
+            attr
+        };
         TypedArray ta = activity.obtainStyledAttributes(attrs);
         int value = ta.getDimensionPixelSize(0, defaultValue);
         ta.recycle();
         return value;
     }
 
-    //can't find a public theme attr to modify actionbar searchview text color
+    // can't find a public theme attr to modify actionbar searchview text color
     public static void customActionBarSearchViewTextColor(SearchView searchView) {
         int id = searchView.getContext().getResources()
                 .getIdentifier("android:id/search_src_text", null, null);
@@ -64,7 +72,7 @@ public class ThemeUtility {
 
     }
 
-    //android:actionModeShareDrawalbe is not a public attr
+    // android:actionModeShareDrawalbe is not a public attr
     public static int getActionBarShareItemIcon() {
         return R.drawable.ic_menu_share_holo_dark;
     }

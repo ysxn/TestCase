@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.adapter;
 
 import org.qii.weiciyuan.R;
@@ -46,8 +47,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 /**
- * User: qii
- * Date: 13-6-16
+ * User: qii Date: 13-6-16
  */
 public class BrowserWeiboMsgCommentAndRepostAdapter extends BaseAdapter {
 
@@ -67,9 +67,7 @@ public class BrowserWeiboMsgCommentAndRepostAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
 
-    private Map<BrowserWeiboMsgCommentAndRepostAdapter.ViewHolder, Drawable> bg
-            = new WeakHashMap<BrowserWeiboMsgCommentAndRepostAdapter.ViewHolder, Drawable>();
-
+    private Map<BrowserWeiboMsgCommentAndRepostAdapter.ViewHolder, Drawable> bg = new WeakHashMap<BrowserWeiboMsgCommentAndRepostAdapter.ViewHolder, Drawable>();
 
     public BrowserWeiboMsgCommentAndRepostAdapter(Fragment fragment, ListView listView
             , List<CommentBean> commentListBean, List<MessageBean> repostListBean) {
@@ -152,7 +150,6 @@ public class BrowserWeiboMsgCommentAndRepostAdapter extends BaseAdapter {
         return convertView;
     }
 
-
     public void bindViewData(ViewHolder holder, int position) {
         if (isCommentList) {
             bindCommentData(holder, position);
@@ -160,7 +157,6 @@ public class BrowserWeiboMsgCommentAndRepostAdapter extends BaseAdapter {
             bindRepostData(holder, position);
         }
     }
-
 
     private void bindCommentData(ViewHolder holder, int position) {
         Drawable drawable = bg.get(holder);
@@ -265,7 +261,6 @@ public class BrowserWeiboMsgCommentAndRepostAdapter extends BaseAdapter {
         holder.time.setTime(msg.getMills());
         holder.reply.setVisibility(View.GONE);
 
-
     }
 
     private View initSimpleLayout(ViewGroup parent) {
@@ -287,7 +282,6 @@ public class BrowserWeiboMsgCommentAndRepostAdapter extends BaseAdapter {
         }
 
     }
-
 
     private ViewHolder buildHolder(View convertView) {
         ViewHolder holder = new ViewHolder();
@@ -344,14 +338,12 @@ public class BrowserWeiboMsgCommentAndRepostAdapter extends BaseAdapter {
 
         }
 
-
     }
 
-
-    //onTouchListener has some strange problem, when user click link, holder.listview_root may also receive a MotionEvent.ACTION_DOWN event
-    //the background then changed
+    // onTouchListener has some strange problem, when user click link, holder.listview_root may also
+    // receive a MotionEvent.ACTION_DOWN event
+    // the background then changed
     private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
-
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
@@ -436,8 +428,7 @@ public class BrowserWeiboMsgCommentAndRepostAdapter extends BaseAdapter {
         }
     };
 
-
-    //when view is recycled by listview, need to catch exception
+    // when view is recycled by listview, need to catch exception
     private ViewHolder getViewHolderByView(View view) {
         try {
             final int position = listView.getPositionForView(view);
@@ -515,12 +506,11 @@ public class BrowserWeiboMsgCommentAndRepostAdapter extends BaseAdapter {
         }
     }
 
-
     public void removeCommentItem(final int postion) {
         if (postion >= 0 && postion < commentListBean.size()) {
             Animation anim = AnimationUtils.loadAnimation(
                     fragment.getActivity(), R.anim.account_delete_slide_out_right
-            );
+                    );
 
             anim.setAnimationListener(new Animation.AnimationListener() {
                 @Override

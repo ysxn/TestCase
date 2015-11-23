@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.user;
 
 import com.google.gson.Gson;
@@ -13,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 13-3-2
+ * User: qii Date: 13-3-2
  */
 public class EditMyProfileDao {
 
@@ -29,7 +29,6 @@ public class EditMyProfileDao {
         map.put("description", description);
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Post, apiUrl, map);
-
 
         Gson gson = new Gson();
 
@@ -48,7 +47,6 @@ public class EditMyProfileDao {
         return value;
 
     }
-
 
     public void setUrl(String url) {
         this.url = url;

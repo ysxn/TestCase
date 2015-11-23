@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.userinfo;
 
 import org.qii.weiciyuan.R;
@@ -62,12 +63,10 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * User: qii
- * Date: 13-6-20
+ * User: qii Date: 13-6-20
  */
 public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageListBean>
         implements MainTimeLineActivity.ScrollableListFragment, Animator.AnimatorListener {
-
 
     private static final String LIMITED_READ_MESSAGE_COUNT = "10";
 
@@ -96,7 +95,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
     private View headerSecond;
 
     private View headerThird;
-
 
     private TimeLineAvatarImageView avatar;
 
@@ -142,11 +140,9 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
         return fragment;
     }
 
-
     public UserInfoFragment() {
 
     }
-
 
     @Override
     public MessageListBean getList() {
@@ -176,7 +172,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
             getAdapter().notifyDataSetChanged();
         }
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -353,7 +348,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
             }
         });
 
-
     }
 
     private void displayBasicInfo() {
@@ -397,7 +391,8 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
             }
         });
 
-//        TimeLineBitmapDownloader.getInstance().downloadAvatar(avatar.getImageView(), userBean, (AbstractTimeLineFragment) this);
+        // TimeLineBitmapDownloader.getInstance().downloadAvatar(avatar.getImageView(), userBean,
+        // (AbstractTimeLineFragment) this);
         avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -464,7 +459,7 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
             return;
         }
 
-//        final int height = viewPager.getHeight();
+        // final int height = viewPager.getHeight();
         final int height = Utility.dip2px(200);
         final int width = Utility.getMaxLeftWidthOrHeightImageViewCanRead(height);
         final String picPath = userBean.getCover_image();
@@ -503,8 +498,7 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
         GlobalContext.getInstance().unRegisterForAccountChangeListener(myProfileInfoChangeListener);
     }
 
-    private GlobalContext.MyProfileInfoChangeListener myProfileInfoChangeListener
-            = new GlobalContext.MyProfileInfoChangeListener() {
+    private GlobalContext.MyProfileInfoChangeListener myProfileInfoChangeListener = new GlobalContext.MyProfileInfoChangeListener() {
         @Override
         public void onChange(UserBean newUserBean) {
             userBean = newUserBean;
@@ -522,7 +516,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
         this.token = token;
     }
 
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -530,7 +523,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
         outState.putParcelable("userBean", userBean);
         outState.putString("token", token);
     }
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -540,7 +532,7 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
                 displayBasicInfo();
                 break;
             case SCREEN_ROTATE:
-                //nothing
+                // nothing
                 refreshLayout(getList());
                 displayBasicInfo();
                 displayCoverPicture();
@@ -564,7 +556,7 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
 
         if ((getActivity() instanceof MainTimeLineActivity)
                 && (((MainTimeLineActivity) getActivity()).getMenuFragment()).getCurrentIndex()
-                == LeftMenuFragment.PROFILE_INDEX) {
+                    == LeftMenuFragment.PROFILE_INDEX) {
             buildActionBarAndViewPagerTitles();
         }
 
@@ -598,7 +590,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
         getActivity().getActionBar().removeAllTabs();
     }
 
-
     protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
 
         startActivityForResult(
@@ -627,12 +618,10 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
         return getActivity() instanceof MainTimeLineActivity;
     }
 
-
     @Override
     protected boolean allowLoadOldMsgBeforeReachListBottom() {
         return false;
     }
-
 
     @Override
     protected void newMsgLoaderSuccessCallback(MessageListBean newValue, Bundle loaderArgs) {
@@ -670,7 +659,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
         }
     }
 
-
     @Override
     public void loadNewMsg() {
         progressFooter.setVisibility(View.VISIBLE);
@@ -681,14 +669,12 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
         getLoaderManager().restartLoader(NEW_MSG_LOADER_ID, null, msgAsyncTaskLoaderCallback);
     }
 
-
     @Override
     protected void loadOldMsg(View view) {
         Intent intent = UserTimeLineActivity
                 .newIntent(GlobalContext.getInstance().getSpecialToken(), userBean);
         startActivity(intent);
     }
-
 
     protected Loader<AsyncTaskLoaderResult<MessageListBean>> onCreateNewMsgLoader(int id,
             Bundle args) {
@@ -718,7 +704,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
 
         }
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -798,7 +783,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
         position = Utility.getCurrentPositionFromListView(getListView());
     }
 
-
     private void setListViewPositionFromPositionsCache() {
 
         TimeLinePosition p = position;
@@ -807,7 +791,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
         } else {
             getListView().setSelectionFromTop(0, 0);
         }
-
 
     }
 
@@ -844,7 +827,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
 
     }
 
-
     class HeaderPagerAdapter extends PagerAdapter {
 
         @Override
@@ -867,7 +849,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
             return view;
         }
 
-
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             ((ViewPager) container).removeView((View) object);
@@ -883,7 +864,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
             return view == (View) object;
         }
     }
-
 
     private class TopicListTask extends MyAsyncTask<Void, ArrayList<String>, ArrayList<String>> {
 
@@ -928,7 +908,7 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
         }
     }
 
-    //sina api has bug,so must refresh to get actual data
+    // sina api has bug,so must refresh to get actual data
     public void forceReloadData(UserBean bean) {
         this.userBean = bean;
         fetchLastestUserInfoFromServer();
@@ -1017,7 +997,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
 
     }
 
-
     private class DBCacheTask extends MyAsyncTask<Void, ArrayList<String>, MyStatusTimeLineData> {
 
         @Override
@@ -1026,7 +1005,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
             progressFooter.setVisibility(View.VISIBLE);
 
         }
-
 
         @Override
         protected MyStatusTimeLineData doInBackground(Void... params) {
@@ -1075,5 +1053,3 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
     }
 
 }
-
-

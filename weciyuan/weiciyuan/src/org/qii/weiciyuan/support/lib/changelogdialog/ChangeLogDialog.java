@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib.changelogdialog;
 
 import android.app.Activity;
@@ -18,8 +19,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 
 /**
- * User: qii
- * Date: 12-12-28
+ * User: qii Date: 12-12-28
  */
 public class ChangeLogDialog {
     static final private String TAG = "ChangeLogDialog";
@@ -33,7 +33,7 @@ public class ChangeLogDialog {
         fActivity = context;
     }
 
-    //Get the current app version
+    // Get the current app version
     private String GetAppVersion() {
         try {
             PackageInfo _info = fActivity.getPackageManager().getPackageInfo(fActivity.getPackageName(), 0);
@@ -44,7 +44,7 @@ public class ChangeLogDialog {
         }
     }
 
-    //Parse a the release tag and return html code
+    // Parse a the release tag and return html code
     private String ParseReleaseTag(XmlResourceParser aXml) throws XmlPullParserException, IOException {
         String _Result = "<h1>Release: " + aXml.getAttributeValue(null, "version") + "</h1><ul>";
         int eventType = aXml.getEventType();
@@ -59,17 +59,17 @@ public class ChangeLogDialog {
         return _Result;
     }
 
-    //CSS style for the html
+    // CSS style for the html
     private String GetStyle() {
         return
-                "<style type=\"text/css\">"
-                        + "h1 { margin-left: 0px; font-size: 12pt; }"
-                        + "li { margin-left: 0px; font-size: 9pt;}"
-                        + "ul { padding-left: 30px;}"
-                        + "</style>";
+        "<style type=\"text/css\">"
+                + "h1 { margin-left: 0px; font-size: 12pt; }"
+                + "li { margin-left: 0px; font-size: 9pt;}"
+                + "ul { padding-left: 30px;}"
+                + "</style>";
     }
 
-    //Get the changelog in html code, this will be shown in the dialog's webview
+    // Get the changelog in html code, this will be shown in the dialog's webview
     private String GetHTMLChangelog(int aResourceId, Resources aResource) {
         String _Result = "<html><head>" + GetStyle() + "</head><body>";
         XmlResourceParser _xml = aResource.getXml(aResourceId);
@@ -94,9 +94,9 @@ public class ChangeLogDialog {
         return _Result;
     }
 
-    //Call to show the changelog dialog
+    // Call to show the changelog dialog
     public void show() {
-        //Get resources
+        // Get resources
         String _PackageName = fActivity.getPackageName();
         Resources _Resource;
         try {
@@ -106,29 +106,29 @@ public class ChangeLogDialog {
             return;
         }
 
-        //Get dialog title
+        // Get dialog title
         int _resID = _Resource.getIdentifier(TITLE_CHANGELOG, "string", _PackageName);
         String _Title = _Resource.getString(_resID);
-//        _Title = _Title + " v" + GetAppVersion();
+        // _Title = _Title + " v" + GetAppVersion();
 
-        //Get Changelog xml resource id
+        // Get Changelog xml resource id
         _resID = _Resource.getIdentifier(CHANGELOG_XML, "xml", _PackageName);
-        //Create html change log
+        // Create html change log
         String _HTML = GetHTMLChangelog(_resID, _Resource);
 
-        //Get button strings
+        // Get button strings
         String _Close = _Resource.getString(R.string.changelog_close);
 
-        //Check for empty changelog
+        // Check for empty changelog
         if (_HTML.equals("") == true) {
-            //Could not load change log, message user and exit void
+            // Could not load change log, message user and exit void
             Toast.makeText(fActivity, "Could not load change log", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        //Create webview and load html
+        // Create webview and load html
         WebView _WebView = new WebView(fActivity);
-//        _WebView.loadData(_HTML, "text/html", "UTF-8");
+        // _WebView.loadData(_HTML, "text/html", "UTF-8");
         _WebView.loadData(_HTML, "text/html; charset=UTF-8", null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(fActivity)

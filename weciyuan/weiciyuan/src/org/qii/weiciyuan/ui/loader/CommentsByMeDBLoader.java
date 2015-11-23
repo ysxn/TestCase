@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.loader;
 
 import android.content.Context;
@@ -6,8 +7,7 @@ import org.qii.weiciyuan.bean.android.CommentTimeLineData;
 import org.qii.weiciyuan.support.database.CommentByMeTimeLineDBTask;
 
 /**
- * User: qii
- * Date: 13-4-10
+ * User: qii Date: 13-4-10
  */
 public class CommentsByMeDBLoader extends AsyncTaskLoader<CommentTimeLineData> {
 

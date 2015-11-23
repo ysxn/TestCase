@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent.unreadnotification;
 
 import org.qii.weiciyuan.R;
@@ -24,12 +25,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * User: qii
- * Date: 13-5-4
+ * User: qii Date: 13-5-4
  */
 @Deprecated
 public class JBMentionsCommentNotificationServiceHelper extends NotificationServiceHelper {
-
 
     private AccountBean accountBean;
 
@@ -43,10 +42,7 @@ public class JBMentionsCommentNotificationServiceHelper extends NotificationServ
 
     private String ticker;
 
-
-    private static HashMap<String, RecordOperationAppBroadcastReceiver>
-            clearNotificationEventReceiver
-            = new HashMap<String, RecordOperationAppBroadcastReceiver>();
+    private static HashMap<String, RecordOperationAppBroadcastReceiver> clearNotificationEventReceiver = new HashMap<String, RecordOperationAppBroadcastReceiver>();
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -66,11 +62,10 @@ public class JBMentionsCommentNotificationServiceHelper extends NotificationServ
         return super.onStartCommand(intent, flags, startId);
     }
 
-
     private void buildNotification() {
 
-//        int count = (data.getSize() >= Integer.valueOf(SettingUtility.getMsgCount()) ? unreadBean
-//                .getMention_cmt() : data.getSize());
+        // int count = (data.getSize() >= Integer.valueOf(SettingUtility.getMsgCount()) ? unreadBean
+        // .getMention_cmt() : data.getSize());
 
         int count = Math.min(unreadBean.getMention_cmt(), data.getSize());
 
@@ -109,10 +104,10 @@ public class JBMentionsCommentNotificationServiceHelper extends NotificationServ
                     @Override
                     public void run() {
                         try {
-//                            new ClearUnreadDao(accountBean.getAccess_token())
-//                                    .clearMentionCommentUnread(unreadBean, accountBean.getUid());
+                            // new ClearUnreadDao(accountBean.getAccess_token())
+                            // .clearMentionCommentUnread(unreadBean, accountBean.getUid());
 
-//                        } catch (WeiboException ignored) {
+                            // } catch (WeiboException ignored) {
 
                             ArrayList<String> ids = new ArrayList<String>();
 
@@ -128,7 +123,7 @@ public class JBMentionsCommentNotificationServiceHelper extends NotificationServ
                                     GlobalContext.getInstance(),
                                     clearNotificationEventReceiver.get(accountBean.getUid()));
                             JBMentionsCommentNotificationServiceHelper
-                                    .clearNotificationEventReceiver
+                            .clearNotificationEventReceiver
                                     .put(accountBean.getUid(), null);
                         }
 

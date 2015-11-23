@@ -1,11 +1,11 @@
+
 package org.qii.weiciyuan.bean;
 
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-8-27
+ * User: qii Date: 12-8-27
  */
 public abstract class ListBean<T extends ItemBean, K> {
 

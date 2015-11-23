@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent.unreadnotification;
 
 import org.qii.weiciyuan.bean.AccountBean;
@@ -20,11 +21,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * User: Jiang Qi
- * Date: 12-7-31
+ * User: Jiang Qi Date: 12-7-31
  */
 public class UnreadMsgReceiver extends BroadcastReceiver {
-
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -43,7 +42,6 @@ public class UnreadMsgReceiver extends BroadcastReceiver {
                 mentionsCommentData, unreadBean);
 
     }
-
 
     private void showNotification(Context context, AccountBean accountBean,
             MessageListBean mentionsWeiboData, CommentListBean commentsToMeData
@@ -111,35 +109,35 @@ public class UnreadMsgReceiver extends BroadcastReceiver {
             return;
         }
 
-//        boolean commentsToMeDataSizeIsLarge = (commentsToMeData != null) && (
-//                commentsToMeData.getSize() >= Integer.valueOf(
-//                        SettingUtility.getMsgCount()));
-//
-//        boolean mentionsWeiboDataSizeIsLarge = (mentionsWeiboData != null) && (
-//                mentionsWeiboData.getSize() >= Integer.valueOf(
-//                        SettingUtility.getMsgCount()));
-//
-//        boolean mentionsCommentDataSizeIsLarge = (mentionsCommentData != null) && (
-//                mentionsCommentData.getSize() >= Integer.valueOf(
-//                        SettingUtility.getMsgCount()));
-//
-//        boolean showSimpleTextNotification = commentsToMeDataSizeIsLarge
-//                || mentionsWeiboDataSizeIsLarge || mentionsCommentDataSizeIsLarge;
+        // boolean commentsToMeDataSizeIsLarge = (commentsToMeData != null) && (
+        // commentsToMeData.getSize() >= Integer.valueOf(
+        // SettingUtility.getMsgCount()));
+        //
+        // boolean mentionsWeiboDataSizeIsLarge = (mentionsWeiboData != null) && (
+        // mentionsWeiboData.getSize() >= Integer.valueOf(
+        // SettingUtility.getMsgCount()));
+        //
+        // boolean mentionsCommentDataSizeIsLarge = (mentionsCommentData != null) && (
+        // mentionsCommentData.getSize() >= Integer.valueOf(
+        // SettingUtility.getMsgCount()));
+        //
+        // boolean showSimpleTextNotification = commentsToMeDataSizeIsLarge
+        // || mentionsWeiboDataSizeIsLarge || mentionsCommentDataSizeIsLarge;
 
-//        if (showSimpleTextNotification) {
-//            String ticker = NotificationUtility
-//                    .getTicker(unreadBean);
-//            Intent intent = new Intent(context,
-//                    SimpleTextNotificationService.class);
-//
-//            intent.putExtra(NotificationServiceHelper.ACCOUNT_ARG, accountBean);
-//            intent.putExtra(NotificationServiceHelper.UNREAD_ARG, unreadBean);
-//            intent.putExtra(NotificationServiceHelper.PENDING_INTENT_INNER_ARG,
-//                    clickNotificationToOpenAppPendingIntentInner);
-//            intent.putExtra(NotificationServiceHelper.TICKER, ticker);
-//            context.startService(intent);
-//
-//        } else {
+        // if (showSimpleTextNotification) {
+        // String ticker = NotificationUtility
+        // .getTicker(unreadBean);
+        // Intent intent = new Intent(context,
+        // SimpleTextNotificationService.class);
+        //
+        // intent.putExtra(NotificationServiceHelper.ACCOUNT_ARG, accountBean);
+        // intent.putExtra(NotificationServiceHelper.UNREAD_ARG, unreadBean);
+        // intent.putExtra(NotificationServiceHelper.PENDING_INTENT_INNER_ARG,
+        // clickNotificationToOpenAppPendingIntentInner);
+        // intent.putExtra(NotificationServiceHelper.TICKER, ticker);
+        // context.startService(intent);
+        //
+        // } else {
 
         String ticker = NotificationUtility
                 .getTicker(unreadBean, mentionsWeiboData, mentionsCommentData,
@@ -151,6 +149,5 @@ public class UnreadMsgReceiver extends BroadcastReceiver {
         context.startService(intent);
 
     }
-
 
 }

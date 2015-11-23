@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.adapter;
 
 import org.qii.weiciyuan.R;
@@ -23,8 +24,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-9-19
+ * User: qii Date: 12-9-19
  */
 public class UserListAdapter extends BaseAdapter {
 

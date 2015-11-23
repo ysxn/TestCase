@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.userinfo;
 
 import org.qii.weiciyuan.R;
@@ -11,13 +12,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-16
+ * User: Jiang Qi Date: 12-8-16
  */
 public class FriendListActivity extends AbstractAppActivity {
 
     private UserBean bean;
-
 
     public UserBean getUser() {
         return bean;
@@ -45,7 +44,6 @@ public class FriendListActivity extends AbstractAppActivity {
                     .commit();
         }
 
-
     }
 
     @Override
@@ -61,4 +59,3 @@ public class FriendListActivity extends AbstractAppActivity {
         return false;
     }
 }
-

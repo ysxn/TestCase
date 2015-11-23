@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.userinfo;
 
 import org.qii.weiciyuan.R;
@@ -25,8 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-11-5
+ * User: qii Date: 12-11-5
  */
 public class ManageGroupDialog extends DialogFragment {
 
@@ -69,7 +69,6 @@ public class ManageGroupDialog extends DialogFragment {
     public ManageGroupDialog() {
 
     }
-
 
     public ManageGroupDialog(GroupListBean group, String uid) {
         this.group = group;
@@ -201,7 +200,6 @@ public class ManageGroupDialog extends DialogFragment {
             }
         }
     }
-
 
     private static class ModifyGroupMemberTask extends MyAsyncTask<Void, Void, Void> {
 

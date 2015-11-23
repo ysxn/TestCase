@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.userinfo;
 
 import org.qii.weiciyuan.R;
@@ -43,8 +44,7 @@ import android.widget.Toast;
 import java.util.List;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-14
+ * User: Jiang Qi Date: 12-8-14
  */
 public class UserInfoActivity extends AbstractAppActivity {
 
@@ -57,7 +57,6 @@ public class UserInfoActivity extends AbstractAppActivity {
     private ModifyGroupMemberTask modifyGroupMemberTask;
 
     private static final int REFRESH_LOADER_ID = 0;
-
 
     public String getToken() {
         if (TextUtils.isEmpty(token)) {
@@ -139,13 +138,12 @@ public class UserInfoActivity extends AbstractAppActivity {
             finish();
         }
 
-
     }
 
     private boolean isMyselfProfile() {
         boolean screenNameEqualCurrentAccount = bean.getScreen_name() != null
                 && bean.getScreen_name()
-                .equals(GlobalContext.getInstance().getCurrentAccountName());
+                        .equals(GlobalContext.getInstance().getCurrentAccountName());
         boolean idEqualCurrentAccount = bean.getId() != null && bean.getId()
                 .equals(GlobalContext.getInstance().getCurrentAccountId());
         return screenNameEqualCurrentAccount || idEqualCurrentAccount;
@@ -181,7 +179,7 @@ public class UserInfoActivity extends AbstractAppActivity {
     }
 
     private void buildContent() {
-        //if you open this activity with user id, must set title with nickname again
+        // if you open this activity with user id, must set title with nickname again
         getActionBar().setTitle(bean.getScreen_name());
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
@@ -205,7 +203,6 @@ public class UserInfoActivity extends AbstractAppActivity {
             }
         });
 
-
     }
 
     private void processIntent(Intent intent) {
@@ -218,7 +215,6 @@ public class UserInfoActivity extends AbstractAppActivity {
         bean = new UserBean();
         bean.setScreen_name(new String(msg.getRecords()[0].getPayload()));
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -248,7 +244,6 @@ public class UserInfoActivity extends AbstractAppActivity {
         }
         return super.onCreateOptionsMenu(menu);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -314,7 +309,6 @@ public class UserInfoActivity extends AbstractAppActivity {
 
         new UpdateRemarkTask(remark).executeOnExecutor(MyAsyncTask.THREAD_POOL_EXECUTOR);
     }
-
 
     private UserInfoFragment getInfoFragment() {
         return ((UserInfoFragment) getSupportFragmentManager().findFragmentByTag(
@@ -421,7 +415,6 @@ public class UserInfoActivity extends AbstractAppActivity {
         }
     }
 
-
     private class FollowTask extends MyAsyncTask<Void, UserBean, UserBean> {
 
         WeiboException e;
@@ -476,7 +469,6 @@ public class UserInfoActivity extends AbstractAppActivity {
         }
     }
 
-
     private class RemoveFanTask extends MyAsyncTask<Void, UserBean, UserBean> {
 
         WeiboException e;
@@ -521,7 +513,6 @@ public class UserInfoActivity extends AbstractAppActivity {
         }
     }
 
-
     class UpdateRemarkTask extends MyAsyncTask<Void, UserBean, UserBean> {
 
         WeiboException e;
@@ -531,7 +522,6 @@ public class UserInfoActivity extends AbstractAppActivity {
         UpdateRemarkTask(String remark) {
             this.remark = remark;
         }
-
 
         @Override
         protected UserBean doInBackground(Void... params) {
@@ -563,7 +553,6 @@ public class UserInfoActivity extends AbstractAppActivity {
         }
     }
 
-
     private static class RefreshLoader extends AbstractAsyncNetRequestTaskLoader<UserBean> {
 
         private UserBean bean;
@@ -594,9 +583,7 @@ public class UserInfoActivity extends AbstractAppActivity {
         }
     }
 
-
-    private LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<UserBean>> refreshCallback
-            = new LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<UserBean>>() {
+    private LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<UserBean>> refreshCallback = new LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<UserBean>>() {
         @Override
         public Loader<AsyncTaskLoaderResult<UserBean>> onCreateLoader(int id, Bundle args) {
             return new RefreshLoader(UserInfoActivity.this, bean);
@@ -612,7 +599,7 @@ public class UserInfoActivity extends AbstractAppActivity {
                 @Override
                 public void run() {
                     CommonProgressDialogFragment dialog
-                            = (CommonProgressDialogFragment) getSupportFragmentManager()
+                    = (CommonProgressDialogFragment) getSupportFragmentManager()
                             .findFragmentByTag(CommonProgressDialogFragment.class.getName());
                     if (dialog != null) {
                         dialog.dismiss();
@@ -620,7 +607,7 @@ public class UserInfoActivity extends AbstractAppActivity {
 
                     if (exception != null) {
                         CommonErrorDialogFragment userInfoActivityErrorDialog
-                                = CommonErrorDialogFragment.newInstance(exception.getError());
+                        = CommonErrorDialogFragment.newInstance(exception.getError());
                         getSupportFragmentManager().beginTransaction()
                                 .add(userInfoActivityErrorDialog,
                                         CommonErrorDialogFragment.class.getName()).commit();
@@ -640,6 +627,5 @@ public class UserInfoActivity extends AbstractAppActivity {
 
         }
     };
-
 
 }

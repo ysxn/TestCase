@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.asyncdrawable;
 
 import android.content.Context;
@@ -14,8 +15,7 @@ import org.qii.weiciyuan.bean.UserBean;
 import org.qii.weiciyuan.support.lib.PerformanceImageView;
 
 /**
- * User: qii
- * Date: 13-9-4
+ * User: qii Date: 13-9-4
  */
 public class MultiPicturesChildImageView extends PerformanceImageView implements IWeiciyuanDrawable {
 
@@ -23,7 +23,6 @@ public class MultiPicturesChildImageView extends PerformanceImageView implements
     private boolean pressed = false;
     private boolean showGif = false;
     private Bitmap gif;
-
 
     public MultiPicturesChildImageView(Context context) {
         this(context, null);

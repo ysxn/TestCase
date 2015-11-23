@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import android.content.ContentValues;
@@ -18,8 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-12-4
+ * User: qii Date: 12-12-4
  */
 public class MyStatusDBTask {
 
@@ -43,7 +43,6 @@ public class MyStatusDBTask {
         if (list == null || list.getSize() == 0) {
             return;
         }
-
 
         Gson gson = new Gson();
         List<MessageBean> msgList = list.getItemList();
@@ -75,12 +74,11 @@ public class MyStatusDBTask {
             ih.close();
         }
 
-
     }
 
-
     public static void clear(String accountId) {
-        String sql = "delete from " + MyStatusTable.StatusDataTable.TABLE_NAME + " where " + MyStatusTable.StatusDataTable.ACCOUNTID + " in " + "(" + accountId + ")";
+        String sql = "delete from " + MyStatusTable.StatusDataTable.TABLE_NAME + " where " + MyStatusTable.StatusDataTable.ACCOUNTID + " in " + "(" + accountId
+                + ")";
 
         getWsd().execSQL(sql);
     }
@@ -118,7 +116,9 @@ public class MyStatusDBTask {
         Gson gson = new Gson();
         if (c.moveToNext()) {
             try {
-                String[] args = {accountId};
+                String[] args = {
+                    accountId
+                };
                 ContentValues cv = new ContentValues();
                 cv.put(MyStatusTable.TIMELINEDATA, gson.toJson(position));
                 getWsd().update(MyStatusTable.TABLE_NAME, cv, MyStatusTable.ACCOUNTID + "=?", args);

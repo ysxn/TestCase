@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.interfaces;
 
 import android.content.Intent;
@@ -18,8 +19,7 @@ import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 
 /**
- * User: Jiang Qi
- * Date: 12-7-31
+ * User: Jiang Qi Date: 12-7-31
  */
 public class AbstractAppActivity extends FragmentActivity {
 
@@ -64,7 +64,6 @@ public class AbstractAppActivity extends FragmentActivity {
         GlobalContext.getInstance().setActivity(this);
     }
 
-
     private void forceShowActionBarOverflowMenu() {
         try {
             ViewConfiguration config = ViewConfiguration.get(this);
@@ -78,7 +77,6 @@ public class AbstractAppActivity extends FragmentActivity {
         }
     }
 
-
     private void initNFC() {
         NfcAdapter mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (mNfcAdapter == null) {
@@ -91,8 +89,9 @@ public class AbstractAppActivity extends FragmentActivity {
                 String text = (GlobalContext.getInstance().getCurrentAccountName());
 
                 NdefMessage msg = new NdefMessage(
-                        new NdefRecord[]{createMimeRecord(
-                                "application/org.qii.weiciyuan.beam", text.getBytes()), NdefRecord.createApplicationRecord(getPackageName())
+                        new NdefRecord[] {
+                                createMimeRecord(
+                                        "application/org.qii.weiciyuan.beam", text.getBytes()), NdefRecord.createApplicationRecord(getPackageName())
                         });
                 return msg;
             }

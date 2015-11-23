@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.send;
 
 import org.qii.weiciyuan.R;
@@ -21,8 +22,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * User: qii
- * Date: 12-8-28
+ * User: qii Date: 12-8-28
  */
 public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBean> {
 
@@ -100,7 +100,6 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
         return intent;
     }
 
-
     public static Intent newIntentFromNotification(Context context,
             AccountBean account,
             CommentBean oriMsg) {
@@ -131,7 +130,6 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
             savedEnableRepost = true;
         }
     }
-
 
     private void handleNormalOperation(Intent intent) {
 
@@ -204,7 +202,6 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
         return super.onPrepareOptionsMenu(menu);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -250,7 +247,6 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
         }
     }
 
-
     private String repost() {
 
         String content = ((EditText) findViewById(R.id.status_new_content)).getText().toString();
@@ -262,7 +258,6 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
 
         return content;
     }
-
 
     @Override
     protected boolean canSend() {
@@ -296,7 +291,6 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
 
         return false;
     }
-
 
     @Override
     protected AccountBean getCurrentAccountBean() {

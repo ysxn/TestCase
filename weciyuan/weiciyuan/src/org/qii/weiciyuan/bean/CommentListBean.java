@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -11,8 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-2
+ * User: Jiang Qi Date: 12-8-2
  */
 public class CommentListBean extends ListBean<CommentBean, CommentListBean> implements Parcelable {
 
@@ -53,7 +53,6 @@ public class CommentListBean extends ListBean<CommentBean, CommentListBean> impl
                 }
             };
 
-
     private List<CommentBean> getComments() {
         return comments;
     }
@@ -61,7 +60,6 @@ public class CommentListBean extends ListBean<CommentBean, CommentListBean> impl
     public void setComments(List<CommentBean> comments) {
         this.comments = comments;
     }
-
 
     @Override
     public CommentBean getItem(int position) {

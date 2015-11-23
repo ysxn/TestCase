@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.dm;
 
 import org.qii.weiciyuan.R;
@@ -24,8 +25,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 /**
- * User: qii
- * Date: 12-11-14
+ * User: qii Date: 12-11-14
  */
 public class DMUserListFragment extends AbstractTimeLineFragment<DMUserListBean>
         implements MainTimeLineActivity.ScrollableListFragment {
@@ -64,7 +64,7 @@ public class DMUserListFragment extends AbstractTimeLineFragment<DMUserListBean>
                 }
                 break;
             case SCREEN_ROTATE:
-                //nothing
+                // nothing
                 refreshLayout(getList());
                 break;
             case ACTIVITY_DESTROY_AND_CREATE:
@@ -207,14 +207,12 @@ public class DMUserListFragment extends AbstractTimeLineFragment<DMUserListBean>
         }
     }
 
-
     protected Loader<AsyncTaskLoaderResult<DMUserListBean>> onCreateNewMsgLoader(int id,
             Bundle args) {
         String token = GlobalContext.getInstance().getSpecialToken();
         String cursor = String.valueOf(0);
         return new DMUserLoader(getActivity(), token, cursor);
     }
-
 
     protected Loader<AsyncTaskLoaderResult<DMUserListBean>> onCreateOldMsgLoader(int id,
             Bundle args) {

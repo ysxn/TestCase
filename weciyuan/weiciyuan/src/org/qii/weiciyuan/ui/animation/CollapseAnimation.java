@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.animation;
 
 import android.view.View;
@@ -6,8 +7,7 @@ import android.view.animation.Transformation;
 import android.widget.LinearLayout;
 
 /**
- * User: qii
- * Date: 13-2-15
+ * User: qii Date: 13-2-15
  */
 public class CollapseAnimation extends Animation {
     private View mAnimatedView;
@@ -15,7 +15,6 @@ public class CollapseAnimation extends Animation {
     private int mMarginStart, mMarginEnd;
     private boolean mIsVisibleAfter = false;
     private boolean mWasEndedAlready = false;
-
 
     public CollapseAnimation(View view, int duration) {
 
@@ -56,6 +55,5 @@ public class CollapseAnimation extends Animation {
             mWasEndedAlready = true;
         }
     }
-
 
 }

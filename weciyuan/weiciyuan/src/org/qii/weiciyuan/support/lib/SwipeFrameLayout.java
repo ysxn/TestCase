@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import org.qii.weiciyuan.R;
@@ -15,8 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.OverScroller;
 
 /**
- * User: qii
- * Date: 13-10-15
+ * User: qii Date: 13-10-15
  */
 public class SwipeFrameLayout extends FrameLayout {
 
@@ -91,7 +91,6 @@ public class SwipeFrameLayout extends FrameLayout {
                     initPointLocation[0] = 0f;
                     initPointLocation[1] = 0f;
 
-
                     if (x > (Utility.getScreenWidth() / 2)) {
                         closeActivity();
                         return true;
@@ -116,7 +115,6 @@ public class SwipeFrameLayout extends FrameLayout {
                 break;
         }
 
-
         return super.dispatchTouchEvent(ev);
 
     }
@@ -127,7 +125,6 @@ public class SwipeFrameLayout extends FrameLayout {
         if (isDragging) {
             return true;
         }
-
 
         switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_MOVE:
@@ -140,7 +137,6 @@ public class SwipeFrameLayout extends FrameLayout {
         }
         return super.onInterceptTouchEvent(ev);
     }
-
 
     private void closeActivity() {
         activity.finish();
@@ -171,7 +167,6 @@ public class SwipeFrameLayout extends FrameLayout {
     private class SwipeRightToCloseOnGestureListener extends GestureDetector.SimpleOnGestureListener {
         protected MotionEvent mLastOnDownEvent = null;
         private float[] initPointLocation = new float[2];
-
 
         @Override
         public boolean onDown(MotionEvent e) {

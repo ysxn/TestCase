@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.basefragment;
 
 import org.qii.weiciyuan.R;
@@ -16,18 +17,15 @@ import android.widget.AbsListView;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-11-10
+ * User: qii Date: 12-11-10
  */
 public abstract class AbstractFriendsFanListFragment extends AbstractUserListFragment {
-
 
     public AbstractFriendsFanListFragment() {
 
     }
 
-
-    //this api has bug, check cursor before add data
+    // this api has bug, check cursor before add data
     @Override
     protected void oldUserLoaderSuccessCallback(UserListBean newValue) {
         if (newValue != null && newValue.getUsers().size() > 0
@@ -59,7 +57,6 @@ public abstract class AbstractFriendsFanListFragment extends AbstractUserListFra
         }
     }
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -79,7 +76,7 @@ public abstract class AbstractFriendsFanListFragment extends AbstractUserListFra
 
                 break;
             case SCREEN_ROTATE:
-                //nothing
+                // nothing
                 refreshLayout(bean);
                 break;
             case ACTIVITY_DESTROY_AND_CREATE:
@@ -103,10 +100,8 @@ public abstract class AbstractFriendsFanListFragment extends AbstractUserListFra
                     }).show();
         }
 
-
     }
 
     protected abstract UserBean getCurrentUser();
-
 
 }

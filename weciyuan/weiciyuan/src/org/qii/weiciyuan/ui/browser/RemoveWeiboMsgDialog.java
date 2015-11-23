@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.browser;
 
 import android.app.AlertDialog;
@@ -8,15 +9,13 @@ import android.os.Bundle;
 import org.qii.weiciyuan.R;
 
 /**
- * User: qii
- * Date: 12-11-28
+ * User: qii Date: 12-11-28
  */
 public class RemoveWeiboMsgDialog extends DialogFragment {
 
     public static interface IRemove {
         public void removeMsg(String id);
     }
-
 
     private String id;
 

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference.filter;
 
 import org.qii.weiciyuan.R;
@@ -13,8 +14,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-6-16
+ * User: qii Date: 13-6-16
  */
 public class FilterAdapter extends BaseAdapter {
 
@@ -27,7 +27,6 @@ public class FilterAdapter extends BaseAdapter {
     private List<String> list;
 
     private ListView listView;
-
 
     public FilterAdapter(Activity activity, ListView listView, List<String> list) {
         defaultBG = activity.getResources().getColor(R.color.transparent);

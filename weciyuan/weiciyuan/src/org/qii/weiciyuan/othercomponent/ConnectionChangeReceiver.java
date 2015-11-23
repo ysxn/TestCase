@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent;
 
 import org.qii.weiciyuan.support.settinghelper.SettingUtility;
@@ -8,8 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-6
+ * User: Jiang Qi Date: 12-8-6
  */
 public class ConnectionChangeReceiver extends BroadcastReceiver {
 

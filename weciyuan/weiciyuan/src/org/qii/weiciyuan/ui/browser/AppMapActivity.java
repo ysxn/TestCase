@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.browser;
 
 import android.location.Address;
@@ -22,8 +23,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * User: qii
- * Date: 13-1-4
+ * User: qii Date: 13-1-4
  */
 public class AppMapActivity extends AbstractAppActivity {
 

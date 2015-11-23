@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference;
 
 import org.qii.weiciyuan.R;
@@ -32,8 +33,7 @@ import android.widget.Toast;
 import java.io.File;
 
 /**
- * User: qii
- * Date: 12-9-29
+ * User: qii Date: 12-9-29
  */
 public class AboutFragment extends PreferenceFragment {
 
@@ -127,7 +127,6 @@ public class AboutFragment extends PreferenceFragment {
                         Environment.DIRECTORY_PICTURES).getAbsolutePath());
 
     }
-
 
     private void detectDebugPreference() {
         Preference debugPreferenceCategory = (PreferenceCategory) findPreference(DEBUG_INFO);

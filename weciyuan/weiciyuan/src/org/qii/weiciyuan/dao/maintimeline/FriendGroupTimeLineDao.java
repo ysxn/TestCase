@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.maintimeline;
 
 import com.google.gson.Gson;
@@ -14,8 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-10-17
+ * User: qii Date: 12-10-17
  */
 public class FriendGroupTimeLineDao extends MainFriendsTimeLineDao {
 
@@ -60,10 +60,8 @@ public class FriendGroupTimeLineDao extends MainFriendsTimeLineDao {
 
         }
 
-
         return value;
     }
-
 
     public FriendGroupTimeLineDao(String access_token, String list_id) {
 

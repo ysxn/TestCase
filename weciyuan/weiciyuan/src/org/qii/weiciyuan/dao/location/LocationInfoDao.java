@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.location;
 
 import org.json.JSONArray;
@@ -14,12 +15,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-8-29
+ * User: qii Date: 12-8-29
  */
 public class LocationInfoDao {
 
-    private double[] latlng = {0.0, 0.0};
+    private double[] latlng = {
+            0.0, 0.0
+    };
 
     public LocationInfoDao(GeoBean bean) {
         this.latlng[0] = bean.getLat();

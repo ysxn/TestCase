@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.asyncdrawable;
 
 import android.graphics.Bitmap;
@@ -14,8 +15,7 @@ import org.qii.weiciyuan.support.lib.MyAsyncTask;
 import org.qii.weiciyuan.support.utils.GlobalContext;
 
 /**
- * User: qii
- * Date: 12-8-5
+ * User: qii Date: 12-8-5
  */
 public class ProfileAvatarReadWorker extends MyAsyncTask<String, Integer, Bitmap> {
 
@@ -24,14 +24,12 @@ public class ProfileAvatarReadWorker extends MyAsyncTask<String, Integer, Bitmap
     private ImageView view;
     private GlobalContext globalContext;
 
-
     public ProfileAvatarReadWorker(ImageView view, String url) {
         this.lruCache = GlobalContext.getInstance().getBitmapCache();
         this.view = view;
         this.globalContext = GlobalContext.getInstance();
         this.data = url;
     }
-
 
     @Override
     protected Bitmap doInBackground(String... url) {
@@ -49,7 +47,6 @@ public class ProfileAvatarReadWorker extends MyAsyncTask<String, Integer, Bitmap
 
     }
 
-
     @Override
     protected void onPostExecute(Bitmap bitmap) {
 
@@ -63,6 +60,5 @@ public class ProfileAvatarReadWorker extends MyAsyncTask<String, Integer, Bitmap
         }
 
     }
-
 
 }

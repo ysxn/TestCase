@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent;
 
 import android.text.TextUtils;
@@ -12,8 +13,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * User: qii
- * Date: 12-10-25
+ * User: qii Date: 12-10-25
  */
 public class ClearCacheTask implements Runnable {
 

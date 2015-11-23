@@ -1,14 +1,14 @@
+
 package org.qii.weiciyuan.support.database.table;
 
 /**
- * User: qii
- * Date: 13-4-19
+ * User: qii Date: 13-4-19
  */
 public class UnreadTable {
 
     public static final String TABLE_NAME = "unread_table";
 
-    //support mulit user primary key
+    // support mulit user primary key
     public static final String ACCOUNTID = "accountid";
 
     public static final String STATUES = "status";

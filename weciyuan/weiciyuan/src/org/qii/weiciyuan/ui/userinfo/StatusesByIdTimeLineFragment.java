@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.userinfo;
 
 import org.qii.weiciyuan.R;
@@ -20,11 +21,9 @@ import android.view.View;
 import android.widget.AdapterView;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-16
+ * User: Jiang Qi Date: 12-8-16
  */
 public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragment<MessageListBean> {
-
 
     protected UserBean userBean;
 
@@ -75,7 +74,6 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
         }
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -93,8 +91,7 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
         GlobalContext.getInstance().unRegisterForAccountChangeListener(myProfileInfoChangeListener);
     }
 
-    private GlobalContext.MyProfileInfoChangeListener myProfileInfoChangeListener
-            = new GlobalContext.MyProfileInfoChangeListener() {
+    private GlobalContext.MyProfileInfoChangeListener myProfileInfoChangeListener = new GlobalContext.MyProfileInfoChangeListener() {
         @Override
         public void onChange(UserBean newUserBean) {
             for (MessageBean msg : getList().getItemList()) {
@@ -104,7 +101,6 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
         }
     };
 
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -112,7 +108,6 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
         outState.putParcelable("userBean", userBean);
         outState.putString("token", token);
     }
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -131,7 +126,7 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
                 }, AppConfig.REFRESH_DELAYED_MILL_SECOND_TIME);
                 break;
             case SCREEN_ROTATE:
-                //nothing
+                // nothing
                 refreshLayout(getList());
                 break;
             case ACTIVITY_DESTROY_AND_CREATE:
@@ -146,14 +141,12 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
         super.onActivityCreated(savedInstanceState);
     }
 
-
     protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
         startActivityForResult(
                 BrowserWeiboMsgActivity.newIntent(getList().getItem(position),
                         GlobalContext.getInstance().getSpecialToken()),
                 0);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -167,7 +160,6 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     protected void newMsgLoaderSuccessCallback(MessageListBean newValue, Bundle loaderArgs) {
         if (getActivity() != null && newValue.getSize() > 0) {
@@ -178,7 +170,6 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
 
         }
 
-
     }
 
     @Override
@@ -188,7 +179,6 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
             getActivity().invalidateOptionsMenu();
         }
     }
-
 
     protected Loader<AsyncTaskLoaderResult<MessageListBean>> onCreateNewMsgLoader(int id,
             Bundle args) {
@@ -223,5 +213,3 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
         return new StatusesByIdLoader(getActivity(), uid, screenName, token, null, maxId);
     }
 }
-
-

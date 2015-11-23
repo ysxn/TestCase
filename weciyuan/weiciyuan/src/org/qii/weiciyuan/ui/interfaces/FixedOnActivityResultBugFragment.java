@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.interfaces;
 
 import android.content.Intent;
@@ -7,8 +8,7 @@ import android.util.SparseIntArray;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-9-8
+ * User: qii Date: 13-9-8
  * <p/>
  * see https://code.google.com/p/android/issues/detail?id=40537
  * <p/>
@@ -19,12 +19,10 @@ public class FixedOnActivityResultBugFragment extends Fragment {
     private final SparseIntArray mRequestCodes = new SparseIntArray();
 
     /**
-     * Registers request code (used in
-     * {@link #startActivityForResult(Intent, int)}).
-     *
+     * Registers request code (used in {@link #startActivityForResult(Intent, int)}).
+     * 
      * @param requestCode the request code.
-     * @param id          the fragment ID (can be {@link Fragment#getId()} of
-     *                    {@link Fragment#hashCode()}).
+     * @param id the fragment ID (can be {@link Fragment#getId()} of {@link Fragment#hashCode()}).
      */
     public void registerRequestCode(int requestCode, int id) {
         mRequestCodes.put(requestCode, id);
@@ -47,18 +45,17 @@ public class FixedOnActivityResultBugFragment extends Fragment {
     }// onActivityResult()
 
     /**
-     * Checks to see whether there is any children fragments which has been
-     * registered with {@code requestCode} before. If so, let it handle the
-     * {@code requestCode}.
-     *
+     * Checks to see whether there is any children fragments which has been registered with
+     * {@code requestCode} before. If so, let it handle the {@code requestCode}.
+     * 
      * @param requestCode the code from {@link #onActivityResult(int, int, Intent)}.
-     * @param resultCode  the code from {@link #onActivityResult(int, int, Intent)}.
-     * @param data        the data from {@link #onActivityResult(int, int, Intent)}.
-     * @return {@code true} if the results have been handed over to some child
-     *         fragment. {@code false} otherwise.
+     * @param resultCode the code from {@link #onActivityResult(int, int, Intent)}.
+     * @param data the data from {@link #onActivityResult(int, int, Intent)}.
+     * @return {@code true} if the results have been handed over to some child fragment.
+     *         {@code false} otherwise.
      */
     protected boolean checkNestedFragmentsForResult(int requestCode,
-                                                    int resultCode, Intent data) {
+            int resultCode, Intent data) {
         final int id = mRequestCodes.get(requestCode);
         if (id == 0)
             return false;

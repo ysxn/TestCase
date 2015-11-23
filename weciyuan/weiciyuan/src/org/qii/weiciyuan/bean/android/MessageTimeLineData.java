@@ -1,10 +1,10 @@
+
 package org.qii.weiciyuan.bean.android;
 
 import org.qii.weiciyuan.bean.MessageListBean;
 
 /**
- * User: qii
- * Date: 13-3-23
+ * User: qii Date: 13-3-23
  */
 public class MessageTimeLineData {
     public MessageListBean msgList;

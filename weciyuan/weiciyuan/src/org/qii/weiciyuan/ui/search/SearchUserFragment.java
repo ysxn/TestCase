@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.search;
 
 import android.os.Bundle;
@@ -15,13 +16,11 @@ import org.qii.weiciyuan.ui.loader.SearchUserLoader;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-11-10
+ * User: qii Date: 12-11-10
  */
 public class SearchUserFragment extends AbstractUserListFragment {
 
     private int page = 1;
-
 
     public SearchUserFragment() {
         super();
@@ -41,7 +40,7 @@ public class SearchUserFragment extends AbstractUserListFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
-        //don't need refresh menu
+        // don't need refresh menu
 
     }
 
@@ -55,7 +54,6 @@ public class SearchUserFragment extends AbstractUserListFragment {
         refreshLayout(bean);
     }
 
-
     @Override
     protected void oldUserLoaderSuccessCallback(UserListBean newValue) {
         if (newValue != null && newValue.getUsers().size() > 0) {
@@ -64,7 +62,6 @@ public class SearchUserFragment extends AbstractUserListFragment {
             page++;
         }
     }
-
 
     @Override
     protected Loader<AsyncTaskLoaderResult<UserListBean>> onCreateNewUserLoader(int id,
@@ -84,4 +81,3 @@ public class SearchUserFragment extends AbstractUserListFragment {
     }
 
 }
-

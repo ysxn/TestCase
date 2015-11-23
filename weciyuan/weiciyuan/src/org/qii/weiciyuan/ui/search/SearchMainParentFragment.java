@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.search;
 
 import org.qii.weiciyuan.R;
@@ -33,8 +34,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 /**
- * User: qii
- * Date: 13-5-11
+ * User: qii Date: 13-5-11
  */
 public class SearchMainParentFragment extends AbstractAppFragment
         implements MainTimeLineActivity.ScrollableListFragment {
@@ -77,8 +77,7 @@ public class SearchMainParentFragment extends AbstractAppFragment
         }
         if ((((MainTimeLineActivity) getActivity()).getMenuFragment()).getCurrentIndex()
                 == LeftMenuFragment.SEARCH_INDEX) {
-            buildActionBarAndViewPagerTitles(
-                    ((MainTimeLineActivity) getActivity()).getMenuFragment().searchTabIndex);
+            buildActionBarAndViewPagerTitles(((MainTimeLineActivity) getActivity()).getMenuFragment().searchTabIndex);
         }
     }
 
@@ -140,7 +139,6 @@ public class SearchMainParentFragment extends AbstractAppFragment
         }
     }
 
-
     public void buildActionBarAndViewPagerTitles(int nav) {
         ((MainTimeLineActivity) getActivity()).setCurrentFragment(this);
 
@@ -174,7 +172,6 @@ public class SearchMainParentFragment extends AbstractAppFragment
         if (actionBar.getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS && nav > -1) {
             viewPager.setCurrentItem(nav, false);
         }
-
 
     }
 
@@ -248,8 +245,7 @@ public class SearchMainParentFragment extends AbstractAppFragment
         return tabMap.get(SEARCH_USER_CHILD_POSITION);
     }
 
-    ViewPager.SimpleOnPageChangeListener onPageChangeListener
-            = new ViewPager.SimpleOnPageChangeListener() {
+    ViewPager.SimpleOnPageChangeListener onPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
         @Override
         public void onPageSelected(int position) {
             ActionBar ab = getActivity().getActionBar();
@@ -282,7 +278,6 @@ public class SearchMainParentFragment extends AbstractAppFragment
             }
         }
     };
-
 
     public SearchUserFragment getSearchUserFragment() {
         SearchUserFragment fragment = ((SearchUserFragment) getChildFragmentManager()
@@ -324,4 +319,3 @@ public class SearchMainParentFragment extends AbstractAppFragment
         getSearchWeiboFragment().clearActionMode();
     }
 }
-

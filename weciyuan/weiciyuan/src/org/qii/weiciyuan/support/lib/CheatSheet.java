@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 /**
@@ -20,11 +21,12 @@ import org.qii.weiciyuan.support.utils.SmileyPickerUtility;
  * already default platform behavior for icon-only {@link android.app.ActionBar} items and tabs.
  * This class provides this behavior for any other such UI element.
  * <p/>
- * <p>Based on the original action bar implementation in <a href="https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/java/com/android/internal/view/menu/ActionMenuItemView.java">
- * ActionMenuItemView.java</a>.
+ * <p>
+ * Based on the original action bar implementation in <a href=
+ * "https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/java/com/android/internal/view/menu/ActionMenuItemView.java"
+ * > ActionMenuItemView.java</a>.
  */
 public class CheatSheet {
-
 
     /**
      * The estimated height of a toast, in dips (density-independent pixels). This is used to
@@ -32,14 +34,13 @@ public class CheatSheet {
      */
     private static final int ESTIMATED_TOAST_HEIGHT_DIPS = 48;
 
-
     /**
-     * Sets up a cheat sheet (tooltip) for the given view by setting its {@link
-     * android.view.View.OnLongClickListener}. When the view is long-pressed, a {@link Toast} with
-     * the given text will be shown either above (default) or below the view (if there isn't room
-     * above it).
-     *
-     * @param view      The view to add a cheat sheet for.
+     * Sets up a cheat sheet (tooltip) for the given view by setting its
+     * {@link android.view.View.OnLongClickListener}. When the view is long-pressed, a {@link Toast}
+     * with the given text will be shown either above (default) or below the view (if there isn't
+     * room above it).
+     * 
+     * @param view The view to add a cheat sheet for.
      * @param textResId The string resource containing the text to show on long-press.
      */
     public static void setup(final Activity activity, View view, final int textResId) {
@@ -61,9 +62,9 @@ public class CheatSheet {
     }
 
     /**
-     * Removes the cheat sheet for the given view by removing the view's {@link
-     * android.view.View.OnLongClickListener}.
-     *
+     * Removes the cheat sheet for the given view by removing the view's
+     * {@link android.view.View.OnLongClickListener}.
+     * 
      * @param view The view whose cheat sheet should be removed.
      */
     public static void remove(final View view) {
@@ -103,7 +104,7 @@ public class CheatSheet {
             // Show above
             // Offsets are after decorations (e.g. status bar) are factored in
 
-            //softkeyboard height
+            // softkeyboard height
             int height = SmileyPickerUtility.getScreenHeight(activity)
                     - SmileyPickerUtility.getStatusBarHeight(activity)
                     - SmileyPickerUtility.getAppHeight(activity);

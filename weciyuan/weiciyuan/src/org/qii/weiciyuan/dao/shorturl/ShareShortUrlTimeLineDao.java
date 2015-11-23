@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.shorturl;
 
 import com.google.gson.Gson;
@@ -17,8 +18,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 13-2-27
+ * User: qii Date: 13-2-27
  */
 public class ShareShortUrlTimeLineDao {
 
@@ -30,7 +30,6 @@ public class ShareShortUrlTimeLineDao {
         map.put("count", count);
         map.put("max_id", max_id);
         map.put("url_short", url_short);
-
 
         String jsonData = null;
 
@@ -72,12 +71,10 @@ public class ShareShortUrlTimeLineDao {
         return value;
     }
 
-
     private String access_token;
     private String url_short;
     private String count;
     private String max_id;
-
 
     public ShareShortUrlTimeLineDao(String access_token, String url_short) {
 
@@ -85,7 +82,6 @@ public class ShareShortUrlTimeLineDao {
         this.url_short = url_short;
         this.count = SettingUtility.getMsgCount();
     }
-
 
     public ShareShortUrlTimeLineDao setCount(String count) {
         this.count = count;

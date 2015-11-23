@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent.unreadnotification;
 
 import org.qii.weiciyuan.R;
@@ -24,8 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * User: qii
- * Date: 13-5-4
+ * User: qii Date: 13-5-4
  */
 @Deprecated
 public class JBMentionsWeiboNotificationServiceHelper extends NotificationServiceHelper {
@@ -42,10 +42,7 @@ public class JBMentionsWeiboNotificationServiceHelper extends NotificationServic
 
     private String ticker;
 
-    private static HashMap<String, RecordOperationAppBroadcastReceiver>
-            clearNotificationEventReceiver
-            = new HashMap<String, RecordOperationAppBroadcastReceiver>();
-
+    private static HashMap<String, RecordOperationAppBroadcastReceiver> clearNotificationEventReceiver = new HashMap<String, RecordOperationAppBroadcastReceiver>();
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -65,11 +62,10 @@ public class JBMentionsWeiboNotificationServiceHelper extends NotificationServic
         return super.onStartCommand(intent, flags, startId);
     }
 
-
     private void buildNotification() {
 
-//        int count = (data.getSize() >= Integer.valueOf(SettingUtility.getMsgCount()) ? unreadBean
-//                .getMention_status() : data.getSize());
+        // int count = (data.getSize() >= Integer.valueOf(SettingUtility.getMsgCount()) ? unreadBean
+        // .getMention_status() : data.getSize());
 
         int count = Math.min(unreadBean.getMention_status(), data.getSize());
 
@@ -108,8 +104,8 @@ public class JBMentionsWeiboNotificationServiceHelper extends NotificationServic
                     @Override
                     public void run() {
                         try {
-//                            new ClearUnreadDao(accountBean.getAccess_token())
-//                                    .clearMentionStatusUnread(unreadBean, accountBean.getUid());
+                            // new ClearUnreadDao(accountBean.getAccess_token())
+                            // .clearMentionStatusUnread(unreadBean, accountBean.getUid());
 
                             ArrayList<String> ids = new ArrayList<String>();
 
@@ -120,7 +116,7 @@ public class JBMentionsWeiboNotificationServiceHelper extends NotificationServic
                             NotificationDBTask.addUnreadNotification(accountBean.getUid(), ids,
                                     NotificationDBTask.UnreadDBType.mentionsWeibo);
 
-//                        } catch (WeiboException ignored) {
+                            // } catch (WeiboException ignored) {
 
                         } finally {
                             Utility.unregisterReceiverIgnoredReceiverNotRegisteredException(

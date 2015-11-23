@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.browser;
 
 import org.qii.weiciyuan.R;
@@ -38,12 +39,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * User: qii
- * Date: 12-8-13
+ * User: qii Date: 12-8-13
  */
 @Deprecated
 public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment<RepostListBean> {
-
 
     private MessageBean msg;
 
@@ -72,7 +71,7 @@ public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment
 
     }
 
-    //restore from activity destroy
+    // restore from activity destroy
     public void load() {
         if ((bean == null || bean.getSize() == 0)) {
             if (pullToRefreshListView != null) {
@@ -91,7 +90,6 @@ public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment
         outState.putString("token", token);
         outState.putParcelable("msg", msg);
     }
-
 
     private boolean canSend() {
 
@@ -115,17 +113,16 @@ public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment
         return false;
     }
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         switch (getCurrentState(savedInstanceState)) {
             case FIRST_TIME_START:
-                //nothing
+                // nothing
                 break;
             case SCREEN_ROTATE:
-                //nothing
+                // nothing
                 refreshLayout(bean);
                 break;
             case ACTIVITY_DESTROY_AND_CREATE:
@@ -166,16 +163,13 @@ public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment
                         return true;
                     }
 
-
                 }
                 return false;
             }
 
         });
 
-
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -183,7 +177,6 @@ public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment
         setHasOptionsMenu(true);
         setRetainInstance(false);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -272,7 +265,6 @@ public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment
         }
     }
 
-
     class SimpleTask extends AsyncTask<Void, Void, MessageBean> {
 
         WeiboException e;
@@ -343,13 +335,11 @@ public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment
         }
     }
 
-
     protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
         startActivity(BrowserWeiboMsgActivity
                 .newIntent(bean.getItemList().get(position),
                         GlobalContext.getInstance().getSpecialToken()));
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -362,7 +352,6 @@ public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment
         return super.onOptionsItemSelected(item);
     }
 
-
     private void invlidateTabText() {
         Activity activity = getActivity();
         if (activity != null) {
@@ -371,7 +360,6 @@ public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment
             ((BrowserWeiboMsgActivity) activity).updateRepostCount(bean.getTotal_number());
         }
     }
-
 
     @Override
     protected void newMsgLoaderSuccessCallback(RepostListBean newValue, Bundle loaderArgs) {
@@ -382,7 +370,6 @@ public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment
             invlidateTabText();
 
         }
-
 
     }
 
@@ -397,7 +384,6 @@ public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment
                     Toast.LENGTH_SHORT).show();
         }
     }
-
 
     @Override
     public void loadMiddleMsg(String beginId, String endId, int position) {
@@ -425,7 +411,6 @@ public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment
         getLoaderManager().restartLoader(NEW_MSG_LOADER_ID, null, msgAsyncTaskLoaderCallback);
     }
 
-
     @Override
     protected void loadOldMsg(View view) {
         getLoaderManager().destroyLoader(NEW_MSG_LOADER_ID);
@@ -433,7 +418,6 @@ public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment
         getLoaderManager().destroyLoader(MIDDLE_MSG_LOADER_ID);
         getLoaderManager().restartLoader(OLD_MSG_LOADER_ID, null, msgAsyncTaskLoaderCallback);
     }
-
 
     protected Loader<AsyncTaskLoaderResult<RepostListBean>> onCreateNewMsgLoader(int loaderId,
             Bundle args) {
@@ -461,4 +445,3 @@ public class RepostsByIdTimeLineFragment extends AbstractMessageTimeLineFragment
         return new RepostByIdMsgLoader(getActivity(), id, token, null, maxId);
     }
 }
-

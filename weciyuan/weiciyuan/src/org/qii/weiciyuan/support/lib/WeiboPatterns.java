@@ -1,11 +1,10 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import java.util.regex.Pattern;
 
 /**
- * User: qii
- * Date: 12-12-27
- * fix web url bug which include chinese words, see WEB_URL
+ * User: qii Date: 12-12-27 fix web url bug which include chinese words, see WEB_URL
  */
 public class WeiboPatterns {
 
@@ -16,7 +15,6 @@ public class WeiboPatterns {
     public static final Pattern MENTION_URL = Pattern.compile("@[\\w\\p{InCJKUnifiedIdeographs}-]{1,26}");
 
     public static final Pattern EMOTION_URL = Pattern.compile("\\[(\\S+?)\\]");
-
 
     public static final String WEB_SCHEME = "http://";
 

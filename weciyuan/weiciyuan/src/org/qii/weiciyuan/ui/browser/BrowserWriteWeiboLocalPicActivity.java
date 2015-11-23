@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.browser;
 
 import org.qii.weiciyuan.R;
@@ -18,15 +19,13 @@ import android.webkit.WebView;
 import java.io.File;
 
 /**
- * User: qii
- * Date: 12-12-30
+ * User: qii Date: 12-12-30
  */
 public class BrowserWriteWeiboLocalPicActivity extends AbstractAppActivity {
 
     private WebView webView;
 
     private String path;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +121,6 @@ public class BrowserWriteWeiboLocalPicActivity extends AbstractAppActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     protected void onDestroy() {

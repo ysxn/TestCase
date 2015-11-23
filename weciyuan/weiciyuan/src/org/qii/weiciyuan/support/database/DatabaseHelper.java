@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import org.qii.weiciyuan.support.database.dbUpgrade.Upgrade35to36;
@@ -25,8 +26,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * User: qii
- * Date: 12-7-30
+ * User: qii Date: 12-7-30
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -105,7 +105,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + CommentsTable.CommentsDataTable.MBLOGID + " text,"
             + CommentsTable.CommentsDataTable.JSONDATA + " text"
             + ");";
-
 
     static final String CREATE_REPOSTS_TABLE_SQL = "create table " + RepostsTable.TABLE_NAME
             + "("
@@ -315,7 +314,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + NotificationTable.TYPE + ")"
             + ");";
 
-
     DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -446,7 +444,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         deleteAllTableExceptAccount(db);
 
     }
-
 
     private void upgrade34To35(SQLiteDatabase db) {
         db.execSQL(CREATE_NOTIFICATION_TABLE_SQL);

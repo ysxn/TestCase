@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.http;
 
 import android.text.TextUtils;
@@ -25,8 +26,7 @@ import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
 /**
- * User: qii
- * Date: 12-12-19
+ * User: qii Date: 12-12-19
  */
 public class JavaHttpUtility {
 
@@ -46,7 +46,7 @@ public class JavaHttpUtility {
         }
     }
 
-    private TrustManager[] trustAllCerts = new TrustManager[]{
+    private TrustManager[] trustAllCerts = new TrustManager[] {
             new X509TrustManager() {
                 public java.security.cert.X509Certificate[] getAcceptedIssuers() {
                     return null;
@@ -64,8 +64,9 @@ public class JavaHttpUtility {
 
     public JavaHttpUtility() {
 
-        //allow Android to use an untrusted certificate for SSL/HTTPS connection
-        //so that when you debug app, you can use Fiddler http://fiddler2.com to logs all HTTPS traffic
+        // allow Android to use an untrusted certificate for SSL/HTTPS connection
+        // so that when you debug app, you can use Fiddler http://fiddler2.com to logs all HTTPS
+        // traffic
         try {
             if (BuildConfig.DEBUG) {
                 HttpsURLConnection.setDefaultHostnameVerifier(new NullHostNameVerifier());
@@ -77,7 +78,6 @@ public class JavaHttpUtility {
         }
 
     }
-
 
     public String executeNormalTask(HttpMethod httpMethod, String url, Map<String, String> param) throws WeiboException {
         switch (httpMethod) {
@@ -179,7 +179,6 @@ public class JavaHttpUtility {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
         return result;
     }
@@ -292,7 +291,6 @@ public class JavaHttpUtility {
             throw new WeiboException(errorStr, e);
         }
 
-
     }
 
     public boolean doGetSaveFile(String urlStr, String path, FileDownloaderHttpHelper.DownloadListener downloadListener) {
@@ -330,7 +328,6 @@ public class JavaHttpUtility {
             if (status != HttpURLConnection.HTTP_OK) {
                 return false;
             }
-
 
             int bytetotal = (int) urlConnection.getContentLength();
             int bytesum = 0;
@@ -412,7 +409,8 @@ public class JavaHttpUtility {
         return res.toString();
     }
 
-    public boolean doUploadFile(String urlStr, Map<String, String> param, String path, String imageParamName, final FileUploaderHttpHelper.ProgressListener listener) throws WeiboException {
+    public boolean doUploadFile(String urlStr, Map<String, String> param, String path, String imageParamName,
+            final FileUploaderHttpHelper.ProgressListener listener) throws WeiboException {
         String BOUNDARYSTR = getBoundry();
 
         File targetFile = new File(path);
@@ -465,7 +463,6 @@ public class JavaHttpUtility {
             out.write(sendStr.getBytes("UTF-8"));
             totalSent += sendStr.getBytes("UTF-8").length;
 
-
             fis = new FileInputStream(targetFile);
 
             int bytesRead;
@@ -498,7 +495,6 @@ public class JavaHttpUtility {
 
             }
 
-
             out.write(barry);
             totalSent += barry.length;
             out.write(barry);
@@ -529,6 +525,3 @@ public class JavaHttpUtility {
     }
 
 }
-
-
-

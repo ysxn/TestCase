@@ -1,13 +1,12 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.content.BroadcastReceiver;
 
 /**
- * User: qii
- * Date: 14-1-25
+ * User: qii Date: 14-1-25
  */
 public abstract class RecordOperationAppBroadcastReceiver extends BroadcastReceiver {
-
 
     private boolean hasRegistered = false;
 

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.user;
 
 import org.qii.weiciyuan.dao.URLHelper;
@@ -8,12 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 13-3-2
- * http://open.weibo.com/wiki/2/account/avatar/upload
+ * User: qii Date: 13-3-2 http://open.weibo.com/wiki/2/account/avatar/upload
  */
 public class UploadAvatarDao {
-
 
     public boolean upload() throws WeiboException {
         String url = URLHelper.AVATAR_UPLOAD;

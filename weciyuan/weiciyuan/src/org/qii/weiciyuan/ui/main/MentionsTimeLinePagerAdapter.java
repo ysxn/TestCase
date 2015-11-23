@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.main;
 
 import android.support.v4.app.Fragment;
@@ -10,8 +11,7 @@ import org.qii.weiciyuan.ui.maintimeline.MentionsCommentTimeLineFragment;
 import org.qii.weiciyuan.ui.maintimeline.MentionsWeiboTimeLineFragment;
 
 /**
- * User: qii
- * Date: 13-3-8
+ * User: qii Date: 13-3-8
  */
 public class MentionsTimeLinePagerAdapter extends AppFragmentPagerAdapter {
 
@@ -26,13 +26,13 @@ public class MentionsTimeLinePagerAdapter extends AppFragmentPagerAdapter {
         if (!fragmentList.get(MentionsTimeLine.MENTIONS_WEIBO_CHILD_POSITION).isAdded())
             transaction.add(viewPager.getId(), fragmentList.get(MentionsTimeLine.MENTIONS_WEIBO_CHILD_POSITION), MentionsWeiboTimeLineFragment.class.getName());
         if (!fragmentList.get(MentionsTimeLine.MENTIONS_COMMENT_CHILD_POSITION).isAdded())
-            transaction.add(viewPager.getId(), fragmentList.get(MentionsTimeLine.MENTIONS_COMMENT_CHILD_POSITION), MentionsCommentTimeLineFragment.class.getName());
+            transaction.add(viewPager.getId(), fragmentList.get(MentionsTimeLine.MENTIONS_COMMENT_CHILD_POSITION),
+                    MentionsCommentTimeLineFragment.class.getName());
         if (!transaction.isEmpty()) {
             transaction.commit();
             fragment.getChildFragmentManager().executePendingTransactions();
         }
     }
-
 
     public Fragment getItem(int position) {
         return fragmentList.get(position);
@@ -47,11 +47,9 @@ public class MentionsTimeLinePagerAdapter extends AppFragmentPagerAdapter {
         return tagList.get(position);
     }
 
-
     @Override
     public int getCount() {
         return 2;
     }
-
 
 }

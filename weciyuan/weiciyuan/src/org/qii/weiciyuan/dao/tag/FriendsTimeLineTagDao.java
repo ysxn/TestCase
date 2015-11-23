@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.tag;
 
 import org.json.JSONArray;
@@ -14,8 +15,7 @@ import org.qii.weiciyuan.support.debug.AppLogger;
 import java.util.*;
 
 /**
- * User: qii
- * Date: 12-8-5
+ * User: qii Date: 12-8-5
  */
 public class FriendsTimeLineTagDao {
 
@@ -28,9 +28,7 @@ public class FriendsTimeLineTagDao {
         map.put("count", count);
         map.put("page", page);
 
-
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
-
 
         return jsonData;
     }
@@ -65,10 +63,8 @@ public class FriendsTimeLineTagDao {
             AppLogger.e(e.getMessage());
         }
 
-
         return tagBeanList;
     }
-
 
     private String access_token;
     private String uid;
@@ -82,11 +78,9 @@ public class FriendsTimeLineTagDao {
         this.count = SettingUtility.getMsgCount();
     }
 
-
     public void setCount(String count) {
         this.count = count;
     }
-
 
     public void setPage(String page) {
         this.page = page;

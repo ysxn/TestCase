@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.asyncdrawable;
 
 import org.qii.weiciyuan.support.file.FileDownloaderHttpHelper;
@@ -10,16 +11,14 @@ import java.io.File;
 import java.util.concurrent.*;
 
 /**
- * User: qii
- * Date: 13-2-9
- * ReadWorker can be interrupted, DownloadWorker can't be interrupted, maybe I can remove CancellationException exception?
+ * User: qii Date: 13-2-9 ReadWorker can be interrupted, DownloadWorker can't be interrupted, maybe
+ * I can remove CancellationException exception?
  */
 public class TaskCache {
 
     private static ConcurrentHashMap<String, DownloadWorker> downloadTasks = new ConcurrentHashMap<String, DownloadWorker>();
 
     public static final Object backgroundWifiDownloadPicturesWorkLock = new Object();
-
 
     public static void removeDownloadTask(String url, DownloadWorker downloadWorker) {
         synchronized (TaskCache.backgroundWifiDownloadPicturesWorkLock) {
@@ -30,7 +29,6 @@ public class TaskCache {
 
     }
 
-
     public static boolean isDownloadTaskFinished() {
         return TaskCache.downloadTasks.isEmpty();
     }
@@ -39,8 +37,8 @@ public class TaskCache {
         return !downloadTasks.containsKey(url);
     }
 
-
-    public static boolean waitForPictureDownload(String url, FileDownloaderHttpHelper.DownloadListener downloadListener, String savedPath, FileLocationMethod method) {
+    public static boolean waitForPictureDownload(String url, FileDownloaderHttpHelper.DownloadListener downloadListener, String savedPath,
+            FileLocationMethod method) {
         while (true) {
             DownloadWorker downloadWorker = TaskCache.downloadTasks.get(url);
             boolean localFileExist = new File(savedPath).exists();
@@ -81,18 +79,14 @@ public class TaskCache {
         }
     }
 
-
     public static boolean waitForMsgDetailPictureDownload(String url, FileDownloaderHttpHelper.DownloadListener downloadListener) {
         while (true) {
             DownloadWorker downloadWorker = null;
 
-
             String largePath = FileManager.getFilePathFromUrl(url, FileLocationMethod.picture_large);
-
 
             downloadWorker = TaskCache.downloadTasks.get(url);
             boolean localFileExist = new File(largePath).exists();
-
 
             if (downloadWorker == null) {
                 if (localFileExist) {
@@ -109,7 +103,6 @@ public class TaskCache {
                     downloadWorker.executeOnExecutor(MyAsyncTask.DOWNLOAD_THREAD_POOL_EXECUTOR);
                 }
             }
-
 
             try {
                 downloadWorker.addDownloadListener(downloadListener);

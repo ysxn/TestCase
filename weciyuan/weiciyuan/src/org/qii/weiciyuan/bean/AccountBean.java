@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -6,8 +7,7 @@ import android.text.TextUtils;
 import org.qii.weiciyuan.support.utils.ObjectToStringUtility;
 
 /**
- * User: Jiang Qi
- * Date: 12-7-30
+ * User: Jiang Qi Date: 12-7-30
  */
 public class AccountBean implements Parcelable {
 
@@ -61,7 +61,6 @@ public class AccountBean implements Parcelable {
         this.black_magic = black_magic;
     }
 
-
     public int getNavigationPosition() {
         return navigationPosition;
     }
@@ -85,7 +84,9 @@ public class AccountBean implements Parcelable {
         dest.writeString(access_token);
         dest.writeLong(expires_time);
         dest.writeInt(navigationPosition);
-        dest.writeBooleanArray(new boolean[]{this.black_magic});
+        dest.writeBooleanArray(new boolean[] {
+            this.black_magic
+        });
         dest.writeParcelable(info, flags);
     }
 
@@ -111,7 +112,6 @@ public class AccountBean implements Parcelable {
                 }
             };
 
-
     @Override
     public boolean equals(Object o) {
 
@@ -120,12 +120,12 @@ public class AccountBean implements Parcelable {
                 && ((AccountBean) o).getUid().equalsIgnoreCase(getUid());
 
     }
-    
+
     public String dump() {
-        return "access_token="+access_token+"\n"
-                +"expires_time="+expires_time+"\n"
-                +"black_magic="+black_magic+"\n"
-                +"navigationPosition="+navigationPosition+"\n"
-                +"UserBean="+info.dump();
+        return "access_token=" + access_token + "\n"
+                + "expires_time=" + expires_time + "\n"
+                + "black_magic=" + black_magic + "\n"
+                + "navigationPosition=" + navigationPosition + "\n"
+                + "UserBean=" + info.dump();
     }
 }

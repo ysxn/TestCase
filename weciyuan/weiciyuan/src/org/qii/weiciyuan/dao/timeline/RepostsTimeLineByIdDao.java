@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.timeline;
 
 import com.google.gson.Gson;
@@ -18,8 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-8-13
+ * User: qii Date: 12-8-13
  */
 public class RepostsTimeLineByIdDao {
 
@@ -35,7 +35,6 @@ public class RepostsTimeLineByIdDao {
         map.put("count", count);
         map.put("page", page);
         map.put("filter_by_author", filter_by_author);
-
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
 
@@ -64,11 +63,9 @@ public class RepostsTimeLineByIdDao {
                 }
             }
 
-
         }
         return value;
     }
-
 
     public RepostsTimeLineByIdDao(String token, String id) {
 

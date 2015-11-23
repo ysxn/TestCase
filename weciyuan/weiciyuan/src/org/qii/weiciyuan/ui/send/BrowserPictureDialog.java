@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.send;
 
 import android.app.AlertDialog;
@@ -13,8 +14,7 @@ import org.qii.weiciyuan.support.imageutility.ImageUtility;
 import org.qii.weiciyuan.support.utils.Utility;
 
 /**
- * User: qii
- * Date: 12-12-20
+ * User: qii Date: 12-12-20
  */
 public class BrowserPictureDialog extends DialogFragment {
 

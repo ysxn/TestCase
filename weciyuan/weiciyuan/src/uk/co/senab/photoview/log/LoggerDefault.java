@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
+
 package uk.co.senab.photoview.log;
 
 import android.util.Log;
@@ -71,6 +72,5 @@ public class LoggerDefault implements Logger {
     public int e(String tag, String msg, Throwable tr) {
         return Log.e(tag, msg, tr);
     }
-
 
 }

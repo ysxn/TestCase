@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.search;
 
 import android.app.ActionBar;
@@ -7,8 +8,7 @@ import org.qii.weiciyuan.R;
 import org.qii.weiciyuan.ui.interfaces.AbstractAppActivity;
 
 /**
- * User: qii
- * Date: 12-10-8
+ * User: qii Date: 12-10-8
  */
 public class AtUserActivity extends AbstractAppActivity {
 

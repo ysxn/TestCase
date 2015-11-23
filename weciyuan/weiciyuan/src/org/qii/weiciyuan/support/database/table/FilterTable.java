@@ -1,8 +1,8 @@
+
 package org.qii.weiciyuan.support.database.table;
 
 /**
- * User: qii
- * Date: 12-9-21
+ * User: qii Date: 12-9-21
  */
 public class FilterTable {
 

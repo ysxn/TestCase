@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.content.Context;
@@ -9,22 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-3-31
- * modify to add
- * int currentItemCount = totalItemCount;
- * int v = currentItemCount - mLastItemCount;
- * mFirstVisiblePosition += v;
- * mLastVisiblePosition += v;
- * so, when notifyDataSetChanged adapter to show new item, the Velocity is also correct.
+ * User: qii Date: 13-3-31 modify to add int currentItemCount = totalItemCount; int v =
+ * currentItemCount - mLastItemCount; mFirstVisiblePosition += v; mLastVisiblePosition += v; so,
+ * when notifyDataSetChanged adapter to show new item, the Velocity is also correct.
  * <p/>
- * and modify setOnScrollListener method, so that ListView can own more than just one OnScrollListener
+ * and modify setOnScrollListener method, so that ListView can own more than just one
+ * OnScrollListener
  */
 public class VelocityListView extends AutoScrollListView {
 
     /**
      * A callback to be notified the velocity has changed.
-     *
+     * 
      * @author Cyril Mottier
      */
     public interface OnVelocityListViewListener {
@@ -38,11 +35,10 @@ public class VelocityListView extends AutoScrollListView {
     private static final long INVALID_TIME = -1;
 
     /**
-     * This value is really necessary to avoid weird velocity values. Indeed, in
-     * fly-wheel mode, onScroll is called twice per-frame which results in
-     * having a delta divided by a value close to zero. onScroll is usually
-     * being called 60 times per seconds (i.e. every 16ms) so 10ms is a good
-     * threshold.
+     * This value is really necessary to avoid weird velocity values. Indeed, in fly-wheel mode,
+     * onScroll is called twice per-frame which results in having a delta divided by a value close
+     * to zero. onScroll is usually being called 60 times per seconds (i.e. every 16ms) so 10ms is a
+     * good threshold.
      */
     private static final long MINIMUM_TIME_DELTA = 10L;
 
@@ -100,12 +96,11 @@ public class VelocityListView extends AutoScrollListView {
     }
 
     /**
-     * Return an approximative value of the ListView's current velocity on the
-     * Y-axis. A negative value indicates the ListView is currently being
-     * scrolled towards the bottom (i.e items are moving from bottom to top)
-     * while a positive value indicates it is currently being scrolled towards
-     * the top (i.e. items are moving from top to bottom).
-     *
+     * Return an approximative value of the ListView's current velocity on the Y-axis. A negative
+     * value indicates the ListView is currently being scrolled towards the bottom (i.e items are
+     * moving from bottom to top) while a positive value indicates it is currently being scrolled
+     * towards the top (i.e. items are moving from top to bottom).
+     * 
      * @return An approximative value of the ListView's velocity on the Y-axis
      */
     public int getVelocity() {
@@ -187,7 +182,7 @@ public class VelocityListView extends AutoScrollListView {
             final long now = AnimationUtils.currentAnimationTimeMillis();
             final int lastVisiblePosition = firstVisiblePosition + visibleItemCount - 1;
 
-            //calc position,because ListView may has new item because adapter has something new
+            // calc position,because ListView may has new item because adapter has something new
             int currentItemCount = totalItemCount;
             int v = currentItemCount - mLastItemCount;
 
@@ -199,7 +194,7 @@ public class VelocityListView extends AutoScrollListView {
                 final long delta = now - mTime;
                 if (now - mTime > MINIMUM_TIME_DELTA) {
                     int distance = 0;
-                    //@formatter:off
+                    // @formatter:off
                     if (mFirstVisiblePosition >= firstVisiblePosition
                             && mFirstVisiblePosition <= lastVisiblePosition) {
                         distance = getChildAt(mFirstVisiblePosition - firstVisiblePosition).getTop() - mFirstVisibleViewTop;
@@ -207,7 +202,7 @@ public class VelocityListView extends AutoScrollListView {
                     } else if (mLastVisiblePosition >= firstVisiblePosition
                             && mLastVisiblePosition <= lastVisiblePosition) {
                         distance = getChildAt(mLastVisiblePosition - firstVisiblePosition).getTop() - mLastVisibleViewTop;
-                        //@formatter:on
+                        // @formatter:on
                     } else {
                         // We're in a case were the item we were previously
                         // referencing has moved out of the visible window.

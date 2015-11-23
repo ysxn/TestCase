@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.search;
 
 import com.google.gson.Gson;
@@ -19,8 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-9-8
+ * User: qii Date: 12-9-8
  */
 public class SearchDao {
     public UserListBean getUserList() throws WeiboException {
@@ -33,11 +33,9 @@ public class SearchDao {
         map.put("page", page);
         map.put("q", q);
 
-
         String jsonData = null;
 
         jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
-
 
         Gson gson = new Gson();
 
@@ -62,7 +60,6 @@ public class SearchDao {
         map.put("page", page);
         map.put("q", q);
 
-
         String jsonData = null;
 
         jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
@@ -77,7 +74,7 @@ public class SearchDao {
             Iterator<MessageBean> iterator = list.iterator();
             while (iterator.hasNext()) {
                 MessageBean msg = iterator.next();
-                //message is deleted by sina
+                // message is deleted by sina
                 if (msg.getUser() == null) {
                     iterator.remove();
                 } else {
@@ -93,12 +90,10 @@ public class SearchDao {
         return value;
     }
 
-
     private String access_token;
     private String q;
     private String count;
     private String page;
-
 
     public SearchDao(String access_token, String q) {
 
@@ -106,7 +101,6 @@ public class SearchDao {
         this.q = q;
         this.count = SettingUtility.getMsgCount();
     }
-
 
     public SearchDao setCount(String count) {
         this.count = count;
@@ -117,6 +111,5 @@ public class SearchDao {
         this.page = page;
         return this;
     }
-
 
 }

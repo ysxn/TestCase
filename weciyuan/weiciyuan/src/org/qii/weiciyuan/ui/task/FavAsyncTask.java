@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.task;
 
 import android.widget.Toast;
@@ -9,8 +10,7 @@ import org.qii.weiciyuan.support.lib.MyAsyncTask;
 import org.qii.weiciyuan.support.utils.GlobalContext;
 
 /**
- * User: qii
- * Date: 12-9-12
+ * User: qii Date: 12-9-12
  */
 public class FavAsyncTask extends MyAsyncTask<Void, FavBean, FavBean> {
 

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent.unreadnotification;
 
 import org.qii.weiciyuan.R;
@@ -39,11 +40,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * User: qii
- * Date: 14-3-8
+ * User: qii Date: 14-3-8
  */
 public class BigTextNotificationService extends NotificationServiceHelper {
-
 
     public static Intent newIntent(AccountBean accountBean,
             MessageListBean mentionsWeiboData, CommentListBean commentsToMeData
@@ -90,10 +89,8 @@ public class BigTextNotificationService extends NotificationServiceHelper {
         private RecordOperationAppBroadcastReceiver clearNotificationEventReceiver;
     }
 
-    //key is account uid
-    private static HashMap<String, ValueWrapper> valueBagHashMap
-            = new HashMap<String, ValueWrapper>();
-
+    // key is account uid
+    private static HashMap<String, ValueWrapper> valueBagHashMap = new HashMap<String, ValueWrapper>();
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -147,7 +144,6 @@ public class BigTextNotificationService extends NotificationServiceHelper {
         return super.onStartCommand(intent, flags, startId);
     }
 
-
     private void buildNotification(String uid) {
 
         final ValueWrapper valueWrapper = valueBagHashMap.get(uid);
@@ -174,7 +170,7 @@ public class BigTextNotificationService extends NotificationServiceHelper {
 
         ArrayList<Parcelable> notificationItems = valueWrapper.notificationItems;
 
-//        int count = Math.min(unreadBean.getMention_status(), data.getSize());
+        // int count = Math.min(unreadBean.getMention_status(), data.getSize());
 
         int count = notificationItems.size();
 
@@ -202,7 +198,7 @@ public class BigTextNotificationService extends NotificationServiceHelper {
 
         valueWrapper.clearNotificationEventReceiver = new RecordOperationAppBroadcastReceiver() {
 
-            //mark these messages as read, write to database
+            // mark these messages as read, write to database
             @Override
             public void onReceive(Context context, Intent intent) {
                 new Thread(new Runnable() {
@@ -365,41 +361,40 @@ public class BigTextNotificationService extends NotificationServiceHelper {
         return pendingIntent;
     }
 
-
     private String getItemBigContentTitle(AccountBean accountBean,
             ArrayList<Parcelable> notificationItems, int currentIndex) {
-//        Parcelable itemBean = notificationItems.get(currentIndex);
-//        if (itemBean instanceof MessageBean) {
-//            MessageBean msg = (MessageBean) itemBean;
-//            if (msg.getText().contains(accountBean.getUsernick())) {
-//                // mentioned you
-//                return "@"
-//                        + msg.getUser().getScreen_name()
-//                        + getString(R.string.weibo_at_to_you);
-//            } else {
-//                // retweeted your weibo
-//                return "@"
-//                        + msg.getUser().getScreen_name()
-//                        + getString(R.string.retweeted_your_weibo);
-//            }
-//        } else if (itemBean instanceof CommentBean) {
-//            CommentBean commentBean = (CommentBean) itemBean;
-//            CommentBean oriCommentBean = commentBean.getReply_comment();
-//            MessageBean oriMessageBean = commentBean.getStatus();
-//            if (oriCommentBean != null && accountBean.getInfo().equals(oriCommentBean.getUser())) {
-//                return "@"
-//                        + commentBean.getUser().getScreen_name()
-//                        + getString(R.string.reply_to_you);
-//            } else if (oriMessageBean != null && accountBean.getInfo()
-//                    .equals(oriMessageBean.getUser())) {
-//                return "@"
-//                        + commentBean.getUser().getScreen_name()
-//                        + getString(R.string.comment_sent_to_you);
-//            } else {
-//                return commentBean.getUser().getScreen_name()
-//                        + getString(R.string.comment_at_to_you);
-//            }
-//        }
+        // Parcelable itemBean = notificationItems.get(currentIndex);
+        // if (itemBean instanceof MessageBean) {
+        // MessageBean msg = (MessageBean) itemBean;
+        // if (msg.getText().contains(accountBean.getUsernick())) {
+        // // mentioned you
+        // return "@"
+        // + msg.getUser().getScreen_name()
+        // + getString(R.string.weibo_at_to_you);
+        // } else {
+        // // retweeted your weibo
+        // return "@"
+        // + msg.getUser().getScreen_name()
+        // + getString(R.string.retweeted_your_weibo);
+        // }
+        // } else if (itemBean instanceof CommentBean) {
+        // CommentBean commentBean = (CommentBean) itemBean;
+        // CommentBean oriCommentBean = commentBean.getReply_comment();
+        // MessageBean oriMessageBean = commentBean.getStatus();
+        // if (oriCommentBean != null && accountBean.getInfo().equals(oriCommentBean.getUser())) {
+        // return "@"
+        // + commentBean.getUser().getScreen_name()
+        // + getString(R.string.reply_to_you);
+        // } else if (oriMessageBean != null && accountBean.getInfo()
+        // .equals(oriMessageBean.getUser())) {
+        // return "@"
+        // + commentBean.getUser().getScreen_name()
+        // + getString(R.string.comment_sent_to_you);
+        // } else {
+        // return commentBean.getUser().getScreen_name()
+        // + getString(R.string.comment_at_to_you);
+        // }
+        // }
 
         ItemBean itemBean = (ItemBean) notificationItems.get(currentIndex);
         return itemBean.getUser().getScreen_name();

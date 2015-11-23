@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import android.content.ContentValues;
@@ -17,20 +18,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-7-30
+ * User: qii Date: 12-7-30
  */
 public class DatabaseManager {
 
     private static DatabaseManager singleton = null;
-
 
     private SQLiteDatabase wsd = null;
 
     private SQLiteDatabase rsd = null;
 
     private DatabaseHelper databaseHelper = null;
-
 
     private DatabaseManager() {
 
@@ -71,7 +69,6 @@ public class DatabaseManager {
         return OAuthActivity.DBResult.add_successfuly;
 
     }
-
 
     public Map<String, String> getEmotionsMap() {
         Gson gson = new Gson();

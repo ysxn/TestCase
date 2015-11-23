@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.adapter;
 
 import org.qii.weiciyuan.R;
@@ -20,18 +21,15 @@ import android.support.v4.app.DialogFragment;
 import android.widget.Toast;
 
 /**
- * User: qii
- * Date: 13-3-26
+ * User: qii Date: 13-3-26
  */
 public class LongClickLinkDialog extends DialogFragment {
-
 
     private Uri uri;
 
     public LongClickLinkDialog() {
 
     }
-
 
     public LongClickLinkDialog(Uri uri) {
         this.uri = uri;
@@ -53,7 +51,9 @@ public class LongClickLinkDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        CharSequence[] strangerItems = {getString(R.string.open), getString(R.string.copy)};
+        CharSequence[] strangerItems = {
+                getString(R.string.open), getString(R.string.copy)
+        };
 
         builder.setTitle(getStringContent())
                 .setItems(strangerItems, new DialogInterface.OnClickListener() {
@@ -84,12 +84,13 @@ public class LongClickLinkDialog extends DialogFragment {
                             case 1:
                                 ClipboardManager cm = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                                 cm.setPrimaryClip(ClipData.newPlainText("sinaweibo", getStringContent()));
-                                Toast.makeText(GlobalContext.getInstance(), String.format(GlobalContext.getInstance().getString(R.string.have_copied), getStringContent()), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(GlobalContext.getInstance(),
+                                        String.format(GlobalContext.getInstance().getString(R.string.have_copied), getStringContent()), Toast.LENGTH_SHORT)
+                                        .show();
                                 break;
                         }
                     }
                 });
-
 
         return builder.create();
     }

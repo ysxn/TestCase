@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.content.Context;
@@ -6,8 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * User: qii
- * Date: 13-11-18
+ * User: qii Date: 13-11-18
  */
 public class QuickRelativeLayout extends ViewGroup {
 
@@ -22,7 +22,6 @@ public class QuickRelativeLayout extends ViewGroup {
     private static final int REPOST_CONTENT_PIC_INDEX = 8;
     private static final int REPOST_CONTENT_PIC_MULTI_INDEX = 9;
 
-
     public QuickRelativeLayout(Context context) {
         super(context);
     }
@@ -34,7 +33,6 @@ public class QuickRelativeLayout extends ViewGroup {
     public QuickRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
-
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -48,12 +46,10 @@ public class QuickRelativeLayout extends ViewGroup {
         if (widthMode != MeasureSpec.EXACTLY || heightMode != MeasureSpec.UNSPECIFIED)
             throw new IllegalArgumentException("this viewgroup only can be used in ListView and its layout_width must be match_parent");
 
-
         int paddingLeft = getPaddingLeft();
         int paddingTop = getPaddingTop();
         int paddingBottom = getPaddingBottom();
         int paddingRight = getPaddingRight();
-
 
         int avatarHeight = 0;
         int avatarWidth = 0;
@@ -70,14 +66,11 @@ public class QuickRelativeLayout extends ViewGroup {
         int sourceHeight = 0;
         int sourceWidth = 0;
 
-
         int contentMaxWidth = widthSize - paddingLeft - paddingRight;
 
         int childCount = getChildCount();
 
-
         int contentHeight = 0;
-
 
         for (int i = 0; i < childCount; i++) {
             View child = getChildAt(i);
@@ -101,7 +94,6 @@ public class QuickRelativeLayout extends ViewGroup {
 
                     avatarWidth = child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin;
                     avatarHeight = child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin;
-
 
                     lp.mLeft = paddingLeft + lp.leftMargin;
                     lp.mTop = paddingTop + lp.topMargin;
@@ -232,12 +224,10 @@ public class QuickRelativeLayout extends ViewGroup {
 
         }
 
-
         contentHeight += paddingBottom;
 
         setMeasuredDimension(widthSize, contentHeight);
     }
-
 
     @Override
     protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {
@@ -254,12 +244,10 @@ public class QuickRelativeLayout extends ViewGroup {
         return new LayoutParams(p);
     }
 
-
     @Override
     protected QuickRelativeLayout.LayoutParams generateDefaultLayoutParams() {
         return new QuickRelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
     }
-
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -277,18 +265,14 @@ public class QuickRelativeLayout extends ViewGroup {
             child.layout(lp.mLeft, lp.mTop, lp.mRight, lp.mBottom);
         }
 
-
     }
-
 
     public static class LayoutParams extends ViewGroup.MarginLayoutParams {
 
         private int mLeft, mTop, mRight, mBottom;
 
-
         public LayoutParams(Context c, AttributeSet attrs) {
             super(c, attrs);
-
 
         }
 
@@ -296,23 +280,18 @@ public class QuickRelativeLayout extends ViewGroup {
             super(w, h);
         }
 
-
         public LayoutParams(ViewGroup.LayoutParams source) {
             super(source);
         }
-
 
         public LayoutParams(ViewGroup.MarginLayoutParams source) {
             super(source);
         }
 
-
         public LayoutParams(LayoutParams source) {
             super(source);
 
-
         }
-
 
     }
 

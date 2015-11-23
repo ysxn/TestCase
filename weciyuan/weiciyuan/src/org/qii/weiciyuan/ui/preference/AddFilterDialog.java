@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference;
 
 import android.app.AlertDialog;
@@ -12,16 +13,13 @@ import org.qii.weiciyuan.R;
 import org.qii.weiciyuan.ui.preference.filter.AbstractFilterFragment;
 
 /**
- * User: qii
- * Date: 12-9-21
+ * User: qii Date: 12-9-21
  */
 public class AddFilterDialog extends DialogFragment {
-
 
     public AddFilterDialog() {
 
     }
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

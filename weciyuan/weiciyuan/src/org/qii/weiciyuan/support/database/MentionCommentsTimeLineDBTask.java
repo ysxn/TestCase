@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import android.content.ContentValues;
@@ -20,8 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-1-23
+ * User: qii Date: 13-1-23
  */
 public class MentionCommentsTimeLineDBTask {
 
@@ -39,7 +39,6 @@ public class MentionCommentsTimeLineDBTask {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         return databaseHelper.getReadableDatabase();
     }
-
 
     public static void addCommentLineMsg(CommentListBean list, String accountId) {
         Gson gson = new Gson();
@@ -61,7 +60,6 @@ public class MentionCommentsTimeLineDBTask {
                 ih.bind(jsondataColumn, json);
                 ih.execute();
 
-
             }
             getWsd().setTransactionSuccessful();
         } catch (SQLException e) {
@@ -76,12 +74,14 @@ public class MentionCommentsTimeLineDBTask {
 
         TimeLinePosition position = getPosition(accountId);
 
-        int limit = position.position + AppConfig.DB_CACHE_COUNT_OFFSET > AppConfig.DEFAULT_MSG_COUNT_50 ? position.position + AppConfig.DB_CACHE_COUNT_OFFSET : AppConfig.DEFAULT_MSG_COUNT_50;
+        int limit = position.position + AppConfig.DB_CACHE_COUNT_OFFSET > AppConfig.DEFAULT_MSG_COUNT_50 ? position.position + AppConfig.DB_CACHE_COUNT_OFFSET
+                : AppConfig.DEFAULT_MSG_COUNT_50;
 
         CommentListBean result = new CommentListBean();
 
         List<CommentBean> msgList = new ArrayList<CommentBean>();
-        String sql = "select * from " + MentionCommentsTable.MentionCommentsDataTable.TABLE_NAME + " where " + MentionCommentsTable.MentionCommentsDataTable.ACCOUNTID + "  = "
+        String sql = "select * from " + MentionCommentsTable.MentionCommentsDataTable.TABLE_NAME + " where "
+                + MentionCommentsTable.MentionCommentsDataTable.ACCOUNTID + "  = "
                 + accountId + " order by " + MentionCommentsTable.MentionCommentsDataTable.MBLOGID + " desc limit " + limit;
         Cursor c = getRsd().rawQuery(sql, null);
         Gson gson = new Gson();
@@ -108,31 +108,36 @@ public class MentionCommentsTimeLineDBTask {
 
     }
 
-
     private static void reduceCommentTable(String accountId) {
-//        String searchCount = "select count(" + MentionCommentsTable.MentionCommentsDataTable.ID + ") as total" + " from " + MentionCommentsTable.MentionCommentsDataTable.TABLE_NAME + " where " + MentionCommentsTable.MentionCommentsDataTable.ACCOUNTID
-//                + " = " + accountId;
-//        int total = 0;
-//        Cursor c = getRsd().rawQuery(searchCount, null);
-//        if (c.moveToNext()) {
-//            total = c.getInt(c.getColumnIndex("total"));
-//        }
-//
-//        c.close();
-//
-//        AppLogger.e("total=" + total);
-//
-//        int needDeletedNumber = total - AppConfig.DEFAULT_MENTIONS_COMMENT_DB_CACHE_COUNT;
-//
-//        if (needDeletedNumber > 0) {
-//            AppLogger.e("" + needDeletedNumber);
-//            String sql = " delete from " + MentionCommentsTable.MentionCommentsDataTable.TABLE_NAME + " where " + MentionCommentsTable.MentionCommentsDataTable.ID + " in "
-//                    + "( select " + MentionCommentsTable.MentionCommentsDataTable.ID + " from " + MentionCommentsTable.MentionCommentsDataTable.TABLE_NAME + " where "
-//                    + MentionCommentsTable.MentionCommentsDataTable.ACCOUNTID
-//                    + " in " + "(" + accountId + ") order by " + MentionCommentsTable.MentionCommentsDataTable.ID + " asc limit " + needDeletedNumber + " ) ";
-//
-//            getWsd().execSQL(sql);
-//        }
+        // String searchCount = "select count(" + MentionCommentsTable.MentionCommentsDataTable.ID +
+        // ") as total" + " from " + MentionCommentsTable.MentionCommentsDataTable.TABLE_NAME +
+        // " where " + MentionCommentsTable.MentionCommentsDataTable.ACCOUNTID
+        // + " = " + accountId;
+        // int total = 0;
+        // Cursor c = getRsd().rawQuery(searchCount, null);
+        // if (c.moveToNext()) {
+        // total = c.getInt(c.getColumnIndex("total"));
+        // }
+        //
+        // c.close();
+        //
+        // AppLogger.e("total=" + total);
+        //
+        // int needDeletedNumber = total - AppConfig.DEFAULT_MENTIONS_COMMENT_DB_CACHE_COUNT;
+        //
+        // if (needDeletedNumber > 0) {
+        // AppLogger.e("" + needDeletedNumber);
+        // String sql = " delete from " + MentionCommentsTable.MentionCommentsDataTable.TABLE_NAME +
+        // " where " + MentionCommentsTable.MentionCommentsDataTable.ID + " in "
+        // + "( select " + MentionCommentsTable.MentionCommentsDataTable.ID + " from " +
+        // MentionCommentsTable.MentionCommentsDataTable.TABLE_NAME + " where "
+        // + MentionCommentsTable.MentionCommentsDataTable.ACCOUNTID
+        // + " in " + "(" + accountId + ") order by " +
+        // MentionCommentsTable.MentionCommentsDataTable.ID + " asc limit " + needDeletedNumber +
+        // " ) ";
+        //
+        // getWsd().execSQL(sql);
+        // }
     }
 
     public static void asyncReplace(final CommentListBean list, final String accountId) {
@@ -149,7 +154,8 @@ public class MentionCommentsTimeLineDBTask {
     }
 
     static void deleteAllComments(String accountId) {
-        String sql = "delete from " + MentionCommentsTable.MentionCommentsDataTable.TABLE_NAME + " where " + MentionCommentsTable.MentionCommentsDataTable.ACCOUNTID + " in " + "(" + accountId + ")";
+        String sql = "delete from " + MentionCommentsTable.MentionCommentsDataTable.TABLE_NAME + " where "
+                + MentionCommentsTable.MentionCommentsDataTable.ACCOUNTID + " in " + "(" + accountId + ")";
 
         getWsd().execSQL(sql);
     }
@@ -168,7 +174,6 @@ public class MentionCommentsTimeLineDBTask {
         new Thread(runnable).start();
     }
 
-
     private static void updatePosition(TimeLinePosition position, String accountId) {
         String sql = "select * from " + MentionCommentsTable.TABLE_NAME + " where " + MentionCommentsTable.ACCOUNTID + "  = "
                 + accountId;
@@ -176,7 +181,9 @@ public class MentionCommentsTimeLineDBTask {
         Gson gson = new Gson();
         if (c.moveToNext()) {
             try {
-                String[] args = {accountId};
+                String[] args = {
+                    accountId
+                };
                 ContentValues cv = new ContentValues();
                 cv.put(MentionCommentsTable.TIMELINEDATA, gson.toJson(position));
                 getWsd().update(MentionCommentsTable.TABLE_NAME, cv, MentionCommentsTable.ACCOUNTID + "=?", args);

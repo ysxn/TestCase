@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.user;
 
 import com.google.gson.Gson;
@@ -13,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-10-1
+ * User: qii Date: 12-10-1
  */
 public class RemarkDao {
 
@@ -27,7 +27,6 @@ public class RemarkDao {
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Post, url, map);
 
-
         Gson gson = new Gson();
 
         UserBean value = null;
@@ -37,7 +36,6 @@ public class RemarkDao {
             AppLogger.e(e.getMessage());
         }
 
-
         return value;
 
     }
@@ -45,7 +43,6 @@ public class RemarkDao {
     private String access_token;
     private String uid;
     private String remark;
-
 
     public RemarkDao(String access_token, String uid, String remark) {
         this.access_token = access_token;

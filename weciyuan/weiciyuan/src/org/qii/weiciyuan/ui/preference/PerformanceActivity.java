@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference;
 
 import android.content.Intent;
@@ -8,8 +9,7 @@ import org.qii.weiciyuan.R;
 import org.qii.weiciyuan.ui.interfaces.AbstractAppActivity;
 
 /**
- * User: qii
- * Date: 13-2-14
+ * User: qii Date: 13-2-14
  */
 public class PerformanceActivity extends AbstractAppActivity {
     @Override
@@ -27,7 +27,6 @@ public class PerformanceActivity extends AbstractAppActivity {
                     .commit();
         }
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -51,7 +50,6 @@ public class PerformanceActivity extends AbstractAppActivity {
 
             addPreferencesFromResource(R.xml.performance_pref);
         }
-
 
     }
 }

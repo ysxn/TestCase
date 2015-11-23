@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.adapter;
 
 import android.graphics.drawable.Drawable;
@@ -23,8 +24,7 @@ import java.util.List;
 import java.util.WeakHashMap;
 
 /**
- * User: qii
- * Date: 12-8-19
+ * User: qii Date: 12-8-19
  */
 public class StatusListAdapter extends AbstractAppListAdapter<MessageBean> {
 
@@ -60,12 +60,12 @@ public class StatusListAdapter extends AbstractAppListAdapter<MessageBean> {
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 VelocityListView velocityListView = (VelocityListView) view;
-//                if (velocityListView.getVelocity() < 0) {
-//                    topTipBar.hideCount();
-//                } else if (velocityListView.getVelocity() > 0) {
-//                    if (topTipBar.getValues().size() == 0) {
-//                        return;
-//                    }
+                // if (velocityListView.getVelocity() < 0) {
+                // topTipBar.hideCount();
+                // } else if (velocityListView.getVelocity() > 0) {
+                // if (topTipBar.getValues().size() == 0) {
+                // return;
+                // }
 
                 View childView = Utility.getListViewItemViewFromPosition(listView, firstVisibleItem);
 
@@ -80,7 +80,7 @@ public class StatusListAdapter extends AbstractAppListAdapter<MessageBean> {
                 } else {
                     handle(position + 1);
                 }
-//                }
+                // }
             }
 
             private void handle(int position) {
@@ -166,7 +166,6 @@ public class StatusListAdapter extends AbstractAppListAdapter<MessageBean> {
             holder.content.setText(msg.getListViewSpannableString());
         }
 
-
         holder.time.setTime(msg.getMills());
         if (holder.source != null)
             holder.source.setText(msg.getSourceString());
@@ -220,7 +219,6 @@ public class StatusListAdapter extends AbstractAppListAdapter<MessageBean> {
         holder.content_pic.setVisibility(View.GONE);
         holder.content_pic_multi.setVisibility(View.GONE);
 
-
         if (!TextUtils.isEmpty(msg.getThumbnail_pic())) {
 
             if (msg.isMultiPics()) {
@@ -236,11 +234,10 @@ public class StatusListAdapter extends AbstractAppListAdapter<MessageBean> {
             if (holder.repost_layout != null)
                 holder.repost_layout.setVisibility(View.VISIBLE);
             holder.repost_flag.setVisibility(View.VISIBLE);
-            //sina weibo official account can send repost message with picture, fuck sina weibo
+            // sina weibo official account can send repost message with picture, fuck sina weibo
             if (holder.content_pic.getVisibility() != View.GONE)
                 holder.content_pic.setVisibility(View.GONE);
             buildRepostContent(msg, repost_msg, holder, position);
-
 
         } else {
             if (holder.repost_layout != null)
@@ -249,7 +246,6 @@ public class StatusListAdapter extends AbstractAppListAdapter<MessageBean> {
         }
 
     }
-
 
     private void buildRepostContent(MessageBean msg, final MessageBean repost_msg, ViewHolder holder, int position) {
         holder.repost_content.setVisibility(View.VISIBLE);
@@ -293,6 +289,5 @@ public class StatusListAdapter extends AbstractAppListAdapter<MessageBean> {
 
         }
     }
-
 
 }

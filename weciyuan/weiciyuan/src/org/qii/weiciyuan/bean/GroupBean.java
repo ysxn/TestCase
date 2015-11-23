@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -5,8 +6,7 @@ import android.os.Parcelable;
 import org.qii.weiciyuan.support.utils.ObjectToStringUtility;
 
 /**
- * User: qii
- * Date: 12-10-17
+ * User: qii Date: 12-10-17
  */
 public class GroupBean implements Parcelable {
 
@@ -64,7 +64,6 @@ public class GroupBean implements Parcelable {
     public void setName(String name) {
         this.name = name;
     }
-
 
     @Override
     public String toString() {

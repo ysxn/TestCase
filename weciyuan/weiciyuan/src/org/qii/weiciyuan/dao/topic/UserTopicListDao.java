@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.topic;
 
 import com.google.gson.Gson;
@@ -16,8 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-11-18
+ * User: qii Date: 12-11-18
  */
 public class UserTopicListDao {
 
@@ -30,11 +30,9 @@ public class UserTopicListDao {
         map.put("page", page);
         map.put("uid", uid);
 
-
         String jsonData = null;
 
         jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
-
 
         return jsonData;
     }
@@ -64,12 +62,10 @@ public class UserTopicListDao {
         return new ArrayList<String>();
     }
 
-
     private String access_token;
     private String uid;
     private String count;
     private String page;
-
 
     public UserTopicListDao(String access_token, String uid) {
 
@@ -77,7 +73,6 @@ public class UserTopicListDao {
         this.count = SettingUtility.getMsgCount();
         this.uid = uid;
     }
-
 
     public UserTopicListDao setCount(String count) {
         this.count = count;
@@ -88,7 +83,6 @@ public class UserTopicListDao {
         this.page = page;
         return this;
     }
-
 
     private static class TopicBean {
         private String num;

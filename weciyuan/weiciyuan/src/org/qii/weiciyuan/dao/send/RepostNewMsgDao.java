@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.send;
 
 import com.google.gson.Gson;
@@ -13,9 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-8-13
- * Time: 下午10:50
+ * User: qii Date: 12-8-13 Time: 下午10:50
  */
 public class RepostNewMsgDao {
 
@@ -26,7 +25,6 @@ public class RepostNewMsgDao {
         map.put("id", id);
         map.put("status", status);
         map.put("is_comment", is_comment);
-
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Post, url, map);
 
@@ -39,7 +37,6 @@ public class RepostNewMsgDao {
 
             AppLogger.e(e.getMessage());
         }
-
 
         return value;
 

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent;
 
 import org.qii.weiciyuan.bean.AccountBean;
@@ -31,16 +32,14 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * User: Jiang Qi
- * Date: 12-7-31
+ * User: Jiang Qi Date: 12-7-31
  */
 public class FetchNewMsgService extends IntentService {
 
-    //close service between 1 clock and 8 clock
+    // close service between 1 clock and 8 clock
     private static final int NIGHT_START_TIME_HOUR = 1;
 
     private static final int NIGHT_END_TIME_HOUR = 7;
-
 
     public FetchNewMsgService() {
         super("FetchNewMsgService");
@@ -70,13 +69,11 @@ public class FetchNewMsgService extends IntentService {
         }
     }
 
-
     private boolean isNowNight() {
         Calendar cal = Calendar.getInstance();
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         return hour >= NIGHT_START_TIME_HOUR && hour <= NIGHT_END_TIME_HOUR;
     }
-
 
     private void fetchMsg(AccountBean accountBean) throws WeiboException {
         CommentListBean commentResult = null;

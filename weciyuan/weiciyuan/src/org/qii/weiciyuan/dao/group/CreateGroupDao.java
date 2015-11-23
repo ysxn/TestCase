@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.group;
 
 import com.google.gson.Gson;
@@ -13,9 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 13-2-15
- * http://open.weibo.com/wiki/2/friendships/groups/create
+ * User: qii Date: 13-2-15 http://open.weibo.com/wiki/2/friendships/groups/create
  */
 public class CreateGroupDao {
 
@@ -38,10 +37,8 @@ public class CreateGroupDao {
             AppLogger.e(e.getMessage());
         }
 
-
         return value;
     }
-
 
     public CreateGroupDao(String token, String name) {
         this.access_token = token;
@@ -50,6 +47,5 @@ public class CreateGroupDao {
 
     private String access_token;
     private String name;
-
 
 }

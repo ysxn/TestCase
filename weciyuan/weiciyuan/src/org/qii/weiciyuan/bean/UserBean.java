@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import org.qii.weiciyuan.support.utils.ObjectToStringUtility;
@@ -6,8 +7,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * User: qii
- * Date: 12-7-29
+ * User: qii Date: 12-7-29
  */
 public class UserBean implements Parcelable {
 
@@ -315,7 +315,6 @@ public class UserBean implements Parcelable {
         this.friends_count = friends_count;
     }
 
-
     @Override
     public String toString() {
         return ObjectToStringUtility.toString(this);
@@ -355,7 +354,9 @@ public class UserBean implements Parcelable {
         dest.writeString(followers_count);
         dest.writeString(friends_count);
 
-        dest.writeBooleanArray(new boolean[]{this.following, this.follow_me, this.verified});
+        dest.writeBooleanArray(new boolean[] {
+                this.following, this.follow_me, this.verified
+        });
     }
 
     public static final Parcelable.Creator<UserBean> CREATOR =
@@ -403,7 +404,6 @@ public class UserBean implements Parcelable {
                 }
             };
 
-
     @Override
     public boolean equals(Object o) {
         return o instanceof UserBean && id.equals(((UserBean) o).getId());
@@ -415,34 +415,34 @@ public class UserBean implements Parcelable {
     }
 
     public String dump() {
-        return "id="+id+"\n"
-                +"screen_name="+screen_name+"\n"
-                +"name="+name+"\n"
-                +"province="+province+"\n"
-                +"city="+city+"\n"
-                +"location="+location+"\n"
-                +"description="+description+"\n"
-                +"url="+url+"\n"
-                +"profile_image_url="+profile_image_url+"\n"
-                +"cover_image="+cover_image+"\n"
-                +"domain="+domain+"\n"
-                +"gender="+gender+"\n"
-                +"statuses_count="+statuses_count+"\n"
-                +"favourites_count="+favourites_count+"\n"
-                +"created_at="+created_at+"\n"
-                +"following="+following+"\n"
-                +"allow_all_act_msg="+allow_all_act_msg+"\n"
-                +"remark="+remark+"\n"
-                +"geo_enabled="+geo_enabled+"\n"
-                +"verified="+verified+"\n"
-                +"allow_all_comment="+allow_all_comment+"\n"
-                +"avatar_large="+avatar_large+"\n"
-                +"verified_reason="+verified_reason+"\n"
-                +"verified_type="+verified_type+"\n"
-                +"follow_me="+follow_me+"\n"
-                +"online_status="+online_status+"\n"
-                +"bi_followers_count="+bi_followers_count+"\n"
-                +"followers_count="+followers_count+"\n"
-                +"friends_count="+friends_count+"\n";
+        return "id=" + id + "\n"
+                + "screen_name=" + screen_name + "\n"
+                + "name=" + name + "\n"
+                + "province=" + province + "\n"
+                + "city=" + city + "\n"
+                + "location=" + location + "\n"
+                + "description=" + description + "\n"
+                + "url=" + url + "\n"
+                + "profile_image_url=" + profile_image_url + "\n"
+                + "cover_image=" + cover_image + "\n"
+                + "domain=" + domain + "\n"
+                + "gender=" + gender + "\n"
+                + "statuses_count=" + statuses_count + "\n"
+                + "favourites_count=" + favourites_count + "\n"
+                + "created_at=" + created_at + "\n"
+                + "following=" + following + "\n"
+                + "allow_all_act_msg=" + allow_all_act_msg + "\n"
+                + "remark=" + remark + "\n"
+                + "geo_enabled=" + geo_enabled + "\n"
+                + "verified=" + verified + "\n"
+                + "allow_all_comment=" + allow_all_comment + "\n"
+                + "avatar_large=" + avatar_large + "\n"
+                + "verified_reason=" + verified_reason + "\n"
+                + "verified_type=" + verified_type + "\n"
+                + "follow_me=" + follow_me + "\n"
+                + "online_status=" + online_status + "\n"
+                + "bi_followers_count=" + bi_followers_count + "\n"
+                + "followers_count=" + followers_count + "\n"
+                + "friends_count=" + friends_count + "\n";
     }
 }

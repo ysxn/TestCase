@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.friendgroup;
 
 import android.text.Editable;
@@ -8,8 +9,7 @@ import org.qii.weiciyuan.support.utils.AppConfig;
 import org.qii.weiciyuan.support.utils.Utility;
 
 /**
- * User: qii
- * Date: 13-2-16
+ * User: qii Date: 13-2-16
  */
 public class WordLengthLimitWatcher implements TextWatcher {
 
@@ -21,13 +21,13 @@ public class WordLengthLimitWatcher implements TextWatcher {
 
     @Override
     public void beforeTextChanged(CharSequence s, int arg1, int arg2,
-                                  int arg3) {
+            int arg3) {
 
     }
 
     @Override
     public void onTextChanged(CharSequence s, int arg1, int arg2,
-                              int arg3) {
+            int arg3) {
     }
 
     @Override

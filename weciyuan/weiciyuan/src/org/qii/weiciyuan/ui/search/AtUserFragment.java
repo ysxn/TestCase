@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.search;
 
 import android.app.Activity;
@@ -25,8 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-10-8
+ * User: qii Date: 12-10-8
  */
 public class AtUserFragment extends ListFragment {
 
@@ -39,7 +39,6 @@ public class AtUserFragment extends ListFragment {
 
     private AtUserTask task;
 
-
     public AtUserFragment() {
 
     }
@@ -48,14 +47,12 @@ public class AtUserFragment extends ListFragment {
         this.token = token;
     }
 
-
     @Override
     public void onDetach() {
         super.onDetach();
         if (task != null)
             task.cancel(true);
     }
-
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -96,7 +93,6 @@ public class AtUserFragment extends ListFragment {
         adapter.notifyDataSetChanged();
     }
 
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.actionbar_menu_atuserfragment, menu);
@@ -136,7 +132,6 @@ public class AtUserFragment extends ListFragment {
         });
         searchView.requestFocus();
     }
-
 
     class AtUserTask extends MyAsyncTask<Void, List<AtUserBean>, List<AtUserBean>> {
         WeiboException e;

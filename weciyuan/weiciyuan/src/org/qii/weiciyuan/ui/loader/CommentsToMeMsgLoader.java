@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.loader;
 
 import android.content.Context;
@@ -9,8 +10,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * User: qii
- * Date: 13-4-18
+ * User: qii Date: 13-4-18
  */
 public class CommentsToMeMsgLoader extends AbstractAsyncNetRequestTaskLoader<CommentListBean> {
 
@@ -29,7 +29,6 @@ public class CommentsToMeMsgLoader extends AbstractAsyncNetRequestTaskLoader<Com
         this.accountId = accountId;
     }
 
-
     public CommentListBean loadData() throws WeiboException {
         MainCommentsTimeLineDao dao = new MainCommentsTimeLineDao(token);
         dao.setSince_id(sinceId);
@@ -47,4 +46,3 @@ public class CommentsToMeMsgLoader extends AbstractAsyncNetRequestTaskLoader<Com
     }
 
 }
-

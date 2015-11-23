@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.group;
 
 import com.google.gson.Gson;
@@ -16,8 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-11-6
+ * User: qii Date: 12-11-6
  */
 public class GroupListDao {
 
@@ -52,7 +52,6 @@ public class GroupListDao {
 
         return null;
     }
-
 
     public GroupListDao(String token, String uids) {
         this.access_token = token;

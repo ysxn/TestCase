@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.send;
 
 import org.qii.weiciyuan.R;
@@ -19,8 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * User: qii
- * Date: 13-12-14
+ * User: qii Date: 13-12-14
  */
 public class ConvertKKUriToPathFragment extends Fragment {
 
@@ -43,7 +43,6 @@ public class ConvertKKUriToPathFragment extends Fragment {
             task.executeOnExecutor(MyAsyncTask.THREAD_POOL_EXECUTOR);
         }
     }
-
 
     private class ConvertTask extends MyAsyncTask<Void, Void, String> {
 

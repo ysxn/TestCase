@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.login;
 
 import org.qii.weiciyuan.R;
@@ -87,7 +88,6 @@ public class AccountActivity extends AbstractAppActivity
 
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -97,7 +97,6 @@ public class AccountActivity extends AbstractAppActivity
         ChangeLogDialog changeLogDialog = new ChangeLogDialog(this);
         changeLogDialog.show();
     }
-
 
     private void jumpToMainTimeLineActivity() {
 
@@ -113,7 +112,6 @@ public class AccountActivity extends AbstractAppActivity
         }
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -159,7 +157,6 @@ public class AccountActivity extends AbstractAppActivity
         }
         return true;
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -245,7 +242,6 @@ public class AccountActivity extends AbstractAppActivity
             return false;
         }
 
-
         @Override
         public void onDestroyActionMode(ActionMode mode) {
 
@@ -257,7 +253,6 @@ public class AccountActivity extends AbstractAppActivity
             listAdapter.notifyDataSetChanged();
         }
     }
-
 
     private class AccountAdapter extends BaseAdapter {
 
@@ -325,9 +320,9 @@ public class AccountActivity extends AbstractAppActivity
                 token.setVisibility(View.GONE);
             }
 
-            Log.i("zyw", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+"\n"
-                    +accountList.get(i).dump()+"\n"
-                    +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+            Log.i("zyw", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + "\n"
+                    + accountList.get(i).dump() + "\n"
+                    + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
             return mView;
         }
     }
@@ -349,7 +344,6 @@ public class AccountActivity extends AbstractAppActivity
         }
     }
 
-
     private void remove() {
         Set<String> set = new HashSet<String>();
         long[] ids = listView.getCheckedItemIds();
@@ -359,6 +353,5 @@ public class AccountActivity extends AbstractAppActivity
         accountList = AccountDBTask.removeAndGetNewAccountList(set);
         listAdapter.notifyDataSetChanged();
     }
-
 
 }

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent;
 
 import android.app.IntentService;
@@ -9,8 +10,7 @@ import org.qii.weiciyuan.support.debug.AppLogger;
 import java.io.Serializable;
 
 /**
- * User: qii
- * Date: 12-12-16
+ * User: qii Date: 12-12-16
  */
 @Deprecated
 public class SaveToDBService extends IntentService {
@@ -29,7 +29,7 @@ public class SaveToDBService extends IntentService {
             case TYPE_STATUS:
                 AppLogger.e("start db");
                 MessageListBean value = (MessageListBean) intent.getParcelableExtra("value");
-//                FriendsTimeLineDBTask.replace(value, accountId);
+                // FriendsTimeLineDBTask.replace(value, accountId);
                 AppLogger.e("end db");
                 break;
         }

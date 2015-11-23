@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.content.Context;
@@ -5,8 +6,7 @@ import android.util.AttributeSet;
 import org.qii.weiciyuan.support.utils.Utility;
 
 /**
- * User: qii
- * Date: 13-9-1
+ * User: qii Date: 13-9-1
  */
 public class ProfileTopAvatarImageView extends TimeLineAvatarImageView {
 
@@ -26,6 +26,5 @@ public class ProfileTopAvatarImageView extends TimeLineAvatarImageView {
         setPadding(Utility.dip2px(5), Utility.dip2px(5), Utility.dip2px(5), Utility.dip2px(5));
 
     }
-
 
 }

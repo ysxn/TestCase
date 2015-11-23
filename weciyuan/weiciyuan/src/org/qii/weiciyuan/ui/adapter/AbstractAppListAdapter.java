@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.adapter;
 
 import org.qii.weiciyuan.R;
@@ -51,8 +52,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * User: qii
- * Date: 12-9-15
+ * User: qii Date: 12-9-15
  */
 public abstract class AbstractAppListAdapter<T extends ItemBean> extends BaseAdapter {
 
@@ -70,12 +70,12 @@ public abstract class AbstractAppListAdapter<T extends ItemBean> extends BaseAda
 
     protected int defaultBG;
 
-//    private final int TYPE_NORMAL = 0;
-//    private final int TYPE_MYSELF = 1;
-//    private final int TYPE_NORMAL_BIG_PIC = 2;
-//    private final int TYPE_MYSELF_BIG_PIC = 3;
-//    private final int TYPE_MIDDLE = 4;
-//    private final int TYPE_SIMPLE = 5;
+    // private final int TYPE_NORMAL = 0;
+    // private final int TYPE_MYSELF = 1;
+    // private final int TYPE_NORMAL_BIG_PIC = 2;
+    // private final int TYPE_MYSELF_BIG_PIC = 3;
+    // private final int TYPE_MIDDLE = 4;
+    // private final int TYPE_SIMPLE = 5;
 
     private final int TYPE_NORMAL = 0;
 
@@ -97,8 +97,7 @@ public abstract class AbstractAppListAdapter<T extends ItemBean> extends BaseAda
     private ArrayDeque<PrefView> prefBigPicViews = new ArrayDeque<PrefView>(
             PREF_LISTVIEW_ITEM_VIEW_COUNT);
 
-    private int savedCurrentMiddleLoadingViewPosition
-            = AbstractTimeLineFragment.NO_SAVED_CURRENT_LOADING_MSG_VIEW_POSITION;
+    private int savedCurrentMiddleLoadingViewPosition = AbstractTimeLineFragment.NO_SAVED_CURRENT_LOADING_MSG_VIEW_POSITION;
 
     private class PrefView {
 
@@ -214,7 +213,6 @@ public abstract class AbstractAppListAdapter<T extends ItemBean> extends BaseAda
         });
     }
 
-
     protected Activity getActivity() {
         return fragment.getActivity();
     }
@@ -247,19 +245,14 @@ public abstract class AbstractAppListAdapter<T extends ItemBean> extends BaseAda
 
     }
 
-
     /**
-     * use getTag(int) and setTag(int, final Object) to solve getItemViewType(int) bug.
-     * When you use getItemViewType(int),getTag(),setTag() together, if getItemViewType(int) change
-     * because
+     * use getTag(int) and setTag(int, final Object) to solve getItemViewType(int) bug. When you use
+     * getItemViewType(int),getTag(),setTag() together, if getItemViewType(int) change because
      * network switch to use another layout when you are scrolling listview, bug appears,the other
-     * listviews in other tabs
-     * (Actionbar tab navigation) will mix several layout up, for example, the correct layout
-     * should
-     * be TYPE_NORMAL_BIG_PIC,
-     * but in the listview, you can see some row's layouts are TYPE_NORMAL, some are
-     * TYPE_NORMAL_BIG_PIC. if you print
-     * getItemViewType(int) value to the console,their are same type
+     * listviews in other tabs (Actionbar tab navigation) will mix several layout up, for example,
+     * the correct layout should be TYPE_NORMAL_BIG_PIC, but in the listview, you can see some row's
+     * layouts are TYPE_NORMAL, some are TYPE_NORMAL_BIG_PIC. if you print getItemViewType(int)
+     * value to the console,their are same type
      */
 
     @Override
@@ -327,8 +320,7 @@ public abstract class AbstractAppListAdapter<T extends ItemBean> extends BaseAda
         } else {
             if (savedCurrentMiddleLoadingViewPosition == position + listView
                     .getHeaderViewsCount()) {
-                ListViewMiddleMsgLoadingView loadingView
-                        = (ListViewMiddleMsgLoadingView) convertView;
+                ListViewMiddleMsgLoadingView loadingView = (ListViewMiddleMsgLoadingView) convertView;
                 loadingView.load();
             }
         }
@@ -385,7 +377,7 @@ public abstract class AbstractAppListAdapter<T extends ItemBean> extends BaseAda
         return inflater.inflate(R.layout.timeline_listview_item_big_pic_layout, parent, false);
     }
 
-    //weibo image widgets and its forward weibo image widgets are the same
+    // weibo image widgets and its forward weibo image widgets are the same
     private ViewHolder buildHolder(View convertView) {
         ViewHolder holder = new ViewHolder();
         holder.username = ViewUtility.findViewById(convertView, R.id.username);
@@ -653,11 +645,9 @@ public abstract class AbstractAppListAdapter<T extends ItemBean> extends BaseAda
                         pic.setVisibility(View.INVISIBLE);
                         break;
 
-
                 }
 
             }
-
 
         } else {
             gridLayout.setVisibility(View.GONE);
@@ -689,7 +679,6 @@ public abstract class AbstractAppListAdapter<T extends ItemBean> extends BaseAda
                 }
             });
             buildPic(msg, view);
-
 
         } else {
             view.setVisibility(View.GONE);
@@ -724,7 +713,6 @@ public abstract class AbstractAppListAdapter<T extends ItemBean> extends BaseAda
             buildPic(repost_msg, holder.repost_content_pic, position);
         }
     }
-
 
     public static class ViewHolder {
 
@@ -772,7 +760,7 @@ public abstract class AbstractAppListAdapter<T extends ItemBean> extends BaseAda
             AppLogger.e("1");
             Animation anim = AnimationUtils.loadAnimation(
                     fragment.getActivity(), R.anim.account_delete_slide_out_right
-            );
+                    );
 
             anim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
@@ -811,11 +799,10 @@ public abstract class AbstractAppListAdapter<T extends ItemBean> extends BaseAda
         }
     }
 
-
     private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
 
         ClickableTextViewMentionLinkOnTouchListener listener
-                = new ClickableTextViewMentionLinkOnTouchListener();
+        = new ClickableTextViewMentionLinkOnTouchListener();
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
@@ -830,12 +817,10 @@ public abstract class AbstractAppListAdapter<T extends ItemBean> extends BaseAda
 
             return !hasActionMode && listener.onTouch(v, event);
 
-
         }
     };
 
-
-    //when view is recycled by listview, need to catch exception
+    // when view is recycled by listview, need to catch exception
     private ViewHolder getViewHolderByView(View view) {
         try {
             final int position = listView.getPositionForView(view);

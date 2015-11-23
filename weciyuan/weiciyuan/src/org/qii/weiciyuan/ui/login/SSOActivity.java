@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.login;
 
 import org.qii.weiciyuan.R;
@@ -21,8 +22,7 @@ import android.widget.Toast;
 import java.lang.ref.WeakReference;
 
 /**
- * User: qii
- * Date: 13-6-18
+ * User: qii Date: 13-6-18
  */
 public class SSOActivity extends AbstractAppActivity {
 
@@ -56,7 +56,6 @@ public class SSOActivity extends AbstractAppActivity {
         private String token;
 
         private String expiresIn;
-
 
         public SSOTask(SSOActivity ssoActivity, String token, String expiresIn) {
             this.sSOActivityWeakReference = new WeakReference<SSOActivity>(ssoActivity);
@@ -149,7 +148,6 @@ public class SSOActivity extends AbstractAppActivity {
 
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

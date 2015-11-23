@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.browser;
 
 import org.qii.weiciyuan.R;
@@ -43,8 +44,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 /**
- * User: qii
- * Date: 12-7-29
+ * User: qii Date: 12-7-29
  */
 @Deprecated
 public class CommentsByIdTimeLineFragment extends AbstractTimeLineFragment<CommentListBean>
@@ -64,7 +64,6 @@ public class CommentsByIdTimeLineFragment extends AbstractTimeLineFragment<Comme
 
     private BroadcastReceiver sendCompletedReceiver;
 
-
     @Override
     public CommentListBean getList() {
         return bean;
@@ -79,7 +78,6 @@ public class CommentsByIdTimeLineFragment extends AbstractTimeLineFragment<Comme
 
     }
 
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -88,7 +86,7 @@ public class CommentsByIdTimeLineFragment extends AbstractTimeLineFragment<Comme
         outState.putString("token", token);
     }
 
-    //restore from activity destroy
+    // restore from activity destroy
     public void load() {
         String sss = token;
         if ((bean == null || bean.getItemList().size() == 0)) {
@@ -129,7 +127,6 @@ public class CommentsByIdTimeLineFragment extends AbstractTimeLineFragment<Comme
         return false;
     }
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -148,7 +145,7 @@ public class CommentsByIdTimeLineFragment extends AbstractTimeLineFragment<Comme
                 }, AppConfig.REFRESH_DELAYED_MILL_SECOND_TIME);
                 break;
             case SCREEN_ROTATE:
-                //nothing
+                // nothing
                 refreshLayout(bean);
                 break;
             case ACTIVITY_DESTROY_AND_CREATE:
@@ -160,9 +157,7 @@ public class CommentsByIdTimeLineFragment extends AbstractTimeLineFragment<Comme
                 break;
         }
 
-
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -171,7 +166,6 @@ public class CommentsByIdTimeLineFragment extends AbstractTimeLineFragment<Comme
         setHasOptionsMenu(true);
         setRetainInstance(false);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -197,8 +191,7 @@ public class CommentsByIdTimeLineFragment extends AbstractTimeLineFragment<Comme
         getListView().setOnItemLongClickListener(onItemLongClickListener);
     }
 
-    private AdapterView.OnItemLongClickListener onItemLongClickListener
-            = new AdapterView.OnItemLongClickListener() {
+    private AdapterView.OnItemLongClickListener onItemLongClickListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
             if (position - 1 < getList().getSize() && position - 1 >= 0) {
@@ -255,7 +248,6 @@ public class CommentsByIdTimeLineFragment extends AbstractTimeLineFragment<Comme
     public void removeCancel() {
         clearActionMode();
     }
-
 
     @Override
     public void onResume() {
@@ -386,13 +378,11 @@ public class CommentsByIdTimeLineFragment extends AbstractTimeLineFragment<Comme
         }
     }
 
-
     protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
 
-//        CommentByIdFloatingMenu menu = new CommentByIdFloatingMenu(getList().getItem(position));
-//        menu.show(getFragmentManager(), "");
+        // CommentByIdFloatingMenu menu = new CommentByIdFloatingMenu(getList().getItem(position));
+        // menu.show(getFragmentManager(), "");
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -404,7 +394,6 @@ public class CommentsByIdTimeLineFragment extends AbstractTimeLineFragment<Comme
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     protected void newMsgLoaderSuccessCallback(CommentListBean newValue, Bundle loaderArgs) {
@@ -433,8 +422,8 @@ public class CommentsByIdTimeLineFragment extends AbstractTimeLineFragment<Comme
     private void invlidateTabText() {
         Activity activity = getActivity();
         if (activity != null) {
-//            ActionBar.Tab tab = activity.getActionBar().getTabAt(1);
-//            Utility.buildTabCount(tab, getString(R.string.comments), bean.getTotal_number());
+            // ActionBar.Tab tab = activity.getActionBar().getTabAt(1);
+            // Utility.buildTabCount(tab, getString(R.string.comments), bean.getTotal_number());
             ((BrowserWeiboMsgActivity) activity).updateCommentCount(bean.getTotal_number());
         }
     }
@@ -470,15 +459,14 @@ public class CommentsByIdTimeLineFragment extends AbstractTimeLineFragment<Comme
         getLoaderManager().restartLoader(OLD_MSG_LOADER_ID, null, msgAsyncTaskLoaderCallback);
     }
 
-
     protected android.support.v4.content.Loader<AsyncTaskLoaderResult<CommentListBean>> onCreateNewMsgLoader(
             int loaderId, Bundle args) {
         String token = GlobalContext.getInstance().getSpecialToken();
 
         String sinceId = null;
-//        if (getList().getItemList().size() > 0) {
-//            sinceId = getList().getItemList().get(0).getId();
-//        }
+        // if (getList().getItemList().size() > 0) {
+        // sinceId = getList().getItemList().get(0).getId();
+        // }
         return new CommentsByIdMsgLoader(getActivity(), msg.getId(), token, sinceId, null);
     }
 

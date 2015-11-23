@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.os.Handler;
@@ -15,8 +16,8 @@ import android.widget.TextView;
 /**
  * support long click
  * <p/>
- * A movement method that traverses links in the text buffer and scrolls if necessary.
- * Supports clicking on links with DPad Center or Enter.
+ * A movement method that traverses links in the text buffer and scrolls if necessary. Supports
+ * clicking on links with DPad Center or Enter.
  */
 public class LongClickableLinkMovementMethod extends ScrollingMovementMethod {
 
@@ -39,7 +40,7 @@ public class LongClickableLinkMovementMethod extends ScrollingMovementMethod {
 
     @Override
     protected boolean handleMovementKey(TextView widget, Spannable buffer, int keyCode,
-                                        int movementMetaState, KeyEvent event) {
+            int movementMetaState, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_DPAD_CENTER:
             case KeyEvent.KEYCODE_ENTER:
@@ -138,7 +139,8 @@ public class LongClickableLinkMovementMethod extends ScrollingMovementMethod {
                 break;
 
             case UP:
-                int beststart, bestend;
+                int beststart,
+                bestend;
 
                 beststart = -1;
                 bestend = -1;
@@ -191,7 +193,7 @@ public class LongClickableLinkMovementMethod extends ScrollingMovementMethod {
 
     @Override
     public boolean onTouchEvent(TextView widget, Spannable buffer,
-                                MotionEvent event) {
+            MotionEvent event) {
         int action = event.getAction();
 
         if (action == MotionEvent.ACTION_UP ||
@@ -229,8 +231,10 @@ public class LongClickableLinkMovementMethod extends ScrollingMovementMethod {
                 return true;
             }
         } else if (action == MotionEvent.ACTION_MOVE) {
-            float[] position = {event.getX(), event.getY()};
-//            int slop = ViewConfiguration.get(widget.getContext()).getScaledTouchSlop();
+            float[] position = {
+                    event.getX(), event.getY()
+            };
+            // int slop = ViewConfiguration.get(widget.getContext()).getScaledTouchSlop();
             int slop = 6;
             float xInstance = Math.abs(lastEvent[0] - position[0]);
             float yInstance = Math.abs(lastEvent[1] - position[1]);

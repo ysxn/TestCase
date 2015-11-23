@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import com.google.gson.Gson;
@@ -15,8 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-2-4
+ * User: qii Date: 13-2-4
  */
 public class AtUsersDBTask {
 
@@ -34,7 +34,6 @@ public class AtUsersDBTask {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         return databaseHelper.getReadableDatabase();
     }
-
 
     public static void add(AtUserBean atUserBean, String accountId) {
         add(getWsd(), atUserBean, accountId);
@@ -81,7 +80,6 @@ public class AtUsersDBTask {
 
     }
 
-
     private static void reduce(String accountId) {
         reduce(getWsd(), accountId);
     }
@@ -111,7 +109,6 @@ public class AtUsersDBTask {
             db.execSQL(sql);
         }
     }
-
 
     static void clear(String accountId) {
         String sql = "delete from " + AtUsersTable.TABLE_NAME + " where " + AtUsersTable.ACCOUNTID

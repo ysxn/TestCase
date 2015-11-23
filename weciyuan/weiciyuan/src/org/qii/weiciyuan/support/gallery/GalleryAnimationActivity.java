@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.gallery;
 
 import org.qii.weiciyuan.R;
@@ -26,8 +27,7 @@ import java.util.ArrayList;
 import uk.co.senab.photoview.PhotoView;
 
 /**
- * User: qii
- * Date: 14-3-21
+ * User: qii Date: 14-3-21
  */
 public class GalleryAnimationActivity extends Activity {
 
@@ -44,7 +44,6 @@ public class GalleryAnimationActivity extends Activity {
     private ArrayList<String> urls = new ArrayList<String>();
 
     private PhotoView animation;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,7 +155,7 @@ public class GalleryAnimationActivity extends Activity {
 
         float startScale;
         if ((float) finalBounds.width() / finalBounds.height()
-                > (float) startBounds.width() / startBounds.height()) {
+        > (float) startBounds.width() / startBounds.height()) {
             startScale = (float) startBounds.height() / finalBounds.height();
 
         } else {
@@ -210,7 +209,6 @@ public class GalleryAnimationActivity extends Activity {
                     "clipVertical", 0, rect.clipRectV));
             animationSet.start();
 
-
         }
     }
 
@@ -226,6 +224,5 @@ public class GalleryAnimationActivity extends Activity {
         animateClose(null);
 
     }
-
 
 }

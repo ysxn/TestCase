@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.adapter;
 
 import org.qii.weiciyuan.R;
@@ -27,8 +28,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-11-15
+ * User: qii Date: 12-11-15
  */
 public class DMConversationAdapter extends BaseAdapter {
     private List<DMBean> bean;
@@ -39,7 +39,6 @@ public class DMConversationAdapter extends BaseAdapter {
 
     private final int TYPE_NORMAL = 0;
     private final int TYPE_MYSELF = 1;
-
 
     public DMConversationAdapter(Fragment fragment, List<DMBean> bean, ListView listView) {
         this.bean = bean;
@@ -68,7 +67,6 @@ public class DMConversationAdapter extends BaseAdapter {
             return TYPE_NORMAL;
         }
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -119,7 +117,6 @@ public class DMConversationAdapter extends BaseAdapter {
 
     }
 
-
     private View initNormalSimpleLayout(ViewGroup parent) {
         View convertView;
         convertView = inflater.inflate(R.layout.dmconversationadapter_item_normal_layout, parent, false);
@@ -132,7 +129,6 @@ public class DMConversationAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.dmconversationadapter_item_myself_layout, parent, false);
         return convertView;
     }
-
 
     private DMViewHolder buildHolder(View convertView) {
         DMViewHolder holder = new DMViewHolder();
@@ -171,7 +167,6 @@ public class DMConversationAdapter extends BaseAdapter {
         holder.time.setTag(msg.getId());
 
     }
-
 
     protected List<DMBean> getList() {
         return bean;
@@ -226,7 +221,6 @@ public class DMConversationAdapter extends BaseAdapter {
             view.setVisibility(View.GONE);
         }
     }
-
 
     private static class DMViewHolder {
         TextView content;

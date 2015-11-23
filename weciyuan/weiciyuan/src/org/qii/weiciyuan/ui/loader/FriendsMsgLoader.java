@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.loader;
 
 import android.content.Context;
@@ -15,13 +16,11 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * User: qii
- * Date: 13-4-18
+ * User: qii Date: 13-4-18
  */
 public class FriendsMsgLoader extends AbstractAsyncNetRequestTaskLoader<MessageListBean> {
 
     private static Lock lock = new ReentrantLock();
-
 
     private String token;
     private String sinceId;
@@ -29,7 +28,7 @@ public class FriendsMsgLoader extends AbstractAsyncNetRequestTaskLoader<MessageL
     private String accountId;
     private String currentGroupId;
 
-    private final int MAX_RETRY_COUNT = 6;  //1*50+6*49=344 new messages count
+    private final int MAX_RETRY_COUNT = 6; // 1*50+6*49=344 new messages count
 
     public FriendsMsgLoader(Context context, String accountId, String token, String groupId, String sinceId, String maxId) {
         super(context);
@@ -39,7 +38,6 @@ public class FriendsMsgLoader extends AbstractAsyncNetRequestTaskLoader<MessageL
         this.accountId = accountId;
         this.currentGroupId = groupId;
     }
-
 
     public MessageListBean loadData() throws WeiboException {
         MessageListBean result = null;
@@ -93,5 +91,3 @@ public class FriendsMsgLoader extends AbstractAsyncNetRequestTaskLoader<MessageL
     }
 
 }
-
-

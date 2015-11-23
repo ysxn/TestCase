@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.dm;
 
 import org.qii.weiciyuan.bean.UserBean;
@@ -9,8 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 /**
- * User: qii
- * Date: 12-11-10
+ * User: qii Date: 12-11-10
  */
 public class DMActivity extends AbstractAppActivity {
 
@@ -33,7 +33,6 @@ public class DMActivity extends AbstractAppActivity {
         }
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
@@ -47,11 +46,9 @@ public class DMActivity extends AbstractAppActivity {
         return false;
     }
 
-
     @Override
     public void onBackPressed() {
-        DMConversationListFragment fragment
-                = (DMConversationListFragment) getSupportFragmentManager()
+        DMConversationListFragment fragment = (DMConversationListFragment) getSupportFragmentManager()
                 .findFragmentByTag(DMConversationListFragment.class.getName());
         if (fragment != null) {
             if (!fragment.isSmileyPanelClosed()) {

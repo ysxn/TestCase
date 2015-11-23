@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.main;
 
 import android.content.Intent;
@@ -18,19 +19,16 @@ import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 
 /**
- * User: qii
- * Date: 13-1-22
+ * User: qii Date: 13-1-22
  */
 public class MainTimeLineParentActivity extends SlidingFragmentActivity {
 
     private int theme = 0;
 
-
     @Override
     protected void onResume() {
         super.onResume();
         GlobalContext.getInstance().setCurrentRunningActivity(this);
-
 
         if (theme == SettingUtility.getAppTheme()) {
 
@@ -69,7 +67,6 @@ public class MainTimeLineParentActivity extends SlidingFragmentActivity {
         TimeLineBitmapDownloader.refreshThemePictureBackground();
     }
 
-
     private void forceShowActionBarOverflowMenu() {
         try {
             ViewConfiguration config = ViewConfiguration.get(this);
@@ -89,7 +86,6 @@ public class MainTimeLineParentActivity extends SlidingFragmentActivity {
 
     }
 
-
     private void initNFC() {
         NfcAdapter mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (mNfcAdapter == null) {
@@ -102,8 +98,9 @@ public class MainTimeLineParentActivity extends SlidingFragmentActivity {
                 String text = (GlobalContext.getInstance().getCurrentAccountName());
 
                 NdefMessage msg = new NdefMessage(
-                        new NdefRecord[]{createMimeRecord(
-                                "application/org.qii.weiciyuan.beam", text.getBytes()), NdefRecord.createApplicationRecord(getPackageName())
+                        new NdefRecord[] {
+                                createMimeRecord(
+                                        "application/org.qii.weiciyuan.beam", text.getBytes()), NdefRecord.createApplicationRecord(getPackageName())
                         });
                 return msg;
             }
@@ -128,7 +125,6 @@ public class MainTimeLineParentActivity extends SlidingFragmentActivity {
         overridePendingTransition(0, 0);
         startActivity(intent);
     }
-
 
     protected void dealWithException(WeiboException e) {
         Toast.makeText(this, e.getError(), Toast.LENGTH_SHORT).show();

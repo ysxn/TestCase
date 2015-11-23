@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.maintimeline;
 
 import com.google.gson.Gson;
@@ -13,11 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-10-17
+ * User: qii Date: 12-10-17
  */
 public class FriendGroupDao {
-
 
     public GroupListBean getGroup() throws WeiboException {
 
@@ -37,10 +36,8 @@ public class FriendGroupDao {
             AppLogger.e(e.getMessage());
         }
 
-
         return value;
     }
-
 
     public FriendGroupDao(String token) {
         this.access_token = token;

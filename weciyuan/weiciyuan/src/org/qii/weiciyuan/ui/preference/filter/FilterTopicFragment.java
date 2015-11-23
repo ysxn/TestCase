@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference.filter;
 
 import org.qii.weiciyuan.support.database.FilterDBTask;
@@ -6,11 +7,9 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-6-16
+ * User: qii Date: 13-6-16
  */
 public class FilterTopicFragment extends AbstractFilterFragment {
-
 
     @Override
     protected List<String> getDBDataImpl() {

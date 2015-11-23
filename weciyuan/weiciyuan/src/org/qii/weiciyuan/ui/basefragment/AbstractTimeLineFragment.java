@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.basefragment;
 
 import org.qii.weiciyuan.R;
@@ -37,19 +38,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
- * User: qii
- * Date: 12-8-27
- * weiciyuan has two kinds of methods to send/receive network request/response asynchronously,
- * one is setRetainInstance(true) + AsyncTask, the other is AsyncTaskLoader
- * Because nested fragment(parent fragment has a viewpager, viewpager has many children fragments,
- * these children fragments are called nested fragment) can't use setRetainInstance(true), at this
- * moment
- * you have to use AsyncTaskLoader to solve Android configuration change(for example: change screen
- * orientation,
- * change system language)
+ * User: qii Date: 12-8-27 weiciyuan has two kinds of methods to send/receive network
+ * request/response asynchronously, one is setRetainInstance(true) + AsyncTask, the other is
+ * AsyncTaskLoader Because nested fragment(parent fragment has a viewpager, viewpager has many
+ * children fragments, these children fragments are called nested fragment) can't use
+ * setRetainInstance(true), at this moment you have to use AsyncTaskLoader to solve Android
+ * configuration change(for example: change screen orientation, change system language)
  */
 public abstract class AbstractTimeLineFragment<T extends ListBean> extends AbstractAppFragment {
-
 
     protected PullToRefreshListView pullToRefreshListView;
 
@@ -62,7 +58,6 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
     protected BaseAdapter timeLineAdapter;
 
     protected View footerView;
-
 
     protected static final int DB_CACHE_LOADER_ID = 0;
 
@@ -106,17 +101,17 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
 
     protected void refreshLayout(T bean) {
         if (bean != null && bean.getSize() > 0) {
-//            empty.setVisibility(View.INVISIBLE);
+            // empty.setVisibility(View.INVISIBLE);
             progressBar.setVisibility(View.INVISIBLE);
-//            listView.setVisibility(View.VISIBLE);
+            // listView.setVisibility(View.VISIBLE);
         } else if (bean == null || bean.getSize() == 0) {
-//            empty.setVisibility(View.VISIBLE);
+            // empty.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.INVISIBLE);
-//            listView.setVisibility(View.VISIBLE);
+            // listView.setVisibility(View.VISIBLE);
         } else if (bean.getSize() == bean.getTotal_number()) {
-//            empty.setVisibility(View.INVISIBLE);
+            // empty.setVisibility(View.INVISIBLE);
             progressBar.setVisibility(View.INVISIBLE);
-//            listView.setVisibility(View.VISIBLE);
+            // listView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -129,7 +124,6 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
         dismissFooterView();
         getLoaderManager().restartLoader(NEW_MSG_LOADER_ID, null, msgAsyncTaskLoaderCallback);
     }
-
 
     protected void loadOldMsg(View view) {
 
@@ -210,9 +204,7 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
         }
     }
 
-
-    private PullToRefreshBase.OnLastItemVisibleListener listViewOnLastItemVisibleListener
-            = new PullToRefreshBase.OnLastItemVisibleListener() {
+    private PullToRefreshBase.OnLastItemVisibleListener listViewOnLastItemVisibleListener = new PullToRefreshBase.OnLastItemVisibleListener() {
         @Override
         public void onLastItemVisible() {
             if (getActivity() == null) {
@@ -227,8 +219,7 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
         }
     };
 
-    private PullToRefreshBase.OnRefreshListener<ListView> listViewOnRefreshListener
-            = new PullToRefreshBase.OnRefreshListener<ListView>() {
+    private PullToRefreshBase.OnRefreshListener<ListView> listViewOnRefreshListener = new PullToRefreshBase.OnRefreshListener<ListView>() {
         @Override
         public void onRefresh(PullToRefreshBase<ListView> refreshView) {
             if (getActivity() == null) {
@@ -248,15 +239,13 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
                 getActivity());
         if (SettingUtility.getEnableSound()) {
             listener.addSoundEvent(PullToRefreshBase.State.RELEASE_TO_REFRESH, R.raw.psst1);
-//            listener.addSoundEvent(PullToRefreshBase.State.GIVE_UP, R.raw.psst2);
+            // listener.addSoundEvent(PullToRefreshBase.State.GIVE_UP, R.raw.psst2);
             listener.addSoundEvent(PullToRefreshBase.State.RESET, R.raw.pop);
         }
         return listener;
     }
 
-
-    private AdapterView.OnItemClickListener listViewOnItemClickListener
-            = new AdapterView.OnItemClickListener() {
+    private AdapterView.OnItemClickListener listViewOnItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if (resetActionMode()) {
@@ -276,14 +265,14 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
                     ListViewMiddleMsgLoadingView loadingView = (ListViewMiddleMsgLoadingView) view;
                     if (!((ListViewMiddleMsgLoadingView) view).isLoading()
                             && savedCurrentLoadingMsgViewPositon
-                            == NO_SAVED_CURRENT_LOADING_MSG_VIEW_POSITION) {
+                                == NO_SAVED_CURRENT_LOADING_MSG_VIEW_POSITION) {
                         loadingView.load();
                         loadMiddleMsg(beginId, endId, indexInDataSource);
                         savedCurrentLoadingMsgViewPositon = indexInDataSource + headerViewsCount;
                         if (timeLineAdapter instanceof AbstractAppListAdapter) {
                             ((AbstractAppListAdapter) timeLineAdapter)
                                     .setSavedMiddleLoadingViewPosition(
-                                            savedCurrentLoadingMsgViewPositon);
+                                    savedCurrentLoadingMsgViewPositon);
                         }
                     }
                 }
@@ -318,8 +307,7 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
         }
     };
 
-    private AbsListView.OnScrollListener listViewOnScrollListener
-            = new AbsListView.OnScrollListener() {
+    private AbsListView.OnScrollListener listViewOnScrollListener = new AbsListView.OnScrollListener() {
         @Override
         public void onScrollStateChanged(AbsListView view, int scrollState) {
             listViewScrollState = scrollState;
@@ -427,7 +415,6 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
         tv.setVisibility(View.VISIBLE);
     }
 
-
     public void clearActionMode() {
         if (actionMode != null) {
 
@@ -460,12 +447,10 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
 
     protected abstract void buildListAdapter();
 
-
     protected boolean allowRefresh() {
         boolean isNewMsgLoaderLoading = getLoaderManager().getLoader(NEW_MSG_LOADER_ID) != null;
         return getPullToRefreshListView().getVisibility() == View.VISIBLE && !isNewMsgLoaderLoading;
     }
-
 
     @Override
     public void onResume() {
@@ -500,11 +485,9 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
         return actionMode != null;
     }
 
-
     protected void showListView() {
         progressBar.setVisibility(View.INVISIBLE);
     }
-
 
     private volatile boolean enableRefreshTime = true;
 
@@ -566,7 +549,6 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
         return loader;
     }
 
-
     protected Loader<AsyncTaskLoaderResult<T>> onCreateNewMsgLoader(int id, Bundle args) {
         return null;
     }
@@ -580,8 +562,7 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
         return null;
     }
 
-    protected LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<T>> msgAsyncTaskLoaderCallback
-            = new LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<T>>() {
+    protected LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<T>> msgAsyncTaskLoaderCallback = new LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<T>>() {
 
         private String middleBeginId = "";
 
@@ -640,19 +621,19 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
                         View view = Utility.getListViewItemViewFromPosition(getListView(),
                                 savedCurrentLoadingMsgViewPositon);
                         ListViewMiddleMsgLoadingView loadingView
-                                = (ListViewMiddleMsgLoadingView) view;
+                        = (ListViewMiddleMsgLoadingView) view;
                         if (loadingView != null) {
                             loadingView.setErrorMessage(exception.getError());
                         }
                     } else {
                         middleMsgLoaderSuccessCallback(middlePosition, data, towardsBottom);
-//                        getAdapter().notifyDataSetChanged();
+                        // getAdapter().notifyDataSetChanged();
                     }
                     savedCurrentLoadingMsgViewPositon = NO_SAVED_CURRENT_LOADING_MSG_VIEW_POSITION;
                     if (timeLineAdapter instanceof AbstractAppListAdapter) {
                         ((AbstractAppListAdapter) timeLineAdapter)
                                 .setSavedMiddleLoadingViewPosition(
-                                        savedCurrentLoadingMsgViewPositon);
+                                savedCurrentLoadingMsgViewPositon);
                     }
                     break;
                 case OLD_MSG_LOADER_ID:
@@ -681,7 +662,4 @@ public abstract class AbstractTimeLineFragment<T extends ListBean> extends Abstr
         }
     };
 
-
 }
-
-

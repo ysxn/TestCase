@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.send;
 
 import android.app.AlertDialog;
@@ -8,8 +9,7 @@ import android.os.Bundle;
 import org.qii.weiciyuan.R;
 
 /**
- * User: qii
- * Date: 12-9-23
+ * User: qii Date: 12-9-23
  */
 public class ClearContentDialog extends DialogFragment {
 
@@ -17,11 +17,9 @@ public class ClearContentDialog extends DialogFragment {
         public void clear();
     }
 
-
     public ClearContentDialog() {
 
     }
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

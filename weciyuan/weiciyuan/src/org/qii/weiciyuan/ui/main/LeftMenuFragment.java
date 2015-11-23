@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.main;
 
 import com.slidingmenu.lib.SlidingMenu;
@@ -50,8 +51,7 @@ import java.util.Iterator;
 import java.util.TreeSet;
 
 /**
- * User: qii
- * Date: 13-1-22
+ * User: qii Date: 13-1-22
  */
 public class LeftMenuFragment extends AbstractAppFragment {
 
@@ -70,7 +70,6 @@ public class LeftMenuFragment extends AbstractAppFragment {
     public int mentionsTabIndex = -1;
 
     public int searchTabIndex = -1;
-
 
     private boolean firstStart = true;
 
@@ -212,7 +211,6 @@ public class LeftMenuFragment extends AbstractAppFragment {
         setCommentUnreadCount(commentsToMeUnreadCount);
     }
 
-
     private void showAccountSwitchPage() {
         Intent intent = AccountActivity.newIntent();
         startActivity(intent);
@@ -222,7 +220,6 @@ public class LeftMenuFragment extends AbstractAppFragment {
     private void showSettingPage() {
         startActivity(new Intent(getActivity(), SettingActivity.class));
     }
-
 
     private boolean showHomePage(boolean reset) {
         if (currentIndex == HOME_INDEX && !reset) {
@@ -333,7 +330,6 @@ public class LeftMenuFragment extends AbstractAppFragment {
         return currentIndex;
     }
 
-
     private boolean showCommentPage(boolean reset) {
         getActivity().getActionBar().setDisplayShowTitleEnabled(true);
         if (currentIndex == COMMENTS_INDEX && !reset) {
@@ -392,7 +388,6 @@ public class LeftMenuFragment extends AbstractAppFragment {
 
         ((CommentsTimeLine) fragment).buildActionBarAndViewPagerTitles(commentsTabIndex);
     }
-
 
     private boolean showSearchPage(boolean reset) {
         getActivity().getActionBar().setDisplayShowTitleEnabled(true);
@@ -454,7 +449,6 @@ public class LeftMenuFragment extends AbstractAppFragment {
         ((SearchMainParentFragment) fragment).buildActionBarAndViewPagerTitles(searchTabIndex);
 
     }
-
 
     private boolean showDMPage(boolean reset) {
         getActivity().getActionBar().setDisplayShowTitleEnabled(true);
@@ -607,7 +601,6 @@ public class LeftMenuFragment extends AbstractAppFragment {
                 .translateFragmentY(fragment, -400, 0, fragment);
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -630,7 +623,7 @@ public class LeftMenuFragment extends AbstractAppFragment {
         layout.comment = (LinearLayout) view.findViewById(R.id.btn_comment);
         layout.search = (Button) view.findViewById(R.id.btn_search);
         layout.profile = (Button) view.findViewById(R.id.btn_profile);
-//        layout.location = (Button) view.findViewById(R.id.btn_location);
+        // layout.location = (Button) view.findViewById(R.id.btn_location);
         layout.setting = (Button) view.findViewById(R.id.btn_setting);
         layout.dm = (Button) view.findViewById(R.id.btn_dm);
         layout.logout = (Button) view.findViewById(R.id.btn_logout);
@@ -655,7 +648,7 @@ public class LeftMenuFragment extends AbstractAppFragment {
         layout.comment.setOnClickListener(onClickListener);
         layout.search.setOnClickListener(onClickListener);
         layout.profile.setOnClickListener(onClickListener);
-//        layout.location.setOnClickListener(onClickListener);
+        // layout.location.setOnClickListener(onClickListener);
         layout.setting.setOnClickListener(onClickListener);
         layout.dm.setOnClickListener(onClickListener);
         layout.logout.setOnClickListener(onClickListener);
@@ -688,7 +681,7 @@ public class LeftMenuFragment extends AbstractAppFragment {
                     break;
                 case R.id.btn_location:
                     startActivity(new Intent(getActivity(), NearbyTimeLineActivity.class));
-//                    drawButtonsBackground(5);
+                    // drawButtonsBackground(5);
                     break;
                 case R.id.btn_favourite:
                     showFavPage(false);
@@ -714,11 +707,11 @@ public class LeftMenuFragment extends AbstractAppFragment {
         layout.comment.setBackgroundResource(R.drawable.btn_drawer_menu);
         layout.search.setBackgroundResource(R.drawable.btn_drawer_menu);
         layout.profile.setBackgroundResource(R.drawable.btn_drawer_menu);
-//        layout.location.setBackgroundResource(R.color.transparent);
-//        layout.setting.setBackgroundResource(R.color.transparent);
+        // layout.location.setBackgroundResource(R.color.transparent);
+        // layout.setting.setBackgroundResource(R.color.transparent);
         layout.dm.setBackgroundResource(R.drawable.btn_drawer_menu);
         layout.fav.setBackgroundResource(R.drawable.btn_drawer_menu);
-//        layout.logout.setBackgroundResource(R.color.transparent);
+        // layout.logout.setBackgroundResource(R.color.transparent);
         switch (position) {
             case HOME_INDEX:
                 layout.home.setBackgroundResource(R.color.ics_blue_semi);
@@ -738,9 +731,9 @@ public class LeftMenuFragment extends AbstractAppFragment {
             case FAV_INDEX:
                 layout.fav.setBackgroundResource(R.color.ics_blue_semi);
                 break;
-//            case 5:
-//                layout.location.setBackgroundResource(R.color.ics_blue_semi);
-//                break;
+            // case 5:
+            // layout.location.setBackgroundResource(R.color.ics_blue_semi);
+            // break;
             case PROFILE_INDEX:
                 layout.profile.setBackgroundResource(R.color.ics_blue_semi);
                 break;
@@ -912,7 +905,7 @@ public class LeftMenuFragment extends AbstractAppFragment {
 
         Button search;
 
-        //        Button location;
+        // Button location;
         Button dm;
 
         Button logout;
@@ -923,6 +916,5 @@ public class LeftMenuFragment extends AbstractAppFragment {
 
         Button fav;
     }
-
 
 }

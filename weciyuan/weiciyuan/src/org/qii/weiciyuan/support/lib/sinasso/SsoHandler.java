@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib.sinasso;
 
 import android.app.Activity;
@@ -12,10 +13,8 @@ import android.text.TextUtils;
 import com.sina.sso.RemoteSSO;
 import org.qii.weiciyuan.dao.URLHelper;
 
-
 /**
- * User: qii
- * Date: 13-6-18
+ * User: qii Date: 13-6-18
  */
 public class SsoHandler {
     private ServiceConnection conn = null;
@@ -43,8 +42,9 @@ public class SsoHandler {
     private static String ssoPackageName = "";// "com.sina.weibo";
     private static String ssoActivityName = "";// "com.sina.weibo.MainTabActivity";
     private Activity mAuthActivity;
-    private String[] authPermissions = {"friendships_groups_read", "friendships_groups_write"};
-
+    private String[] authPermissions = {
+            "friendships_groups_read", "friendships_groups_write"
+    };
 
     public SsoHandler(Activity activity) {
         mAuthActivity = activity;
@@ -72,7 +72,6 @@ public class SsoHandler {
             }
         };
     }
-
 
     public void authorize() {
         authorize(DEFAULT_AUTH_ACTIVITY_CODE);
@@ -122,7 +121,7 @@ public class SsoHandler {
     }
 
     private boolean validateAppSignatureForIntent(Activity activity,
-                                                  Intent intent) {
+            Intent intent) {
         ResolveInfo resolveInfo = activity.getPackageManager().resolveActivity(
                 intent, 0);
         if (resolveInfo == null) {
@@ -144,6 +143,5 @@ public class SsoHandler {
 
         return false;
     }
-
 
 }

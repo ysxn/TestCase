@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.adapter;
 
 import android.content.Intent;
@@ -24,11 +25,9 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 /**
- * User: qii
- * Date: 12-9-8
+ * User: qii Date: 12-9-8
  */
 public class CommentListAdapter extends AbstractAppListAdapter<CommentBean> {
-
 
     private Map<ViewHolder, Drawable> bg = new WeakHashMap<ViewHolder, Drawable>();
 
@@ -58,13 +57,13 @@ public class CommentListAdapter extends AbstractAppListAdapter<CommentBean> {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//                VelocityListView velocityListView = (VelocityListView) view;
-//                if (velocityListView.getVelocity() < 0) {
-//                    topTipBar.hideCount();
-//                } else if (velocityListView.getVelocity() > 0) {
-//                    if (topTipBar.getValues().size() == 0) {
-//                        return;
-//                    }
+                // VelocityListView velocityListView = (VelocityListView) view;
+                // if (velocityListView.getVelocity() < 0) {
+                // topTipBar.hideCount();
+                // } else if (velocityListView.getVelocity() > 0) {
+                // if (topTipBar.getValues().size() == 0) {
+                // return;
+                // }
 
                 View childView = Utility.getListViewItemViewFromPosition(listView, firstVisibleItem);
 
@@ -80,7 +79,8 @@ public class CommentListAdapter extends AbstractAppListAdapter<CommentBean> {
                     handle(position + 1);
                 }
             }
-//            }
+
+            // }
 
             private void handle(int position) {
                 if (position > 0 && topTipBar != null && position < bean.size()) {
@@ -180,9 +180,6 @@ public class CommentListAdapter extends AbstractAppListAdapter<CommentBean> {
 
         }
 
-
     }
 
 }
-
-

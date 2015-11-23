@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.maintimeline;
 
 import com.google.gson.Gson;
@@ -19,11 +20,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-7-29
+ * User: qii Date: 12-7-29
  */
 public class MainCommentsTimeLineDao implements ICommentsTimeLineDao {
-
 
     public void setSince_id(String since_id) {
         this.since_id = since_id;
@@ -76,7 +75,6 @@ public class MainCommentsTimeLineDao implements ICommentsTimeLineDao {
         map.put("page", page);
         map.put("filter_by_author", filter_by_author);
         map.put("filter_by_source", filter_by_source);
-
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
 

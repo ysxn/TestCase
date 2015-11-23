@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import org.qii.weiciyuan.support.database.table.NotificationTable;
@@ -13,8 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * User: qii
- * Date: 14-2-22
+ * User: qii Date: 14-2-22
  */
 public class NotificationDBTask {
 
@@ -46,7 +46,6 @@ public class NotificationDBTask {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         return databaseHelper.getReadableDatabase();
     }
-
 
     public static void addUnreadNotification(String accountId, ArrayList<String> msgIds,
             UnreadDBType type) {
@@ -113,7 +112,6 @@ public class NotificationDBTask {
         c.close();
         return total >= AppConfig.DEFAULT_NOTIFICATION_UNREAD_DB_CACHE_COUNT;
     }
-
 
     public static void asyncCleanUnread(final String accountId, final UnreadDBType type) {
         new Thread(new Runnable() {

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference;
 
 import android.content.SharedPreferences;
@@ -10,15 +11,13 @@ import org.qii.weiciyuan.support.settinghelper.SettingUtility;
 import org.qii.weiciyuan.support.utils.Utility;
 
 /**
- * User: qii
- * Date: 12-10-19
+ * User: qii Date: 12-10-19
  */
 public class ControlFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private Preference msgCount = null;
     private Preference commentRepostListAvatar = null;
     private Preference uploadPicQuality = null;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,14 +36,12 @@ public class ControlFragment extends PreferenceFragment implements SharedPrefere
 
     }
 
-
     private void buildSummary() {
         String value = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(SettingActivity.MSG_COUNT, "3");
         msgCount.setSummary(getActivity().getResources().getStringArray(R.array.msg_count_title)[Integer.valueOf(value) - 1]);
 
         value = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(SettingActivity.COMMENT_REPOST_AVATAR, "3");
         commentRepostListAvatar.setSummary(getActivity().getResources().getStringArray(R.array.comment_repost_list_avatar_mode)[Integer.valueOf(value) - 1]);
-
 
         value = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(SettingActivity.UPLOAD_PIC_QUALITY, "1");
         uploadPicQuality.setSummary(getActivity().getResources().getStringArray(R.array.upload_pic_quality_hack_bug)[Integer.valueOf(value) - 1]);

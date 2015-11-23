@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.graphics.Bitmap;
@@ -9,8 +10,7 @@ import android.os.Parcelable;
 import android.widget.ImageView;
 
 /**
- * User: qii
- * Date: 14-4-1
+ * User: qii Date: 14-4-1
  */
 public class AnimationRect implements Parcelable {
 
@@ -26,7 +26,9 @@ public class AnimationRect implements Parcelable {
         dest.writeFloat(clipRectV);
         dest.writeParcelable(imageViewRect, flags);
         dest.writeInt(type);
-        dest.writeBooleanArray(new boolean[]{clipped});
+        dest.writeBooleanArray(new boolean[] {
+            clipped
+        });
     }
 
     public static final Parcelable.Creator<AnimationRect> CREATOR =
@@ -50,7 +52,6 @@ public class AnimationRect implements Parcelable {
                 }
             };
 
-
     public static final int TYPE_CLIP_V = 0;
 
     public static final int TYPE_CLIP_H = 1;
@@ -64,7 +65,6 @@ public class AnimationRect implements Parcelable {
     public float clipRectH;
 
     public float clipRectV;
-
 
     public Rect imageViewRect;
 
@@ -113,7 +113,7 @@ public class AnimationRect implements Parcelable {
             case CENTER_CROP:
 
                 if ((float) imageViewWidth / bitmapWidth
-                        > (float) imageviewHeight / bitmapHeight) {
+                > (float) imageviewHeight / bitmapHeight) {
 
                     startScale = (float) imageViewWidth / bitmapWidth;
                     rect.type = TYPE_CLIP_V;
@@ -144,7 +144,7 @@ public class AnimationRect implements Parcelable {
             case FIT_CENTER:
 
                 if ((float) imageViewWidth / bitmapWidth
-                        > (float) imageviewHeight / bitmapHeight) {
+                > (float) imageviewHeight / bitmapHeight) {
                     // Extend start bounds horizontally
                     startScale = (float) imageviewHeight / bitmapHeight;
 

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.gallery;
 
 import android.content.Context;
@@ -5,8 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * User: qii
- * Date: 13-7-28
+ * User: qii Date: 13-7-28
  */
 public class ViewPagerFixed extends android.support.v4.view.ViewPager {
 

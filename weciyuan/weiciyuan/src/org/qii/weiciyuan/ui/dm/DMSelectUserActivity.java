@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.dm;
 
 import org.qii.weiciyuan.R;
@@ -33,8 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-3-2
+ * User: qii Date: 13-3-2
  */
 public class DMSelectUserActivity extends AbstractAppActivity {
 
@@ -76,7 +76,6 @@ public class DMSelectUserActivity extends AbstractAppActivity {
                 finish();
             }
         });
-
 
     }
 
@@ -200,7 +199,6 @@ public class DMSelectUserActivity extends AbstractAppActivity {
 
     public static class SelectFriendsListFragment extends AbstractFriendsFanListFragment {
 
-
         public static SelectFriendsListFragment newInstance(UserBean userBean) {
             SelectFriendsListFragment fragment = new SelectFriendsListFragment();
             Bundle bundle = new Bundle();
@@ -212,7 +210,6 @@ public class DMSelectUserActivity extends AbstractAppActivity {
         public SelectFriendsListFragment() {
 
         }
-
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -235,7 +232,7 @@ public class DMSelectUserActivity extends AbstractAppActivity {
 
         @Override
         protected void buildActionBarSubtitle() {
-            //empty
+            // empty
         }
 
         protected void listViewItemClick(AdapterView parent, View view, int position, long id) {

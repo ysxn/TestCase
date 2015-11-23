@@ -1,5 +1,5 @@
-package org.qii.weiciyuan.support.file;
 
+package org.qii.weiciyuan.support.file;
 
 public class FileUploaderHttpHelper {
 

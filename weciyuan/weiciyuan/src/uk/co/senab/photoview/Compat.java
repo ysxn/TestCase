@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
+
 package uk.co.senab.photoview;
 
 import android.annotation.TargetApi;
@@ -56,7 +57,7 @@ public class Compat {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private static int getPointerIndexHoneyComb(int action) {
         return (action & MotionEvent.ACTION_POINTER_INDEX_MASK)
-                >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+        >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
     }
 
 }

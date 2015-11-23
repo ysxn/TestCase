@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.search;
 
 import android.support.v4.app.Fragment;
@@ -11,14 +12,14 @@ import org.qii.weiciyuan.ui.maintimeline.MentionsCommentTimeLineFragment;
 import org.qii.weiciyuan.ui.maintimeline.MentionsWeiboTimeLineFragment;
 
 /**
- * User: qii
- * Date: 13-5-11
+ * User: qii Date: 13-5-11
  */
 public class SearchTimeLinePagerAdapter extends AppFragmentPagerAdapter {
 
     private SparseArray<Fragment> fragmentList;
 
-    public SearchTimeLinePagerAdapter(SearchMainParentFragment fragment, ViewPager viewPager, FragmentManager fm, MainTimeLineActivity activity, SparseArray<Fragment> fragmentList) {
+    public SearchTimeLinePagerAdapter(SearchMainParentFragment fragment, ViewPager viewPager, FragmentManager fm, MainTimeLineActivity activity,
+            SparseArray<Fragment> fragmentList) {
         super(fm);
         this.fragmentList = fragmentList;
         fragmentList.append(0, fragment.getSearchWeiboFragment());
@@ -34,7 +35,6 @@ public class SearchTimeLinePagerAdapter extends AppFragmentPagerAdapter {
         }
     }
 
-
     public Fragment getItem(int position) {
         return fragmentList.get(position);
     }
@@ -48,11 +48,9 @@ public class SearchTimeLinePagerAdapter extends AppFragmentPagerAdapter {
         return tagList.get(position);
     }
 
-
     @Override
     public int getCount() {
         return 2;
     }
-
 
 }

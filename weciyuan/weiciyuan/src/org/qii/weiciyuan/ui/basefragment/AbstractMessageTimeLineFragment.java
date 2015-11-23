@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.basefragment;
 
 import android.os.Bundle;
@@ -19,8 +20,7 @@ import org.qii.weiciyuan.ui.adapter.StatusListAdapter;
 import org.qii.weiciyuan.ui.interfaces.IRemoveItem;
 
 /**
- * User: qii
- * Date: 12-7-29
+ * User: qii Date: 12-7-29
  */
 public abstract class AbstractMessageTimeLineFragment<T extends ListBean<MessageBean, ?>>
         extends AbstractTimeLineFragment<T> implements IRemoveItem {
@@ -46,7 +46,6 @@ public abstract class AbstractMessageTimeLineFragment<T extends ListBean<Message
         getList().setTotal_number(value.getTotal_number());
     }
 
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -54,19 +53,18 @@ public abstract class AbstractMessageTimeLineFragment<T extends ListBean<Message
         getListView().setOnItemLongClickListener(onItemLongClickListener);
     }
 
-    private AdapterView.OnItemLongClickListener onItemLongClickListener
-            = new AdapterView.OnItemLongClickListener() {
+    private AdapterView.OnItemLongClickListener onItemLongClickListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
             if (position - getListView().getHeaderViewsCount() < getList().getSize()
                     && position - getListView().getHeaderViewsCount() >= 0
                     && timeLineAdapter.getItem(position - getListView().getHeaderViewsCount())
-                    != null) {
+                        != null) {
                 MessageBean msg = getList().getItemList()
                         .get(position - getListView().getHeaderViewsCount());
                 StatusSingleChoiceModeListener choiceModeListener
-                        = new StatusSingleChoiceModeListener(getListView(),
+                = new StatusSingleChoiceModeListener(getListView(),
                         (StatusListAdapter) timeLineAdapter, AbstractMessageTimeLineFragment.this,
                         msg);
                 if (actionMode != null) {
@@ -92,8 +90,8 @@ public abstract class AbstractMessageTimeLineFragment<T extends ListBean<Message
 
     /**
      * fix android bug,long press a item in the first tab's listview, rotate screen, the item
-     * background is still blue(it is checked),
-     * but if you test on other tabs' lstview, the item is not checked
+     * background is still blue(it is checked), but if you test on other tabs' lstview, the item is
+     * not checked
      */
     @Override
     public void onResume() {
@@ -106,7 +104,6 @@ public abstract class AbstractMessageTimeLineFragment<T extends ListBean<Message
         timeLineAdapter = new StatusListAdapter(this, getList().getItemList(), getListView(), true);
         getListView().setAdapter(timeLineAdapter);
     }
-
 
     @Override
     public void removeItem(int position) {
@@ -122,7 +119,6 @@ public abstract class AbstractMessageTimeLineFragment<T extends ListBean<Message
     public void removeCancel() {
         clearActionMode();
     }
-
 
     class RemoveTask extends MyAsyncTask<Void, Void, Boolean> {
 

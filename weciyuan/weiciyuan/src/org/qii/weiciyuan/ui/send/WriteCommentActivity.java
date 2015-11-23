@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.send;
 
 import org.qii.weiciyuan.R;
@@ -24,8 +25,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-2
+ * User: Jiang Qi Date: 12-8-2
  */
 public class WriteCommentActivity extends AbstractWriteActivity<ItemBean> {
 
@@ -33,9 +33,7 @@ public class WriteCommentActivity extends AbstractWriteActivity<ItemBean> {
 
     private static final String ACTION_SEND_FAILED = "org.qii.weiciyuan.SEND_FAILED";
 
-    private static final String ACTION_NOTIFICATION_COMMENT
-            = "org.qii.weiciyuan.NOTIFICATION_COMMENT";
-
+    private static final String ACTION_NOTIFICATION_COMMENT = "org.qii.weiciyuan.NOTIFICATION_COMMENT";
 
     private String token;
 
@@ -50,7 +48,6 @@ public class WriteCommentActivity extends AbstractWriteActivity<ItemBean> {
     private boolean savedEnableCommentOri;
 
     private boolean savedEnableRepost;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,7 +102,6 @@ public class WriteCommentActivity extends AbstractWriteActivity<ItemBean> {
         intent.putExtra("msg", msg);
         return intent;
     }
-
 
     private void handleNotificationCommentOperation(Intent intent) {
         AccountBean accountBean = intent.getParcelableExtra("account");
@@ -259,7 +255,6 @@ public class WriteCommentActivity extends AbstractWriteActivity<ItemBean> {
         return false;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -313,16 +308,13 @@ public class WriteCommentActivity extends AbstractWriteActivity<ItemBean> {
             repost();
         }
 
-
     }
 
-
     /**
-     * 1. this message has repost's message
-     * 2. this message is an original message
+     * 1. this message has repost's message 2. this message is an original message
      * <p/>
-     * if this message has repost's message,try to include its content,
-     * if total word number above 140,discard current msg content
+     * if this message has repost's message,try to include its content, if total word number above
+     * 140,discard current msg content
      */
 
     private void repost() {

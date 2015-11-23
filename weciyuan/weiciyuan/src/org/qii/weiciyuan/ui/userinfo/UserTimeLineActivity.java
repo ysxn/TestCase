@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.userinfo;
 
 import org.qii.weiciyuan.bean.UserBean;
@@ -10,11 +11,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 /**
- * User: qii
- * Date: 13-6-21
+ * User: qii Date: 13-6-21
  */
 public class UserTimeLineActivity extends AbstractAppActivity {
-
 
     public static Intent newIntent(String token, UserBean userBean) {
         Intent intent = new Intent(GlobalContext.getInstance(), UserTimeLineActivity.class);

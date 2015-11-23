@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.topic;
 
 import android.app.ListFragment;
@@ -23,8 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-11-18
+ * User: qii Date: 12-11-18
  */
 public class UserTopicListFragment extends ListFragment {
 
@@ -38,7 +38,6 @@ public class UserTopicListFragment extends ListFragment {
 
     private FollowTopicTask followTopicTask;
 
-
     public UserTopicListFragment() {
 
     }
@@ -47,19 +46,16 @@ public class UserTopicListFragment extends ListFragment {
         this.userBean = userBean;
     }
 
-
     public UserTopicListFragment(UserBean userBean, ArrayList<String> topicList) {
         this.userBean = userBean;
         this.result = topicList;
     }
-
 
     @Override
     public void onDetach() {
         super.onDetach();
         Utility.cancelTasks(task, followTopicTask);
     }
-
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -128,7 +124,6 @@ public class UserTopicListFragment extends ListFragment {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     class TopicListTask extends MyAsyncTask<Void, List<String>, List<String>> {
         WeiboException e;

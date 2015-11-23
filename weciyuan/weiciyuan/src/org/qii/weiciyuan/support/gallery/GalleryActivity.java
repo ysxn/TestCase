@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.gallery;
 
 import org.qii.weiciyuan.R;
@@ -55,8 +56,7 @@ import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
- * User: qii
- * Date: 13-7-28
+ * User: qii Date: 13-7-28
  */
 @Deprecated
 public class GalleryActivity extends Activity {
@@ -75,8 +75,7 @@ public class GalleryActivity extends Activity {
 
     private TextView position;
 
-    private HashMap<String, PicSimpleBitmapWorkerTask> taskMap
-            = new HashMap<String, PicSimpleBitmapWorkerTask>();
+    private HashMap<String, PicSimpleBitmapWorkerTask> taskMap = new HashMap<String, PicSimpleBitmapWorkerTask>();
 
     private PicSaveTask saveTask;
 
@@ -111,11 +110,11 @@ public class GalleryActivity extends Activity {
         }
         sum.setText(String.valueOf(urls.size()));
 
-        //jump to new gallery animation activity
+        // jump to new gallery animation activity
         if (urls.size() < 10 && rect != null && ImageUtility.isThisBitmapCanRead(
                 FileManager.getFilePathFromUrl(urls.get(0), FileLocationMethod.picture_large))
                 && !ImageUtility.isThisBitmapTooLargeToRead(
-                FileManager.getFilePathFromUrl(urls.get(0), FileLocationMethod.picture_large))
+                        FileManager.getFilePathFromUrl(urls.get(0), FileLocationMethod.picture_large))
                 && !ImageUtility.isThisPictureGif(urls.get(0))) {
             Intent intent = new Intent(this, GalleryAnimationActivity.class);
             intent.putExtra("msg", getIntent().getParcelableExtra("msg"));
@@ -182,7 +181,6 @@ public class GalleryActivity extends Activity {
         }
     }
 
-
     private void animateClose(PhotoView imageView) {
         currentViewPositionLayout.setVisibility(View.INVISIBLE);
         animationView.setImageDrawable(imageView.getDrawable());
@@ -200,7 +198,7 @@ public class GalleryActivity extends Activity {
 
         float startScale;
         if ((float) finalBounds.width() / finalBounds.height()
-                > (float) startBounds.width() / startBounds.height()) {
+        > (float) startBounds.width() / startBounds.height()) {
             // Extend start bounds horizontally
             startScale = (float) startBounds.height() / finalBounds.height();
             float startWidth = startScale * finalBounds.width();
@@ -233,7 +231,6 @@ public class GalleryActivity extends Activity {
                 }).start();
     }
 
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
 
@@ -256,9 +253,8 @@ public class GalleryActivity extends Activity {
                 Utility.recycleViewGroupAndChildViews(viewGroup, true);
 
             }
-//            ((ViewPager) container).removeView((View) object);
+            // ((ViewPager) container).removeView((View) object);
         }
-
 
         @Override
         public int getCount() {
@@ -309,7 +305,6 @@ public class GalleryActivity extends Activity {
             return view.equals(object);
         }
 
-
     }
 
     private void handlePage(int position, View contentView, boolean fromInstantiateItem) {
@@ -347,7 +342,7 @@ public class GalleryActivity extends Activity {
         if (Utility.doThisDeviceOwnNavigationBar(GalleryActivity.this)) {
             imageView.setPadding(0, 0, 0,
                     Utility.dip2px(NAVIGATION_BAR_HEIGHT_DP_UNIT));
-            //webview has a bug, padding is ignored
+            // webview has a bug, padding is ignored
             gif.setPadding(0, 0, 0,
                     Utility.dip2px(NAVIGATION_BAR_HEIGHT_DP_UNIT));
             large.setPadding(0, 0, 0,
@@ -364,7 +359,7 @@ public class GalleryActivity extends Activity {
         boolean shouldDownLoadPicture = !fromInstantiateItem || (fromInstantiateItem && Utility
                 .isWifi(GalleryActivity.this));
 
-        //sometime picture is not downloaded completely, but android already can read it....
+        // sometime picture is not downloaded completely, but android already can read it....
         if (ImageUtility.isThisBitmapCanRead(path)
                 && taskMap.get(urls.get(position)) == null
                 && TaskCache.isThisUrlTaskFinished(urls.get(position))) {
@@ -390,16 +385,13 @@ public class GalleryActivity extends Activity {
         }
     }
 
-
     private class PicSimpleBitmapWorkerTask extends MyAsyncTask<String, Integer, String> {
 
-        private FileDownloaderHttpHelper.DownloadListener downloadListener
-                = new FileDownloaderHttpHelper.DownloadListener() {
+        private FileDownloaderHttpHelper.DownloadListener downloadListener = new FileDownloaderHttpHelper.DownloadListener() {
             @Override
             public void pushProgress(int progress, int max) {
                 publishProgress(progress, max);
             }
-
 
         };
 
@@ -444,7 +436,6 @@ public class GalleryActivity extends Activity {
             this.spinner.setVisibility(View.VISIBLE);
 
         }
-
 
         @Override
         protected String doInBackground(String... dd) {
@@ -508,10 +499,8 @@ public class GalleryActivity extends Activity {
 
             readPicture(iv, gif, large, readError, url, bitmapPath);
 
-
         }
     }
-
 
     private void readPicture(final ImageView imageView, WebView gif, WebView large,
             final TextView readError, final String url, final String bitmapPath) {
@@ -529,9 +518,9 @@ public class GalleryActivity extends Activity {
 
         boolean isThisBitmapTooLarge = ImageUtility.isThisBitmapTooLargeToRead(bitmapPath);
         if (isThisBitmapTooLarge && !alreadyShowPicturesTooLargeHint) {
-//            Toast.makeText(GalleryActivity.this,
-//                    R.string.picture_is_too_large_so_enable_software_layer, Toast.LENGTH_LONG)
-//                    .show();
+            // Toast.makeText(GalleryActivity.this,
+            // R.string.picture_is_too_large_so_enable_software_layer, Toast.LENGTH_LONG)
+            // .show();
             alreadyShowPicturesTooLargeHint = true;
         }
 
@@ -540,15 +529,15 @@ public class GalleryActivity extends Activity {
             return;
         }
 
-        //ImageView already have bitmap, ignore it
+        // ImageView already have bitmap, ignore it
         if (imageView.getDrawable() != null) {
             return;
         }
 
         new MyAsyncTask<Void, Bitmap, Bitmap>() {
 
-            //todo
-            //when I finish new ImageView in the future, I will refactor these code....
+            // todo
+            // when I finish new ImageView in the future, I will refactor these code....
             @Override
             protected Bitmap doInBackground(Void... params) {
                 Bitmap bitmap = null;
@@ -762,7 +751,7 @@ public class GalleryActivity extends Activity {
                     mPendingCheckForSinglePress = new CheckForSinglePress(v);
                     mPressed = true;
                     if (System.currentTimeMillis() - lastTime
-                            > ViewConfiguration.getDoubleTapTimeout() + 100) {
+                    > ViewConfiguration.getDoubleTapTimeout() + 100) {
                         mClose = true;
                         new Handler().postDelayed(mPendingCheckForSinglePress,
                                 ViewConfiguration.getDoubleTapTimeout() + 100);
@@ -795,7 +784,6 @@ public class GalleryActivity extends Activity {
         }
     };
 
-
     private void bindImageViewLongClickListener(View view, final String url,
             final String filePath) {
 
@@ -803,8 +791,10 @@ public class GalleryActivity extends Activity {
             @Override
             public boolean onLongClick(View v) {
 
-                String[] values = {getString(R.string.copy_link_to_clipboard),
-                        getString(R.string.share), getString(R.string.save_pic_album)};
+                String[] values = {
+                        getString(R.string.copy_link_to_clipboard),
+                        getString(R.string.share), getString(R.string.save_pic_album)
+                };
 
                 new AlertDialog.Builder(GalleryActivity.this)
                         .setItems(values, new DialogInterface.OnClickListener() {
@@ -844,7 +834,6 @@ public class GalleryActivity extends Activity {
         });
     }
 
-
     private void saveBitmapToPictureDir(String filePath) {
         if (Utility.isTaskStopped(saveTask)) {
             saveTask = new PicSaveTask(filePath);
@@ -852,7 +841,6 @@ public class GalleryActivity extends Activity {
         }
 
     }
-
 
     private class PicSaveTask extends MyAsyncTask<Void, Boolean, Boolean> {
 
@@ -867,7 +855,6 @@ public class GalleryActivity extends Activity {
             return FileManager.saveToPicDir(path);
         }
 
-
         @Override
         protected void onPostExecute(Boolean value) {
             super.onPostExecute(value);
@@ -879,7 +866,6 @@ public class GalleryActivity extends Activity {
                         Toast.LENGTH_SHORT).show();
             }
         }
-
 
     }
 }

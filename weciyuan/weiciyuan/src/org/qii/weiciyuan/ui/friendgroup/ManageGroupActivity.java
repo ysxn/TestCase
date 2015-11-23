@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.friendgroup;
 
 import org.qii.weiciyuan.R;
@@ -34,8 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-2-14
+ * User: qii Date: 13-2-14
  */
 public class ManageGroupActivity extends AbstractAppActivity {
 
@@ -55,7 +55,6 @@ public class ManageGroupActivity extends AbstractAppActivity {
         }
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
@@ -68,7 +67,6 @@ public class ManageGroupActivity extends AbstractAppActivity {
         }
         return false;
     }
-
 
     public static class ManageGroupFragment extends ListFragment {
 
@@ -161,7 +159,6 @@ public class ManageGroupActivity extends AbstractAppActivity {
                 checkedBG = ThemeUtility
                         .getColor(getActivity(), R.attr.listview_checked_color);
 
-
             }
 
             @Override
@@ -198,7 +195,6 @@ public class ManageGroupActivity extends AbstractAppActivity {
                 return view;
             }
         }
-
 
         class GroupMultiChoiceModeListener implements AbsListView.MultiChoiceModeListener {
 
@@ -258,7 +254,6 @@ public class ManageGroupActivity extends AbstractAppActivity {
                 return false;
             }
 
-
             @Override
             public void onDestroyActionMode(ActionMode mode) {
 
@@ -277,7 +272,6 @@ public class ManageGroupActivity extends AbstractAppActivity {
                 adapter.notifyDataSetChanged();
             }
         }
-
 
         class CreateGroupTask extends MyAsyncTask<Void, Void, GroupBean> {
 
@@ -317,7 +311,6 @@ public class ManageGroupActivity extends AbstractAppActivity {
 
         class RefreshGroupTask extends MyAsyncTask<Void, GroupListBean, GroupListBean> {
 
-
             private WeiboException e;
 
             private String token;
@@ -335,7 +328,6 @@ public class ManageGroupActivity extends AbstractAppActivity {
                 }
                 return null;
             }
-
 
             @Override
             protected void onPostExecute(GroupListBean groupListBean) {

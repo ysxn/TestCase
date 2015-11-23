@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
+
 package org.qii.weiciyuan.support.lib.pulltorefresh.internal;
 
 import android.content.Context;
@@ -39,7 +40,6 @@ public class RotateLoadingLayout extends LoadingLayout {
     private final boolean mRotateDrawableWhilePulling;
 
     private MediaPlayer currentMediaPlayer;
-
 
     public RotateLoadingLayout(Context context, Mode mode, Orientation scrollDirection, TypedArray attrs) {
         super(context, mode, scrollDirection, attrs);
@@ -94,7 +94,6 @@ public class RotateLoadingLayout extends LoadingLayout {
             mHeaderImage.setImageMatrix(mHeaderImageMatrix);
         }
     }
-
 
     private void playSound(int resId) {
         // Stop current player, if there's one playing

@@ -1,8 +1,8 @@
+
 package org.qii.weiciyuan.support.database.table;
 
 /**
- * User: qii
- * Date: 12-9-24
+ * User: qii Date: 12-9-24
  */
 public class EmotionsTable {
 

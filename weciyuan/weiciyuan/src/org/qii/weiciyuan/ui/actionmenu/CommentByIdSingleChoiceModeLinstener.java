@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.actionmenu;
 
 import android.support.v4.app.Fragment;
@@ -10,8 +11,7 @@ import android.widget.ListView;
 import org.qii.weiciyuan.bean.CommentBean;
 
 /**
- * User: qii
- * Date: 12-9-11
+ * User: qii Date: 12-9-11
  */
 public class CommentByIdSingleChoiceModeLinstener extends CommentSingleChoiceModeListener {
     LinearLayout quick_repost;
@@ -24,7 +24,6 @@ public class CommentByIdSingleChoiceModeLinstener extends CommentSingleChoiceMod
 
     }
 
-
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         if (initState == View.VISIBLE)
@@ -36,7 +35,7 @@ public class CommentByIdSingleChoiceModeLinstener extends CommentSingleChoiceMod
     @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
         buildMenu(mode, menu);
-//        menu.findItem(R.id.menu_view).setVisible(true);
+        // menu.findItem(R.id.menu_view).setVisible(true);
         return true;
     }
 

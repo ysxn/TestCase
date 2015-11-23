@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import android.content.ContentValues;
@@ -19,8 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-5-30
+ * User: qii Date: 13-5-30
  */
 public class FavouriteDBTask {
     private FavouriteDBTask() {
@@ -71,7 +71,9 @@ public class FavouriteDBTask {
         Cursor c = getRsd().rawQuery(sql, null);
         if (c.moveToNext()) {
             try {
-                String[] args = {accountId};
+                String[] args = {
+                    accountId
+                };
                 ContentValues cv = new ContentValues();
                 cv.put(FavouriteTable.PAGE, page);
                 getWsd().update(FavouriteTable.TABLE_NAME, cv, FavouriteTable.ACCOUNTID + "=?", args);
@@ -125,9 +127,9 @@ public class FavouriteDBTask {
 
     }
 
-
     static void deleteAllFavourites(String accountId) {
-        String sql = "delete from " + FavouriteTable.FavouriteDataTable.TABLE_NAME + " where " + FavouriteTable.FavouriteDataTable.ACCOUNTID + " in " + "(" + accountId + ")";
+        String sql = "delete from " + FavouriteTable.FavouriteDataTable.TABLE_NAME + " where " + FavouriteTable.FavouriteDataTable.ACCOUNTID + " in " + "("
+                + accountId + ")";
 
         getWsd().execSQL(sql);
 
@@ -149,7 +151,6 @@ public class FavouriteDBTask {
         new Thread(runnable).start();
     }
 
-
     private static void updatePosition(TimeLinePosition position, String accountId) {
         String sql = "select * from " + FavouriteTable.TABLE_NAME + " where " + FavouriteTable.ACCOUNTID + "  = "
                 + accountId;
@@ -157,7 +158,9 @@ public class FavouriteDBTask {
         Gson gson = new Gson();
         if (c.moveToNext()) {
             try {
-                String[] args = {accountId};
+                String[] args = {
+                    accountId
+                };
                 ContentValues cv = new ContentValues();
                 cv.put(FavouriteTable.TIMELINEDATA, gson.toJson(position));
                 getWsd().update(FavouriteTable.TABLE_NAME, cv, FavouriteTable.ACCOUNTID + "=?", args);

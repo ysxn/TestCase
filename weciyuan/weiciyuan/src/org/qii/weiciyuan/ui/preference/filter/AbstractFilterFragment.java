@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference.filter;
 
 import android.app.AlertDialog;
@@ -22,8 +23,7 @@ import org.qii.weiciyuan.ui.preference.ModifyFilterDialog;
 import java.util.*;
 
 /**
- * User: qii
- * Date: 13-6-16
+ * User: qii Date: 13-6-16
  */
 public abstract class AbstractFilterFragment extends ListFragment {
 
@@ -34,7 +34,6 @@ public abstract class AbstractFilterFragment extends ListFragment {
     protected List<String> list = new ArrayList<String>();
 
     private RemoveFilterDBTask removeTask;
-
 
     @Override
     public void onDetach() {
@@ -77,7 +76,6 @@ public abstract class AbstractFilterFragment extends ListFragment {
 
     }
 
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.actionbar_menu_filterfragment, menu);
@@ -101,7 +99,6 @@ public abstract class AbstractFilterFragment extends ListFragment {
 
         return true;
     }
-
 
     public void addFilter(String word) {
         Set<String> words = new HashSet<String>();
@@ -129,9 +126,7 @@ public abstract class AbstractFilterFragment extends ListFragment {
             }
         }.executeOnExecutor(MyAsyncTask.THREAD_POOL_EXECUTOR);
 
-
     }
-
 
     class FilterMultiChoiceModeListener implements AbsListView.MultiChoiceModeListener {
 
@@ -157,7 +152,6 @@ public abstract class AbstractFilterFragment extends ListFragment {
             }
             return false;
         }
-
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
@@ -220,7 +214,6 @@ public abstract class AbstractFilterFragment extends ListFragment {
                     }
                 }
 
-
                 mode.finish();
 
                 if (Utility.isTaskStopped(removeTask)) {
@@ -245,7 +238,6 @@ public abstract class AbstractFilterFragment extends ListFragment {
         for (int i = 0; i < views.size(); i++) {
             views.get(i).startAnimation(animations.get(i));
         }
-
 
     }
 
@@ -331,6 +323,5 @@ public abstract class AbstractFilterFragment extends ListFragment {
 
         }
     }
-
 
 }

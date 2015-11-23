@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
+
 package uk.co.senab.photoview;
 
 import android.content.Context;
@@ -115,8 +116,8 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
      */
     private static void setImageViewScaleTypeMatrix(ImageView imageView) {
         /**
-         * PhotoView sets it's own ScaleType to Matrix, then diverts all calls
-         * setScaleType to this.setScaleType automatically.
+         * PhotoView sets it's own ScaleType to Matrix, then diverts all calls setScaleType to
+         * this.setScaleType automatically.
          */
         if (null != imageView && !(imageView instanceof IPhotoView)) {
             if (!ScaleType.MATRIX.equals(imageView.getScaleType())) {
@@ -195,8 +196,9 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
 
     /**
      * Sets custom double tap listener, to intercept default given functions. To reset behavior to
-     * default, you can just pass in "null" or public field of PhotoViewAttacher.defaultOnDoubleTapListener
-     *
+     * default, you can just pass in "null" or public field of
+     * PhotoViewAttacher.defaultOnDoubleTapListener
+     * 
      * @param newOnDoubleTapListener custom OnDoubleTapListener to be set on ImageView
      */
     public void setOnDoubleTapListener(GestureDetector.OnDoubleTapListener newOnDoubleTapListener) {
@@ -369,13 +371,10 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
         checkAndDisplayMatrix();
 
         /**
-         * Here we decide whether to let the ImageView's parent to start taking
-         * over the touch event.
-         *
-         * First we check whether this function is enabled. We never want the
-         * parent to take over if we're scaling. We then check the edge we're
-         * on, and the direction of the scroll (i.e. if we're pulling against
-         * the edge, aka 'overscrolling', let the parent take over).
+         * Here we decide whether to let the ImageView's parent to start taking over the touch
+         * event. First we check whether this function is enabled. We never want the parent to take
+         * over if we're scaling. We then check the edge we're on, and the direction of the scroll
+         * (i.e. if we're pulling against the edge, aka 'overscrolling', let the parent take over).
          */
         ViewParent parent = imageView.getParent();
         if (mAllowParentInterceptOnEdge) {
@@ -421,11 +420,10 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
                 final int left = imageView.getLeft();
 
                 /**
-                 * We need to check whether the ImageView's bounds have changed.
-                 * This would be easier if we targeted API 11+ as we could just use
-                 * View.OnLayoutChangeListener. Instead we have to replicate the
-                 * work, keeping track of the ImageView's bounds and then checking
-                 * if the values change.
+                 * We need to check whether the ImageView's bounds have changed. This would be
+                 * easier if we targeted API 11+ as we could just use View.OnLayoutChangeListener.
+                 * Instead we have to replicate the work, keeping track of the ImageView's bounds
+                 * and then checking if the values change.
                  */
                 if (top != mIvTop || bottom != mIvBottom || left != mIvLeft
                         || right != mIvRight) {
@@ -686,8 +684,8 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
         ImageView imageView = getImageView();
 
         /**
-         * PhotoView's getScaleType() will just divert to this.getScaleType() so
-         * only call if we're not attached to a PhotoView.
+         * PhotoView's getScaleType() will just divert to this.getScaleType() so only call if we're
+         * not attached to a PhotoView.
          */
         if (null != imageView && !(imageView instanceof IPhotoView)) {
             if (!ScaleType.MATRIX.equals(imageView.getScaleType())) {
@@ -761,7 +759,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
 
     /**
      * Helper method that maps the supplied Matrix to the current Drawable
-     *
+     * 
      * @param matrix - Matrix to map Drawable against
      * @return RectF - Displayed Rectangle
      */
@@ -787,8 +785,8 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
 
     /**
      * Helper method that 'unpacks' a Matrix and returns the required value
-     *
-     * @param matrix     - Matrix to unpack
+     * 
+     * @param matrix - Matrix to unpack
      * @param whichValue - Which value from Matrix.M* to return
      * @return float - returned value
      */
@@ -825,7 +823,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
 
     /**
      * Calculate Matrix for FIT_CENTER
-     *
+     * 
      * @param d - Drawable being displayed
      */
     private void updateBaseMatrix(Drawable d) {
@@ -907,23 +905,22 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
     /**
      * Interface definition for a callback to be invoked when the internal Matrix has changed for
      * this View.
-     *
+     * 
      * @author Chris Banes
      */
     public static interface OnMatrixChangedListener {
         /**
          * Callback for when the Matrix displaying the Drawable has changed. This could be because
          * the View's bounds have changed, or the user has zoomed.
-         *
+         * 
          * @param rect - Rectangle displaying the Drawable's new bounds.
          */
         void onMatrixChanged(RectF rect);
     }
 
     /**
-     * Interface definition for a callback to be invoked when the Photo is tapped with a single
-     * tap.
-     *
+     * Interface definition for a callback to be invoked when the Photo is tapped with a single tap.
+     * 
      * @author Chris Banes
      */
     public static interface OnPhotoTapListener {
@@ -931,12 +928,12 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
         /**
          * A callback to receive where the user taps on a photo. You will only receive a callback if
          * the user taps on the actual photo, tapping on 'whitespace' will be ignored.
-         *
+         * 
          * @param view - View the user tapped.
-         * @param x    - where the user tapped from the of the Drawable, as percentage of the
-         *             Drawable width.
-         * @param y    - where the user tapped from the top of the Drawable, as percentage of the
-         *             Drawable height.
+         * @param x - where the user tapped from the of the Drawable, as percentage of the Drawable
+         *            width.
+         * @param y - where the user tapped from the top of the Drawable, as percentage of the
+         *            Drawable height.
          */
         void onPhotoTap(View view, float x, float y);
     }
@@ -944,7 +941,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
     /**
      * Interface definition for a callback to be invoked when the ImageView is tapped with a single
      * tap.
-     *
+     * 
      * @author Chris Banes
      */
     public static interface OnViewTapListener {
@@ -952,10 +949,10 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
         /**
          * A callback to receive where the user taps on a ImageView. You will receive a callback if
          * the user taps anywhere on the view, tapping on 'whitespace' will not be ignored.
-         *
+         * 
          * @param view - View the user tapped.
-         * @param x    - where the user tapped from the left of the View.
-         * @param y    - where the user tapped from the top of the View.
+         * @param x - where the user tapped from the left of the View.
+         * @param y - where the user tapped from the top of the View.
          */
         void onViewTap(View view, float x, float y);
     }

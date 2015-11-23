@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.browser;
 
 import android.app.Fragment;
@@ -24,8 +25,7 @@ import org.qii.weiciyuan.ui.send.WriteReplyToCommentActivity;
 import org.qii.weiciyuan.ui.userinfo.UserInfoActivity;
 
 /**
- * User: qii
- * Date: 12-9-19
+ * User: qii Date: 12-9-19
  */
 public class BrowserCommentFragment extends Fragment {
 
@@ -41,13 +41,10 @@ public class BrowserCommentFragment extends Fragment {
 
     private ImageView avatar;
 
-
     private ShareActionProvider mShareActionProvider;
-
 
     public BrowserCommentFragment() {
     }
-
 
     public BrowserCommentFragment(CommentBean msg) {
         this.msg = msg;
@@ -69,7 +66,6 @@ public class BrowserCommentFragment extends Fragment {
         }
         buildViewData();
 
-
     }
 
     @Override
@@ -79,7 +75,6 @@ public class BrowserCommentFragment extends Fragment {
         avatar.setImageDrawable(null);
 
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -115,8 +110,9 @@ public class BrowserCommentFragment extends Fragment {
                 avatar.setImageBitmap(bitmap);
             } else {
 
-//                ProfileAvatarReadWorker avatarTask = new ProfileAvatarReadWorker(avatar, FileLocationMethod.avatar_small);
-//                avatarTask.execute(url);
+                // ProfileAvatarReadWorker avatarTask = new ProfileAvatarReadWorker(avatar,
+                // FileLocationMethod.avatar_small);
+                // avatarTask.execute(url);
             }
 
         }
@@ -131,7 +127,6 @@ public class BrowserCommentFragment extends Fragment {
 
         buildShareActionMenu();
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -186,6 +181,5 @@ public class BrowserCommentFragment extends Fragment {
         }
         return true;
     }
-
 
 }

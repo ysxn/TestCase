@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -8,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-10-17
+ * User: qii Date: 12-10-17
  */
 public class GroupListBean implements Parcelable {
 
@@ -45,7 +45,6 @@ public class GroupListBean implements Parcelable {
                     return new GroupListBean[size];
                 }
             };
-
 
     public List<GroupBean> getLists() {
         return lists;

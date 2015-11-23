@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference;
 
 import android.app.ActionBar;
@@ -30,13 +31,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-9-21
+ * User: qii Date: 12-9-21
  */
 public class FilterActivity extends AbstractAppActivity {
 
     private ViewPager viewPager = null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,26 +94,24 @@ public class FilterActivity extends AbstractAppActivity {
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(onPageChangeListener);
 
-
     }
 
     ActionBar.TabListener tabListener = new ActionBar.TabListener() {
 
         public void onTabSelected(ActionBar.Tab tab,
-                                  FragmentTransaction ft) {
+                FragmentTransaction ft) {
             if (viewPager != null && viewPager.getCurrentItem() != tab.getPosition())
                 viewPager.setCurrentItem(tab.getPosition());
-
 
         }
 
         public void onTabUnselected(ActionBar.Tab tab,
-                                    FragmentTransaction ft) {
+                FragmentTransaction ft) {
 
         }
 
         public void onTabReselected(ActionBar.Tab tab,
-                                    FragmentTransaction ft) {
+                FragmentTransaction ft) {
 
         }
     };
@@ -126,12 +123,10 @@ public class FilterActivity extends AbstractAppActivity {
         }
     };
 
-
     class TimeLinePagerAdapter extends
             AppFragmentPagerAdapter {
 
         List<Fragment> list = new ArrayList<Fragment>();
-
 
         public TimeLinePagerAdapter(FragmentManager fm) {
             super(fm);

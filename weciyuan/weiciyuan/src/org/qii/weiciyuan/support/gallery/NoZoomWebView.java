@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.gallery;
 
 import android.content.Context;
@@ -6,8 +7,7 @@ import android.view.MotionEvent;
 import android.webkit.WebView;
 
 /**
- * User: qii
- * Date: 13-8-22
+ * User: qii Date: 13-8-22
  */
 public class NoZoomWebView extends WebView {
     public NoZoomWebView(Context context) {

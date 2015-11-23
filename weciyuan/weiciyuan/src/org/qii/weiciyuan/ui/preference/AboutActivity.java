@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference;
 
 import android.content.Intent;
@@ -7,8 +8,7 @@ import org.qii.weiciyuan.R;
 import org.qii.weiciyuan.ui.interfaces.AbstractAppActivity;
 
 /**
- * User: qii
- * Date: 12-9-29
+ * User: qii Date: 12-9-29
  */
 public class AboutActivity extends AbstractAppActivity {
 
@@ -27,7 +27,6 @@ public class AboutActivity extends AbstractAppActivity {
                     .commit();
         }
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.send;
 
 import android.content.Context;
@@ -20,8 +21,7 @@ import org.qii.weiciyuan.support.utils.Utility;
 import org.qii.weiciyuan.ui.search.AtUserActivity;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-2
+ * User: Jiang Qi Date: 12-8-2
  */
 public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
 
@@ -77,11 +77,11 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
     }
 
     public static Intent startBecauseSendFailed(Context context,
-                                                AccountBean accountBean,
-                                                String content,
-                                                MessageBean oriMsg,
-                                                RepostDraftBean repostDraftBean,
-                                                String failedReason) {
+            AccountBean accountBean,
+            String content,
+            MessageBean oriMsg,
+            RepostDraftBean repostDraftBean,
+            String failedReason) {
         Intent intent = new Intent(context, WriteRepostActivity.class);
         intent.setAction(WriteRepostActivity.ACTION_SEND_FAILED);
         intent.putExtra("account", accountBean);
@@ -123,7 +123,6 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
         }
         getEditTextView().setSelection(0);
     }
-
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -170,7 +169,6 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
 
     }
 
-
     @Override
     public void saveToDraft() {
         if (!TextUtils.isEmpty(getEditTextView().getText().toString())) {
@@ -196,7 +194,6 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
 
         return true;
     }
-
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -319,7 +316,6 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
         }
     }
 
-
     @Override
     protected boolean canSend() {
 
@@ -344,6 +340,5 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
 
         return false;
     }
-
 
 }

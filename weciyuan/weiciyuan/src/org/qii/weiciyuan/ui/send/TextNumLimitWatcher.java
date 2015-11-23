@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.send;
 
 import org.qii.weiciyuan.R;
@@ -11,8 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 /**
- * User: qii
- * Date: 12-9-2
+ * User: qii Date: 12-9-2
  */
 public class TextNumLimitWatcher implements TextWatcher {
 

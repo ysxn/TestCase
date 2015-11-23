@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.relationship;
 
 import com.google.gson.Gson;
@@ -13,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-10-12
+ * User: qii Date: 12-10-12
  */
 public class FanDao {
 
@@ -29,7 +29,6 @@ public class FanDao {
         Map<String, String> map = new HashMap<String, String>();
         map.put("access_token", access_token);
         map.put("uid", uid);
-
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Post, url, map);
         try {

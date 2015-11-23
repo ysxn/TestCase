@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.dm;
 
 import android.content.DialogInterface;
@@ -32,8 +33,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 /**
- * User: qii
- * Date: 12-11-15
+ * User: qii Date: 12-11-15
  */
 public class DMConversationListFragment extends AbstractTimeLineFragment<DMListBean> {
 
@@ -102,7 +102,7 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
                 }, AppConfig.REFRESH_DELAYED_MILL_SECOND_TIME);
                 break;
             case SCREEN_ROTATE:
-                //nothing
+                // nothing
                 refreshLayout(getList());
                 break;
             case ACTIVITY_DESTROY_AND_CREATE:
@@ -121,14 +121,15 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dmconversationlistfragment_layout, container, false);
         empty = (TextView) view.findViewById(R.id.empty);
-        //dirty hack.....in other list, progressbar is used to indicate loading local data; but in this list,
-        //use a progressbar to indicate loading new data first time, maybe be refactored at 0.50 version
+        // dirty hack.....in other list, progressbar is used to indicate loading local data; but in
+        // this list,
+        // use a progressbar to indicate loading new data first time, maybe be refactored at 0.50
+        // version
         progressBar = new ProgressBar(getActivity());
         dmProgressBar = (ProgressBar) view.findViewById(R.id.progressbar);
         pullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.listView);
@@ -212,7 +213,7 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
     public void hideSmileyPicker(boolean showKeyBoard) {
         if (this.smiley.isShown()) {
             if (showKeyBoard) {
-                //this time softkeyboard is hidden
+                // this time softkeyboard is hidden
                 LinearLayout.LayoutParams localLayoutParams = (LinearLayout.LayoutParams) this
                         .mContainer.getLayoutParams();
                 localLayoutParams.height = smiley.getTop();
@@ -247,7 +248,6 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
 
     }
 
-
     private void send() {
 
         if (TextUtils.isEmpty(et.getText().toString())) {
@@ -263,7 +263,6 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
         timeLineAdapter = new DMConversationAdapter(this, getList().getItemList(), getListView());
         getListView().setAdapter(timeLineAdapter);
     }
-
 
     @Override
     protected void newMsgLoaderSuccessCallback(DMListBean newValue, Bundle loaderArgs) {
@@ -287,7 +286,6 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
             page++;
         }
     }
-
 
     private class QuickCommentTask extends AsyncTask<Void, Void, Boolean> {
 
@@ -373,7 +371,6 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
         getLoaderManager().restartLoader(NEW_MSG_LOADER_ID, null, msgAsyncTaskLoaderCallback);
     }
 
-
     @Override
     protected void loadOldMsg(View view) {
         getLoaderManager().destroyLoader(NEW_MSG_LOADER_ID);
@@ -396,6 +393,5 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
         return new DMConversationLoader(getActivity(), token, userBean.getId(),
                 String.valueOf(page + 1));
     }
-
 
 }

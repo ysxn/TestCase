@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.crashmanager;
 
 import android.text.TextUtils;
@@ -12,8 +13,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * User: qii
- * Date: 13-3-21
+ * User: qii Date: 13-3-21
  */
 public class CrashManager {
 
@@ -71,7 +71,7 @@ public class CrashManager {
         for (int i = 0; i < files.length; i++) {
             files[i] = path + File.separator + files[i];
         }
-        //desc sort arrays, then delete the longest file
+        // desc sort arrays, then delete the longest file
         Arrays.sort(files, new Comparator<String>() {
             @Override
             public int compare(String aFilePath, String bFilePath) {

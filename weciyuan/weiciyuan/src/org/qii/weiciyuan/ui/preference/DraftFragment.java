@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference;
 
 import org.qii.weiciyuan.R;
@@ -37,8 +38,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * User: qii
- * Date: 12-10-22
+ * User: qii Date: 12-10-22
  */
 public class DraftFragment extends ListFragment {
 
@@ -49,7 +49,6 @@ public class DraftFragment extends ListFragment {
     private DBTask task;
 
     private RemoveDraftDBTask removeTask;
-
 
     @Override
     public void onDetach() {
@@ -163,7 +162,6 @@ public class DraftFragment extends ListFragment {
             }
             return false;
         }
-
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {

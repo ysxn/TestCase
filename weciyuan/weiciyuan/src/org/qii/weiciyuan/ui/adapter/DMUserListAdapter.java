@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.adapter;
 
 import org.qii.weiciyuan.R;
@@ -32,8 +33,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-11-14
+ * User: qii Date: 12-11-14
  */
 public class DMUserListAdapter extends BaseAdapter {
 
@@ -46,7 +46,6 @@ public class DMUserListAdapter extends BaseAdapter {
     private ListView listView;
 
     private TimeLineBitmapDownloader commander;
-
 
     public DMUserListAdapter(Fragment fragment, List<DMUserBean> bean, ListView listView) {
         this.bean = bean;
@@ -61,7 +60,6 @@ public class DMUserListAdapter extends BaseAdapter {
         return fragment.getActivity();
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         DMViewHolder holder = null;
@@ -71,7 +69,6 @@ public class DMUserListAdapter extends BaseAdapter {
             convertView = initSimpleLayout(parent);
             holder = buildHolder(convertView);
             convertView.setTag(R.drawable.ic_launcher + getItemViewType(position), holder);
-
 
         } else {
             holder = (DMViewHolder) convertView.getTag();
@@ -83,14 +80,12 @@ public class DMUserListAdapter extends BaseAdapter {
         return convertView;
     }
 
-
     private View initSimpleLayout(ViewGroup parent) {
         View convertView;
         convertView = inflater.inflate(R.layout.dm_user_list_listview_item_layout, parent, false);
 
         return convertView;
     }
-
 
     private DMViewHolder buildHolder(View convertView) {
         DMViewHolder holder = new DMViewHolder();
@@ -236,7 +231,6 @@ public class DMUserListAdapter extends BaseAdapter {
         }
     }
 
-
     private static class DMViewHolder {
 
         TextView username;
@@ -249,11 +243,10 @@ public class DMUserListAdapter extends BaseAdapter {
 
     }
 
-
     private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
 
         ClickableTextViewMentionLinkOnTouchListener listener
-                = new ClickableTextViewMentionLinkOnTouchListener();
+        = new ClickableTextViewMentionLinkOnTouchListener();
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
@@ -267,7 +260,6 @@ public class DMUserListAdapter extends BaseAdapter {
             boolean hasActionMode = ((AbstractTimeLineFragment) fragment).hasActionMode();
 
             return !hasActionMode && listener.onTouch(v, event);
-
 
         }
     };

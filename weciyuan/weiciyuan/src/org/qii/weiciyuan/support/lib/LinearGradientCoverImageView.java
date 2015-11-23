@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import org.qii.weiciyuan.R;
@@ -12,8 +13,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 /**
- * User: qii
- * Date: 14-1-30
+ * User: qii Date: 14-1-30
  */
 public class LinearGradientCoverImageView extends ImageView {
 
@@ -34,18 +34,18 @@ public class LinearGradientCoverImageView extends ImageView {
 
     }
 
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (linearGradient == null) {
-            int colorLinear[] = {Color.TRANSPARENT, getResources().getColor(R.color.dark_gray)};
+            int colorLinear[] = {
+                    Color.TRANSPARENT, getResources().getColor(R.color.dark_gray)
+            };
             linearGradient = new LinearGradient(0, 0, 0, getHeight(), colorLinear, null,
                     Shader.TileMode.REPEAT);
             paint.setShader(linearGradient);
         }
         canvas.drawPaint(paint);
     }
-
 
 }

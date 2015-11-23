@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.userinfo;
 
 import org.qii.weiciyuan.R;
@@ -10,13 +11,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 /**
- * User: qii
- * Date: 12-8-18
+ * User: qii Date: 12-8-18
  */
 public class MyFavActivity extends AbstractAppActivity {
 
     private UserBean bean;
-
 
     public UserBean getUser() {
         return bean;

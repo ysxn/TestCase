@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.loader;
 
 import android.content.Context;
@@ -9,18 +10,15 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * User: qii
- * Date: 13-5-15
+ * User: qii Date: 13-5-15
  */
 public class BrowserShareMsgLoader extends AbstractAsyncNetRequestTaskLoader<ShareListBean> {
 
     private static Lock lock = new ReentrantLock();
 
-
     private String token;
     private String maxId;
     private String url;
-
 
     public BrowserShareMsgLoader(Context context, String token, String url, String maxId) {
         super(context);
@@ -47,6 +45,3 @@ public class BrowserShareMsgLoader extends AbstractAsyncNetRequestTaskLoader<Sha
     }
 
 }
-
-
-

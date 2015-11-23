@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.relationship;
 
 import android.text.TextUtils;
@@ -14,8 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-8-22
+ * User: qii Date: 12-8-22
  */
 public class FriendshipsDao {
 

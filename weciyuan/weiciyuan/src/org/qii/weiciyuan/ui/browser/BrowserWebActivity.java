@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.browser;
 
 import org.qii.weiciyuan.R;
@@ -18,8 +19,7 @@ import android.view.View;
 import android.widget.Button;
 
 /**
- * User: qii
- * Date: 13-2-19
+ * User: qii Date: 13-2-19
  */
 public class BrowserWebActivity extends AbstractAppActivity {
 
@@ -74,7 +74,6 @@ public class BrowserWebActivity extends AbstractAppActivity {
 
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -115,4 +114,3 @@ public class BrowserWebActivity extends AbstractAppActivity {
         }
     }
 }
-

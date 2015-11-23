@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.send;
 
 import org.qii.weiciyuan.R;
@@ -61,8 +62,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * User: qii
- * Date: 12-7-29
+ * User: qii Date: 12-7-29
  */
 public class WriteWeiboActivity extends AbstractAppActivity
         implements DialogInterface.OnClickListener,
@@ -73,7 +73,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
     private static final int PIC_RESULT = 1;
 
     private static final int PIC_RESULT_KK = 2;
-
 
     public static final int AT_USER = 3;
 
@@ -157,7 +156,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
         statusDraftBean = (StatusDraftBean) intent.getParcelableExtra("statusDraftBean");
     }
 
-
     @Override
     public void onClick(DialogInterface dialog, int which) {
 
@@ -236,7 +234,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
         preview.setImageBitmap(null);
     }
 
-
     private boolean picture() {
         int level = ((ImageButton) findViewById(R.id.menu_add_pic)).getDrawable().getLevel();
         return level == 1;
@@ -288,7 +285,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
 
         }
 
-
     }
 
     public void picConvertSucceedKK(String path) {
@@ -301,7 +297,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
         enablePicture();
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -309,7 +304,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
         Utility.cancelTasks(string2PicTask, locationTask);
 
     }
-
 
     protected boolean canShowSaveDraftDialog() {
         if (statusDraftBean == null) {
@@ -406,7 +400,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
         }
     }
 
-
     private void handleDraftOperation(Intent intent) {
         accountBean = (AccountBean) intent.getParcelableExtra("account");
         token = accountBean.getAccess_token();
@@ -441,7 +434,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
             content.setSelection(content.getText().toString().length());
         }
     }
-
 
     private void buildInterface() {
         setContentView(R.layout.writeweiboactivity_layout);
@@ -557,7 +549,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
         });
     }
 
-
     private void getAccountInfo() {
 
         AccountBean account = GlobalContext.getInstance().getAccountBean();
@@ -568,7 +559,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
         }
     }
 
-
     private void handleSendText(Intent intent) {
         getAccountInfo();
         String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
@@ -578,7 +568,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
         }
 
     }
-
 
     private void handleSendImage(Intent intent) {
 
@@ -596,7 +585,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
             enablePicture();
         }
     }
-
 
     private boolean canSend() {
 
@@ -630,7 +618,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
 
         return false;
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -706,7 +693,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
         }
         return true;
     }
-
 
     public void saveToDraft() {
         if (!TextUtils.isEmpty(content.getText().toString())) {
@@ -784,7 +770,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
         finish();
     }
 
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -818,8 +803,7 @@ public class WriteWeiboActivity extends AbstractAppActivity
                     if (smiley.isShown()) {
                         hideSmileyPicker(true);
                     } else {
-                        showSmileyPicker(
-                                SmileyPickerUtility.isKeyBoardShow(WriteWeiboActivity.this));
+                        showSmileyPicker(SmileyPickerUtility.isKeyBoardShow(WriteWeiboActivity.this));
                     }
                     break;
 
@@ -837,7 +821,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
         }
     }
 
-
     private void showSmileyPicker(boolean showAnimation) {
         this.smiley.show(WriteWeiboActivity.this, showAnimation);
         lockContainerHeight(SmileyPickerUtility.getAppContentHeight(WriteWeiboActivity.this));
@@ -847,7 +830,7 @@ public class WriteWeiboActivity extends AbstractAppActivity
     public void hideSmileyPicker(boolean showKeyBoard) {
         if (this.smiley.isShown()) {
             if (showKeyBoard) {
-                //this time softkeyboard is hidden
+                // this time softkeyboard is hidden
                 LinearLayout.LayoutParams localLayoutParams = (LinearLayout.LayoutParams) this
                         .container.getLayoutParams();
                 localLayoutParams.height = smiley.getTop();
@@ -878,11 +861,9 @@ public class WriteWeiboActivity extends AbstractAppActivity
 
     public void unlockContainerHeightDelayed() {
 
-        ((LinearLayout.LayoutParams) WriteWeiboActivity.this.container.getLayoutParams()).weight
-                = 1.0F;
+        ((LinearLayout.LayoutParams) WriteWeiboActivity.this.container.getLayoutParams()).weight = 1.0F;
 
     }
-
 
     private void addLocation() {
         LocationManager locationManager = (LocationManager) WriteWeiboActivity.this
@@ -908,7 +889,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
         }
     }
 
-
     private void updateWithNewLocation(Location result) {
         haveGPS.setVisibility(View.VISIBLE);
         geoBean = new GeoBean();
@@ -922,7 +902,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
                 .getSystemService(Context.LOCATION_SERVICE)).removeUpdates(locationListener);
 
     }
-
 
     private final LocationListener locationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
@@ -941,7 +920,6 @@ public class WriteWeiboActivity extends AbstractAppActivity
                 Bundle extras) {
         }
     };
-
 
     private class GetGoogleLocationInfo extends MyAsyncTask<Void, String, String> {
 

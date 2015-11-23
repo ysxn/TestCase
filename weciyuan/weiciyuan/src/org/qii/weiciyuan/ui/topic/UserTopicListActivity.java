@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.topic;
 
 import org.qii.weiciyuan.R;
@@ -13,8 +14,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 /**
- * User: qii
- * Date: 12-11-18
+ * User: qii Date: 12-11-18
  */
 public class UserTopicListActivity extends AbstractAppActivity {
 
@@ -24,7 +24,6 @@ public class UserTopicListActivity extends AbstractAppActivity {
         intent.putStringArrayListExtra("topicList", topicList);
         return intent;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,6 @@ public class UserTopicListActivity extends AbstractAppActivity {
                     .commit();
         }
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

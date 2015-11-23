@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.loader;
 
 import android.content.Context;
@@ -10,13 +11,11 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * User: qii
- * Date: 13-5-12
+ * User: qii Date: 13-5-12
  */
 public class StatusesByIdLoader extends AbstractAsyncNetRequestTaskLoader<MessageListBean> {
 
     private static Lock lock = new ReentrantLock();
-
 
     private String token;
     private String sinceId;
@@ -41,7 +40,6 @@ public class StatusesByIdLoader extends AbstractAsyncNetRequestTaskLoader<Messag
 
     }
 
-
     public MessageListBean loadData() throws WeiboException {
         StatusesTimeLineDao dao = new StatusesTimeLineDao(token, uid);
 
@@ -65,10 +63,7 @@ public class StatusesByIdLoader extends AbstractAsyncNetRequestTaskLoader<Messag
             lock.unlock();
         }
 
-
         return result;
     }
 
 }
-
-

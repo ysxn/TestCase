@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -8,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-7
+ * User: Jiang Qi Date: 12-8-7
  */
 public class RepostListBean extends ListBean<MessageBean, RepostListBean> implements Parcelable {
 
@@ -50,7 +50,6 @@ public class RepostListBean extends ListBean<MessageBean, RepostListBean> implem
                 }
             };
 
-
     private List<MessageBean> getReposts() {
         return reposts;
     }
@@ -58,7 +57,6 @@ public class RepostListBean extends ListBean<MessageBean, RepostListBean> implem
     public void setReposts(List<MessageBean> reposts) {
         this.reposts = reposts;
     }
-
 
     @Override
     public int getSize() {

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.search;
 
 import org.qii.weiciyuan.R;
@@ -28,8 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-8-29
+ * User: qii Date: 12-8-29
  */
 public class SearchMainActivity extends AbstractAppActivity {
 
@@ -98,7 +98,6 @@ public class SearchMainActivity extends AbstractAppActivity {
                 mViewPager.setCurrentItem(tab.getPosition());
             }
 
-
         }
 
         public void onTabUnselected(ActionBar.Tab tab,
@@ -111,7 +110,6 @@ public class SearchMainActivity extends AbstractAppActivity {
 
         }
     };
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -181,20 +179,16 @@ public class SearchMainActivity extends AbstractAppActivity {
                 SearchStatusFragment.class.getName());
     }
 
-    ViewPager.SimpleOnPageChangeListener onPageChangeListener
-            = new ViewPager.SimpleOnPageChangeListener() {
+    ViewPager.SimpleOnPageChangeListener onPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
         @Override
         public void onPageSelected(int position) {
             getActionBar().setSelectedNavigationItem(position);
         }
     };
 
-
     private class SearchTabPagerAdapter extends AppFragmentPagerAdapter {
 
-
         List<Fragment> list = new ArrayList<Fragment>();
-
 
         public SearchTabPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -210,9 +204,7 @@ public class SearchMainActivity extends AbstractAppActivity {
                 list.add(getSearchUserFragment());
             }
 
-
         }
-
 
         public Fragment getItem(int position) {
             return list.get(position);
@@ -226,12 +218,10 @@ public class SearchMainActivity extends AbstractAppActivity {
             return tagList.get(position);
         }
 
-
         @Override
         public int getCount() {
             return list.size();
         }
-
 
     }
 }

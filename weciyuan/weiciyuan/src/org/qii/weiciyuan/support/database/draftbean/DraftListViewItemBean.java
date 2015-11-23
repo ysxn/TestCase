@@ -1,11 +1,11 @@
+
 package org.qii.weiciyuan.support.database.draftbean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * User: qii
- * Date: 12-10-21
+ * User: qii Date: 12-10-21
  */
 public class DraftListViewItemBean implements Parcelable {
     private CommentDraftBean commentDraftBean;
@@ -14,7 +14,6 @@ public class DraftListViewItemBean implements Parcelable {
     private StatusDraftBean statusDraftBean;
     private int type;
     private String id;
-
 
     @Override
     public int describeContents() {

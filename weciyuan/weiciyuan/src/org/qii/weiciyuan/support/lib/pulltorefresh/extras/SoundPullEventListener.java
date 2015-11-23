@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
+
 package org.qii.weiciyuan.support.lib.pulltorefresh.extras;
 
 import android.content.Context;
@@ -33,7 +34,7 @@ public class SoundPullEventListener<V extends View> implements PullToRefreshBase
 
     /**
      * Constructor
-     *
+     * 
      * @param context - Context
      */
     public SoundPullEventListener(Context context) {
@@ -50,16 +51,14 @@ public class SoundPullEventListener<V extends View> implements PullToRefreshBase
     }
 
     /**
-     * Set the Sounds to be played when a Pull Event happens. You specify which
-     * sound plays for which events by calling this method multiple times for
-     * each event.
+     * Set the Sounds to be played when a Pull Event happens. You specify which sound plays for
+     * which events by calling this method multiple times for each event.
      * <p/>
-     * If you've already set a sound for a certain event, and add another sound
-     * for that event, only the new sound will be played.
-     *
+     * If you've already set a sound for a certain event, and add another sound for that event, only
+     * the new sound will be played.
+     * 
      * @param event - The event for which the sound will be played.
-     * @param resId - Resource Id of the sound file to be played (e.g.
-     *              <var>R.raw.pull_sound</var>)
+     * @param resId - Resource Id of the sound file to be played (e.g. <var>R.raw.pull_sound</var>)
      */
     public void addSoundEvent(State event, int resId) {
         mSoundMap.put(event, resId);

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.send;
 
 import android.R;
@@ -19,8 +20,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 
 /**
- * User: qii
- * Date: 13-6-7
+ * User: qii Date: 13-6-7
  */
 public class AutoCompleteAdapter extends ArrayAdapter<AtUserBean> implements Filterable {
 
@@ -100,7 +100,7 @@ public class AutoCompleteAdapter extends ArrayAdapter<AtUserBean> implements Fil
             });
 
             FilterResults filterResults = new FilterResults();
-            //AutoCompleteTextView is empty, return empty;
+            // AutoCompleteTextView is empty, return empty;
             if (TextUtils.isEmpty(constraint)) {
                 return filterResults;
             }
@@ -113,7 +113,7 @@ public class AutoCompleteAdapter extends ArrayAdapter<AtUserBean> implements Fil
             String contentStr = constraint.toString();
 
             String search = contentStr.substring(0, selectPosition);
-            //must contain @ sign
+            // must contain @ sign
             if (!search.contains("@")) {
                 return filterResults;
             }
@@ -142,7 +142,6 @@ public class AutoCompleteAdapter extends ArrayAdapter<AtUserBean> implements Fil
                 return filterResults;
             }
 
-
             SystemClock.sleep(500);
 
             if (!contentStr.equals(content.getText().toString())) {
@@ -158,7 +157,7 @@ public class AutoCompleteAdapter extends ArrayAdapter<AtUserBean> implements Fil
             }
 
             AtUserDao dao = new AtUserDao(GlobalContext.getInstance().getSpecialToken(), q);
-//            SearchDao dao = new SearchDao(GlobalContext.getInstance().getSpecialToken(), q);
+            // SearchDao dao = new SearchDao(GlobalContext.getInstance().getSpecialToken(), q);
             activity.runOnUiThread(new Runnable() {
 
                 @Override
@@ -168,14 +167,13 @@ public class AutoCompleteAdapter extends ArrayAdapter<AtUserBean> implements Fil
             });
 
             try {
-//                data = dao.getUserList().getUsers();
+                // data = dao.getUserList().getUsers();
                 data = dao.getUserInfo();
             } catch (Exception e) {
             }
             // Now assign the values and count to the FilterResults object
             filterResults.values = data;
             filterResults.count = data.size();
-
 
             if (!contentStr.equals(content.getText().toString())) {
                 activity.runOnUiThread(new Runnable() {
@@ -192,7 +190,7 @@ public class AutoCompleteAdapter extends ArrayAdapter<AtUserBean> implements Fil
                 @Override
                 public void run() {
                     pb.setVisibility(View.GONE);
-                    //                                    int pos = content.getSelectionStart();
+                    // int pos = content.getSelectionStart();
                     int pos = atSignPosition;
                     Layout layout = content.getLayout();
                     int line = layout.getLineForOffset(pos);
@@ -207,7 +205,6 @@ public class AutoCompleteAdapter extends ArrayAdapter<AtUserBean> implements Fil
 
                 }
             });
-
 
             return filterResults;
         }

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent;
 
 import android.app.Notification;
@@ -19,15 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-9-24
+ * User: qii Date: 12-9-24
  */
 @Deprecated
 public class DownloadEmotionsService extends Service {
     private String token;
 
     private DownloadTask task;
-
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -46,7 +45,6 @@ public class DownloadEmotionsService extends Service {
         return super.onStartCommand(intent, flags, startId);
 
     }
-
 
     class DownloadTask extends MyAsyncTask<Void, Integer, Void> {
 
@@ -75,7 +73,6 @@ public class DownloadEmotionsService extends Service {
                 EmotionsDao dao = new EmotionsDao(token);
                 List<EmotionBean> list = dao.getEmotions();
 
-
                 List<EmotionBean> needList = new ArrayList<EmotionBean>();
 
                 for (EmotionBean bean : list) {
@@ -87,7 +84,7 @@ public class DownloadEmotionsService extends Service {
                 size = needList.size();
 
                 DatabaseManager.getInstance().addEmotions(needList);
-//                GlobalContext.getInstance().setEmotions(DatabaseManager.getInstance().getEmotionsMap());
+                // GlobalContext.getInstance().setEmotions(DatabaseManager.getInstance().getEmotionsMap());
 
                 for (EmotionBean bean : needList) {
                     String url = bean.getUrl();
@@ -98,21 +95,19 @@ public class DownloadEmotionsService extends Service {
                     publishProgress(now);
                 }
 
-
-//                size = list.size();
-//
-//                DatabaseManager.getInstance().addEmotions(list);
-//                GlobalContext.getInstance().setEmotions(DatabaseManager.getInstance().getEmotionsMap());
-//
-//                for (EmotionBean bean : list) {
-//                    String url = bean.getUrl();
-//                    String path = FileManager.getFilePathFromUrl(url, FileLocationMethod.emotion);
-//
-//                    HttpUtility.getInstance().executeDownloadTask(url, path, null);
-//                    now++;
-//                    publishProgress(now);
-//                }
-
+                // size = list.size();
+                //
+                // DatabaseManager.getInstance().addEmotions(list);
+                // GlobalContext.getInstance().setEmotions(DatabaseManager.getInstance().getEmotionsMap());
+                //
+                // for (EmotionBean bean : list) {
+                // String url = bean.getUrl();
+                // String path = FileManager.getFilePathFromUrl(url, FileLocationMethod.emotion);
+                //
+                // HttpUtility.getInstance().executeDownloadTask(url, path, null);
+                // now++;
+                // publishProgress(now);
+                // }
 
             } catch (WeiboException e) {
                 this.e = e;
@@ -122,7 +117,6 @@ public class DownloadEmotionsService extends Service {
 
             return null;
         }
-
 
         @Override
         protected void onProgressUpdate(Integer... values) {
@@ -158,6 +152,5 @@ public class DownloadEmotionsService extends Service {
             stopSelf();
         }
     }
-
 
 }

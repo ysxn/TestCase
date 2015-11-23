@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -8,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-16
+ * User: Jiang Qi Date: 12-8-16
  */
 public class UserListBean implements Parcelable {
 
@@ -17,7 +17,6 @@ public class UserListBean implements Parcelable {
     private int previous_cursor = 0;
     private int next_cursor = 0;
     private int total_number = 0;
-
 
     @Override
     public int describeContents() {
@@ -46,7 +45,6 @@ public class UserListBean implements Parcelable {
                     userListBean.users = new ArrayList<UserBean>();
                     in.readTypedList(userListBean.users, UserBean.CREATOR);
 
-
                     return userListBean;
                 }
 
@@ -54,7 +52,6 @@ public class UserListBean implements Parcelable {
                     return new UserListBean[size];
                 }
             };
-
 
     public List<UserBean> getUsers() {
         return users;
@@ -87,7 +84,6 @@ public class UserListBean implements Parcelable {
     public void setTotal_number(int total_number) {
         this.total_number = total_number;
     }
-
 
     @Override
     public String toString() {

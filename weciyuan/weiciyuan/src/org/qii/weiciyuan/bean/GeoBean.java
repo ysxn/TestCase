@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -5,13 +6,13 @@ import android.os.Parcelable;
 import org.qii.weiciyuan.support.utils.ObjectToStringUtility;
 
 /**
- * User: qii
- * Date: 12-7-31
- * "geo":{"type":"Point","coordinates":[30.1953,120.199235]}
+ * User: qii Date: 12-7-31 "geo":{"type":"Point","coordinates":[30.1953,120.199235]}
  */
 public class GeoBean implements Parcelable {
     private String type;
-    private double[] coordinates = {0.0, 0.0};
+    private double[] coordinates = {
+            0.0, 0.0
+    };
 
     public String getType() {
         return type;

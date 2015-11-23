@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference;
 
 import android.content.SharedPreferences;
@@ -11,14 +12,13 @@ import org.qii.weiciyuan.support.utils.GlobalContext;
 import org.qii.weiciyuan.support.utils.Utility;
 
 /**
- * User: qii
- * Date: 12-10-4
+ * User: qii Date: 12-10-4
  */
 public class AppearanceFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private Preference listAvatarMode = null;
     private Preference listPicMode = null;
-    //    private Preference listHighPicMode = null;
+    // private Preference listHighPicMode = null;
     private Preference theme = null;
     private Preference listFontSize = null;
 
@@ -28,15 +28,13 @@ public class AppearanceFragment extends PreferenceFragment implements SharedPref
 
         addPreferencesFromResource(R.xml.appearance_pref);
 
-
         listAvatarMode = findPreference(SettingActivity.LIST_AVATAR_MODE);
         listPicMode = findPreference(SettingActivity.LIST_PIC_MODE);
-//        listHighPicMode = findPreference(SettingActivity.LIST_HIGH_PIC_MODE);
+        // listHighPicMode = findPreference(SettingActivity.LIST_HIGH_PIC_MODE);
         listFontSize = findPreference(SettingActivity.FONT_SIZE);
         theme = findPreference(SettingActivity.THEME);
 
         buildSummary();
-
 
         setRetainInstance(false);
         PreferenceManager.getDefaultSharedPreferences(getActivity()).registerOnSharedPreferenceChangeListener(this);
@@ -57,8 +55,11 @@ public class AppearanceFragment extends PreferenceFragment implements SharedPref
         value = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(SettingActivity.LIST_PIC_MODE, "1");
         listPicMode.setSummary(getActivity().getResources().getStringArray(R.array.list_pic_mode)[Integer.valueOf(value) - 1]);
 
-//        value = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(SettingActivity.LIST_HIGH_PIC_MODE, "1");
-//        listHighPicMode.setSummary(getActivity().getResources().getStringArray(R.array.list_high_pic_mode)[Integer.valueOf(value) - 1]);
+        // value =
+        // PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(SettingActivity.LIST_HIGH_PIC_MODE,
+        // "1");
+        // listHighPicMode.setSummary(getActivity().getResources().getStringArray(R.array.list_high_pic_mode)[Integer.valueOf(value)
+        // - 1]);
 
         value = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(SettingActivity.FONT_SIZE, "1");
         String[] values = getActivity().getResources().getStringArray(R.array.font_value);
@@ -79,7 +80,6 @@ public class AppearanceFragment extends PreferenceFragment implements SharedPref
             index = 1;
         }
         theme.setSummary(getActivity().getResources().getStringArray(R.array.theme)[index - 1]);
-
 
     }
 
@@ -104,15 +104,15 @@ public class AppearanceFragment extends PreferenceFragment implements SharedPref
             String value = sharedPreferences.getString(key, "1");
             if (value.equals("1")) {
                 SettingUtility.setEnableBigPic(false);
-//                listHighPicMode.setEnabled(false);
+                // listHighPicMode.setEnabled(false);
             }
             if (value.equals("2")) {
                 SettingUtility.setEnableBigPic(true);
-//                listHighPicMode.setEnabled(true);
+                // listHighPicMode.setEnabled(true);
             }
             if (value.equals("3")) {
                 SettingUtility.setEnableBigPic(Utility.isWifi(getActivity()));
-//                listHighPicMode.setEnabled(true);
+                // listHighPicMode.setEnabled(true);
             }
 
         }
@@ -120,6 +120,5 @@ public class AppearanceFragment extends PreferenceFragment implements SharedPref
             GlobalContext.getInstance().getBitmapCache().evictAll();
         }
     }
-
 
 }

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.topic;
 
 import org.qii.weiciyuan.ui.interfaces.AbstractAppActivity;
@@ -10,8 +11,7 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 /**
- * User: qii
- * Date: 12-9-8
+ * User: qii Date: 12-9-8
  */
 public class SearchTopicByNameActivity extends AbstractAppActivity {
 
@@ -35,7 +35,6 @@ public class SearchTopicByNameActivity extends AbstractAppActivity {
         }
 
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

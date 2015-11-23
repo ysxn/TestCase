@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
+
 package org.qii.weiciyuan.support.lib.pulltorefresh.internal;
 
 import android.annotation.SuppressLint;
@@ -38,7 +39,6 @@ import org.qii.weiciyuan.R;
 import org.qii.weiciyuan.support.lib.pulltorefresh.ILoadingLayout;
 import org.qii.weiciyuan.support.lib.pulltorefresh.PullToRefreshBase;
 import org.qii.weiciyuan.support.utils.Utility;
-
 
 @SuppressLint("ViewConstructor")
 public abstract class LoadingLayout extends FrameLayout implements ILoadingLayout {

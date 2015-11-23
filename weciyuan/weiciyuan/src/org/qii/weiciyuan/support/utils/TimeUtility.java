@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.utils;
 
 import org.qii.weiciyuan.R;
@@ -7,8 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * User: qii
- * Date: 12-8-28
+ * User: qii Date: 12-8-28
  */
 public class TimeUtility {
 
@@ -34,7 +34,6 @@ public class TimeUtility {
     private static java.text.SimpleDateFormat dayFormat = null;
     private static java.text.SimpleDateFormat dateFormat = null;
     private static java.text.SimpleDateFormat yearFormat = null;
-
 
     private TimeUtility() {
 
@@ -89,7 +88,6 @@ public class TimeUtility {
 
         }
 
-
         long calDay = calHours / 24;
 
         if (calDay < 31) {
@@ -130,7 +128,6 @@ public class TimeUtility {
             yearFormat = new java.text.SimpleDateFormat(YEAR_FORMAT);
         String result = yearFormat.format(msgCalendar.getTime());
         return new StringBuilder().append(result).toString();
-
 
     }
 

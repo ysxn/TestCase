@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -5,8 +6,7 @@ import android.os.Parcelable;
 import org.qii.weiciyuan.support.utils.ObjectToStringUtility;
 
 /**
- * User: qii
- * Date: 12-8-18
+ * User: qii Date: 12-8-18
  */
 public class FavBean implements Parcelable {
     private MessageBean status;
@@ -40,7 +40,6 @@ public class FavBean implements Parcelable {
                     return new FavBean[size];
                 }
             };
-
 
     public MessageBean getStatus() {
         return status;

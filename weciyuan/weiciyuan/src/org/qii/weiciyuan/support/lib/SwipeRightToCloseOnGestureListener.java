@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.app.Activity;
@@ -8,15 +9,13 @@ import android.view.View;
 import org.qii.weiciyuan.support.utils.Utility;
 
 /**
- * User: qii
- * Date: 13-2-26
+ * User: qii Date: 13-2-26
  */
 public class SwipeRightToCloseOnGestureListener extends GestureDetector.SimpleOnGestureListener {
     private ViewPager viewPager;
     protected MotionEvent mLastOnDownEvent = null;
     private float[] firstPosition = new float[2];
     private View topView;
-
 
     public SwipeRightToCloseOnGestureListener(Activity activity, ViewPager viewPager) {
         this.viewPager = viewPager;

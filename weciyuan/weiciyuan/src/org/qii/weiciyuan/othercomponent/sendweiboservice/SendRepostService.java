@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent.sendweiboservice;
 
 import android.app.Notification;
@@ -27,8 +28,7 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * User: qii
- * Date: 13-1-20
+ * User: qii Date: 13-1-20
  */
 public class SendRepostService extends Service {
 
@@ -67,7 +67,6 @@ public class SendRepostService extends Service {
 
     }
 
-
     private class WeiboSendTask extends MyAsyncTask<Void, Long, Void> {
 
         Notification notification;
@@ -80,13 +79,12 @@ public class SendRepostService extends Service {
         String is_comment;
         RepostDraftBean repostDraftBean;
 
-
         public WeiboSendTask(String token,
-                             AccountBean account,
-                             String content,
-                             MessageBean oriMsg,
-                             String is_comment,
-                             RepostDraftBean repostDraftBean) {
+                AccountBean account,
+                String content,
+                MessageBean oriMsg,
+                String is_comment,
+                RepostDraftBean repostDraftBean) {
             this.token = token;
             this.account = account;
             this.content = content;
@@ -106,12 +104,9 @@ public class SendRepostService extends Service {
                     .setOngoing(true)
                     .setSmallIcon(R.drawable.upload_white);
 
-
             builder.setProgress(0, 100, true);
 
-
             int notificationId = new Random().nextInt(Integer.MAX_VALUE);
-
 
             notification = builder.getNotification();
 
@@ -120,7 +115,6 @@ public class SendRepostService extends Service {
             tasksNotifications.put(WeiboSendTask.this, notificationId);
 
         }
-
 
         private MessageBean sendText() throws WeiboException {
             RepostNewMsgDao dao = new RepostNewMsgDao(token, oriMsg.getId());
@@ -142,7 +136,6 @@ public class SendRepostService extends Service {
 
             return null;
         }
-
 
         @Override
         protected void onPostExecute(Void aVoid) {
@@ -194,7 +187,6 @@ public class SendRepostService extends Service {
                     .setAutoCancel(true)
                     .setSmallIcon(R.drawable.send_failed)
                     .setOngoing(false);
-
 
             Intent notifyIntent = WriteRepostActivity.startBecauseSendFailed(
                     SendRepostService.this, account, content, oriMsg, repostDraftBean, e.getError());
@@ -259,6 +251,5 @@ public class SendRepostService extends Service {
             stopSelf();
         }
     }
-
 
 }

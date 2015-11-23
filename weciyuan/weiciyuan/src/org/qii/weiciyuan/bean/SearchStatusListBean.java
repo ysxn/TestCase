@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -8,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-11-23
+ * User: qii Date: 12-11-23
  */
 public class SearchStatusListBean extends ListBean<MessageBean, SearchStatusListBean> implements Parcelable {
     private List<MessageBean> statuses = new ArrayList<MessageBean>();
@@ -49,7 +49,6 @@ public class SearchStatusListBean extends ListBean<MessageBean, SearchStatusList
                 }
             };
 
-
     @Override
     public int getSize() {
         return statuses.size();
@@ -72,7 +71,6 @@ public class SearchStatusListBean extends ListBean<MessageBean, SearchStatusList
             this.getItemList().clear();
             this.getItemList().addAll(newValue.getItemList());
             this.setTotal_number(newValue.getTotal_number());
-
 
         }
     }

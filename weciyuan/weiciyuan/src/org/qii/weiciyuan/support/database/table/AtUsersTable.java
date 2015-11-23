@@ -1,8 +1,8 @@
+
 package org.qii.weiciyuan.support.database.table;
 
 /**
- * User: qii
- * Date: 13-2-4
+ * User: qii Date: 13-2-4
  */
 public class AtUsersTable {
 
@@ -15,6 +15,5 @@ public class AtUsersTable {
     public static final String ACCOUNTID = "accountid";
 
     public static final String JSONDATA = "json";
-
 
 }

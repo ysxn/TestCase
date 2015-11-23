@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.login;
 
 import org.json.JSONException;
@@ -11,9 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-11-29
- * sina weibo dont allow third apps use this api, the result is always error
+ * User: qii Date: 12-11-29 sina weibo dont allow third apps use this api, the result is always
+ * error
  */
 public class RefreshOAuthDao {
 
@@ -27,7 +27,6 @@ public class RefreshOAuthDao {
         map.put("grant_type", grant_type);
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Post, url, map);
-
 
         if ((jsonData != null) && (jsonData.contains("{"))) {
             try {

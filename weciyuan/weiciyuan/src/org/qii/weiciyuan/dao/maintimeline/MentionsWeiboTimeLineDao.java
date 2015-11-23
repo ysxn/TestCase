@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.maintimeline;
 
 import com.google.gson.Gson;
@@ -19,8 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-7-28
+ * User: qii Date: 12-7-28
  */
 public class MentionsWeiboTimeLineDao {
 
@@ -38,9 +38,7 @@ public class MentionsWeiboTimeLineDao {
         map.put("filter_by_type", filter_by_type);
         map.put("trim_user", trim_user);
 
-
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
-
 
         return jsonData;
     }
@@ -91,7 +89,6 @@ public class MentionsWeiboTimeLineDao {
 
         return value;
     }
-
 
     private String access_token;
     private String since_id;

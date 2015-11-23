@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.show;
 
 import android.text.TextUtils;
@@ -14,8 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-14
+ * User: Jiang Qi Date: 12-8-14
  */
 public class ShowUserDao {
 
@@ -29,7 +29,6 @@ public class ShowUserDao {
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
 
-
         Gson gson = new Gson();
 
         UserBean value = null;
@@ -39,7 +38,6 @@ public class ShowUserDao {
 
             AppLogger.e(e.getMessage());
         }
-
 
         return value;
 

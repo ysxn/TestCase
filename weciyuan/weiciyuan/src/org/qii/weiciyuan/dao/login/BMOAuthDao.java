@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.login;
 
 import org.json.JSONException;
@@ -11,8 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-11-9
+ * User: qii Date: 12-11-9
  */
 public class BMOAuthDao {
 
@@ -27,7 +27,6 @@ public class BMOAuthDao {
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Post, url, map);
 
-
         if ((jsonData != null) && (jsonData.contains("{"))) {
             try {
                 JSONObject localJSONObject = new JSONObject(jsonData);
@@ -35,7 +34,7 @@ public class BMOAuthDao {
                 result[0] = localJSONObject.optString("access_token");
                 result[1] = localJSONObject.optString("expires_in");
                 return result;
-//            setUserId(localJSONObject.optLong("uid"));
+                // setUserId(localJSONObject.optLong("uid"));
 
             } catch (JSONException localJSONException) {
 

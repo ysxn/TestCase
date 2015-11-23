@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.loader;
 
 import android.content.Context;
@@ -7,8 +8,7 @@ import org.qii.weiciyuan.bean.android.AsyncTaskLoaderResult;
 import org.qii.weiciyuan.support.error.WeiboException;
 
 /**
- * User: qii
- * Date: 13-5-15
+ * User: qii Date: 13-5-15
  */
 public abstract class AbstractAsyncNetRequestTaskLoader<T> extends AsyncTaskLoader<AsyncTaskLoaderResult<T>> {
 
@@ -34,7 +34,6 @@ public abstract class AbstractAsyncNetRequestTaskLoader<T> extends AsyncTaskLoad
 
         T data = null;
         WeiboException exception = null;
-
 
         try {
             data = loadData();

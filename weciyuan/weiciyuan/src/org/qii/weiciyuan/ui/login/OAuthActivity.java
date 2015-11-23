@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.login;
 
 import org.qii.weiciyuan.R;
@@ -40,15 +41,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-7-28
+ * User: qii Date: 12-7-28
  */
 public class OAuthActivity extends AbstractAppActivity {
 
     private WebView webView;
 
     private MenuItem refreshItem;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,7 +86,6 @@ public class OAuthActivity extends AbstractAppActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -103,7 +101,6 @@ public class OAuthActivity extends AbstractAppActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     public void refresh() {
         webView.clearView();
@@ -126,7 +123,6 @@ public class OAuthActivity extends AbstractAppActivity {
         }
     }
 
-
     private String getWeiboOAuthUrl() {
 
         Map<String, String> parameters = new HashMap<String, String>();
@@ -145,7 +141,6 @@ public class OAuthActivity extends AbstractAppActivity {
             view.loadUrl(url);
             return true;
         }
-
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -256,7 +251,6 @@ public class OAuthActivity extends AbstractAppActivity {
                 return null;
             }
 
-
         }
 
         @Override
@@ -346,7 +340,6 @@ public class OAuthActivity extends AbstractAppActivity {
             asyncTask = task;
         }
     }
-
 
     public static class SinaWeiboErrorDialog extends DialogFragment {
 

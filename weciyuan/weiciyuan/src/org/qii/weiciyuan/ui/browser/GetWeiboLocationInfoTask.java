@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.browser;
 
 import android.app.Activity;
@@ -20,8 +21,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * User: qii
- * Date: 13-1-25
+ * User: qii Date: 13-1-25
  */
 public class GetWeiboLocationInfoTask extends MyAsyncTask<Void, String, Bitmap> {
 
@@ -58,7 +58,7 @@ public class GetWeiboLocationInfoTask extends MyAsyncTask<Void, String, Bitmap> 
             }
             addresses = geocoder.getFromLocation(geoBean.getLat(), geoBean.getLon(), 1);
         } catch (IOException e) {
-//            cancel(true);
+            // cancel(true);
         }
         if (addresses != null && addresses.size() > 0) {
             Address address = addresses.get(0);

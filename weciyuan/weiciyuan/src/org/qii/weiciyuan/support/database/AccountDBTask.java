@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import android.content.ContentValues;
@@ -17,8 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * User: qii
- * Date: 13-1-7
+ * User: qii Date: 13-1-7
  */
 public class AccountDBTask {
 
@@ -49,10 +49,14 @@ public class AccountDBTask {
         cv.put(AccountTable.INFOJSON, json);
 
         Cursor c = getWsd().query(AccountTable.TABLE_NAME, null, AccountTable.UID + "=?",
-                new String[]{account.getUid()}, null, null, null);
+                new String[] {
+                    account.getUid()
+                }, null, null, null);
 
         if (c != null && c.getCount() > 0) {
-            String[] args = {account.getUid()};
+            String[] args = {
+                account.getUid()
+            };
             getWsd().update(AccountTable.TABLE_NAME, cv, AccountTable.UID + "=?", args);
             return OAuthActivity.DBResult.update_successfully;
         } else {
@@ -82,7 +86,9 @@ public class AccountDBTask {
         cv.put(AccountTable.INFOJSON, json);
 
         int c = getWsd().update(AccountTable.TABLE_NAME, cv, AccountTable.UID + "=?",
-                new String[]{uid});
+                new String[] {
+                    uid
+                });
     }
 
     public static void updateNavigationPosition(AccountBean account, int position) {
@@ -93,7 +99,9 @@ public class AccountDBTask {
         cv.put(AccountTable.NAVIGATION_POSITION, position);
 
         int c = getWsd().update(AccountTable.TABLE_NAME, cv, AccountTable.UID + "=?",
-                new String[]{uid});
+                new String[] {
+                    uid
+                });
     }
 
     public static List<AccountBean> getAccountList() {

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -5,8 +6,7 @@ import android.os.Parcelable;
 import org.qii.weiciyuan.support.utils.ObjectToStringUtility;
 
 /**
- * User: qii
- * Date: 13-2-14
+ * User: qii Date: 13-2-14
  */
 public class MessageReCmtCountBean implements Parcelable {
 

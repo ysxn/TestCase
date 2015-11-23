@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.actionmenu;
 
 import android.app.AlertDialog;
@@ -13,8 +14,7 @@ import org.qii.weiciyuan.ui.browser.BrowserCommentActivity;
 import org.qii.weiciyuan.ui.send.WriteReplyToCommentActivity;
 
 /**
- * User: qii
- * Date: 12-12-6
+ * User: qii Date: 12-12-6
  */
 public class CommentByIdFloatingMenu extends DialogFragment {
 
@@ -30,7 +30,6 @@ public class CommentByIdFloatingMenu extends DialogFragment {
 
     }
 
-
     public CommentByIdFloatingMenu(CommentBean bean) {
         this.bean = bean;
     }
@@ -44,7 +43,9 @@ public class CommentByIdFloatingMenu extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(this.bean.getUser().getScreen_name());
-        String[] str = {getString(R.string.reply_to_comment), getString(R.string.view_comment)};
+        String[] str = {
+                getString(R.string.reply_to_comment), getString(R.string.view_comment)
+        };
         builder.setItems(str, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -76,4 +77,3 @@ public class CommentByIdFloatingMenu extends DialogFragment {
 
     }
 }
-

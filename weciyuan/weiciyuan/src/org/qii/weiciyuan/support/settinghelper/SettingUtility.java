@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.settinghelper;
 
 import org.qii.weiciyuan.R;
@@ -9,8 +10,7 @@ import org.qii.weiciyuan.ui.preference.SettingActivity;
 import android.content.Context;
 
 /**
- * User: qii
- * Date: 12-11-28
+ * User: qii Date: 12-11-28
  */
 public class SettingUtility {
 
@@ -49,7 +49,6 @@ public class SettingUtility {
     public static boolean isEnableFilter() {
         return SettingHelper.getSharedPreferences(getContext(), SettingActivity.FILTER, false);
     }
-
 
     public static int getFontSize() {
         String value = SettingHelper
@@ -95,7 +94,6 @@ public class SettingUtility {
         return Integer.valueOf(value);
     }
 
-
     public static int getCommentRepostAvatar() {
         String value = SettingHelper
                 .getSharedPreferences(getContext(), SettingActivity.COMMENT_REPOST_AVATAR, "1");
@@ -114,18 +112,15 @@ public class SettingUtility {
         return Integer.valueOf(value);
     }
 
-
     public static void setEnableCommentRepostAvatar(boolean value) {
         SettingHelper.setEditor(getContext(), SettingActivity.SHOW_COMMENT_REPOST_AVATAR, value);
     }
-
 
     public static boolean getEnableCommentRepostListAvatar() {
         return SettingHelper
                 .getSharedPreferences(getContext(), SettingActivity.SHOW_COMMENT_REPOST_AVATAR,
                         true);
     }
-
 
     public static int getNotificationStyle() {
         String value = SettingHelper
@@ -144,7 +139,6 @@ public class SettingUtility {
         }
     }
 
-
     public static boolean isEnablePic() {
         return !SettingHelper
                 .getSharedPreferences(getContext(), SettingActivity.DISABLE_DOWNLOAD_AVATAR_PIC,
@@ -161,12 +155,10 @@ public class SettingUtility {
                 .getSharedPreferences(getContext(), SettingActivity.ENABLE_FETCH_MSG, false);
     }
 
-
     public static boolean getEnableAutoRefresh() {
         return SettingHelper
                 .getSharedPreferences(getContext(), SettingActivity.AUTO_REFRESH, false);
     }
-
 
     public static boolean getEnableBigAvatar() {
         return SettingHelper
@@ -191,7 +183,6 @@ public class SettingUtility {
     public static void setEnableBigPic(boolean value) {
         SettingHelper.setEditor(getContext(), SettingActivity.SHOW_BIG_PIC, value);
     }
-
 
     public static void setEnableBigAvatar(boolean value) {
         SettingHelper.setEditor(getContext(), SettingActivity.SHOW_BIG_AVATAR, value);
@@ -228,20 +219,17 @@ public class SettingUtility {
 
     }
 
-
     public static boolean allowMentionToMe() {
         return SettingHelper
                 .getSharedPreferences(getContext(), SettingActivity.ENABLE_MENTION_TO_ME, true);
 
     }
 
-
     public static boolean allowCommentToMe() {
         return SettingHelper
                 .getSharedPreferences(getContext(), SettingActivity.ENABLE_COMMENT_TO_ME, true);
 
     }
-
 
     public static boolean allowMentionCommentToMe() {
         return SettingHelper
@@ -354,6 +342,5 @@ public class SettingUtility {
         SettingHelper.setEditor(getContext(), CLICK_TO_TOP_TIP, false);
         return result;
     }
-
 
 }

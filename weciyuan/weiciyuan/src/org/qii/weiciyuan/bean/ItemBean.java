@@ -1,10 +1,10 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.text.SpannableString;
 
 /**
- * User: qii
- * Date: 12-9-6
+ * User: qii Date: 12-9-6
  */
 public abstract class ItemBean {
     public abstract SpannableString getListViewSpannableString();

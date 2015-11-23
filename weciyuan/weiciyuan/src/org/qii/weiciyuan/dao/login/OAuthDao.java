@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.login;
 
 import android.util.Log;
@@ -17,8 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: Jiang Qi
- * Date: 12-7-30
+ * User: Jiang Qi Date: 12-7-30
  */
 public class OAuthDao {
 
@@ -41,7 +41,6 @@ public class OAuthDao {
             AppLogger.e(e.getMessage());
         }
 
-
         Map<String, String> map = new HashMap<String, String>();
         map.put("uid", uid);
         map.put("access_token", access_token);
@@ -49,15 +48,14 @@ public class OAuthDao {
         String url = URLHelper.USER_SHOW;
 
         String result = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
-        Log.i("zyw", ">>>>>>HttpMethod.Get: url="+url+",uid="+uid);
-
+        Log.i("zyw", ">>>>>>HttpMethod.Get: url=" + url + ",uid=" + uid);
 
         Gson gson = new Gson();
         UserBean user = new UserBean();
         try {
-            Log.i("zyw", ">>>>>>before user="+result);
+            Log.i("zyw", ">>>>>>before user=" + result);
             user = gson.fromJson(result, UserBean.class);
-            Log.i("zyw", ">>>>>>after user="+user.dump());
+            Log.i("zyw", ">>>>>>after user=" + user.dump());
         } catch (JsonSyntaxException e) {
             AppLogger.e(result);
         }

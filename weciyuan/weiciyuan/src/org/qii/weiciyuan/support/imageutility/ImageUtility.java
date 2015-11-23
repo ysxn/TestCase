@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.imageutility;
 
 import android.content.Context;
@@ -21,19 +22,15 @@ import java.io.IOException;
 import static android.media.ExifInterface.*;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-3
+ * User: Jiang Qi Date: 12-8-3
  */
 public class ImageUtility {
-
 
     public static final int WITH_UNDEFINED = -1;
     public static final int HEIGHT_UNDEFINED = -1;
 
-
     /**
-     * 1. convert gif to normal bitmap
-     * 2. cut bitmap
+     * 1. convert gif to normal bitmap 2. cut bitmap
      */
     private static Bitmap getMiddlePictureInTimeLineGif(String filePath, int reqWidth, int reqHeight) {
 
@@ -53,7 +50,6 @@ public class ImageUtility {
 
             if (bitmap == null)
                 return null;
-
 
             int height = options.outHeight;
             int width = options.outWidth;
@@ -76,7 +72,6 @@ public class ImageUtility {
                 cutHeight = (reqHeight * cutWidth) / reqWidth;
 
             } else if (height < reqHeight && width < reqWidth) {
-
 
                 float betweenWidth = ((float) reqWidth - (float) width) / (float) width;
                 float betweenHeight = ((float) reqHeight - (float) height) / (float) height;
@@ -112,7 +107,6 @@ public class ImageUtility {
                 }
             }
 
-
             Bitmap cornerBitmap = ImageEditUtility.getRoundedCornerBitmap(bitmap);
             if (cornerBitmap != bitmap) {
                 bitmap.recycle();
@@ -129,7 +123,8 @@ public class ImageUtility {
         return path.endsWith(".gif");
     }
 
-    public static Bitmap getMiddlePictureInTimeLine(String url, int reqWidth, int reqHeight, FileDownloaderHttpHelper.DownloadListener downloadListener) throws WeiboException {
+    public static Bitmap getMiddlePictureInTimeLine(String url, int reqWidth, int reqHeight, FileDownloaderHttpHelper.DownloadListener downloadListener)
+            throws WeiboException {
         try {
 
             String filePath = FileManager.getFilePathFromUrl(url, FileLocationMethod.picture_bmiddle);
@@ -174,10 +169,8 @@ public class ImageUtility {
 
             } else if (height < reqHeight && width < reqWidth) {
 
-
                 float betweenWidth = ((float) reqWidth - (float) width) / (float) width;
                 float betweenHeight = ((float) reqHeight - (float) height) / (float) height;
-
 
                 if (betweenWidth > betweenHeight) {
                     cutWidth = width;
@@ -191,7 +184,6 @@ public class ImageUtility {
 
             }
 
-
             if (cutWidth > 0 && cutHeight > 0) {
 
                 int startX = 0;
@@ -199,7 +191,6 @@ public class ImageUtility {
                 if (cutWidth < width) {
                     startX = (width - cutWidth) / 2;
                 }
-
 
                 try {
                     BitmapRegionDecoder decoder = BitmapRegionDecoder.newInstance(filePath, false);
@@ -228,7 +219,6 @@ public class ImageUtility {
 
             }
 
-
             return null;
         } catch (OutOfMemoryError ignored) {
             ignored.printStackTrace();
@@ -240,7 +230,8 @@ public class ImageUtility {
         return getRoundedCornerPic(url, reqWidth, reqHeight, method, null);
     }
 
-    public static Bitmap getRoundedCornerPic(String url, int reqWidth, int reqHeight, FileLocationMethod method, FileDownloaderHttpHelper.DownloadListener downloadListener) throws WeiboException {
+    public static Bitmap getRoundedCornerPic(String url, int reqWidth, int reqHeight, FileLocationMethod method,
+            FileDownloaderHttpHelper.DownloadListener downloadListener) throws WeiboException {
         try {
 
             if (!FileManager.isExternalStorageMounted()) {
@@ -275,11 +266,10 @@ public class ImageUtility {
             Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
 
             if (bitmap == null) {
-                //this picture is broken,so delete it
+                // this picture is broken,so delete it
                 new File(filePath).delete();
                 return null;
             }
-
 
             int[] size = calcResize(bitmap.getWidth(), bitmap.getHeight(), reqWidth, reqHeight);
             if (size[0] > 0 && size[1] > 0) {
@@ -314,7 +304,6 @@ public class ImageUtility {
                 return null;
             }
 
-
             if (!filePath.endsWith(".jpg") && !filePath.endsWith(".gif") && !filePath.endsWith(".png"))
                 filePath = filePath + ".jpg";
 
@@ -323,7 +312,6 @@ public class ImageUtility {
             if (!fileExist && !SettingUtility.isEnablePic()) {
                 return null;
             }
-
 
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
@@ -337,7 +325,7 @@ public class ImageUtility {
             Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
 
             if (bitmap == null) {
-                //this picture is broken,so delete it
+                // this picture is broken,so delete it
                 new File(filePath).delete();
                 return null;
             }
@@ -373,7 +361,6 @@ public class ImageUtility {
                 return null;
             }
 
-
             if (!filePath.endsWith(".jpg") && !filePath.endsWith(".gif") && !filePath.endsWith(".png"))
                 filePath = filePath + ".jpg";
 
@@ -382,7 +369,6 @@ public class ImageUtility {
             if (!fileExist && !SettingUtility.isEnablePic()) {
                 return null;
             }
-
 
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
@@ -397,7 +383,7 @@ public class ImageUtility {
             Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
 
             if (bitmap == null) {
-                //this picture is broken,so delete it
+                // this picture is broken,so delete it
                 new File(filePath).delete();
                 return null;
             }
@@ -436,7 +422,6 @@ public class ImageUtility {
 
                 getBitmapFromNetWork(url, filePath, downloadListener);
 
-
             }
             file = new File(filePath);
             if (file.exists()) {
@@ -449,9 +434,8 @@ public class ImageUtility {
         }
     }
 
-
-    public static String getLargePictureWithoutRoundedCorner(String url, FileDownloaderHttpHelper.DownloadListener downloadListener, FileLocationMethod fileLocationMethod) {
-
+    public static String getLargePictureWithoutRoundedCorner(String url, FileDownloaderHttpHelper.DownloadListener downloadListener,
+            FileLocationMethod fileLocationMethod) {
 
         String absoluteFilePath = FileManager.getFilePathFromUrl(url, fileLocationMethod);
 
@@ -464,13 +448,11 @@ public class ImageUtility {
 
             getBitmapFromNetWork(url, absoluteFilePath, downloadListener);
 
-
             if (isThisBitmapCanRead(absoluteFilePath)) {
                 return absoluteFilePath;
             } else {
                 return "about:blank";
             }
-
 
         }
 
@@ -519,9 +501,10 @@ public class ImageUtility {
 
     }
 
-
     public static int[] getBitmapSize(String path) {
-        int[] result = {-1, -1};
+        int[] result = {
+                -1, -1
+        };
         File file = new File(path);
 
         if (!file.exists()) {
@@ -541,9 +524,8 @@ public class ImageUtility {
         return result;
     }
 
-
     public static Bitmap decodeBitmapFromSDCard(String path,
-                                                int reqWidth, int reqHeight) {
+            int reqWidth, int reqHeight) {
 
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -588,7 +570,6 @@ public class ImageUtility {
                 return null;
             }
 
-
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
             BitmapFactory.decodeFile(filePath, options);
@@ -601,11 +582,10 @@ public class ImageUtility {
             Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
 
             if (bitmap == null) {
-                //this picture is broken,so delete it
+                // this picture is broken,so delete it
                 new File(filePath).delete();
                 return null;
             }
-
 
             int[] size = calcResize(bitmap.getWidth(), bitmap.getHeight(), reqWidth, reqHeight);
             if (size[0] > 0 && size[1] > 0) {
@@ -631,7 +611,7 @@ public class ImageUtility {
 
     public static Bitmap getWriteWeiboPictureThumblr(String filePath) {
         try {
-            //actionbar button image width and height is 32 dip
+            // actionbar button image width and height is 32 dip
             int reqWidth = Utility.dip2px(32);
             int reqHeight = Utility.dip2px(32);
 
@@ -639,13 +619,11 @@ public class ImageUtility {
                 return null;
             }
 
-
             boolean fileExist = new File(filePath).exists();
 
             if (!fileExist) {
                 return null;
             }
-
 
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
@@ -659,11 +637,10 @@ public class ImageUtility {
             Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
 
             if (bitmap == null) {
-                //this picture is broken,so delete it
+                // this picture is broken,so delete it
                 new File(filePath).delete();
                 return null;
             }
-
 
             int[] size = calcResize(bitmap.getWidth(), bitmap.getHeight(), reqWidth, reqHeight);
             if (size[0] > 0 && size[1] > 0) {
@@ -699,7 +676,6 @@ public class ImageUtility {
         }
     }
 
-
     public static boolean getBitmapFromNetWork(String url, String path, FileDownloaderHttpHelper.DownloadListener downloadListener) {
         for (int i = 0; i < 3; i++) {
             if (HttpUtility.getInstance().executeDownloadTask(url, path, downloadListener)) {
@@ -710,7 +686,6 @@ public class ImageUtility {
 
         return false;
     }
-
 
     private static int calculateInSampleSize(
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
@@ -746,13 +721,10 @@ public class ImageUtility {
         return roundedSize;
     }
 
-
     private static int[] calcResize(int actualWidth, int actualHeight, int reqWidth, int reqHeight) {
-
 
         int height = actualHeight;
         int width = actualWidth;
-
 
         float betweenWidth = ((float) reqWidth) / (float) actualWidth;
         float betweenHeight = ((float) reqHeight) / (float) actualHeight;
@@ -762,9 +734,10 @@ public class ImageUtility {
         height = (int) (min * actualHeight);
         width = (int) (min * actualWidth);
 
-        return new int[]{width, height};
+        return new int[] {
+                width, height
+        };
     }
-
 
     public static String compressPic(Context context, String picPath) {
 
@@ -793,7 +766,7 @@ public class ImageUtility {
         Bitmap bitmap = BitmapFactory.decodeFile(picPath, options);
         int exifRotation = ImageUtility.getFileExifRotation(picPath);
         if (exifRotation != 0) {
-            //TODO write EXIF instead of rotating bitmap.
+            // TODO write EXIF instead of rotating bitmap.
             Matrix mtx = new Matrix();
             mtx.postRotate(exifRotation);
             Bitmap adjustedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
@@ -849,4 +822,3 @@ public class ImageUtility {
         }
     }
 }
-

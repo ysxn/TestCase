@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.topic;
 
 import android.app.AlertDialog;
@@ -11,16 +12,13 @@ import android.widget.EditText;
 import org.qii.weiciyuan.R;
 
 /**
- * User: qii
- * Date: 12-11-26
+ * User: qii Date: 12-11-26
  */
 public class FollowTopicDialog extends DialogFragment {
-
 
     public FollowTopicDialog() {
 
     }
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

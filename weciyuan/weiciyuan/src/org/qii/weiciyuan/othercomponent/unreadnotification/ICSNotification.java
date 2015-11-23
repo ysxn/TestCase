@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent.unreadnotification;
 
 import android.app.Notification;
@@ -19,8 +20,7 @@ import org.qii.weiciyuan.support.utils.Utility;
 import org.qii.weiciyuan.ui.main.MainTimeLineActivity;
 
 /**
- * User: qii
- * Date: 12-12-5
+ * User: qii Date: 12-12-5
  */
 @Deprecated
 public class ICSNotification {
@@ -35,14 +35,14 @@ public class ICSNotification {
 
     private UnreadBean unreadBean;
 
-    //only leave one broadcast receiver
+    // only leave one broadcast receiver
     private static BroadcastReceiver clearNotificationEventReceiver;
 
     public ICSNotification(Context context,
-                           AccountBean accountBean,
-                           CommentListBean comment,
-                           MessageListBean repost,
-                           CommentListBean mentionCommentsResult, UnreadBean unreadBean) {
+            AccountBean accountBean,
+            CommentListBean comment,
+            MessageListBean repost,
+            CommentListBean mentionCommentsResult, UnreadBean unreadBean) {
         this.context = context;
         this.accountBean = accountBean;
         this.comment = comment;
@@ -101,7 +101,6 @@ public class ICSNotification {
 
     }
 
-
     public Notification get() {
 
         Notification.Builder builder = new Notification.Builder(context)
@@ -112,7 +111,6 @@ public class ICSNotification {
                 .setAutoCancel(true)
                 .setContentIntent(getPendingIntent())
                 .setOnlyAlertOnce(true);
-
 
         if (getCount() > 1) {
             builder.setNumber(getCount());
@@ -158,6 +156,5 @@ public class ICSNotification {
 
         return builder.getNotification();
     }
-
 
 }

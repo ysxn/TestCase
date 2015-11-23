@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.content.Context;
@@ -10,8 +11,7 @@ import android.widget.TextView;
 import org.qii.weiciyuan.R;
 
 /**
- * User: qii
- * Date: 13-4-29
+ * User: qii Date: 13-4-29
  */
 public class ListViewMiddleMsgLoadingView extends FrameLayout {
 
@@ -57,5 +57,3 @@ public class ListViewMiddleMsgLoadingView extends FrameLayout {
 
     }
 }
-
-

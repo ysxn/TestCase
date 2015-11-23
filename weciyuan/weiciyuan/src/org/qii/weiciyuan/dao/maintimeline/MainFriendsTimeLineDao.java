@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.maintimeline;
 
 import com.google.gson.Gson;
@@ -16,8 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-7-28
+ * User: qii Date: 12-7-28
  */
 public class MainFriendsTimeLineDao {
 
@@ -65,10 +65,8 @@ public class MainFriendsTimeLineDao {
             TimeLineUtility.filterHomeTimeLineSinaWeiboAd(value);
         }
 
-
         return value;
     }
-
 
     protected String access_token;
     protected String since_id;
@@ -119,6 +117,5 @@ public class MainFriendsTimeLineDao {
         this.trim_user = trim_user;
         return this;
     }
-
 
 }

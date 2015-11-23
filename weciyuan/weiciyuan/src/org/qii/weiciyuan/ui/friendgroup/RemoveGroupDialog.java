@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.friendgroup;
 
 import android.app.AlertDialog;
@@ -10,8 +11,7 @@ import org.qii.weiciyuan.R;
 import java.util.ArrayList;
 
 /**
- * User: qii
- * Date: 13-2-15
+ * User: qii Date: 13-2-15
  */
 public class RemoveGroupDialog extends DialogFragment {
     private ArrayList<String> checkedNames;

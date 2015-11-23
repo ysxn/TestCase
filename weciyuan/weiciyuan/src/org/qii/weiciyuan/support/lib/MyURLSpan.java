@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import org.qii.weiciyuan.R;
@@ -20,8 +21,7 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 
 /**
- * User: qii
- * Date: 12-8-20
+ * User: qii Date: 12-8-20
  */
 public class MyURLSpan extends ClickableSpan implements ParcelableSpan {
 
@@ -65,7 +65,7 @@ public class MyURLSpan extends ClickableSpan implements ParcelableSpan {
                 intent.putExtra("domain", Utility.getDomainFromWeiboAccountLink(url));
                 context.startActivity(intent);
             } else {
-                //otherwise some urls cant be opened, will be redirected to sina error page
+                // otherwise some urls cant be opened, will be redirected to sina error page
                 String openUrl = url;
                 if (openUrl.endsWith("/")) {
                     openUrl = openUrl.substring(0, openUrl.lastIndexOf("/"));
@@ -78,7 +78,6 @@ public class MyURLSpan extends ClickableSpan implements ParcelableSpan {
             context.startActivity(intent);
         }
     }
-
 
     public void onLongClick(View widget) {
         Uri data = Uri.parse(getURL());
@@ -96,7 +95,6 @@ public class MyURLSpan extends ClickableSpan implements ParcelableSpan {
                 LongClickLinkDialog dialog = new LongClickLinkDialog(data);
                 Utility.forceShowDialog((FragmentActivity) widget.getContext(), dialog);
 
-
             }
 
         }
@@ -105,6 +103,6 @@ public class MyURLSpan extends ClickableSpan implements ParcelableSpan {
     @Override
     public void updateDrawState(TextPaint tp) {
         tp.setColor(ThemeUtility.getColor(R.attr.link_color));
-//        tp.setUnderlineText(true);
+        // tp.setUnderlineText(true);
     }
 }

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.topic;
 
 import org.qii.weiciyuan.R;
@@ -24,15 +25,14 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 /**
- * User: qii
- * Date: 12-9-26
+ * User: qii Date: 12-9-26
  */
 public class SearchTopicByNameFragment
         extends AbstractMessageTimeLineFragment<TopicResultListBean> {
 
     private String q;
 
-    //page 0 and page 1 data is same
+    // page 0 and page 1 data is same
     private int page = 1;
 
     private TopicResultListBean bean = new TopicResultListBean();
@@ -53,7 +53,6 @@ public class SearchTopicByNameFragment
     public SearchTopicByNameFragment(String q) {
         this.q = q;
     }
-
 
     @Override
     public void onDetach() {
@@ -79,7 +78,7 @@ public class SearchTopicByNameFragment
                 loadNewMsg();
                 break;
             case SCREEN_ROTATE:
-                //nothing
+                // nothing
                 refreshLayout(bean);
                 break;
             case ACTIVITY_DESTROY_AND_CREATE:
@@ -111,7 +110,6 @@ public class SearchTopicByNameFragment
             buildActionBatSubtitle();
         }
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -150,20 +148,17 @@ public class SearchTopicByNameFragment
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
         startActivity(BrowserWeiboMsgActivity.newIntent(bean.getItemList().get(position),
                 GlobalContext.getInstance().getSpecialToken()));
     }
 
-
     private void buildActionBatSubtitle() {
         int newSize = bean.getTotal_number();
         String number = bean.getSize() + "/" + newSize;
         getActivity().getActionBar().setSubtitle(number);
     }
-
 
     private class FollowTopicTask extends MyAsyncTask<Void, Boolean, Boolean> {
 
@@ -243,7 +238,6 @@ public class SearchTopicByNameFragment
         }
 
     }
-
 
     @Override
     protected Loader<AsyncTaskLoaderResult<TopicResultListBean>> onCreateNewMsgLoader(int id,

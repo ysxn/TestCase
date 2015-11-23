@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent.unreadnotification;
 
 import android.app.Notification;
@@ -16,8 +17,7 @@ import org.qii.weiciyuan.support.utils.Utility;
 import org.qii.weiciyuan.ui.main.MainTimeLineActivity;
 
 /**
- * User: qii
- * Date: 12-12-5
+ * User: qii Date: 12-12-5
  */
 @Deprecated
 public class JBInboxNotification {
@@ -32,14 +32,14 @@ public class JBInboxNotification {
 
     private UnreadBean unreadBean;
 
-    //only leave one broadcast receiver
+    // only leave one broadcast receiver
     private static BroadcastReceiver clearNotificationEventReceiver;
 
     public JBInboxNotification(Context context,
-                               AccountBean accountBean,
-                               CommentListBean comment,
-                               MessageListBean repost,
-                               CommentListBean mentionCommentsResult, UnreadBean unreadBean) {
+            AccountBean accountBean,
+            CommentListBean comment,
+            MessageListBean repost,
+            CommentListBean mentionCommentsResult, UnreadBean unreadBean) {
         this.context = context;
         this.accountBean = accountBean;
         this.comment = comment;
@@ -47,7 +47,6 @@ public class JBInboxNotification {
         this.mentionCommentsResult = mentionCommentsResult;
         this.unreadBean = unreadBean;
     }
-
 
     private PendingIntent getPendingIntent() {
         Intent i = new Intent(context, MainTimeLineActivity.class);
@@ -138,6 +137,5 @@ public class JBInboxNotification {
         Utility.configVibrateLedRingTone(builder);
         return builder.build();
     }
-
 
 }

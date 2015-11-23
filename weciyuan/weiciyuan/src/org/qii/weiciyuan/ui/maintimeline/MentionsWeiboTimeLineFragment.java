@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.maintimeline;
 
 import org.qii.weiciyuan.R;
@@ -48,8 +49,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-7-29
+ * User: qii Date: 12-7-29
  */
 public class MentionsWeiboTimeLineFragment
         extends AbstractMessageTimeLineFragment<MessageListBean> {
@@ -72,7 +72,6 @@ public class MentionsWeiboTimeLineFragment
     public void onDestroy() {
         super.onDestroy();
     }
-
 
     @Override
     public MessageListBean getList() {
@@ -130,7 +129,6 @@ public class MentionsWeiboTimeLineFragment
 
     }
 
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -144,7 +142,6 @@ public class MentionsWeiboTimeLineFragment
         timeLinePosition = Utility.getCurrentPositionFromListView(getListView());
     }
 
-
     @Override
     protected void buildListAdapter() {
         StatusListAdapter adapter = new StatusListAdapter(this,
@@ -154,7 +151,6 @@ public class MentionsWeiboTimeLineFragment
         timeLineAdapter = adapter;
         getListView().setAdapter(timeLineAdapter);
     }
-
 
     private void checkUnreadInfo() {
         Loader loader = getLoaderManager().getLoader(DB_CACHE_LOADER_ID);
@@ -197,7 +193,6 @@ public class MentionsWeiboTimeLineFragment
         }
     }
 
-
     @Override
     protected void newMsgLoaderSuccessCallback(MessageListBean newValue, Bundle loaderArgs) {
         if (getActivity() != null && newValue.getSize() > 0) {
@@ -208,7 +203,6 @@ public class MentionsWeiboTimeLineFragment
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(NotificationServiceHelper
                 .getMentionsWeiboNotificationId(GlobalContext.getInstance().getAccountBean()));
-
 
     }
 
@@ -271,7 +265,6 @@ public class MentionsWeiboTimeLineFragment
         }
     }
 
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -322,7 +315,6 @@ public class MentionsWeiboTimeLineFragment
         }
     }
 
-
     @Override
     protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
         startActivityForResult(
@@ -334,7 +326,7 @@ public class MentionsWeiboTimeLineFragment
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //use Up instead of Back to reach this fragment
+        // use Up instead of Back to reach this fragment
         if (data == null) {
             return;
         }
@@ -376,9 +368,7 @@ public class MentionsWeiboTimeLineFragment
         }
     }
 
-
-    private LoaderManager.LoaderCallbacks<MentionTimeLineData> dbCallback
-            = new LoaderManager.LoaderCallbacks<MentionTimeLineData>() {
+    private LoaderManager.LoaderCallbacks<MentionTimeLineData> dbCallback = new LoaderManager.LoaderCallbacks<MentionTimeLineData>() {
         @Override
         public Loader<MentionTimeLineData> onCreateLoader(int id, Bundle args) {
             getPullToRefreshListView().setVisibility(View.INVISIBLE);
@@ -400,7 +390,8 @@ public class MentionsWeiboTimeLineFragment
             refreshLayout(bean);
 
             /**
-             * when this account first open app,if he don't have any data in database,fetch data from server automally
+             * when this account first open app,if he don't have any data in database,fetch data
+             * from server automally
              */
 
             if (bean.getSize() == 0) {
@@ -413,7 +404,6 @@ public class MentionsWeiboTimeLineFragment
             getLoaderManager().destroyLoader(loader.getId());
 
             checkUnreadInfo();
-
 
         }
 
@@ -549,4 +539,3 @@ public class MentionsWeiboTimeLineFragment
         }.executeOnExecutor(MyAsyncTask.THREAD_POOL_EXECUTOR);
     }
 }
-

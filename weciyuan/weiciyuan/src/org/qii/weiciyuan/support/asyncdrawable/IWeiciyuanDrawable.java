@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.asyncdrawable;
 
 import android.graphics.Bitmap;
@@ -9,8 +10,7 @@ import android.widget.ProgressBar;
 import org.qii.weiciyuan.bean.UserBean;
 
 /**
- * User: qii
- * Date: 13-9-3
+ * User: qii Date: 13-9-3
  */
 public interface IWeiciyuanDrawable {
 

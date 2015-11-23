@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.file;
 
 import org.qii.weiciyuan.R;
@@ -22,8 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-8-3
+ * User: qii Date: 12-8-3
  */
 public class FileManager {
 
@@ -52,10 +52,10 @@ public class FileManager {
     private static final String WEICIYUAN = "weiciyuan";
 
     /**
-     * install weiciyuan, open app and login in, Android system will create cache dir.
-     * then open cache dir (/sdcard dir/Android/data/org.qii.weiciyuan) with Root Explorer,
-     * uninstall weiciyuan and reinstall it, the new weiciyuan app will have the bug it can't
-     * read cache dir again, so I have to tell user to delete that cache dir
+     * install weiciyuan, open app and login in, Android system will create cache dir. then open
+     * cache dir (/sdcard dir/Android/data/org.qii.weiciyuan) with Root Explorer, uninstall
+     * weiciyuan and reinstall it, the new weiciyuan app will have the bug it can't read cache dir
+     * again, so I have to tell user to delete that cache dir
      */
     private static volatile boolean cantReadBecauseOfAndroidBugPermissionProblem = false;
 
@@ -127,7 +127,6 @@ public class FileManager {
 
         return !(!canRead || onlyRead || unMounted);
     }
-
 
     public static String getUploadPicTempFile() {
 
@@ -226,7 +225,6 @@ public class FileManager {
         return path;
     }
 
-
     public static File createNewFileInSDCard(String absolutePath) {
         if (!isExternalStorageMounted()) {
             AppLogger.e("sdcard unavailiable");
@@ -277,7 +275,6 @@ public class FileManager {
         }
         return "0MB";
     }
-
 
     public static List<String> getCachePath() {
         List<String> path = new ArrayList<String>();

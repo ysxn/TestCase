@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -14,8 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * User: qii
- * Date: 12-7-29
+ * User: qii Date: 12-7-29
  */
 
 public class MessageBean extends ItemBean implements Parcelable {
@@ -33,7 +33,7 @@ public class MessageBean extends ItemBean implements Parcelable {
     private String mid;
     private int reposts_count = 0;
     private int comments_count = 0;
-    //    private Object annotations;
+    // private Object annotations;
 
     private String thumbnail_pic;
     private String bmiddle_pic;
@@ -50,9 +50,7 @@ public class MessageBean extends ItemBean implements Parcelable {
     private ArrayList<PicUrls> pic_urls = new ArrayList<PicUrls>();
     private ArrayList<String> pic_ids = new ArrayList<String>();
 
-
     private transient SpannableString listViewSpannableString;
-
 
     public static class PicUrls implements Parcelable {
         public String thumbnail_pic;
@@ -95,7 +93,9 @@ public class MessageBean extends ItemBean implements Parcelable {
         dest.writeString(idstr);
         dest.writeString(text);
         dest.writeString(source);
-        dest.writeBooleanArray(new boolean[]{this.favorited});
+        dest.writeBooleanArray(new boolean[] {
+            this.favorited
+        });
         dest.writeString(truncated);
         dest.writeString(in_reply_to_status_id);
         dest.writeString(in_reply_to_user_id);
@@ -135,13 +135,11 @@ public class MessageBean extends ItemBean implements Parcelable {
                     in.readBooleanArray(booleans);
                     messageBean.favorited = booleans[0];
 
-
                     messageBean.truncated = in.readString();
                     messageBean.in_reply_to_status_id = in.readString();
                     messageBean.in_reply_to_user_id = in.readString();
                     messageBean.in_reply_to_screen_name = in.readString();
                     messageBean.mid = in.readString();
-
 
                     messageBean.reposts_count = in.readInt();
                     messageBean.comments_count = in.readInt();
@@ -168,7 +166,6 @@ public class MessageBean extends ItemBean implements Parcelable {
                     return new MessageBean[size];
                 }
             };
-
 
     public String getCreated_at() {
 
@@ -285,7 +282,6 @@ public class MessageBean extends ItemBean implements Parcelable {
         this.comments_count = comments_count;
     }
 
-
     public UserBean getUser() {
         return user;
     }
@@ -309,7 +305,6 @@ public class MessageBean extends ItemBean implements Parcelable {
     public long getIdLong() {
         return this.id;
     }
-
 
     public SpannableString getListViewSpannableString() {
         if (!TextUtils.isEmpty(listViewSpannableString)) {
@@ -337,7 +332,6 @@ public class MessageBean extends ItemBean implements Parcelable {
     public void setSourceString(String sourceString) {
         this.sourceString = sourceString;
     }
-
 
     public long getMills() {
         if (mills == 0L) {
@@ -374,7 +368,6 @@ public class MessageBean extends ItemBean implements Parcelable {
         this.original_pic = original_pic;
     }
 
-
     @Override
     public boolean equals(Object otherObject) {
         if (this == otherObject) {
@@ -396,7 +389,6 @@ public class MessageBean extends ItemBean implements Parcelable {
     private ArrayList<String> thumbnaiUrls = new ArrayList<String>();
     private ArrayList<String> middleUrls = new ArrayList<String>();
     private ArrayList<String> highUrls = new ArrayList<String>();
-
 
     public ArrayList<String> getThumbnailPicUrls() {
         if (thumbnaiUrls.size() > 0)
@@ -434,7 +426,6 @@ public class MessageBean extends ItemBean implements Parcelable {
         return middleUrls;
     }
 
-
     public ArrayList<String> getHighPicUrls() {
         if (highUrls.size() > 0)
             return highUrls;
@@ -470,6 +461,5 @@ public class MessageBean extends ItemBean implements Parcelable {
     public String toString() {
         return ObjectToStringUtility.toString(this);
     }
-
 
 }

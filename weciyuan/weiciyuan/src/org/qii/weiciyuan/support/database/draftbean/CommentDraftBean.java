@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database.draftbean;
 
 import android.os.Parcel;
@@ -5,15 +6,13 @@ import android.os.Parcelable;
 import org.qii.weiciyuan.bean.MessageBean;
 
 /**
- * User: qii
- * Date: 12-10-21
+ * User: qii Date: 12-10-21
  */
 public class CommentDraftBean implements Parcelable {
     private String content;
     private String accountId;
     private MessageBean messageBean;
     private String id;
-
 
     @Override
     public int describeContents() {
@@ -67,7 +66,6 @@ public class CommentDraftBean implements Parcelable {
     public void setMessageBean(MessageBean messageBean) {
         this.messageBean = messageBean;
     }
-
 
     public String getId() {
         return id;

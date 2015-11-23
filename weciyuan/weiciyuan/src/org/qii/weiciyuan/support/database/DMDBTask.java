@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import android.content.ContentValues;
@@ -10,8 +11,7 @@ import org.qii.weiciyuan.bean.DMUserListBean;
 import org.qii.weiciyuan.support.database.table.DMTable;
 
 /**
- * User: qii
- * Date: 12-12-3
+ * User: qii Date: 12-12-3
  */
 public class DMDBTask {
 

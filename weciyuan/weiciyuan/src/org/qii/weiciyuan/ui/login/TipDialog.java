@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.login;
 
 import android.app.AlertDialog;
@@ -8,16 +9,13 @@ import android.os.Bundle;
 import org.qii.weiciyuan.R;
 
 /**
- * User: qii
- * Date: 12-12-9
+ * User: qii Date: 12-12-9
  */
 public class TipDialog extends DialogFragment {
-
 
     public TipDialog() {
 
     }
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -34,4 +32,3 @@ public class TipDialog extends DialogFragment {
         return builder.create();
     }
 }
-

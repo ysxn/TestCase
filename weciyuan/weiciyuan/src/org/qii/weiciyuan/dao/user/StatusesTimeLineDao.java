@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.user;
 
 import com.google.gson.Gson;
@@ -17,8 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-16
+ * User: Jiang Qi Date: 12-8-16
  */
 public class StatusesTimeLineDao {
 
@@ -38,9 +38,7 @@ public class StatusesTimeLineDao {
         map.put("feature", feature);
         map.put("trim_user", trim_user);
 
-
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
-
 
         Gson gson = new Gson();
 
@@ -62,7 +60,6 @@ public class StatusesTimeLineDao {
 
         return value;
     }
-
 
     public StatusesTimeLineDao(String token, String uid) {
         this.access_token = token;

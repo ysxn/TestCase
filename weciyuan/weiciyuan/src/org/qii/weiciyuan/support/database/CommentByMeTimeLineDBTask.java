@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import com.google.gson.Gson;
@@ -22,8 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-1-23
+ * User: qii Date: 13-1-23
  */
 public class CommentByMeTimeLineDBTask {
 
@@ -41,7 +41,6 @@ public class CommentByMeTimeLineDBTask {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         return databaseHelper.getReadableDatabase();
     }
-
 
     public static void addCommentLineMsg(CommentListBean list, String accountId) {
         Gson gson = new Gson();
@@ -121,7 +120,6 @@ public class CommentByMeTimeLineDBTask {
 
     }
 
-
     private static void reduceCommentTable(String accountId) {
         String searchCount = "select count(" + CommentByMeTable.CommentByMeDataTable.ID
                 + ") as total" + " from " + CommentByMeTable.CommentByMeDataTable.TABLE_NAME
@@ -135,28 +133,31 @@ public class CommentByMeTimeLineDBTask {
 
         c.close();
 
-//        AppLogger.e("total=" + total);
-//
-//        int needDeletedNumber = total - AppConfig.DEFAULT_COMMENTS_BY_ME_DB_CACHE_COUNT;
-//
-//        if (needDeletedNumber > 0) {
-//            AppLogger.e("" + needDeletedNumber);
-//            String sql = " delete from " + CommentByMeTable.CommentByMeDataTable.TABLE_NAME + " where " + CommentByMeTable.CommentByMeDataTable.ID + " in "
-//                    + "( select " + CommentByMeTable.CommentByMeDataTable.ID + " from " + CommentByMeTable.CommentByMeDataTable.TABLE_NAME + " where "
-//                    + CommentByMeTable.CommentByMeDataTable.ACCOUNTID
-//                    + " in " + "(" + accountId + ") order by " + CommentByMeTable.CommentByMeDataTable.ID + " asc limit " + needDeletedNumber + " ) ";
-//
-//            getWsd().execSQL(sql);
-//        }
+        // AppLogger.e("total=" + total);
+        //
+        // int needDeletedNumber = total - AppConfig.DEFAULT_COMMENTS_BY_ME_DB_CACHE_COUNT;
+        //
+        // if (needDeletedNumber > 0) {
+        // AppLogger.e("" + needDeletedNumber);
+        // String sql = " delete from " + CommentByMeTable.CommentByMeDataTable.TABLE_NAME +
+        // " where " + CommentByMeTable.CommentByMeDataTable.ID + " in "
+        // + "( select " + CommentByMeTable.CommentByMeDataTable.ID + " from " +
+        // CommentByMeTable.CommentByMeDataTable.TABLE_NAME + " where "
+        // + CommentByMeTable.CommentByMeDataTable.ACCOUNTID
+        // + " in " + "(" + accountId + ") order by " + CommentByMeTable.CommentByMeDataTable.ID +
+        // " asc limit " + needDeletedNumber + " ) ";
+        //
+        // getWsd().execSQL(sql);
+        // }
     }
 
     private void replaceCommentLineMsg(CommentListBean list, String accountId) {
 
         deleteAllComments(accountId);
 
-        //need modification
-        //        wsd.execSQL("DROP TABLE IF EXISTS " + CommentByMeTable.CommentByMeDataTable.TABLE_NAME);
-        //        wsd.execSQL(DatabaseHelper.CREATE_COMMENTS_TABLE_SQL);
+        // need modification
+        // wsd.execSQL("DROP TABLE IF EXISTS " + CommentByMeTable.CommentByMeDataTable.TABLE_NAME);
+        // wsd.execSQL(DatabaseHelper.CREATE_COMMENTS_TABLE_SQL);
 
         addCommentLineMsg(list, accountId);
     }
@@ -184,7 +185,6 @@ public class CommentByMeTimeLineDBTask {
         new Thread(runnable).start();
     }
 
-
     private static void updatePosition(TimeLinePosition position, String accountId) {
         String sql = "select * from " + CommentByMeTable.TABLE_NAME + " where "
                 + CommentByMeTable.ACCOUNTID + "  = "
@@ -193,7 +193,9 @@ public class CommentByMeTimeLineDBTask {
         Gson gson = new Gson();
         if (c.moveToNext()) {
             try {
-                String[] args = {accountId};
+                String[] args = {
+                    accountId
+                };
                 ContentValues cv = new ContentValues();
                 cv.put(CommentByMeTable.TIMELINEDATA, gson.toJson(position));
                 getWsd().update(CommentByMeTable.TABLE_NAME, cv, CommentByMeTable.ACCOUNTID + "=?",

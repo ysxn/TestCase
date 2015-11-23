@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.destroy;
 
 import com.google.gson.Gson;
@@ -13,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-9-11
+ * User: qii Date: 12-9-11
  */
 public class DestroyCommentDao {
     private String access_token;
@@ -31,7 +31,6 @@ public class DestroyCommentDao {
         map.put("access_token", access_token);
         map.put("cid", cid);
 
-
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Post, url, map);
         Gson gson = new Gson();
 
@@ -43,7 +42,6 @@ public class DestroyCommentDao {
         }
 
         return true;
-
 
     }
 }

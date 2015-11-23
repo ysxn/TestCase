@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.loader;
 
 import android.content.Context;
@@ -9,8 +10,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * User: qii
- * Date: 13-5-12
+ * User: qii Date: 13-5-12
  */
 public class FanUserLoader extends AbstractAsyncNetRequestTaskLoader<UserListBean> {
 
@@ -20,14 +20,12 @@ public class FanUserLoader extends AbstractAsyncNetRequestTaskLoader<UserListBea
     private String uid;
     private String cursor;
 
-
     public FanUserLoader(Context context, String token, String uid, String cursor) {
         super(context);
         this.token = token;
         this.uid = uid;
         this.cursor = cursor;
     }
-
 
     public UserListBean loadData() throws WeiboException {
         FanListDao dao = new FanListDao(token, uid);
@@ -42,9 +40,7 @@ public class FanUserLoader extends AbstractAsyncNetRequestTaskLoader<UserListBea
             lock.unlock();
         }
 
-
         return result;
     }
 
 }
-

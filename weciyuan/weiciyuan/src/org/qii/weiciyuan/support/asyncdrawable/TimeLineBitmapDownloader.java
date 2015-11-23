@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.asyncdrawable;
 
 import org.qii.weiciyuan.R;
@@ -26,8 +27,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 /**
- * User: qii
- * Date: 12-12-12
+ * User: qii Date: 12-12-12
  */
 public class TimeLineBitmapDownloader {
 
@@ -68,16 +68,14 @@ public class TimeLineBitmapDownloader {
     }
 
     /**
-     * Pause any ongoing background work. This can be used as a temporary
-     * measure to improve performance. For example background work could
-     * be paused when a ListView or GridView is being scrolled using a
-     * {@link android.widget.AbsListView.OnScrollListener} to keep
-     * scrolling smooth.
+     * Pause any ongoing background work. This can be used as a temporary measure to improve
+     * performance. For example background work could be paused when a ListView or GridView is being
+     * scrolled using a {@link android.widget.AbsListView.OnScrollListener} to keep scrolling
+     * smooth.
      * <p/>
-     * If work is paused, be sure setPauseDownloadWork(false) is called again
-     * before your fragment or activity is destroyed (for example during
-     * {@link android.app.Activity#onPause()}), or there is a risk the
-     * background thread will never finish.
+     * If work is paused, be sure setPauseDownloadWork(false) is called again before your fragment
+     * or activity is destroyed (for example during {@link android.app.Activity#onPause()}), or
+     * there is a risk the background thread will never finish.
      */
     public void setPauseDownloadWork(boolean pauseWork) {
         synchronized (pauseDownloadWorkLock) {
@@ -105,11 +103,9 @@ public class TimeLineBitmapDownloader {
         }
     }
 
-
     public void downloadAvatar(ImageView view, UserBean user) {
         downloadAvatar(view, user, false);
     }
-
 
     public void downloadAvatar(ImageView view, UserBean user, AbstractTimeLineFragment fragment) {
         boolean isFling = fragment.isListViewFling();
@@ -151,7 +147,6 @@ public class TimeLineBitmapDownloader {
         }
     }
 
-
     public void displayMultiPicture(IWeiciyuanDrawable view, String picUrl,
             FileLocationMethod method, AbstractTimeLineFragment fragment) {
 
@@ -167,7 +162,6 @@ public class TimeLineBitmapDownloader {
         display(view, picUrl, method, false, true);
 
     }
-
 
     public void downContentPic(IWeiciyuanDrawable view, MessageBean msg,
             AbstractTimeLineFragment fragment) {
@@ -187,13 +181,12 @@ public class TimeLineBitmapDownloader {
     }
 
     /**
-     * when user open weibo detail, the activity will setResult to previous Activity,
-     * timeline will refresh at the time user press back button to display the latest repost count
-     * and comment count. But sometimes, weibo detail's pictures are very large that bitmap memory
-     * cache has cleared those timeline bitmap to save memory, app have to read bitmap from sd card
-     * again, then app play annoying animation , this method will check whether we should read
-     * again
-     * or not.
+     * when user open weibo detail, the activity will setResult to previous Activity, timeline will
+     * refresh at the time user press back button to display the latest repost count and comment
+     * count. But sometimes, weibo detail's pictures are very large that bitmap memory cache has
+     * cleared those timeline bitmap to save memory, app have to read bitmap from sd card again,
+     * then app play annoying animation , this method will check whether we should read again or
+     * not.
      */
     private boolean shouldReloadPicture(ImageView view, String urlKey) {
         if (urlKey.equals(view.getTag())
@@ -241,7 +234,7 @@ public class TimeLineBitmapDownloader {
             PictureBitmapDrawable downloadedDrawable = new PictureBitmapDrawable(newTask);
             view.setImageDrawable(downloadedDrawable);
 
-            //listview fast scroll performance
+            // listview fast scroll performance
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -251,15 +244,12 @@ public class TimeLineBitmapDownloader {
                     }
                     return;
 
-
                 }
             }, 400);
-
 
         }
 
     }
-
 
     private void display(final IWeiciyuanDrawable view, final String urlKey,
             final FileLocationMethod method, boolean isFling, boolean isMultiPictures) {
@@ -300,7 +290,7 @@ public class TimeLineBitmapDownloader {
             PictureBitmapDrawable downloadedDrawable = new PictureBitmapDrawable(newTask);
             view.setImageDrawable(downloadedDrawable);
 
-            //listview fast scroll performance
+            // listview fast scroll performance
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -310,20 +300,16 @@ public class TimeLineBitmapDownloader {
                     }
                     return;
 
-
                 }
             }, 400);
-
 
         }
 
     }
 
-
     public void totalStopLoadPicture() {
 
     }
-
 
     private static boolean cancelPotentialDownload(String url, ImageView imageView) {
         IPictureWorker bitmapDownloaderTask = getBitmapDownloaderTask(imageView);
@@ -340,7 +326,6 @@ public class TimeLineBitmapDownloader {
         }
         return true;
     }
-
 
     private static IPictureWorker getBitmapDownloaderTask(ImageView imageView) {
         if (imageView != null) {

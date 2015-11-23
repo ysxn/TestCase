@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.maintimeline;
 
 import org.qii.weiciyuan.bean.AccountBean;
@@ -29,12 +30,10 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 /**
- * User: qii
- * Date: 13-1-22
+ * User: qii Date: 13-1-22
  */
 public class CommentsByMeTimeLineFragment extends AbstractTimeLineFragment<CommentListBean>
         implements IRemoveItem {
-
 
     private AccountBean accountBean;
 
@@ -47,7 +46,6 @@ public class CommentsByMeTimeLineFragment extends AbstractTimeLineFragment<Comme
     private CommentListBean bean = new CommentListBean();
 
     private TimeLinePosition timeLinePosition;
-
 
     @Override
     public CommentListBean getList() {
@@ -63,7 +61,6 @@ public class CommentsByMeTimeLineFragment extends AbstractTimeLineFragment<Comme
         this.userBean = userBean;
         this.token = token;
     }
-
 
     protected void clearAndReplaceValue(CommentListBean value) {
         getList().getItemList().clear();
@@ -83,7 +80,6 @@ public class CommentsByMeTimeLineFragment extends AbstractTimeLineFragment<Comme
             outState.putSerializable("timeLinePosition", timeLinePosition);
         }
     }
-
 
     @Override
     public void onDestroy() {
@@ -146,8 +142,7 @@ public class CommentsByMeTimeLineFragment extends AbstractTimeLineFragment<Comme
         getListView().setOnItemLongClickListener(onItemLongClickListener);
     }
 
-    private AdapterView.OnItemLongClickListener onItemLongClickListener
-            = new AdapterView.OnItemLongClickListener() {
+    private AdapterView.OnItemLongClickListener onItemLongClickListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
             if (position - 1 < getList().getSize() && position - 1 >= 0) {
@@ -180,7 +175,7 @@ public class CommentsByMeTimeLineFragment extends AbstractTimeLineFragment<Comme
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisible() && isVisibleToUser) {
-//            ((MainTimeLineActivity) getActivity()).setCurrentFragment(this);
+            // ((MainTimeLineActivity) getActivity()).setCurrentFragment(this);
         }
     }
 
@@ -245,7 +240,6 @@ public class CommentsByMeTimeLineFragment extends AbstractTimeLineFragment<Comme
         }
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -261,7 +255,6 @@ public class CommentsByMeTimeLineFragment extends AbstractTimeLineFragment<Comme
         }
     }
 
-
     @Override
     protected void buildListAdapter() {
         timeLineAdapter = new CommentListAdapter(this,
@@ -269,7 +262,6 @@ public class CommentsByMeTimeLineFragment extends AbstractTimeLineFragment<Comme
                 getListView(), true, false);
         pullToRefreshListView.setAdapter(timeLineAdapter);
     }
-
 
     protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
         CommentFloatingMenu menu = new CommentFloatingMenu(getList().getItem(position));
@@ -321,8 +313,7 @@ public class CommentsByMeTimeLineFragment extends AbstractTimeLineFragment<Comme
         }
     }
 
-    private LoaderManager.LoaderCallbacks<CommentTimeLineData> dbCallback
-            = new LoaderManager.LoaderCallbacks<CommentTimeLineData>() {
+    private LoaderManager.LoaderCallbacks<CommentTimeLineData> dbCallback = new LoaderManager.LoaderCallbacks<CommentTimeLineData>() {
         @Override
         public Loader<CommentTimeLineData> onCreateLoader(int id, Bundle args) {
             getPullToRefreshListView().setVisibility(View.INVISIBLE);
@@ -343,7 +334,8 @@ public class CommentsByMeTimeLineFragment extends AbstractTimeLineFragment<Comme
 
             refreshLayout(getList());
             /**
-             * when this account first open app,if he don't have any data in database,fetch data from server automally
+             * when this account first open app,if he don't have any data in database,fetch data
+             * from server automally
              */
             if (getList().getSize() == 0) {
                 getPullToRefreshListView().setRefreshing();

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -8,12 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-11-11
+ * User: qii Date: 12-11-11
  */
 public class DMListBean extends ListBean<DMBean, DMListBean> implements Parcelable {
     private List<DMBean> direct_messages = new ArrayList<DMBean>();
-
 
     @Override
     public int describeContents() {
@@ -50,7 +49,6 @@ public class DMListBean extends ListBean<DMBean, DMListBean> implements Parcelab
                 }
             };
 
-
     public List<DMBean> getDirect_messages() {
         return direct_messages;
     }
@@ -63,7 +61,6 @@ public class DMListBean extends ListBean<DMBean, DMListBean> implements Parcelab
     public int getSize() {
         return direct_messages.size();
     }
-
 
     @Override
     public DMBean getItem(int position) {

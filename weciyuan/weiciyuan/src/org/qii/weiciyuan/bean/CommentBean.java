@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -10,8 +11,7 @@ import org.qii.weiciyuan.support.utils.ObjectToStringUtility;
 import org.qii.weiciyuan.support.utils.TimeUtility;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-2
+ * User: Jiang Qi Date: 12-8-2
  */
 public class CommentBean extends ItemBean implements Parcelable {
     private String created_at;
@@ -30,7 +30,6 @@ public class CommentBean extends ItemBean implements Parcelable {
 
     private transient SpannableString listViewSpannableString;
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -47,13 +46,11 @@ public class CommentBean extends ItemBean implements Parcelable {
         dest.writeString(mid);
         dest.writeLong(mills);
 
-
         dest.writeParcelable(user, flags);
         dest.writeParcelable(status, flags);
         dest.writeParcelable(reply_comment, flags);
 
         dest.writeString(sourceString);
-
 
     }
 
@@ -83,7 +80,6 @@ public class CommentBean extends ItemBean implements Parcelable {
                 }
             };
 
-
     public CommentBean getReply_comment() {
         return reply_comment;
     }
@@ -92,8 +88,7 @@ public class CommentBean extends ItemBean implements Parcelable {
         this.reply_comment = reply_comment;
     }
 
-
-    //comment timeline show comment
+    // comment timeline show comment
     public SpannableString getListViewSpannableString() {
         if (!TextUtils.isEmpty(listViewSpannableString)) {
             return listViewSpannableString;
@@ -106,7 +101,6 @@ public class CommentBean extends ItemBean implements Parcelable {
     public void setListViewSpannableString(SpannableString listViewSpannableString) {
         this.listViewSpannableString = listViewSpannableString;
     }
-
 
     public long getMills() {
         if (mills == 0L) {
@@ -128,7 +122,6 @@ public class CommentBean extends ItemBean implements Parcelable {
         return TimeUtility.getListTime(this);
     }
 
-
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
@@ -144,7 +137,6 @@ public class CommentBean extends ItemBean implements Parcelable {
     public long getIdLong() {
         return this.id;
     }
-
 
     public String getText() {
         return text;
@@ -175,7 +167,6 @@ public class CommentBean extends ItemBean implements Parcelable {
     public void setSourceString(String sourceString) {
         this.sourceString = sourceString;
     }
-
 
     public String getMid() {
         return mid;

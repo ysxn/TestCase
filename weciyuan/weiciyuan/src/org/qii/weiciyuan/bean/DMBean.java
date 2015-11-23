@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -9,8 +10,7 @@ import org.qii.weiciyuan.support.utils.ObjectToStringUtility;
 import org.qii.weiciyuan.support.utils.TimeUtility;
 
 /**
- * User: qii
- * Date: 12-11-11
+ * User: qii Date: 12-11-11
  */
 public class DMBean extends ItemBean implements Parcelable {
 
@@ -35,7 +35,6 @@ public class DMBean extends ItemBean implements Parcelable {
 
     private transient SpannableString listViewSpannableString;
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -58,7 +57,6 @@ public class DMBean extends ItemBean implements Parcelable {
         dest.writeString(geo);
 
         dest.writeLong(mills);
-
 
         dest.writeParcelable(sender, flags);
         dest.writeParcelable(recipient, flags);
@@ -95,7 +93,6 @@ public class DMBean extends ItemBean implements Parcelable {
                     return new DMBean[size];
                 }
             };
-
 
     public String getId() {
         return idstr;
@@ -240,7 +237,6 @@ public class DMBean extends ItemBean implements Parcelable {
     public void setGeo(String geo) {
         this.geo = geo;
     }
-
 
     @Override
     public String toString() {

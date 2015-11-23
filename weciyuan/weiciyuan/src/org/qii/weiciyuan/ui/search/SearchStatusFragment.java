@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.search;
 
 import org.qii.weiciyuan.bean.SearchStatusListBean;
@@ -13,8 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 /**
- * User: qii
- * Date: 12-11-10
+ * User: qii Date: 12-11-10
  */
 public class SearchStatusFragment extends AbstractMessageTimeLineFragment<SearchStatusListBean> {
 
@@ -48,7 +48,6 @@ public class SearchStatusFragment extends AbstractMessageTimeLineFragment<Search
         outState.putParcelable("bean", bean);
     }
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -60,15 +59,12 @@ public class SearchStatusFragment extends AbstractMessageTimeLineFragment<Search
 
         refreshLayout(bean);
 
-
     }
-
 
     protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
         startActivity(BrowserWeiboMsgActivity.newIntent(bean.getItem(position),
                 GlobalContext.getInstance().getSpecialToken()));
     }
-
 
     @Override
     protected Loader<AsyncTaskLoaderResult<SearchStatusListBean>> onCreateNewMsgLoader(int id,
@@ -86,7 +82,6 @@ public class SearchStatusFragment extends AbstractMessageTimeLineFragment<Search
         String word = ((SearchMainParentFragment) getParentFragment()).getSearchWord();
         return new SearchStatusLoader(getActivity(), token, word, String.valueOf(page + 1));
     }
-
 
     @Override
     protected void newMsgLoaderSuccessCallback(SearchStatusListBean newValue, Bundle loaderArgs) {

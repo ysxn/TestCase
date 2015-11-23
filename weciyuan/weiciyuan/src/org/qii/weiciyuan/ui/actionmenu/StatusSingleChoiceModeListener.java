@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.actionmenu;
 
 import android.app.Activity;
@@ -28,8 +29,7 @@ import org.qii.weiciyuan.ui.task.FavAsyncTask;
 import org.qii.weiciyuan.ui.task.UnFavAsyncTask;
 
 /**
- * User: qii
- * Date: 12-9-9
+ * User: qii Date: 12-9-9
  */
 public class StatusSingleChoiceModeListener implements ActionMode.Callback {
 
@@ -67,7 +67,6 @@ public class StatusSingleChoiceModeListener implements ActionMode.Callback {
         return fragment.getActivity();
     }
 
-
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         if (this.mode == null) {
@@ -90,16 +89,16 @@ public class StatusSingleChoiceModeListener implements ActionMode.Callback {
 
         mode.setTitle(bean.getUser().getScreen_name());
 
-        //fuck sina weibo
-//        MenuItem favItem = menu.findItem(R.id.menu_fav);
-//        MenuItem unFavItem = menu.findItem(R.id.menu_unfav);
-//        if (bean.isFavorited()) {
-//            favItem.setVisible(false);
-//            unFavItem.setVisible(true);
-//        } else {
-//            favItem.setVisible(true);
-//            unFavItem.setVisible(false);
-//        }
+        // fuck sina weibo
+        // MenuItem favItem = menu.findItem(R.id.menu_fav);
+        // MenuItem unFavItem = menu.findItem(R.id.menu_unfav);
+        // if (bean.isFavorited()) {
+        // favItem.setVisible(false);
+        // unFavItem.setVisible(true);
+        // } else {
+        // favItem.setVisible(true);
+        // unFavItem.setVisible(false);
+        // }
 
         MenuItem item = menu.findItem(R.id.menu_share);
         mShareActionProvider = (ShareActionProvider) item.getActionProvider();
@@ -116,7 +115,6 @@ public class StatusSingleChoiceModeListener implements ActionMode.Callback {
                     }
                 });
         return true;
-
 
     }
 
@@ -214,6 +212,5 @@ public class StatusSingleChoiceModeListener implements ActionMode.Callback {
             ((BrowserWeiboMsgFragment) fragment).setActionMode(null);
         }
     }
-
 
 }

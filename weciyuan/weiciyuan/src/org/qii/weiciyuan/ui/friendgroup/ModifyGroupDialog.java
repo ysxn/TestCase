@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.friendgroup;
 
 import android.app.AlertDialog;
@@ -11,8 +12,7 @@ import android.widget.EditText;
 import org.qii.weiciyuan.R;
 
 /**
- * User: qii
- * Date: 13-2-15
+ * User: qii Date: 13-2-15
  */
 public class ModifyGroupDialog extends DialogFragment {
 
@@ -36,7 +36,6 @@ public class ModifyGroupDialog extends DialogFragment {
         outState.putString("oriName", oriName);
         outState.putString("name", name.getText().toString());
     }
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -76,4 +75,3 @@ public class ModifyGroupDialog extends DialogFragment {
         return dialog;
     }
 }
-

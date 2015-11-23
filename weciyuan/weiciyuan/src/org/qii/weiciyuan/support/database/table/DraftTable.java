@@ -1,8 +1,8 @@
+
 package org.qii.weiciyuan.support.database.table;
 
 /**
- * User: qii
- * Date: 12-9-25
+ * User: qii Date: 12-9-25
  */
 public class DraftTable {
     public static final String TABLE_NAME = "draft_table";

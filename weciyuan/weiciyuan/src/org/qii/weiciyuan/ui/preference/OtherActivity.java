@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference;
 
 import org.qii.weiciyuan.R;
@@ -13,8 +14,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 /**
- * User: qii
- * Date: 13-9-17
+ * User: qii Date: 13-9-17
  */
 public class OtherActivity extends AbstractAppActivity {
 
@@ -33,7 +33,6 @@ public class OtherActivity extends AbstractAppActivity {
                     .commit();
         }
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -62,7 +61,7 @@ public class OtherActivity extends AbstractAppActivity {
             if (FileManager.isExternalStorageMounted()) {
                 new CalcCacheSize(cleanCachePre)
                         .executeOnExecutor(
-                                MyAsyncTask.THREAD_POOL_EXECUTOR);
+                        MyAsyncTask.THREAD_POOL_EXECUTOR);
             } else {
                 cleanCachePre.setSummary(R.string.please_insert_sd_card);
             }
@@ -114,7 +113,6 @@ public class OtherActivity extends AbstractAppActivity {
 
         }
 
-
         private class CleanCacheTask extends MyAsyncTask<Void, Void, Void> {
 
             Preference preference;
@@ -148,7 +146,7 @@ public class OtherActivity extends AbstractAppActivity {
 
                 new CalcCacheSize(preference)
                         .executeOnExecutor(
-                                MyAsyncTask.THREAD_POOL_EXECUTOR);
+                        MyAsyncTask.THREAD_POOL_EXECUTOR);
             }
         }
 

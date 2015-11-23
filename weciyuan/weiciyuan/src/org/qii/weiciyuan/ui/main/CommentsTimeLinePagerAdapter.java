@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.main;
 
 import android.support.v4.app.Fragment;
@@ -10,8 +11,7 @@ import org.qii.weiciyuan.ui.maintimeline.CommentsByMeTimeLineFragment;
 import org.qii.weiciyuan.ui.maintimeline.CommentsToMeTimeLineFragment;
 
 /**
- * User: qii
- * Date: 13-3-8
+ * User: qii Date: 13-3-8
  */
 public class CommentsTimeLinePagerAdapter extends AppFragmentPagerAdapter {
 
@@ -32,7 +32,6 @@ public class CommentsTimeLinePagerAdapter extends AppFragmentPagerAdapter {
             fragment.getChildFragmentManager().executePendingTransactions();
         }
     }
-
 
     public Fragment getItem(int position) {
         return fragmentList.get(position);

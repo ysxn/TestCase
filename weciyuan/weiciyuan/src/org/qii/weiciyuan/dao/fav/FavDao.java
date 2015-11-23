@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.fav;
 
 import com.google.gson.Gson;
@@ -13,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-8-22
+ * User: qii Date: 12-8-22
  */
 public class FavDao {
     private String access_token;

@@ -1,8 +1,8 @@
+
 package org.qii.weiciyuan.support.utils;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-1
+ * User: Jiang Qi Date: 12-8-1
  */
 public class AppConfig {
 
@@ -28,21 +28,19 @@ public class AppConfig {
 
     public static final int DB_CACHE_COUNT_OFFSET = 10;
 
-    //friend timeline
+    // friend timeline
     public static final long AUTO_REFRESH_INITIALDELAY = 9L;
 
     public static final long AUTO_REFRESH_PERIOD = 7L;
 
-
-    //if download pic failed,retry
+    // if download pic failed,retry
     public static final int RETRY_TIMES = 6;
 
-    //pic cache saved days
+    // pic cache saved days
     public static final int SAVED_DAYS = 2;
 
-    //swipe to close,300px
+    // swipe to close,300px
     public static final int SWIPE_MIN_DISTANCE = 300;
-
 
     public static final int REFRESH_DELAYED_MILL_SECOND_TIME = 600;
 
@@ -50,7 +48,7 @@ public class AppConfig {
 
     public static final int DEFAULT_NOTIFICATION_UNREAD_DB_CACHE_COUNT = 1000;
 
-    //ViewConfiguration
+    // ViewConfiguration
     public static int getScrollSlop() {
         return Utility.dip2px(2);
     }

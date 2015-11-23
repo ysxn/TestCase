@@ -1,10 +1,10 @@
+
 package org.qii.weiciyuan.support.utils;
 
 import org.qii.weiciyuan.bean.*;
 
 /**
- * User: qii
- * Date: 13-3-29
+ * User: qii Date: 13-3-29
  */
 public class ObjectToStringUtility {
 

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.utils;
 
 import android.animation.Animator;
@@ -12,8 +13,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
 /**
- * User: qii
- * Date: 14-1-24
+ * User: qii Date: 14-1-24
  */
 public class AnimationUtility {
 
@@ -98,7 +98,7 @@ public class AnimationUtility {
 
             float startScale;
             if ((float) imageViewWidth / bitmapWidth
-                    > (float) imageviewHeight / bitmapHeight) {
+            > (float) imageviewHeight / bitmapHeight) {
                 // Extend start bounds horizontally
                 startScale = (float) imageviewHeight / bitmapHeight;
 
@@ -120,7 +120,6 @@ public class AnimationUtility {
         } else {
             return null;
         }
-
 
     }
 }

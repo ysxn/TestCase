@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -8,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-11-14
+ * User: qii Date: 12-11-14
  */
 public class DMUserListBean extends ListBean<DMUserBean, DMUserListBean> implements Parcelable {
     private List<DMUserBean> user_list = new ArrayList<DMUserBean>();
@@ -49,7 +49,6 @@ public class DMUserListBean extends ListBean<DMUserBean, DMUserListBean> impleme
                 }
             };
 
-
     @Override
     public int getSize() {
         return user_list.size();
@@ -88,4 +87,3 @@ public class DMUserListBean extends ListBean<DMUserBean, DMUserListBean> impleme
         return ObjectToStringUtility.toString(this);
     }
 }
-

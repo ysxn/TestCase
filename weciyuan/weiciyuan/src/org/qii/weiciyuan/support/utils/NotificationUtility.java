@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.utils;
 
 import org.qii.weiciyuan.R;
@@ -11,8 +12,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 
 /**
- * User: qii
- * Date: 12-12-5
+ * User: qii Date: 12-12-5
  */
 public class NotificationUtility {
 
@@ -77,7 +77,7 @@ public class NotificationUtility {
         int cmt = 0;
 
         if (SettingUtility.allowCommentToMe() && unreadCmt > 0 && commentsToMe != null) {
-//
+            //
             int actualFetchedSize = commentsToMe.getSize();
             if (actualFetchedSize < Integer.valueOf(SettingUtility.getMsgCount())) {
                 cmt += actualFetchedSize;

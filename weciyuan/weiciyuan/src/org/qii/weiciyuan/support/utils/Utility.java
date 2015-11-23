@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.utils;
 
 import org.qii.weiciyuan.BuildConfig;
@@ -96,7 +97,6 @@ import java.util.concurrent.TimeUnit;
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 
-
 public class Utility {
 
     private Utility() {
@@ -115,7 +115,7 @@ public class Utility {
 
         for (String key : keys) {
             String value = param.get(key);
-            //pain...EditMyProfileDao params' values can be empty
+            // pain...EditMyProfileDao params' values can be empty
             if (!TextUtils.isEmpty(value) || key.equals("description") || key.equals("url")) {
                 if (first) {
                     first = false;
@@ -129,7 +129,6 @@ public class Utility {
 
                 }
             }
-
 
         }
 
@@ -281,7 +280,6 @@ public class Utility {
         return manager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL;
     }
 
-
     public static void configVibrateLedRingTone(Notification.Builder builder) {
         configRingTone(builder);
         configLed(builder);
@@ -290,7 +288,9 @@ public class Utility {
 
     private static void configVibrate(Notification.Builder builder) {
         if (SettingUtility.allowVibrate()) {
-            long[] pattern = {0, 200, 500};
+            long[] pattern = {
+                    0, 200, 500
+            };
             builder.setVibrate(pattern);
         }
     }
@@ -318,7 +318,9 @@ public class Utility {
         String value = uri.getPath();
 
         if (value.startsWith("/external")) {
-            String[] proj = {MediaStore.Images.Media.DATA};
+            String[] proj = {
+                MediaStore.Images.Media.DATA
+            };
             Cursor cursor = activity.managedQuery(uri, proj, null, null, null);
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
@@ -362,7 +364,6 @@ public class Utility {
         return activities.size() > 0;
     }
 
-
     public static boolean isGooglePlaySafe(Activity activity) {
         Uri uri = Uri.parse("http://play.google.com/store/apps/details?id=com.google.android.gms");
         Intent mapCall = new Intent(Intent.ACTION_VIEW, uri);
@@ -377,7 +378,7 @@ public class Utility {
         Intent mapCall = new Intent("com.sina.weibo.remotessoservice");
         PackageManager packageManager = activity.getPackageManager();
         List<ResolveInfo> services = packageManager.queryIntentServices(mapCall, 0);
-        android.util.Log.i("zyw", "services.size()="+services.size());
+        android.util.Log.i("zyw", "services.size()=" + services.size());
         return services.size() > 0;
     }
 
@@ -433,7 +434,8 @@ public class Utility {
     }
 
     public static String getLatestCameraPicture(Activity activity) {
-        String[] projection = new String[]{MediaStore.Images.ImageColumns._ID,
+        String[] projection = new String[] {
+                MediaStore.Images.ImageColumns._ID,
                 MediaStore.Images.ImageColumns.DATA,
                 MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME,
                 MediaStore.Images.ImageColumns.DATE_TAKEN,
@@ -471,7 +473,7 @@ public class Utility {
         try {
             v.getLocationOnScreen(location);
         } catch (NullPointerException npe) {
-            //Happens when the view doesn't exist on screen anymore.
+            // Happens when the view doesn't exist on screen anymore.
             return null;
         }
         Rect locationRect = new Rect();
@@ -558,20 +560,20 @@ public class Utility {
         if (tab == null) {
             return;
         }
-//        String content = tab.getText().toString();
-//        int value = 0;
-//        int start = content.indexOf("(");
-//        int end = content.lastIndexOf(")");
-//        if (start > 0) {
-//            String result = content.substring(start + 1, end);
-//            value = Integer.valueOf(result);
-//        }
-//        if (value <= count) {
+        // String content = tab.getText().toString();
+        // int value = 0;
+        // int start = content.indexOf("(");
+        // int end = content.lastIndexOf(")");
+        // if (start > 0) {
+        // String result = content.substring(start + 1, end);
+        // value = Integer.valueOf(result);
+        // }
+        // if (value <= count) {
         tab.setText(" " + count + " " + tabStrRes);
-//        }
+        // }
     }
 
-    //to do getChildAt(0)
+    // to do getChildAt(0)
     public static TimeLinePosition getCurrentPositionFromListView(ListView listView) {
         View view = listView.getChildAt(1);
         int top = (view != null ? view.getTop() : 0);
@@ -620,7 +622,7 @@ public class Utility {
         return !TextUtils.isEmpty(url) && url.startsWith("http://weibo.com/u/");
     }
 
-    //todo need refactor...
+    // todo need refactor...
     public static boolean isWeiboAccountDomainLink(String url) {
         if (TextUtils.isEmpty(url)) {
             return false;
@@ -646,7 +648,7 @@ public class Utility {
         }
     }
 
-    //http://www.weibo.com/2125954191/Aj3W9z25s
+    // http://www.weibo.com/2125954191/Aj3W9z25s
     public static boolean isWeiboMid(String url) {
         if (TextUtils.isEmpty(url)) {
             return false;
@@ -673,10 +675,8 @@ public class Utility {
 
             return result != null && result.length == 2;
 
-
         }
     }
-
 
     public static String getMidFromUrl(String url) {
         url = convertWeiboCnToWeiboCom(url);
@@ -708,8 +708,8 @@ public class Utility {
     }
 
     public static void vibrate(Context context, View view) {
-//        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-//        vibrator.vibrate(30);
+        // Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        // vibrator.vibrate(30);
         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
     }
 
@@ -829,14 +829,14 @@ public class Utility {
                                                     AccountActivity.newIntent());
                                             activity.finish();
                                             GlobalContext.getInstance().tokenExpiredDialogIsShowing
-                                                    = false;
+                                            = false;
                                         }
                                     }).setOnCancelListener(new DialogInterface.OnCancelListener() {
-                        @Override
-                        public void onCancel(DialogInterface dialog) {
-                            //do nothing
-                        }
-                    }).show();
+                                @Override
+                                public void onCancel(DialogInterface dialog) {
+                                    // do nothing
+                                }
+                            }).show();
                     GlobalContext.getInstance().tokenExpiredDialogIsShowing = true;
                 }
             });
@@ -869,10 +869,10 @@ public class Utility {
         }
     }
 
-
     public static int getMaxLeftWidthOrHeightImageViewCanRead(int heightOrWidth) {
-        //1pixel==4bytes http://stackoverflow.com/questions/13536042/android-bitmap-allocating-16-bytes-per-pixel
-        //http://stackoverflow.com/questions/15313807/android-maximum-allowed-width-height-of-bitmap
+        // 1pixel==4bytes
+        // http://stackoverflow.com/questions/13536042/android-bitmap-allocating-16-bytes-per-pixel
+        // http://stackoverflow.com/questions/15313807/android-maximum-allowed-width-height-of-bitmap
         int[] maxSizeArray = new int[1];
         GLES10.glGetIntegerv(GL10.GL_MAX_TEXTURE_SIZE, maxSizeArray, 0);
 
@@ -885,7 +885,7 @@ public class Utility {
         return (maxHeight * maxWidth) / heightOrWidth;
     }
 
-    //sometime can get value, sometime can't, so I define it is 2048x2048
+    // sometime can get value, sometime can't, so I define it is 2048x2048
     public static int getBitmapMaxWidthAndMaxHeight() {
         int[] maxSizeArray = new int[1];
         GLES10.glGetIntegerv(GL10.GL_MAX_TEXTURE_SIZE, maxSizeArray, 0);
@@ -893,7 +893,7 @@ public class Utility {
         if (maxSizeArray[0] == 0) {
             GLES10.glGetIntegerv(GL11.GL_MAX_TEXTURE_SIZE, maxSizeArray, 0);
         }
-//        return maxSizeArray[0];
+        // return maxSizeArray[0];
         return 2048;
     }
 
@@ -943,7 +943,8 @@ public class Utility {
         return !hasMenuKey && !hasBackKey;
     }
 
-    //if app's certificate md5 is correct, enable Crashlytics crash log platform, you should not modify those md5 values
+    // if app's certificate md5 is correct, enable Crashlytics crash log platform, you should not
+    // modify those md5 values
     public static boolean isCertificateFingerprintCorrect(Context context) {
         try {
             PackageManager pm = context.getPackageManager();
@@ -966,12 +967,12 @@ public class Utility {
                 strResult += Integer.toString(b & 0xff, 16);
             }
             strResult = strResult.toUpperCase();
-            android.util.Log.i("zyw", "strResult="+strResult);
-            //debug
+            android.util.Log.i("zyw", "strResult=" + strResult);
+            // debug
             if ("DE421D82D4BBF9042886E72AA31FE22".toUpperCase().equals(strResult)) {
                 return true;
             }
-            //relaease
+            // relaease
             if ("C96155C3DAD4CA1069808FBAC813A69".toUpperCase().equals(strResult)) {
                 return true;
             }
@@ -984,7 +985,6 @@ public class Utility {
 
         return false;
     }
-
 
     public static void unregisterReceiverIgnoredReceiverNotRegisteredException(Context context,
             RecordOperationAppBroadcastReceiver broadcastReceiver) {
@@ -1025,7 +1025,11 @@ public class Utility {
         String type = options.outMimeType;
 
         MediaScannerConnection
-                .scanFile(GlobalContext.getInstance(), new String[]{path}, new String[]{type},
+                .scanFile(GlobalContext.getInstance(), new String[] {
+                    path
+                }, new String[] {
+                    type
+                },
                         null);
 
     }
@@ -1034,14 +1038,14 @@ public class Utility {
         return BuildConfig.DEBUG;
     }
 
-    //long click link(schedule show dialog event), press home button(onPause onSaveInstance), show dialog,then crash....
+    // long click link(schedule show dialog event), press home button(onPause onSaveInstance), show
+    // dialog,then crash....
     public static void forceShowDialog(FragmentActivity activity, DialogFragment dialogFragment) {
-//        try {
+        // try {
         dialogFragment.show(activity.getSupportFragmentManager(), "");
         activity.getSupportFragmentManager().executePendingTransactions();
-//        } catch (Exception ignored) {
-//
-//        }
+        // } catch (Exception ignored) {
+        //
+        // }
     }
 }
-

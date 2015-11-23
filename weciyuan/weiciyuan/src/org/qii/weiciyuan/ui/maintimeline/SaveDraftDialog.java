@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.maintimeline;
 
 import android.app.AlertDialog;
@@ -8,8 +9,7 @@ import android.os.Bundle;
 import org.qii.weiciyuan.R;
 
 /**
- * User: qii
- * Date: 12-10-22
+ * User: qii Date: 12-10-22
  */
 public class SaveDraftDialog extends DialogFragment {
 
@@ -20,7 +20,6 @@ public class SaveDraftDialog extends DialogFragment {
     public SaveDraftDialog() {
 
     }
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -44,4 +43,3 @@ public class SaveDraftDialog extends DialogFragment {
         return builder.create();
     }
 }
-

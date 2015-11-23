@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent;
 
 import org.qii.weiciyuan.R;
@@ -12,8 +13,7 @@ import android.content.Intent;
 import android.widget.Toast;
 
 /**
- * User: qii
- * Date: 12-9-14
+ * User: qii Date: 12-9-14
  */
 public class AppNewMsgAlarm {
 

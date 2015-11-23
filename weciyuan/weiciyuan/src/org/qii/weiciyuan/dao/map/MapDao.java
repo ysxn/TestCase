@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.map;
 
 import android.graphics.Bitmap;
@@ -18,8 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 13-7-22
+ * User: qii Date: 13-7-22
  */
 public class MapDao {
 
@@ -32,7 +32,6 @@ public class MapDao {
         map.put("center_coordinate", coordinates);
         map.put("zoom", "14");
         map.put("size", "600x380");
-
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
         String mapUrl = "";
@@ -70,6 +69,5 @@ public class MapDao {
     private String access_token;
     private double lan;
     private double lat;
-
 
 }

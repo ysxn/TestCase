@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.blackmagic;
 
 import org.qii.weiciyuan.R;
@@ -31,8 +32,7 @@ import android.widget.Toast;
 import java.lang.ref.WeakReference;
 
 /**
- * User: qii
- * Date: 12-11-9
+ * User: qii Date: 12-11-9
  */
 public class BlackMagicActivity extends AbstractAppActivity {
 
@@ -81,7 +81,6 @@ public class BlackMagicActivity extends AbstractAppActivity {
             }
         });
 
-
     }
 
     @Override
@@ -120,7 +119,6 @@ public class BlackMagicActivity extends AbstractAppActivity {
         }
     }
 
-
     private static class LoginTask extends MyAsyncTask<Void, Void, String[]> {
 
         private WeiboException e;
@@ -145,7 +143,6 @@ public class BlackMagicActivity extends AbstractAppActivity {
             this.appkey = appkey;
             this.appSecret = appSecret;
         }
-
 
         @Override
         protected void onPreExecute() {
@@ -218,7 +215,6 @@ public class BlackMagicActivity extends AbstractAppActivity {
             activity.finish();
         }
     }
-
 
     public static class ProgressFragment extends DialogFragment {
 

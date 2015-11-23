@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
+
 package uk.co.senab.photoview.gestures;
 
 import android.annotation.TargetApi;
@@ -27,8 +28,7 @@ public class FroyoGestureDetector extends EclairGestureDetector {
 
     public FroyoGestureDetector(Context context) {
         super(context);
-        ScaleGestureDetector.OnScaleGestureListener mScaleListener
-                = new ScaleGestureDetector.OnScaleGestureListener() {
+        ScaleGestureDetector.OnScaleGestureListener mScaleListener = new ScaleGestureDetector.OnScaleGestureListener() {
 
             @Override
             public boolean onScale(ScaleGestureDetector detector) {

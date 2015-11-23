@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.utils;
 
 import com.crashlytics.android.Crashlytics;
@@ -37,30 +38,27 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * User: Jiang Qi
- * Date: 12-7-27
+ * User: Jiang Qi Date: 12-7-27
  */
 public final class GlobalContext extends Application {
 
-    //singleton
+    // singleton
     private static GlobalContext globalContext = null;
 
-    //image size
+    // image size
     private Activity activity = null;
 
     private Activity currentRunningActivity = null;
 
     private DisplayMetrics displayMetrics = null;
 
-    //image memory cache
+    // image memory cache
     private LruCache<String, Bitmap> appBitmapCache = null;
 
-    //current account info
+    // current account info
     private AccountBean accountBean = null;
 
-
-    private LinkedHashMap<Integer, LinkedHashMap<String, Bitmap>> emotionsPic
-            = new LinkedHashMap<Integer, LinkedHashMap<String, Bitmap>>();
+    private LinkedHashMap<Integer, LinkedHashMap<String, Bitmap>> emotionsPic = new LinkedHashMap<Integer, LinkedHashMap<String, Bitmap>>();
 
     private GroupListBean group = null;
 
@@ -113,7 +111,7 @@ public final class GlobalContext extends Application {
                 this.displayMetrics = metrics;
                 return metrics;
             } else {
-                //default screen is 800x480
+                // default screen is 800x480
                 DisplayMetrics metrics = new DisplayMetrics();
                 metrics.widthPixels = 480;
                 metrics.heightPixels = 800;
@@ -154,8 +152,7 @@ public final class GlobalContext extends Application {
         return accountBean;
     }
 
-    private Set<MyProfileInfoChangeListener> profileListenerSet
-            = new HashSet<MyProfileInfoChangeListener>();
+    private Set<MyProfileInfoChangeListener> profileListenerSet = new HashSet<MyProfileInfoChangeListener>();
 
     public void registerForAccountChangeListener(MyProfileInfoChangeListener listener) {
         if (listener != null) {
@@ -176,12 +173,10 @@ public final class GlobalContext extends Application {
         return getAccountBean().getUid();
     }
 
-
     public String getCurrentAccountName() {
 
         return getAccountBean().getUsernick();
     }
-
 
     public synchronized LruCache<String, Bitmap> getBitmapCache() {
         if (appBitmapCache == null) {
@@ -247,7 +242,6 @@ public final class GlobalContext extends Application {
         }
     }
 
-
     private void getEmotionsTask() {
         Map<String, String> general = SmileyMap.getInstance().getGeneral();
         emotionsPic.put(SmileyMap.GENERAL_EMOTION_POSITION, getEmotionsTask(general));
@@ -298,4 +292,3 @@ public final class GlobalContext extends Application {
     }
 
 }
-

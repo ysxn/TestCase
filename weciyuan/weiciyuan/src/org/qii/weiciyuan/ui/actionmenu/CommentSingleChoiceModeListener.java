@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.actionmenu;
 
 import org.qii.weiciyuan.R;
@@ -28,8 +29,7 @@ import android.widget.Toast;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-9-10
+ * User: qii Date: 12-9-10
  */
 public class CommentSingleChoiceModeListener implements ActionMode.Callback {
 
@@ -63,7 +63,6 @@ public class CommentSingleChoiceModeListener implements ActionMode.Callback {
         return fragment.getActivity();
     }
 
-
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         if (this.mode == null) {
@@ -78,7 +77,6 @@ public class CommentSingleChoiceModeListener implements ActionMode.Callback {
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
         buildMenu(mode, menu);
         return true;
-
 
     }
 

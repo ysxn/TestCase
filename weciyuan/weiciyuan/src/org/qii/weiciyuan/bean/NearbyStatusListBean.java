@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -8,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-3-8
+ * User: qii Date: 13-3-8
  */
 public class NearbyStatusListBean extends ListBean<MessageBean, NearbyStatusListBean> implements Parcelable {
     private List<MessageBean> statuses = new ArrayList<MessageBean>();
@@ -64,7 +64,6 @@ public class NearbyStatusListBean extends ListBean<MessageBean, NearbyStatusList
         return statuses;
     }
 
-
     @Override
     public void addNewData(NearbyStatusListBean newValue) {
         if (newValue != null && newValue.getSize() > 0) {
@@ -92,4 +91,3 @@ public class NearbyStatusListBean extends ListBean<MessageBean, NearbyStatusList
         return ObjectToStringUtility.toString(this);
     }
 }
-

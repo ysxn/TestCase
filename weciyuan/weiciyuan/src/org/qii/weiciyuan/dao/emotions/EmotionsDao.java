@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.emotions;
 
 import com.google.gson.Gson;
@@ -16,8 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-9-24
+ * User: qii Date: 12-9-24
  */
 public class EmotionsDao {
 
@@ -32,7 +32,6 @@ public class EmotionsDao {
         map.put("access_token", access_token);
         map.put("type", type);
         map.put("language", language);
-
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
 

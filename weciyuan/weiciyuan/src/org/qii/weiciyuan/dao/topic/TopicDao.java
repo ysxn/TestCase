@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.topic;
 
 import org.json.JSONException;
@@ -11,8 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-11-26
+ * User: qii Date: 12-11-26
  */
 public class TopicDao {
     private String access_token;
@@ -76,7 +76,6 @@ public class TopicDao {
 
             }
             return false;
-
 
         } catch (JSONException e) {
 

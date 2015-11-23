@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.content.Context;
@@ -15,10 +16,7 @@ import org.qii.weiciyuan.bean.UserBean;
 import org.qii.weiciyuan.support.asyncdrawable.IWeiciyuanDrawable;
 
 /**
- * User: qii
- * Date: 12-12-18
- * todo
- * this class and its child class need to be refactored
+ * User: qii Date: 12-12-18 todo this class and its child class need to be refactored
  */
 public class TimeLineImageView extends FrameLayout implements IWeiciyuanDrawable {
 
@@ -56,7 +54,6 @@ public class TimeLineImageView extends FrameLayout implements IWeiciyuanDrawable
         this.setAddStatesFromChildren(true);
     }
 
-
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
@@ -77,11 +74,9 @@ public class TimeLineImageView extends FrameLayout implements IWeiciyuanDrawable
         mImageView.setImageBitmap(bm);
     }
 
-
     public ImageView getImageView() {
         return mImageView;
     }
-
 
     public void setProgress(int value, int max) {
         pb.setVisibility(View.VISIBLE);
@@ -113,5 +108,3 @@ public class TimeLineImageView extends FrameLayout implements IWeiciyuanDrawable
         parentPressState = value;
     }
 }
-
-

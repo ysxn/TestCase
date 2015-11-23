@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference;
 
 import org.qii.weiciyuan.R;
@@ -16,8 +17,7 @@ import android.view.WindowManager;
 import android.webkit.WebView;
 
 /**
- * User: qii
- * Date: 13-4-18
+ * User: qii Date: 13-4-18
  */
 public class LicenseActivity extends AbstractAppActivity {
 
@@ -61,7 +61,6 @@ public class LicenseActivity extends AbstractAppActivity {
             super.onBackPressed();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

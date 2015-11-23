@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.smileypicker;
 
 import org.qii.weiciyuan.R;
@@ -30,8 +31,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * User: qii
- * Date: 13-1-18
+ * User: qii Date: 13-1-18
  */
 public class SmileyPicker extends LinearLayout {
 
@@ -107,7 +107,6 @@ public class SmileyPicker extends LinearLayout {
 
     }
 
-
     public void show(Activity paramActivity, boolean showAnimation) {
         if (showAnimation) {
             transitioner.setDuration(200);
@@ -118,8 +117,8 @@ public class SmileyPicker extends LinearLayout {
         SmileyPickerUtility.hideSoftInput(this.mEditText);
         getLayoutParams().height = this.mPickerHeight;
         setVisibility(View.VISIBLE);
-        //open smilepicker, press home, press app switcher to return to write weibo interface,
-        //softkeyboard will be opened by android system when smilepicker is showing,
+        // open smilepicker, press home, press app switcher to return to write weibo interface,
+        // softkeyboard will be opened by android system when smilepicker is showing,
         // this method is used to fix this issue
         paramActivity.getWindow()
                 .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -132,7 +131,6 @@ public class SmileyPicker extends LinearLayout {
                 .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
     }
-
 
     private class SmileyPagerAdapter extends PagerAdapter {
 
@@ -162,7 +160,6 @@ public class SmileyPicker extends LinearLayout {
         @Override
         public void setPrimaryItem(ViewGroup container, int position, Object object) {
             super.setPrimaryItem(container, position, object);
-
 
         }
 
@@ -279,7 +276,6 @@ public class SmileyPicker extends LinearLayout {
                 SmileyPickerUtility.getScreenHeight(this.activity)).
                 setDuration(transition.getDuration(LayoutTransition.DISAPPEARING));
         transition.setAnimator(LayoutTransition.DISAPPEARING, animOut);
-
 
     }
 }

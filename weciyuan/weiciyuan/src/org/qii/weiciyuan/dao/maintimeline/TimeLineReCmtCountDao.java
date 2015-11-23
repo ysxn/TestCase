@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.maintimeline;
 
 import com.google.gson.Gson;
@@ -16,8 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 13-2-14
+ * User: qii Date: 13-2-14
  */
 public class TimeLineReCmtCountDao {
 
@@ -33,13 +33,10 @@ public class TimeLineReCmtCountDao {
 
         map.put("ids", idsBuilder.toString());
 
-
         return HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
     }
 
-
     public List<MessageReCmtCountBean> get() throws WeiboException {
-
 
         String json = getJson();
 
@@ -52,10 +49,8 @@ public class TimeLineReCmtCountDao {
             AppLogger.e(e.getMessage());
         }
 
-
         return value;
     }
-
 
     private String access_token;
     private List<String> msgIds;

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent.unreadnotification;
 
 import org.qii.weiciyuan.bean.AccountBean;
@@ -7,19 +8,15 @@ import android.content.Intent;
 import android.os.IBinder;
 
 /**
- * User: qii
- * Date: 13-5-4
+ * User: qii Date: 13-5-4
  */
 public class NotificationServiceHelper extends Service {
 
-    protected static final String RESET_UNREAD_MENTIONS_WEIBO_ACTION
-            = "org.qii.weiciyuan.Notification.unread.reset.mentionsweibo";
+    protected static final String RESET_UNREAD_MENTIONS_WEIBO_ACTION = "org.qii.weiciyuan.Notification.unread.reset.mentionsweibo";
 
-    protected static final String RESET_UNREAD_MENTIONS_COMMENT_ACTION
-            = "org.qii.weiciyuan.Notification.unread.reset.mentionscomment";
+    protected static final String RESET_UNREAD_MENTIONS_COMMENT_ACTION = "org.qii.weiciyuan.Notification.unread.reset.mentionscomment";
 
-    protected static final String RESET_UNREAD_COMMENTS_TO_ME_ACTION
-            = "org.qii.weiciyuan.Notification.unread.reset.comments";
+    protected static final String RESET_UNREAD_COMMENTS_TO_ME_ACTION = "org.qii.weiciyuan.Notification.unread.reset.comments";
 
     private static final int MENTIONS_WEIBO_NOTIFICATION_ID = 1;
 
@@ -47,7 +44,6 @@ public class NotificationServiceHelper extends Service {
 
     public static final String TICKER = "ticker";
 
-
     public static int getMentionsWeiboNotificationId(AccountBean accountBean) {
         return accountBean.getUid().hashCode() + MENTIONS_WEIBO_NOTIFICATION_ID;
     }
@@ -70,7 +66,6 @@ public class NotificationServiceHelper extends Service {
     public static int getTokenExpiredNotificationId() {
         return TOKEN_EXPIRED_NOTIFICATION_ID;
     }
-
 
     @Override
     public IBinder onBind(Intent intent) {

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent.sendweiboservice;
 
 import org.qii.weiciyuan.R;
@@ -30,11 +31,9 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * User: qii
- * Date: 13-1-20
+ * User: qii Date: 13-1-20
  */
 public class SendCommentService extends Service {
-
 
     private Map<WeiboSendTask, Boolean> tasksResult = new HashMap<WeiboSendTask, Boolean>();
 
@@ -82,7 +81,6 @@ public class SendCommentService extends Service {
         return START_REDELIVER_INTENT;
 
     }
-
 
     private class WeiboSendTask extends MyAsyncTask<Void, Long, Void> {
 
@@ -142,7 +140,6 @@ public class SendCommentService extends Service {
 
         }
 
-
         private CommentBean sendText() throws WeiboException {
             CommentNewMsgDao dao = new CommentNewMsgDao(token, oriMsg.getId(), content);
             dao.enableComment_ori(comment_ori);
@@ -161,7 +158,6 @@ public class SendCommentService extends Service {
 
             return null;
         }
-
 
         @Override
         protected void onPostExecute(Void aVoid) {
@@ -189,8 +185,7 @@ public class SendCommentService extends Service {
                     .setSmallIcon(R.drawable.send_successfully)
                     .setOngoing(false);
             Notification notification = builder.getNotification();
-            final NotificationManager notificationManager
-                    = (NotificationManager) getApplicationContext()
+            final NotificationManager notificationManager = (NotificationManager) getApplicationContext()
                     .getSystemService(NOTIFICATION_SERVICE);
             final int id = tasksNotifications.get(task);
             notificationManager.notify(id, notification);
@@ -284,6 +279,5 @@ public class SendCommentService extends Service {
             stopSelf();
         }
     }
-
 
 }

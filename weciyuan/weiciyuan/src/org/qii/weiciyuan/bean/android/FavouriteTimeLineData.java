@@ -1,10 +1,10 @@
+
 package org.qii.weiciyuan.bean.android;
 
 import org.qii.weiciyuan.bean.FavListBean;
 
 /**
- * User: qii
- * Date: 13-5-30
+ * User: qii Date: 13-5-30
  */
 public class FavouriteTimeLineData {
     public FavListBean favList;

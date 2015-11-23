@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -5,8 +6,7 @@ import android.os.Parcelable;
 import org.qii.weiciyuan.support.utils.ObjectToStringUtility;
 
 /**
- * User: qii
- * Date: 12-10-7
+ * User: qii Date: 12-10-7
  */
 public class AtUserBean implements Parcelable {
     private String uid;
@@ -63,7 +63,6 @@ public class AtUserBean implements Parcelable {
     public void setRemark(String remark) {
         this.remark = remark;
     }
-
 
     @Override
     public String toString() {

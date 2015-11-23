@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.show;
 
 import com.google.gson.Gson;
@@ -13,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-7
+ * User: Jiang Qi Date: 12-8-7
  */
 public class ShowStatusDao {
 

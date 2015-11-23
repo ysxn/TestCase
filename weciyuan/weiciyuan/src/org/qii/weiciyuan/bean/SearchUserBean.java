@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -5,8 +6,7 @@ import android.os.Parcelable;
 import org.qii.weiciyuan.support.utils.ObjectToStringUtility;
 
 /**
- * User: qii
- * Date: 12-9-8
+ * User: qii Date: 12-9-8
  */
 public class SearchUserBean implements Parcelable {
     private String screen_name;
@@ -39,7 +39,6 @@ public class SearchUserBean implements Parcelable {
                     return new SearchUserBean[size];
                 }
             };
-
 
     public String getScreen_name() {
         return screen_name;

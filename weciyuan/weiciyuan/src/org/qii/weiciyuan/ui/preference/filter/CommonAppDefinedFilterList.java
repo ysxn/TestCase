@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference.filter;
 
 import java.util.Collections;
@@ -5,8 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * User: qii
- * Date: 13-6-17
+ * User: qii Date: 13-6-17
  */
 public class CommonAppDefinedFilterList {
     public static Set<String> getDefinedFilterKeywordAndUserList() {

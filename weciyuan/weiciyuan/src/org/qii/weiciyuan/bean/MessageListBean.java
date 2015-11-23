@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -11,8 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-7-29
+ * User: qii Date: 12-7-29
  */
 public class MessageListBean extends ListBean<MessageBean, MessageListBean> implements Parcelable {
 
@@ -57,7 +57,6 @@ public class MessageListBean extends ListBean<MessageBean, MessageListBean> impl
                 }
             };
 
-
     private List<MessageBean> getStatuses() {
         return statuses;
     }
@@ -65,7 +64,6 @@ public class MessageListBean extends ListBean<MessageBean, MessageListBean> impl
     public void setStatuses(List<MessageBean> statuses) {
         this.statuses = statuses;
     }
-
 
     @Override
     public int getSize() {
@@ -81,7 +79,6 @@ public class MessageListBean extends ListBean<MessageBean, MessageListBean> impl
     public List<MessageBean> getItemList() {
         return getStatuses();
     }
-
 
     public int getReceivedCount() {
         return getSize() + removedCount;
@@ -162,6 +159,5 @@ public class MessageListBean extends ListBean<MessageBean, MessageListBean> impl
     public String toString() {
         return ObjectToStringUtility.toString(this);
     }
-
 
 }

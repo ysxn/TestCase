@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.content.Context;
@@ -5,9 +6,9 @@ import android.util.AttributeSet;
 import android.widget.ListView;
 
 /**
- * User: qii
- * Date: 13-3-31
- * https://github.com/android/platform_packages_apps_contacts/blob/master/src/com/android/contacts/widget/AutoScrollListView.java
+ * User: qii Date: 13-3-31
+ * https://github.com/android/platform_packages_apps_contacts/blob/master/src
+ * /com/android/contacts/widget/AutoScrollListView.java
  * <p/>
  * ref http://cyrilmottier.com/2013/01/09/back-to-top-android-vs-ios/
  */
@@ -34,11 +35,11 @@ public class AutoScrollListView extends ListView {
     }
 
     /**
-     * Brings the specified position to view by optionally performing a jump-scroll maneuver:
-     * first it jumps to some position near the one requested and then does a smooth
-     * scroll to the requested position.  This creates an impression of full smooth
-     * scrolling without actually traversing the entire list.  If smooth scrolling is
-     * not requested, instantly positions the requested item at a preferred offset.
+     * Brings the specified position to view by optionally performing a jump-scroll maneuver: first
+     * it jumps to some position near the one requested and then does a smooth scroll to the
+     * requested position. This creates an impression of full smooth scrolling without actually
+     * traversing the entire list. If smooth scrolling is not requested, instantly positions the
+     * requested item at a preferred offset.
      */
     public void requestPositionToScreen(int position, boolean smoothScroll) {
         mRequestedScrollPosition = position;
@@ -95,7 +96,6 @@ public class AutoScrollListView extends ListView {
                     super.layoutChildren();
                 }
             }
-
 
             smoothScrollToPositionFromTop(position, offset);
         }

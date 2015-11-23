@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.dm;
 
 import com.google.gson.Gson;
@@ -15,8 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-11-14
+ * User: qii Date: 12-11-14
  */
 public class DMDao {
 

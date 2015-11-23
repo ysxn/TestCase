@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.basefragment;
 
 import org.qii.weiciyuan.R;
@@ -36,8 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * User: qii
- * Date: 12-8-18
+ * User: qii Date: 12-8-18
  */
 public abstract class AbstractUserListFragment extends AbstractAppFragment {
 
@@ -58,7 +58,6 @@ public abstract class AbstractUserListFragment extends AbstractAppFragment {
     protected static final int OLD_USER_LOADER_ID = 2;
 
     private boolean canLoadOldData = true;
-
 
     public ListView getListView() {
         return pullToRefreshListView.getRefreshableView();
@@ -90,11 +89,9 @@ public abstract class AbstractUserListFragment extends AbstractAppFragment {
         getListView().setFastScrollEnabled(SettingUtility.allowFastScroll());
     }
 
-
     public AbstractUserListFragment() {
 
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -147,7 +144,7 @@ public abstract class AbstractUserListFragment extends AbstractAppFragment {
                 getActivity());
         if (SettingUtility.getEnableSound()) {
             listener.addSoundEvent(PullToRefreshBase.State.RELEASE_TO_REFRESH, R.raw.psst1);
-            //            listener.addSoundEvent(PullToRefreshBase.State.GIVE_UP, R.raw.psst2);
+            // listener.addSoundEvent(PullToRefreshBase.State.GIVE_UP, R.raw.psst2);
             listener.addSoundEvent(PullToRefreshBase.State.RESET, R.raw.pop);
         }
         return listener;
@@ -183,14 +180,13 @@ public abstract class AbstractUserListFragment extends AbstractAppFragment {
         if (bean.getUsers().size() > 0) {
             empty.setVisibility(View.INVISIBLE);
             progressBar.setVisibility(View.INVISIBLE);
-//            listView.setVisibility(View.VISIBLE);
+            // listView.setVisibility(View.VISIBLE);
         } else {
             empty.setVisibility(View.INVISIBLE);
             progressBar.setVisibility(View.INVISIBLE);
-//            listView.setVisibility(View.INVISIBLE);
+            // listView.setVisibility(View.INVISIBLE);
         }
     }
-
 
     protected void showFooterView() {
         View view = footerView.findViewById(R.id.loading_progressbar);
@@ -228,7 +224,6 @@ public abstract class AbstractUserListFragment extends AbstractAppFragment {
         getLoaderManager().restartLoader(NEW_USER_LOADER_ID, null, userAsyncTaskLoaderCallback);
     }
 
-
     protected void loadOldMsg(View view) {
 
         if (getLoaderManager().getLoader(OLD_USER_LOADER_ID) != null || !canLoadOldData) {
@@ -240,12 +235,10 @@ public abstract class AbstractUserListFragment extends AbstractAppFragment {
         getLoaderManager().restartLoader(OLD_USER_LOADER_ID, null, userAsyncTaskLoaderCallback);
     }
 
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.actionbar_menu_userlistfragment, menu);
-
 
     }
 
@@ -260,13 +253,11 @@ public abstract class AbstractUserListFragment extends AbstractAppFragment {
         return super.onOptionsItemSelected(item);
     }
 
-
     private void showListView() {
         empty.setVisibility(View.INVISIBLE);
-//        listView.setVisibility(View.VISIBLE);
+        // listView.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.INVISIBLE);
     }
-
 
     private PullToRefreshListView getPullToRefreshListView() {
         return this.pullToRefreshListView;
@@ -340,7 +331,7 @@ public abstract class AbstractUserListFragment extends AbstractAppFragment {
             if (getListView().getLastVisiblePosition() > 7
                     && getListView().getLastVisiblePosition() > getList().getUsers().size() - 3
                     && getListView().getFirstVisiblePosition() != getListView()
-                    .getHeaderViewsCount()) {
+                            .getHeaderViewsCount()) {
                 loadOldMsg(null);
             }
         }
@@ -363,7 +354,6 @@ public abstract class AbstractUserListFragment extends AbstractAppFragment {
         return loader;
     }
 
-
     private Loader<AsyncTaskLoaderResult<UserListBean>> createOldUserLoader(int id, Bundle args) {
         Loader<AsyncTaskLoaderResult<UserListBean>> loader = onCreateOldUserLoader(id, args);
         if (loader == null) {
@@ -372,26 +362,21 @@ public abstract class AbstractUserListFragment extends AbstractAppFragment {
         return loader;
     }
 
-
     protected Loader<AsyncTaskLoaderResult<UserListBean>> onCreateNewUserLoader(int id,
             Bundle args) {
         return null;
     }
-
 
     protected Loader<AsyncTaskLoaderResult<UserListBean>> onCreateOldUserLoader(int id,
             Bundle args) {
         return null;
     }
 
-
-    protected LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<UserListBean>>
-            userAsyncTaskLoaderCallback
-            = new LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<UserListBean>>() {
+    protected LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<UserListBean>> userAsyncTaskLoaderCallback = new LoaderManager.LoaderCallbacks<AsyncTaskLoaderResult<UserListBean>>() {
 
         @Override
         public Loader<AsyncTaskLoaderResult<UserListBean>> onCreateLoader(int id, Bundle args) {
-//            clearActionMode();
+            // clearActionMode();
             showListView();
             switch (id) {
                 case NEW_USER_LOADER_ID:

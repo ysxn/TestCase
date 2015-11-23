@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.adapter;
 
 import android.app.AlertDialog;
@@ -21,11 +22,9 @@ import org.qii.weiciyuan.ui.send.WriteWeiboActivity;
 import org.qii.weiciyuan.ui.userinfo.ManageGroupDialog;
 
 /**
- * User: qii
- * Date: 13-3-10
+ * User: qii Date: 13-3-10
  */
 public class UserDialog extends DialogFragment {
-
 
     private UserBean user;
 
@@ -54,8 +53,12 @@ public class UserDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        CharSequence[] friendItems = {getString(R.string.at_him), getString(R.string.manage_group), getString(R.string.add_to_app_filter), getString(R.string.unfollow_him)};
-        CharSequence[] strangerItems = {getString(R.string.at_him), getString(R.string.follow_him), getString(R.string.add_to_app_filter)};
+        CharSequence[] friendItems = {
+                getString(R.string.at_him), getString(R.string.manage_group), getString(R.string.add_to_app_filter), getString(R.string.unfollow_him)
+        };
+        CharSequence[] strangerItems = {
+                getString(R.string.at_him), getString(R.string.follow_him), getString(R.string.add_to_app_filter)
+        };
         if (user.isFollowing()) {
             builder.setTitle(user.getScreen_name())
                     .setItems(friendItems, new FriendOnClicker());
@@ -205,6 +208,5 @@ public class UserDialog extends DialogFragment {
             user.setFollowing(false);
         }
     }
-
 
 }

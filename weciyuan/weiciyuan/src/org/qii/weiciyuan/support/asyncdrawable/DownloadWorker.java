@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.asyncdrawable;
 
 import org.qii.weiciyuan.support.file.FileDownloaderHttpHelper;
@@ -9,12 +10,9 @@ import org.qii.weiciyuan.support.lib.MyAsyncTask;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * User: qii
- * Date: 13-2-9
- * support to insert progressbar update
+ * User: qii Date: 13-2-9 support to insert progressbar update
  */
 public class DownloadWorker extends MyAsyncTask<String, Integer, Boolean> implements IPictureWorker {
-
 
     private String url = "";
     private CopyOnWriteArrayList<FileDownloaderHttpHelper.DownloadListener> downloadListenerList = new CopyOnWriteArrayList<FileDownloaderHttpHelper.DownloadListener>();
@@ -31,11 +29,9 @@ public class DownloadWorker extends MyAsyncTask<String, Integer, Boolean> implem
         this.method = method;
     }
 
-
     public void addDownloadListener(FileDownloaderHttpHelper.DownloadListener listener) {
         downloadListenerList.addIfAbsent(listener);
     }
-
 
     @Override
     protected Boolean doInBackground(String... d) {
@@ -89,6 +85,5 @@ public class DownloadWorker extends MyAsyncTask<String, Integer, Boolean> implem
                 downloadListener.pushProgress(values[0], values[1]);
         }
     }
-
 
 }

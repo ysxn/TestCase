@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -9,8 +10,7 @@ import org.qii.weiciyuan.support.utils.ObjectToStringUtility;
 import org.qii.weiciyuan.support.utils.TimeUtility;
 
 /**
- * User: qii
- * Date: 12-11-14
+ * User: qii Date: 12-11-14
  */
 public class DMUserBean extends ItemBean implements Parcelable {
     private int unread_count;
@@ -83,7 +83,6 @@ public class DMUserBean extends ItemBean implements Parcelable {
     public String getCreated_at() {
         return direct_message.getCreated_at();
     }
-
 
     public long getMills() {
         return mills;

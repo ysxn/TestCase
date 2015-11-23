@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
+
 package org.qii.weiciyuan.support.lib.pulltorefresh;
 
 import android.annotation.TargetApi;
@@ -66,8 +67,8 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
     @Override
     protected void onRefreshing(final boolean doScroll) {
         /**
-         * If we're not showing the Refreshing view, or the list is empty, the
-         * the header/footer views won't show so we use the normal method.
+         * If we're not showing the Refreshing view, or the list is empty, the the header/footer
+         * views won't show so we use the normal method.
          */
         ListAdapter adapter = mRefreshableView.getAdapter();
         if (!mListViewExtrasEnabled || !getShowViewWhileRefreshing() || null == adapter || adapter.isEmpty()) {
@@ -171,9 +172,8 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
             listViewLoadingLayout.setVisibility(View.GONE);
 
             /**
-             * Scroll so the View is at the same Y as the ListView
-             * header/footer, but only scroll if: we've pulled to refresh, it's
-             * positioned correctly
+             * Scroll so the View is at the same Y as the ListView header/footer, but only scroll
+             * if: we've pulled to refresh, it's positioned correctly
              */
             if (scrollLvToEdge && getState() != State.MANUAL_REFRESHING) {
                 mRefreshableView.setSelection(selection);
@@ -245,8 +245,8 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
             mLvFooterLoadingFrame.addView(mFooterLoadingView, lp);
 
             /**
-             * If the value for Scrolling While Refreshing hasn't been
-             * explicitly set via XML, enable Scrolling While Refreshing.
+             * If the value for Scrolling While Refreshing hasn't been explicitly set via XML,
+             * enable Scrolling While Refreshing.
              */
             if (!a.hasValue(R.styleable.PullToRefresh_ptrScrollingWhileRefreshingEnabled)) {
                 setScrollingWhileRefreshingEnabled(true);
@@ -263,7 +263,7 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
 
         @Override
         protected boolean overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY, int scrollRangeX,
-                                       int scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent) {
+                int scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent) {
 
             final boolean returnValue = super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX,
                     scrollRangeY, maxOverScrollX, maxOverScrollY, isTouchEvent);
@@ -286,9 +286,9 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
         @Override
         protected void dispatchDraw(Canvas canvas) {
             /**
-             * This is a bit hacky, but Samsung's ListView has got a bug in it
-             * when using Header/Footer Views and the list is empty. This masks
-             * the issue so that it doesn't cause an FC. See Issue #66.
+             * This is a bit hacky, but Samsung's ListView has got a bug in it when using
+             * Header/Footer Views and the list is empty. This masks the issue so that it doesn't
+             * cause an FC. See Issue #66.
              */
             try {
                 super.dispatchDraw(canvas);
@@ -300,9 +300,9 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
         @Override
         public boolean dispatchTouchEvent(MotionEvent ev) {
             /**
-             * This is a bit hacky, but Samsung's ListView has got a bug in it
-             * when using Header/Footer Views and the list is empty. This masks
-             * the issue so that it doesn't cause an FC. See Issue #66.
+             * This is a bit hacky, but Samsung's ListView has got a bug in it when using
+             * Header/Footer Views and the list is empty. This masks the issue so that it doesn't
+             * cause an FC. See Issue #66.
              */
             try {
                 return super.dispatchTouchEvent(ev);

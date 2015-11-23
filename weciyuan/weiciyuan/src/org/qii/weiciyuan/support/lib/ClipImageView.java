@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.content.Context;
@@ -12,8 +13,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 /**
- * User: qii
- * Date: 14-4-1
+ * User: qii Date: 14-4-1
  */
 public class ClipImageView extends ImageView {
 
@@ -40,12 +40,10 @@ public class ClipImageView extends ImageView {
         invalidate();
     }
 
-
     public void setClipVertical(float value) {
         this.clipVerticalPercent = value;
         invalidate();
     }
-
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -81,10 +79,9 @@ public class ClipImageView extends ImageView {
             int deltaY;
 
             if ((float) imageViewWidth / bitmapWidth
-                    > (float) imageviewHeight / bitmapHeight) {
-//                Extend start bounds horizontally
+            > (float) imageviewHeight / bitmapHeight) {
+                // Extend start bounds horizontally
                 startScale = (float) imageviewHeight / bitmapHeight;
-
 
             } else {
                 startScale = (float) imageViewWidth / bitmapWidth;

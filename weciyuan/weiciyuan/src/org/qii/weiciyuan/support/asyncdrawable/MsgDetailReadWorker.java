@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.asyncdrawable;
 
 import android.content.Intent;
@@ -20,10 +21,8 @@ import org.qii.weiciyuan.support.utils.GlobalContext;
 import org.qii.weiciyuan.support.utils.Utility;
 
 /**
- * User: qii
- * Date: 13-2-8
- * insert progress update listener into  download worker if it exists
- * or create a new download worker
+ * User: qii Date: 13-2-8 insert progress update listener into download worker if it exists or
+ * create a new download worker
  */
 public class MsgDetailReadWorker extends MyAsyncTask<Void, Integer, String> {
 
@@ -52,7 +51,6 @@ public class MsgDetailReadWorker extends MyAsyncTask<Void, Integer, String> {
             cancel(true);
             return;
         }
-
 
         middlePath = FileManager.getFilePathFromUrl(msg.getBmiddle_pic(), FileLocationMethod.picture_bmiddle);
 
@@ -91,7 +89,6 @@ public class MsgDetailReadWorker extends MyAsyncTask<Void, Integer, String> {
 
     }
 
-
     FileDownloaderHttpHelper.DownloadListener downloadListener = new FileDownloaderHttpHelper.DownloadListener() {
 
         @Override
@@ -99,7 +96,6 @@ public class MsgDetailReadWorker extends MyAsyncTask<Void, Integer, String> {
             onProgressUpdate(progress, max);
         }
     };
-
 
     @Override
     protected void onProgressUpdate(Integer... values) {
@@ -113,7 +109,6 @@ public class MsgDetailReadWorker extends MyAsyncTask<Void, Integer, String> {
 
             pb.setMax(max);
             pb.setProgress(progress);
-
 
         }
     }
@@ -157,7 +152,6 @@ public class MsgDetailReadWorker extends MyAsyncTask<Void, Integer, String> {
                 }
             });
         }
-
 
     }
 

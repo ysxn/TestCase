@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.content.Context;
@@ -6,8 +7,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 /**
- * User: qii
- * Date: 12-11-15
+ * User: qii Date: 12-11-15
  */
 public class PerformanceImageView extends ImageView {
 
@@ -32,7 +32,6 @@ public class PerformanceImageView extends ImageView {
         super.setImageDrawable(drawable);
         mBlockMeasurement = false;
     }
-
 
     @Override
     public void requestLayout() {

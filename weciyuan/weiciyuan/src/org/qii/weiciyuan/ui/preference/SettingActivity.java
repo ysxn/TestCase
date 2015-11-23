@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference;
 
 import org.qii.weiciyuan.R;
@@ -10,8 +11,7 @@ import android.preference.PreferenceFragment;
 import android.view.MenuItem;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-6
+ * User: Jiang Qi Date: 12-8-6
  */
 public class SettingActivity extends AbstractAppActivity {
 
@@ -19,7 +19,7 @@ public class SettingActivity extends AbstractAppActivity {
 
     public static final String AUTO_REFRESH = "auto_refresh";
 
-    //appearance
+    // appearance
     public static final String THEME = "theme";
 
     public static final String LIST_AVATAR_MODE = "list_avatar_mode";
@@ -36,10 +36,10 @@ public class SettingActivity extends AbstractAppActivity {
 
     public static final String SHOW_BIG_AVATAR = "show_big_avatar";
 
-    //read
+    // read
     public static final String READ_STYLE = "read_style";
 
-    //notification
+    // notification
     public static final String FREQUENCY = "frequency";
 
     public static final String ENABLE_FETCH_MSG = "enable_fetch_msg";
@@ -60,12 +60,10 @@ public class SettingActivity extends AbstractAppActivity {
 
     public static final String ENABLE_MENTION_COMMENT_TO_ME = "mention_comment_to_me";
 
-
-    //filter
+    // filter
     public static final String FILTER = "filter";
 
-
-    //traffic control
+    // traffic control
     public static final String UPLOAD_PIC_QUALITY = "upload_pic_quality";
 
     public static final String COMMENT_REPOST_AVATAR = "comment_repost_list_avatar";
@@ -80,18 +78,17 @@ public class SettingActivity extends AbstractAppActivity {
 
     public static final String WIFI_AUTO_DOWNLOAD_PIC = "enable_wifi_auto_download_pic";
 
-    //performance
-    public static final String DISABLE_HARDWARE_ACCELERATED
-            = "pref_disable_hardware_accelerated_key";
+    // performance
+    public static final String DISABLE_HARDWARE_ACCELERATED = "pref_disable_hardware_accelerated_key";
 
-    //other
+    // other
     public static final String ENABLE_INTERNAL_WEB_BROWSER = "enable_internal_web_browser";
 
     public static final String ENABLE_CLICK_TO_CLOSE_GALLERY = "enable_click_to_close_gallery";
 
     public static final String CLICK_TO_CLEAN_CACHE = "click_to_clean_cache";
 
-    //about
+    // about
     public static final String OFFICIAL_WEIBO = "pref_official_weibo_key";
 
     public static final String SUGGEST = "pref_suggest_key";
@@ -114,7 +111,6 @@ public class SettingActivity extends AbstractAppActivity {
 
     public static final String CRASH = "pref_crash_key";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -131,7 +127,6 @@ public class SettingActivity extends AbstractAppActivity {
         }
 
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -156,5 +151,3 @@ public class SettingActivity extends AbstractAppActivity {
     }
 
 }
-
-

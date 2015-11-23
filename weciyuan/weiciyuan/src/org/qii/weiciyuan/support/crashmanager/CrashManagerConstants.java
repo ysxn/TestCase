@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.crashmanager;
 
 import android.content.Context;
@@ -5,8 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 /**
- * User: qii
- * Date: 13-3-21
+ * User: qii Date: 13-3-21
  */
 public class CrashManagerConstants {
     static String APP_VERSION = null;
@@ -14,7 +14,6 @@ public class CrashManagerConstants {
     static String ANDROID_VERSION = null;
     static String PHONE_MODEL = null;
     static String PHONE_MANUFACTURER = null;
-
 
     public static void loadFromContext(Context context) {
 

@@ -1,12 +1,11 @@
+
 package org.qii.weiciyuan.support.smileypicker;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 13-3-4
- * 42+6=48
+ * User: qii Date: 13-3-4 42+6=48
  */
 public class SmileyMap {
 
@@ -73,7 +72,6 @@ public class SmileyMap {
         general.put("[拜拜]", "face062.png");
         general.put("[疑问]", "face055.png");
 
-
         general.put("[赞]", "face329.png");
         general.put("[心]", "hearta_org.png");
         general.put("[伤心]", "unheart.png");
@@ -90,7 +88,6 @@ public class SmileyMap {
         general.put("[咖啡]", "face74.png");
         general.put("[爱心传递]", "face221.png");
         general.put("[来]", "face277.png");
-
 
         general.put("[熊猫]", "face002.png");
         general.put("[帅]", "face94.png");
@@ -140,7 +137,6 @@ public class SmileyMap {
         huahua.put("[赞啊]", "lxh_zana.png");
         huahua.put("[被电]", "lxh_beidian.png");
         huahua.put("[霹雳]", "lxh_pili.png");
-
 
     }
 

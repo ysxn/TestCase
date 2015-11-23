@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.maintimeline;
 
 import org.qii.weiciyuan.bean.GroupListBean;
@@ -8,11 +9,9 @@ import org.qii.weiciyuan.support.lib.MyAsyncTask;
 import org.qii.weiciyuan.support.utils.GlobalContext;
 
 /**
- * User: qii
- * Date: 12-12-28
+ * User: qii Date: 12-12-28
  */
 public class GroupInfoTask extends MyAsyncTask<Void, GroupListBean, GroupListBean> {
-
 
     private WeiboException e;
 
@@ -34,7 +33,6 @@ public class GroupInfoTask extends MyAsyncTask<Void, GroupListBean, GroupListBea
         }
         return null;
     }
-
 
     @Override
     protected void onPostExecute(GroupListBean groupListBean) {

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent.unreadnotification;
 
 import android.app.Notification;
@@ -21,8 +22,7 @@ import org.qii.weiciyuan.ui.send.WriteCommentActivity;
 import org.qii.weiciyuan.ui.send.WriteReplyToCommentActivity;
 
 /**
- * User: qii
- * Date: 12-12-5
+ * User: qii Date: 12-12-5
  */
 @Deprecated
 public class JBBigTextNotification {
@@ -36,14 +36,14 @@ public class JBBigTextNotification {
 
     private UnreadBean unreadBean;
 
-    //only leave one broadcast receiver
+    // only leave one broadcast receiver
     private static BroadcastReceiver clearNotificationEventReceiver;
 
     public JBBigTextNotification(Context context,
-                                 AccountBean accountBean,
-                                 CommentListBean comment,
-                                 MessageListBean repost,
-                                 CommentListBean mentionCommentsResult, UnreadBean unreadBean) {
+            AccountBean accountBean,
+            CommentListBean comment,
+            MessageListBean repost,
+            CommentListBean mentionCommentsResult, UnreadBean unreadBean) {
         this.context = context;
         this.accountBean = accountBean;
         this.comment = comment;
@@ -51,7 +51,6 @@ public class JBBigTextNotification {
         this.mentionCommentsResult = mentionCommentsResult;
         this.unreadBean = unreadBean;
     }
-
 
     private PendingIntent getPendingIntent() {
         Intent i = new Intent(context, MainTimeLineActivity.class);
@@ -113,13 +112,11 @@ public class JBBigTextNotification {
         PendingIntent deletedPendingIntent = PendingIntent.getBroadcast(GlobalContext.getInstance(), 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setDeleteIntent(deletedPendingIntent);
 
-
         Notification.BigTextStyle bigTextStyle = new Notification.BigTextStyle(builder);
 
         if (unreadBean.getMention_status() == 1) {
             bigTextStyle.setBigContentTitle(repost.getItem(0).getUser().getScreen_name() + "：");
             bigTextStyle.bigText(repost.getItem(0).getText());
-
 
             Intent intent = new Intent(context, WriteCommentActivity.class);
             intent.putExtra("token", accountBean.getAccess_token());
@@ -127,7 +124,6 @@ public class JBBigTextNotification {
 
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             builder.addAction(R.drawable.comment_light, context.getString(R.string.comments), pendingIntent);
-
 
         }
 
@@ -153,7 +149,6 @@ public class JBBigTextNotification {
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             builder.addAction(R.drawable.reply_to_comment_light, context.getString(R.string.reply_to_comment), pendingIntent);
         }
-
 
         bigTextStyle.setSummaryText(accountBean.getUsernick());
 

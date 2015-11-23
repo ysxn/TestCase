@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.friendgroup;
 
 import android.app.AlertDialog;
@@ -11,8 +12,7 @@ import android.widget.EditText;
 import org.qii.weiciyuan.R;
 
 /**
- * User: qii
- * Date: 13-2-15
+ * User: qii Date: 13-2-15
  */
 public class AddGroupDialog extends DialogFragment {
     private EditText name;

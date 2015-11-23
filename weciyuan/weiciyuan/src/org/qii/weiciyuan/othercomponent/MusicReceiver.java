@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent;
 
 import org.qii.weiciyuan.bean.android.MusicInfo;
@@ -10,8 +11,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 
 /**
- * User: qii
- * Date: 14-2-5
+ * User: qii Date: 14-2-5
  */
 public class MusicReceiver extends RecordOperationAppBroadcastReceiver {
 

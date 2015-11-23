@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.group;
 
 import com.google.gson.Gson;
@@ -12,8 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 13-2-16
+ * User: qii Date: 13-2-16
  */
 public class DestroyGroupDao {
 
@@ -41,8 +41,7 @@ public class DestroyGroupDao {
     }
 
     /**
-     * http://open.weibo.com/wiki/2/friendships/groups/destroy
-     * suggest use idstr
+     * http://open.weibo.com/wiki/2/friendships/groups/destroy suggest use idstr
      */
 
     public DestroyGroupDao(String token, String list_id) {

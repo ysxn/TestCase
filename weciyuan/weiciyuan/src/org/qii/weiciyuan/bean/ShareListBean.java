@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.bean;
 
 import android.os.Parcel;
@@ -8,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-2-27
+ * User: qii Date: 13-2-27
  */
 public class ShareListBean extends ListBean<MessageBean, ShareListBean> implements Parcelable {
     private String url_long;
@@ -56,7 +56,6 @@ public class ShareListBean extends ListBean<MessageBean, ShareListBean> implemen
                     return new ShareListBean[size];
                 }
             };
-
 
     public String getUrl_long() {
         return url_long;

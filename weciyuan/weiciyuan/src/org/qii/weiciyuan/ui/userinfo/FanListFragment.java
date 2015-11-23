@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.userinfo;
 
 import org.qii.weiciyuan.bean.UserBean;
@@ -15,8 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-16
+ * User: Jiang Qi Date: 12-8-16
  */
 public class FanListFragment extends AbstractFriendsFanListFragment {
 
@@ -32,7 +32,6 @@ public class FanListFragment extends AbstractFriendsFanListFragment {
         super();
     }
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -43,7 +42,6 @@ public class FanListFragment extends AbstractFriendsFanListFragment {
     protected UserBean getCurrentUser() {
         return getArguments().getParcelable("userBean");
     }
-
 
     private class FanListOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 
@@ -89,7 +87,6 @@ public class FanListFragment extends AbstractFriendsFanListFragment {
         }
     }
 
-
     @Override
     protected Loader<AsyncTaskLoaderResult<UserListBean>> onCreateNewUserLoader(int id,
             Bundle args) {
@@ -112,7 +109,4 @@ public class FanListFragment extends AbstractFriendsFanListFragment {
         return new FanUserLoader(getActivity(), token, getCurrentUser().getId(), cursor);
     }
 
-
 }
-
-

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.imageutility;
 
 import android.content.Context;
@@ -11,8 +12,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-14
+ * User: Jiang Qi Date: 12-8-14
  */
 public class ImageEditUtility {
     public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
@@ -60,7 +60,7 @@ public class ImageEditUtility {
             FileManager.createNewFileInSDCard(path);
             FileOutputStream out = new FileOutputStream(path);
             output.compress(Bitmap.CompressFormat.PNG, 90, out);
-//            bitmap.recycle();
+            // bitmap.recycle();
             if (new File(path).exists())
                 return path;
         } catch (Exception e) {

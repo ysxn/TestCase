@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.main;
 
 import org.qii.weiciyuan.R;
@@ -25,8 +26,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * User: qii
- * Date: 13-3-31
+ * User: qii Date: 13-3-31
  */
 public class MentionsTimeLine extends AbstractAppFragment
         implements MainTimeLineActivity.ScrollableListFragment {
@@ -53,8 +53,7 @@ public class MentionsTimeLine extends AbstractAppFragment
 
         if ((((MainTimeLineActivity) getActivity()).getMenuFragment()).getCurrentIndex()
                 == LeftMenuFragment.MENTIONS_INDEX) {
-            buildActionBarAndViewPagerTitles(
-                    ((MainTimeLineActivity) getActivity()).getMenuFragment().mentionsTabIndex);
+            buildActionBarAndViewPagerTitles(((MainTimeLineActivity) getActivity()).getMenuFragment().mentionsTabIndex);
         }
     }
 
@@ -141,7 +140,6 @@ public class MentionsTimeLine extends AbstractAppFragment
 
     }
 
-
     public void buildActionBarAndViewPagerTitles(int nav) {
         ((MainTimeLineActivity) getActivity()).setCurrentFragment(this);
 
@@ -184,8 +182,7 @@ public class MentionsTimeLine extends AbstractAppFragment
         return tabMap.get(MENTIONS_COMMENT_CHILD_POSITION);
     }
 
-    ViewPager.SimpleOnPageChangeListener onPageChangeListener
-            = new ViewPager.SimpleOnPageChangeListener() {
+    ViewPager.SimpleOnPageChangeListener onPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
         @Override
         public void onPageSelected(int position) {
             ActionBar ab = getActivity().getActionBar();
@@ -218,10 +215,8 @@ public class MentionsTimeLine extends AbstractAppFragment
         }
     };
 
-
     public MentionsCommentTimeLineFragment getMentionsCommentTimeLineFragment() {
-        MentionsCommentTimeLineFragment fragment
-                = ((MentionsCommentTimeLineFragment) getChildFragmentManager().findFragmentByTag(
+        MentionsCommentTimeLineFragment fragment = ((MentionsCommentTimeLineFragment) getChildFragmentManager().findFragmentByTag(
                 MentionsCommentTimeLineFragment.class.getName()));
         if (fragment == null) {
             fragment = new MentionsCommentTimeLineFragment(
@@ -234,8 +229,7 @@ public class MentionsTimeLine extends AbstractAppFragment
     }
 
     public MentionsWeiboTimeLineFragment getMentionsWeiboTimeLineFragment() {
-        MentionsWeiboTimeLineFragment fragment
-                = ((MentionsWeiboTimeLineFragment) getChildFragmentManager().findFragmentByTag(
+        MentionsWeiboTimeLineFragment fragment = ((MentionsWeiboTimeLineFragment) getChildFragmentManager().findFragmentByTag(
                 MentionsWeiboTimeLineFragment.class.getName()));
         if (fragment == null) {
             fragment = new MentionsWeiboTimeLineFragment(

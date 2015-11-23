@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import org.qii.weiciyuan.R;
@@ -23,12 +24,12 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * User: qii
- * Date: 13-4-20
+ * User: qii Date: 13-4-20
  */
 public class TopTipBar extends TextView {
 
-    //always show toptipbar, or hide itself when handling out of date data (for example user scroll down listview)
+    // always show toptipbar, or hide itself when handling out of date data (for example user scroll
+    // down listview)
     public enum Type {
         ALWAYS, AUTO
     }
@@ -44,7 +45,6 @@ public class TopTipBar extends TextView {
     private OnChangeListener onChangeListener;
 
     private Type type;
-
 
     private static class TopTipBarComparator implements Comparator<Long>, Serializable {
 
@@ -68,7 +68,6 @@ public class TopTipBar extends TextView {
         public void onChange(int count);
 
     }
-
 
     public void setOnChangeListener(OnChangeListener l) {
         this.onChangeListener = l;
@@ -160,7 +159,6 @@ public class TopTipBar extends TextView {
         }
     }
 
-
     private void setCount() {
 
         this.error = false;
@@ -175,14 +173,13 @@ public class TopTipBar extends TextView {
         }
     }
 
-
     public void hideCount() {
         if (!error) {
             setVisibility(View.INVISIBLE);
         }
     }
 
-    //helperId can be used to keep TopTipBar stay Visible status
+    // helperId can be used to keep TopTipBar stay Visible status
     public void handle(long id, long helperId) {
         if (disappear || id == 0L) {
             return;
@@ -236,11 +233,11 @@ public class TopTipBar extends TextView {
 
     @Override
     public Parcelable onSaveInstanceState() {
-        //begin boilerplate code that allows parent classes to save state
+        // begin boilerplate code that allows parent classes to save state
         Parcelable superState = super.onSaveInstanceState();
 
         SavedState ss = new SavedState(superState);
-        //end
+        // end
 
         ss.ids = this.ids;
         ss.disappear = this.disappear;
@@ -300,10 +297,12 @@ public class TopTipBar extends TextView {
             bundle.putSerializable("ids", ids);
             bundle.putSerializable("type", type);
             out.writeBundle(bundle);
-            out.writeBooleanArray(new boolean[]{this.disappear, this.visible});
+            out.writeBooleanArray(new boolean[] {
+                    this.disappear, this.visible
+            });
         }
 
-        //required field that makes Parcelables from a Parcel
+        // required field that makes Parcelables from a Parcel
         public static final Parcelable.Creator<SavedState> CREATOR =
                 new Parcelable.Creator<SavedState>() {
                     public SavedState createFromParcel(Parcel in) {

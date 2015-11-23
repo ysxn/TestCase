@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.search;
 
 import com.google.gson.Gson;
@@ -15,8 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-10-7
+ * User: qii Date: 12-10-7
  */
 public class AtUserDao {
 
@@ -31,7 +31,6 @@ public class AtUserDao {
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
 
-
         Gson gson = new Gson();
 
         List<AtUserBean> value = null;
@@ -42,7 +41,6 @@ public class AtUserDao {
 
             AppLogger.e(e.getMessage());
         }
-
 
         return value;
 

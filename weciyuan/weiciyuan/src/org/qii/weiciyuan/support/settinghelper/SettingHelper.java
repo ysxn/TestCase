@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.settinghelper;
 
 import android.content.Context;
@@ -5,8 +6,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 /**
- * User: qii
- * Date: 12-11-28
+ * User: qii Date: 12-11-28
  */
 class SettingHelper {
     private static SharedPreferences.Editor editor = null;

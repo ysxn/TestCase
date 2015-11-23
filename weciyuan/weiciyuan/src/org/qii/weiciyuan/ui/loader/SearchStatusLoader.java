@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.loader;
 
 import android.content.Context;
@@ -9,8 +10,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * User: qii
- * Date: 13-5-12
+ * User: qii Date: 13-5-12
  */
 public class SearchStatusLoader extends AbstractAsyncNetRequestTaskLoader<SearchStatusListBean> {
 
@@ -27,7 +27,6 @@ public class SearchStatusLoader extends AbstractAsyncNetRequestTaskLoader<Search
         this.page = page;
     }
 
-
     public SearchStatusListBean loadData() throws WeiboException {
         SearchDao dao = new SearchDao(token, searchWord);
         dao.setPage(page);
@@ -41,10 +40,7 @@ public class SearchStatusLoader extends AbstractAsyncNetRequestTaskLoader<Search
             lock.unlock();
         }
 
-
         return result;
     }
 
 }
-
-

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.dm;
 
 import org.qii.weiciyuan.dao.URLHelper;
@@ -9,12 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 13-3-2
- * http://open.weibo.com/wiki/2/direct_messages/new
+ * User: qii Date: 13-3-2 http://open.weibo.com/wiki/2/direct_messages/new
  */
 public class SendDMDao {
-
 
     public boolean send() throws WeiboException {
         String apiUrl = URLHelper.DM_SENT;

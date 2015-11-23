@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference;
 
 import android.app.ActionBar;
@@ -24,8 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-10-24
+ * User: qii Date: 12-10-24
  */
 public class NotificationFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -67,7 +67,6 @@ public class NotificationFragment extends PreferenceFragment implements SharedPr
         switchBtn.setChecked(SettingUtility.getEnableFetchMSG());
         switchPre(SettingUtility.getEnableFetchMSG());
 
-
         getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 
         frequency = findPreference(SettingActivity.FREQUENCY);
@@ -94,7 +93,7 @@ public class NotificationFragment extends PreferenceFragment implements SharedPr
 
     }
 
-    //confirm getActivity() is not null
+    // confirm getActivity() is not null
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -162,7 +161,6 @@ public class NotificationFragment extends PreferenceFragment implements SharedPr
         } else {
             ringtone.setSummary(getString(R.string.silent));
         }
-
 
     }
 

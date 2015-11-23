@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.send;
 
 import org.qii.weiciyuan.R;
@@ -31,13 +32,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
- * User: qii
- * Date: 12-9-25
+ * User: qii Date: 12-9-25
  */
 public abstract class AbstractWriteActivity<T> extends AbstractAppActivity
         implements View.OnClickListener, ClearContentDialog.IClear
         , SaveDraftDialog.IDraft {
-
 
     protected abstract boolean canSend();
 
@@ -51,11 +50,9 @@ public abstract class AbstractWriteActivity<T> extends AbstractAppActivity
 
     protected String token;
 
-
     protected EditText getEditTextView() {
         return et;
     }
-
 
     @Override
     public void clear() {
@@ -73,13 +70,11 @@ public abstract class AbstractWriteActivity<T> extends AbstractAppActivity
         getEditTextView().setSelection(index + emotionChar.length());
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -152,7 +147,7 @@ public abstract class AbstractWriteActivity<T> extends AbstractAppActivity
     public void hideSmileyPicker(boolean showKeyBoard) {
         if (this.smiley.isShown()) {
             if (showKeyBoard) {
-                //this time softkeyboard is hidden
+                // this time softkeyboard is hidden
                 LinearLayout.LayoutParams localLayoutParams = (LinearLayout.LayoutParams) this
                         .container.getLayoutParams();
                 localLayoutParams.height = smiley.getTop();
@@ -183,8 +178,7 @@ public abstract class AbstractWriteActivity<T> extends AbstractAppActivity
 
     public void unlockContainerHeightDelayed() {
 
-        ((LinearLayout.LayoutParams) AbstractWriteActivity.this.container.getLayoutParams()).weight
-                = 1.0F;
+        ((LinearLayout.LayoutParams) AbstractWriteActivity.this.container.getLayoutParams()).weight = 1.0F;
 
     }
 
@@ -195,8 +189,7 @@ public abstract class AbstractWriteActivity<T> extends AbstractAppActivity
                 if (smiley.isShown()) {
                     hideSmileyPicker(true);
                 } else {
-                    showSmileyPicker(
-                            SmileyPickerUtility.isKeyBoardShow(AbstractWriteActivity.this));
+                    showSmileyPicker(SmileyPickerUtility.isKeyBoardShow(AbstractWriteActivity.this));
                 }
                 break;
 
@@ -280,6 +273,5 @@ public abstract class AbstractWriteActivity<T> extends AbstractAppActivity
 
         }
     }
-
 
 }

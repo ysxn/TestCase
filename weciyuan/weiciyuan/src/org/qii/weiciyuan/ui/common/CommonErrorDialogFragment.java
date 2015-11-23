@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.common;
 
 import org.qii.weiciyuan.R;
@@ -9,11 +10,9 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
 /**
- * User: qii
- * Date: 13-12-4
+ * User: qii Date: 13-12-4
  */
 public class CommonErrorDialogFragment extends DialogFragment {
-
 
     public CommonErrorDialogFragment() {
 
@@ -26,7 +25,6 @@ public class CommonErrorDialogFragment extends DialogFragment {
         fragment.setArguments(bundle);
         return fragment;
     }
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

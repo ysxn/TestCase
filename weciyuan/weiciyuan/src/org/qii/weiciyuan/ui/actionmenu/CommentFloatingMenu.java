@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.actionmenu;
 
 import org.qii.weiciyuan.R;
@@ -14,8 +15,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
 /**
- * User: qii
- * Date: 12-12-6
+ * User: qii Date: 12-12-6
  */
 public class CommentFloatingMenu extends DialogFragment {
 
@@ -31,7 +31,6 @@ public class CommentFloatingMenu extends DialogFragment {
 
     }
 
-
     public CommentFloatingMenu(CommentBean bean) {
         this.bean = bean;
     }
@@ -45,7 +44,9 @@ public class CommentFloatingMenu extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(this.bean.getUser().getScreen_name());
-        String[] str = {getString(R.string.view), getString(R.string.reply_to_comment)};
+        String[] str = {
+                getString(R.string.view), getString(R.string.reply_to_comment)
+        };
         builder.setItems(str, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

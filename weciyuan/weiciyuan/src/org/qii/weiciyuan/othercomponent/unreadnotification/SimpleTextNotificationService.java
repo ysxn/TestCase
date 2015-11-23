@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent.unreadnotification;
 
 import org.qii.weiciyuan.R;
@@ -25,8 +26,7 @@ import android.widget.Toast;
 import java.util.HashMap;
 
 /**
- * User: qii
- * Date: 14-3-8
+ * User: qii Date: 14-3-8
  */
 public class SimpleTextNotificationService extends NotificationServiceHelper {
 
@@ -43,10 +43,8 @@ public class SimpleTextNotificationService extends NotificationServiceHelper {
         private RecordOperationAppBroadcastReceiver clearNotificationEventReceiver;
     }
 
-    //key is account uid
-    private static HashMap<String, ValueWrapper> valueBagHashMap
-            = new HashMap<String, ValueWrapper>();
-
+    // key is account uid
+    private static HashMap<String, ValueWrapper> valueBagHashMap = new HashMap<String, ValueWrapper>();
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -72,7 +70,6 @@ public class SimpleTextNotificationService extends NotificationServiceHelper {
         return super.onStartCommand(intent, flags, startId);
     }
 
-
     private void buildNotification(String uid) {
 
         ValueWrapper valueWrapper = valueBagHashMap.get(uid);
@@ -88,8 +85,7 @@ public class SimpleTextNotificationService extends NotificationServiceHelper {
 
         String ticker = valueWrapper.ticker;
 
-        final RecordOperationAppBroadcastReceiver clearNotificationEventReceiver
-                = valueWrapper.clearNotificationEventReceiver;
+        final RecordOperationAppBroadcastReceiver clearNotificationEventReceiver = valueWrapper.clearNotificationEventReceiver;
 
         Notification.Builder builder = new Notification.Builder(getBaseContext())
                 .setTicker(ticker)
@@ -170,6 +166,5 @@ public class SimpleTextNotificationService extends NotificationServiceHelper {
                         PendingIntent.FLAG_UPDATE_CURRENT);
         return pendingIntent;
     }
-
 
 }

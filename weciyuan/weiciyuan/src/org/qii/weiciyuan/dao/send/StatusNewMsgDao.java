@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.send;
 
 import android.text.TextUtils;
@@ -12,8 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-7-29
+ * User: qii Date: 12-7-29
  */
 public class StatusNewMsgDao {
 

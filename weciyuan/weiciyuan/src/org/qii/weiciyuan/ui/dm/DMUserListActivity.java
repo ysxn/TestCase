@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.dm;
 
 import org.qii.weiciyuan.R;
@@ -9,8 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 /**
- * User: qii
- * Date: 13-1-23
+ * User: qii Date: 13-1-23
  */
 public class DMUserListActivity extends AbstractAppActivity {
 
@@ -29,7 +29,6 @@ public class DMUserListActivity extends AbstractAppActivity {
         }
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
@@ -42,6 +41,5 @@ public class DMUserListActivity extends AbstractAppActivity {
         }
         return false;
     }
-
 
 }

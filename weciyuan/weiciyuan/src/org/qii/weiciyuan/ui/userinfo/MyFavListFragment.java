@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.userinfo;
 
 import org.qii.weiciyuan.R;
@@ -32,9 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 12-8-18
- * this class need to refactor
+ * User: qii Date: 12-8-18 this class need to refactor
  */
 public class MyFavListFragment extends AbstractMessageTimeLineFragment<FavListBean>
         implements MainTimeLineActivity.ScrollableListFragment {
@@ -67,15 +66,15 @@ public class MyFavListFragment extends AbstractMessageTimeLineFragment<FavListBe
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-//        outState.putSerializable("bean", bean);
-//        outState.putInt("page", page);
+        // outState.putSerializable("bean", bean);
+        // outState.putInt("page", page);
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        inflater.inflate(R.menu.actionbar_menu_myfavlistfragment, menu);
-//    }
+    // @Override
+    // public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    // super.onCreateOptionsMenu(menu, inflater);
+    // inflater.inflate(R.menu.actionbar_menu_myfavlistfragment, menu);
+    // }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -89,7 +88,7 @@ public class MyFavListFragment extends AbstractMessageTimeLineFragment<FavListBe
                 readDBCache();
                 break;
             case SCREEN_ROTATE:
-                //nothing
+                // nothing
                 refreshLayout(bean);
                 break;
             case ACTIVITY_DESTROY_AND_CREATE:
@@ -136,7 +135,7 @@ public class MyFavListFragment extends AbstractMessageTimeLineFragment<FavListBe
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //use Up instead of Back to reach this fragment
+        // use Up instead of Back to reach this fragment
         if (data == null) {
             return;
         }
@@ -158,12 +157,11 @@ public class MyFavListFragment extends AbstractMessageTimeLineFragment<FavListBe
         }
     }
 
-
     private void buildActionBarSubtitle() {
         if (bean != null) {
             int newSize = bean.getTotal_number();
             String number = bean.getSize() + "/" + newSize;
-//            getActivity().getActionBar().setSubtitle(number);
+            // getActivity().getActionBar().setSubtitle(number);
         }
     }
 
@@ -194,7 +192,6 @@ public class MyFavListFragment extends AbstractMessageTimeLineFragment<FavListBe
         }
     }
 
-
     @Override
     protected void newMsgLoaderSuccessCallback(FavListBean newValue, Bundle loaderArgs) {
         if (newValue != null && getActivity() != null && newValue.getSize() > 0) {
@@ -223,7 +220,6 @@ public class MyFavListFragment extends AbstractMessageTimeLineFragment<FavListBe
         getAdapter().notifyDataSetChanged();
         getListView().setSelectionAfterHeaderView();
     }
-
 
     @Override
     protected Loader<AsyncTaskLoaderResult<FavListBean>> onCreateNewMsgLoader(int id, Bundle args) {
@@ -257,11 +253,9 @@ public class MyFavListFragment extends AbstractMessageTimeLineFragment<FavListBe
         FavouriteDBTask.asyncUpdatePosition(position, account.getUid());
     }
 
-
     private void savePositionToPositionsCache() {
         position = Utility.getCurrentPositionFromListView(getListView());
     }
-
 
     private void setListViewPositionFromPositionsCache() {
         TimeLinePosition p = position;
@@ -271,9 +265,7 @@ public class MyFavListFragment extends AbstractMessageTimeLineFragment<FavListBe
             getListView().setSelectionFromTop(0, 0);
         }
 
-
     }
-
 
     private class DBCacheTask
             extends MyAsyncTask<Void, FavouriteTimeLineData, FavouriteTimeLineData> {
@@ -317,7 +309,6 @@ public class MyFavListFragment extends AbstractMessageTimeLineFragment<FavListBe
             }
         }
     }
-
 
     private class RefreshReCmtCountTask
             extends MyAsyncTask<Void, List<MessageReCmtCountBean>, List<MessageReCmtCountBean>> {

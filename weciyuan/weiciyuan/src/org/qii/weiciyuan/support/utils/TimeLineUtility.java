@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.utils;
 
 import org.qii.weiciyuan.bean.CommentBean;
@@ -26,15 +27,13 @@ import java.util.List;
 import java.util.regex.Matcher;
 
 /**
- * User: qii
- * Date: 12-8-29
- * build emotions and clickable string in other threads except UI thread, improve listview scroll performance
+ * User: qii Date: 12-8-29 build emotions and clickable string in other threads except UI thread,
+ * improve listview scroll performance
  */
 public class TimeLineUtility {
 
     private TimeLineUtility() {
     }
-
 
     public static void addLinks(TextView view) {
         CharSequence content = view.getText();
@@ -45,8 +44,9 @@ public class TimeLineUtility {
     }
 
     public static SpannableString convertNormalStringToSpannableString(String txt) {
-        //hack to fix android imagespan bug,see http://stackoverflow.com/questions/3253148/imagespan-is-cut-off-incorrectly-aligned
-        //if string only contains emotion tags,add a empty char to the end
+        // hack to fix android imagespan bug,see
+        // http://stackoverflow.com/questions/3253148/imagespan-is-cut-off-incorrectly-aligned
+        // if string only contains emotion tags,add a empty char to the end
         String hackTxt;
         if (txt.startsWith("[") && txt.endsWith("]")) {
             hackTxt = txt + " ";
@@ -171,7 +171,6 @@ public class TimeLineUtility {
         List<String> topicFilter = FilterDBTask.getFilterKeywordList(FilterDBTask.TYPE_TOPIC);
         List<String> sourceFilter = FilterDBTask.getFilterKeywordList(FilterDBTask.TYPE_SOURCE);
 
-
         while (iterator.hasNext()) {
             MessageBean msg = iterator.next();
             if (msg.getUser() == null) {
@@ -190,7 +189,7 @@ public class TimeLineUtility {
     public static boolean haveFilterWord(MessageBean content, List<String> keywordFilter
             , List<String> userFilter, List<String> topicFilter, List<String> sourceFilter) {
 
-        //if this message is sent myself, ignore it;
+        // if this message is sent myself, ignore it;
         if (content.getUser().getId().equals(GlobalContext.getInstance().getCurrentAccountId())) {
             return false;
         }
@@ -216,7 +215,6 @@ public class TimeLineUtility {
                 return true;
             }
 
-
             if (hasOriMessage && oriMessage.getUser() != null
                     && oriMessage.getUser().getScreen_name().equals(filterWord)) {
                 return true;
@@ -224,7 +222,6 @@ public class TimeLineUtility {
         }
 
         for (String filterWord : topicFilter) {
-
 
             Matcher localMatcher = WeiboPatterns.TOPIC_URL.matcher(content.getText());
 
@@ -239,7 +236,6 @@ public class TimeLineUtility {
                 }
 
             }
-
 
             if (content.getRetweeted_status() != null) {
 
@@ -266,7 +262,6 @@ public class TimeLineUtility {
                 return true;
             }
 
-
             if (hasOriMessage && filterWord.equals(content.getRetweeted_status().getSourceString())) {
                 return true;
             }
@@ -274,7 +269,6 @@ public class TimeLineUtility {
 
         return false;
     }
-
 
     private static void addEmotions(SpannableString value) {
         Matcher localMatcher = WeiboPatterns.EMOTION_URL.matcher(value);

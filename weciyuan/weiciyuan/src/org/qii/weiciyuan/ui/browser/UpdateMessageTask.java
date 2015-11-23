@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.browser;
 
 import android.app.Activity;
@@ -17,8 +18,7 @@ import org.qii.weiciyuan.support.utils.GlobalContext;
 import org.qii.weiciyuan.support.utils.Utility;
 
 /**
- * User: qii
- * Date: 13-1-25
+ * User: qii Date: 13-1-25
  */
 public class UpdateMessageTask extends MyAsyncTask<Void, Void, MessageBean> {
     private MessageBean msg;
@@ -44,7 +44,6 @@ public class UpdateMessageTask extends MyAsyncTask<Void, Void, MessageBean> {
     protected void onPreExecute() {
         super.onPreExecute();
 
-
     }
 
     @Override
@@ -69,8 +68,8 @@ public class UpdateMessageTask extends MyAsyncTask<Void, Void, MessageBean> {
         }
     }
 
-    //sometime, onPostExecute method is executed after fragment is onDestroy(),
-    //you must check activity status
+    // sometime, onPostExecute method is executed after fragment is onDestroy(),
+    // you must check activity status
     @Override
     protected void onPostExecute(MessageBean newValue) {
         if (fragment.getActivity() == null)
@@ -95,10 +94,10 @@ public class UpdateMessageTask extends MyAsyncTask<Void, Void, MessageBean> {
         super.onPostExecute(newValue);
     }
 
-    //sometime status is deleted
+    // sometime status is deleted
     private boolean isStatusDeleted(MessageBean newValue) {
 
-        //status is deleted
+        // status is deleted
         if ((msg != null))
             if ((msg.getUser() != null) && (newValue.getUser() == null)) {
                 return true;
@@ -108,13 +107,12 @@ public class UpdateMessageTask extends MyAsyncTask<Void, Void, MessageBean> {
 
     }
 
-
-    //sometime the ori status is deleted
+    // sometime the ori status is deleted
     private boolean isRepostDeleted(MessageBean newValue) {
 
         if (msg.getRetweeted_status() != null && msg.getRetweeted_status().getUser() != null) {
 
-            //ori status is deleted
+            // ori status is deleted
             if (newValue.getRetweeted_status() != null && newValue.getRetweeted_status().getUser() == null) {
                 return true;
             }

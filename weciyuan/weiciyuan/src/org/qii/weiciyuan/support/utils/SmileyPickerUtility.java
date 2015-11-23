@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.utils;
 
 import org.qii.weiciyuan.support.debug.AppLogger;
@@ -12,9 +13,7 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 
 /**
- * User: qii
- * Date: 13-1-18
- * from top to bottom:statusbar, actionbar, app content, keyboard
+ * User: qii Date: 13-1-18 from top to bottom:statusbar, actionbar, app content, keyboard
  */
 public class SmileyPickerUtility {
 
@@ -34,7 +33,6 @@ public class SmileyPickerUtility {
         });
     }
 
-
     public static int getScreenHeight(Activity paramActivity) {
         Display display = paramActivity.getWindowManager().getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
@@ -50,28 +48,28 @@ public class SmileyPickerUtility {
     }
 
     public static int getActionBarHeight(Activity paramActivity) {
-        //test on samsung 9300 android 4.1.2, this value is 96px
-        //but on galaxy nexus android 4.2, this value is 146px
-        //statusbar height is 50px
-        //I guess 4.1 Window.ID_ANDROID_CONTENT contain statusbar
+        // test on samsung 9300 android 4.1.2, this value is 96px
+        // but on galaxy nexus android 4.2, this value is 146px
+        // statusbar height is 50px
+        // I guess 4.1 Window.ID_ANDROID_CONTENT contain statusbar
         int contentViewTop =
                 paramActivity.getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
         AppLogger.e("contentViewTop=" + contentViewTop);
 
-//        return contentViewTop - getStatusBarHeight(paramActivity);
+        // return contentViewTop - getStatusBarHeight(paramActivity);
 
         return ThemeUtility.getDimensionPixelSize(paramActivity, android.R.attr.actionBarSize,
                 Utility.dip2px(48));
     }
 
-    //below status bar,include actionbar, above softkeyboard
+    // below status bar,include actionbar, above softkeyboard
     public static int getAppHeight(Activity paramActivity) {
         Rect localRect = new Rect();
         paramActivity.getWindow().getDecorView().getWindowVisibleDisplayFrame(localRect);
         return localRect.height();
     }
 
-    //below actionbar, above softkeyboard
+    // below actionbar, above softkeyboard
     public static int getAppContentHeight(Activity paramActivity) {
         return SmileyPickerUtility.getScreenHeight(paramActivity)
                 - SmileyPickerUtility.getStatusBarHeight(paramActivity)

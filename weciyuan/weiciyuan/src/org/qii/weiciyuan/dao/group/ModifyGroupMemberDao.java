@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.group;
 
 import com.google.gson.Gson;
@@ -13,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-11-6
+ * User: qii Date: 12-11-6
  */
 public class ModifyGroupMemberDao {
 

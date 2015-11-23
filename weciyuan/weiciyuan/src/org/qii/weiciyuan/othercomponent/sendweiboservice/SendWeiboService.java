@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent.sendweiboservice;
 
 import android.app.Notification;
@@ -32,11 +33,9 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * User: qii
- * Date: 12-8-21
+ * User: qii Date: 12-8-21
  */
 public class SendWeiboService extends Service {
-
 
     private Map<WeiboSendTask, Boolean> tasksResult = new HashMap<WeiboSendTask, Boolean>();
     private Map<WeiboSendTask, Integer> tasksNotifications = new HashMap<WeiboSendTask, Integer>();
@@ -106,14 +105,13 @@ public class SendWeiboService extends Service {
 
         StatusDraftBean statusDraftBean;
 
-
         public WeiboSendTask(int lastNotificationId,
-                             String token,
-                             AccountBean account,
-                             String picPath,
-                             String content,
-                             GeoBean geoBean,
-                             StatusDraftBean statusDraftBean) {
+                String token,
+                AccountBean account,
+                String picPath,
+                String content,
+                GeoBean geoBean,
+                StatusDraftBean statusDraftBean) {
             this.lastNotificationId = lastNotificationId;
             this.token = token;
             this.account = account;
@@ -214,7 +212,6 @@ public class SendWeiboService extends Service {
                 cancel(true);
             return null;
         }
-
 
         private double lastStatus = -1d;
         private long lastMillis = -1L;
@@ -357,7 +354,6 @@ public class SendWeiboService extends Service {
                 notification = builder.getNotification();
             }
 
-
             final int id = tasksNotifications.get(task);
             NotificationUtility.show(notification, id);
 
@@ -368,7 +364,6 @@ public class SendWeiboService extends Service {
                 }
             }, 3000);
         }
-
 
         private void showSuccessfulNotification(final WeiboSendTask task) {
             Notification.Builder builder = new Notification.Builder(SendWeiboService.this)
@@ -390,8 +385,6 @@ public class SendWeiboService extends Service {
             }, 3000);
         }
 
-
     }
-
 
 }

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.unread;
 
 import com.google.gson.Gson;
@@ -13,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-9-26
+ * User: qii Date: 12-9-26
  */
 public class UnreadDao {
 
@@ -29,9 +29,7 @@ public class UnreadDao {
         map.put("access_token", access_token);
         map.put("uid", uid);
 
-
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
-
 
         return jsonData;
     }
@@ -50,20 +48,16 @@ public class UnreadDao {
             return null;
         }
 
-
         return value;
     }
 
-
     private String access_token;
     private String uid;
-
 
     public UnreadDao(String access_token, String uid) {
 
         this.access_token = access_token;
         this.uid = uid;
     }
-
 
 }

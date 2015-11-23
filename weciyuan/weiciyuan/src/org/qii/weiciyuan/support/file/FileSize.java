@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.file;
 
 import java.io.File;
@@ -5,8 +6,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 /**
- * User: qii
- * Date: 12-8-24
+ * User: qii Date: 12-8-24
  */
 public class FileSize {
 
@@ -83,7 +83,7 @@ public class FileSize {
             BigDecimal longs = new BigDecimal(Double.valueOf(fileSize + "").toString());
             BigDecimal sizeMB = new BigDecimal(Double.valueOf(SIZE_MB + "").toString());
             String result = longs.divide(sizeMB, SACLE, BigDecimal.ROUND_HALF_UP).toString();
-            //double result=this.longSize/(double)SIZE_MB;
+            // double result=this.longSize/(double)SIZE_MB;
             return result + "GB";
         } else {
             BigDecimal longs = new BigDecimal(Double.valueOf(fileSize + "").toString());
@@ -92,7 +92,6 @@ public class FileSize {
             return result + "TB";
         }
     }
-
 
     public long getLongSize() throws RuntimeException {
         try {
@@ -104,6 +103,5 @@ public class FileSize {
             throw new RuntimeException(ex.getMessage());
         }
     }
-
 
 }

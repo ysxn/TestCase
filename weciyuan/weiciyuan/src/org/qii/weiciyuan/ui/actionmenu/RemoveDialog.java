@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.actionmenu;
 
 import android.app.AlertDialog;
@@ -9,11 +10,9 @@ import org.qii.weiciyuan.R;
 import org.qii.weiciyuan.ui.interfaces.IRemoveItem;
 
 /**
- * User: qii
- * Date: 12-9-11
+ * User: qii Date: 12-9-11
  */
 public class RemoveDialog extends DialogFragment {
-
 
     private int positon;
 

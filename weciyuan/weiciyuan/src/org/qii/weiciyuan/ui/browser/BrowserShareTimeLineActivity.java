@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.browser;
 
 import org.qii.weiciyuan.bean.ShareListBean;
@@ -16,8 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 /**
- * User: qii
- * Date: 13-2-21
+ * User: qii Date: 13-2-21
  */
 public class BrowserShareTimeLineActivity extends AbstractAppActivity {
 
@@ -40,10 +40,11 @@ public class BrowserShareTimeLineActivity extends AbstractAppActivity {
                     .replace(android.R.id.content, BrowserShareTimeLineFragment.newInstance(url))
                     .commit();
         }
-// 0.50 feature
-//        int count = getIntent().getIntExtra("count", 0);
-//        String subTitle = String.format(getString(R.string.total_share_count), String.valueOf(count));
-//        getActionBar().setSubtitle(subTitle);
+        // 0.50 feature
+        // int count = getIntent().getIntExtra("count", 0);
+        // String subTitle = String.format(getString(R.string.total_share_count),
+        // String.valueOf(count));
+        // getActionBar().setSubtitle(subTitle);
 
     }
 
@@ -66,7 +67,6 @@ public class BrowserShareTimeLineActivity extends AbstractAppActivity {
         private ShareListBean bean = new ShareListBean();
 
         private String url;
-
 
         public static BrowserShareTimeLineFragment newInstance(String url) {
             BrowserShareTimeLineFragment fragment = new BrowserShareTimeLineFragment();
@@ -106,7 +106,7 @@ public class BrowserShareTimeLineActivity extends AbstractAppActivity {
                     loadNewMsg();
                     break;
                 case SCREEN_ROTATE:
-                    //nothing
+                    // nothing
                     refreshLayout(bean);
                     break;
                 case ACTIVITY_DESTROY_AND_CREATE:
@@ -117,7 +117,6 @@ public class BrowserShareTimeLineActivity extends AbstractAppActivity {
             }
 
         }
-
 
         @Override
         protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
@@ -143,7 +142,6 @@ public class BrowserShareTimeLineActivity extends AbstractAppActivity {
             }
         }
 
-
         @Override
         public void loadNewMsg() {
             getLoaderManager().destroyLoader(MIDDLE_MSG_LOADER_ID);
@@ -151,7 +149,6 @@ public class BrowserShareTimeLineActivity extends AbstractAppActivity {
             dismissFooterView();
             getLoaderManager().restartLoader(NEW_MSG_LOADER_ID, null, msgAsyncTaskLoaderCallback);
         }
-
 
         @Override
         protected void loadOldMsg(View view) {
@@ -170,7 +167,6 @@ public class BrowserShareTimeLineActivity extends AbstractAppActivity {
             }
             return new BrowserShareMsgLoader(getActivity(), token, url, null);
         }
-
 
         protected Loader<AsyncTaskLoaderResult<ShareListBean>> onCreateOldMsgLoader(int id,
                 Bundle args) {

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent;
 
 import org.qii.weiciyuan.bean.MessageBean;
@@ -17,8 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * User: qii
- * Date: 13-12-29
+ * User: qii Date: 13-12-29
  */
 public class WifiAutoDownloadPictureRunnable implements Runnable {
 
@@ -81,7 +81,7 @@ public class WifiAutoDownloadPictureRunnable implements Runnable {
             return true;
         }
 
-        //wait until other download tasks are finished
+        // wait until other download tasks are finished
         synchronized (TaskCache.backgroundWifiDownloadPicturesWorkLock) {
             while (!TaskCache.isDownloadTaskFinished() && !Thread.currentThread()
                     .isInterrupted()) {
@@ -156,4 +156,3 @@ public class WifiAutoDownloadPictureRunnable implements Runnable {
     }
 
 }
-

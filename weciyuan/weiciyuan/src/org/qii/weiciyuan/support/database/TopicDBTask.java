@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import android.database.Cursor;
@@ -10,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-7-4
+ * User: qii Date: 13-7-4
  */
 public class TopicDBTask {
 

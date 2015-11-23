@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.actionmenu;
 
 import android.app.Activity;
@@ -22,8 +23,7 @@ import org.qii.weiciyuan.ui.basefragment.AbstractUserListFragment;
 import org.qii.weiciyuan.ui.send.WriteWeiboActivity;
 
 /**
- * User: qii
- * Date: 12-9-19
+ * User: qii Date: 12-9-19
  */
 public class NormalFriendShipSingleChoiceModeListener implements ActionMode.Callback {
     private ListView listView;
@@ -33,7 +33,6 @@ public class NormalFriendShipSingleChoiceModeListener implements ActionMode.Call
     private UserBean bean;
 
     private MyAsyncTask<Void, UserBean, UserBean> followOrUnfollowTask;
-
 
     public void finish() {
         if (mode != null)
@@ -54,7 +53,6 @@ public class NormalFriendShipSingleChoiceModeListener implements ActionMode.Call
         return fragment.getActivity();
     }
 
-
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         if (this.mode == null)
@@ -69,17 +67,15 @@ public class NormalFriendShipSingleChoiceModeListener implements ActionMode.Call
         MenuInflater inflater = mode.getMenuInflater();
         menu.clear();
 
-        //sina weibo has bug,everyone's following is false
+        // sina weibo has bug,everyone's following is false
         inflater.inflate(R.menu.contextual_menu_fragment_user_listview, menu);
-//        if(bean.isFollowing()){
-//           menu.findItem(R.id.menu_follow).setVisible(false);
-//        }
+        // if(bean.isFollowing()){
+        // menu.findItem(R.id.menu_follow).setVisible(false);
+        // }
 
         mode.setTitle(bean.getScreen_name());
 
-
         return true;
-
 
     }
 
@@ -114,7 +110,6 @@ public class NormalFriendShipSingleChoiceModeListener implements ActionMode.Call
                 break;
         }
 
-
         return true;
     }
 
@@ -126,7 +121,6 @@ public class NormalFriendShipSingleChoiceModeListener implements ActionMode.Call
         ((AbstractUserListFragment) fragment).setmActionMode(null);
 
     }
-
 
     private class FollowTask extends MyAsyncTask<Void, UserBean, UserBean> {
         WeiboException e;

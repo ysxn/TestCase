@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.unread;
 
 import org.json.JSONException;
@@ -13,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-9-26
+ * User: qii Date: 12-9-26
  */
 public class ClearUnreadDao {
 
@@ -29,7 +29,6 @@ public class ClearUnreadDao {
         return URLHelper.UNREAD_CLEAR;
     }
 
-
     public boolean clearUnread() throws WeiboException {
 
         String url = getUrl();
@@ -37,7 +36,6 @@ public class ClearUnreadDao {
         Map<String, String> map = new HashMap<String, String>();
         map.put("access_token", access_token);
         map.put("type", type);
-
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
 
@@ -60,7 +58,7 @@ public class ClearUnreadDao {
         if (currentCount == null) {
             return false;
         }
-        //already reset or have new unread message
+        // already reset or have new unread message
         if (count != currentCount.getMention_status()) {
             return false;
         }
@@ -73,7 +71,7 @@ public class ClearUnreadDao {
         if (currentCount == null) {
             return false;
         }
-        //already reset or have new unread message
+        // already reset or have new unread message
         if (count != currentCount.getMention_cmt()) {
             return false;
         }
@@ -86,13 +84,12 @@ public class ClearUnreadDao {
         if (currentCount == null) {
             return false;
         }
-        //already reset or have new unread message
+        // already reset or have new unread message
         if (count != currentCount.getCmt()) {
             return false;
         }
         return new ClearUnreadDao(access_token, ClearUnreadDao.CMT).clearUnread();
     }
-
 
     private String access_token;
     private String type;
@@ -107,6 +104,5 @@ public class ClearUnreadDao {
         this.access_token = access_token;
         this.type = type;
     }
-
 
 }

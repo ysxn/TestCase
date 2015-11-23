@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.main;
 
 import org.qii.weiciyuan.R;
@@ -25,8 +26,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * User: qii
- * Date: 13-4-5
+ * User: qii Date: 13-4-5
  */
 public class CommentsTimeLine extends AbstractAppFragment
         implements MainTimeLineActivity.ScrollableListFragment {
@@ -53,8 +53,7 @@ public class CommentsTimeLine extends AbstractAppFragment
 
         if ((((MainTimeLineActivity) getActivity()).getMenuFragment()).getCurrentIndex()
                 == LeftMenuFragment.COMMENTS_INDEX) {
-            buildActionBarAndViewPagerTitles(
-                    ((MainTimeLineActivity) getActivity()).getMenuFragment().commentsTabIndex);
+            buildActionBarAndViewPagerTitles(((MainTimeLineActivity) getActivity()).getMenuFragment().commentsTabIndex);
         }
     }
 
@@ -87,7 +86,6 @@ public class CommentsTimeLine extends AbstractAppFragment
         viewPager = (ViewPager) view;
         return view;
     }
-
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -177,8 +175,7 @@ public class CommentsTimeLine extends AbstractAppFragment
         return tabMap.get(COMMENTS_BY_ME_CHILD_POSITION);
     }
 
-    ViewPager.SimpleOnPageChangeListener onPageChangeListener
-            = new ViewPager.SimpleOnPageChangeListener() {
+    ViewPager.SimpleOnPageChangeListener onPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
         @Override
         public void onPageSelected(int position) {
             ActionBar ab = getActivity().getActionBar();
@@ -213,8 +210,7 @@ public class CommentsTimeLine extends AbstractAppFragment
     };
 
     public CommentsToMeTimeLineFragment getCommentsToMeTimeLineFragment() {
-        CommentsToMeTimeLineFragment fragment
-                = ((CommentsToMeTimeLineFragment) getChildFragmentManager().findFragmentByTag(
+        CommentsToMeTimeLineFragment fragment = ((CommentsToMeTimeLineFragment) getChildFragmentManager().findFragmentByTag(
                 CommentsToMeTimeLineFragment.class.getName()));
         if (fragment == null) {
             fragment = new CommentsToMeTimeLineFragment(GlobalContext.getInstance().getAccountBean()
@@ -226,8 +222,7 @@ public class CommentsTimeLine extends AbstractAppFragment
     }
 
     public CommentsByMeTimeLineFragment getCommentsByMeTimeLineFragment() {
-        CommentsByMeTimeLineFragment fragment
-                = ((CommentsByMeTimeLineFragment) getChildFragmentManager().findFragmentByTag(
+        CommentsByMeTimeLineFragment fragment = ((CommentsByMeTimeLineFragment) getChildFragmentManager().findFragmentByTag(
                 CommentsByMeTimeLineFragment.class.getName()));
         if (fragment == null) {
             fragment = new CommentsByMeTimeLineFragment(GlobalContext.getInstance().getAccountBean()
@@ -237,7 +232,6 @@ public class CommentsTimeLine extends AbstractAppFragment
 
         return fragment;
     }
-
 
     @Override
     public void scrollToTop() {

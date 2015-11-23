@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.loader;
 
 import android.content.Context;
@@ -9,13 +10,11 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * User: qii
- * Date: 13-5-15
+ * User: qii Date: 13-5-15
  */
 public class RepostByIdMsgLoader extends AbstractAsyncNetRequestTaskLoader<RepostListBean> {
 
     private static Lock lock = new ReentrantLock();
-
 
     private String token;
     private String sinceId;
@@ -31,10 +30,8 @@ public class RepostByIdMsgLoader extends AbstractAsyncNetRequestTaskLoader<Repos
 
     }
 
-
     public RepostListBean loadData() throws WeiboException {
         RepostsTimeLineByIdDao dao = new RepostsTimeLineByIdDao(token, id);
-
 
         dao.setSince_id(sinceId);
         dao.setMax_id(maxId);
@@ -52,5 +49,3 @@ public class RepostByIdMsgLoader extends AbstractAsyncNetRequestTaskLoader<Repos
     }
 
 }
-
-

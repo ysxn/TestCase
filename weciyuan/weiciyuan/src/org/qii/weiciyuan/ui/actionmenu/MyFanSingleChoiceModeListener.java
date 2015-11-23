@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.actionmenu;
 
 import android.app.Activity;
@@ -23,8 +24,7 @@ import org.qii.weiciyuan.ui.basefragment.AbstractUserListFragment;
 import org.qii.weiciyuan.ui.send.WriteWeiboActivity;
 
 /**
- * User: qii
- * Date: 12-10-9
+ * User: qii Date: 12-10-9
  */
 public class MyFanSingleChoiceModeListener implements ActionMode.Callback {
     private ListView listView;
@@ -33,9 +33,7 @@ public class MyFanSingleChoiceModeListener implements ActionMode.Callback {
     private ActionMode mode;
     private UserBean bean;
 
-
     private MyAsyncTask<Void, UserBean, UserBean> followOrUnfollowTask;
-
 
     public void finish() {
         if (mode != null)
@@ -56,7 +54,6 @@ public class MyFanSingleChoiceModeListener implements ActionMode.Callback {
         return fragment.getActivity();
     }
 
-
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         if (this.mode == null)
@@ -75,9 +72,7 @@ public class MyFanSingleChoiceModeListener implements ActionMode.Callback {
 
         mode.setTitle(bean.getScreen_name());
 
-
         return true;
-
 
     }
 
@@ -120,10 +115,8 @@ public class MyFanSingleChoiceModeListener implements ActionMode.Callback {
                 break;
         }
 
-
         return true;
     }
-
 
     private class FollowTask extends MyAsyncTask<Void, UserBean, UserBean> {
         WeiboException e;
@@ -212,7 +205,6 @@ public class MyFanSingleChoiceModeListener implements ActionMode.Callback {
         }
     }
 
-
     private class RemoveFanTask extends MyAsyncTask<Void, UserBean, UserBean> {
         WeiboException e;
 
@@ -254,7 +246,6 @@ public class MyFanSingleChoiceModeListener implements ActionMode.Callback {
         }
     }
 
-
     @Override
     public void onDestroyActionMode(ActionMode mode) {
         this.mode = null;
@@ -265,4 +256,3 @@ public class MyFanSingleChoiceModeListener implements ActionMode.Callback {
     }
 
 }
-

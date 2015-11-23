@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.content.Context;
@@ -6,8 +7,7 @@ import android.widget.TextView;
 import org.qii.weiciyuan.support.utils.TimeUtility;
 
 /**
- * User: qii
- * Date: 12-12-18
+ * User: qii Date: 12-12-18
  */
 public class TimeTextView extends TextView {
 

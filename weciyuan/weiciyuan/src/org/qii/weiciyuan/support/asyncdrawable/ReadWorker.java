@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.asyncdrawable;
 
 import android.graphics.Bitmap;
@@ -22,9 +23,7 @@ import org.qii.weiciyuan.support.utils.Utility;
 import java.lang.ref.WeakReference;
 
 /**
- * User: qii
- * Date: 13-2-9
- * reuse download worker or create a new download worker
+ * User: qii Date: 13-2-9 reuse download worker or create a new download worker
  */
 public class ReadWorker extends MyAsyncTask<String, Integer, Bitmap> implements IPictureWorker {
 
@@ -85,7 +84,6 @@ public class ReadWorker extends MyAsyncTask<String, Integer, Bitmap> implements 
         this(view, url, method, false);
     }
 
-
     @Override
     protected Bitmap doInBackground(String... url) {
 
@@ -134,7 +132,7 @@ public class ReadWorker extends MyAsyncTask<String, Integer, Bitmap> implements 
                     float reSize = globalContext.getResources().getDisplayMetrics().density;
 
                     height = globalContext.getResources().getDimensionPixelSize(R.dimen.timeline_pic_high_thumbnail_height);
-                    //8 is  layout padding
+                    // 8 is layout padding
                     width = (int) (metrics.widthPixels - (8 + 8) * reSize);
                 } else {
                     height = width = Utility.dip2px(120);
@@ -189,7 +187,7 @@ public class ReadWorker extends MyAsyncTask<String, Integer, Bitmap> implements 
                     pb.setProgress(progress);
                 }
             } else if (isImageViewDrawableBitmap(imageView)) {
-                //imageview drawable actually is bitmap, so hide progressbar
+                // imageview drawable actually is bitmap, so hide progressbar
                 resetProgressBarStatues();
                 pbWeakReference = null;
             }
@@ -241,13 +239,11 @@ public class ReadWorker extends MyAsyncTask<String, Integer, Bitmap> implements 
 
                 }
 
-
             } else if (isImageViewDrawableBitmap(imageView)) {
-                //imageview drawable actually is bitmap, so hide progressbar
+                // imageview drawable actually is bitmap, so hide progressbar
                 resetProgressBarStatues();
             }
         }
-
 
     }
 
@@ -294,60 +290,61 @@ public class ReadWorker extends MyAsyncTask<String, Integer, Bitmap> implements 
         view.startAnimation(alphaAnimation);
         view.setTag(getUrl());
 
-
-//        final Animation anim_out = AnimationUtils.loadAnimation(view.getContext(), R.anim.timeline_pic_fade_out);
-//        final Animation anim_in = AnimationUtils.loadAnimation(view.getContext(), R.anim.timeline_pic_fade_in);
-//
-//        anim_out.setAnimationListener(new Animation.AnimationListener() {
-//
-//            @Override
-//            public void onAnimationStart(Animation animation) {
-//
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animation animation) {
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animation animation) {
-//
-//                anim_in.setAnimationListener(new Animation.AnimationListener() {
-//                    @Override
-//                    public void onAnimationStart(Animation animation) {
-//                    }
-//
-//                    @Override
-//                    public void onAnimationRepeat(Animation animation) {
-//                    }
-//
-//                    //clear animation avoid memory leak
-//                    @Override
-//                    public void onAnimationEnd(Animation animation) {
-//                        if (view.getAnimation() != null && view.getAnimation().hasEnded()) {
-//                            view.clearAnimation();
-//                        }
-//                        resetProgressBarStatues();
-//                    }
-//                });
-//
-//                if (isImageViewDrawableBitmap(view)) {
-//                    resetProgressBarStatues();
-//                    return;
-//                } else if (!canDisplay(view)) {
-//                    return;
-//                }
-//
-//
-//                view.setImageBitmap(bitmap);
-//                view.setTag(getUrl());
-//                view.startAnimation(anim_in);
-//
-//            }
-//        });
-//
-//        if (view.getAnimation() == null || view.getAnimation().hasEnded())
-//            view.startAnimation(anim_out);
+        // final Animation anim_out = AnimationUtils.loadAnimation(view.getContext(),
+        // R.anim.timeline_pic_fade_out);
+        // final Animation anim_in = AnimationUtils.loadAnimation(view.getContext(),
+        // R.anim.timeline_pic_fade_in);
+        //
+        // anim_out.setAnimationListener(new Animation.AnimationListener() {
+        //
+        // @Override
+        // public void onAnimationStart(Animation animation) {
+        //
+        // }
+        //
+        // @Override
+        // public void onAnimationRepeat(Animation animation) {
+        // }
+        //
+        // @Override
+        // public void onAnimationEnd(Animation animation) {
+        //
+        // anim_in.setAnimationListener(new Animation.AnimationListener() {
+        // @Override
+        // public void onAnimationStart(Animation animation) {
+        // }
+        //
+        // @Override
+        // public void onAnimationRepeat(Animation animation) {
+        // }
+        //
+        // //clear animation avoid memory leak
+        // @Override
+        // public void onAnimationEnd(Animation animation) {
+        // if (view.getAnimation() != null && view.getAnimation().hasEnded()) {
+        // view.clearAnimation();
+        // }
+        // resetProgressBarStatues();
+        // }
+        // });
+        //
+        // if (isImageViewDrawableBitmap(view)) {
+        // resetProgressBarStatues();
+        // return;
+        // } else if (!canDisplay(view)) {
+        // return;
+        // }
+        //
+        //
+        // view.setImageBitmap(bitmap);
+        // view.setTag(getUrl());
+        // view.startAnimation(anim_in);
+        //
+        // }
+        // });
+        //
+        // if (view.getAnimation() == null || view.getAnimation().hasEnded())
+        // view.startAnimation(anim_out);
     }
 
     FileDownloaderHttpHelper.DownloadListener downloadListener = new FileDownloaderHttpHelper.DownloadListener() {

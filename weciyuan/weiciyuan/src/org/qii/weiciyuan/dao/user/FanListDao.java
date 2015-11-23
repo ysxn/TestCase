@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.user;
 
 import com.google.gson.Gson;
@@ -14,8 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-16
+ * User: Jiang Qi Date: 12-8-16
  */
 public class FanListDao {
 
@@ -31,9 +31,7 @@ public class FanListDao {
         map.put("count", count);
         map.put("screen_name", screen_name);
 
-
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
-
 
         Gson gson = new Gson();
 
@@ -47,7 +45,6 @@ public class FanListDao {
 
         return value;
     }
-
 
     public FanListDao(String token, String uid) {
         this.access_token = token;

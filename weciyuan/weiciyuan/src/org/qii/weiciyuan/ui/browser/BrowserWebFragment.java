@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.browser;
 
 import org.qii.weiciyuan.R;
@@ -45,8 +46,7 @@ import android.widget.Toast;
 import java.lang.ref.WeakReference;
 
 /**
- * User: qii
- * Date: 13-2-19
+ * User: qii Date: 13-2-19
  */
 public class BrowserWebFragment extends Fragment {
 
@@ -77,14 +77,13 @@ public class BrowserWebFragment extends Fragment {
         outState.putString("mUrl", mUrl);
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         setRetainInstance(true);
         /**
-         *some devices for example Nexus 7 4.2.2 version will receive website favicon, but some
+         * some devices for example Nexus 7 4.2.2 version will receive website favicon, but some
          * devices may cant, Galaxy Nexus 4.2.2 version
          */
         String path = FileManager.getWebViewFaviconDirPath();
@@ -113,7 +112,6 @@ public class BrowserWebFragment extends Fragment {
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressbar);
         mWebView.setOnKeyListener(new View.OnKeyListener() {
 
-
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
@@ -134,7 +132,6 @@ public class BrowserWebFragment extends Fragment {
         return view;
     }
 
-
     public void loadUrl(String url) {
         if (mIsWebViewAvailable) {
             getWebView().loadUrl(mUrl = url);
@@ -150,20 +147,17 @@ public class BrowserWebFragment extends Fragment {
         mWebView.onPause();
     }
 
-
     @Override
     public void onResume() {
         mWebView.onResume();
         super.onResume();
     }
 
-
     @Override
     public void onDestroyView() {
         mIsWebViewAvailable = false;
         super.onDestroyView();
     }
-
 
     @Override
     public void onDestroy() {
@@ -173,7 +167,6 @@ public class BrowserWebFragment extends Fragment {
         }
         super.onDestroy();
     }
-
 
     public WebView getWebView() {
         return mIsWebViewAvailable ? mWebView : null;
@@ -309,16 +302,16 @@ public class BrowserWebFragment extends Fragment {
             }
         }
 
-        //website icon is too small
+        // website icon is too small
         @Override
         public void onReceivedIcon(WebView view, Bitmap icon) {
             super.onReceivedIcon(view, icon);
             if (getActivity() == null) {
                 return;
             }
-//            getActivity().getActionBar().setIcon(new BitmapDrawable(getActivity().getResources(), icon));
+            // getActivity().getActionBar().setIcon(new BitmapDrawable(getActivity().getResources(),
+            // icon));
         }
-
 
         public void onProgressChanged(WebView view, int progress) {
             if (getActivity() == null) {

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent.unreadnotification;
 
 import org.qii.weiciyuan.R;
@@ -24,12 +25,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * User: qii
- * Date: 13-5-4
+ * User: qii Date: 13-5-4
  */
 @Deprecated
 public class JBCommentsToMeNotificationServiceHelper extends NotificationServiceHelper {
-
 
     private AccountBean accountBean;
 
@@ -43,10 +42,7 @@ public class JBCommentsToMeNotificationServiceHelper extends NotificationService
 
     private String ticker;
 
-
-    private static HashMap<String, RecordOperationAppBroadcastReceiver>
-            clearNotificationEventReceiver
-            = new HashMap<String, RecordOperationAppBroadcastReceiver>();
+    private static HashMap<String, RecordOperationAppBroadcastReceiver> clearNotificationEventReceiver = new HashMap<String, RecordOperationAppBroadcastReceiver>();
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -66,11 +62,10 @@ public class JBCommentsToMeNotificationServiceHelper extends NotificationService
         return super.onStartCommand(intent, flags, startId);
     }
 
-
     private void buildNotification() {
 
-//        int count = (data.getSize() >= Integer.valueOf(SettingUtility.getMsgCount()) ? unreadBean
-//                .getCmt() : data.getSize());
+        // int count = (data.getSize() >= Integer.valueOf(SettingUtility.getMsgCount()) ? unreadBean
+        // .getCmt() : data.getSize());
         int count = Math.min(unreadBean.getCmt(), data.getSize());
 
         if (count == 0) {
@@ -108,9 +103,9 @@ public class JBCommentsToMeNotificationServiceHelper extends NotificationService
                     @Override
                     public void run() {
                         try {
-//                            new ClearUnreadDao(accountBean.getAccess_token())
-//                                    .clearCommentUnread(unreadBean, accountBean.getUid());
-//                        } catch (WeiboException ignored) {
+                            // new ClearUnreadDao(accountBean.getAccess_token())
+                            // .clearCommentUnread(unreadBean, accountBean.getUid());
+                            // } catch (WeiboException ignored) {
 
                             ArrayList<String> ids = new ArrayList<String>();
 

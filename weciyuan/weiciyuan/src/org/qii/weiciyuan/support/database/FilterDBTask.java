@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import android.database.Cursor;
@@ -9,8 +10,7 @@ import org.qii.weiciyuan.support.database.table.FilterTable;
 import java.util.*;
 
 /**
- * User: qii
- * Date: 13-1-7
+ * User: qii Date: 13-1-7
  */
 public class FilterDBTask {
 
@@ -67,7 +67,6 @@ public class FilterDBTask {
 
     }
 
-
     public static List<String> getFilterKeywordList(int type) {
 
         List<String> keywordList = new ArrayList<String>();
@@ -99,6 +98,5 @@ public class FilterDBTask {
 
         return getFilterKeywordList(type);
     }
-
 
 }

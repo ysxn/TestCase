@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.maintimeline;
 
 import org.qii.weiciyuan.R;
@@ -47,12 +48,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * User: qii
- * Date: 13-1-23
+ * User: qii Date: 13-1-23
  */
 public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<CommentListBean>
         implements IRemoveItem {
-
 
     private AccountBean accountBean;
 
@@ -70,7 +69,6 @@ public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<Co
 
     private final int POSITION_IN_PARENT_FRAGMENT = 1;
 
-
     @Override
     public CommentListBean getList() {
         return bean;
@@ -86,7 +84,6 @@ public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<Co
         this.userBean = userBean;
         this.token = token;
     }
-
 
     protected void clearAndReplaceValue(CommentListBean value) {
         getList().getItemList().clear();
@@ -107,7 +104,6 @@ public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<Co
             outState.putSerializable("timeLinePosition", timeLinePosition);
         }
     }
-
 
     @Override
     protected void onListViewScrollStop() {
@@ -132,7 +128,6 @@ public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<Co
         checkUnreadInfo();
     }
 
-
     @Override
     public void onPause() {
         super.onPause();
@@ -147,7 +142,6 @@ public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<Co
         timeLinePosition.newMsgIds = newMsgTipBar.getValues();
         MentionCommentsTimeLineDBTask.asyncUpdatePosition(timeLinePosition, accountBean.getUid());
     }
-
 
     private void checkUnreadInfo() {
         Loader loader = getLoaderManager().getLoader(DB_CACHE_LOADER_ID);
@@ -236,8 +230,7 @@ public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<Co
 
     }
 
-    private AdapterView.OnItemLongClickListener onItemLongClickListener
-            = new AdapterView.OnItemLongClickListener() {
+    private AdapterView.OnItemLongClickListener onItemLongClickListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -327,13 +320,11 @@ public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<Co
         }
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(false);
     }
-
 
     private void setListViewPositionFromPositionsCache() {
         if (timeLinePosition != null) {
@@ -355,7 +346,6 @@ public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<Co
         }
     }
 
-
     @Override
     protected void buildListAdapter() {
         CommentListAdapter adapter = new CommentListAdapter(this,
@@ -366,12 +356,10 @@ public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<Co
         pullToRefreshListView.setAdapter(timeLineAdapter);
     }
 
-
     protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
         CommentFloatingMenu menu = new CommentFloatingMenu(getList().getItem(position));
         menu.show(getFragmentManager(), "");
     }
-
 
     @Override
     protected void newMsgLoaderSuccessCallback(CommentListBean newValue, Bundle loaderArgs) {
@@ -412,7 +400,6 @@ public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<Co
             saveTimeLinePositionToDB();
         }
 
-
     }
 
     protected void middleMsgLoaderSuccessCallback(int position, CommentListBean newValue,
@@ -448,9 +435,7 @@ public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<Co
         }
     }
 
-
-    private LoaderManager.LoaderCallbacks<CommentTimeLineData> dbCallback
-            = new LoaderManager.LoaderCallbacks<CommentTimeLineData>() {
+    private LoaderManager.LoaderCallbacks<CommentTimeLineData> dbCallback = new LoaderManager.LoaderCallbacks<CommentTimeLineData>() {
         @Override
         public Loader<CommentTimeLineData> onCreateLoader(int id, Bundle args) {
             getPullToRefreshListView().setVisibility(View.INVISIBLE);
@@ -473,7 +458,8 @@ public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<Co
 
             refreshLayout(getList());
             /**
-             * when this account first open app,if he don't have any data in database,fetch data from server automally
+             * when this account first open app,if he don't have any data in database,fetch data
+             * from server automally
              */
             if (getList().getSize() == 0) {
                 getPullToRefreshListView().setRefreshing();

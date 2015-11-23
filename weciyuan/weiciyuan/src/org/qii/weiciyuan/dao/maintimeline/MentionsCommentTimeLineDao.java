@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.maintimeline;
 
 import org.qii.weiciyuan.dao.URLHelper;
@@ -5,8 +6,7 @@ import org.qii.weiciyuan.dao.unread.ClearUnreadDao;
 import org.qii.weiciyuan.support.error.WeiboException;
 
 /**
- * User: qii
- * Date: 12-10-21
+ * User: qii Date: 12-10-21
  */
 public class MentionsCommentTimeLineDao extends MainCommentsTimeLineDao {
     public MentionsCommentTimeLineDao(String access_token) {

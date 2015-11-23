@@ -1,10 +1,10 @@
+
 package org.qii.weiciyuan.bean.android;
 
 import android.text.TextUtils;
 
 /**
- * User: qii
- * Date: 13-4-19
+ * User: qii Date: 13-4-19
  */
 public class MusicInfo {
 

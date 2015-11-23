@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.fav;
 
 import com.google.gson.Gson;
@@ -16,8 +17,7 @@ import org.qii.weiciyuan.support.utils.TimeUtility;
 import java.util.*;
 
 /**
- * User: qii
- * Date: 12-8-18
+ * User: qii Date: 12-8-18
  */
 public class FavListDao {
     private String getMsgListJson() throws WeiboException {
@@ -27,7 +27,6 @@ public class FavListDao {
         map.put("access_token", access_token);
         map.put("count", count);
         map.put("page", page);
-
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
 
@@ -72,18 +71,15 @@ public class FavListDao {
         return value;
     }
 
-
     private String access_token;
     private String count;
     private String page;
-
 
     public FavListDao(String access_token) {
 
         this.access_token = access_token;
         this.count = SettingUtility.getMsgCount();
     }
-
 
     public FavListDao setCount(String count) {
         this.count = count;
@@ -94,6 +90,5 @@ public class FavListDao {
         this.page = page;
         return this;
     }
-
 
 }

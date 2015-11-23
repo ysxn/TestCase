@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import android.content.ContentValues;
@@ -20,8 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-1-7
+ * User: qii Date: 13-1-7
  */
 public class MentionWeiboTimeLineDBTask {
 
@@ -40,14 +40,14 @@ public class MentionWeiboTimeLineDBTask {
         return databaseHelper.getReadableDatabase();
     }
 
-
     public static MentionTimeLineData getRepostLineMsgList(String accountId) {
         TimeLinePosition position = getPosition(accountId);
 
         Gson gson = new Gson();
         MessageListBean result = new MessageListBean();
 
-        int limit = position.position + AppConfig.DB_CACHE_COUNT_OFFSET > AppConfig.DEFAULT_MSG_COUNT_50 ? position.position + AppConfig.DB_CACHE_COUNT_OFFSET : AppConfig.DEFAULT_MSG_COUNT_50;
+        int limit = position.position + AppConfig.DB_CACHE_COUNT_OFFSET > AppConfig.DEFAULT_MSG_COUNT_50 ? position.position + AppConfig.DB_CACHE_COUNT_OFFSET
+                : AppConfig.DEFAULT_MSG_COUNT_50;
 
         List<MessageBean> msgList = new ArrayList<MessageBean>();
         String sql = "select * from " + RepostsTable.RepostDataTable.TABLE_NAME + " where " + RepostsTable.RepostDataTable.ACCOUNTID + "  = "
@@ -105,7 +105,6 @@ public class MentionWeiboTimeLineDBTask {
                 }
                 ih.execute();
 
-
             }
             getWsd().setTransactionSuccessful();
         } catch (SQLException e) {
@@ -116,9 +115,9 @@ public class MentionWeiboTimeLineDBTask {
         reduceRepostTable(accountId);
     }
 
-
     private static void reduceRepostTable(String accountId) {
-        String searchCount = "select count(" + RepostsTable.RepostDataTable.ID + ") as total" + " from " + RepostsTable.RepostDataTable.TABLE_NAME + " where " + RepostsTable.RepostDataTable.ACCOUNTID
+        String searchCount = "select count(" + RepostsTable.RepostDataTable.ID + ") as total" + " from " + RepostsTable.RepostDataTable.TABLE_NAME + " where "
+                + RepostsTable.RepostDataTable.ACCOUNTID
                 + " = " + accountId;
         int total = 0;
         Cursor c = getWsd().rawQuery(searchCount, null);
@@ -128,34 +127,38 @@ public class MentionWeiboTimeLineDBTask {
 
         c.close();
 
-//        AppLogger.e("total=" + total);
-//
-//        int needDeletedNumber = total - AppConfig.DEFAULT_MENTIONS_WEIBO_DB_CACHE_COUNT;
-//
-//        if (needDeletedNumber > 0) {
-//            AppLogger.e("" + needDeletedNumber);
-//            String sql = " delete from " + RepostsTable.RepostDataTable.TABLE_NAME + " where " + RepostsTable.RepostDataTable.ID + " in "
-//                    + "( select " + RepostsTable.RepostDataTable.ID + " from " + RepostsTable.RepostDataTable.TABLE_NAME + " where "
-//                    + RepostsTable.RepostDataTable.ACCOUNTID
-//                    + " in " + "(" + accountId + ") order by " + RepostsTable.RepostDataTable.ID + " asc limit " + needDeletedNumber + " ) ";
-//
-//            getWsd().execSQL(sql);
-//        }
+        // AppLogger.e("total=" + total);
+        //
+        // int needDeletedNumber = total - AppConfig.DEFAULT_MENTIONS_WEIBO_DB_CACHE_COUNT;
+        //
+        // if (needDeletedNumber > 0) {
+        // AppLogger.e("" + needDeletedNumber);
+        // String sql = " delete from " + RepostsTable.RepostDataTable.TABLE_NAME + " where " +
+        // RepostsTable.RepostDataTable.ID + " in "
+        // + "( select " + RepostsTable.RepostDataTable.ID + " from " +
+        // RepostsTable.RepostDataTable.TABLE_NAME + " where "
+        // + RepostsTable.RepostDataTable.ACCOUNTID
+        // + " in " + "(" + accountId + ") order by " + RepostsTable.RepostDataTable.ID +
+        // " asc limit " + needDeletedNumber + " ) ";
+        //
+        // getWsd().execSQL(sql);
+        // }
     }
 
     private static void replaceRepostLineMsg(MessageListBean list, String accountId) {
 
         deleteAllReposts(accountId);
 
-        //need modification
-//        wsd.execSQL("DROP TABLE IF EXISTS " + RepostsTable.RepostDataTable.TABLE_NAME);
-//        wsd.execSQL(DatabaseHelper.CREATE_REPOSTS_TABLE_SQL);
+        // need modification
+        // wsd.execSQL("DROP TABLE IF EXISTS " + RepostsTable.RepostDataTable.TABLE_NAME);
+        // wsd.execSQL(DatabaseHelper.CREATE_REPOSTS_TABLE_SQL);
 
         addRepostLineMsg(list, accountId);
     }
 
     static void deleteAllReposts(String accountId) {
-        String sql = "delete from " + RepostsTable.RepostDataTable.TABLE_NAME + " where " + RepostsTable.RepostDataTable.ACCOUNTID + " in " + "(" + accountId + ")";
+        String sql = "delete from " + RepostsTable.RepostDataTable.TABLE_NAME + " where " + RepostsTable.RepostDataTable.ACCOUNTID + " in " + "(" + accountId
+                + ")";
 
         getWsd().execSQL(sql);
     }
@@ -173,7 +176,6 @@ public class MentionWeiboTimeLineDBTask {
         new Thread(runnable).start();
     }
 
-
     private static void updatePosition(TimeLinePosition position, String accountId) {
         String sql = "select * from " + RepostsTable.TABLE_NAME + " where " + RepostsTable.ACCOUNTID + "  = "
                 + accountId;
@@ -181,7 +183,9 @@ public class MentionWeiboTimeLineDBTask {
         Gson gson = new Gson();
         if (c.moveToNext()) {
             try {
-                String[] args = {accountId};
+                String[] args = {
+                    accountId
+                };
                 ContentValues cv = new ContentValues();
                 cv.put(RepostsTable.TIMELINEDATA, gson.toJson(position));
                 getWsd().update(RepostsTable.TABLE_NAME, cv, RepostsTable.ACCOUNTID + "=?", args);

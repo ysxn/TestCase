@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.browser;
 
 import org.qii.weiciyuan.bean.CommentBean;
@@ -9,8 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 /**
- * User: qii
- * Date: 12-9-19
+ * User: qii Date: 12-9-19
  */
 public class BrowserCommentActivity extends AbstractAppActivity {
 
@@ -39,7 +39,6 @@ public class BrowserCommentActivity extends AbstractAppActivity {
         }
 
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

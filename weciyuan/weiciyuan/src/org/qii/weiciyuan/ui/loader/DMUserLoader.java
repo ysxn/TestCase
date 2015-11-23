@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.loader;
 
 import android.content.Context;
@@ -9,8 +10,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * User: qii
- * Date: 13-5-15
+ * User: qii Date: 13-5-15
  */
 public class DMUserLoader extends AbstractAsyncNetRequestTaskLoader<DMUserListBean> {
 
@@ -24,7 +24,6 @@ public class DMUserLoader extends AbstractAsyncNetRequestTaskLoader<DMUserListBe
         this.token = token;
         this.cursor = cursor;
     }
-
 
     public DMUserListBean loadData() throws WeiboException {
         DMDao dao = new DMDao(token);
@@ -43,4 +42,3 @@ public class DMUserLoader extends AbstractAsyncNetRequestTaskLoader<DMUserListBe
     }
 
 }
-

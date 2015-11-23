@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import org.qii.weiciyuan.R;
@@ -12,8 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 /**
- * User: qii
- * Date: 13-10-7
+ * User: qii Date: 13-10-7
  */
 public class ClickableTextViewMentionLinkOnTouchListener implements View.OnTouchListener {
 
@@ -64,7 +64,8 @@ public class ClickableTextViewMentionLinkOnTouchListener implements View.OnTouch
                             ThemeUtility.getColor(R.attr.link_pressed_background_color));
                     value.setSpan(backgroundColorSpan, findStart, findEnd,
                             Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-                    //Android has a bug, sometime TextView wont change its value when you modify SpannableString,
+                    // Android has a bug, sometime TextView wont change its value when you modify
+                    // SpannableString,
                     // so you must setText again, test on Android 4.3 Nexus4
                     tv.setText(value);
                 }

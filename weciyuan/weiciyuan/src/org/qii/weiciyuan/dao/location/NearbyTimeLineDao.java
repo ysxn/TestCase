@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.location;
 
 import com.google.gson.Gson;
@@ -13,9 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 13-3-8
- * http://open.weibo.com/wiki/2/place/nearby_timeline
+ * User: qii Date: 13-3-8 http://open.weibo.com/wiki/2/place/nearby_timeline
  */
 public class NearbyTimeLineDao {
 

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.userinfo;
 
 import org.qii.weiciyuan.R;
@@ -37,8 +38,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 /**
- * User: qii
- * Date: 13-2-28
+ * User: qii Date: 13-2-28
  */
 public class EditMyProfileActivity extends AbstractAppActivity
         implements DialogInterface.OnClickListener {
@@ -208,7 +208,6 @@ public class EditMyProfileActivity extends AbstractAppActivity
         }
     }
 
-
     private void displayPic() {
         if (Utility.isTaskStopped(newProfileAvatarReaderWorker)) {
             newProfileAvatarReaderWorker = new NewProfileAvatarReaderWorker();
@@ -240,7 +239,6 @@ public class EditMyProfileActivity extends AbstractAppActivity
         layout.avatar.setOnClickListener(avatarOnClickListener);
 
     }
-
 
     private class SaveAsyncTask extends MyAsyncTask<Void, UserBean, UserBean> {
 
@@ -281,8 +279,7 @@ public class EditMyProfileActivity extends AbstractAppActivity
 
         /**
          * sina weibo have a bug, after modify your profile, the return UserBean object dont have
-         * large avatar url
-         * so must refresh to get actual data;
+         * large avatar url so must refresh to get actual data;
          */
         @Override
         protected void onPostExecute(UserBean userBean) {
@@ -303,7 +300,6 @@ public class EditMyProfileActivity extends AbstractAppActivity
             stopSaveAnimation();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -328,7 +324,6 @@ public class EditMyProfileActivity extends AbstractAppActivity
         return false;
     }
 
-
     private class Layout {
 
         ImageView avatar;
@@ -340,7 +335,6 @@ public class EditMyProfileActivity extends AbstractAppActivity
         EditText info;
 
     }
-
 
     private class NewProfileAvatarReaderWorker extends MyAsyncTask<String, Integer, Bitmap> {
 
@@ -357,7 +351,6 @@ public class EditMyProfileActivity extends AbstractAppActivity
 
         }
 
-
         @Override
         protected void onPostExecute(Bitmap bitmap) {
 
@@ -369,7 +362,6 @@ public class EditMyProfileActivity extends AbstractAppActivity
 
         }
     }
-
 
     private class RefreshTask extends MyAsyncTask<Object, UserBean, UserBean> {
 

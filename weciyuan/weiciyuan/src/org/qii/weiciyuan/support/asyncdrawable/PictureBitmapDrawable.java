@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.asyncdrawable;
 
 import android.graphics.drawable.ColorDrawable;
@@ -7,8 +8,7 @@ import org.qii.weiciyuan.support.utils.ThemeUtility;
 import java.lang.ref.WeakReference;
 
 /**
- * User: qii
- * Date: 12-9-5
+ * User: qii Date: 12-9-5
  */
 public class PictureBitmapDrawable extends ColorDrawable {
     private final WeakReference<IPictureWorker> bitmapDownloaderTaskReference;

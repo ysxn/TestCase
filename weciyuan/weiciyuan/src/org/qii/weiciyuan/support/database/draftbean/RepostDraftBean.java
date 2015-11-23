@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database.draftbean;
 
 import android.os.Parcel;
@@ -5,8 +6,7 @@ import android.os.Parcelable;
 import org.qii.weiciyuan.bean.MessageBean;
 
 /**
- * User: qii
- * Date: 12-10-21
+ * User: qii Date: 12-10-21
  */
 public class RepostDraftBean implements Parcelable {
 
@@ -52,7 +52,6 @@ public class RepostDraftBean implements Parcelable {
         this.content = content;
     }
 
-
     public MessageBean getMessageBean() {
         return messageBean;
     }
@@ -61,7 +60,6 @@ public class RepostDraftBean implements Parcelable {
         this.messageBean = messageBean;
     }
 
-
     public String getAccountId() {
         return accountId;
     }
@@ -69,7 +67,6 @@ public class RepostDraftBean implements Parcelable {
     public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
-
 
     public String getId() {
         return id;

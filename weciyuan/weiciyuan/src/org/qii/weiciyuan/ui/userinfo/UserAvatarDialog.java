@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.userinfo;
 
 import android.app.AlertDialog;
@@ -11,8 +12,7 @@ import android.widget.ImageView;
 import org.qii.weiciyuan.R;
 
 /**
- * User: qii
- * Date: 12-12-9
+ * User: qii Date: 12-12-9
  */
 public class UserAvatarDialog extends DialogFragment {
 
@@ -39,7 +39,6 @@ public class UserAvatarDialog extends DialogFragment {
         }
 
         Bitmap bitmap = BitmapFactory.decodeFile(path);
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.UserAvatarDialog);
         View customView = getActivity().getLayoutInflater().inflate(R.layout.useravatardialog_layout, null);

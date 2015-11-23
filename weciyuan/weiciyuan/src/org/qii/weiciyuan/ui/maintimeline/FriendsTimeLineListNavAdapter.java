@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.maintimeline;
 
 import android.app.Activity;
@@ -11,8 +12,7 @@ import org.qii.weiciyuan.bean.AccountBean;
 import org.qii.weiciyuan.support.utils.GlobalContext;
 
 /**
- * User: qii
- * Date: 13-2-11
+ * User: qii Date: 13-2-11
  */
 public class FriendsTimeLineListNavAdapter extends BaseAdapter {
     private Activity activity;

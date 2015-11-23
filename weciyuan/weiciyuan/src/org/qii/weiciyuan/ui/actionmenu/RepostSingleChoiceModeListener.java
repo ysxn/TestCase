@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.actionmenu;
 
 import android.support.v4.app.Fragment;
@@ -10,8 +11,7 @@ import org.qii.weiciyuan.bean.MessageBean;
 import org.qii.weiciyuan.ui.adapter.StatusListAdapter;
 
 /**
- * User: qii
- * Date: 12-9-9
+ * User: qii Date: 12-9-9
  */
 public class RepostSingleChoiceModeListener extends StatusSingleChoiceModeListener {
     LinearLayout quick_repost;
@@ -24,7 +24,6 @@ public class RepostSingleChoiceModeListener extends StatusSingleChoiceModeListen
 
     }
 
-
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         if (initState == View.VISIBLE)
@@ -32,7 +31,6 @@ public class RepostSingleChoiceModeListener extends StatusSingleChoiceModeListen
         return super.onCreateActionMode(mode, menu);
 
     }
-
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {

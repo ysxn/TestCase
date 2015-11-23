@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.send;
 
 import com.google.gson.Gson;
@@ -13,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-8-28
+ * User: qii Date: 12-8-28
  */
 public class ReplyToCommentMsgDao {
 
@@ -28,9 +28,7 @@ public class ReplyToCommentMsgDao {
         map.put("comment_ori", comment_ori);
         map.put("without_mention", without_mention);
 
-
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Post, url, map);
-
 
         Gson gson = new Gson();
 
@@ -41,7 +39,6 @@ public class ReplyToCommentMsgDao {
 
             AppLogger.e(e.getMessage());
         }
-
 
         return value;
 

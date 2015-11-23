@@ -1,11 +1,11 @@
+
 package org.qii.weiciyuan.ui.main;
 
 import android.app.ActionBar;
 import android.support.v4.view.ViewPager;
 
 /**
- * User: qii
- * Date: 13-4-5
+ * User: qii Date: 13-4-5
  */
 public class SimpleTwoTabsListener implements ActionBar.TabListener {
 

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.shorturl;
 
 import org.json.JSONException;
@@ -12,8 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 13-12-4
+ * User: qii Date: 13-12-4
  */
 public class Mid2IdDao {
 

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.preference.filter;
 
 import android.view.Menu;
@@ -11,11 +12,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * User: qii
- * Date: 12-9-21
+ * User: qii Date: 12-9-21
  */
 public class FilterKeywordFragment extends AbstractFilterFragment {
-
 
     @Override
     protected List<String> getDBDataImpl() {

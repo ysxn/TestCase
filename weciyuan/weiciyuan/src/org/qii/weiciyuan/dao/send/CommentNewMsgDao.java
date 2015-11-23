@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.send;
 
 import com.google.gson.Gson;
@@ -13,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User: qii
- * Date: 12-8-13
+ * User: qii Date: 12-8-13
  */
 public class CommentNewMsgDao {
     public CommentBean sendNewMsg() throws WeiboException {
@@ -24,7 +24,6 @@ public class CommentNewMsgDao {
         map.put("id", id);
         map.put("comment", comment);
         map.put("comment_ori", comment_ori);
-
 
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Post, url, map);
 
@@ -38,7 +37,6 @@ public class CommentNewMsgDao {
             AppLogger.e(e.getMessage());
         }
 
-
         return value;
 
     }
@@ -49,7 +47,6 @@ public class CommentNewMsgDao {
         this.id = id;
         this.comment = comment;
     }
-
 
     public void enableComment_ori(boolean enable) {
         if (enable)

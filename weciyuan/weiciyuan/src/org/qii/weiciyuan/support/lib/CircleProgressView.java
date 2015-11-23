@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.content.Context;
@@ -9,8 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * User: qii
- * Date: 12-12-23
+ * User: qii Date: 12-12-23
  */
 public class CircleProgressView extends View {
 

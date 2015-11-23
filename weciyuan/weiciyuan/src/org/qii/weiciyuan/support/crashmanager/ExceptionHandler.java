@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.crashmanager;
 
 import android.text.TextUtils;
@@ -8,8 +9,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * User: qii
- * Date: 13-3-21
+ * User: qii Date: 13-3-21
  */
 public class ExceptionHandler implements Thread.UncaughtExceptionHandler {
 

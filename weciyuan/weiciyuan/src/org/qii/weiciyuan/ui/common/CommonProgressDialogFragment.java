@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.common;
 
 import android.app.Dialog;
@@ -7,11 +8,9 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
 /**
- * User: qii
- * Date: 13-12-4
+ * User: qii Date: 13-12-4
  */
 public class CommonProgressDialogFragment extends DialogFragment {
-
 
     public CommonProgressDialogFragment() {
     }

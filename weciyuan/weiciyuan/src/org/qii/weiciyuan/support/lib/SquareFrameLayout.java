@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.lib;
 
 import android.content.Context;
@@ -5,8 +6,7 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 /**
- * User: qii
- * Date: 13-10-24
+ * User: qii Date: 13-10-24
  */
 public class SquareFrameLayout extends FrameLayout {
 

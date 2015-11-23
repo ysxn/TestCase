@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.dao.timeline;
 
 import com.google.gson.Gson;
@@ -18,11 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: Jiang Qi
- * Date: 12-8-13
+ * User: Jiang Qi Date: 12-8-13
  */
 public class CommentsTimeLineByIdDao {
-
 
     public CommentListBean getGSONMsgList() throws WeiboException {
 
@@ -37,9 +36,7 @@ public class CommentsTimeLineByIdDao {
         map.put("page", page);
         map.put("filter_by_author", filter_by_author);
 
-
         String jsonData = HttpUtility.getInstance().executeNormalTask(HttpMethod.Get, url, map);
-
 
         Gson gson = new Gson();
 
@@ -67,10 +64,8 @@ public class CommentsTimeLineByIdDao {
 
         }
 
-
         return value;
     }
-
 
     public CommentsTimeLineByIdDao(String token, String id) {
 
@@ -106,6 +101,5 @@ public class CommentsTimeLineByIdDao {
     private String count;
     private String page;
     private String filter_by_author;
-
 
 }

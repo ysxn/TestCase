@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.main;
 
 import com.espian.showcaseview.ShowcaseView;
@@ -56,8 +57,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * User: Jiang Qi
- * Date: 12-7-27
+ * User: Jiang Qi Date: 12-7-27
  */
 public class MainTimeLineActivity extends MainTimeLineParentActivity {
 
@@ -95,7 +95,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
     }
 
     /*
-      notification bar
+     * notification bar
      */
     public static Intent newIntent(AccountBean accountBean, MessageListBean mentionsWeiboData,
             CommentListBean mentionsCommentData, CommentListBean commentsToMeData,
@@ -112,7 +112,6 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
     public String getToken() {
         return accountBean.getAccess_token();
     }
-
 
     public void setTitle(String title) {
         if (TextUtils.isEmpty(title)) {
@@ -157,7 +156,6 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
         Executors.newSingleThreadScheduledExecutor()
                 .schedule(new ClearCacheTask(), 8, TimeUnit.SECONDS);
     }
-
 
     private void buildInterface(Bundle savedInstanceState) {
         getActionBar().setTitle(GlobalContext.getInstance().getCurrentAccountName());
@@ -324,7 +322,6 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
         getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
     }
 
-
     private void scrollCurrentListViewToTop() {
         if (this.currentFragment != null) {
             this.currentFragment.scrollToTop();
@@ -377,7 +374,6 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -395,17 +391,14 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     public UserBean getUser() {
         return accountBean.getInfo();
 
     }
 
-
     public AccountBean getAccount() {
         return accountBean;
     }
-
 
     private void readClipboard() {
         ClipboardManager cm = (ClipboardManager) getApplicationContext().getSystemService(
@@ -492,7 +485,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
                 musicReceiver,
                 AppEventAction.getSystemMusicBroadcastFilterAction());
         readClipboard();
-        //ensure timeline picture type is correct
+        // ensure timeline picture type is correct
         ConnectionChangeReceiver.judgeNetworkStatus(this);
     }
 
@@ -521,7 +514,6 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
                 .updateNavigationPosition(GlobalContext.getInstance().getAccountBean(), result);
     }
 
-
     public LeftMenuFragment getMenuFragment() {
         LeftMenuFragment fragment = ((LeftMenuFragment) getSupportFragmentManager()
                 .findFragmentByTag(
@@ -531,7 +523,6 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
         }
         return fragment;
     }
-
 
     public FriendsTimeLineFragment getFriendsTimeLineFragment() {
         FriendsTimeLineFragment fragment = ((FriendsTimeLineFragment) getSupportFragmentManager()
@@ -605,7 +596,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
         return fragment;
     }
 
-    //todo
+    // todo
     private class NewMsgInterruptBroadcastReceiver extends RecordOperationAppBroadcastReceiver {
 
         @Override
@@ -631,7 +622,6 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
             }
         }
     }
-
 
     public void setMentionsWeiboCount(int count) {
         LeftMenuFragment fragment = getMenuFragment();

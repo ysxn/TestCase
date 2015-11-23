@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import android.content.ContentValues;
@@ -17,17 +18,14 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * User: qii
- * Date: 12-10-21
+ * User: qii Date: 12-10-21
  */
 public class DraftDBManager {
     private static DraftDBManager singleton = null;
 
-
     private SQLiteDatabase wsd = null;
 
     private SQLiteDatabase rsd = null;
-
 
     private DraftDBManager() {
 
@@ -47,7 +45,6 @@ public class DraftDBManager {
 
         return singleton;
     }
-
 
     public void insertStatus(String content, GeoBean gps, String pic, String accountId) {
         ContentValues cv = new ContentValues();
@@ -91,7 +88,6 @@ public class DraftDBManager {
         wsd.insert(DraftTable.TABLE_NAME,
                 DraftTable.ID, cv);
     }
-
 
     public List<DraftListViewItemBean> getDraftList(String accountId) {
 
@@ -167,14 +163,12 @@ public class DraftDBManager {
                     break;
             }
 
-
         }
 
         c.close();
         return result;
 
     }
-
 
     public List<DraftListViewItemBean> removeAndGet(Set<String> checkedItemPosition, String acountId) {
         String[] args = checkedItemPosition.toArray(new String[0]);

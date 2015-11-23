@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import com.google.gson.Gson;
@@ -22,8 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-1-7
+ * User: qii Date: 13-1-7
  */
 public class CommentToMeTimeLineDBTask {
 
@@ -41,7 +41,6 @@ public class CommentToMeTimeLineDBTask {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         return databaseHelper.getReadableDatabase();
     }
-
 
     public static void addCommentLineMsg(CommentListBean list, String accountId) {
         Gson gson = new Gson();
@@ -119,7 +118,6 @@ public class CommentToMeTimeLineDBTask {
 
     }
 
-
     private static void reduceCommentTable(String accountId) {
         String searchCount = "select count(" + CommentsTable.CommentsDataTable.ID + ") as total"
                 + " from " + CommentsTable.CommentsDataTable.TABLE_NAME + " where "
@@ -133,28 +131,31 @@ public class CommentToMeTimeLineDBTask {
 
         c.close();
 
-//        AppLogger.e("total=" + total);
-//
-//        int needDeletedNumber = total - AppConfig.DEFAULT_COMMENTS_TO_ME_DB_CACHE_COUNT;
-//
-//        if (needDeletedNumber > 0) {
-//            AppLogger.e("" + needDeletedNumber);
-//            String sql = " delete from " + CommentsTable.CommentsDataTable.TABLE_NAME + " where " + CommentsTable.CommentsDataTable.ID + " in "
-//                    + "( select " + CommentsTable.CommentsDataTable.ID + " from " + CommentsTable.CommentsDataTable.TABLE_NAME + " where "
-//                    + CommentsTable.CommentsDataTable.ACCOUNTID
-//                    + " in " + "(" + accountId + ") order by " + CommentsTable.CommentsDataTable.ID + " asc limit " + needDeletedNumber + " ) ";
-//
-//            getWsd().execSQL(sql);
-//        }
+        // AppLogger.e("total=" + total);
+        //
+        // int needDeletedNumber = total - AppConfig.DEFAULT_COMMENTS_TO_ME_DB_CACHE_COUNT;
+        //
+        // if (needDeletedNumber > 0) {
+        // AppLogger.e("" + needDeletedNumber);
+        // String sql = " delete from " + CommentsTable.CommentsDataTable.TABLE_NAME + " where " +
+        // CommentsTable.CommentsDataTable.ID + " in "
+        // + "( select " + CommentsTable.CommentsDataTable.ID + " from " +
+        // CommentsTable.CommentsDataTable.TABLE_NAME + " where "
+        // + CommentsTable.CommentsDataTable.ACCOUNTID
+        // + " in " + "(" + accountId + ") order by " + CommentsTable.CommentsDataTable.ID +
+        // " asc limit " + needDeletedNumber + " ) ";
+        //
+        // getWsd().execSQL(sql);
+        // }
     }
 
     private void replaceCommentLineMsg(CommentListBean list, String accountId) {
 
         deleteAllComments(accountId);
 
-        //need modification
-//        wsd.execSQL("DROP TABLE IF EXISTS " + CommentsTable.CommentsDataTable.TABLE_NAME);
-//        wsd.execSQL(DatabaseHelper.CREATE_COMMENTS_TABLE_SQL);
+        // need modification
+        // wsd.execSQL("DROP TABLE IF EXISTS " + CommentsTable.CommentsDataTable.TABLE_NAME);
+        // wsd.execSQL(DatabaseHelper.CREATE_COMMENTS_TABLE_SQL);
 
         addCommentLineMsg(list, accountId);
     }
@@ -182,7 +183,6 @@ public class CommentToMeTimeLineDBTask {
         new Thread(runnable).start();
     }
 
-
     private static void updatePosition(TimeLinePosition position, String accountId) {
         String sql = "select * from " + CommentsTable.TABLE_NAME + " where "
                 + CommentsTable.ACCOUNTID + "  = "
@@ -191,7 +191,9 @@ public class CommentToMeTimeLineDBTask {
         Gson gson = new Gson();
         if (c.moveToNext()) {
             try {
-                String[] args = {accountId};
+                String[] args = {
+                    accountId
+                };
                 ContentValues cv = new ContentValues();
                 cv.put(CommentsTable.TIMELINEDATA, gson.toJson(position));
                 getWsd().update(CommentsTable.TABLE_NAME, cv, CommentsTable.ACCOUNTID + "=?", args);

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import android.content.ContentValues;
@@ -10,8 +11,7 @@ import org.qii.weiciyuan.support.database.table.GroupTable;
 import org.qii.weiciyuan.support.database.table.HomeTable;
 
 /**
- * User: qii
- * Date: 12-11-5
+ * User: qii Date: 12-11-5
  */
 public class GroupDBTask {
 

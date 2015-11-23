@@ -1,10 +1,10 @@
+
 package org.qii.weiciyuan.bean.android;
 
 import org.qii.weiciyuan.bean.MessageListBean;
 
 /**
- * User: qii
- * Date: 13-7-7
+ * User: qii Date: 13-7-7
  */
 public class MyStatusTimeLineData {
 

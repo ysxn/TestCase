@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.support.database;
 
 import com.google.gson.Gson;
@@ -26,16 +27,15 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * User: qii
- * Date: 13-1-7
+ * User: qii Date: 13-1-7
  */
 public class FriendsTimeLineDBTask {
 
     /**
-     * the number of messages to read is calculated by listview position, for example,
-     * if you have 1000 messages, but the first position of listview is 60,
-     * weiciyuan will save 1000 messages to database, but at the next time when
-     * app need to read database, app will read only 60+ DB_CACHE_COUNT_OFFSET =70 messages.
+     * the number of messages to read is calculated by listview position, for example, if you have
+     * 1000 messages, but the first position of listview is 60, weiciyuan will save 1000 messages to
+     * database, but at the next time when app need to read database, app will read only 60+
+     * DB_CACHE_COUNT_OFFSET =70 messages.
      */
 
     private FriendsTimeLineDBTask() {
@@ -52,7 +52,6 @@ public class FriendsTimeLineDBTask {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         return databaseHelper.getReadableDatabase();
     }
-
 
     private static void addHomeLineMsg(MessageListBean list, String accountId) {
 
@@ -107,17 +106,20 @@ public class FriendsTimeLineDBTask {
 
         AppLogger.e("total=" + total);
 
-//        int needDeletedNumber = total - AppConfig.DEFAULT_HOME_DB_CACHE_COUNT;
-//
-//        if (needDeletedNumber > 0) {
-//            AppLogger.e("" + needDeletedNumber);
-//            String sql = " delete from " + HomeTable.HomeDataTable.TABLE_NAME + " where " + HomeTable.HomeDataTable.ID + " in "
-//                    + "( select " + HomeTable.HomeDataTable.ID + " from " + HomeTable.HomeDataTable.TABLE_NAME + " where "
-//                    + HomeTable.HomeDataTable.ACCOUNTID
-//                    + " in " + "(" + accountId + ") order by " + HomeTable.HomeDataTable.ID + " desc limit " + needDeletedNumber + " ) ";
-//
-//            getWsd().execSQL(sql);
-//        }
+        // int needDeletedNumber = total - AppConfig.DEFAULT_HOME_DB_CACHE_COUNT;
+        //
+        // if (needDeletedNumber > 0) {
+        // AppLogger.e("" + needDeletedNumber);
+        // String sql = " delete from " + HomeTable.HomeDataTable.TABLE_NAME + " where " +
+        // HomeTable.HomeDataTable.ID + " in "
+        // + "( select " + HomeTable.HomeDataTable.ID + " from " +
+        // HomeTable.HomeDataTable.TABLE_NAME + " where "
+        // + HomeTable.HomeDataTable.ACCOUNTID
+        // + " in " + "(" + accountId + ") order by " + HomeTable.HomeDataTable.ID + " desc limit "
+        // + needDeletedNumber + " ) ";
+        //
+        // getWsd().execSQL(sql);
+        // }
     }
 
     private static void replace(MessageListBean list, String accountId, String groupId) {
@@ -163,7 +165,6 @@ public class FriendsTimeLineDBTask {
         }
     }
 
-
     private static void updatePosition(TimeLinePosition position, String accountId) {
         String sql = "select * from " + HomeTable.TABLE_NAME + " where " + HomeTable.ACCOUNTID
                 + "  = "
@@ -172,7 +173,9 @@ public class FriendsTimeLineDBTask {
         Gson gson = new Gson();
         if (c.moveToNext()) {
             try {
-                String[] args = {accountId};
+                String[] args = {
+                    accountId
+                };
                 ContentValues cv = new ContentValues();
                 cv.put(HomeTable.TIMELINEDATA, gson.toJson(position));
                 getWsd().update(HomeTable.TABLE_NAME, cv, HomeTable.ACCOUNTID + "=?", args);
@@ -250,7 +253,9 @@ public class FriendsTimeLineDBTask {
         Cursor c = getRsd().rawQuery(sql, null);
         if (c.moveToNext()) {
             try {
-                String[] args = {accountId};
+                String[] args = {
+                    accountId
+                };
                 ContentValues cv = new ContentValues();
                 cv.put(HomeTable.RECENT_GROUP_ID, groupId);
                 getWsd().update(HomeTable.TABLE_NAME, cv, HomeTable.ACCOUNTID + "=?", args);
@@ -302,7 +307,9 @@ public class FriendsTimeLineDBTask {
                     MessageBean value = gson.fromJson(json, MessageBean.class);
                     value.setComments_count(commentCount);
                     value.setReposts_count(repostCount);
-                    String[] args = {id};
+                    String[] args = {
+                        id
+                    };
                     ContentValues cv = new ContentValues();
                     cv.put(HomeTable.HomeDataTable.JSONDATA, gson.toJson(value));
                     getWsd().update(HomeTable.HomeDataTable.TABLE_NAME, cv,
@@ -395,7 +402,7 @@ public class FriendsTimeLineDBTask {
             }
         }
 
-        //delete the null flag at the head positon and the end position
+        // delete the null flag at the head positon and the end position
         for (int i = msgList.size() - 1; i >= 0; i--) {
             if (msgList.get(i) == null) {
                 msgList.remove(i);

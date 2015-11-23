@@ -1,11 +1,11 @@
+
 package org.qii.weiciyuan.bean.android;
 
 import java.io.Serializable;
 import java.util.TreeSet;
 
 /**
- * User: qii
- * Date: 13-3-23
+ * User: qii Date: 13-3-23
  */
 public class TimeLinePosition implements Serializable {
     public TimeLinePosition(int position, int top) {

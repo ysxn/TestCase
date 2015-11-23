@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.othercomponent.sendweiboservice;
 
 import org.qii.weiciyuan.R;
@@ -31,11 +32,9 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * User: qii
- * Date: 13-1-20
+ * User: qii Date: 13-1-20
  */
 public class SendReplyToCommentService extends Service {
-
 
     private Map<WeiboSendTask, Boolean> tasksResult = new HashMap<WeiboSendTask, Boolean>();
 
@@ -87,7 +86,6 @@ public class SendReplyToCommentService extends Service {
         return START_REDELIVER_INTENT;
 
     }
-
 
     private class WeiboSendTask extends MyAsyncTask<Void, Long, Void> {
 
@@ -146,7 +144,6 @@ public class SendReplyToCommentService extends Service {
 
         }
 
-
         private void sendText() throws WeiboException {
             ReplyToCommentMsgDao dao = new ReplyToCommentMsgDao(token, oriMsg, content);
             CommentBean commentBean = dao.reply();
@@ -157,7 +154,6 @@ public class SendReplyToCommentService extends Service {
                 repostNewMsgDao.setStatus(content);
                 repostNewMsgDao.sendNewMsg();
             }
-
 
         }
 
@@ -172,7 +168,6 @@ public class SendReplyToCommentService extends Service {
 
             return null;
         }
-
 
         @Override
         protected void onPostExecute(Void aVoid) {
@@ -200,8 +195,7 @@ public class SendReplyToCommentService extends Service {
                     .setSmallIcon(R.drawable.send_successfully)
                     .setOngoing(false);
             Notification notification = builder.getNotification();
-            final NotificationManager notificationManager
-                    = (NotificationManager) getApplicationContext()
+            final NotificationManager notificationManager = (NotificationManager) getApplicationContext()
                     .getSystemService(NOTIFICATION_SERVICE);
             final int id = tasksNotifications.get(task);
             notificationManager.notify(id, notification);
@@ -300,6 +294,4 @@ public class SendReplyToCommentService extends Service {
         }
     }
 
-
 }
-

@@ -1,3 +1,4 @@
+
 package org.qii.weiciyuan.ui.userinfo;
 
 import android.app.AlertDialog;
@@ -10,16 +11,13 @@ import android.widget.EditText;
 import org.qii.weiciyuan.R;
 
 /**
- * User: qii
- * Date: 12-10-1
+ * User: qii Date: 12-10-1
  */
 public class UpdateRemarkDialog extends DialogFragment {
-
 
     public UpdateRemarkDialog() {
 
     }
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
