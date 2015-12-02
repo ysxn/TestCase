@@ -27,9 +27,45 @@ public class CanvasHelper {
      * 很明显可以得出，每次增加，偶数时，左范围减去width整除2的结果，奇数时，右范围加上width整除2的结果。这样绘制过程中可以精确自动变化。
      * 
      * Paint.Align有3个值，分别是center，left，right，用于表示字符的位置，字符以坐标（x,y）为原点。
-     * center表示字符在水平方向上以x中心向左右两边延伸，在垂直方向以y为起点向下延伸；
-     * left表示字符在水平方向上以x为起点向右延伸，在垂直方向上以y为起点向下延伸；
-     * right表示字符在水平方向上以x为起点向左延伸，在垂直方向上以y为起点向下延伸。
+     * center表示字符在水平方向上以x中心向左右两边延伸，在垂直方向以y为baseline；
+     * left表示字符在水平方向上以x为起点向右延伸，在垂直方向上以y为baseline；
+     * right表示字符在水平方向上以x为起点向左延伸，在垂直方向上以y为baseline。
+     * 
+     * 
+     * Baseline是基线，在Android中，文字的绘制都是从Baseline处开始的，
+     * Baseline往上至字符“最高处”的距离我们称之为ascent（上坡度），
+     * Baseline往下至字符“最低处”的距离我们称之为descent（下坡度）；
+     * leading（行间距）则表示上一行字符的descent到该行字符的ascent之间的距离,只有一行文本所以leading恒为0；
+     * top和bottom文档描述地很模糊，其实这里我们可以借鉴一下TextView对文本的绘制，
+     * TextView在绘制文本的时候总会在文本的最外层留出一些内边距，为什么要这样做？
+     * 因为TextView在绘制文本的时候考虑到了类似读音符号，下图中的A上面的符号就是一个拉丁文的类似读音符号的东西：
+     * top的意思其实就是除了Baseline到字符顶端的距离外还应该包含这些符号的高度，bottom的意思也是一样。
+     * 一般情况下我们极少使用到类似的符号所以往往会忽略掉这些符号的存在，但是Android依然会在绘制文本的时候在文本外层留出一定的边距，
+     * 这就是为什么top和bottom总会比ascent和descent大一点的原因。
+     * 而在TextView中我们可以通过xml设置其属性android:includeFontPadding="false"去掉一定的边距值但是不能完全去掉。
+     * 注：Baseline上方的值为负，下方的值为正
+     * 我们来分析一下这个结果：
+     * 因为基线上方为负，所以ascent和top的值都是负数，而且top要大于ascent，原因是要为符号留出位置。
+     * 因为只有一行文本所以leading恒为0。
+     * 基线下方为正，所以descent和bottom都是正的，bottom要略大于descent
+     * 
+     * 文字宽度的计算：
+     * int width = (int) mPaint.measureText("text");
+     * 文字高度度的计算有三个情况：
+     * 1.int height = (int) mPaint.getFontMetrics().bottom - mPaint.getFontMetrics().top;
+     * 2.int height = (int) mTextPaint.descent() - mTextPaint.ascent();
+     * 3.int height = (int) (- mTextPaint.ascent());
+     * 文字baseline的计算方法 ：
+     *         // 计算Baseline绘制的起点X轴坐标 ，计算方式：画布宽度的一半 - 文字宽度的一半
+     *         int baseX = (int) (canvas.getWidth() / 2 - mTextPaint.measureText(TEXT) / 2);
+     * 
+     *         // 计算Baseline绘制的Y坐标 ，计算方式：画布高度的一半 - 文字总高度的一半
+     *         int baseY = (int) ((canvas.getHeight() / 2) - ((mTextPaint.descent() + mTextPaint.ascent()) / 2));
+     * 
+     *         // 居中画一个文字
+     *         canvas.drawText(TEXT, baseX, baseY, mTextPaint);
+     * 
+     * 
      * </pre>
      */
 
