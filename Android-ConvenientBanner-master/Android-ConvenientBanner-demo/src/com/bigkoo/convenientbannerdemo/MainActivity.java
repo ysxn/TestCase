@@ -1,7 +1,12 @@
+
 package com.bigkoo.convenientbannerdemo;
 
-import android.support.v7.app.ActionBarActivity;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,20 +21,15 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
- * Created by Sai on 15/7/30.
- * convenientbanner 控件 的 demo
+ * Created by Sai on 15/7/30. convenientbanner 控件 的 demo
  */
 public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
-    private ConvenientBanner convenientBanner;//顶部广告栏控件
+    private ConvenientBanner convenientBanner;// 顶部广告栏控件
     private ArrayList<Integer> localImages = new ArrayList<Integer>();
     private List<String> networkImages;
-    private String[] images = {"http://img2.imgtn.bdimg.com/it/u=3093785514,1341050958&fm=21&gp=0.jpg",
+    private String[] images = {
+            "http://img2.imgtn.bdimg.com/it/u=3093785514,1341050958&fm=21&gp=0.jpg",
             "http://img2.3lian.com/2014/f2/37/d/40.jpg",
             "http://d.3987.com/sqmy_131219/001.jpg",
             "http://img2.3lian.com/2014/f2/37/d/39.jpg",
@@ -53,15 +53,15 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     private void initViews() {
         convenientBanner = (ConvenientBanner) findViewById(R.id.convenientBanner);
         listView = (ListView) findViewById(R.id.listView);
-        transformerArrayAdapter = new ArrayAdapter(this,R.layout.adapter_transformer,transformerList);
+        transformerArrayAdapter = new ArrayAdapter(this, R.layout.adapter_transformer, transformerList);
         listView.setAdapter(transformerArrayAdapter);
         listView.setOnItemClickListener(this);
     }
 
-    private void init(){
+    private void init() {
         initImageLoader();
         loadTestDatas();
-        //本地图片例子
+        // 本地图片例子
         convenientBanner.setPages(
                 new CBViewHolderCreator<LocalImageHolderView>() {
                     @Override
@@ -69,28 +69,33 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                         return new LocalImageHolderView();
                     }
                 }, localImages)
-                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
-                .setPageIndicator(new int[]{R.drawable.ic_page_indicator, R.drawable.ic_page_indicator_focused})
-                //设置指示器的方向
-//                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
-                //设置翻页的效果，不需要翻页效果可用不设
+                // 设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
+                .setPageIndicator(new int[] {
+                        R.drawable.ic_page_indicator, R.drawable.ic_page_indicator_focused
+                })
+                // 设置指示器的方向
+                // .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
+                // 设置翻页的效果，不需要翻页效果可用不设
                 .setPageTransformer(Transformer.DefaultTransformer);
 
-//        convenientBanner.setManualPageable(false);//设置不能手动影响
+        // convenientBanner.setManualPageable(false);//设置不能手动影响
 
-        //网络加载例子
-//        networkImages=Arrays.asList(images);
-//        convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
-//            @Override
-//            public NetworkImageHolderView createHolder() {
-//                return new NetworkImageHolderView();
-//            }
-//        },networkImages);
+        // 网络加载例子
+        // networkImages=Arrays.asList(images);
+        // convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+        // @Override
+        // public NetworkImageHolderView createHolder() {
+        // return new NetworkImageHolderView();
+        // }
+        // },networkImages);
     }
 
-    //初始化网络图片缓存库
-    private void initImageLoader(){
-        //网络图片例子,结合常用的图片缓存库UIL,你可以根据自己需求自己换其他网络图片库
+    // 初始化网络图片缓存库
+    private void initImageLoader() {
+        if (ImageLoader.getInstance().isInited()) {
+            return;
+        }
+        // 网络图片例子,结合常用的图片缓存库UIL,你可以根据自己需求自己换其他网络图片库
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().
                 showImageForEmptyUri(R.drawable.ic_default_adimage)
                 .cacheInMemory(true).cacheOnDisk(true).build();
@@ -103,17 +108,16 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                 .tasksProcessingOrder(QueueProcessingType.LIFO).build();
         ImageLoader.getInstance().init(config);
     }
+
     /*
-    加入测试Views
-    * */
+     * 加入测试Views
+     */
     private void loadTestDatas() {
-        //本地图片集合
+        // 本地图片集合
         for (int position = 0; position < 7; position++)
             localImages.add(getResId("ic_test_" + position, R.drawable.class));
 
-
-
-        //各种翻页效果
+        // 各种翻页效果
         transformerList.add(Transformer.DefaultTransformer.getClassName());
         transformerList.add(Transformer.AccordionTransformer.getClassName());
         transformerList.add(Transformer.BackgroundToForegroundTransformer.getClassName());
@@ -134,7 +138,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
     /**
      * 通过文件名获取资源id 例子：getResId("icon", R.drawable.class);
-     *
+     * 
      * @param variableName
      * @param c
      * @return
@@ -153,19 +157,19 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     @Override
     protected void onResume() {
         super.onResume();
-        //开始自动翻页
+        // 开始自动翻页
         convenientBanner.startTurning(5000);
     }
 
-     // 停止自动翻页
+    // 停止自动翻页
     @Override
     protected void onPause() {
         super.onPause();
-        //停止翻页
+        // 停止翻页
         convenientBanner.stopTurning();
     }
 
-    //点击切换效果
+    // 点击切换效果
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         String name = transformerList.get(position);
