@@ -1,3 +1,4 @@
+
 package com.bigkoo.convenientbannerdemo.recyclerviewdemo;
 
 import android.support.v7.widget.RecyclerView;
@@ -107,45 +108,44 @@ public class RecyclerViewHFAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return items.get(position - getHeadViewSize());
     }
 
-
-    //add a header to the adapter
+    // add a header to the adapter
     public void addHeader(View header) {
         mHeaderView = header;
         notifyItemInserted(0);
     }
 
-    //remove a header from the adapter
+    // remove a header from the adapter
     public void removeHeader(View header) {
         notifyItemRemoved(0);
         mHeaderView = null;
     }
 
-    //add a footer to the adapter
+    // add a footer to the adapter
     public void addFooter(View footer) {
         mFooterView = footer;
         notifyItemInserted(getHeadViewSize() + items.size());
     }
 
-    //remove a footer from the adapter
+    // remove a footer from the adapter
     public void removeFooter(View footer) {
         notifyItemRemoved(getHeadViewSize() + items.size());
         mFooterView = null;
     }
 
-    //add data
+    // add data
     public void addDatas(List<String> data) {
         items.addAll(data);
         notifyItemInserted(getHeadViewSize() + items.size() - 1);
     }
 
-    //add data
+    // add data
     public void addData(String data) {
         items.add(data);
         notifyItemInserted(getHeadViewSize() + items.size() - 1);
     }
 
-    //refresh data
-    public void refreshData(List<String> datas){
+    // refresh data
+    public void refreshData(List<String> datas) {
         items.clear();
         addDatas(datas);
     }
@@ -154,7 +154,6 @@ public class RecyclerViewHFAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         mEmptyView = emptyView;
         notifyItemInserted(0);
     }
-
 
     class ItemHolder extends RecyclerView.ViewHolder {
         TextView mTextView;

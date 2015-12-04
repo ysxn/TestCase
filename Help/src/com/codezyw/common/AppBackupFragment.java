@@ -16,9 +16,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.bigkoo.convenientbanner.CBPageAdapter;
-import com.bigkoo.convenientbanner.CBViewHolderCreator;
-import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.LoopPageAdapter;
+import com.bigkoo.convenientbanner.ViewHolderCreator;
+import com.bigkoo.convenientbanner.FlipBanner;
 import com.codezyw.common.HttpPostAsyncTask.PostListener;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -29,7 +29,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 public class AppBackupFragment extends BaseFragment {
     private LinearLayout mRootView;
     private Button mButtonBackUp;
-    private ConvenientBanner<String> mConvenientBanner;
+    private FlipBanner<String> mFlipBanner;
     private BackupAsyncTask mBackupAsyncTast;
     private final static String[] IMAGE_URL = {
             "http://img2.imgtn.bdimg.com/it/u=3093785514,1341050958&fm=21&gp=0.jpg",
@@ -68,10 +68,10 @@ public class AppBackupFragment extends BaseFragment {
         mRootView.setLayoutParams(lp);
         mRootView.setOrientation(LinearLayout.VERTICAL);
 
-        mConvenientBanner = new ConvenientBanner<String>(getActivity());
+        mFlipBanner = new FlipBanner<String>(getActivity());
         LinearLayout.LayoutParams lpBanner = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lpBanner.height = (int) UnitHelper.dp2px(getActivity(), 200);
-        mRootView.addView(mConvenientBanner, lpBanner);
+        mRootView.addView(mFlipBanner, lpBanner);
 
         mButtonBackUp = new Button(getActivity());
         LinearLayout.LayoutParams lpButton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -118,13 +118,27 @@ public class AppBackupFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         initImageLoader();
         // 网络加载例子
-        mConvenientBanner.setPages(new
-                CBViewHolderCreator<NetworkImageHolderView>() {
+        mFlipBanner.setViewPagerData(new
+                ViewHolderCreator<NetworkImageHolderView>() {
                     @Override
                     public NetworkImageHolderView createHolder() {
                         return new NetworkImageHolderView();
                     }
                 }, Arrays.asList(IMAGE_URL));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // 开始自动翻页
+        mFlipBanner.startFlipping(5000);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // 停止翻页
+        mFlipBanner.stopFlipping();
     }
 
     @Override
@@ -156,7 +170,7 @@ public class AppBackupFragment extends BaseFragment {
         ImageLoader.getInstance().init(config);
     }
 
-    public class NetworkImageHolderView implements CBPageAdapter.Holder<String> {
+    public class NetworkImageHolderView implements LoopPageAdapter.Holder<String> {
         private ImageView mImageView;
 
         /**
