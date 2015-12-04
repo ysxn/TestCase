@@ -24,20 +24,13 @@ import com.bigkoo.convenientbanner.transforms.ABaseTransformer;
  * 页面翻转控件，极方便的广告栏 支持无限循环，自动翻页，翻页特效
  */
 public class FlipBanner<T> extends LinearLayout {
-    private ViewHolderCreator holderCreator;
-    private List<T> mDatas;
-    private LoopPageAdapter mLoopPageAdapter;
+    private List<T> mDataList;
+    private RecyclingPagerAdapter mPageAdapter;
     private RelativeLayout mRootView;
     private LoopViewPager mLoopViewPager;
     private LoopIndicator mLoopIndicator;
-    private long autoTurningTime;
+    private long mAutoFlipTime;
     private boolean mFlipEnable = false;
-    private boolean mFlipStart = false;
-    private boolean manualPageable = true;
-
-    public enum PageIndicatorAlign {
-        ALIGN_PARENT_LEFT, ALIGN_PARENT_RIGHT, CENTER_HORIZONTAL
-    }
 
     public enum Transformer {
         DefaultTransformer("DefaultTransformer"), AccordionTransformer(
@@ -70,14 +63,15 @@ public class FlipBanner<T> extends LinearLayout {
         }
     }
 
-    private Handler timeHandler = new Handler();
-    private Runnable adSwitchTask = new Runnable() {
+    private Handler mAutoFlipHandler = new Handler();
+    private Runnable mAutoFlipRunnable = new Runnable() {
         @Override
         public void run() {
             if (mLoopViewPager != null && mFlipEnable) {
                 int page = mLoopViewPager.getCurrentItem() + 1;
                 mLoopViewPager.setCurrentItem(page);
-                timeHandler.postDelayed(adSwitchTask, autoTurningTime);
+                mAutoFlipHandler.removeCallbacks(mAutoFlipRunnable);
+                mAutoFlipHandler.postDelayed(mAutoFlipRunnable, mAutoFlipTime);
             }
         }
     };
@@ -98,12 +92,12 @@ public class FlipBanner<T> extends LinearLayout {
     @TargetApi(Build.VERSION_CODES.FROYO)
     private void init(Context context) {
         mRootView = new RelativeLayout(context);
-
+        // ViewPager
         mLoopViewPager = new LoopViewPager(context);
         RelativeLayout.LayoutParams pagerLp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT);
         mRootView.addView(mLoopViewPager, pagerLp);
-
+        // 指示器
         mLoopIndicator = new LoopIndicator(context);
         mRootView.addView(mLoopIndicator);
 
@@ -111,13 +105,15 @@ public class FlipBanner<T> extends LinearLayout {
         initViewPagerScroll();
     }
 
-    public FlipBanner setViewPagerData(ViewHolderCreator holderCreator, List<T> datas) {
-        this.mDatas = datas;
-        this.holderCreator = holderCreator;
-        mLoopPageAdapter = new LoopPageAdapter(holderCreator, mDatas);
-        mLoopViewPager.setAdapter(mLoopPageAdapter);
+    /**
+     * 设置数据源
+     */
+    public FlipBanner<T> setViewPagerData(RecyclingPagerAdapter adapter, List<T> datas) {
+        this.mDataList = datas;
+        mPageAdapter = adapter;
+        mLoopViewPager.setAdapter(mPageAdapter);
         mLoopViewPager.setBoundaryCaching(true);
-        mLoopIndicator.updatePageIndicator(mDatas != null ? mDatas.size() : 0);
+        mLoopIndicator.updateIndicator(mDataList != null ? mDataList.size() : 0);
         return this;
     }
 
@@ -126,7 +122,7 @@ public class FlipBanner<T> extends LinearLayout {
      */
     public void notifyDataSetChanged() {
         mLoopViewPager.getAdapter().notifyDataSetChanged();
-        mLoopIndicator.updatePageIndicator(mDatas != null ? mDatas.size() : 0);
+        mLoopIndicator.updateIndicator(mDataList != null ? mDataList.size() : 0);
     }
 
     /**
@@ -135,8 +131,8 @@ public class FlipBanner<T> extends LinearLayout {
      * @param selected
      * @param other
      */
-    public void setPageIndicator(int selected, int other) {
-        mLoopIndicator.setPageIndicator(selected, other, mLoopViewPager);
+    public void setIndicatorResource(int selected, int other) {
+        mLoopIndicator.setIndicatorResource(selected, other, mLoopViewPager);
     }
 
     /**
@@ -144,14 +140,14 @@ public class FlipBanner<T> extends LinearLayout {
      * 
      * @param visible
      */
-    public void setPagerIndicatorVisible(boolean visible) {
+    public void setIndicatorVisible(boolean visible) {
         mLoopIndicator.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     /**
      * 指示器
      */
-    public LoopIndicator getPageIndicator() {
+    public LoopIndicator getIndicator() {
         return mLoopIndicator;
     }
 
@@ -171,25 +167,21 @@ public class FlipBanner<T> extends LinearLayout {
     /***
      * 开始翻页
      * 
-     * @param autoTurningTime 自动翻页时间
+     * @param autoFlipTime 自动翻页时间,单位毫秒
      * @return
      */
-    public FlipBanner startFlipping(long autoTurningTime) {
-        // 如果是正在翻页的话先停掉
-        if (mFlipEnable) {
-            stopFlipping();
-        }
-        // 设置可以翻页并开启翻页
-        mFlipStart = true;
-        this.autoTurningTime = autoTurningTime;
+    public FlipBanner<T> startFlipping(long autoFlipTime) {
         mFlipEnable = true;
-        timeHandler.postDelayed(adSwitchTask, autoTurningTime);
+        mAutoFlipTime = autoFlipTime;
+        // 如果是正在翻页的话先停掉
+        mAutoFlipHandler.removeCallbacks(mAutoFlipRunnable);
+        mAutoFlipHandler.postDelayed(mAutoFlipRunnable, autoFlipTime);
         return this;
     }
 
     public void stopFlipping() {
         mFlipEnable = false;
-        timeHandler.removeCallbacks(adSwitchTask);
+        mAutoFlipHandler.removeCallbacks(mAutoFlipRunnable);
     }
 
     /**
@@ -198,7 +190,7 @@ public class FlipBanner<T> extends LinearLayout {
      * @param transformer
      * @return
      */
-    public FlipBanner setPageTransformer(PageTransformer transformer) {
+    public FlipBanner<T> setPageTransformer(PageTransformer transformer) {
         mLoopViewPager.setPageTransformer(true, transformer);
         return this;
     }
@@ -209,7 +201,7 @@ public class FlipBanner<T> extends LinearLayout {
      * @param transformer
      * @return
      */
-    public FlipBanner setPageTransformer(Transformer transformer) {
+    public FlipBanner<T> setPageTransformer(Transformer transformer) {
         try {
             mLoopViewPager
                     .setPageTransformer(
@@ -249,14 +241,6 @@ public class FlipBanner<T> extends LinearLayout {
         }
     }
 
-    public boolean isManualPageable() {
-        return mLoopViewPager.isCanScroll();
-    }
-
-    public void setManualPageable(boolean manualPageable) {
-        mLoopViewPager.setCanScroll(manualPageable);
-    }
-
     /**
      * 触碰控件的时候，翻页应该停止，离开的时候如果之前是开启了翻页的话则重新启动翻页
      */
@@ -264,13 +248,13 @@ public class FlipBanner<T> extends LinearLayout {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_UP) {
             // 开始翻页
-            if (mFlipStart) {
-                startFlipping(autoTurningTime);
+            if (mFlipEnable) {
+                startFlipping(mAutoFlipTime);
             }
         } else if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             // 停止翻页
-            if (mFlipStart) {
-                stopFlipping();
+            if (mFlipEnable) {
+                mAutoFlipHandler.removeCallbacks(mAutoFlipRunnable);
             }
         }
         return super.dispatchTouchEvent(ev);

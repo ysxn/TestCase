@@ -2,8 +2,8 @@
 package com.codezyw.common;
 
 import java.util.Arrays;
+import java.util.List;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,9 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.bigkoo.convenientbanner.LoopPageAdapter;
-import com.bigkoo.convenientbanner.ViewHolderCreator;
 import com.bigkoo.convenientbanner.FlipBanner;
+import com.bigkoo.convenientbanner.RecyclingPagerAdapter;
 import com.codezyw.common.HttpPostAsyncTask.PostListener;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -31,6 +30,8 @@ public class AppBackupFragment extends BaseFragment {
     private Button mButtonBackUp;
     private FlipBanner<String> mFlipBanner;
     private BackupAsyncTask mBackupAsyncTast;
+    private List<String> mDataList;
+
     private final static String[] IMAGE_URL = {
             "http://img2.imgtn.bdimg.com/it/u=3093785514,1341050958&fm=21&gp=0.jpg",
             "http://img2.3lian.com/2014/f2/37/d/40.jpg",
@@ -117,14 +118,9 @@ public class AppBackupFragment extends BaseFragment {
     Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initImageLoader();
+        mDataList = Arrays.asList(IMAGE_URL);
         // 网络加载例子
-        mFlipBanner.setViewPagerData(new
-                ViewHolderCreator<NetworkImageHolderView>() {
-                    @Override
-                    public NetworkImageHolderView createHolder() {
-                        return new NetworkImageHolderView();
-                    }
-                }, Arrays.asList(IMAGE_URL));
+        mFlipBanner.setViewPagerData(new LoopPageAdapter(), mDataList);
     }
 
     @Override
@@ -170,30 +166,40 @@ public class AppBackupFragment extends BaseFragment {
         ImageLoader.getInstance().init(config);
     }
 
-    public class NetworkImageHolderView implements LoopPageAdapter.Holder<String> {
-        private ImageView mImageView;
-
-        /**
-         * 你可以通过layout文件来创建，也可以像我一样用代码创建，不一定是Image，任何控件都可以进行翻页
-         */
-        @Override
-        public View createView(Context context) {
-            mImageView = new ImageView(context);
-            mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            return mImageView;
+    public class LoopPageAdapter extends RecyclingPagerAdapter {
+        public LoopPageAdapter() {
         }
 
         @Override
-        public void UpdateUI(Context context, final int position, String data) {
-            mImageView.setImageDrawable(new ColorDrawable(Color.DKGRAY));
-            ImageLoader.getInstance().displayImage(data, mImageView);
-            mImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // 点击事件
-                    Toast.makeText(view.getContext(), "点击了第" + position + "个", Toast.LENGTH_SHORT).show();
-                }
-            });
+        public View getView(final int position, View view, ViewGroup container) {
+            ImageView image = null;
+            if (view == null) {
+                image = new ImageView(getActivity());
+                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                view = image;
+            } else {
+                image = (ImageView) view;
+            }
+            image.setImageDrawable(new ColorDrawable(Color.DKGRAY));
+            if (mDataList != null && !mDataList.isEmpty()) {
+                ImageLoader.getInstance().displayImage(mDataList.get(position), image);
+                image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // 点击事件
+                        Toast.makeText(view.getContext(), "点击了第" + position + "个", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            return view;
+        }
+
+        @Override
+        public int getCount() {
+            if (mDataList == null) {
+                return 0;
+            }
+            return mDataList.size();
         }
     }
 }

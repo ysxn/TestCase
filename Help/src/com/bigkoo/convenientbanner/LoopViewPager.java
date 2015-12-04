@@ -55,7 +55,7 @@ public class LoopViewPager extends ViewPager {
     private static final boolean DEFAULT_BOUNDARY_CASHING = true;
     private PagerAdapterWrapper mPagerAdapterWrapper;
     private boolean mBoundaryCaching = DEFAULT_BOUNDARY_CASHING;
-    private boolean isCanScroll = true;
+    private boolean mCanScrollByTouch = true;
 
     private OnPageChangeListener mOnPageChangeListener;
     private List<OnPageChangeListener> mOnPageChangeListeners;
@@ -164,18 +164,28 @@ public class LoopViewPager extends ViewPager {
         super.setOnPageChangeListener(mInternalPageChangeListener);
     }
 
-    public boolean isCanScroll() {
-        return isCanScroll;
+    /**
+     * 手动触摸影响滚动
+     * 
+     * @return
+     */
+    public boolean canScrollByTouch() {
+        return mCanScrollByTouch;
     }
 
-    public void setCanScroll(boolean isCanScroll) {
-        this.isCanScroll = isCanScroll;
+    /**
+     * 手动触摸影响滚动
+     * 
+     * @param isCanScroll
+     */
+    public void setCanScrollByTouch(boolean isCanScroll) {
+        this.mCanScrollByTouch = isCanScroll;
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        if (isCanScroll) {
+        if (mCanScrollByTouch) {
             return super.onTouchEvent(ev);
         } else {
             return false;
@@ -184,7 +194,7 @@ public class LoopViewPager extends ViewPager {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (isCanScroll) {
+        if (mCanScrollByTouch) {
             return super.onInterceptTouchEvent(ev);
         } else {
             return false;

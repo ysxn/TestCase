@@ -6,16 +6,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
+import android.widget.Toast;
 
 import com.bigkoo.convenientbanner.FlipBanner;
 import com.bigkoo.convenientbanner.FlipBanner.Transformer;
-import com.bigkoo.convenientbanner.ViewHolderCreator;
+import com.bigkoo.convenientbanner.LoopIndicator;
+import com.bigkoo.convenientbanner.RecyclingPagerAdapter;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -23,11 +33,13 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+    @SuppressWarnings("rawtypes")
     private FlipBanner mFlipBanner;// 顶部广告栏控件
-    private ArrayList<Integer> mLocalImages = new ArrayList<Integer>();
-    private List<String> mNetworkImages;
+    private ArrayList<Integer> mDataList = new ArrayList<Integer>();
+    private List<String> mNetWorkDataList;
     private ListView mListView;
-    private ArrayAdapter mTransformerArrayAdapter;
+    private Context mContext = MainActivity.this;
+    private ArrayAdapter<String> mTransformerArrayAdapter;
     private ArrayList<String> mTransformerList = new ArrayList<String>();
     private String[] IMAGES = {
             "http://img2.imgtn.bdimg.com/it/u=3093785514,1341050958&fm=21&gp=0.jpg",
@@ -50,42 +62,39 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     private void initViews() {
         mFlipBanner = (FlipBanner) findViewById(R.id.convenientBanner);
         mListView = (ListView) findViewById(R.id.listView);
-        mTransformerArrayAdapter = new ArrayAdapter(this, R.layout.adapter_transformer, mTransformerList);
+        mTransformerArrayAdapter = new ArrayAdapter<String>(this, R.layout.adapter_transformer, mTransformerList);
         mListView.setAdapter(mTransformerArrayAdapter);
         mListView.setOnItemClickListener(this);
     }
 
+    @SuppressWarnings("unused")
     private void init() {
         initImageLoader();
         loadTestDatas();
         // 设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
-        mFlipBanner.setPageIndicator(
+        mFlipBanner.setIndicatorResource(
                 R.drawable.ic_page_indicator_focused, R.drawable.ic_page_indicator
                 );
+        // 设置指示器的方向
+        mFlipBanner.getIndicator().setIndicatorAlign(LoopIndicator.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
+        RelativeLayout.LayoutParams layoutParams = (LayoutParams) mFlipBanner.getIndicator().getLayoutParams();
+        layoutParams.leftMargin = 20;
+        layoutParams.topMargin = 20;
+        layoutParams.rightMargin = 20;
+        layoutParams.bottomMargin = 20;
         // 本地图片例子
-        mFlipBanner.setViewPagerData(
-                new ViewHolderCreator<LocalImageHolderView>() {
-                    @Override
-                    public LocalImageHolderView createHolder() {
-                        return new LocalImageHolderView();
-                    }
-                }, mLocalImages)
-                // 设置指示器的方向
-                // .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
+        mFlipBanner.setViewPagerData(new LoopPageAdapter(), mDataList)
                 // 设置翻页的效果，不需要翻页效果可用不设
                 .setPageTransformer(Transformer.DefaultTransformer);
-
-        // convenientBanner.setManualPageable(false);//设置不能手动影响
+        // 设置不能手动影响
+        if (false) {
+            mFlipBanner.getViewPager().setCanScrollByTouch(false);
+        }
 
         // 网络加载例子
         if (false) {
-            mNetworkImages = Arrays.asList(IMAGES);
-            mFlipBanner.setViewPagerData(new ViewHolderCreator<NetworkImageHolderView>() {
-                @Override
-                public NetworkImageHolderView createHolder() {
-                    return new NetworkImageHolderView();
-                }
-            }, mNetworkImages);
+            mNetWorkDataList = Arrays.asList(IMAGES);
+            mFlipBanner.setViewPagerData(new NetworkLoopPageAdapter(), mNetWorkDataList);
         }
     }
 
@@ -115,9 +124,9 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
      */
     private void loadTestDatas() {
         // 本地图片集合
-        for (int position = 0; position < 7; position++)
-            mLocalImages.add(getResId("ic_test_" + position, R.drawable.class));
-
+        for (int position = 0; position < 7; position++) {
+            mDataList.add(getResId("ic_test_" + position, R.drawable.class));
+        }
         // 各种翻页效果
         mTransformerList.add(Transformer.DefaultTransformer.getClassName());
         mTransformerList.add(Transformer.AccordionTransformer.getClassName());
@@ -133,6 +142,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         mTransformerList.add(Transformer.StackTransformer.getClassName());
         mTransformerList.add(Transformer.ZoomInTransformer.getClassName());
         mTransformerList.add(Transformer.ZoomOutTranformer.getClassName());
+        mTransformerList.add("跳转下一个界面");
 
         mTransformerArrayAdapter.notifyDataSetChanged();
     }
@@ -154,9 +164,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         }
     }
 
-    /**
-     * 开始自动翻页
-     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -164,9 +171,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         mFlipBanner.startFlipping(5000);
     }
 
-    /**
-     * 停止自动翻页
-     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -180,8 +184,85 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         String name = mTransformerList.get(position);
-        Transformer transformer = Transformer.valueOf(name);
-        mFlipBanner.setPageTransformer(transformer);
+        if ("跳转下一个界面".equals(name)) {
+            startActivity(new Intent(mContext, RecyclerViewDemo.class));
+        } else {
+            Transformer transformer = Transformer.valueOf(name);
+            mFlipBanner.setPageTransformer(transformer);
+        }
     }
 
+    public class NetworkLoopPageAdapter extends RecyclingPagerAdapter {
+        public NetworkLoopPageAdapter() {
+        }
+
+        @Override
+        public View getView(final int position, View view, ViewGroup container) {
+            ImageView image = null;
+            if (view == null) {
+                image = new ImageView(mContext);
+                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                view = image;
+            } else {
+                image = (ImageView) view;
+            }
+            image.setImageResource(R.drawable.ic_default_adimage);
+            if (mNetWorkDataList != null && !mNetWorkDataList.isEmpty()) {
+                ImageLoader.getInstance().displayImage(mNetWorkDataList.get(position), image);
+                image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // 点击事件
+                        Toast.makeText(view.getContext(), "点击了第" + position + "个", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            return view;
+        }
+
+        @Override
+        public int getCount() {
+            if (mDataList == null) {
+                return 0;
+            }
+            return mDataList.size();
+        }
+    }
+
+    public class LoopPageAdapter extends RecyclingPagerAdapter {
+        public LoopPageAdapter() {
+        }
+
+        @Override
+        public View getView(final int position, View view, ViewGroup container) {
+            ImageView image = null;
+            if (view == null) {
+                image = new ImageView(mContext);
+                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                view = image;
+            } else {
+                image = (ImageView) view;
+            }
+            image.setImageDrawable(new ColorDrawable(Color.DKGRAY));
+            if (mDataList != null && !mDataList.isEmpty()) {
+                image.setImageResource(mDataList.get(position));
+                image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // 点击事件
+                        Toast.makeText(view.getContext(), "点击了第" + position + "个", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            return view;
+        }
+
+        @Override
+        public int getCount() {
+            if (mDataList == null) {
+                return 0;
+            }
+            return mDataList.size();
+        }
+    }
 }

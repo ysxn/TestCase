@@ -1,5 +1,5 @@
 
-package com.bigkoo.convenientbannerdemo.recyclerviewdemo;
+package com.bigkoo.convenientbannerdemo;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

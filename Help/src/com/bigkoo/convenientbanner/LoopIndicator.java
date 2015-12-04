@@ -10,13 +10,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.bigkoo.convenientbanner.FlipBanner.PageIndicatorAlign;
+import com.codezyw.common.UnitHelper;
 
+/**
+ * 底部指示器, parent View必须是RelativeLayout
+ */
 public class LoopIndicator extends LinearLayout {
     private int mSelectedIndicatorId = 0;
     private int mOthertIndicatorId = 0;
     private ArrayList<ImageView> mPointViews = new ArrayList<ImageView>();
     private int mPagerCount = 0;
+
+    public enum PageIndicatorAlign {
+        ALIGN_PARENT_LEFT, ALIGN_PARENT_RIGHT, CENTER_HORIZONTAL
+    }
 
     public LoopIndicator(Context context) {
         this(context, null);
@@ -30,14 +37,17 @@ public class LoopIndicator extends LinearLayout {
         super(context, attrs, defStyle);
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
-        lp.leftMargin = 20;
-        lp.topMargin = 20;
-        lp.rightMargin = 20;
-        lp.bottomMargin = 20;
+        int margin = (int) UnitHelper.dp2px(getContext(), 5);
+        lp.leftMargin = margin;
+        lp.topMargin = margin;
+        lp.rightMargin = margin;
+        lp.bottomMargin = margin;
         lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
         lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         setLayoutParams(lp);
         setOrientation(LinearLayout.HORIZONTAL);
+        // 设置指示器的方向
+        setIndicatorAlign(LoopIndicator.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
     }
 
     /**
@@ -45,13 +55,13 @@ public class LoopIndicator extends LinearLayout {
      * 
      * @param page_indicatorId
      */
-    public void setPageIndicator(int selected, int other, ViewPager v) {
+    public void setIndicatorResource(int selected, int other, ViewPager v) {
         mSelectedIndicatorId = selected;
         mOthertIndicatorId = other;
         v.setOnPageChangeListener(new IndicatorListener());
     }
 
-    public void updatePageIndicator(int count) {
+    public void updateIndicator(int count) {
         mPagerCount = count;
         removeAllViews();
         mPointViews.clear();
@@ -80,7 +90,7 @@ public class LoopIndicator extends LinearLayout {
      *            （RelativeLayout.ALIGN_PARENT_RIGHT）
      * @return
      */
-    public void setPageIndicatorAlign(PageIndicatorAlign align) {
+    public void setIndicatorAlign(PageIndicatorAlign align) {
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) getLayoutParams();
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, align == PageIndicatorAlign.ALIGN_PARENT_LEFT ? RelativeLayout.TRUE : 0);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, align == PageIndicatorAlign.ALIGN_PARENT_RIGHT ? RelativeLayout.TRUE : 0);
