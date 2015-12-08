@@ -21,6 +21,9 @@ import android.os.PowerManager;
 
 /**
  * Utility class to hold wake lock in app.
+ * <p>
+ * 推荐使用: getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
+ * WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
  */
 public class WakeLockHelper {
 
@@ -45,11 +48,14 @@ public class WakeLockHelper {
             return;
         }
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        //sCpuWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK | PowerManager.SCREEN_BRIGHT_WAKE_LOCK
-        //        | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "ZHUYAWEN");
-        //sCpuWakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "ZHUYAWEN");
+        // sCpuWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK |
+        // PowerManager.SCREEN_BRIGHT_WAKE_LOCK
+        // | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE,
+        // "ZHUYAWEN");
+        // sCpuWakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK,
+        // "ZHUYAWEN");
         sCpuWakeLock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.FULL_WAKE_LOCK, "ZHUYAWEN");
-        
+
         sCpuWakeLock.acquire();
     }
 
