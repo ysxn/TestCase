@@ -1,5 +1,5 @@
 
-package com.zhuyawen.getmetrics;
+package com.codezyw.common;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -14,73 +14,42 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Bundle;
 import android.telephony.TelephonyManager;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.widget.TextView;
 
 import com.apache.commons.codec.binary.Base64;
 
-public class GetMetricsActivity extends Activity {
+public class DeviceHelper {
+    private static DeviceHelper sDeviceHelper;
+    private Context mContext;
+    private boolean mFakeOpenWifi = false;
     private TelephonyManager mTelephonyMgr;
     private WifiManager mWifiManager;
-    private TextView mIMSI;
-    private TextView mIMEI;
-    private TextView mMacAddress;
-    private TextView mSerialno;
-    private TextView mGoogle;
-    private TextView mGetMetrics;
+
     private NetworkConnectChangedReceiver receiver = new NetworkConnectChangedReceiver();
-    private boolean mFakeOpenWifi = false;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        mIMSI = (TextView) findViewById(R.id.get_imsi);
-        mIMEI = (TextView) findViewById(R.id.get_imei);
-        mMacAddress = (TextView) findViewById(R.id.get_mac);
-        mSerialno = (TextView) findViewById(R.id.get_serialno);
-        mGoogle = (TextView) findViewById(R.id.get_google);
-        mGetMetrics = (TextView) findViewById(R.id.get_metrics);
-
-        mIMSI.setText(mIMSI.getText() + " " + getIMSI());
-        mIMEI.setText(mIMEI.getText() + " " + getIMEI());
-        mMacAddress.setText(mMacAddress.getText() + " " + getMacFromDevice());
-        mSerialno.setText(mSerialno.getText() + " " + getSerialNumberBuild());
-        mGoogle.setText(mGoogle.getText() + " " + getAndroidId());
-
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
-        this.registerReceiver(receiver, filter);
-
-        DisplayMetrics dm = this.getResources().getDisplayMetrics();
-        Log.i("GUH", dm.toString());
-        mGetMetrics.setText(dm.toString());
-
-        String data = "hello world!";
-        byte[] r = encrypt(data);
-        String result = "--";
-        result = new String(r);
-        Log.i("zzz", "result=" + result);
-        result = result.replace('+', '*');
-        result = result.replace('/', '-');
-        result = result.replace('=', '.');
-        Log.i("zzz", "result2=" + result);
+    public DeviceHelper() {
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(receiver);
+    public static DeviceHelper getInstance() {
+        if (sDeviceHelper == null) {
+            synchronized (DeviceHelper.class) {
+                if (sDeviceHelper == null) {
+                    sDeviceHelper = new DeviceHelper();
+                }
+            }
+        }
+        return sDeviceHelper;
+    }
+
+    public void setContext(Context context) {
+        mContext = context;
+        mTelephonyMgr = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+        mWifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
     }
 
     /**
@@ -88,8 +57,7 @@ public class GetMetricsActivity extends Activity {
      * 
      * @return
      */
-    private String getIMSI() {
-        mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+    public String getIMSI() {
         String imsi = mTelephonyMgr.getSubscriberId();
         return imsi;
     }
@@ -99,8 +67,7 @@ public class GetMetricsActivity extends Activity {
      * 
      * @return
      */
-    private String getIMEI() {
-        mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+    public String getIMEI() {
         String imei = mTelephonyMgr.getDeviceId();
         return imei;
     }
@@ -120,7 +87,7 @@ public class GetMetricsActivity extends Activity {
      * @return
      */
     public String getAndroidId() {
-        return android.provider.Settings.Secure.getString(getContentResolver(),
+        return android.provider.Settings.Secure.getString(mContext.getContentResolver(),
                 android.provider.Settings.Secure.ANDROID_ID);
     }
 
@@ -129,8 +96,7 @@ public class GetMetricsActivity extends Activity {
      * 
      * @return
      */
-    private boolean tryOpenMAC() {
-        mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+    public boolean tryOpenMAC() {
         boolean softOpenWifi = false;
         int state = mWifiManager.getWifiState();
         if (state != WifiManager.WIFI_STATE_ENABLED && state != WifiManager.WIFI_STATE_ENABLING) {
@@ -145,8 +111,7 @@ public class GetMetricsActivity extends Activity {
      * 
      * @return
      */
-    private void tryCloseMAC() {
-        mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+    public void tryCloseMAC() {
         mWifiManager.setWifiEnabled(false);
     }
 
@@ -155,8 +120,7 @@ public class GetMetricsActivity extends Activity {
      * 
      * @return
      */
-    private String tryGetMAC() {
-        mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+    public String tryGetMAC() {
         WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
         return wifiInfo.getMacAddress();
     }
@@ -166,8 +130,7 @@ public class GetMetricsActivity extends Activity {
      * 
      * @return
      */
-    private String getMacFromDevice() {
-        mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+    public String getMacFromDevice() {
         String mac = null;
         mac = tryGetMAC();
         if (!isNull(mac)) {
@@ -178,7 +141,7 @@ public class GetMetricsActivity extends Activity {
         return mac;
     }
 
-    private boolean isNull(String s) {
+    public boolean isNull(String s) {
         if (s == null || s.isEmpty() || "NULL".equalsIgnoreCase(s)) {
             return true;
         }
@@ -200,7 +163,7 @@ public class GetMetricsActivity extends Activity {
                         break;
                     case WifiManager.WIFI_STATE_ENABLED:
                         String mac = tryGetMAC();
-                        mMacAddress.setText("本机MAC地址" + " " + mac);
+                        // mMacAddress.setText("本机MAC地址" + " " + mac);
                         // 尝试关闭wifi
                         if (mFakeOpenWifi) {
                             tryCloseMAC();

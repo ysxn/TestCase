@@ -1,6 +1,7 @@
 
 package com.codezyw.backuprestore;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -13,7 +14,9 @@ import com.codezyw.common.BaseLoginFragment;
 import com.codezyw.common.BottomMenuLayout;
 import com.codezyw.common.Constant;
 import com.codezyw.common.CrashHelper;
+import com.codezyw.common.HttpPostAsyncTask.PostListener;
 import com.codezyw.common.SPAsync;
+import com.codezyw.common.UIHelper;
 
 public class MainActivity extends BaseFragmentActivity {
     private AppBackupFragment mAppBackupFragment;
@@ -45,9 +48,32 @@ public class MainActivity extends BaseFragmentActivity {
         }
         mBottomMenuLayout.switchFragment(tab);
 
-        String log = SPAsync.getString(this, "crash", "");
+        String log = SPAsync.getString(this, CrashHelper.SERVER_TAG, "");
         if (!TextUtils.isEmpty(log)) {
-            CrashHelper.getInstance().uploadServer(MainActivity.this, log);
+            CrashHelper.getInstance().uploadServer(MainActivity.this, log, new PostListener() {
+
+                @Override
+                public void onProgressUpdate(int progress) {
+                    UIHelper.updateProgressDialog(100, progress);
+                }
+
+                @Override
+                public void onPreExecute() {
+                    UIHelper.showProgressDialog(MainActivity.this, "上传崩溃日志", "上传中......", ProgressDialog.STYLE_HORIZONTAL, false, 100);
+                }
+
+                @Override
+                public void onPostExecute(String result) {
+                    UIHelper.dismissProgressDialog();
+                    UIHelper.showDialog(MainActivity.this, "上传崩溃日志结束", result);
+                }
+
+                @Override
+                public void onCancelled(String result) {
+                    UIHelper.dismissProgressDialog();
+                    UIHelper.showDialog(MainActivity.this, "上传崩溃日志被取消", result);
+                }
+            });
         }
     }
 

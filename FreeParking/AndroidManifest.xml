@@ -76,6 +76,12 @@
                 </action>
             </intent-filter>
         </service>
+        
+        <service
+            android:name="com.codezyw.freeparking.UpdateService"
+            android:process="com.codezyw.freeparking.UpdateService"
+            android:exported="false">
+        </service>
     </application>
 
 </manifest>

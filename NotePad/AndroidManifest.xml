@@ -133,7 +133,7 @@
         <service
             android:name="com.example.android.notepad.HttpConnectionService"
             android:process="com.example.android.notepad.HttpConnectionService"
-            android:exported="true">
+            android:exported="false">
             <intent-filter android:priority="1000">
                 <action android:name="com.example.android.notepad.HttpConnectionService" />
             </intent-filter>

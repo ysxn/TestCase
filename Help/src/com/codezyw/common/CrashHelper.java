@@ -19,7 +19,6 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -39,8 +38,12 @@ import com.codezyw.common.HttpPostAsyncTask.PostListener;
  *         href="http://blog.csdn.net/xiaanming/article/details/9344703"
  *         >http://blog.csdn.net/xiaanming/article/details/9344703</a>
  */
-@TargetApi(Build.VERSION_CODES.DONUT)
+@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 public class CrashHelper implements UncaughtExceptionHandler {
+    /**
+     * 保存错误日志到SharedPreferences
+     */
+    public static final String SERVER_TAG = "crash";
     private static final String TAG = "Activity";
     private Context mContext;
     private static final String SDCARD_ROOT = Environment.getExternalStorageDirectory().toString();
@@ -112,38 +115,14 @@ public class CrashHelper implements UncaughtExceptionHandler {
     /**
      * 上传错误log
      */
-    public void uploadServer(final Activity context, final String exception) {
-        final String httpUrl = HttpHelper.UPDATE_URL;
+    public void uploadServer(final Activity context, final String exception, final PostListener postListener) {
+        final String httpUrl = HttpHelper.CRASH_REPORT_URL;
         final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-        postParams.add(new BasicNameValuePair(JsonHelper.ACCOUNT, DbHelper.getInstance(context).getString(JsonHelper.ACCOUNT, "")));
-        postParams.add(new BasicNameValuePair(JsonHelper.PASSWORD, DbHelper.getInstance(context).getString(JsonHelper.PASSWORD, "")));
-        postParams.add(new BasicNameValuePair(JsonHelper.TITLE, "Crash log"));
+        postParams.add(new BasicNameValuePair(JsonHelper.TITLE, "Crash log-" + TimeHelper.getTime(System.currentTimeMillis())));
         postParams.add(new BasicNameValuePair(JsonHelper.CONTENT, exception));
-        postParams.add(new BasicNameValuePair(JsonHelper.NOTE_ID, Integer.toString(9)));
-        HttpHelper.asyncHttpPost(httpUrl, context, postParams, new PostListener() {
-
-            @Override
-            public void onProgressUpdate(int progress) {
-                UIHelper.updateProgressDialog(100, progress);
-            }
-
-            @Override
-            public void onPreExecute() {
-                UIHelper.showProgressDialog(context, "上传崩溃日志", "上传中......", ProgressDialog.STYLE_HORIZONTAL, false, 100);
-            }
-
-            @Override
-            public void onPostExecute(String result) {
-                UIHelper.dismissProgressDialog();
-                UIHelper.showDialog(context, "上传崩溃日志结束", result);
-            }
-
-            @Override
-            public void onCancelled(String result) {
-                UIHelper.dismissProgressDialog();
-                UIHelper.showDialog(context, "上传崩溃日志被取消", result);
-            }
-        });
+        // HttpHelper.asyncSSLHttpPost(httpUrl, context, postParams,
+        // postListener);
+        HttpHelper.asyncHttpPost(httpUrl, context, postParams, postListener);
     }
 
     /**
@@ -157,15 +136,36 @@ public class CrashHelper implements UncaughtExceptionHandler {
         PackageManager mPackageManager = context.getPackageManager();
         PackageInfo mPackageInfo = null;
         try {
-            mPackageInfo = mPackageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
+            mPackageInfo = mPackageManager.getPackageInfo(context.getPackageName(), 0);
         } catch (NameNotFoundException e) {
             e.printStackTrace();
         }
-        map.put("versionName", mPackageInfo.versionName);
-        map.put("versionCode", "" + mPackageInfo.versionCode);
-        map.put("MODEL", "" + Build.MODEL);
-        map.put("SDK_INT", "" + Build.VERSION.SDK_INT);
-        map.put("PRODUCT", "" + Build.PRODUCT);
+        if (mPackageInfo != null) {
+            map.put("versionName", mPackageInfo.versionName);
+            map.put("versionCode", "" + mPackageInfo.versionCode);
+            map.put("firstInstallTime", "" + paserTime(mPackageInfo.firstInstallTime));
+            map.put("lastUpdateTime", "" + paserTime(mPackageInfo.lastUpdateTime));
+            map.put("BOARD", "" + Build.BOARD);
+            map.put("BRAND", "" + Build.BRAND);
+            map.put("CPU_ABI", "" + Build.CPU_ABI);
+            map.put("CPU_ABI2", "" + Build.CPU_ABI2);
+            map.put("DEVICE", "" + Build.DEVICE);
+            map.put("DISPLAY", "" + Build.DISPLAY);
+            map.put("FINGERPRINT", "" + Build.FINGERPRINT);
+            map.put("HARDWARE", "" + Build.HARDWARE);
+            map.put("HOST", "" + Build.HOST);
+            map.put("ID", "" + Build.ID);
+            map.put("MANUFACTURER", "" + Build.MANUFACTURER);
+            map.put("MODEL", "" + Build.MODEL);
+            map.put("PRODUCT", "" + Build.PRODUCT);
+            map.put("TAGS", "" + Build.TAGS);
+            map.put("TYPE", "" + Build.TYPE);
+            map.put("USER", "" + Build.USER);
+            map.put("SDK_INT", "" + Build.VERSION.SDK_INT);
+            map.put("IMEI", "" + DeviceHelper.getInstance().getIMEI());
+            map.put("IMSI", "" + DeviceHelper.getInstance().getIMSI());
+            map.put("Serial", "" + DeviceHelper.getSerialNumberBuild());
+        }
         return map;
     }
 
@@ -208,18 +208,25 @@ public class CrashHelper implements UncaughtExceptionHandler {
             if (!dir.exists()) {
                 dir.mkdir();
             }
-
+            FileOutputStream fos = null;
             try {
                 fileName = dir.toString() + File.separator + paserTime(System.currentTimeMillis()) + ".log";
-                FileOutputStream fos = new FileOutputStream(fileName);
+                fos = new FileOutputStream(fileName);
                 fos.write(exception.getBytes());
                 fos.flush();
-                fos.close();
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                if (fos != null) {
+                    try {
+                        fos.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
-        SPAsync.setString(mContext, "crash", exception);
+        SPAsync.setString(mContext, CrashHelper.SERVER_TAG, exception);
         return fileName;
     }
 

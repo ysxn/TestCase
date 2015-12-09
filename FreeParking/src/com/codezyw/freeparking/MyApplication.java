@@ -1,11 +1,10 @@
 
 package com.codezyw.freeparking;
 
-import android.app.Application;
-
 import com.baidu.mapapi.SDKInitializer;
+import com.codezyw.common.CrashApplication;
 
-public class MyApplication extends Application {
+public class MyApplication extends CrashApplication {
 
     @Override
     public void onCreate() {

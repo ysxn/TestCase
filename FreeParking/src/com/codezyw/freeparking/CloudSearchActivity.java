@@ -29,9 +29,12 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.LatLngBounds;
 import com.baidu.mapapi.model.LatLngBounds.Builder;
+import com.codezyw.common.HttpHelper;
+import com.codezyw.common.HttpPostAsyncTask.PostListener;
+import com.codezyw.common.JsonHelper;
 
 /**
- * TODO 下载更新，崩溃报告，广告json，意见反馈，代码保护--(apk运行md5检查),应用统计,屏幕常亮,分享,
+ * TODO 下载更新,应用统计，广告json，崩溃报告，意见反馈，代码保护--(apk运行md5检查),屏幕常亮,分享,
  */
 public class CloudSearchActivity extends Activity implements CloudListener {
     private static final String TAG = "temp";
@@ -58,6 +61,27 @@ public class CloudSearchActivity extends Activity implements CloudListener {
             }
         });
         localSearch();
+        Bundle bundle = new Bundle();
+        bundle.putString(JsonHelper.TITLE, this.getPackageName());
+        bundle.putString(JsonHelper.CONTENT, "onCreate");
+        HttpHelper.sendStatistics(this, bundle, new PostListener() {
+
+            @Override
+            public void onProgressUpdate(int progress) {
+            }
+
+            @Override
+            public void onPreExecute() {
+            }
+
+            @Override
+            public void onPostExecute(String result) {
+            }
+
+            @Override
+            public void onCancelled(String result) {
+            }
+        });
     }
 
     @Override
@@ -152,7 +176,7 @@ public class CloudSearchActivity extends Activity implements CloudListener {
             for (CloudPoiInfo info : result.poiList) {
                 ll = new LatLng(info.latitude, info.longitude);
                 if (DEBUG) {
-                    Log.d(TAG, "onGetSearchResult, info = " + info.address + "\n" + info.title);
+                    // Log.d(TAG, "onGetSearchResult, info = " + info.address + "\n" + info.title);
                 }
                 OverlayOptions oo = new MarkerOptions().icon(bd).position(ll).title(info.address + "\n" + info.title);
                 mBaiduMap.addOverlay(oo);

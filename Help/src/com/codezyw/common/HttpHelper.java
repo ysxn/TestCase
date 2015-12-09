@@ -171,6 +171,8 @@ public class HttpHelper {
     public final static String DELETE_URL = "https://php.codezyw.com/delete_note_android.php";
     public final static String UPDATE_URL = "https://php.codezyw.com/update_note_android.php";
     public final static String FETCH_URL = "https://php.codezyw.com/fetch_note_android.php";
+    public final static String STATISTICS_URL = "https://php.codezyw.com/statistics.php";
+    public final static String CRASH_REPORT_URL = "https://php.codezyw.com/crash_report.php";
 
     /** 本身就是线程安全的 */
     private static HttpClient sHttpClient;
@@ -816,6 +818,18 @@ public class HttpHelper {
         }
         HttpPostAsyncTask task = new HttpPostAsyncTask(postListener, multipartEntity);
         task.execute(url);
+    }
+
+    /**
+     * <a href="php.codezyw.com">php.codezyw.com</a>
+     */
+    public static void sendStatistics(final Context mContext, Bundle bundle, final PostListener postListener) {
+        String title = bundle.getString(JsonHelper.TITLE);
+        String content = bundle.getString(JsonHelper.CONTENT);
+        final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        postParams.add(new BasicNameValuePair(JsonHelper.TITLE, title));
+        postParams.add(new BasicNameValuePair(JsonHelper.CONTENT, content));
+        asyncSSLHttpPost(HttpHelper.STATISTICS_URL, mContext, postParams, postListener);
     }
 
     /**
