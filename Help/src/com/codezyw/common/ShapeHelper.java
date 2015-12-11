@@ -10,17 +10,17 @@ import android.graphics.drawable.shapes.Shape;
 
 /**
  * <pre>
- * GradientDrawableµÄ×÷ÓÃÔÚÓÚ¶¨ÓÚ¸÷ÖÖÑùÊ½µÄ½¥±ä¡£ÔÚXMLÎÄ¼şÖĞÊ¹ÓÃ<shape>ÔªËØ¶¨Òå¡£
+ * GradientDrawableçš„ä½œç”¨åœ¨äºå®šäºå„ç§æ ·å¼çš„æ¸å˜ã€‚åœ¨XMLæ–‡ä»¶ä¸­ä½¿ç”¨<shape>å…ƒç´ å®šä¹‰ã€‚
  * 
- * ÎÄ¼şÎ»ÖÃ£º
+ * æ–‡ä»¶ä½ç½®ï¼š
  *     res/drawable/filename.xml
- *     ÎÄ¼şÃû¼´×ÊÔ´ID
- * ±àÒë×ÊÔ´ÀàĞÍ£º
- *     Ö¸Ïò GradientDrawable.
- * ×ÊÔ´ÒıÓÃ
+ *     æ–‡ä»¶åå³èµ„æºID
+ * ç¼–è¯‘èµ„æºç±»å‹ï¼š
+ *     æŒ‡å‘ GradientDrawable.
+ * èµ„æºå¼•ç”¨
  *     In Java: R.drawable.filename
  *     In XML: @[package:]drawable/filename
- * Óï·¨
+ * è¯­æ³•
  * 
  *     <?xml version="1.0" encoding="utf-8"?>
  *     <shape
@@ -59,160 +59,160 @@ import android.graphics.drawable.shapes.Shape;
  *             android:dashGap="integer" />
  *     </shape>
  * 
- * ÔªËØ£º
+ * å…ƒç´ ï¼š
  * 
  *     <shape>
- *         ¶¨ÒåÕâÊÇÒ»¸öGradientDrawable£¬±ØĞë×÷Îª¸ùÔªËØ¡£
+ *         å®šä¹‰è¿™æ˜¯ä¸€ä¸ªGradientDrawableï¼Œå¿…é¡»ä½œä¸ºæ ¹å…ƒç´ ã€‚
  * 
- *         ÊôĞÔ£º
+ *         å±æ€§ï¼š
  * 
  *         xmlns:android
- *             StringÀàĞÍ¡£±ØĞëµÄ£¬¶¨ÒåxmlÎÄ¼şµÄÃüÃû¿Õ¼ä£¬±ØĞëÊÇ"http://schemas.android.com/apk/res/android". 
+ *             Stringç±»å‹ã€‚å¿…é¡»çš„ï¼Œå®šä¹‰xmlæ–‡ä»¶çš„å‘½åç©ºé—´ï¼Œå¿…é¡»æ˜¯"http://schemas.android.com/apk/res/android". 
  *         android:shape
- *             ¹Ø¼ü×Ö¡£¶¨ÒåshapeµÄÖµ£¬±ØĞëÊÇÏÂÃæµÄÖ®Ò»£º
- *             Öµ   ÃèÊö
- *             "rectangle"     ¾ØÕó£¬ÕâÒ²ÊÇÄ¬ÈÏµÄshape
- *             "oval"  ÍÖÔ²
- *             "line"  Ò»ÌõË®Æ½µÄÖ±Ïß¡£ÕâÖÖshape±ØĞëÊ¹ÓÃ <stroke> ÔªËØÀ´¶¨ÒåÕâÌõÏßµÄ¿í¶È
- *             "ring"  Ô²»·
+ *             å…³é”®å­—ã€‚å®šä¹‰shapeçš„å€¼ï¼Œå¿…é¡»æ˜¯ä¸‹é¢çš„ä¹‹ä¸€ï¼š
+ *             å€¼   æè¿°
+ *             "rectangle"     çŸ©é˜µï¼Œè¿™ä¹Ÿæ˜¯é»˜è®¤çš„shape
+ *             "oval"  æ¤­åœ†
+ *             "line"  ä¸€æ¡æ°´å¹³çš„ç›´çº¿ã€‚è¿™ç§shapeå¿…é¡»ä½¿ç”¨ <stroke> å…ƒç´ æ¥å®šä¹‰è¿™æ¡çº¿çš„å®½åº¦
+ *             "ring"  åœ†ç¯
  * 
- *         ÏÂÃæµÄÊôĞÔÖ»ÓĞµ± android:shape="ring"²ÅÊ¹ÓÃ£º
+ *         ä¸‹é¢çš„å±æ€§åªæœ‰å½“ android:shape="ring"æ‰ä½¿ç”¨ï¼š
  * 
  *         android:innerRadius
- *             ³ß´ç¡£ ÄÚ»·µÄ°ë¾¶¡£Ò»¸ö³ß´çÖµ£¨dipµÈµÈ£©»òÕßÒ»¸ö³ß´ç×ÊÔ´¡£
+ *             å°ºå¯¸ã€‚ å†…ç¯çš„åŠå¾„ã€‚ä¸€ä¸ªå°ºå¯¸å€¼ï¼ˆdipç­‰ç­‰ï¼‰æˆ–è€…ä¸€ä¸ªå°ºå¯¸èµ„æºã€‚
  *         android:innerRadiusRatio
- *             FloatÀàĞÍ¡£Õâ¸öÖµ±íÊ¾ÄÚ²¿»·µÄ±ÈÀı£¬ÀıÈç,Èç¹ûandroid:innerRadiusRatio = " 5 ",ÄÇÃ´ÄÚ²¿µÄ°ë¾¶µÈÓÚ»·µÄ¿í¶È³ıÒÔ5¡£Õâ¸öÖµ»á±»android:innerRadiusÖØĞ´¡£ Ä¬ÈÏÖµÊÇ9¡£
+ *             Floatç±»å‹ã€‚è¿™ä¸ªå€¼è¡¨ç¤ºå†…éƒ¨ç¯çš„æ¯”ä¾‹ï¼Œä¾‹å¦‚,å¦‚æœandroid:innerRadiusRatio = " 5 ",é‚£ä¹ˆå†…éƒ¨çš„åŠå¾„ç­‰äºç¯çš„å®½åº¦é™¤ä»¥5ã€‚è¿™ä¸ªå€¼ä¼šè¢«android:innerRadiusé‡å†™ã€‚ é»˜è®¤å€¼æ˜¯9ã€‚
  *         android:thickness
- *             ³ß´ç¡£»·µÄºñ¶È£¬ÊÇÒ»¸ö³ß´çÖµ»ò³ß´çµÄ×ÊÔ´¡£
+ *             å°ºå¯¸ã€‚ç¯çš„åšåº¦ï¼Œæ˜¯ä¸€ä¸ªå°ºå¯¸å€¼æˆ–å°ºå¯¸çš„èµ„æºã€‚
  *         android:thicknessRatio
- *             FloatÀàĞÍ¡£ºñ¶ÈµÄ±ÈÀı¡£ÀıÈç,Èç¹ûandroid:thicknessRatio= " 2 ",È»ºóºñ¶ÈµÈÓÚ»·µÄ¿í¶È³ıÒÔ2¡£Õâ¸öÖµÊÇ±»android:innerRadiusÖØĞ´£¬ Ä¬ÈÏÖµÊÇ3¡£
+ *             Floatç±»å‹ã€‚åšåº¦çš„æ¯”ä¾‹ã€‚ä¾‹å¦‚,å¦‚æœandroid:thicknessRatio= " 2 ",ç„¶ååšåº¦ç­‰äºç¯çš„å®½åº¦é™¤ä»¥2ã€‚è¿™ä¸ªå€¼æ˜¯è¢«android:innerRadiusé‡å†™ï¼Œ é»˜è®¤å€¼æ˜¯3ã€‚
  *         android:useLevel
- *             BooleanÀàĞÍ¡£Èç¹ûÓÃÔÚ LevelListDrawableÀï£¬ÄÇÃ´¾ÍÊÇtrue¡£Èç¹ûÍ¨³£²»³öÏÖÔòÎªfalse¡£
+ *             Booleanç±»å‹ã€‚å¦‚æœç”¨åœ¨ LevelListDrawableé‡Œï¼Œé‚£ä¹ˆå°±æ˜¯trueã€‚å¦‚æœé€šå¸¸ä¸å‡ºç°åˆ™ä¸ºfalseã€‚
  * 
  *     <corners>
- *         ÎªShape´´½¨Ò»¸öÔ²½Ç£¬Ö»ÓĞshapeÊÇrectangleÊ±ºò²ÅÊ¹ÓÃ¡£
+ *         ä¸ºShapeåˆ›å»ºä¸€ä¸ªåœ†è§’ï¼Œåªæœ‰shapeæ˜¯rectangleæ—¶å€™æ‰ä½¿ç”¨ã€‚
  * 
- *         ÊôĞÔ£º
+ *         å±æ€§ï¼š
  * 
  *         android:radius
- *             Dimension¡£Ô²½ÇµÄ°ë¾¶¡£»á±»ÏÂÃæÃ¿¸öÌØ¶¨µÄÔ²½ÇÊôĞÔÖØĞ´¡£
+ *             Dimensionã€‚åœ†è§’çš„åŠå¾„ã€‚ä¼šè¢«ä¸‹é¢æ¯ä¸ªç‰¹å®šçš„åœ†è§’å±æ€§é‡å†™ã€‚
  *         android:topLeftRadius
- *             Dimension¡£top-left Ô²½ÇµÄ°ë¾¶¡£
+ *             Dimensionã€‚top-left åœ†è§’çš„åŠå¾„ã€‚
  *         android:topRightRadius
- *             Dimension¡£top-right Ô²½ÇµÄ°ë¾¶¡£
+ *             Dimensionã€‚top-right åœ†è§’çš„åŠå¾„ã€‚
  *         android:bottomLeftRadius
- *             Dimension¡£ bottom-leftÔ²½ÇµÄ°ë¾¶¡£
+ *             Dimensionã€‚ bottom-leftåœ†è§’çš„åŠå¾„ã€‚
  *         android:bottomRightRadius
- *             Dimension¡£bottom-rightÔ²½ÇµÄ°ë¾¶¡£
+ *             Dimensionã€‚bottom-rightåœ†è§’çš„åŠå¾„ã€‚
  * 
- *         ×¢Òâ£ºÃ¿¸öÔ²½Ç°ë¾¶Öµ¶¼±ØĞë´óÓÚ1£¬·ñ²à¾ÍÃ»ÓĞÔ²½Ç¡£
- *                  ÏÂÃæµÄ»°²»Ã÷°×£¬ÎÒÖ±½ÓÉèÖÃÔ²½ÇÎª0¾Í¿ÉÒÔ²»Ô²ÁË£¬ÆäÓàµÄÉèÖÃÓĞÔ²½Ç£¬Ò»ÑùµÄ¿ÉĞĞ¡£²»ÖªµÀËüÎªÊ²Ã´ÒªÕâÃ´½²¡£
+ *         æ³¨æ„ï¼šæ¯ä¸ªåœ†è§’åŠå¾„å€¼éƒ½å¿…é¡»å¤§äº1ï¼Œå¦ä¾§å°±æ²¡æœ‰åœ†è§’ã€‚
+ *                  ä¸‹é¢çš„è¯ä¸æ˜ç™½ï¼Œæˆ‘ç›´æ¥è®¾ç½®åœ†è§’ä¸º0å°±å¯ä»¥ä¸åœ†äº†ï¼Œå…¶ä½™çš„è®¾ç½®æœ‰åœ†è§’ï¼Œä¸€æ ·çš„å¯è¡Œã€‚ä¸çŸ¥é“å®ƒä¸ºä»€ä¹ˆè¦è¿™ä¹ˆè®²ã€‚
  * 
- *         £¨If you want specific cornersto not be rounded, a work-around is to use android:radius to set a default cornerradius greater than 1, but then override each and every corner with the values you reallywant, providing zero ("0dp") where you don't want rounded corners.£©
+ *         ï¼ˆIf you want specific cornersto not be rounded, a work-around is to use android:radius to set a default cornerradius greater than 1, but then override each and every corner with the values you reallywant, providing zero ("0dp") where you don't want rounded corners.ï¼‰
  *     <gradient>
- *         Ö¸¶¨Õâ¸öshapeµÄ½¥±äÑÕÉ«¡£
+ *         æŒ‡å®šè¿™ä¸ªshapeçš„æ¸å˜é¢œè‰²ã€‚
  * 
- *         ÊôĞÔ£º
+ *         å±æ€§ï¼š
  * 
  *         android:angle
- *             Integer¡£½¥±äµÄ½Ç¶È¡£ 0 ´ú±í´Ó left µ½ right¡£90 ´ú±íbottomµ½ top¡£±ØĞëÊÇ45µÄ±¶Êı£¬Ä¬ÈÏÎª0
+ *             Integerã€‚æ¸å˜çš„è§’åº¦ã€‚ 0 ä»£è¡¨ä» left åˆ° rightã€‚90 ä»£è¡¨bottomåˆ° topã€‚å¿…é¡»æ˜¯45çš„å€æ•°ï¼Œé»˜è®¤ä¸º0
  *         android:centerX
- *             Float¡£½¥±äÖĞĞÄµÄÏà¶ÔX×ø±ê£¬ÔÚ0µ½1.0Ö®¼ä¡£
+ *             Floatã€‚æ¸å˜ä¸­å¿ƒçš„ç›¸å¯¹Xåæ ‡ï¼Œåœ¨0åˆ°1.0ä¹‹é—´ã€‚
  *         android:centerY
- *             Float¡£½¥±äÖĞĞÄµÄÏà¶ÔY×ø±ê£¬ÔÚ0µ½1.0Ö®¼ä¡£
+ *             Floatã€‚æ¸å˜ä¸­å¿ƒçš„ç›¸å¯¹Yåæ ‡ï¼Œåœ¨0åˆ°1.0ä¹‹é—´ã€‚
  *         android:centerColor
- *             Color¡£¿ÉÑ¡µÄÑÕÉ«Öµ¡£»ùÓÚstartColorºÍendColorÖ®¼ä¡£
+ *             Colorã€‚å¯é€‰çš„é¢œè‰²å€¼ã€‚åŸºäºstartColorå’ŒendColorä¹‹é—´ã€‚
  *         android:endColor
- *             Color¡£ ½áÊøµÄÑÕÉ«¡£
+ *             Colorã€‚ ç»“æŸçš„é¢œè‰²ã€‚
  *         android:gradientRadius
- *             Float ¡£½¥±äµÄ°ë¾¶¡£Ö»ÓĞÔÚ android:type="radial"²ÅÊ¹ÓÃ
+ *             Float ã€‚æ¸å˜çš„åŠå¾„ã€‚åªæœ‰åœ¨ android:type="radial"æ‰ä½¿ç”¨
  *         android:startColor
- *             Color¡£¿ªÊ¼µÄÑÕÉ«Öµ¡£
+ *             Colorã€‚å¼€å§‹çš„é¢œè‰²å€¼ã€‚
  *         android:type
- *             Keyword¡£½¥±äµÄÄ£Ê½£¬ÏÂÃæÖµÖ®Ò»£º
- *             Öµ   ÃèÊö
- *             "linear"    ÏßĞÎ½¥±ä¡£ÕâÒ²ÊÇÄ¬ÈÏµÄÄ£Ê½
- *             "radial"    ·øÉä½¥±ä¡£startColor¼´·øÉäÖĞĞÄµÄÑÕÉ«
- *             "sweep"     É¨ÃèÏß½¥±ä¡£
+ *             Keywordã€‚æ¸å˜çš„æ¨¡å¼ï¼Œä¸‹é¢å€¼ä¹‹ä¸€ï¼š
+ *             å€¼   æè¿°
+ *             "linear"    çº¿å½¢æ¸å˜ã€‚è¿™ä¹Ÿæ˜¯é»˜è®¤çš„æ¨¡å¼
+ *             "radial"    è¾å°„æ¸å˜ã€‚startColorå³è¾å°„ä¸­å¿ƒçš„é¢œè‰²
+ *             "sweep"     æ‰«æçº¿æ¸å˜ã€‚
  *         android:useLevel
- *             Boolean¡£Èç¹ûÔÚLevelListDrawableÖĞÊ¹ÓÃ£¬ÔòÎªtrue
+ *             Booleanã€‚å¦‚æœåœ¨LevelListDrawableä¸­ä½¿ç”¨ï¼Œåˆ™ä¸ºtrue
  * 
  * 
  *     <padding>
  * 
- *          ÄÚÈİÓëÊÓÍ¼±ß½çµÄ¾àÀë
+ *          å†…å®¹ä¸è§†å›¾è¾¹ç•Œçš„è·ç¦»
  * 
- *         ÊôĞÔ£º
+ *         å±æ€§ï¼š
  * 
  *         android:left
- *             Dimension¡£×ó±ßÌî³ä¾àÀë.
+ *             Dimensionã€‚å·¦è¾¹å¡«å……è·ç¦».
  *         android:top
- *             Dimension¡£¶¥²¿Ìî³ä¾àÀë.
+ *             Dimensionã€‚é¡¶éƒ¨å¡«å……è·ç¦».
  *         android:right
- *             Dimension¡£ÓÒ±ßÌî³ä¾àÀë.
+ *             Dimensionã€‚å³è¾¹å¡«å……è·ç¦».
  *         android:bottom
- *             Dimension¡£µ×²¿Ìî³ä¾àÀë.
+ *             Dimensionã€‚åº•éƒ¨å¡«å……è·ç¦».
  * 
  *     <size>
- *         Õâ¸öshapeµÄ´óĞ¡¡£
+ *         è¿™ä¸ªshapeçš„å¤§å°ã€‚
  * 
- *         ÊôĞÔ£º
+ *         å±æ€§ï¼š
  * 
  *         android:height
- *             Dimension¡£Õâ¸öshapeµÄ¸ß¶È¡£
+ *             Dimensionã€‚è¿™ä¸ªshapeçš„é«˜åº¦ã€‚
  *         android:width
- *             Dimension¡£Õâ¸öshapeµÄ¿í¶È¡£
+ *             Dimensionã€‚è¿™ä¸ªshapeçš„å®½åº¦ã€‚
  * 
- *         ×¢Òâ£ºÄ¬ÈÏÇé¿öÏÂ£¬Õâ¸öshape»áËõ·Åµ½ÓëËûËùÔÚÈİÆ÷´óĞ¡³ÉÕı±È¡£µ±ÄãÔÚÒ»¸öImageViewÖĞÊ¹ÓÃÕâ¸öshape£¬Äã¿ÉÒÔÊ¹ÓÃ android:scaleType="center"À´ÏŞÖÆÕâÖÖËõ·Å¡£
+ *         æ³¨æ„ï¼šé»˜è®¤æƒ…å†µä¸‹ï¼Œè¿™ä¸ªshapeä¼šç¼©æ”¾åˆ°ä¸ä»–æ‰€åœ¨å®¹å™¨å¤§å°æˆæ­£æ¯”ã€‚å½“ä½ åœ¨ä¸€ä¸ªImageViewä¸­ä½¿ç”¨è¿™ä¸ªshapeï¼Œä½ å¯ä»¥ä½¿ç”¨ android:scaleType="center"æ¥é™åˆ¶è¿™ç§ç¼©æ”¾ã€‚
  *     <solid>
- *         Ìî³äÕâ¸öshapeµÄ´¿É«
+ *         å¡«å……è¿™ä¸ªshapeçš„çº¯è‰²
  * 
- *         ÊôĞÔ£º
+ *         å±æ€§ï¼š
  * 
  *         android:color
- *             Color¡£ÑÕÉ«Öµ£¬Ê®Áù½øÖÆÊı£¬»òÕßÒ»¸öColor×ÊÔ´
+ *             Colorã€‚é¢œè‰²å€¼ï¼Œåå…­è¿›åˆ¶æ•°ï¼Œæˆ–è€…ä¸€ä¸ªColorèµ„æº
  * 
  *     <stroke>
- *         Õâ¸öshapeÊ¹ÓÃµÄ±Ê»­£¬µ±android:shape="line"µÄÊ±ºò£¬±ØĞëÉèÖÃ¸ÄÔªËØ¡£
+ *         è¿™ä¸ªshapeä½¿ç”¨çš„ç¬”ç”»ï¼Œå½“android:shape="line"çš„æ—¶å€™ï¼Œå¿…é¡»è®¾ç½®æ”¹å…ƒç´ ã€‚
  * 
- *         ÊôĞÔ£º
+ *         å±æ€§ï¼š
  * 
  *         android:width
- *             Dimension¡£±Ê»­µÄ´ÖÏ¸¡£
+ *             Dimensionã€‚ç¬”ç”»çš„ç²—ç»†ã€‚
  *         android:color
- *             Color¡£±Ê»­µÄÑÕÉ«
+ *             Colorã€‚ç¬”ç”»çš„é¢œè‰²
  *         android:dashGap
- *             Dimension¡£Ã¿»­Ò»ÌõÏß¾Í¼ä¸ô¶àÉÙ¡£Ö»ÓĞµ±android:dashWidthÒ²ÉèÖÃÁË²ÅÓĞĞ§¡£
+ *             Dimensionã€‚æ¯ç”»ä¸€æ¡çº¿å°±é—´éš”å¤šå°‘ã€‚åªæœ‰å½“android:dashWidthä¹Ÿè®¾ç½®äº†æ‰æœ‰æ•ˆã€‚
  *         android:dashWidth
- *             Dimension¡£Ã¿»­Ò»ÌõÏßµÄ³¤¶È¡£Ö»ÓĞµ± android:dashGapÒ²ÉèÖÃÁË²ÅÓĞĞ§¡£
+ *             Dimensionã€‚æ¯ç”»ä¸€æ¡çº¿çš„é•¿åº¦ã€‚åªæœ‰å½“ android:dashGapä¹Ÿè®¾ç½®äº†æ‰æœ‰æ•ˆã€‚
  * 
  * <!--   
- *     shape drawable xmlÎÄ¼şÖĞ¶¨ÒåµÄÒ»¸ö¼¸ºÎÍ¼ĞÎ£¬¶¨ÒåÔÚres/drawable/Ä¿Â¼ÏÂ£¬ÎÄ¼şÃûfilename³ÆÎª·ÃÎÊµÄ×ÊÔ´ID  
- *     ÔÚ´úÂëÖĞÍ¨¹ıR.drawable.filename½øĞĞ·ÃÎÊ£¬ÔÚxmlÎÄ¼şÖĞÍ¨¹ı@[package:]drawable/filename½øĞĞ·ÃÎÊ¡£  
+ *     shape drawable xmlæ–‡ä»¶ä¸­å®šä¹‰çš„ä¸€ä¸ªå‡ ä½•å›¾å½¢ï¼Œå®šä¹‰åœ¨res/drawable/ç›®å½•ä¸‹ï¼Œæ–‡ä»¶åfilenameç§°ä¸ºè®¿é—®çš„èµ„æºID  
+ *     åœ¨ä»£ç ä¸­é€šè¿‡R.drawable.filenameè¿›è¡Œè®¿é—®ï¼Œåœ¨xmlæ–‡ä»¶ä¸­é€šè¿‡@[package:]drawable/filenameè¿›è¡Œè®¿é—®ã€‚  
  *  -->  
  *  <!--   
  *     android:shape=["rectangle" | "oval" | "line" | "ring"]  
- *     shapeµÄĞÎ×´£¬Ä¬ÈÏÎª¾ØĞÎ£¬¿ÉÒÔÉèÖÃÎª¾ØĞÎ£¨rectangle£©¡¢ÍÖÔ²ĞÎ(oval)¡¢ÏßĞÔĞÎ×´(line)¡¢»·ĞÎ(ring)  
- *     ÏÂÃæµÄÊôĞÔÖ»ÓĞÔÚandroid:shape="ringÊ±¿ÉÓÃ£º  
- *     android:innerRadius         ³ß´ç£¬ÄÚ»·µÄ°ë¾¶¡£  
- *     android:innerRadiusRatio    ¸¡µãĞÍ£¬ÒÔ»·µÄ¿í¶È±ÈÂÊÀ´±íÊ¾ÄÚ»·µÄ°ë¾¶£¬  
- *     ÀıÈç£¬Èç¹ûandroid:innerRadiusRatio£¬±íÊ¾ÄÚ»·°ë¾¶µÈÓÚ»·µÄ¿í¶È³ıÒÔ5£¬Õâ¸öÖµÊÇ¿ÉÒÔ±»¸²¸ÇµÄ£¬Ä¬ÈÏÎª9.  
- *     android:thickness           ³ß´ç£¬»·µÄºñ¶È  
- *     android:thicknessRatio      ¸¡µãĞÍ£¬ÒÔ»·µÄ¿í¶È±ÈÂÊÀ´±íÊ¾»·µÄºñ¶È£¬ÀıÈç£¬Èç¹ûandroid:thicknessRatio="2"£¬  
- *     ÄÇÃ´»·µÄºñ¶È¾ÍµÈÓÚ»·µÄ¿í¶È³ıÒÔ2¡£Õâ¸öÖµÊÇ¿ÉÒÔ±»android:thickness¸²¸ÇµÄ£¬Ä¬ÈÏÖµÊÇ3.  
- *     android:useLevel            booleanÖµ£¬Èç¹ûµ±×öÊÇLevelListDrawableÊ¹ÓÃÊ±ÖµÎªtrue£¬·ñÔòÎªfalse.  
+ *     shapeçš„å½¢çŠ¶ï¼Œé»˜è®¤ä¸ºçŸ©å½¢ï¼Œå¯ä»¥è®¾ç½®ä¸ºçŸ©å½¢ï¼ˆrectangleï¼‰ã€æ¤­åœ†å½¢(oval)ã€çº¿æ€§å½¢çŠ¶(line)ã€ç¯å½¢(ring)  
+ *     ä¸‹é¢çš„å±æ€§åªæœ‰åœ¨android:shape="ringæ—¶å¯ç”¨ï¼š  
+ *     android:innerRadius         å°ºå¯¸ï¼Œå†…ç¯çš„åŠå¾„ã€‚  
+ *     android:innerRadiusRatio    æµ®ç‚¹å‹ï¼Œä»¥ç¯çš„å®½åº¦æ¯”ç‡æ¥è¡¨ç¤ºå†…ç¯çš„åŠå¾„ï¼Œ  
+ *     ä¾‹å¦‚ï¼Œå¦‚æœandroid:innerRadiusRatioï¼Œè¡¨ç¤ºå†…ç¯åŠå¾„ç­‰äºç¯çš„å®½åº¦é™¤ä»¥5ï¼Œè¿™ä¸ªå€¼æ˜¯å¯ä»¥è¢«è¦†ç›–çš„ï¼Œé»˜è®¤ä¸º9.  
+ *     android:thickness           å°ºå¯¸ï¼Œç¯çš„åšåº¦  
+ *     android:thicknessRatio      æµ®ç‚¹å‹ï¼Œä»¥ç¯çš„å®½åº¦æ¯”ç‡æ¥è¡¨ç¤ºç¯çš„åšåº¦ï¼Œä¾‹å¦‚ï¼Œå¦‚æœandroid:thicknessRatio="2"ï¼Œ  
+ *     é‚£ä¹ˆç¯çš„åšåº¦å°±ç­‰äºç¯çš„å®½åº¦é™¤ä»¥2ã€‚è¿™ä¸ªå€¼æ˜¯å¯ä»¥è¢«android:thicknessè¦†ç›–çš„ï¼Œé»˜è®¤å€¼æ˜¯3.  
+ *     android:useLevel            booleanå€¼ï¼Œå¦‚æœå½“åšæ˜¯LevelListDrawableä½¿ç”¨æ—¶å€¼ä¸ºtrueï¼Œå¦åˆ™ä¸ºfalse.  
  *   -->  
  * <shape  
  *     xmlns:android="http://schemas.android.com/apk/res/android"  
  *     android:shape="rectangle">  
  *       
  *     <!--  
- *         Ô²½Ç  
- *         android:radius              ÕûĞÍ °ë¾¶  
- *         android:topLeftRadius       ÕûĞÍ ×óÉÏ½Ç°ë¾¶  
- *         android:topRightRadius      ÕûĞÍ ÓÒÉÏ½Ç°ë¾¶  
- *         android:bottomLeftRadius    ÕûĞÍ ×óÏÂ½Ç°ë¾¶  
- *         android:bottomRightRadius   ÕûĞÍ ÓÒÏÂ½Ç°ë¾¶  
+ *         åœ†è§’  
+ *         android:radius              æ•´å‹ åŠå¾„  
+ *         android:topLeftRadius       æ•´å‹ å·¦ä¸Šè§’åŠå¾„  
+ *         android:topRightRadius      æ•´å‹ å³ä¸Šè§’åŠå¾„  
+ *         android:bottomLeftRadius    æ•´å‹ å·¦ä¸‹è§’åŠå¾„  
+ *         android:bottomRightRadius   æ•´å‹ å³ä¸‹è§’åŠå¾„  
  *      -->  
  *      <corners    
  *         android:radius="8dp"  
@@ -223,19 +223,19 @@ import android.graphics.drawable.shapes.Shape;
  *         />  
  *        
  *      <!--  
- *         ½¥±äÉ«  
- *         android:startColor  ÑÕÉ«Öµ                             ÆğÊ¼ÑÕÉ«  
- *         android:endColor    ÑÕÉ«Öµ                             ½áÊøÑÕÉ«  
- *         android:centerColor ÕûĞÍ                              ½¥±äÖĞ¼äÑÕÉ«£¬¼´¿ªÊ¼ÑÕÉ«Óë½áÊøÑÕÉ«Ö®¼äµÄÑÕÉ«  
- *         android:angle       ÕûĞÍ                              ½¥±ä½Ç¶È(PS£ºµ±angle=0Ê±£¬½¥±äÉ«ÊÇ´Ó×óÏòÓÒ¡£ È»ºóÄæÊ±Õë·½Ïò×ª£¬µ±angle=90Ê±Îª´ÓÏÂÍùÉÏ¡£angle±ØĞëÎª45µÄÕûÊı±¶)  
- *         android:type        ["linear" | "radial" | "sweep"] ½¥±äÀàĞÍ(È¡Öµ£ºlinear¡¢radial¡¢sweep)  
- *                             linear ÏßĞÔ½¥±ä£¬ÕâÊÇÄ¬ÈÏÉèÖÃ  
- *                             radial ·ÅÉäĞÔ½¥±ä£¬ÒÔ¿ªÊ¼É«ÎªÖĞĞÄ¡£  
- *                             sweep É¨ÃèÏßÊ½µÄ½¥±ä¡£  
- *        android:useLevel     ["true" | "false"]              Èç¹ûÒªÊ¹ÓÃLevelListDrawable¶ÔÏó£¬¾ÍÒªÉèÖÃÎªtrue¡£ÉèÖÃÎªtrueÎŞ½¥±ä¡£falseÓĞ½¥±äÉ«  
- *        android:gradientRadius ÕûĞÍ                            ½¥±äÉ«°ë¾¶.µ± android:type="radial" Ê±²ÅÊ¹ÓÃ¡£µ¥¶ÀÊ¹ÓÃ android:type="radial"»á±¨´í¡£  
- *        android:centerX      ÕûĞÍ                              ½¥±äÖĞĞÄXµã×ø±êµÄÏà¶ÔÎ»ÖÃ  
- *        android:centerY      ÕûĞÍ                              ½¥±äÖĞĞÄYµã×ø±êµÄÏà¶ÔÎ»ÖÃ  
+ *         æ¸å˜è‰²  
+ *         android:startColor  é¢œè‰²å€¼                             èµ·å§‹é¢œè‰²  
+ *         android:endColor    é¢œè‰²å€¼                             ç»“æŸé¢œè‰²  
+ *         android:centerColor æ•´å‹                              æ¸å˜ä¸­é—´é¢œè‰²ï¼Œå³å¼€å§‹é¢œè‰²ä¸ç»“æŸé¢œè‰²ä¹‹é—´çš„é¢œè‰²  
+ *         android:angle       æ•´å‹                              æ¸å˜è§’åº¦(PSï¼šå½“angle=0æ—¶ï¼Œæ¸å˜è‰²æ˜¯ä»å·¦å‘å³ã€‚ ç„¶åé€†æ—¶é’ˆæ–¹å‘è½¬ï¼Œå½“angle=90æ—¶ä¸ºä»ä¸‹å¾€ä¸Šã€‚angleå¿…é¡»ä¸º45çš„æ•´æ•°å€)  
+ *         android:type        ["linear" | "radial" | "sweep"] æ¸å˜ç±»å‹(å–å€¼ï¼šlinearã€radialã€sweep)  
+ *                             linear çº¿æ€§æ¸å˜ï¼Œè¿™æ˜¯é»˜è®¤è®¾ç½®  
+ *                             radial æ”¾å°„æ€§æ¸å˜ï¼Œä»¥å¼€å§‹è‰²ä¸ºä¸­å¿ƒã€‚  
+ *                             sweep æ‰«æçº¿å¼çš„æ¸å˜ã€‚  
+ *        android:useLevel     ["true" | "false"]              å¦‚æœè¦ä½¿ç”¨LevelListDrawableå¯¹è±¡ï¼Œå°±è¦è®¾ç½®ä¸ºtrueã€‚è®¾ç½®ä¸ºtrueæ— æ¸å˜ã€‚falseæœ‰æ¸å˜è‰²  
+ *        android:gradientRadius æ•´å‹                            æ¸å˜è‰²åŠå¾„.å½“ android:type="radial" æ—¶æ‰ä½¿ç”¨ã€‚å•ç‹¬ä½¿ç”¨ android:type="radial"ä¼šæŠ¥é”™ã€‚  
+ *        android:centerX      æ•´å‹                              æ¸å˜ä¸­å¿ƒXç‚¹åæ ‡çš„ç›¸å¯¹ä½ç½®  
+ *        android:centerY      æ•´å‹                              æ¸å˜ä¸­å¿ƒYç‚¹åæ ‡çš„ç›¸å¯¹ä½ç½®  
  *     -->  
  *     <gradient  
  *         android:startColor="#FFFF0000"  
@@ -244,11 +244,11 @@ import android.graphics.drawable.shapes.Shape;
  *         />   
  *           
  *     <!--  
- *         ÄÚ±ß¾à£¬¼´ÄÚÈİÓë±ßµÄ¾àÀë   
- *         android:left    ÕûĞÍ ×óÄÚ±ß¾à  
- *         android:top     ÕûĞÍ ÉÏÄÚ±ß¾à  
- *         android:right   ÕûĞÍ ÓÒÄÚ±ß¾à  
- *         android:bottom  ÕûĞÍ ÏÂÄÚ±ß¾à  
+ *         å†…è¾¹è·ï¼Œå³å†…å®¹ä¸è¾¹çš„è·ç¦»   
+ *         android:left    æ•´å‹ å·¦å†…è¾¹è·  
+ *         android:top     æ•´å‹ ä¸Šå†…è¾¹è·  
+ *         android:right   æ•´å‹ å³å†…è¾¹è·  
+ *         android:bottom  æ•´å‹ ä¸‹å†…è¾¹è·  
  *       -->  
  *      <padding   
  *          android:left="10dp"  
@@ -258,37 +258,54 @@ import android.graphics.drawable.shapes.Shape;
  *          />  
  *        
  *     <!--   
- *         size ´óĞ¡  
- *         android:width   ÕûĞÍ ¿í¶È  
- *         android:height  ÕûĞÍ ¸ß¶È  
+ *         size å¤§å°  
+ *         android:width   æ•´å‹ å®½åº¦  
+ *         android:height  æ•´å‹ é«˜åº¦  
  *     -->  
  *     <size  
  *         android:width="600dp"  
  *         />  
  *       
  *     <!--  
- *         ÄÚ²¿Ìî³ä  
- *         android:color   ÑÕÉ«Öµ Ìî³äÑÕÉ«  
+ *         å†…éƒ¨å¡«å……  
+ *         android:color   é¢œè‰²å€¼ å¡«å……é¢œè‰²  
  *     -->  
  *     <solid   
  *         android:color="#ffff9d77"  
  *         />  
  *       
  *      <!--  
- *         Ãè±ß  
- *         android:width       ÕûĞÍ  Ãè±ßµÄ¿í¶È  
- *         android:color       ÑÕÉ«Öµ     Ãè±ßµÄÑÕÉ«  
- *         android:dashWidth   ÕûĞÍ  ±íÊ¾Ãè±ßµÄÑùÊ½ÊÇĞéÏßµÄ¿í¶È£¬ ÖµÎª0Ê±£¬±íÊ¾ÎªÊµÏß¡£Öµ´óÓÚ0ÔòÎªĞéÏß¡£  
- *         android:dashGap     ÕûĞÍ  ±íÊ¾Ãè±ßÎªĞéÏßÊ±£¬ĞéÏßÖ®¼äµÄ¼ä¸ô ¼´¡° - - - - ¡±  
+ *         æè¾¹  
+ *         android:width       æ•´å‹  æè¾¹çš„å®½åº¦  
+ *         android:color       é¢œè‰²å€¼     æè¾¹çš„é¢œè‰²  
+ *         android:dashWidth   æ•´å‹  è¡¨ç¤ºæè¾¹çš„æ ·å¼æ˜¯è™šçº¿çš„å®½åº¦ï¼Œ å€¼ä¸º0æ—¶ï¼Œè¡¨ç¤ºä¸ºå®çº¿ã€‚å€¼å¤§äº0åˆ™ä¸ºè™šçº¿ã€‚  
+ *         android:dashGap     æ•´å‹  è¡¨ç¤ºæè¾¹ä¸ºè™šçº¿æ—¶ï¼Œè™šçº¿ä¹‹é—´çš„é—´éš” å³â€œ - - - - â€  
  *      -->  
  *      <stroke   
  *         android:width="2dp"  
  *         android:color="#dcdcdc"    
  *         />   
  * </shape>
+ * 
+ * <a href="http://android.jobbole.com/82108/">Androidæ ·å¼çš„å¼€å‘ï¼šshapeç¯‡</a>
+ * <p>
+ * <a href="http://android.jobbole.com/82115/">Androidæ ·å¼çš„å¼€å‘ï¼šselectorç¯‡</a>
+ * <p>
+ * <a href="http://android.jobbole.com/82096/">Androidæ ·å¼çš„å¼€å‘ï¼šStyleç¯‡</a>
+ * <p>
+ * <a href="http://android.jobbole.com/82116/">Androidæ ·å¼çš„å¼€å‘ï¼šlayer-listç¯‡</a>
+ * <p>
+ * <a href="http://android.jobbole.com/82117/">Androidæ ·å¼çš„å¼€å‘ï¼šdrawableæ±‡æ€»ç¯‡</a>
  * </pre>
  */
 public class ShapeHelper {
+
+    public static Drawable createOvalShape(int color) {
+        GradientDrawable shape = new GradientDrawable();
+        shape.setShape(GradientDrawable.OVAL);
+        shape.setColor(color);
+        return shape;
+    }
 
     public static Drawable createRingShape(int color) {
         GradientDrawable shape = new GradientDrawable();
