@@ -1,7 +1,0 @@
-**/bin/
-**/gen/
-*.apk
-**/.classpath
-**/.project
-*.class
-*.DS_Store
