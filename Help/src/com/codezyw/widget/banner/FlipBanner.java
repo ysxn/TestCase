@@ -1,5 +1,5 @@
 
-package com.bigkoo.convenientbanner;
+package com.codezyw.widget.banner;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -25,7 +25,6 @@ import com.bigkoo.convenientbanner.transforms.ABaseTransformer;
  */
 public class FlipBanner<T> extends LinearLayout {
     private List<T> mDataList;
-    private RecyclingPagerAdapter mPageAdapter;
     private RelativeLayout mRootView;
     private LoopViewPager mLoopViewPager;
     private LoopIndicator mLoopIndicator;
@@ -68,8 +67,15 @@ public class FlipBanner<T> extends LinearLayout {
         @Override
         public void run() {
             if (mLoopViewPager != null && mFlipEnable) {
-                int page = mLoopViewPager.getCurrentItem() + 1;
-                mLoopViewPager.setCurrentItem(page);
+                if (mLoopViewPager.getAdapter() != null) {
+                    int page = mLoopViewPager.getCurrentItem() + 1;
+                    if (page >= mLoopViewPager.getAdapter().getCount()) {
+                        page = 0;
+                        mLoopViewPager.setCurrentItem(page, false);
+                    } else {
+                        mLoopViewPager.setCurrentItem(page, true);
+                    }
+                }
                 mAutoFlipHandler.removeCallbacks(mAutoFlipRunnable);
                 mAutoFlipHandler.postDelayed(mAutoFlipRunnable, mAutoFlipTime);
             }
@@ -110,10 +116,9 @@ public class FlipBanner<T> extends LinearLayout {
      */
     public FlipBanner<T> setViewPagerData(RecyclingPagerAdapter adapter, List<T> datas) {
         this.mDataList = datas;
-        mPageAdapter = adapter;
-        mLoopViewPager.setAdapter(mPageAdapter);
-        mLoopViewPager.setBoundaryCaching(true);
+        mLoopViewPager.setAdapter(adapter);
         mLoopIndicator.updateIndicator(mDataList != null ? mDataList.size() : 0);
+        mLoopIndicator.setIndicatorResource(0, 0, mLoopViewPager);
         return this;
     }
 
@@ -121,7 +126,9 @@ public class FlipBanner<T> extends LinearLayout {
      * 通知数据变化
      */
     public void notifyDataSetChanged() {
-        mLoopViewPager.getAdapter().notifyDataSetChanged();
+        if (mLoopViewPager != null && mLoopViewPager.getAdapter() != null) {
+            mLoopViewPager.getAdapter().notifyDataSetChanged();
+        }
         mLoopIndicator.updateIndicator(mDataList != null ? mDataList.size() : 0);
     }
 

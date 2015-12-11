@@ -10,6 +10,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.text.TextUtils;
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -126,7 +130,6 @@ public class JsonHelper<E> {
         try {
             Gson gson = new Gson();
             httpDataContentBean = gson.fromJson(data, HttpDataContentBean.class);
-            ;
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
             jsonOk = false;
@@ -179,5 +182,75 @@ public class JsonHelper<E> {
         if (!jsonOk)
             return null;
         return httpDataContentBeanList;
+    }
+
+    public static HttpAdvBean parseHttpAdvBeanByGson(String data) {
+        HttpAdvBean httpAdvBean = null;
+        boolean jsonOk = true;
+        if (data == null || data.isEmpty())
+            return null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<HttpAdvBean>() {
+            }.getType();
+            httpAdvBean = gson.fromJson(data, listType);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+            jsonOk = false;
+        }
+        if (!jsonOk)
+            return null;
+        return httpAdvBean;
+    }
+
+    public static HttpAPKBean parseHttpAPKBeanByGson(String data) {
+        HttpAPKBean httpAPKBean = null;
+        boolean jsonOk = true;
+        if (data == null || data.isEmpty())
+            return null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<HttpAPKBean>() {
+            }.getType();
+            httpAPKBean = gson.fromJson(data, listType);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+            jsonOk = false;
+        }
+        if (!jsonOk)
+            return null;
+        return httpAPKBean;
+    }
+
+    /**
+     * <a href="php.codezyw.com">php.codezyw.com</a>
+     * <p>
+     * 主要用于崩溃反馈和应用统计
+     */
+    public static boolean parseServerResult(Context mContext, String result_data) {
+        Log.i(TAG, "after http post result_data = " + result_data);
+        if (!TextUtils.isEmpty(result_data)) {
+            HttpResultBean httpResultBean = JsonHelper.parseHttpResultBeanByJSONSingle(result_data);
+            if (httpResultBean != null) {
+                if (httpResultBean.getLogin_result()) {
+                    if (httpResultBean.getFetch_result()) {
+                        UIHelper.showToast(mContext, "登录成功,操作服务器数据成功!");
+                        return true;
+                    } else {
+                        UIHelper.showToast(mContext, "登录成功,但是操作服务器数据失败!" + httpResultBean.getError_info());
+                        return false;
+                    }
+                } else {
+                    UIHelper.showToast(mContext, "登录失败!" + result_data);
+                    return false;
+                }
+            } else {
+                UIHelper.showToast(mContext, "JSON错误!" + result_data);
+                return false;
+            }
+        } else {
+            UIHelper.showToast(mContext, "网络错误!" + result_data);
+            return false;
+        }
     }
 }

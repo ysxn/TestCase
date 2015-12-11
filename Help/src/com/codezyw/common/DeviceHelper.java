@@ -17,6 +17,9 @@ import javax.crypto.spec.SecretKeySpec;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
@@ -29,6 +32,10 @@ public class DeviceHelper {
     private boolean mFakeOpenWifi = false;
     private TelephonyManager mTelephonyMgr;
     private WifiManager mWifiManager;
+    private String mVersionName = "";
+    private int mVersionCode = 0;
+    private String mFirstInstallTime = "";
+    private String mLastUpdateTime = "";
 
     private NetworkConnectChangedReceiver receiver = new NetworkConnectChangedReceiver();
 
@@ -50,6 +57,35 @@ public class DeviceHelper {
         mContext = context;
         mTelephonyMgr = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
         mWifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
+        PackageManager mPackageManager = context.getPackageManager();
+        PackageInfo mPackageInfo = null;
+        try {
+            mPackageInfo = mPackageManager.getPackageInfo(context.getPackageName(), 0);
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (mPackageInfo != null) {
+            mVersionName = "" + mPackageInfo.versionName;
+            mVersionCode = mPackageInfo.versionCode;
+            mFirstInstallTime = "" + TimeHelper.getTime(mPackageInfo.firstInstallTime);
+            mLastUpdateTime = "" + TimeHelper.getTime(mPackageInfo.lastUpdateTime);
+        }
+    }
+
+    public String getVersionName() {
+        return mVersionName;
+    }
+
+    public int getVersionCode() {
+        return mVersionCode;
+    }
+
+    public String getFirstInstallTime() {
+        return mFirstInstallTime;
+    }
+
+    public String getLastUpdateTime() {
+        return mLastUpdateTime;
     }
 
     /**

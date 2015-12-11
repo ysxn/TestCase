@@ -80,6 +80,7 @@ import android.widget.Scroller;
  * development/samples/Support13Demos/src/com/example/android/supportv13/app/
  * ActionBarTabsPager.java complete}
  */
+@Deprecated
 public class BaseViewPager extends ViewGroup {
     private static final String TAG = "ViewPager";
     private static final boolean DEBUG = false;

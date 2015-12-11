@@ -168,11 +168,14 @@ public class HttpHelper {
 
     private final static String TAG = "HttpHelper";
 
-    public final static String DELETE_URL = "https://php.codezyw.com/delete_note_android.php";
-    public final static String UPDATE_URL = "https://php.codezyw.com/update_note_android.php";
-    public final static String FETCH_URL = "https://php.codezyw.com/fetch_note_android.php";
-    public final static String STATISTICS_URL = "https://php.codezyw.com/statistics.php";
-    public final static String CRASH_REPORT_URL = "https://php.codezyw.com/crash_report.php";
+    public final static String DELETE_URL = "http://php.codezyw.com/delete_note_android.php";
+    public final static String UPDATE_URL = "http://php.codezyw.com/update_note_android.php";
+    public final static String FETCH_URL = "http://php.codezyw.com/fetch_note_android.php";
+    public final static String STATISTICS_URL = "http://php.codezyw.com/statistics.php";
+    public final static String CRASH_REPORT_URL = "http://php.codezyw.com/crash_report.php";
+    public final static String FEEDBACK_URL = "http://php.codezyw.com/feedback.php";
+    public final static String ADV_URL = "http://php.codezyw.com/adv.php";
+    public final static String APK_UPDATE_URL = "http://php.codezyw.com/apk_update.php";
 
     /** 本身就是线程安全的 */
     private static HttpClient sHttpClient;
@@ -761,10 +764,22 @@ public class HttpHelper {
     /**
      * AsyncTask异步任务http post提交application/x-www-form-urlencoded
      */
+    public static void asyncHttpGet(final String url, final Context context,
+            final PostListener postListener) {
+        if (context == null || TextUtils.isEmpty(url)) {
+            return;
+        }
+        HttpGetNamedAsyncTask task = new HttpGetNamedAsyncTask(postListener);
+        task.execute(url);
+    }
+
+    /**
+     * AsyncTask异步任务http post提交application/x-www-form-urlencoded
+     */
     public static void asyncHttpPost(final String url, final Context context,
             final List<NameValuePair> paramsPair,
             final PostListener postListener) {
-        if (context == null || TextUtils.isEmpty(url) || postListener == null) {
+        if (context == null || TextUtils.isEmpty(url)) {
             return;
         }
         HttpPostNamedAsyncTask task = new HttpPostNamedAsyncTask(postListener, paramsPair);
@@ -777,7 +792,7 @@ public class HttpHelper {
     public static void asyncSSLHttpPost(final String url, final Context context,
             final List<NameValuePair> paramsPair,
             final PostListener postListener) {
-        if (context == null || TextUtils.isEmpty(url) || postListener == null) {
+        if (context == null || TextUtils.isEmpty(url)) {
             return;
         }
         HttpPostNamedAsyncTask task = new HttpPostNamedAsyncTask(postListener, paramsPair, true);
@@ -803,7 +818,7 @@ public class HttpHelper {
     public static void asyncHttpPostMultipart(final String url, final Activity activity,
             ProgressMultipartEntity multipartEntity,
             final PostListener postListener) {
-        if (activity == null || TextUtils.isEmpty(url) || postListener == null) {
+        if (activity == null || TextUtils.isEmpty(url)) {
             return;
         }
         if (multipartEntity == null) {
@@ -823,13 +838,21 @@ public class HttpHelper {
     /**
      * <a href="php.codezyw.com">php.codezyw.com</a>
      */
-    public static void sendStatistics(final Context mContext, Bundle bundle, final PostListener postListener) {
-        String title = bundle.getString(JsonHelper.TITLE);
-        String content = bundle.getString(JsonHelper.CONTENT);
+    public static void sendFeedback(final Context mContext, String content, final PostListener postListener) {
+        final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        postParams.add(new BasicNameValuePair(JsonHelper.TITLE, DeviceHelper.getInstance().getIMEI()));
+        postParams.add(new BasicNameValuePair(JsonHelper.CONTENT, content));
+        asyncHttpPost(HttpHelper.FEEDBACK_URL, mContext, postParams, postListener);
+    }
+
+    /**
+     * <a href="php.codezyw.com">php.codezyw.com</a>
+     */
+    public static void sendStatistics(final Context mContext, String title, final PostListener postListener) {
         final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
         postParams.add(new BasicNameValuePair(JsonHelper.TITLE, title));
-        postParams.add(new BasicNameValuePair(JsonHelper.CONTENT, content));
-        asyncSSLHttpPost(HttpHelper.STATISTICS_URL, mContext, postParams, postListener);
+        postParams.add(new BasicNameValuePair(JsonHelper.CONTENT, CrashHelper.getSystemInfo(mContext)));
+        asyncHttpPost(HttpHelper.STATISTICS_URL, mContext, postParams, postListener);
     }
 
     /**
@@ -843,7 +866,7 @@ public class HttpHelper {
         phpParams.add(new BasicNameValuePair(JsonHelper.PASSWORD, DbHelper.getInstance(
                 mContext).getString(JsonHelper.PASSWORD, "")));
         phpParams.add(new BasicNameValuePair(JsonHelper.NOTE_ID, Integer.toString(id)));
-        parseServerResult(mContext, HttpHelper.httpSSLTrustAllPost(HttpHelper.DELETE_URL, phpParams));
+        parseServerResult(mContext, HttpHelper.httpPost(HttpHelper.DELETE_URL, phpParams));
     }
 
     /**
@@ -884,7 +907,7 @@ public class HttpHelper {
                 parseServerResult(mContext, result);
             }
         };
-        asyncSSLHttpPost(HttpHelper.UPDATE_URL, mContext, postParams, postListener);
+        asyncHttpPost(HttpHelper.UPDATE_URL, mContext, postParams, postListener);
     }
 
     /**
@@ -896,7 +919,7 @@ public class HttpHelper {
                 .getString(JsonHelper.ACCOUNT, "")));
         postParams.add(new BasicNameValuePair(JsonHelper.PASSWORD, DbHelper.getInstance(
                 mContext).getString(JsonHelper.PASSWORD, "")));
-        return parseServerResult(mContext, HttpHelper.httpSSLTrustAllPost(HttpHelper.FETCH_URL, postParams));
+        return parseServerResult(mContext, HttpHelper.httpPost(HttpHelper.FETCH_URL, postParams));
     }
 
     /**

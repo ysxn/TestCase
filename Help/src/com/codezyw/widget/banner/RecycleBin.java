@@ -1,5 +1,5 @@
 
-package com.bigkoo.convenientbanner;
+package com.codezyw.widget.banner;
 
 import android.os.Build;
 import android.util.SparseArray;

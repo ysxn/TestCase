@@ -1,10 +1,21 @@
 
 package com.codezyw.freeparking;
 
+import java.util.List;
+
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.mapapi.cloud.BoundSearchInfo;
@@ -29,12 +40,19 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.LatLngBounds;
 import com.baidu.mapapi.model.LatLngBounds.Builder;
+import com.codezyw.common.DeviceHelper;
+import com.codezyw.common.DownloadService;
+import com.codezyw.common.HttpAPKBean;
+import com.codezyw.common.HttpAdvBean;
+import com.codezyw.common.HttpAdvBean.DataBean;
 import com.codezyw.common.HttpHelper;
 import com.codezyw.common.HttpPostAsyncTask.PostListener;
 import com.codezyw.common.JsonHelper;
+import com.codezyw.widget.banner.FlipBanner;
+import com.codezyw.widget.banner.RecyclingPagerAdapter;
 
 /**
- * TODO 下载更新,应用统计，广告json，崩溃报告，意见反馈，代码保护--(apk运行md5检查),屏幕常亮,分享,
+ * TODO 代码保护,分享,
  */
 public class CloudSearchActivity extends Activity implements CloudListener {
     private static final String TAG = "temp";
@@ -43,12 +61,19 @@ public class CloudSearchActivity extends Activity implements CloudListener {
     private BaiduMap mBaiduMap;
     private int mPageIndex = 0;
     private final int mPageSize = 10;
+    private FlipBanner<DataBean> mFlipBanner;
+    private List<DataBean> mDataList;
+    private long mBackPressed = 0L;
 
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_lbssearch);
+
+        mFlipBanner = (FlipBanner) findViewById(R.id.banner);
+        mFlipBanner.setVisibility(View.GONE);
         CloudManager.getInstance().init(CloudSearchActivity.this);
         mMapView = (MapView) findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
@@ -61,10 +86,8 @@ public class CloudSearchActivity extends Activity implements CloudListener {
             }
         });
         localSearch();
-        Bundle bundle = new Bundle();
-        bundle.putString(JsonHelper.TITLE, this.getPackageName());
-        bundle.putString(JsonHelper.CONTENT, "onCreate");
-        HttpHelper.sendStatistics(this, bundle, new PostListener() {
+        HttpHelper.sendStatistics(this, this.getPackageName() + " onCreate", null);
+        HttpHelper.asyncHttpGet(HttpHelper.APK_UPDATE_URL, this, new PostListener() {
 
             @Override
             public void onProgressUpdate(int progress) {
@@ -76,6 +99,23 @@ public class CloudSearchActivity extends Activity implements CloudListener {
 
             @Override
             public void onPostExecute(String result) {
+                HttpAPKBean bean = JsonHelper.parseHttpAPKBeanByGson(result);
+                if (bean != null && CloudSearchActivity.this.getPackageName().equals(bean.getPackage_name())) {
+                    float oldVersion = DeviceHelper.getInstance().getVersionCode();
+                    float newVersion = oldVersion;
+                    try {
+                        newVersion = Float.parseFloat(bean.getVersion_code().trim());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (oldVersion < newVersion) {
+                        if (DownloadService.isDownloadComplete(CloudSearchActivity.this, bean.getUrl())) {
+                            DownloadService.tryInstall(CloudSearchActivity.this, bean.getUrl());
+                        } else {
+                            DownloadService.startDownloadService(CloudSearchActivity.this, bean.getUrl(), true, true);
+                        }
+                    }
+                }
             }
 
             @Override
@@ -88,12 +128,41 @@ public class CloudSearchActivity extends Activity implements CloudListener {
     protected void onResume() {
         super.onResume();
         mMapView.onResume();
+        // 开始自动翻页
+        mFlipBanner.startFlipping(5000);
+        HttpHelper.sendStatistics(this, this.getPackageName() + " onResume", null);
+        HttpHelper.asyncHttpGet(HttpHelper.ADV_URL, this, new PostListener() {
+
+            @Override
+            public void onProgressUpdate(int progress) {
+            }
+
+            @Override
+            public void onPreExecute() {
+            }
+
+            @Override
+            public void onPostExecute(String result) {
+                HttpAdvBean bean = JsonHelper.parseHttpAdvBeanByGson(result);
+                if (bean != null && bean.getData() != null && bean.getData().size() > 0) {
+                    mDataList = bean.getData();
+                    mFlipBanner.setViewPagerData(new LoopPageAdapter(), mDataList);
+                    mFlipBanner.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(String result) {
+            }
+        });
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         mMapView.onPause();
+        // 停止翻页
+        mFlipBanner.stopFlipping();
     }
 
     @Override
@@ -101,6 +170,17 @@ public class CloudSearchActivity extends Activity implements CloudListener {
         super.onDestroy();
         mMapView.onDestroy();
         CloudManager.getInstance().destroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        long previous = mBackPressed;
+        mBackPressed = SystemClock.elapsedRealtime();
+        if (mBackPressed - previous < 3500) {
+            finish();
+        } else {
+            Toast.makeText(this, "再按一下返回键退出应用.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void localSearch() {
@@ -190,6 +270,51 @@ public class CloudSearchActivity extends Activity implements CloudListener {
                 mPageIndex++;
                 localSearch();
             }
+        }
+    }
+
+    public class LoopPageAdapter extends RecyclingPagerAdapter {
+        public LoopPageAdapter() {
+            super();
+        }
+
+        @Override
+        public View getView(final int position, View view, ViewGroup container) {
+            TextView text = null;
+            if (view == null) {
+                text = new TextView(CloudSearchActivity.this);
+                // image.setScaleType(ImageView.ScaleType.FIT_XY);
+                view = text;
+                text.setGravity(Gravity.CENTER);
+                text.setTextColor(getResources().getColorStateList(R.drawable.text_color));
+            } else {
+                text = (TextView) view;
+            }
+            // image.setImageDrawable(new ColorDrawable(Color.DKGRAY));
+            if (mDataList != null && !mDataList.isEmpty()) {
+                // ImageLoader.getInstance().displayImage(mDataList.get(position), image);
+                final String url = mDataList.get(position).getUrl();
+                text.setText(mDataList.get(position).getContent());
+                text.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!TextUtils.isEmpty(url)) {
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(url));
+                            startActivity(i);
+                        }
+                    }
+                });
+            }
+            return view;
+        }
+
+        @Override
+        public int getCount() {
+            if (mDataList == null) {
+                return 0;
+            }
+            return mDataList.size();
         }
     }
 }

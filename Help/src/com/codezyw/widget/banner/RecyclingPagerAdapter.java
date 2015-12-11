@@ -1,78 +1,28 @@
 
-package com.codezyw.common;
+package com.codezyw.widget.banner;
 
-import android.database.DataSetObservable;
-import android.database.DataSetObserver;
 import android.os.Parcelable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+
+import com.codezyw.common.BasePagerAdapter;
 
 /**
- * Base class providing the adapter to populate pages inside of a
- * {@link ViewPager}. You will most likely want to use a more specific
- * implementation of this, such as
- * {@link android.support.v4.app.FragmentPagerAdapter} or
- * {@link android.support.v4.app.FragmentStatePagerAdapter}.
- * <p>
- * When you implement a PagerAdapter, you must override the following methods at
- * minimum:
- * </p>
- * <ul>
- * <li>{@link #instantiateItem(ViewGroup, int)}</li>
- * <li>{@link #destroyItem(ViewGroup, int, Object)}</li>
- * <li>{@link #getCount()}</li>
- * <li>{@link #isViewFromObject(View, Object)}</li>
- * </ul>
- * <p>
- * PagerAdapter is more general than the adapters used for
- * {@link android.widget.AdapterView AdapterViews}. Instead of providing a View
- * recycling mechanism directly ViewPager uses callbacks to indicate the steps
- * taken during an update. A PagerAdapter may implement a form of View recycling
- * if desired or use a more sophisticated method of managing page Views such as
- * Fragment transactions where each page is represented by its own Fragment.
- * </p>
- * <p>
- * ViewPager associates each page with a key Object instead of working with
- * Views directly. This key is used to track and uniquely identify a given page
- * independent of its position in the adapter. A call to the PagerAdapter method
- * {@link #startUpdate(ViewGroup)} indicates that the contents of the ViewPager
- * are about to change. One or more calls to
- * {@link #instantiateItem(ViewGroup, int)} and/or
- * {@link #destroyItem(ViewGroup, int, Object)} will follow, and the end of an
- * update will be signaled by a call to {@link #finishUpdate(ViewGroup)}. By the
- * time {@link #finishUpdate(ViewGroup) finishUpdate} returns the views
- * associated with the key objects returned by
- * {@link #instantiateItem(ViewGroup, int) instantiateItem} should be added to
- * the parent ViewGroup passed to these methods and the views associated with
- * the keys passed to {@link #destroyItem(ViewGroup, int, Object) destroyItem}
- * should be removed. The method {@link #isViewFromObject(View, Object)}
- * identifies whether a page View is associated with a given key object.
- * </p>
- * <p>
- * A very simple PagerAdapter may choose to use the page Views themselves as key
- * objects, returning them from {@link #instantiateItem(ViewGroup, int)} after
- * creation and adding them to the parent ViewGroup. A matching
- * {@link #destroyItem(ViewGroup, int, Object)} implementation would remove the
- * View from the parent ViewGroup and {@link #isViewFromObject(View, Object)}
- * could be implemented as <code>return view == object;</code>.
- * </p>
- * <p>
- * PagerAdapter supports data set changes. Data set changes must occur on the
- * main thread and must end with a call to {@link #notifyDataSetChanged()}
- * similar to AdapterView adapters derived from
- * {@link android.widget.BaseAdapter}. A data set change may involve pages being
- * added, removed, or changing position. The ViewPager will keep the current
- * page active provided the adapter implements the method
- * {@link #getItemPosition(Object)}.
- * </p>
+ * A {@link android.support.v4.view.PagerAdapter} which behaves like an
+ * {@link android.widget.Adapter} with view types and view recycling.
  */
-public abstract class BasePagerAdapter extends PagerAdapter {
-    private DataSetObservable mObservable = new DataSetObservable();
+public abstract class RecyclingPagerAdapter extends BasePagerAdapter {
+    private final RecycleBin mRecycleBin;
 
-    public static final int POSITION_UNCHANGED = -1;
-    public static final int POSITION_NONE = -2;
+    public RecyclingPagerAdapter() {
+        this(new RecycleBin());
+    }
+
+    RecyclingPagerAdapter(RecycleBin recycleBin) {
+        this.mRecycleBin = recycleBin;
+        recycleBin.setViewTypeCount(getViewTypeCount());
+    }
 
     /**
      * Return the number of views available.
@@ -101,7 +51,16 @@ public abstract class BasePagerAdapter extends PagerAdapter {
      *         to be a View, but can be some other container of the page.
      */
     public Object instantiateItem(ViewGroup container, int position) {
-        return instantiateItem((View) container, position);
+        // return instantiateItem((View) container, position);
+
+        int viewType = getItemViewType(position);
+        View view = null;
+        if (viewType != AdapterView.ITEM_VIEW_TYPE_IGNORE) {
+            view = mRecycleBin.getScrapView(position, viewType);
+        }
+        view = getView(position, view, container);
+        container.addView(view);
+        return view;
     }
 
     /**
@@ -115,7 +74,14 @@ public abstract class BasePagerAdapter extends PagerAdapter {
      *            {@link #instantiateItem(View, int)}.
      */
     public void destroyItem(ViewGroup container, int position, Object object) {
-        destroyItem((View) container, position, object);
+        // destroyItem((View) container, position, object);
+
+        View view = (View) object;
+        container.removeView(view);
+        int viewType = getItemViewType(position);
+        if (viewType != AdapterView.ITEM_VIEW_TYPE_IGNORE) {
+            mRecycleBin.addScrapView(view, position, viewType);
+        }
     }
 
     /**
@@ -220,7 +186,10 @@ public abstract class BasePagerAdapter extends PagerAdapter {
      * @return true if <code>view</code> is associated with the key object
      *         <code>object</code>
      */
-    public abstract boolean isViewFromObject(View view, Object object);
+    @Override
+    public final boolean isViewFromObject(View view, Object object) {
+        return view == object;
+    }
 
     /**
      * Save any instance state associated with this adapter and its pages that
@@ -264,36 +233,6 @@ public abstract class BasePagerAdapter extends PagerAdapter {
     }
 
     /**
-     * This method should be called by the application if the data backing this
-     * adapter has changed and associated views should update.
-     */
-    public void notifyDataSetChanged() {
-        mObservable.notifyChanged();
-    }
-
-    /**
-     * Register an observer to receive callbacks related to the adapter's data
-     * changing.
-     * 
-     * @param observer The {@link android.database.DataSetObserver} which will
-     *            receive callbacks.
-     */
-    public void registerDataSetObserver(DataSetObserver observer) {
-        mObservable.registerObserver(observer);
-    }
-
-    /**
-     * Unregister an observer from callbacks related to the adapter's data
-     * changing.
-     * 
-     * @param observer The {@link android.database.DataSetObserver} which will
-     *            be unregistered.
-     */
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-        mObservable.unregisterObserver(observer);
-    }
-
-    /**
      * This method may be called by the ViewPager to obtain a title string to
      * describe the specified page. This method may return null indicating no
      * title for this page. The default implementation returns null.
@@ -315,4 +254,95 @@ public abstract class BasePagerAdapter extends PagerAdapter {
     public float getPageWidth(int position) {
         return 1.f;
     }
+
+    /**
+     * 下面都是从{@link android.widget.AdapterView}
+     * 挪过来的函数，利用View的复用来使得ViewPager表现的类似ListView.
+     * <p>
+     * A {@link android.support.v4.view.PagerAdapter} which behaves like an
+     * {@link android.widget.Adapter} with view types and view recycling.
+     */
+    /**
+     * 下面都是从{@link android.widget.AdapterView}
+     * 挪过来的函数，利用View的复用来使得ViewPager表现的类似ListView.
+     * <p>
+     * Move all views remaining in activeViews to scrapViews.
+     * <p>
+     * This method should be called by the application if the data backing this
+     * adapter has changed and associated views should update.
+     */
+    @Override
+    public void notifyDataSetChanged() {
+        mRecycleBin.scrapActiveViews();
+        super.notifyDataSetChanged();
+    }
+
+    /**
+     * 下面都是从{@link android.widget.AdapterView}
+     * 挪过来的函数，利用View的复用来使得ViewPager表现的类似ListView.
+     * <p>
+     * <p>
+     * Returns the number of types of Views that will be created by
+     * {@link #getView}. Each type represents a set of views that can be
+     * converted in {@link #getView}. If the adapter always returns the same
+     * type of View for all items, this method should return 1.
+     * </p>
+     * <p>
+     * This method will only be called when when the adapter is set on the the
+     * {@link android.widget.AdapterView}.
+     * </p>
+     * 
+     * @return The number of types of Views that will be created by this adapter
+     */
+    public int getViewTypeCount() {
+        return 1;
+    }
+
+    /**
+     * 下面都是从{@link android.widget.AdapterView}
+     * 挪过来的函数，利用View的复用来使得ViewPager表现的类似ListView.
+     * <p>
+     * Get the type of View that will be created by {@link #getView} for the
+     * specified item.
+     * 
+     * @param position The position of the item within the adapter's data set
+     *            whose view type we want.
+     * @return An integer representing the type of View. Two views should share
+     *         the same type if one can be converted to the other in
+     *         {@link #getView}. Note: Integers must be in the range 0 to
+     *         {@link #getViewTypeCount} - 1. {@link #IGNORE_ITEM_VIEW_TYPE} can
+     *         also be returned.
+     * @see #IGNORE_ITEM_VIEW_TYPE
+     */
+    @SuppressWarnings("UnusedParameters")
+    // Argument potentially used by subclasses.
+    public int getItemViewType(int position) {
+        return 0;
+    }
+
+    /**
+     * 下面都是从{@link android.widget.AdapterView}
+     * 挪过来的函数，利用View的复用来使得ViewPager表现的类似ListView.
+     * <p>
+     * Get a View that displays the data at the specified position in the data
+     * set. You can either create a View manually or inflate it from an XML
+     * layout file. When the View is inflated, the parent View (GridView,
+     * ListView...) will apply default layout parameters unless you use
+     * {@link android.view.LayoutInflater#inflate(int, android.view.ViewGroup, boolean)}
+     * to specify a root view and to prevent attachment to the root.
+     * 
+     * @param position The position of the item within the adapter's data set of
+     *            the item whose view we want.
+     * @param convertView The old view to reuse, if possible. Note: You should
+     *            check that this view is non-null and of an appropriate type
+     *            before using. If it is not possible to convert this view to
+     *            display the correct data, this method can create a new view.
+     *            Heterogeneous lists can specify their number of view types, so
+     *            that this View is always of the right type (see
+     *            {@link #getViewTypeCount()} and {@link #getItemViewType(int)}
+     *            ).
+     * @param container The parent that this view will eventually be attached to
+     * @return A View corresponding to the data at the specified position.
+     */
+    public abstract View getView(int position, View convertView, ViewGroup container);
 }

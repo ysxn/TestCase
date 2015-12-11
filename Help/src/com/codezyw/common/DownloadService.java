@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -29,15 +30,16 @@ import android.util.Log;
 public class DownloadService extends Service implements Handler.Callback {
     private static final String TAG = "zyw";
     public static final boolean DEBUG = true;
-    public static final int MSG_STOP_SERVICE_BY_SELF = 110;
-    public static final int BUFFER_SIZE = 4096;
+    private static final int MSG_STOP_SERVICE_BY_SELF = 110;
+    private static final int BUFFER_SIZE = 4096;
     public static final String URL = "download_url";
     public static final String MD5 = "download_MD5";
     public static final String SILENT = "download_silent";
     public static final String WIFI_LIMIT = "download_only_wifi";
     public static final String CMD = "cmd";
-    public static final String START_DOWNLOAD = "start_download";
-    public static final String INSTALL_APK = "install";
+    public static final String CMD_START_DOWNLOAD = "cmd_start_download";
+    public static final String CMD_INSTALL_APK = "cmd_install";
+    public static final String CMD_FORCE_STOP_SERVICE = "cmd_force_stop";
     public static final int MSG_START_DOWNLOAD = 0x1000;
     public static final int MSG_TRY_CONTINUE_DOWNLOAD = 0x1001;
 
@@ -61,6 +63,7 @@ public class DownloadService extends Service implements Handler.Callback {
     public static String mUrl;
     public static String mMd5;
     public static String mSaveDirectory;
+    public static boolean sForceStop = false;
     private BroadcastReceiver mNetStatusReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -88,6 +91,10 @@ public class DownloadService extends Service implements Handler.Callback {
 
             @Override
             public void handleMessage(Message msg) {
+                if (sForceStop) {
+                    stopService();
+                    return;
+                }
                 switch (msg.what) {
                     case MSG_START_DOWNLOAD: {
                         Intent i = (Intent) msg.obj;
@@ -157,7 +164,11 @@ public class DownloadService extends Service implements Handler.Callback {
             Log.i(TAG, "DownloadService onStartCommand CMD=" + cmd + " flags=" + flags + " , startId=" + startId);
         }
 
-        if (START_DOWNLOAD.equals(cmd)) {
+        if (sForceStop) {
+            stopService();
+            return Service.START_NOT_STICKY;
+        }
+        if (CMD_START_DOWNLOAD.equals(cmd)) {
             if (isDownloadComplete()) {
                 showDialog(mContext, TransparentActivity.DIALOG_BULLET_DOWNLOAD_OK);
             } else {
@@ -174,7 +185,7 @@ public class DownloadService extends Service implements Handler.Callback {
                     mWorkHandler.sendEmptyMessageDelayed(MSG_TRY_CONTINUE_DOWNLOAD, 30000);
                 }
             }
-        } else if (INSTALL_APK.equals(cmd)) {
+        } else if (CMD_INSTALL_APK.equals(cmd)) {
             installApk();
         } else {
             if (isDownloadComplete()) {
@@ -373,7 +384,7 @@ public class DownloadService extends Service implements Handler.Callback {
             mNotification.icon = android.R.drawable.stat_sys_download;
             mNotification.tickerText = "下载";
             Intent i = new Intent(this, DownloadService.class);
-            i.putExtra(DownloadService.CMD, DownloadService.INSTALL_APK);
+            i.putExtra(DownloadService.CMD, DownloadService.CMD_INSTALL_APK);
             PendingIntent contentIntent = PendingIntent.getService(this, 0, i, 0);
             mNotification.contentIntent = contentIntent;
         }
@@ -408,10 +419,10 @@ public class DownloadService extends Service implements Handler.Callback {
         }
         Intent i = new Intent();
         Bundle bd = new Bundle();
-        bd.putInt(TransparentActivity.BUNDLE_KEY_DIALOG_ID, type);
+        bd.putInt(TransparentActivity.BUNDLE_DIALOG_ID, type);
         bd.putString(TransparentActivity.BUNDLE_TITLE, title);
         bd.putString(TransparentActivity.BUNDLE_MESSAGE, message);
-        bd.putString(TransparentActivity.SAVE_PATH, getSavePath());
+        bd.putString(TransparentActivity.BUNDLE_SAVE_PATH, getSavePath());
         i.setClass(context, TransparentActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.putExtras(bd);
@@ -423,7 +434,34 @@ public class DownloadService extends Service implements Handler.Callback {
         Log.i(TAG, "showDialog type=" + type);
     }
 
-    private static String getSavePath() {
+    private void stopService() {
+        mWorkHandler.removeMessages(MSG_TRY_CONTINUE_DOWNLOAD);
+        mServiceMainHandler.sendEmptyMessage(MSG_STOP_SERVICE_BY_SELF);
+        // extracts file name from URL
+    }
+
+    private void installApk() {
+        if (isDownloadComplete()) {
+            File file = new File(getSavePath());
+            Intent intent = new Intent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setAction(android.content.Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+            startActivity(intent);
+            mWorkHandler.removeMessages(MSG_TRY_CONTINUE_DOWNLOAD);
+            mServiceMainHandler.sendEmptyMessage(MSG_STOP_SERVICE_BY_SELF);
+        }
+    }
+
+    public static void tryInstall(Context context, String updateUrl) {
+        if (context != null) {
+            Intent i = new Intent(context, DownloadService.class);
+            i.putExtra(DownloadService.CMD, DownloadService.CMD_INSTALL_APK);
+            context.startService(i);
+        }
+    }
+
+    public static String getSavePath() {
         String savePath = null;
         if (!TextUtils.isEmpty(mUrl) && !TextUtils.isEmpty(mSaveDirectory)) {
             // extracts file name from URL
@@ -433,20 +471,62 @@ public class DownloadService extends Service implements Handler.Callback {
         return savePath;
     }
 
-    private void installApk() {
-        if (isDownloadComplete()) {
-            FileHelper.installApk(this, getSavePath());
-            mWorkHandler.removeMessages(MSG_TRY_CONTINUE_DOWNLOAD);
-            mServiceMainHandler.sendEmptyMessage(MSG_STOP_SERVICE_BY_SELF);
+    public static boolean isDownloadComplete(Context context, String updateUrl) {
+        if (context == null) {
+            return false;
         }
+        boolean r = false;
+        mSaveDirectory = FileHelper.getSdcardRootDir(context, "download");
+        mUrl = parseUrl(updateUrl);
+        mMd5 = parseMd5(updateUrl);
+        String why = "null error mSaveDirectory=" + mSaveDirectory + " mUrl=" + mUrl + " mMd5=" + mMd5;
+        if (!TextUtils.isEmpty(mUrl) && !TextUtils.isEmpty(mMd5) && !TextUtils.isEmpty(getSavePath())) {
+            File file = new File(getSavePath());
+            try {
+                if (file.exists()) {
+                    String md5 = MD5Util.getFileMD5String(file);
+                    Log.i(TAG, "md5=" + md5 + ",mMd5=" + mMd5);
+                    if (mMd5.equalsIgnoreCase(md5)) {
+                        r = true;
+                        why = "md5 OK";
+                    } else if (file != null) {
+                        why = "md5 not equal";
+                    }
+                } else {
+                    why = "file not exists";
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                r = false;
+                why = "Exception=" + e.toString();
+            }
+        }
+        Log.i(TAG, "isDownloadComplete=" + r + " why=" + why);
+        return r;
     }
 
-    public static void tryInstall(Context context, String updateUrl) {
-        if (context != null) {
-            Intent i = new Intent(context, DownloadService.class);
-            i.putExtra(DownloadService.CMD, DownloadService.INSTALL_APK);
-            context.startService(i);
+    public static String parseUrl(String updateUrl) {
+        if (TextUtils.isEmpty(updateUrl)) {
+            return null;
         }
+        String result = updateUrl;
+        int md5Suffix = updateUrl.indexOf("?MD5=");
+        if (md5Suffix != -1) {
+            result = updateUrl.substring(0, md5Suffix);
+        }
+        return result;
+    }
+
+    public static String parseMd5(String updateUrl) {
+        if (TextUtils.isEmpty(updateUrl)) {
+            return null;
+        }
+        String result = null;
+        int md5Suffix = updateUrl.indexOf("?MD5=");
+        if (md5Suffix != -1) {
+            result = updateUrl.substring(md5Suffix + 5);
+        }
+        return result;
     }
 
     /**
@@ -460,14 +540,9 @@ public class DownloadService extends Service implements Handler.Callback {
         boolean r = false;
         if (context != null && !TextUtils.isEmpty(updateUrl)) {
             Intent i = new Intent(context, DownloadService.class);
-            i.putExtra(DownloadService.CMD, DownloadService.START_DOWNLOAD);
-            String paraUrl = updateUrl;
-            String md5 = null;
-            int md5Suffix = updateUrl.indexOf("?MD5=");
-            if (md5Suffix != -1) {
-                md5 = updateUrl.substring(md5Suffix + 5);
-                paraUrl = updateUrl.substring(0, md5Suffix);
-            }
+            i.putExtra(DownloadService.CMD, DownloadService.CMD_START_DOWNLOAD);
+            String paraUrl = parseUrl(updateUrl);
+            String md5 = parseMd5(updateUrl);
             if (!TextUtils.isEmpty(paraUrl) && !TextUtils.isEmpty(md5)) {
                 Log.i(TAG, "startDownloadService");
                 i.putExtra(DownloadService.SILENT, silent);
@@ -479,11 +554,21 @@ public class DownloadService extends Service implements Handler.Callback {
                 DownloadHelper.getInstance(context).putString(Constant.APK_DOWNLOAD_URL, mUrl);
                 DownloadHelper.getInstance(context).putString(Constant.APK_DOWNLOAD_MD5, mMd5);
                 DownloadHelper.getInstance(context).close();
+                sForceStop = false;
                 context.startService(i);
                 r = true;
             }
         }
         Log.i(TAG, "startDownloadService return=" + r + " updateUrl=" + updateUrl + " silent=" + silent + " wifiLimit=" + wifiLimit);
         return r;
+    }
+
+    /**
+     * 退出更新下载服务
+     */
+    public static void stopDownloadService(Context context) {
+        sForceStop = true;
+        Intent i = new Intent(context, DownloadService.class);
+        context.stopService(i);
     }
 }

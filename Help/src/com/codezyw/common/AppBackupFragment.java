@@ -16,9 +16,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.bigkoo.convenientbanner.FlipBanner;
-import com.bigkoo.convenientbanner.RecyclingPagerAdapter;
 import com.codezyw.common.HttpPostAsyncTask.PostListener;
+import com.codezyw.widget.banner.FlipBanner;
+import com.codezyw.widget.banner.RecyclingPagerAdapter;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;

@@ -1,15 +1,18 @@
 
-package com.bigkoo.convenientbanner;
+package com.codezyw.widget.banner;
 
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.codezyw.common.ShapeHelper;
 import com.codezyw.common.UnitHelper;
 
 /**
@@ -18,6 +21,8 @@ import com.codezyw.common.UnitHelper;
 public class LoopIndicator extends LinearLayout {
     private int mSelectedIndicatorId = 0;
     private int mOthertIndicatorId = 0;
+    private Drawable mSelectedIndicator;
+    private Drawable mOthertIndicator;
     private ArrayList<ImageView> mPointViews = new ArrayList<ImageView>();
     private int mPagerCount = 0;
 
@@ -48,6 +53,8 @@ public class LoopIndicator extends LinearLayout {
         setOrientation(LinearLayout.HORIZONTAL);
         // 设置指示器的方向
         setIndicatorAlign(LoopIndicator.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
+        mSelectedIndicator = ShapeHelper.createRingShape(Color.CYAN);
+        mOthertIndicator = ShapeHelper.createRingShape(Color.LTGRAY);
     }
 
     /**
@@ -65,17 +72,28 @@ public class LoopIndicator extends LinearLayout {
         mPagerCount = count;
         removeAllViews();
         mPointViews.clear();
-        if (mPagerCount <= 0 || mSelectedIndicatorId == 0 || mOthertIndicatorId == 0) {
+        if (mPagerCount <= 0) {
             return;
         }
         for (int i = 0; i < mPagerCount; i++) {
             // 翻页指示的点
             ImageView pointView = new ImageView(getContext());
+            int size = (int) UnitHelper.dp2px(getContext(), 10);
+            LayoutParams lp = new LayoutParams(size, size);
+            pointView.setLayoutParams(lp);
             pointView.setPadding(5, 0, 5, 0);
-            if (mPointViews.isEmpty()) {
-                pointView.setImageResource(mSelectedIndicatorId);
+            if (mSelectedIndicatorId == 0 || mOthertIndicatorId == 0) {
+                if (mPointViews.isEmpty()) {
+                    pointView.setImageDrawable(mSelectedIndicator);
+                } else {
+                    pointView.setImageDrawable(mOthertIndicator);
+                }
             } else {
-                pointView.setImageResource(mOthertIndicatorId);
+                if (mPointViews.isEmpty()) {
+                    pointView.setImageResource(mSelectedIndicatorId);
+                } else {
+                    pointView.setImageResource(mOthertIndicatorId);
+                }
             }
             mPointViews.add(pointView);
             addView(pointView);
@@ -117,10 +135,18 @@ public class LoopIndicator extends LinearLayout {
         @Override
         public void onPageSelected(int position) {
             for (int i = 0; i < mPointViews.size(); i++) {
-                if (position != i) {
-                    mPointViews.get(i).setImageResource(mOthertIndicatorId);
+                if (mSelectedIndicatorId == 0 || mOthertIndicatorId == 0) {
+                    if (position != i) {
+                        mPointViews.get(i).setImageDrawable(mOthertIndicator);
+                    } else {
+                        mPointViews.get(position).setImageDrawable(mSelectedIndicator);
+                    }
                 } else {
-                    mPointViews.get(position).setImageResource(mSelectedIndicatorId);
+                    if (position != i) {
+                        mPointViews.get(i).setImageResource(mOthertIndicatorId);
+                    } else {
+                        mPointViews.get(position).setImageResource(mSelectedIndicatorId);
+                    }
                 }
             }
         }

@@ -18,10 +18,10 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Toast;
 
-import com.bigkoo.convenientbanner.FlipBanner;
-import com.bigkoo.convenientbanner.LoopIndicator;
-import com.bigkoo.convenientbanner.RecyclingPagerAdapter;
 import com.codezyw.common.UnitHelper;
+import com.codezyw.widget.banner.FlipBanner;
+import com.codezyw.widget.banner.LoopIndicator;
+import com.codezyw.widget.banner.RecyclingPagerAdapter;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;

@@ -131,7 +131,7 @@ public class CrashHelper implements UncaughtExceptionHandler {
      * @param context
      * @return
      */
-    private HashMap<String, String> obtainSimpleInfo(Context context) {
+    public static HashMap<String, String> obtainSimpleInfo(Context context) {
         HashMap<String, String> map = new HashMap<String, String>();
         PackageManager mPackageManager = context.getPackageManager();
         PackageInfo mPackageInfo = null;
@@ -141,32 +141,81 @@ public class CrashHelper implements UncaughtExceptionHandler {
             e.printStackTrace();
         }
         if (mPackageInfo != null) {
-            map.put("versionName", mPackageInfo.versionName);
-            map.put("versionCode", "" + mPackageInfo.versionCode);
-            map.put("firstInstallTime", "" + paserTime(mPackageInfo.firstInstallTime));
-            map.put("lastUpdateTime", "" + paserTime(mPackageInfo.lastUpdateTime));
-            map.put("BOARD", "" + Build.BOARD);
-            map.put("BRAND", "" + Build.BRAND);
-            map.put("CPU_ABI", "" + Build.CPU_ABI);
-            map.put("CPU_ABI2", "" + Build.CPU_ABI2);
-            map.put("DEVICE", "" + Build.DEVICE);
-            map.put("DISPLAY", "" + Build.DISPLAY);
-            map.put("FINGERPRINT", "" + Build.FINGERPRINT);
-            map.put("HARDWARE", "" + Build.HARDWARE);
-            map.put("HOST", "" + Build.HOST);
-            map.put("ID", "" + Build.ID);
-            map.put("MANUFACTURER", "" + Build.MANUFACTURER);
-            map.put("MODEL", "" + Build.MODEL);
-            map.put("PRODUCT", "" + Build.PRODUCT);
-            map.put("TAGS", "" + Build.TAGS);
-            map.put("TYPE", "" + Build.TYPE);
-            map.put("USER", "" + Build.USER);
-            map.put("SDK_INT", "" + Build.VERSION.SDK_INT);
-            map.put("IMEI", "" + DeviceHelper.getInstance().getIMEI());
-            map.put("IMSI", "" + DeviceHelper.getInstance().getIMSI());
-            map.put("Serial", "" + DeviceHelper.getSerialNumberBuild());
+            map.put("CrashTime", "" + paserTime(System.currentTimeMillis()));
+            fillMap(map, mPackageInfo);
         }
         return map;
+    }
+
+    private static void fillMap(HashMap<String, String> map, PackageInfo mPackageInfo) {
+        map.put("versionName", "" + mPackageInfo.versionName);
+        map.put("versionCode", "" + mPackageInfo.versionCode);
+        map.put("firstInstallTime", "" + paserTime(mPackageInfo.firstInstallTime));
+        map.put("lastUpdateTime", "" + paserTime(mPackageInfo.lastUpdateTime));
+        map.put("BOARD", "" + Build.BOARD);
+        map.put("BRAND", "" + Build.BRAND);
+        map.put("CPU_ABI", "" + Build.CPU_ABI);
+        map.put("CPU_ABI2", "" + Build.CPU_ABI2);
+        map.put("DEVICE", "" + Build.DEVICE);
+        map.put("DISPLAY", "" + Build.DISPLAY);
+        map.put("FINGERPRINT", "" + Build.FINGERPRINT);
+        map.put("HARDWARE", "" + Build.HARDWARE);
+        map.put("HOST", "" + Build.HOST);
+        map.put("ID", "" + Build.ID);
+        map.put("MANUFACTURER", "" + Build.MANUFACTURER);
+        map.put("MODEL", "" + Build.MODEL);
+        map.put("PRODUCT", "" + Build.PRODUCT);
+        map.put("TAGS", "" + Build.TAGS);
+        map.put("TYPE", "" + Build.TYPE);
+        map.put("USER", "" + Build.USER);
+        map.put("SDK_INT", "" + Build.VERSION.SDK_INT);
+        map.put("IMEI", "" + DeviceHelper.getInstance().getIMEI());
+        map.put("IMSI", "" + DeviceHelper.getInstance().getIMSI());
+        map.put("Serial", "" + DeviceHelper.getSerialNumberBuild());
+    }
+
+    /**
+     * 获取一些简单的信息,软件版本，手机版本，型号等信息, 返回String
+     * 
+     * @param context
+     * @return
+     */
+    public static String getSystemInfo(Context context) {
+        StringBuffer sb = new StringBuffer();
+        PackageManager mPackageManager = context.getPackageManager();
+        PackageInfo mPackageInfo = null;
+        try {
+            mPackageInfo = mPackageManager.getPackageInfo(context.getPackageName(), 0);
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (mPackageInfo != null) {
+            sb.append("versionName").append(" = ").append("" + mPackageInfo.versionName).append("; ");
+            sb.append("versionCode").append(" = ").append("" + mPackageInfo.versionCode).append("; ");
+            sb.append("firstInstallTime").append(" = ").append("" + paserTime(mPackageInfo.firstInstallTime)).append("; ");
+            sb.append("lastUpdateTime").append(" = ").append("" + paserTime(mPackageInfo.lastUpdateTime)).append("; ");
+        }
+        sb.append("BOARD").append(" = ").append("" + Build.BOARD).append("; ");
+        sb.append("BRAND").append(" = ").append("" + Build.BRAND).append("; ");
+        sb.append("CPU_ABI").append(" = ").append("" + Build.CPU_ABI).append("; ");
+        sb.append("CPU_ABI2").append(" = ").append("" + Build.CPU_ABI2).append("; ");
+        sb.append("DEVICE").append(" = ").append("" + Build.DEVICE).append("; ");
+        sb.append("DISPLAY").append(" = ").append("" + Build.DISPLAY).append("; ");
+        sb.append("FINGERPRINT").append(" = ").append("" + Build.FINGERPRINT).append("; ");
+        sb.append("HARDWARE").append(" = ").append("" + Build.HARDWARE).append("; ");
+        sb.append("HOST").append(" = ").append("" + Build.HOST).append("; ");
+        sb.append("ID").append(" = ").append("" + Build.ID).append("; ");
+        sb.append("MANUFACTURER").append(" = ").append("" + Build.MANUFACTURER).append("; ");
+        sb.append("MODEL").append(" = ").append("" + Build.MODEL).append("; ");
+        sb.append("PRODUCT").append(" = ").append("" + Build.PRODUCT).append("; ");
+        sb.append("TAGS").append(" = ").append("" + Build.TAGS).append("; ");
+        sb.append("TYPE").append(" = ").append("" + Build.TYPE).append("; ");
+        sb.append("USER").append(" = ").append("" + Build.USER).append("; ");
+        sb.append("SDK_INT").append(" = ").append("" + Build.VERSION.SDK_INT).append("; ");
+        sb.append("IMEI").append(" = ").append("" + DeviceHelper.getInstance().getIMEI()).append("; ");
+        sb.append("IMSI").append(" = ").append("" + DeviceHelper.getInstance().getIMSI()).append("; ");
+        sb.append("Serial").append(" = ").append("" + DeviceHelper.getSerialNumberBuild()).append("; ");
+        return sb.toString();
     }
 
     /**
@@ -226,7 +275,12 @@ public class CrashHelper implements UncaughtExceptionHandler {
                 }
             }
         }
-        SPAsync.setString(mContext, CrashHelper.SERVER_TAG, exception);
+        // SPAsync.setString(mContext, CrashHelper.SERVER_TAG, exception);
+        final String httpUrl = HttpHelper.CRASH_REPORT_URL;
+        final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        postParams.add(new BasicNameValuePair(JsonHelper.TITLE, "Crash log-" + TimeHelper.getTime(System.currentTimeMillis())));
+        postParams.add(new BasicNameValuePair(JsonHelper.CONTENT, exception));
+        HttpHelper.asyncHttpPost(httpUrl, context, postParams, null);
         return fileName;
     }
 
@@ -236,7 +290,7 @@ public class CrashHelper implements UncaughtExceptionHandler {
      * @param milliseconds
      * @return
      */
-    private String paserTime(long milliseconds) {
+    public static String paserTime(long milliseconds) {
         System.setProperty("user.timezone", "Asia/Shanghai");
         TimeZone tz = TimeZone.getTimeZone("Asia/Shanghai");
         TimeZone.setDefault(tz);

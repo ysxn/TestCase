@@ -4,6 +4,10 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <com.codezyw.widget.banner.FlipBanner
+        android:id="@+id/banner"
+        android:layout_width="fill_parent"
+        android:layout_height="48dip"/>
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
         android:layout_width="fill_parent"
