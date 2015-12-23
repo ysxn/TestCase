@@ -1,26 +1,27 @@
+
 package in.srain.cube.views.ptr.demo.ui.storehouse;
 
-import android.graphics.Point;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import in.srain.cube.image.CubeImageView;
 import in.srain.cube.image.ImageLoader;
 import in.srain.cube.image.ImageLoaderFactory;
 import in.srain.cube.mints.base.TitleBaseFragment;
 import in.srain.cube.util.LocalDisplay;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
+import in.srain.cube.views.ptr.PullWidget;
+import in.srain.cube.views.ptr.PullWidget.OnCheckPullListener;
 import in.srain.cube.views.ptr.demo.R;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.Point;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 /**
- * the point list used here is taken from:
- * https://github.com/cloay/CRefreshLayout
+ * the point list used here is taken from: https://github.com/cloay/CRefreshLayout
  */
 
 public class StoreHouseUsingPointList extends TitleBaseFragment {
@@ -36,7 +37,7 @@ public class StoreHouseUsingPointList extends TitleBaseFragment {
         String pic = "http://img5.duitang.com/uploads/item/201406/28/20140628122218_fLQyP.thumb.jpeg";
         imageView.loadImage(imageLoader, pic);
 
-        final PtrFrameLayout frame = (PtrFrameLayout) view.findViewById(R.id.store_house_ptr_frame);
+        final PullWidget frame = (PullWidget) view.findViewById(R.id.store_house_ptr_frame);
 
         // header
         final StoreHouseHeader header = new StoreHouseHeader(getContext());
@@ -54,20 +55,25 @@ public class StoreHouseUsingPointList extends TitleBaseFragment {
             }
         }, 100);
 
-        frame.setPtrHandler(new PtrHandler() {
+        frame.setPtrHandler(new OnCheckPullListener() {
             @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return true;
-            }
-
-            @Override
-            public void onRefreshBegin(final PtrFrameLayout frame) {
+            public void onRefreshBegin(final PullWidget frame) {
                 frame.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         frame.refreshComplete();
                     }
                 }, 2000);
+            }
+
+            @Override
+            public boolean canPullFromTop(PullWidget frame, View content, View header) {
+                return true;
+            }
+
+            @Override
+            public boolean canPullFromBottom(PullWidget frame, View content, View header) {
+                return false;
             }
         });
         return view;

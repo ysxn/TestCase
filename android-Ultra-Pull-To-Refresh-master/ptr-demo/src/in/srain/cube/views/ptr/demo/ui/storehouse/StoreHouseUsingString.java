@@ -1,24 +1,27 @@
+
 package in.srain.cube.views.ptr.demo.ui.storehouse;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import in.srain.cube.image.CubeImageView;
 import in.srain.cube.image.ImageLoader;
 import in.srain.cube.image.ImageLoaderFactory;
 import in.srain.cube.mints.base.TitleBaseFragment;
 import in.srain.cube.util.LocalDisplay;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
-import in.srain.cube.views.ptr.PtrUIHandler;
+import in.srain.cube.views.ptr.PullViewManager;
+import in.srain.cube.views.ptr.PullWidget;
+import in.srain.cube.views.ptr.PullWidget.OnCheckPullListener;
+import in.srain.cube.views.ptr.PullWidget.OnPullUIListener;
 import in.srain.cube.views.ptr.demo.R;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
-import in.srain.cube.views.ptr.indicator.PtrIndicator;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 public class StoreHouseUsingString extends TitleBaseFragment {
 
-    final String[] mStringList = {"Alibaba", "TMALL 11-11"};
+    final String[] mStringList = {
+            "Alibaba", "TMALL 11-11"
+    };
     private String mTitlePre;
 
     @Override
@@ -32,49 +35,48 @@ public class StoreHouseUsingString extends TitleBaseFragment {
         String pic = "http://img5.duitang.com/uploads/item/201406/28/20140628122218_fLQyP.thumb.jpeg";
         imageView.loadImage(imageLoader, pic);
 
-        final PtrFrameLayout frame = (PtrFrameLayout) view.findViewById(R.id.store_house_ptr_frame);
+        final PullWidget frame = (PullWidget) view.findViewById(R.id.store_house_ptr_frame);
 
         // header
         final StoreHouseHeader header = new StoreHouseHeader(getContext());
         header.setPadding(0, LocalDisplay.dp2px(15), 0, 0);
 
         /**
-         * using a string, support: A-Z 0-9 - .
-         * you can add more letters by {@link in.srain.cube.views.ptr.header.StoreHousePath#addChar}
+         * using a string, support: A-Z 0-9 - . you can add more letters by {@link in.srain.cube.views.ptr.header.StoreHousePath#addChar}
          */
         header.initWithString(mStringList[0]);
         setHeaderTitle(mTitlePre + mStringList[0]);
 
         // for changing string
-        frame.addPtrUIHandler(new PtrUIHandler() {
+        frame.addPtrUIHandler(new OnPullUIListener() {
 
             private int mLoadTime = 0;
 
             @Override
-            public void onUIReset(PtrFrameLayout frame) {
+            public void onUIReset(PullWidget frame) {
                 mLoadTime++;
                 String string = mStringList[mLoadTime % mStringList.length];
                 header.initWithString(string);
             }
 
             @Override
-            public void onUIRefreshPrepare(PtrFrameLayout frame) {
+            public void onUIRefreshPrepare(PullWidget frame) {
                 String string = mStringList[mLoadTime % mStringList.length];
                 setHeaderTitle(mTitlePre + string);
             }
 
             @Override
-            public void onUIRefreshBegin(PtrFrameLayout frame) {
+            public void onUIRefreshBegin(PullWidget frame) {
 
             }
 
             @Override
-            public void onUIRefreshComplete(PtrFrameLayout frame) {
+            public void onUIRefreshComplete(PullWidget frame) {
 
             }
 
             @Override
-            public void onUIPositionChange(PtrFrameLayout frame, boolean isUnderTouch, byte status, PtrIndicator ptrIndicator) {
+            public void onUIPositionChange(PullWidget frame, boolean isUnderTouch, byte status, PullViewManager ptrIndicator) {
 
             }
         });
@@ -89,20 +91,25 @@ public class StoreHouseUsingString extends TitleBaseFragment {
             }
         }, 100);
 
-        frame.setPtrHandler(new PtrHandler() {
+        frame.setPtrHandler(new OnCheckPullListener() {
             @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return true;
-            }
-
-            @Override
-            public void onRefreshBegin(final PtrFrameLayout frame) {
+            public void onRefreshBegin(final PullWidget frame) {
                 frame.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         frame.refreshComplete();
                     }
                 }, 2000);
+            }
+
+            @Override
+            public boolean canPullFromTop(PullWidget frame, View content, View header) {
+                return true;
+            }
+
+            @Override
+            public boolean canPullFromBottom(PullWidget frame, View content, View header) {
+                return false;
             }
         });
         return view;

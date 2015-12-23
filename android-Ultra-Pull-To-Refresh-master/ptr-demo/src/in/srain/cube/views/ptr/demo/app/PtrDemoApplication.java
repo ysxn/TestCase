@@ -6,7 +6,7 @@ import in.srain.cube.image.ImageLoaderFactory;
 import in.srain.cube.request.RequestCacheManager;
 import in.srain.cube.util.CLog;
 import in.srain.cube.util.CubeDebug;
-import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.demo.image.DemoDuiTangImageReSizer;
 import in.srain.cube.views.ptr.demo.image.PtrImageLoadHandler;
 
@@ -31,8 +31,8 @@ public class PtrDemoApplication extends Application {
         }
 
         CubeDebug.DEBUG_IMAGE = true;
-        PtrFrameLayout.DEBUG = true;
-        PtrFrameLayout.DEBUG = false;
+        PullWidget.DEBUG = true;
+        PullWidget.DEBUG = false;
 
         ImageLoaderFactory.setDefaultImageReSizer(DemoDuiTangImageReSizer.getInstance());
         ImageLoaderFactory.setDefaultImageLoadHandler(new PtrImageLoadHandler());

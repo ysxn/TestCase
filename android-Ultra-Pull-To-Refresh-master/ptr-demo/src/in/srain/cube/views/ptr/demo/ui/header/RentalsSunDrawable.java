@@ -1,7 +1,14 @@
+
 package in.srain.cube.views.ptr.demo.ui.header;
 
+import in.srain.cube.views.ptr.demo.R;
 import android.content.Context;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.Matrix;
+import android.graphics.PixelFormat;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -9,8 +16,8 @@ import android.view.animation.Animation;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.Transformation;
-import in.srain.cube.views.ptr.demo.R;
-import in.srain.cube.views.ptr.util.PtrLocalDisplay;
+
+import com.codezyw.common.DisplayHelper;
 
 public class RentalsSunDrawable extends Drawable implements Animatable {
 
@@ -77,20 +84,19 @@ public class RentalsSunDrawable extends Drawable implements Animatable {
         return mContext;
     }
 
-
     private void initiateDimens() {
-        PtrLocalDisplay.init(mContext);
-        mTotalDragDistance = PtrLocalDisplay.dp2px(120);
+        DisplayHelper.init(mContext);
+        mTotalDragDistance = DisplayHelper.dp2px(120);
 
         mScreenWidth = getContext().getResources().getDisplayMetrics().widthPixels;
         mSkyHeight = (int) (SKY_RATIO * mScreenWidth);
         mSkyTopOffset = -(mSkyHeight * 0.28f);
-        mSkyMoveOffset = PtrLocalDisplay.designedDP2px(15);
+        mSkyMoveOffset = DisplayHelper.designedDP2px(15);
 
         mTownHeight = (int) (TOWN_RATIO * mScreenWidth);
         mTownInitialTopOffset = (mTotalDragDistance - mTownHeight * TOWN_INITIAL_SCALE) + mTotalDragDistance * .42f;
         mTownFinalTopOffset = (mTotalDragDistance - mTownHeight * TOWN_FINAL_SCALE) + mTotalDragDistance * .42f;
-        mTownMoveOffset = PtrLocalDisplay.designedDP2px(10);
+        mTownMoveOffset = DisplayHelper.designedDP2px(10);
 
         mSunLeftOffset = 0.3f * (float) mScreenWidth;
         mSunTopOffset = (mTotalDragDistance * 0.5f);
@@ -169,8 +175,8 @@ public class RentalsSunDrawable extends Drawable implements Animatable {
         float scalePercentDelta = dragPercent - SCALE_START_PERCENT;
         if (scalePercentDelta > 0) {
             /**
-             * Change townScale between {@link #TOWN_INITIAL_SCALE} and {@link #TOWN_FINAL_SCALE} depending on {@link #mPercent}
-             * Change townTopOffset between {@link #mTownInitialTopOffset} and {@link #mTownFinalTopOffset} depending on {@link #mPercent}
+             * Change townScale between {@link #TOWN_INITIAL_SCALE} and {@link #TOWN_FINAL_SCALE} depending on {@link #mPercent} Change townTopOffset between
+             * {@link #mTownInitialTopOffset} and {@link #mTownFinalTopOffset} depending on {@link #mPercent}
              */
             float scalePercent = scalePercentDelta / (1.0f - SCALE_START_PERCENT);
             townScale = TOWN_INITIAL_SCALE + (TOWN_FINAL_SCALE - TOWN_INITIAL_SCALE) * scalePercent;

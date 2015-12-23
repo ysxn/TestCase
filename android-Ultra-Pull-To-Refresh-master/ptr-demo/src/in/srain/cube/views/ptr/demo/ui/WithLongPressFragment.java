@@ -1,4 +1,18 @@
+
 package in.srain.cube.views.ptr.demo.ui;
+
+import in.srain.cube.image.CubeImageView;
+import in.srain.cube.image.ImageLoader;
+import in.srain.cube.image.ImageLoaderFactory;
+import in.srain.cube.mints.base.TitleBaseFragment;
+import in.srain.cube.views.list.ListViewDataAdapter;
+import in.srain.cube.views.list.ViewHolderBase;
+import in.srain.cube.views.ptr.DefaultOnCheckPullListener;
+import in.srain.cube.views.ptr.PullWidget;
+import in.srain.cube.views.ptr.demo.R;
+import in.srain.cube.views.ptr.demo.image.Images;
+
+import java.util.Arrays;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,18 +21,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-import in.srain.cube.image.CubeImageView;
-import in.srain.cube.image.ImageLoader;
-import in.srain.cube.image.ImageLoaderFactory;
-import in.srain.cube.mints.base.TitleBaseFragment;
-import in.srain.cube.views.list.ListViewDataAdapter;
-import in.srain.cube.views.list.ViewHolderBase;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.demo.R;
-import in.srain.cube.views.ptr.demo.image.Images;
-
-import java.util.Arrays;
 
 public class WithLongPressFragment extends TitleBaseFragment {
 
@@ -33,7 +35,7 @@ public class WithLongPressFragment extends TitleBaseFragment {
 
         setHeaderTitle(R.string.ptr_demo_block_with_long_press);
 
-        final PtrFrameLayout ptrFrameLayout = (PtrFrameLayout) view.findViewById(R.id.with_long_press_list_view_frame);
+        final PullWidget ptrFrameLayout = (PullWidget) view.findViewById(R.id.with_long_press_list_view_frame);
 
         ListView listView = (ListView) view.findViewById(R.id.with_long_press_list_view);
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -47,9 +49,9 @@ public class WithLongPressFragment extends TitleBaseFragment {
         final ListViewDataAdapter<String> listViewDataAdapter = new ListViewDataAdapter<String>();
         listViewDataAdapter.setViewHolderClass(this, ViewHolder.class);
 
-        ptrFrameLayout.setPtrHandler(new PtrDefaultHandler() {
+        ptrFrameLayout.setPtrHandler(new DefaultOnCheckPullListener() {
             @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
+            public void onRefreshBegin(PullWidget frame) {
                 ptrFrameLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -59,6 +61,11 @@ public class WithLongPressFragment extends TitleBaseFragment {
                         ptrFrameLayout.refreshComplete();
                     }
                 }, 2000);
+            }
+
+            @Override
+            public boolean canPullFromBottom(PullWidget frame, View content, View header) {
+                return false;
             }
         });
         ptrFrameLayout.postDelayed(new Runnable() {
@@ -77,7 +84,7 @@ public class WithLongPressFragment extends TitleBaseFragment {
 
         /**
          * create a view from resource Xml file, and hold the view that may be used in displaying data.
-         *
+         * 
          * @param layoutInflater
          */
         @Override
@@ -89,7 +96,7 @@ public class WithLongPressFragment extends TitleBaseFragment {
 
         /**
          * using the held views to display data
-         *
+         * 
          * @param position
          * @param itemData
          */

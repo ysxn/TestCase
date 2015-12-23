@@ -1,18 +1,24 @@
+
 package in.srain.cube.views.ptr.demo.ui;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import in.srain.cube.mints.base.BlockMenuFragment;
 import in.srain.cube.util.LocalDisplay;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
+import in.srain.cube.views.ptr.DefaultOnCheckPullListener;
+import in.srain.cube.views.ptr.PullWidget;
+import in.srain.cube.views.ptr.PullWidget.OnCheckPullListener;
 import in.srain.cube.views.ptr.demo.R;
-import in.srain.cube.views.ptr.demo.ui.classic.*;
+import in.srain.cube.views.ptr.demo.ui.classic.AutoRefresh;
+import in.srain.cube.views.ptr.demo.ui.classic.EvenOnlyATextView;
+import in.srain.cube.views.ptr.demo.ui.classic.HideHeader;
+import in.srain.cube.views.ptr.demo.ui.classic.KeepHeader;
+import in.srain.cube.views.ptr.demo.ui.classic.PullToRefresh;
+import in.srain.cube.views.ptr.demo.ui.classic.ReleaseToRefresh;
+import in.srain.cube.views.ptr.demo.ui.classic.WithGridView;
+import in.srain.cube.views.ptr.demo.ui.classic.WithListView;
+import in.srain.cube.views.ptr.demo.ui.classic.WithListViewAndEmptyView;
+import in.srain.cube.views.ptr.demo.ui.classic.WithScrollView;
+import in.srain.cube.views.ptr.demo.ui.classic.WithTextViewInFrameLayoutFragment;
+import in.srain.cube.views.ptr.demo.ui.classic.WithWebView;
 import in.srain.cube.views.ptr.demo.ui.storehouse.StoreHouseUsingPointList;
 import in.srain.cube.views.ptr.demo.ui.storehouse.StoreHouseUsingString;
 import in.srain.cube.views.ptr.demo.ui.storehouse.StoreHouseUsingStringArray;
@@ -20,6 +26,13 @@ import in.srain.cube.views.ptr.demo.ui.viewpager.ViewPagerActivity;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
 
 import java.util.ArrayList;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 
 public class PtrDemoHomeFragment extends BlockMenuFragment {
 
@@ -211,7 +224,7 @@ public class PtrDemoHomeFragment extends BlockMenuFragment {
         View view = super.createView(inflater, container, savedInstanceState);
         view.setBackgroundColor(getResources().getColor(R.color.cube_mints_333333));
 
-        final PtrFrameLayout ptrFrameLayout = (PtrFrameLayout) view.findViewById(R.id.fragment_ptr_home_ptr_frame);
+        final PullWidget ptrFrameLayout = (PullWidget) view.findViewById(R.id.fragment_ptr_home_ptr_frame);
         StoreHouseHeader header = new StoreHouseHeader(getContext());
         header.setPadding(0, LocalDisplay.dp2px(20), 0, LocalDisplay.dp2px(20));
         header.initWithString("Ultra PTR");
@@ -219,20 +232,25 @@ public class PtrDemoHomeFragment extends BlockMenuFragment {
         ptrFrameLayout.setDurationToCloseHeader(1500);
         ptrFrameLayout.setHeaderView(header);
         ptrFrameLayout.addPtrUIHandler(header);
-        ptrFrameLayout.setPtrHandler(new PtrHandler() {
+        ptrFrameLayout.setPtrHandler(new OnCheckPullListener() {
             @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+            public boolean canPullFromTop(PullWidget frame, View content, View header) {
+                return DefaultOnCheckPullListener.checkContentCanBePulledDown(frame, content, header);
             }
 
             @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
+            public void onRefreshBegin(PullWidget frame) {
                 ptrFrameLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         ptrFrameLayout.refreshComplete();
                     }
                 }, 1500);
+            }
+
+            @Override
+            public boolean canPullFromBottom(PullWidget frame, View content, View header) {
+                return false;
             }
         });
         return view;

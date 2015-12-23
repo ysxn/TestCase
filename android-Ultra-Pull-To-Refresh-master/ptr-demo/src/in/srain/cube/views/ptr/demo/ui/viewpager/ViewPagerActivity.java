@@ -1,4 +1,17 @@
+
 package in.srain.cube.views.ptr.demo.ui.viewpager;
+
+import in.srain.cube.mints.base.TitleBaseActivity;
+import in.srain.cube.request.JsonData;
+import in.srain.cube.request.RequestFinishHandler;
+import in.srain.cube.util.LocalDisplay;
+import in.srain.cube.views.pager.TabPageIndicator;
+import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
+import in.srain.cube.views.ptr.demo.R;
+import in.srain.cube.views.ptr.demo.data.DemoRequestData;
+
+import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,25 +23,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.TextView;
-import in.srain.cube.mints.base.TitleBaseActivity;
-import in.srain.cube.request.JsonData;
-import in.srain.cube.request.RequestFinishHandler;
-import in.srain.cube.util.LocalDisplay;
-import in.srain.cube.views.pager.TabPageIndicator;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
-import in.srain.cube.views.ptr.demo.R;
-import in.srain.cube.views.ptr.demo.data.DemoRequestData;
-
-import java.util.ArrayList;
 
 public class ViewPagerActivity extends TitleBaseActivity {
 
     private TabPageIndicator mCatTabPageIndicator;
     private ViewPager mFragmentViewPager;
     private FragmentViewPagerAdapter mPagerAdapter;
-    private PtrFrameLayout mPtrFrame;
+    private PullWidget mPtrFrame;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,17 +68,22 @@ public class ViewPagerActivity extends TitleBaseActivity {
         });
         mCatTabPageIndicator.setViewPager(mFragmentViewPager);
 
-        mPtrFrame = (PtrClassicFrameLayout) findViewById(R.id.view_pager_ptr_frame);
+        mPtrFrame = (DefaultPullWidget) findViewById(R.id.view_pager_ptr_frame);
         mPtrFrame.disableWhenHorizontalMove(true);
-        mPtrFrame.setPtrHandler(new PtrHandler() {
+        mPtrFrame.setPtrHandler(new PullWidget.OnCheckPullListener() {
             @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+            public boolean canPullFromTop(PullWidget frame, View content, View header) {
                 return mPagerAdapter.checkCanDoRefresh();
             }
 
             @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
+            public void onRefreshBegin(PullWidget frame) {
                 mPagerAdapter.updateData();
+            }
+
+            @Override
+            public boolean canPullFromBottom(PullWidget frame, View content, View header) {
+                return false;
             }
         });
         mFragmentViewPager.setCurrentItem(startIndex);

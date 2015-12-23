@@ -1,21 +1,22 @@
+
 package in.srain.cube.views.ptr.demo.ui.classic;
 
+import in.srain.cube.mints.base.TitleBaseFragment;
+import in.srain.cube.views.ptr.DefaultOnCheckPullListener;
+import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
+import in.srain.cube.views.ptr.PullWidget.OnCheckPullListener;
+import in.srain.cube.views.ptr.demo.R;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import in.srain.cube.mints.base.TitleBaseFragment;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
-import in.srain.cube.views.ptr.demo.R;
 
 public class WithWebView extends TitleBaseFragment {
 
-    private PtrClassicFrameLayout mPtrFrame;
+    private DefaultPullWidget mPtrFrame;
     private WebView mWebView;
 
     @Override
@@ -31,17 +32,22 @@ public class WithWebView extends TitleBaseFragment {
                 mPtrFrame.refreshComplete();
             }
         });
-        mPtrFrame = (PtrClassicFrameLayout) contentView.findViewById(R.id.rotate_header_web_view_frame);
+        mPtrFrame = (DefaultPullWidget) contentView.findViewById(R.id.rotate_header_web_view_frame);
         mPtrFrame.setLastUpdateTimeRelateObject(this);
-        mPtrFrame.setPtrHandler(new PtrHandler() {
+        mPtrFrame.setPtrHandler(new OnCheckPullListener() {
             @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, mWebView, header);
+            public boolean canPullFromTop(PullWidget frame, View content, View header) {
+                return DefaultOnCheckPullListener.checkContentCanBePulledDown(frame, mWebView, header);
             }
 
             @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
+            public void onRefreshBegin(PullWidget frame) {
                 updateData();
+            }
+
+            @Override
+            public boolean canPullFromBottom(PullWidget frame, View content, View header) {
+                return false;
             }
         });
         // the following are default settings

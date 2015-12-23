@@ -1,25 +1,26 @@
+
 package in.srain.cube.views.ptr.demo.ui.classic;
 
-import android.view.View;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.DefaultOnCheckPullListener;
+import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.demo.R;
 import in.srain.cube.views.ptr.demo.ui.Utils;
+import android.view.View;
 
 public class HideHeader extends WithTextViewInFrameLayoutFragment {
 
     @Override
-    protected void setupViews(final PtrClassicFrameLayout ptrFrame) {
+    protected void setupViews(final DefaultPullWidget ptrFrame) {
         setHeaderTitle(R.string.ptr_demo_block_hide_header);
         ptrFrame.setKeepHeaderWhenRefresh(false);
 
         final View loading = Utils.createSimpleLoadingTip(getContext());
         mTitleHeaderBar.getRightViewContainer().addView(loading);
 
-        ptrFrame.setPtrHandler(new PtrDefaultHandler() {
+        ptrFrame.setPtrHandler(new DefaultOnCheckPullListener() {
             @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
+            public void onRefreshBegin(PullWidget frame) {
                 loading.setVisibility(View.VISIBLE);
                 frame.postDelayed(new Runnable() {
                     @Override
@@ -31,8 +32,13 @@ public class HideHeader extends WithTextViewInFrameLayoutFragment {
             }
 
             @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+            public boolean canPullFromTop(PullWidget frame, View content, View header) {
                 return true;
+            }
+
+            @Override
+            public boolean canPullFromBottom(PullWidget frame, View content, View header) {
+                return false;
             }
         });
     }

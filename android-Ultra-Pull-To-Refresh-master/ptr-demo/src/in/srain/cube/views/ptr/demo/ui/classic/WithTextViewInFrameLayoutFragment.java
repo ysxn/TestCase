@@ -1,14 +1,15 @@
+
 package in.srain.cube.views.ptr.demo.ui.classic;
 
+import in.srain.cube.mints.base.TitleBaseFragment;
+import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
+import in.srain.cube.views.ptr.PullWidget.OnCheckPullListener;
+import in.srain.cube.views.ptr.demo.R;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import in.srain.cube.mints.base.TitleBaseFragment;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
-import in.srain.cube.views.ptr.demo.R;
 
 public class WithTextViewInFrameLayoutFragment extends TitleBaseFragment {
 
@@ -19,10 +20,10 @@ public class WithTextViewInFrameLayoutFragment extends TitleBaseFragment {
 
         final View contentView = inflater.inflate(R.layout.fragment_classic_header_with_viewgroup, container, false);
 
-        final PtrClassicFrameLayout ptrFrame = (PtrClassicFrameLayout) contentView.findViewById(R.id.fragment_rotate_header_with_view_group_frame);
-        ptrFrame.setPtrHandler(new PtrHandler() {
+        final DefaultPullWidget ptrFrame = (DefaultPullWidget) contentView.findViewById(R.id.fragment_rotate_header_with_view_group_frame);
+        ptrFrame.setPtrHandler(new OnCheckPullListener() {
             @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
+            public void onRefreshBegin(PullWidget frame) {
                 frame.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -32,8 +33,13 @@ public class WithTextViewInFrameLayoutFragment extends TitleBaseFragment {
             }
 
             @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+            public boolean canPullFromTop(PullWidget frame, View content, View header) {
                 return true;
+            }
+
+            @Override
+            public boolean canPullFromBottom(PullWidget frame, View content, View header) {
+                return false;
             }
         });
         ptrFrame.setLastUpdateTimeRelateObject(this);
@@ -62,7 +68,7 @@ public class WithTextViewInFrameLayoutFragment extends TitleBaseFragment {
         return contentView;
     }
 
-    protected void setupViews(final PtrClassicFrameLayout ptrFrame) {
+    protected void setupViews(final DefaultPullWidget ptrFrame) {
 
     }
 }

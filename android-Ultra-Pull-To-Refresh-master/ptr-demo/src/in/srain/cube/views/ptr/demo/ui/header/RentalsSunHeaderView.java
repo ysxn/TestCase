@@ -1,20 +1,21 @@
+
 package in.srain.cube.views.ptr.demo.ui.header;
 
+import in.srain.cube.views.ptr.PullViewManager;
+import in.srain.cube.views.ptr.PullViewTensionManager;
+import in.srain.cube.views.ptr.PullWidget;
+import in.srain.cube.views.ptr.PullWidget.OnPullUIListener;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrUIHandler;
-import in.srain.cube.views.ptr.indicator.PtrIndicator;
-import in.srain.cube.views.ptr.indicator.PtrTensionIndicator;
 
-public class RentalsSunHeaderView extends View implements PtrUIHandler {
+public class RentalsSunHeaderView extends View implements OnPullUIListener {
 
     private RentalsSunDrawable mDrawable;
-    private PtrFrameLayout mPtrFrameLayout;
-    private PtrTensionIndicator mPtrTensionIndicator;
+    private PullWidget mPtrFrameLayout;
+    private PullViewTensionManager mPtrTensionIndicator;
 
     public RentalsSunHeaderView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -31,9 +32,9 @@ public class RentalsSunHeaderView extends View implements PtrUIHandler {
         init();
     }
 
-    public void setUp(PtrFrameLayout ptrFrameLayout) {
+    public void setUp(PullWidget ptrFrameLayout) {
         mPtrFrameLayout = ptrFrameLayout;
-        mPtrTensionIndicator = new PtrTensionIndicator();
+        mPtrTensionIndicator = new PullViewTensionManager();
         mPtrFrameLayout.setPtrIndicator(mPtrTensionIndicator);
     }
 
@@ -56,7 +57,7 @@ public class RentalsSunHeaderView extends View implements PtrUIHandler {
     }
 
     @Override
-    public void onUIReset(PtrFrameLayout frame) {
+    public void onUIReset(PullWidget frame) {
         mDrawable.resetOriginals();
     }
 
@@ -67,12 +68,12 @@ public class RentalsSunHeaderView extends View implements PtrUIHandler {
     }
 
     @Override
-    public void onUIRefreshPrepare(PtrFrameLayout frame) {
+    public void onUIRefreshPrepare(PullWidget frame) {
 
     }
 
     @Override
-    public void onUIRefreshBegin(PtrFrameLayout frame) {
+    public void onUIRefreshBegin(PullWidget frame) {
         mDrawable.start();
         float percent = mPtrTensionIndicator.getOverDragPercent();
         mDrawable.offsetTopAndBottom(mPtrTensionIndicator.getCurrentPosY());
@@ -81,7 +82,7 @@ public class RentalsSunHeaderView extends View implements PtrUIHandler {
     }
 
     @Override
-    public void onUIRefreshComplete(PtrFrameLayout frame) {
+    public void onUIRefreshComplete(PullWidget frame) {
         float percent = mPtrTensionIndicator.getOverDragPercent();
         mDrawable.stop();
         mDrawable.offsetTopAndBottom(mPtrTensionIndicator.getCurrentPosY());
@@ -90,7 +91,7 @@ public class RentalsSunHeaderView extends View implements PtrUIHandler {
     }
 
     @Override
-    public void onUIPositionChange(PtrFrameLayout frame, boolean isUnderTouch, byte status, PtrIndicator ptrIndicator) {
+    public void onUIPositionChange(PullWidget frame, boolean isUnderTouch, byte status, PullViewManager ptrIndicator) {
         float percent = mPtrTensionIndicator.getOverDragPercent();
         mDrawable.offsetTopAndBottom(mPtrTensionIndicator.getCurrentPosY());
         mDrawable.setPercent(percent);

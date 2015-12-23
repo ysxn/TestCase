@@ -1,14 +1,6 @@
+
 package in.srain.cube.views.ptr.demo.ui.classic;
 
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.ImageView.ScaleType;
-import android.widget.LinearLayout;
 import in.srain.cube.image.CubeImageView;
 import in.srain.cube.image.ImageLoader;
 import in.srain.cube.image.ImageLoaderFactory;
@@ -19,20 +11,29 @@ import in.srain.cube.util.LocalDisplay;
 import in.srain.cube.views.list.ListViewDataAdapter;
 import in.srain.cube.views.list.ViewHolderBase;
 import in.srain.cube.views.list.ViewHolderCreator;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
+import in.srain.cube.views.ptr.DefaultOnCheckPullListener;
+import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
+import in.srain.cube.views.ptr.PullWidget.OnCheckPullListener;
 import in.srain.cube.views.ptr.demo.R;
 import in.srain.cube.views.ptr.demo.data.DemoRequestData;
 import in.srain.cube.views.ptr.demo.ui.MaterialStyleFragment;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout;
 
 public class WithGridView extends TitleBaseFragment {
 
     private static final int sGirdImageSize = (LocalDisplay.SCREEN_WIDTH_PIXELS - LocalDisplay.dp2px(12 + 12 + 10)) / 2;
     private ImageLoader mImageLoader;
     private ListViewDataAdapter<JsonData> mAdapter;
-    private PtrClassicFrameLayout mPtrFrame;
+    private DefaultPullWidget mPtrFrame;
 
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,17 +64,22 @@ public class WithGridView extends TitleBaseFragment {
         });
         gridListView.setAdapter(mAdapter);
 
-        mPtrFrame = (PtrClassicFrameLayout) contentView.findViewById(R.id.rotate_header_grid_view_frame);
+        mPtrFrame = (DefaultPullWidget) contentView.findViewById(R.id.rotate_header_grid_view_frame);
         mPtrFrame.setLastUpdateTimeRelateObject(this);
-        mPtrFrame.setPtrHandler(new PtrHandler() {
+        mPtrFrame.setPtrHandler(new OnCheckPullListener() {
             @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
+            public void onRefreshBegin(PullWidget frame) {
                 updateData();
             }
 
             @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+            public boolean canPullFromTop(PullWidget frame, View content, View header) {
+                return DefaultOnCheckPullListener.checkContentCanBePulledDown(frame, content, header);
+            }
+
+            @Override
+            public boolean canPullFromBottom(PullWidget frame, View content, View header) {
+                return false;
             }
         });
         // the following are default settings
@@ -96,7 +102,7 @@ public class WithGridView extends TitleBaseFragment {
         return contentView;
     }
 
-    protected void setupViews(final PtrClassicFrameLayout ptrFrame) {
+    protected void setupViews(final DefaultPullWidget ptrFrame) {
 
     }
 

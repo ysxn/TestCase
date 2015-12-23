@@ -5,7 +5,7 @@
     android:background="@color/cube_mints_f1f1f1"
     android:orientation="vertical">
 
-    <in.srain.cube.views.ptr.PtrClassicFrameLayout
+    <in.srain.cube.views.ptr.DefaultPullWidget
         android:id="@+id/with_long_press_list_view_frame"
         xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -26,6 +26,6 @@
             android:listSelector="@android:color/transparent"
             android:scrollbars="none" />
 
-    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+    </in.srain.cube.views.ptr.DefaultPullWidget>
 
 </LinearLayout>

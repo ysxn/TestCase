@@ -1,13 +1,6 @@
+
 package in.srain.cube.views.ptr.demo.ui.classic;
 
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
 import in.srain.cube.image.CubeImageView;
 import in.srain.cube.image.ImageLoader;
 import in.srain.cube.image.ImageLoaderFactory;
@@ -16,19 +9,27 @@ import in.srain.cube.request.JsonData;
 import in.srain.cube.request.RequestFinishHandler;
 import in.srain.cube.views.list.ListViewDataAdapter;
 import in.srain.cube.views.list.ViewHolderBase;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
+import in.srain.cube.views.ptr.DefaultOnCheckPullListener;
+import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
+import in.srain.cube.views.ptr.PullWidget.OnCheckPullListener;
 import in.srain.cube.views.ptr.demo.R;
 import in.srain.cube.views.ptr.demo.data.DemoRequestData;
 import in.srain.cube.views.ptr.demo.ui.MaterialStyleFragment;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
 
 public class WithListView extends TitleBaseFragment {
 
     private ImageLoader mImageLoader;
     private ListViewDataAdapter<JsonData> mAdapter;
-    private PtrClassicFrameLayout mPtrFrame;
+    private DefaultPullWidget mPtrFrame;
 
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,17 +56,22 @@ public class WithListView extends TitleBaseFragment {
         mAdapter.setViewHolderClass(this, ViewHolder.class);
         listView.setAdapter(mAdapter);
 
-        mPtrFrame = (PtrClassicFrameLayout) contentView.findViewById(R.id.rotate_header_list_view_frame);
+        mPtrFrame = (DefaultPullWidget) contentView.findViewById(R.id.rotate_header_list_view_frame);
         mPtrFrame.setLastUpdateTimeRelateObject(this);
-        mPtrFrame.setPtrHandler(new PtrHandler() {
+        mPtrFrame.setPtrHandler(new OnCheckPullListener() {
             @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
+            public void onRefreshBegin(PullWidget frame) {
                 updateData();
             }
 
             @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+            public boolean canPullFromTop(PullWidget frame, View content, View header) {
+                return DefaultOnCheckPullListener.checkContentCanBePulledDown(frame, content, header);
+            }
+
+            @Override
+            public boolean canPullFromBottom(PullWidget frame, View content, View header) {
+                return false;
             }
         });
         // the following are default settings
@@ -118,7 +124,7 @@ public class WithListView extends TitleBaseFragment {
 
         @Override
         public void showData(int position, JsonData itemData) {
-        	android.util.Log.i("GHH", "         \""+itemData.optString("pic")+"\",");
+            android.util.Log.i("GHH", "         \"" + itemData.optString("pic") + "\",");
             mImageView.loadImage(mImageLoader, itemData.optString("pic"));
         }
     }
