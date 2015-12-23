@@ -1,6 +1,9 @@
 
 package in.srain.cube.views.ptr;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -55,7 +58,6 @@ public class PullWidget extends ViewGroup {
     private boolean mKeepHeaderWhenRefresh = true;
     private boolean mPullToRefresh = false;
     private View mHeaderView;
-    private UIHandlerHolder mPtrUIHandlerHolder = UIHandlerHolder.create();
     private OnCheckPullListener mPtrHandler;
     // working parameters
     private ScrollChecker mScrollChecker;
@@ -77,6 +79,7 @@ public class PullWidget extends ViewGroup {
     private long mLoadingStartTime = 0;
     private PullViewManager mPtrIndicator;
     private boolean mHasSendCancelEvent = false;
+    private List<OnPullUIListener> mOnPullUIListeners;
 
     public PullWidget(Context context) {
         this(context, null);
@@ -376,7 +379,14 @@ public class PullWidget extends ViewGroup {
                 (mPtrIndicator.goDownCrossFinishPosition() && mStatus == PTR_STATUS_COMPLETE && isEnabledNextPtrAtOnce())) {
 
             mStatus = PTR_STATUS_PREPARE;
-            mPtrUIHandlerHolder.onUIRefreshPrepare(this);
+            if (mOnPullUIListeners != null) {
+                for (int i = 0, z = mOnPullUIListeners.size(); i < z; i++) {
+                    OnPullUIListener listener = mOnPullUIListeners.get(i);
+                    if (listener != null) {
+                        listener.onUIRefreshPrepare(this);
+                    }
+                }
+            }
             if (DEBUG) {
                 CLog.i(LOG_TAG, "PtrUIHandler: onUIRefreshPrepare, mFlag %s", mFlag);
             }
@@ -416,8 +426,13 @@ public class PullWidget extends ViewGroup {
         }
         invalidate();
 
-        if (mPtrUIHandlerHolder.hasHandler()) {
-            mPtrUIHandlerHolder.onUIPositionChange(this, isUnderTouch, mStatus, mPtrIndicator);
+        if (mOnPullUIListeners != null) {
+            for (int i = 0, z = mOnPullUIListeners.size(); i < z; i++) {
+                OnPullUIListener listener = mOnPullUIListeners.get(i);
+                if (listener != null) {
+                    listener.onUIPositionChange(this, isUnderTouch, mStatus, mPtrIndicator);
+                }
+            }
         }
         onPositionChange(isUnderTouch, mStatus, mPtrIndicator);
     }
@@ -425,7 +440,6 @@ public class PullWidget extends ViewGroup {
     protected void onPositionChange(boolean isInTouching, byte status, PullViewManager mPtrIndicator) {
     }
 
-    @SuppressWarnings("unused")
     public int getHeaderHeight() {
         return mHeaderHeight;
     }
@@ -519,8 +533,13 @@ public class PullWidget extends ViewGroup {
 
     private void performRefresh() {
         mLoadingStartTime = System.currentTimeMillis();
-        if (mPtrUIHandlerHolder.hasHandler()) {
-            mPtrUIHandlerHolder.onUIRefreshBegin(this);
+        if (mOnPullUIListeners != null) {
+            for (int i = 0, z = mOnPullUIListeners.size(); i < z; i++) {
+                OnPullUIListener listener = mOnPullUIListeners.get(i);
+                if (listener != null) {
+                    listener.onUIRefreshBegin(this);
+                }
+            }
             if (DEBUG) {
                 CLog.i(LOG_TAG, "PtrUIHandler: onUIRefreshBegin");
             }
@@ -535,8 +554,13 @@ public class PullWidget extends ViewGroup {
      */
     private boolean tryToNotifyReset() {
         if ((mStatus == PTR_STATUS_COMPLETE || mStatus == PTR_STATUS_PREPARE) && mPtrIndicator.isInStartPosition()) {
-            if (mPtrUIHandlerHolder.hasHandler()) {
-                mPtrUIHandlerHolder.onUIReset(this);
+            if (mOnPullUIListeners != null) {
+                for (int i = 0, z = mOnPullUIListeners.size(); i < z; i++) {
+                    OnPullUIListener listener = mOnPullUIListeners.get(i);
+                    if (listener != null) {
+                        listener.onUIReset(this);
+                    }
+                }
                 if (DEBUG) {
                     CLog.i(LOG_TAG, "PtrUIHandler: onUIReset");
                 }
@@ -643,11 +667,16 @@ public class PullWidget extends ViewGroup {
             mRefreshCompleteHook.takeOver();
             return;
         }
-        if (mPtrUIHandlerHolder.hasHandler()) {
+        if (mOnPullUIListeners != null) {
             if (DEBUG) {
                 CLog.i(LOG_TAG, "PtrUIHandler: onUIRefreshComplete");
             }
-            mPtrUIHandlerHolder.onUIRefreshComplete(this);
+            for (int i = 0, z = mOnPullUIListeners.size(); i < z; i++) {
+                OnPullUIListener listener = mOnPullUIListeners.get(i);
+                if (listener != null) {
+                    listener.onUIRefreshComplete(this);
+                }
+            }
         }
         mPtrIndicator.onUIRefreshComplete();
         tryScrollBackToTopAfterComplete();
@@ -676,8 +705,13 @@ public class PullWidget extends ViewGroup {
         mFlag |= atOnce ? FLAG_AUTO_REFRESH_AT_ONCE : FLAG_AUTO_REFRESH_BUT_LATER;
 
         mStatus = PTR_STATUS_PREPARE;
-        if (mPtrUIHandlerHolder.hasHandler()) {
-            mPtrUIHandlerHolder.onUIRefreshPrepare(this);
+        if (mOnPullUIListeners != null) {
+            for (int i = 0, z = mOnPullUIListeners.size(); i < z; i++) {
+                OnPullUIListener listener = mOnPullUIListeners.get(i);
+                if (listener != null) {
+                    listener.onUIRefreshPrepare(this);
+                }
+            }
             if (DEBUG) {
                 CLog.i(LOG_TAG, "PtrUIHandler: onUIRefreshPrepare, mFlag %s", mFlag);
             }
@@ -750,35 +784,12 @@ public class PullWidget extends ViewGroup {
         mLoadingMinTime = time;
     }
 
-    /**
-     * Not necessary any longer. Once moved, cancel event will be sent to child.
-     * 
-     * @param yes
-     */
-    @Deprecated
-    public void setInterceptEventWhileWorking(boolean yes) {
-    }
-
-    @SuppressWarnings({
-            "unused"
-    })
     public View getContentView() {
         return mContent;
     }
 
     public void setOnCheckPullListener(OnCheckPullListener ptrHandler) {
         mPtrHandler = ptrHandler;
-    }
-
-    public void addOnPullUIListener(OnPullUIListener ptrUIHandler) {
-        UIHandlerHolder.addHandler(mPtrUIHandlerHolder, ptrUIHandler);
-    }
-
-    @SuppressWarnings({
-            "unused"
-    })
-    public void removePtrUIHandler(OnPullUIListener ptrUIHandler) {
-        mPtrUIHandlerHolder = UIHandlerHolder.removeHandler(mPtrUIHandlerHolder, ptrUIHandler);
     }
 
     public void setPtrIndicator(PullViewManager slider) {
@@ -788,9 +799,6 @@ public class PullWidget extends ViewGroup {
         mPtrIndicator = slider;
     }
 
-    @SuppressWarnings({
-            "unused"
-    })
     public float getResistance() {
         return mPtrIndicator.getResistance();
     }
@@ -799,9 +807,6 @@ public class PullWidget extends ViewGroup {
         mPtrIndicator.setResistance(resistance);
     }
 
-    @SuppressWarnings({
-            "unused"
-    })
     public float getDurationToClose() {
         return mDurationToClose;
     }
@@ -815,9 +820,6 @@ public class PullWidget extends ViewGroup {
         mDurationToClose = duration;
     }
 
-    @SuppressWarnings({
-            "unused"
-    })
     public long getDurationToCloseHeader() {
         return mDurationToCloseHeader;
     }
@@ -839,37 +841,22 @@ public class PullWidget extends ViewGroup {
         return mPtrIndicator.getOffsetToRefresh();
     }
 
-    @SuppressWarnings({
-            "unused"
-    })
     public void setOffsetToRefresh(int offset) {
         mPtrIndicator.setOffsetToRefresh(offset);
     }
 
-    @SuppressWarnings({
-            "unused"
-    })
     public float getRatioOfHeaderToHeightRefresh() {
         return mPtrIndicator.getRatioOfHeaderToHeightRefresh();
     }
 
-    @SuppressWarnings({
-            "unused"
-    })
     public void setOffsetToKeepHeaderWhileLoading(int offset) {
         mPtrIndicator.setOffsetToKeepHeaderWhileLoading(offset);
     }
 
-    @SuppressWarnings({
-            "unused"
-    })
     public int getOffsetToKeepHeaderWhileLoading() {
         return mPtrIndicator.getOffsetToKeepHeaderWhileLoading();
     }
 
-    @SuppressWarnings({
-            "unused"
-    })
     public boolean isKeepHeaderWhenRefresh() {
         return mKeepHeaderWhenRefresh;
     }
@@ -886,9 +873,6 @@ public class PullWidget extends ViewGroup {
         mPullToRefresh = pullToRefresh;
     }
 
-    @SuppressWarnings({
-            "unused"
-    })
     public View getHeaderView() {
         return mHeaderView;
     }
@@ -961,9 +945,6 @@ public class PullWidget extends ViewGroup {
             super(width, height);
         }
 
-        @SuppressWarnings({
-                "unused"
-        })
         public LayoutParams(MarginLayoutParams source) {
             super(source);
         }
@@ -1054,6 +1035,25 @@ public class PullWidget extends ViewGroup {
         }
     }
 
+    public void addOnPullUIListener(OnPullUIListener listener) {
+        if (mOnPullUIListeners == null) {
+            mOnPullUIListeners = new ArrayList<OnPullUIListener>();
+        }
+        mOnPullUIListeners.add(listener);
+    }
+
+    public void removeOnPullUIListener(OnPullUIListener listener) {
+        if (mOnPullUIListeners != null) {
+            mOnPullUIListeners.remove(listener);
+        }
+    }
+
+    public void clearOnPullUIListeners() {
+        if (mOnPullUIListeners != null) {
+            mOnPullUIListeners.clear();
+        }
+    }
+
     /**
      * 检查滑动动作是否达到触发刷新阀值
      */
@@ -1102,7 +1102,7 @@ public class PullWidget extends ViewGroup {
         public void onUIRefreshBegin(PullWidget frame);
 
         /**
-         * 刷新完成后的话
+         * 刷新完成后的动画
          */
         public void onUIRefreshComplete(PullWidget frame);
 
