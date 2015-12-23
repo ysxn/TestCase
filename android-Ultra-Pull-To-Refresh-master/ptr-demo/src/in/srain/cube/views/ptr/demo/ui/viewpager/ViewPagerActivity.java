@@ -6,7 +6,7 @@ import in.srain.cube.request.JsonData;
 import in.srain.cube.request.RequestFinishHandler;
 import in.srain.cube.util.LocalDisplay;
 import in.srain.cube.views.pager.TabPageIndicator;
-import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.demo.R;
 import in.srain.cube.views.ptr.demo.data.DemoRequestData;
@@ -68,7 +68,7 @@ public class ViewPagerActivity extends TitleBaseActivity {
         });
         mCatTabPageIndicator.setViewPager(mFragmentViewPager);
 
-        mPtrFrame = (DefaultPullWidget) findViewById(R.id.view_pager_ptr_frame);
+        mPtrFrame = (PullWidget) findViewById(R.id.view_pager_ptr_frame);
         mPtrFrame.disableWhenHorizontalMove(true);
         mPtrFrame.setOnCheckPullListener(new PullWidget.OnCheckPullListener() {
             @Override

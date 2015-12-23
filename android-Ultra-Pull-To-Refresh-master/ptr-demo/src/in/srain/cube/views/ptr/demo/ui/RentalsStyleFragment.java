@@ -11,7 +11,7 @@ import in.srain.cube.util.LocalDisplay;
 import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget.OnCheckPullListener;
 import in.srain.cube.views.ptr.demo.R;
-import in.srain.cube.views.ptr.demo.ui.header.RentalsSunHeaderView;
+import in.srain.cube.views.ptr.demo.ui.header.SunHeaderView;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -47,7 +47,7 @@ public class RentalsStyleFragment extends TitleBaseFragment {
         final PullWidget frame = (PullWidget) view.findViewById(R.id.material_style_ptr_frame);
 
         // header
-        final RentalsSunHeaderView header = new RentalsSunHeaderView(getContext());
+        final SunHeaderView header = new SunHeaderView(getContext());
         header.setLayoutParams(new PullWidget.LayoutParams(-1, -2));
         header.setPadding(0, LocalDisplay.dp2px(15), 0, LocalDisplay.dp2px(10));
         header.setUp(frame);

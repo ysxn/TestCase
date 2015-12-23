@@ -1,7 +1,9 @@
-package in.srain.cube.views.ptr;
+package in.srain.cube.views.ptr.demo.ui.header;
+
+import in.srain.cube.views.ptr.PullViewManager;
 
 
-public class PullViewTensionManager extends PullViewManager {
+public class SunPullViewManager extends PullViewManager {
 
     private float DRAG_RATE = 0.5f;
     private float mDownY;

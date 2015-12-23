@@ -10,7 +10,7 @@ import in.srain.cube.request.RequestFinishHandler;
 import in.srain.cube.views.list.ListViewDataAdapter;
 import in.srain.cube.views.list.ViewHolderBase;
 import in.srain.cube.views.ptr.DefaultOnCheckPullListener;
-import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget.OnCheckPullListener;
 import in.srain.cube.views.ptr.demo.R;
@@ -29,7 +29,7 @@ public class WithListView extends TitleBaseFragment {
 
     private ImageLoader mImageLoader;
     private ListViewDataAdapter<JsonData> mAdapter;
-    private DefaultPullWidget mPtrFrame;
+    private PullWidget mPtrFrame;
 
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class WithListView extends TitleBaseFragment {
         mAdapter.setViewHolderClass(this, ViewHolder.class);
         listView.setAdapter(mAdapter);
 
-        mPtrFrame = (DefaultPullWidget) contentView.findViewById(R.id.rotate_header_list_view_frame);
+        mPtrFrame = (PullWidget) contentView.findViewById(R.id.rotate_header_list_view_frame);
         mPtrFrame.setLastUpdateTimeRelateObject(this);
         mPtrFrame.setOnCheckPullListener(new OnCheckPullListener() {
             @Override

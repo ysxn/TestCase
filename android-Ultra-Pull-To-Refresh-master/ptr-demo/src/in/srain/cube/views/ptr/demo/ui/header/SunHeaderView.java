@@ -2,7 +2,6 @@
 package in.srain.cube.views.ptr.demo.ui.header;
 
 import in.srain.cube.views.ptr.PullViewManager;
-import in.srain.cube.views.ptr.PullViewTensionManager;
 import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget.OnPullUIListener;
 import android.content.Context;
@@ -11,35 +10,35 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class RentalsSunHeaderView extends View implements OnPullUIListener {
+public class SunHeaderView extends View implements OnPullUIListener {
 
-    private RentalsSunDrawable mDrawable;
+    private SunDrawable mDrawable;
     private PullWidget mPtrFrameLayout;
-    private PullViewTensionManager mPtrTensionIndicator;
+    private SunPullViewManager mPtrTensionIndicator;
 
-    public RentalsSunHeaderView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SunHeaderView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
-    public RentalsSunHeaderView(Context context) {
+    public SunHeaderView(Context context) {
         super(context);
         init();
     }
 
-    public RentalsSunHeaderView(Context context, AttributeSet attrs) {
+    public SunHeaderView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
     public void setUp(PullWidget ptrFrameLayout) {
         mPtrFrameLayout = ptrFrameLayout;
-        mPtrTensionIndicator = new PullViewTensionManager();
+        mPtrTensionIndicator = new SunPullViewManager();
         mPtrFrameLayout.setPtrIndicator(mPtrTensionIndicator);
     }
 
     private void init() {
-        mDrawable = new RentalsSunDrawable(getContext(), this);
+        mDrawable = new SunDrawable(getContext(), this);
     }
 
     @Override

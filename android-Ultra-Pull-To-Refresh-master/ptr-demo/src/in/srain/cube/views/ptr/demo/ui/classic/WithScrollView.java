@@ -3,7 +3,7 @@ package in.srain.cube.views.ptr.demo.ui.classic;
 
 import in.srain.cube.mints.base.TitleBaseFragment;
 import in.srain.cube.views.ptr.DefaultOnCheckPullListener;
-import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget.OnCheckPullListener;
 import in.srain.cube.views.ptr.demo.R;
@@ -15,7 +15,7 @@ import android.widget.ScrollView;
 
 public class WithScrollView extends TitleBaseFragment {
 
-    private DefaultPullWidget mPtrFrame;
+    private PullWidget mPtrFrame;
     private ScrollView mScrollView;
 
     @Override
@@ -25,7 +25,7 @@ public class WithScrollView extends TitleBaseFragment {
 
         final View contentView = inflater.inflate(R.layout.fragment_classic_header_with_scroll_view, null);
         mScrollView = (ScrollView) contentView.findViewById(R.id.rotate_header_scroll_view);
-        mPtrFrame = (DefaultPullWidget) contentView.findViewById(R.id.rotate_header_web_view_frame);
+        mPtrFrame = (PullWidget) contentView.findViewById(R.id.rotate_header_web_view_frame);
         mPtrFrame.setLastUpdateTimeRelateObject(this);
         mPtrFrame.setOnCheckPullListener(new OnCheckPullListener() {
             @Override

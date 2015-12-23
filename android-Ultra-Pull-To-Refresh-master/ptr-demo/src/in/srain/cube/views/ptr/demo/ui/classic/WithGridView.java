@@ -12,7 +12,7 @@ import in.srain.cube.views.list.ListViewDataAdapter;
 import in.srain.cube.views.list.ViewHolderBase;
 import in.srain.cube.views.list.ViewHolderCreator;
 import in.srain.cube.views.ptr.DefaultOnCheckPullListener;
-import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget.OnCheckPullListener;
 import in.srain.cube.views.ptr.demo.R;
@@ -33,7 +33,7 @@ public class WithGridView extends TitleBaseFragment {
     private static final int sGirdImageSize = (LocalDisplay.SCREEN_WIDTH_PIXELS - LocalDisplay.dp2px(12 + 12 + 10)) / 2;
     private ImageLoader mImageLoader;
     private ListViewDataAdapter<JsonData> mAdapter;
-    private DefaultPullWidget mPtrFrame;
+    private PullWidget mPtrFrame;
 
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class WithGridView extends TitleBaseFragment {
         });
         gridListView.setAdapter(mAdapter);
 
-        mPtrFrame = (DefaultPullWidget) contentView.findViewById(R.id.rotate_header_grid_view_frame);
+        mPtrFrame = (PullWidget) contentView.findViewById(R.id.rotate_header_grid_view_frame);
         mPtrFrame.setLastUpdateTimeRelateObject(this);
         mPtrFrame.setOnCheckPullListener(new OnCheckPullListener() {
             @Override
@@ -102,7 +102,7 @@ public class WithGridView extends TitleBaseFragment {
         return contentView;
     }
 
-    protected void setupViews(final DefaultPullWidget ptrFrame) {
+    protected void setupViews(final PullWidget ptrFrame) {
 
     }
 

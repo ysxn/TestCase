@@ -2,7 +2,7 @@
 package in.srain.cube.views.ptr.demo.ui.classic;
 
 import in.srain.cube.views.ptr.DefaultOnCheckPullListener;
-import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.demo.R;
 import in.srain.cube.views.ptr.demo.ui.Utils;
@@ -11,7 +11,7 @@ import android.view.View;
 public class HideHeader extends WithTextViewInFrameLayoutFragment {
 
     @Override
-    protected void setupViews(final DefaultPullWidget ptrFrame) {
+    protected void setupViews(final PullWidget ptrFrame) {
         setHeaderTitle(R.string.ptr_demo_block_hide_header);
         ptrFrame.setKeepHeaderWhenRefresh(false);
 

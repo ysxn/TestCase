@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/cube_mints_f1f1f1">
 
-    <in.srain.cube.views.ptr.DefaultPullWidget
+    <in.srain.cube.views.ptr.PullWidget
         android:id="@+id/fragment_rotate_header_with_view_group_frame"
         xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -36,5 +36,5 @@
                 android:textSize="30sp" />
 
         </FrameLayout>
-    </in.srain.cube.views.ptr.DefaultPullWidget>
+    </in.srain.cube.views.ptr.PullWidget>
 </RelativeLayout>

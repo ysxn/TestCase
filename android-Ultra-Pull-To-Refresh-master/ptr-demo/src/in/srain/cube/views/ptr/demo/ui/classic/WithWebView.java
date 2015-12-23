@@ -3,7 +3,7 @@ package in.srain.cube.views.ptr.demo.ui.classic;
 
 import in.srain.cube.mints.base.TitleBaseFragment;
 import in.srain.cube.views.ptr.DefaultOnCheckPullListener;
-import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget.OnCheckPullListener;
 import in.srain.cube.views.ptr.demo.R;
@@ -16,7 +16,7 @@ import android.webkit.WebViewClient;
 
 public class WithWebView extends TitleBaseFragment {
 
-    private DefaultPullWidget mPtrFrame;
+    private PullWidget mPtrFrame;
     private WebView mWebView;
 
     @Override
@@ -32,7 +32,7 @@ public class WithWebView extends TitleBaseFragment {
                 mPtrFrame.refreshComplete();
             }
         });
-        mPtrFrame = (DefaultPullWidget) contentView.findViewById(R.id.rotate_header_web_view_frame);
+        mPtrFrame = (PullWidget) contentView.findViewById(R.id.rotate_header_web_view_frame);
         mPtrFrame.setLastUpdateTimeRelateObject(this);
         mPtrFrame.setOnCheckPullListener(new OnCheckPullListener() {
             @Override

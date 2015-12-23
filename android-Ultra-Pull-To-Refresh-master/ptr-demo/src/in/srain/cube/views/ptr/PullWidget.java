@@ -80,6 +80,7 @@ public class PullWidget extends ViewGroup {
     private PullViewManager mPtrIndicator;
     private boolean mHasSendCancelEvent = false;
     private List<OnPullUIListener> mOnPullUIListeners;
+    private DefaultHeader mPtrClassicHeader;
 
     public PullWidget(Context context) {
         this(context, null);
@@ -170,6 +171,26 @@ public class PullWidget extends ViewGroup {
             mHeaderView.bringToFront();
         }
         super.onFinishInflate();
+        if (mHeaderView == null) {
+            initViews();
+        }
+    }
+
+    private void initViews() {
+        mPtrClassicHeader = new DefaultHeader(getContext());
+        setHeaderView(mPtrClassicHeader);
+        addOnPullUIListener(mPtrClassicHeader);
+    }
+
+    /**
+     * Using an object to specify the last update time.
+     * 
+     * @param object
+     */
+    public void setLastUpdateTimeRelateObject(Object object) {
+        if (mPtrClassicHeader != null) {
+            mPtrClassicHeader.setLastUpdateTimeRelateObject(object);
+        }
     }
 
     @Override

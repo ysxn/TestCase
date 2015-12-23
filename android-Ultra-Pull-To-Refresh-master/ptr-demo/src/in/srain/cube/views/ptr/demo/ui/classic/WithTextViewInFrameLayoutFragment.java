@@ -2,7 +2,7 @@
 package in.srain.cube.views.ptr.demo.ui.classic;
 
 import in.srain.cube.mints.base.TitleBaseFragment;
-import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget.OnCheckPullListener;
 import in.srain.cube.views.ptr.demo.R;
@@ -20,7 +20,7 @@ public class WithTextViewInFrameLayoutFragment extends TitleBaseFragment {
 
         final View contentView = inflater.inflate(R.layout.fragment_classic_header_with_viewgroup, container, false);
 
-        final DefaultPullWidget ptrFrame = (DefaultPullWidget) contentView.findViewById(R.id.fragment_rotate_header_with_view_group_frame);
+        final PullWidget ptrFrame = (PullWidget) contentView.findViewById(R.id.fragment_rotate_header_with_view_group_frame);
         ptrFrame.setOnCheckPullListener(new OnCheckPullListener() {
             @Override
             public void onRefreshBegin(PullWidget frame) {
@@ -68,7 +68,7 @@ public class WithTextViewInFrameLayoutFragment extends TitleBaseFragment {
         return contentView;
     }
 
-    protected void setupViews(final DefaultPullWidget ptrFrame) {
+    protected void setupViews(final PullWidget ptrFrame) {
 
     }
 }

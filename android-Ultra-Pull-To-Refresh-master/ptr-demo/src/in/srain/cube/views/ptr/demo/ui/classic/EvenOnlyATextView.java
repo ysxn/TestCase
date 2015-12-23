@@ -3,7 +3,7 @@ package in.srain.cube.views.ptr.demo.ui.classic;
 
 import in.srain.cube.mints.base.TitleBaseFragment;
 import in.srain.cube.views.ptr.DefaultOnCheckPullListener;
-import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.demo.R;
 import android.os.Bundle;
@@ -19,7 +19,7 @@ public class EvenOnlyATextView extends TitleBaseFragment {
 
         final View contentView = inflater.inflate(R.layout.fragment_classic_header_with_textview, container, false);
 
-        final DefaultPullWidget ptrFrame = (DefaultPullWidget) contentView.findViewById(R.id.fragment_rotate_header_with_text_view_frame);
+        final PullWidget ptrFrame = (PullWidget) contentView.findViewById(R.id.fragment_rotate_header_with_text_view_frame);
         ptrFrame.setLastUpdateTimeRelateObject(this);
         ptrFrame.setOnCheckPullListener(new DefaultOnCheckPullListener() {
             @Override

@@ -10,7 +10,7 @@ import in.srain.cube.request.RequestFinishHandler;
 import in.srain.cube.views.list.ListViewDataAdapter;
 import in.srain.cube.views.list.ViewHolderBase;
 import in.srain.cube.views.ptr.DefaultOnCheckPullListener;
-import in.srain.cube.views.ptr.DefaultPullWidget;
+import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget;
 import in.srain.cube.views.ptr.PullWidget.OnCheckPullListener;
 import in.srain.cube.views.ptr.demo.R;
@@ -30,7 +30,7 @@ public class WithListViewAndEmptyView extends TitleBaseFragment {
 
     private ImageLoader mImageLoader;
     private ListViewDataAdapter<JsonData> mAdapter;
-    private DefaultPullWidget mPtrFrame;
+    private PullWidget mPtrFrame;
     private TextView mTextView;
     private ListView mListView;
 
@@ -43,7 +43,7 @@ public class WithListViewAndEmptyView extends TitleBaseFragment {
 
         final View contentView = inflater.inflate(R.layout.fragment_classic_header_with_list_view_and_empty_view, null);
         mTextView = (TextView) contentView.findViewById(R.id.list_view_with_empty_view_fragment_empty_view);
-        mPtrFrame = (DefaultPullWidget) contentView.findViewById(R.id.list_view_with_empty_view_fragment_ptr_frame);
+        mPtrFrame = (PullWidget) contentView.findViewById(R.id.list_view_with_empty_view_fragment_ptr_frame);
 
         mTextView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -19,7 +19,7 @@ import android.view.animation.Transformation;
 
 import com.codezyw.common.DisplayHelper;
 
-public class RentalsSunDrawable extends Drawable implements Animatable {
+public class SunDrawable extends Drawable implements Animatable {
 
     private static final float SCALE_START_PERCENT = 0.3f;
     private static final int ANIMATION_DURATION = 1000;
@@ -69,7 +69,7 @@ public class RentalsSunDrawable extends Drawable implements Animatable {
     private Context mContext;
     private int mTotalDragDistance;
 
-    public RentalsSunDrawable(Context context, View parent) {
+    public SunDrawable(Context context, View parent) {
         mContext = context;
         mParent = parent;
 
