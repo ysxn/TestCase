@@ -27,7 +27,7 @@ public class WithScrollView extends TitleBaseFragment {
         mScrollView = (ScrollView) contentView.findViewById(R.id.rotate_header_scroll_view);
         mPtrFrame = (DefaultPullWidget) contentView.findViewById(R.id.rotate_header_web_view_frame);
         mPtrFrame.setLastUpdateTimeRelateObject(this);
-        mPtrFrame.setPtrHandler(new OnCheckPullListener() {
+        mPtrFrame.setOnCheckPullListener(new OnCheckPullListener() {
             @Override
             public boolean canPullFromTop(PullWidget frame, View content, View header) {
                 return DefaultOnCheckPullListener.checkContentCanBePulledDown(frame, mScrollView, header);

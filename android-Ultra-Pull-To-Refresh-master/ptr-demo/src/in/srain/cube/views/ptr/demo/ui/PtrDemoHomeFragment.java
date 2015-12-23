@@ -231,8 +231,8 @@ public class PtrDemoHomeFragment extends BlockMenuFragment {
 
         ptrFrameLayout.setDurationToCloseHeader(1500);
         ptrFrameLayout.setHeaderView(header);
-        ptrFrameLayout.addPtrUIHandler(header);
-        ptrFrameLayout.setPtrHandler(new OnCheckPullListener() {
+        ptrFrameLayout.addOnPullUIListener(header);
+        ptrFrameLayout.setOnCheckPullListener(new OnCheckPullListener() {
             @Override
             public boolean canPullFromTop(PullWidget frame, View content, View header) {
                 return DefaultOnCheckPullListener.checkContentCanBePulledDown(frame, content, header);

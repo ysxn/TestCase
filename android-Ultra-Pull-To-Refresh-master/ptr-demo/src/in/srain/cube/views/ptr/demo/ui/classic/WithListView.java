@@ -58,7 +58,7 @@ public class WithListView extends TitleBaseFragment {
 
         mPtrFrame = (DefaultPullWidget) contentView.findViewById(R.id.rotate_header_list_view_frame);
         mPtrFrame.setLastUpdateTimeRelateObject(this);
-        mPtrFrame.setPtrHandler(new OnCheckPullListener() {
+        mPtrFrame.setOnCheckPullListener(new OnCheckPullListener() {
             @Override
             public void onRefreshBegin(PullWidget frame) {
                 updateData();

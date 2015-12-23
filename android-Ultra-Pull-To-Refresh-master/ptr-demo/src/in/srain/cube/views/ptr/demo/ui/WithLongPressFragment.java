@@ -49,7 +49,7 @@ public class WithLongPressFragment extends TitleBaseFragment {
         final ListViewDataAdapter<String> listViewDataAdapter = new ListViewDataAdapter<String>();
         listViewDataAdapter.setViewHolderClass(this, ViewHolder.class);
 
-        ptrFrameLayout.setPtrHandler(new DefaultOnCheckPullListener() {
+        ptrFrameLayout.setOnCheckPullListener(new DefaultOnCheckPullListener() {
             @Override
             public void onRefreshBegin(PullWidget frame) {
                 ptrFrameLayout.postDelayed(new Runnable() {

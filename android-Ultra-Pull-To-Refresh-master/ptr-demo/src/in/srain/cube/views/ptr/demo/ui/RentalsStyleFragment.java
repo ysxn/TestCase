@@ -55,7 +55,7 @@ public class RentalsStyleFragment extends TitleBaseFragment {
         frame.setLoadingMinTime(1000);
         frame.setDurationToCloseHeader(1500);
         frame.setHeaderView(header);
-        frame.addPtrUIHandler(header);
+        frame.addOnPullUIListener(header);
         // frame.setPullToRefresh(true);
         frame.postDelayed(new Runnable() {
             @Override
@@ -64,7 +64,7 @@ public class RentalsStyleFragment extends TitleBaseFragment {
             }
         }, 100);
 
-        frame.setPtrHandler(new OnCheckPullListener() {
+        frame.setOnCheckPullListener(new OnCheckPullListener() {
             @Override
             public boolean canPullFromTop(PullWidget frame, View content, View header) {
                 return true;

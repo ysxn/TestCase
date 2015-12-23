@@ -58,7 +58,7 @@ public class MaterialStyleFragment extends TitleBaseFragment {
         mPtrFrameLayout.setLoadingMinTime(1000);
         mPtrFrameLayout.setDurationToCloseHeader(1500);
         mPtrFrameLayout.setHeaderView(header);
-        mPtrFrameLayout.addPtrUIHandler(header);
+        mPtrFrameLayout.addOnPullUIListener(header);
         mPtrFrameLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -66,7 +66,7 @@ public class MaterialStyleFragment extends TitleBaseFragment {
             }
         }, 100);
 
-        mPtrFrameLayout.setPtrHandler(new OnCheckPullListener() {
+        mPtrFrameLayout.setOnCheckPullListener(new OnCheckPullListener() {
             @Override
             public boolean canPullFromTop(PullWidget frame, View content, View header) {
                 return true;

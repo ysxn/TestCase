@@ -48,7 +48,7 @@ public class StoreHouseUsingString extends TitleBaseFragment {
         setHeaderTitle(mTitlePre + mStringList[0]);
 
         // for changing string
-        frame.addPtrUIHandler(new OnPullUIListener() {
+        frame.addOnPullUIListener(new OnPullUIListener() {
 
             private int mLoadTime = 0;
 
@@ -83,7 +83,7 @@ public class StoreHouseUsingString extends TitleBaseFragment {
 
         frame.setDurationToCloseHeader(3000);
         frame.setHeaderView(header);
-        frame.addPtrUIHandler(header);
+        frame.addOnPullUIListener(header);
         frame.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -91,7 +91,7 @@ public class StoreHouseUsingString extends TitleBaseFragment {
             }
         }, 100);
 
-        frame.setPtrHandler(new OnCheckPullListener() {
+        frame.setOnCheckPullListener(new OnCheckPullListener() {
             @Override
             public void onRefreshBegin(final PullWidget frame) {
                 frame.postDelayed(new Runnable() {

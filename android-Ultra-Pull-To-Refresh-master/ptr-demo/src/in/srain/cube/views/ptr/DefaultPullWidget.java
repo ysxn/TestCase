@@ -25,7 +25,7 @@ public class DefaultPullWidget extends PullWidget {
     private void initViews() {
         mPtrClassicHeader = new DefaultHeader(getContext());
         setHeaderView(mPtrClassicHeader);
-        addPtrUIHandler(mPtrClassicHeader);
+        addOnPullUIListener(mPtrClassicHeader);
     }
 
     public DefaultHeader getHeader() {

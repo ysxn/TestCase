@@ -70,7 +70,7 @@ public class ViewPagerActivity extends TitleBaseActivity {
 
         mPtrFrame = (DefaultPullWidget) findViewById(R.id.view_pager_ptr_frame);
         mPtrFrame.disableWhenHorizontalMove(true);
-        mPtrFrame.setPtrHandler(new PullWidget.OnCheckPullListener() {
+        mPtrFrame.setOnCheckPullListener(new PullWidget.OnCheckPullListener() {
             @Override
             public boolean canPullFromTop(PullWidget frame, View content, View header) {
                 return mPagerAdapter.checkCanDoRefresh();

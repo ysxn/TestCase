@@ -21,7 +21,7 @@ public class EvenOnlyATextView extends TitleBaseFragment {
 
         final DefaultPullWidget ptrFrame = (DefaultPullWidget) contentView.findViewById(R.id.fragment_rotate_header_with_text_view_frame);
         ptrFrame.setLastUpdateTimeRelateObject(this);
-        ptrFrame.setPtrHandler(new DefaultOnCheckPullListener() {
+        ptrFrame.setOnCheckPullListener(new DefaultOnCheckPullListener() {
             @Override
             public void onRefreshBegin(PullWidget frame) {
                 frame.postDelayed(new Runnable() {

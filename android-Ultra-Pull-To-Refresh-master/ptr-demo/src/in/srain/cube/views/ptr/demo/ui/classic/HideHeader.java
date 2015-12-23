@@ -18,7 +18,7 @@ public class HideHeader extends WithTextViewInFrameLayoutFragment {
         final View loading = Utils.createSimpleLoadingTip(getContext());
         mTitleHeaderBar.getRightViewContainer().addView(loading);
 
-        ptrFrame.setPtrHandler(new DefaultOnCheckPullListener() {
+        ptrFrame.setOnCheckPullListener(new DefaultOnCheckPullListener() {
             @Override
             public void onRefreshBegin(PullWidget frame) {
                 loading.setVisibility(View.VISIBLE);

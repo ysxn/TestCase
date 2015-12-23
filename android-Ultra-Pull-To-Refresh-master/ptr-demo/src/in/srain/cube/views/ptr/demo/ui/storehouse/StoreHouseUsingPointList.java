@@ -47,7 +47,7 @@ public class StoreHouseUsingPointList extends TitleBaseFragment {
 
         frame.setDurationToCloseHeader(3000);
         frame.setHeaderView(header);
-        frame.addPtrUIHandler(header);
+        frame.addOnPullUIListener(header);
         frame.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -55,7 +55,7 @@ public class StoreHouseUsingPointList extends TitleBaseFragment {
             }
         }, 100);
 
-        frame.setPtrHandler(new OnCheckPullListener() {
+        frame.setOnCheckPullListener(new OnCheckPullListener() {
             @Override
             public void onRefreshBegin(final PullWidget frame) {
                 frame.postDelayed(new Runnable() {

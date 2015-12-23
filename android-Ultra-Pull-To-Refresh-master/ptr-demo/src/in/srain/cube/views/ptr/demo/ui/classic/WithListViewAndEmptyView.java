@@ -75,7 +75,7 @@ public class WithListViewAndEmptyView extends TitleBaseFragment {
         mListView.setAdapter(mAdapter);
 
         mPtrFrame.setLastUpdateTimeRelateObject(this);
-        mPtrFrame.setPtrHandler(new OnCheckPullListener() {
+        mPtrFrame.setOnCheckPullListener(new OnCheckPullListener() {
             @Override
             public boolean canPullFromTop(PullWidget frame, View content, View header) {
 

@@ -21,7 +21,7 @@ public class WithTextViewInFrameLayoutFragment extends TitleBaseFragment {
         final View contentView = inflater.inflate(R.layout.fragment_classic_header_with_viewgroup, container, false);
 
         final DefaultPullWidget ptrFrame = (DefaultPullWidget) contentView.findViewById(R.id.fragment_rotate_header_with_view_group_frame);
-        ptrFrame.setPtrHandler(new OnCheckPullListener() {
+        ptrFrame.setOnCheckPullListener(new OnCheckPullListener() {
             @Override
             public void onRefreshBegin(PullWidget frame) {
                 frame.postDelayed(new Runnable() {

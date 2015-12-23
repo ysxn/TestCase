@@ -766,11 +766,11 @@ public class PullWidget extends ViewGroup {
         return mContent;
     }
 
-    public void setPtrHandler(OnCheckPullListener ptrHandler) {
+    public void setOnCheckPullListener(OnCheckPullListener ptrHandler) {
         mPtrHandler = ptrHandler;
     }
 
-    public void addPtrUIHandler(OnPullUIListener ptrUIHandler) {
+    public void addOnPullUIListener(OnPullUIListener ptrUIHandler) {
         UIHandlerHolder.addHandler(mPtrUIHandlerHolder, ptrUIHandler);
     }
 
