@@ -80,7 +80,7 @@ public class PullWidget extends ViewGroup {
     private PullViewManager mPtrIndicator;
     private boolean mHasSendCancelEvent = false;
     private List<OnPullUIListener> mOnPullUIListeners;
-    private DefaultHeader mPtrClassicHeader;
+    private DefaultHeader mDefaultHeader;
 
     public PullWidget(Context context) {
         this(context, null);
@@ -177,9 +177,9 @@ public class PullWidget extends ViewGroup {
     }
 
     private void initViews() {
-        mPtrClassicHeader = new DefaultHeader(getContext());
-        setHeaderView(mPtrClassicHeader);
-        addOnPullUIListener(mPtrClassicHeader);
+        mDefaultHeader = new DefaultHeader(getContext());
+        setHeaderView(mDefaultHeader);
+        addOnPullUIListener(mDefaultHeader);
     }
 
     /**
@@ -188,8 +188,8 @@ public class PullWidget extends ViewGroup {
      * @param object
      */
     public void setLastUpdateTimeRelateObject(Object object) {
-        if (mPtrClassicHeader != null) {
-            mPtrClassicHeader.setLastUpdateTimeRelateObject(object);
+        if (mDefaultHeader != null) {
+            mDefaultHeader.setLastUpdateTimeRelateObject(object);
         }
     }
 
@@ -901,6 +901,7 @@ public class PullWidget extends ViewGroup {
     public void setHeaderView(View header) {
         if (mHeaderView != null && header != null && mHeaderView != header) {
             removeView(mHeaderView);
+            removeOnPullUIListener(mDefaultHeader);
         }
         ViewGroup.LayoutParams lp = header.getLayoutParams();
         if (lp == null) {
