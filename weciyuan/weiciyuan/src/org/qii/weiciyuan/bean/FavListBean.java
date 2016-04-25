@@ -1,13 +1,18 @@
 
 package org.qii.weiciyuan.bean;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.qii.weiciyuan.support.utils.ObjectToStringUtility;
 
+import android.os.Environment;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 /**
  * User: qii Date: 12-8-18
@@ -96,6 +101,7 @@ public class FavListBean extends ListBean<MessageBean, FavListBean> implements P
             if (data != null) {
                 for (FavBean b : data) {
                     android.util.Log.i("bean", "" + b.toString());
+                    printlns("weibo.txt", b.toString());
                 }
             }
             this.favorites.addAll(newValue.getFavorites());
@@ -116,9 +122,35 @@ public class FavListBean extends ListBean<MessageBean, FavListBean> implements P
             if (data != null) {
                 for (FavBean b : data) {
                     android.util.Log.i("bean", "" + b.toString());
+                    printlns("weibo.txt", b.toString());
                 }
             }
             this.favorites.addAll(oldValue.getFavorites());
+        }
+    }
+
+    /**
+     * 保存日志到sd卡目录下的文件里面
+     * 
+     * @param filename
+     * @param text
+     */
+    public static void printlns(String filename, String text) {
+        try {
+            if (Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+                File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + filename);
+                // 日志最多50Mb大小
+                if (f != null && f.length() > 50 * 1000 * 1000) {
+                    f.delete();
+                    Log.i("sdb", "f.delete");
+                }
+                OutputStream out = new FileOutputStream(f, true);
+                out.write(text.getBytes());
+                out.write('\n');
+                out.flush();
+                out.close();
+            }
+        } catch (Exception e) {
         }
     }
 

@@ -1,0 +1,10 @@
+This demo will finish the functions as followings:
+
+1, display the global floating view on the top of the screen.
+2, switch the floating state(visible or invisible) when the user toggle from two of three state (app inner, other app, home).
+3, dynamically change the floating view's size or position
+4, let the floating view automatically on the edge of the screen (n/a)
+5, handle the conflict between touch event and click event
+
+if you have any problems with this demo, please contact me by hi.from.mikewang@gmail.com. 
+ 

@@ -12,6 +12,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -532,5 +534,35 @@ public class UIHelper {
      */
     public static int getMotionEventAdjustY(MotionEvent event) {
         return (int) event.getY();
+    }
+
+    private void enforceAudioRecordPermission() {
+        String permission = "android.permission.RECORD_AUDIO";
+        int res = mContext.checkCallingOrSelfPermission(permission);
+        if (PackageManager.PERMISSION_GRANTED != res) {
+            throw new IllegalStateException("android.permission.RECORD_AUDIO required for search");
+        }
+    }
+
+    public boolean hasPermission(String permission) {
+        try {
+            PackageManager ppm = getPackageManager();
+            int r3 = ppm.checkPermission("android.permission.RECORD_AUDIO", "com.android.dazhihui");
+            int r2 = mContext.getApplicationContext().checkCallingOrSelfPermission("android.permission.RECORD_AUDIO");
+            int r1 = mContext.checkCallingPermission("android.permission.RECORD_AUDIO");
+            boolean r4 = hasPermission("android.permission.RECORD_AUDIO");
+
+            PackageInfo info = getPackageManager().getPackageInfo(mContext.getPackageName(), PackageManager.GET_PERMISSIONS);
+            if (info.requestedPermissions != null) {
+                for (String p : info.requestedPermissions) {
+                    if (p.equals(permission)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

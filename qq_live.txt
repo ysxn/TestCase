@@ -1,0 +1,11 @@
+LoginActivity  登录界面
+GameOverActivity 本次直播结束
+AvActivity  直播主播界面
+
+
+StartActivity 首页TabActivity
+---ProgramListActivity 房间列表TabActivity
+------LiveActivity  最新直播列表
+------ParadeActivity  直播预告列表
+---PersonalCenterActivity  个人中心
+---ReleaseActivity 创建直播设置标题和封面

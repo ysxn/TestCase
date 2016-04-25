@@ -1378,6 +1378,52 @@ public class FileHelper {
     }
 
     /**
+     * 保存日志到sd卡目录下的文件里面
+     * 
+     * @param filename
+     * @param text
+     */
+    public static void printlns(String filename, String text) {
+        try {
+            if (Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+                File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + filename);
+                // 日志最多5Mb大小
+                if (f != null && f.length() > 5 * 1000 * 1000) {
+                    f.delete();
+                    Log.i("sdb", "f.delete");
+                }
+                OutputStream out = new FileOutputStream(f, true);
+                out.write(text.getBytes());
+                out.write('\n');
+                out.flush();
+                out.close();
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public static void println(String dir, String filename, String text) {
+        try {
+            File f = new File(dir);
+            if (!f.exists()) {
+                f.mkdirs();
+            }
+            f = new File(dir + File.separator + filename);
+            // 日志最多5Mb大小
+            if (f != null && f.length() > 5 * 1000 * 1000) {
+                f.delete();
+                Log.i("sdb", "f.delete");
+            }
+            OutputStream out = new FileOutputStream(f, true);
+            out.write(text.getBytes());
+            out.write('\n');
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+        }
+    }
+
+    /**
      * 序列化对象转换为byte数组
      * 
      * @param obj

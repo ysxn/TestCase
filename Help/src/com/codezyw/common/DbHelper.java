@@ -28,7 +28,7 @@ public class DbHelper extends SQLiteOpenHelper {
         if (sDbHelper == null) {
             synchronized (DbHelper.class) {
                 if (sDbHelper == null) {
-                    sDbHelper = new DbHelper(context);
+                    sDbHelper = new DbHelper(context.getApplicationContext());
                 }
             }
         }
@@ -150,7 +150,7 @@ public class DbHelper extends SQLiteOpenHelper {
             cv.put(COLUMN_SETTING_KEY, key);
             cv.put(COLUMN_SETTING_VALUE, value);
             int update = db.update(SETTING_TABLE, cv, COLUMN_SETTING_KEY + "=?", new String[] {
-                key
+                    key
             });
             if (update == 0) {
                 db.insert(SETTING_TABLE, null, cv);
@@ -176,7 +176,7 @@ public class DbHelper extends SQLiteOpenHelper {
             db = sDbHelper.getWritableDatabase();
             db.beginTransaction();
             cursor = db.query(SETTING_TABLE, null, COLUMN_SETTING_KEY + "=?", new String[] {
-                key
+                    key
             }, null, null, null, null);
             if (cursor == null || !cursor.moveToFirst()) {
                 return value;
@@ -207,7 +207,7 @@ public class DbHelper extends SQLiteOpenHelper {
             db = sDbHelper.getWritableDatabase();
             db.beginTransaction();
             affected = db.delete(SETTING_TABLE, COLUMN_SETTING_KEY + "=?", new String[] {
-                key
+                    key
             });
             db.setTransactionSuccessful();
         } catch (Exception e) {
