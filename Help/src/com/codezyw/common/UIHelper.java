@@ -536,7 +536,7 @@ public class UIHelper {
         return (int) event.getY();
     }
 
-    private void enforceAudioRecordPermission() {
+    private void enforceAudioRecordPermission(Context mContext) {
         String permission = "android.permission.RECORD_AUDIO";
         int res = mContext.checkCallingOrSelfPermission(permission);
         if (PackageManager.PERMISSION_GRANTED != res) {
@@ -544,15 +544,16 @@ public class UIHelper {
         }
     }
 
-    public boolean hasPermission(String permission) {
+    public boolean hasPermission(Context mContext, String permission) {
         try {
-            PackageManager ppm = getPackageManager();
+            PackageManager ppm = mContext.getPackageManager();
             int r3 = ppm.checkPermission("android.permission.RECORD_AUDIO", "com.android.dazhihui");
             int r2 = mContext.getApplicationContext().checkCallingOrSelfPermission("android.permission.RECORD_AUDIO");
             int r1 = mContext.checkCallingPermission("android.permission.RECORD_AUDIO");
-            boolean r4 = hasPermission("android.permission.RECORD_AUDIO");
+            // boolean r4 = ((Activity)
+            // mContext).hasPermission("android.permission.RECORD_AUDIO");
 
-            PackageInfo info = getPackageManager().getPackageInfo(mContext.getPackageName(), PackageManager.GET_PERMISSIONS);
+            PackageInfo info = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), PackageManager.GET_PERMISSIONS);
             if (info.requestedPermissions != null) {
                 for (String p : info.requestedPermissions) {
                     if (p.equals(permission)) {
